@@ -49,20 +49,7 @@ namespace Mech3DotNetTests.Json
             Assert.AreEqual(0.1f, tuple.A, 0.00001f);
         }
 
-        [TestMethod]
-        public void Deserialize_InvalidStart_Throws()
-        {
-            // sometimes, there is no rhyme or reason to Json.NET's error messages:
-            // JsonConvert.DeserializeObject<List<float>>("{");
-            // JsonSerializationException: Unexpected end when deserializing object. Path '', line 1, position 1.
-            var e = Assert.ThrowsException<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<TestTuple>("{"));
-            Assert.AreEqual(
-                $"Unexpected token when deserializing array: {JsonToken.StartObject}. Path '', line 1, position 1.",
-                e.Message);
-        }
-
-        private void CompareErrors<T>(string json) where T : Exception
+        private Tuple<string, string> CompareDeserialize<T>(string json) where T : Exception
         {
             var expected = Assert.ThrowsException<T>(
                 () => JsonConvert.DeserializeObject<List<float>>(json));
@@ -70,7 +57,26 @@ namespace Mech3DotNetTests.Json
                 () => JsonConvert.DeserializeObject<TestTuple>(json));
             Console.WriteLine("Expected: {0}", expected.Message);
             Console.WriteLine("Actual: {0}", actual.Message);
-            Assert.AreEqual(expected.Message, actual.Message);
+            return new Tuple<string, string>(expected.Message, actual.Message);
+        }
+
+        private void CompareErrors<T>(string json) where T : Exception
+        {
+            var result = CompareDeserialize<T>(json);
+            Assert.AreEqual(result.Item1, result.Item2);
+        }
+
+        [TestMethod]
+        public void Deserialize_InvalidStart_Throws()
+        {
+            // sometimes, there is no rhyme or reason to Json.NET's error messages:
+            var result = CompareDeserialize<JsonSerializationException>("{");
+            Assert.AreEqual(
+                "Unexpected end when reading JSON. Path '', line 1, position 1.",
+                result.Item1);
+            Assert.AreEqual(
+                $"Unexpected token when deserializing array: {JsonToken.StartObject}. Path '', line 1, position 1.",
+                result.Item2);
         }
 
         [TestMethod]
@@ -100,7 +106,14 @@ namespace Mech3DotNetTests.Json
         [TestMethod]
         public void Deserialize_InvalidEnd_Throws()
         {
-            CompareErrors<JsonReaderException>("[0.1,0.2}");
+            // sometimes, there is no rhyme or reason to Json.NET's error messages:
+            var result = CompareDeserialize<JsonReaderException>("[0.1,0.2}");
+            Assert.AreEqual(
+                "Unexpected character encountered while parsing value: }. Path '[1]', line 1, position 9.",
+                result.Item1);
+            Assert.AreEqual(
+                $"JsonToken {JsonToken.EndObject} is not valid for closing JsonType Array. Path '', line 1, position 9.",
+                result.Item2);
         }
 
         [TestMethod]

@@ -99,22 +99,7 @@ namespace Mech3DotNetTests.Json
                 e.Message);
         }
 
-        [TestMethod]
-        public void Deserialize_InvalidStart_Throws()
-        {
-            // sometimes, there is no rhyme or reason to Json.NET's error messages:
-            // JsonConvert.DeserializeObject<Dictionary<string, JObject>>("[");
-            // Cannot deserialize the current JSON array (e.g. [1,2,3]) into type
-            // 'System.Collections.Generic.Dictionary`2[System.String,Newtonsoft.Json.Linq.JObject]'
-            // because the type requires a JSON object (e.g. {"name":"value"}) to deserialize correctly.
-            var e = Assert.ThrowsException<JsonSerializationException>(
-                () => JsonConvert.DeserializeObject<TestUnion>("["));
-            Assert.AreEqual(
-                $"Unexpected token when deserializing object: {JsonToken.StartArray}. Path '', line 1, position 1.",
-                e.Message);
-        }
-
-        private void CompareErrors<T>(string json) where T : Exception
+        private Tuple<string, string> CompareDeserialize<T>(string json) where T : Exception
         {
             var expected = Assert.ThrowsException<T>(
                 () => JsonConvert.DeserializeObject<Dictionary<string, JObject>>(json));
@@ -122,7 +107,24 @@ namespace Mech3DotNetTests.Json
                 () => JsonConvert.DeserializeObject<TestUnion>(json));
             Console.WriteLine("Expected: {0}", expected.Message);
             Console.WriteLine("Actual: {0}", actual.Message);
-            Assert.AreEqual(expected.Message, actual.Message);
+            return new Tuple<string, string>(expected.Message, actual.Message);
+        }
+
+        private void CompareErrors<T>(string json) where T : Exception
+        {
+            var result = CompareDeserialize<T>(json);
+            Assert.AreEqual(result.Item1, result.Item2);
+        }
+
+        [TestMethod]
+        public void Deserialize_InvalidStart_Throws()
+        {
+            // sometimes, there is no rhyme or reason to Json.NET's error messages:
+            var result = CompareDeserialize<JsonSerializationException>("[");
+            StringAssert.StartsWith(result.Item1, "Cannot deserialize the current JSON array (e.g. [1,2,3])");
+            Assert.AreEqual(
+                $"Unexpected token when deserializing object: {JsonToken.StartArray}. Path '', line 1, position 1.",
+                result.Item2);
         }
 
         [TestMethod]

@@ -60,7 +60,6 @@ namespace Mech3DotNet.Json
                 constructors = new Dictionary<Type, ConstructorInfo>();
                 hasNoValue = new List<string>();
 
-                //foreach (var t in type.GetNestedTypes())
                 var nestedTypes = new List<Type>();
                 var currentType = type;
                 while (currentType != null)

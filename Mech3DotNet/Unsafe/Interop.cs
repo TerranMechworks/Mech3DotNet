@@ -5,6 +5,7 @@ namespace Mech3DotNet.Unsafe
 {
     public class Interop
     {
+        // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
         private const String MECH3AX = @"mech3ax-0.4.2";
         private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
 

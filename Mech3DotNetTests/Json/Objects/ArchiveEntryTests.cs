@@ -14,7 +14,7 @@ namespace Mech3DotNetTests.Json
         [TestMethod]
         public void SerDe_Default_Roundtrips()
         {
-            var expected = Normalize("{'name': 'Foo', 'garbage': '" + testBase64 + "'}");
+            var expected = Normalize($"{{'name': 'Foo', 'garbage': '{testBase64}'}}");
             var entry = JsonConvert.DeserializeObject<ArchiveEntry>(expected);
             Assert.AreEqual("Foo", entry.name);
             CollectionAssert.AreEqual(testBinary, entry.garbage);

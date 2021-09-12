@@ -19,6 +19,7 @@ namespace RoundtripTests
             var failures = new List<string>();
             foreach (var inputPath in matches)
             {
+                Console.WriteLine(inputPath);
                 var archive = readFn(inputPath);
                 using (var outputPath = new TemporaryFile())
                 {
@@ -63,7 +64,7 @@ namespace RoundtripTests
             Roundtrip(
                 basePath,
                 "Motions",
-                @"motion.zbd$",
+                @"motion\.zbd$",
                 Motions<Vec3, Vec4>.ReadArchiveMW,
                 Motions<Vec3, Vec4>.WriteArchiveMW);
         }
@@ -73,7 +74,7 @@ namespace RoundtripTests
             Roundtrip(
                 basePath,
                 "Mechlib",
-                @"mechlib.zbd$",
+                @"mechlib\.zbd$",
                 Mechlib<Vec2, Vec3, Color>.ReadArchiveMW,
                 Mechlib<Vec2, Vec3, Color>.WriteArchiveMW);
         }
@@ -83,7 +84,7 @@ namespace RoundtripTests
             Roundtrip(
                 basePath,
                 "Textures",
-                @"rtexture.zbd$",
+                @"r?texture[12]?\.zbd$",
                 Mech3DotNet.Textures.ReadArchive,
                 Mech3DotNet.Textures.WriteArchive);
         }
@@ -93,7 +94,7 @@ namespace RoundtripTests
             Roundtrip(
                 basePath,
                 "Interpreter",
-                @"interp.zbd$",
+                @"interp\.zbd$",
                 Mech3DotNet.Interp.Read,
                 Mech3DotNet.Interp.Write);
         }
@@ -103,22 +104,28 @@ namespace RoundtripTests
             Roundtrip(
                 basePath,
                 "GameZ",
-                @"gamez.zbd$",
+                @"gamez\.zbd$",
                 Mech3DotNet.GameZ.ReadMW<Vec2, Vec3, Color>,
                 Mech3DotNet.GameZ.WriteMW);
         }
 
         static void Main(string[] args)
         {
-            string basePath = @"C:\Program Files (x86)\MechWarrior 3\";
-            string zbdPath = basePath + @"zbd\";
+            if (args.Length != 1)
+            {
+                Console.WriteLine("usage: RoundtripTests <zbdPath>");
+                return;
+            }
+
+            string zbdPath = args[0];
             Sounds(zbdPath);
-            //Readers(zbdPath);
             Motions(zbdPath);
             Mechlib(zbdPath);
             Textures(zbdPath);
             Interp(zbdPath);
             GameZ(zbdPath);
+            Readers(zbdPath);
+
             Console.WriteLine("All tests complete, press any key to exit...");
             Console.ReadKey();
         }

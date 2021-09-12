@@ -8,11 +8,13 @@ namespace Mech3DotNet.Reader
         public JToken root;
         private ReaderDeserializer deserializer;
 
-        public ReaderData(JToken root)
+        public ReaderData(JToken root, ReaderDeserializer deserializer)
         {
             this.root = root;
-            this.deserializer = new ReaderDeserializer();
+            this.deserializer = deserializer;
         }
+
+        public ReaderData(JToken root) : this(root, new ReaderDeserializer()) { }
 
         public static Query operator /(ReaderData reader, IQueryOperation op)
         {
@@ -31,17 +33,17 @@ namespace Mech3DotNet.Reader
         }
 
         /// <summary>Deserialize reader data from JSON</summary>
-        public static ReaderData Deserialize(string json)
+        public static ReaderData Deserialize(string json, ReaderDeserializer deserializer)
         {
             var root = Settings.DeserializeObject<JArray>(json);
             // some reader files (c2/mobilerepair.zrd) contain empty arrays,
             // and mech3ax deserializes this as null
             if (root == null)
-                return new ReaderData(null);
+                return new ReaderData(null, deserializer);
             // we strip the first array, since all readers have this
             if (root.Count != 1)
                 throw new InvalidRootException();
-            return new ReaderData(root.First);
+            return new ReaderData(root.First, deserializer);
         }
 
         /// <summary>Serialize reader data to JSON</summary>

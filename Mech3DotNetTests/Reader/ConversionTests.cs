@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
@@ -73,25 +74,48 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DataTestMethod]
-        [DataRow("42.1")]
-        [DataRow("[42.1]")]
+        [DataRow("42.0")]
+        [DataRow("[42.0]")]
+        [DataRow("42")]
+        [DataRow("[42]")]
         public void ToFloat_Valid_ReturnsFloat(string json)
         {
             var actual = ConvertSuccess(json, new ToFloat(), null);
-            Assert.AreEqual(42.1f, actual);
+            Assert.AreEqual(42.0f, actual);
         }
 
         [DataTestMethod]
-        [DataRow("42")]
         [DataRow("'foo'")]
         [DataRow("null")]
-        [DataRow("[42]")]
         [DataRow("['foo']")]
         [DataRow("[null]")]
         [DataRow("{}")]
         public void ToFloat_Invalid_Throws(string json)
         {
             var message = ConvertFailure(json, new ToFloat(), null);
+            StringAssert.EndsWith(message, ". Path '/path'.");
+        }
+
+        [DataTestMethod]
+        [DataRow("42.0")]
+        [DataRow("[42.0]")]
+        public void ToFloatStrict_Valid_ReturnsFloat(string json)
+        {
+            var actual = ConvertSuccess(json, new ToFloatStrict(), null);
+            Assert.AreEqual(42.0f, actual);
+        }
+
+        [DataTestMethod]
+        [DataRow("'foo'")]
+        [DataRow("null")]
+        [DataRow("['foo']")]
+        [DataRow("[null]")]
+        [DataRow("{}")]
+        [DataRow("42")]
+        [DataRow("[42]")]
+        public void ToFloatStrict_Invalid_Throws(string json)
+        {
+            var message = ConvertFailure(json, new ToFloatStrict(), null);
             StringAssert.EndsWith(message, ". Path '/path'.");
         }
 
@@ -198,39 +222,6 @@ namespace Mech3DotNetTests.Reader
             var toClass = new ToClassStrict<TestClassWithFloat>();
             var actual = toClass.ConvertTo(deserializer, token, EmptyPath());
             Assert.AreEqual(42.1f, actual.foo);
-        }
-
-        [ReaderConverter(typeof(ToClassStrict<TestInnerClass>))]
-        class TestInnerClass
-        {
-            public string foo = default;
-            public TestInnerClass() { }
-        }
-
-        class TestOuterClass
-        {
-            public TestInnerClass inner = default;
-            public TestOuterClass() { }
-        }
-
-        [TestMethod]
-        public void ToClass_NestedClass_ReturnsClass()
-        {
-            var token = JToken.Parse(@"['inner', ['foo', ['bar']]]");
-            var deserializer = new ReaderDeserializer();
-            var toClass = new ToClassStrict<TestOuterClass>();
-            var actual = toClass.ConvertTo(deserializer, token, EmptyPath());
-            Assert.AreEqual("bar", actual.inner.foo);
-        }
-
-        [TestMethod]
-        public void ToClass_InvalidInnerClass_ThrowsWithInnerPath()
-        {
-            var token = JToken.Parse(@"['inner', {}]");
-            var deserializer = new ReaderDeserializer();
-            var toClass = new ToClassStrict<TestOuterClass>();
-            var e = Assert.ThrowsException<InvalidTypeException>(() => toClass.ConvertTo(deserializer, token, EmptyPath()));
-            StringAssert.EndsWith(e.Message, ". Path '/path/1'.");
         }
 
         class TestClass
@@ -366,7 +357,7 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"['bar']");
             var deserializer = new ReaderDeserializer();
-            var toStruct = new ToStruct<TestStructWithString>();
+            var toStruct = new ToStruct<TestStructWithString>(typeof(string));
             var actual = toStruct.ConvertTo(deserializer, token, EmptyPath());
             Assert.AreEqual("bar", actual.foo);
         }
@@ -385,7 +376,7 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"[42]");
             var deserializer = new ReaderDeserializer();
-            var toStruct = new ToStruct<TestStructWithInt>();
+            var toStruct = new ToStruct<TestStructWithInt>(typeof(int));
             var actual = toStruct.ConvertTo(deserializer, token, EmptyPath());
             Assert.AreEqual(42, actual.foo);
         }
@@ -404,7 +395,7 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"[42.1]");
             var deserializer = new ReaderDeserializer();
-            var toStruct = new ToStruct<TestStructWithFloat>();
+            var toStruct = new ToStruct<TestStructWithFloat>(typeof(float));
             var actual = toStruct.ConvertTo(deserializer, token, EmptyPath());
             Assert.AreEqual(42.1f, actual.foo);
         }
@@ -414,7 +405,7 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"42");
             var deserializer = new ReaderDeserializer();
-            var toStruct = new ToStruct<TestStructWithInt>();
+            var toStruct = new ToStruct<TestStructWithInt>(typeof(int));
             var e = Assert.ThrowsException<InvalidTypeException>(() => toStruct.ConvertTo(deserializer, token, EmptyPath()));
             StringAssert.EndsWith(e.Message, ". Path '/path'.");
         }
@@ -424,7 +415,7 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"[]");
             var deserializer = new ReaderDeserializer();
-            var toStruct = new ToStruct<TestStructWithInt>();
+            var toStruct = new ToStruct<TestStructWithInt>(typeof(int));
             var e = Assert.ThrowsException<ConversionException>(() => toStruct.ConvertTo(deserializer, token, EmptyPath()));
             StringAssert.EndsWith(e.Message, ". Path '/path'.");
         }
@@ -434,7 +425,7 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"[42, 43]");
             var deserializer = new ReaderDeserializer();
-            var toStruct = new ToStruct<TestStructWithInt>();
+            var toStruct = new ToStruct<TestStructWithInt>(typeof(int));
             var e = Assert.ThrowsException<ConversionException>(() => toStruct.ConvertTo(deserializer, token, EmptyPath()));
             StringAssert.EndsWith(e.Message, ". Path '/path'.");
         }
@@ -444,7 +435,7 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"['foo']");
             var deserializer = new ReaderDeserializer();
-            var toStruct = new ToStruct<TestStructWithInt>();
+            var toStruct = new ToStruct<TestStructWithInt>(typeof(int));
             var e = Assert.ThrowsException<InvalidTypeException>(() => toStruct.ConvertTo(deserializer, token, EmptyPath()));
             StringAssert.EndsWith(e.Message, ". Path '/path/0'.");
         }

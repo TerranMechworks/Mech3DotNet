@@ -17,7 +17,7 @@ namespace Mech3DotNet.Reader
         T ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path);
     }
 
-    public static class Convert
+    public static class ReaderConvert
     {
         public static Map<U> Map<U>(IReaderConverter<U> converter)
         {
@@ -44,9 +44,14 @@ namespace Mech3DotNet.Reader
             return new ToClassLenient<U>();
         }
 
-        public static ToStruct<U> Struct<U>()
+        public static ToStruct<U> Struct<U>(params Type[] constructorTypes)
         {
-            return new ToStruct<U>();
+            return new ToStruct<U>(constructorTypes);
+        }
+
+        public static Map<U> MapClass<U>()
+        {
+            return new Map<U>(new ToClassLenient<U>());
         }
 
         public static Token Token()
@@ -114,11 +119,48 @@ namespace Mech3DotNet.Reader
         }
     }
 
-    public struct ToFloat : IReaderConverter, IReaderConverter<float>
+    public struct ToFloatStrict : IReaderConverter, IReaderConverter<float>
     {
         public float ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
             return (float)UnpackSingleValueFromArray(token, JTokenType.Float, path);
+        }
+
+        public object Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
+        {
+            return ConvertTo(deserializer, token, path);
+        }
+
+        public Type ConvertType
+        {
+            get { return typeof(float); }
+        }
+
+        public static float operator /(Query query, ToFloatStrict converter)
+        {
+            return converter.ConvertTo(query.deserializer, query.token, query.path);
+        }
+    }
+
+    public struct ToFloat : IReaderConverter, IReaderConverter<float>
+    {
+        public float ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
+        {
+            if (token.Type == JTokenType.Float)
+                return (float)token;
+            // allow int also
+            if (token.Type == JTokenType.Integer)
+                return (float)(int)token;
+            var array = InvalidTypeException.Array(token, path);
+            if (array.Count != 1)
+                throw new ConversionException(AddPath($"Expected one item, but found {array.Count} ({array})", path));
+            var first = array.First;
+            if (first.Type == JTokenType.Float)
+                return (float)first;
+            // allow int also
+            if (first.Type == JTokenType.Integer)
+                return (float)(int)first;
+            throw new InvalidTypeException(AddPath($"Expected '{JTokenType.Float}', but was '{first.Type}' ({first})", path));
         }
 
         public object Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
@@ -338,72 +380,34 @@ namespace Mech3DotNet.Reader
 
     public class ToStruct<T> : IReaderConverter, IReaderConverter<T>
     {
-        protected class Introspector
+        private Type type;
+        private ConstructorInfo ctorInfo;
+        private ParameterInfo[] paramInfos;
+
+        public ToStruct(params Type[] constructorTypes)
         {
-            public readonly Type type;
-            public readonly int fieldCount;
-            public readonly List<FieldInfo> fieldInfos;
-            public readonly ConstructorInfo constructor;
-
-            public Introspector()
-            {
-                type = typeof(T);
-
-                fieldInfos = new List<FieldInfo>();
-                // fields seem to be in the order they're declared (which is good)
-                foreach (var fieldInfo in type.GetFields())
-                    fieldInfos.Add(fieldInfo);
-                fieldCount = fieldInfos.Count;
-
-                constructor = null;
-                foreach (var ctorInfo in type.GetConstructors())
-                {
-                    var paramInfos = ctorInfo.GetParameters();
-                    if (fieldCount == paramInfos.Length)
-                    {
-                        bool matches = true;
-                        for (var i = 0; i < fieldCount; i++)
-                        {
-                            if (fieldInfos[i].FieldType != paramInfos[i].ParameterType)
-                            {
-                                matches = false;
-                                break;
-                            }
-                        }
-                        if (matches)
-                        {
-                            constructor = ctorInfo;
-                            break;
-                        }
-                    }
-                }
-
-                if (constructor == null)
-                    throw new NoConstructorException($"No parameterless constructor found for '{type.Name}'");
-            }
+            this.type = typeof(T);
+            this.ctorInfo = type.GetConstructor(constructorTypes) ?? throw new ArgumentException("Constructor not found");
+            this.paramInfos = this.ctorInfo.GetParameters();
         }
-
-        protected static Introspector introspector = new Introspector();
-
-        public ToStruct() { }
 
         public T ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
             var array = InvalidTypeException.Array(token, path);
-            if (array.Count != introspector.fieldCount)
-                throw new ConversionException(AddPath($"Expected {introspector.fieldCount} fields, but found {array.Count} fields", path));
+            if (array.Count != this.paramInfos.Length)
+                throw new ConversionException(AddPath($"Expected {this.paramInfos.Length} fields, but found {array.Count} fields", path));
 
-            var parameters = new List<object>(introspector.fieldCount);
-            for (var i = 0; i < introspector.fieldCount; i++)
+            var parameters = new List<object>(this.paramInfos.Length);
+            for (var i = 0; i < this.paramInfos.Length; i++)
             {
-                var fieldInfo = introspector.fieldInfos[i];
+                var paramInfo = this.paramInfos[i];
                 var child = array[i];
                 var childPath = ExtendPath(path, i.ToString());
-                var fieldValue = deserializer.Deserialize(child, fieldInfo.FieldType, childPath);
+                var fieldValue = deserializer.Deserialize(child, paramInfo.ParameterType, childPath);
                 parameters.Add(fieldValue);
             }
 
-            return (T)introspector.constructor.Invoke(parameters.ToArray());
+            return (T)this.ctorInfo.Invoke(parameters.ToArray());
         }
 
         public object Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
@@ -413,7 +417,7 @@ namespace Mech3DotNet.Reader
 
         public Type ConvertType
         {
-            get { return introspector.type; }
+            get { return this.type; }
         }
 
         public static T operator /(Query query, ToStruct<T> converter)

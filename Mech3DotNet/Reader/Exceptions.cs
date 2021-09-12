@@ -21,7 +21,7 @@ namespace Mech3DotNet.Reader
 
     public class InvalidTypeException : ReaderException
     {
-        private InvalidTypeException(string message) : base(message) { }
+        public InvalidTypeException(string message) : base(message) { }
 
         public static void Assert(JToken token, JTokenType expected, IEnumerable<string> path)
         {

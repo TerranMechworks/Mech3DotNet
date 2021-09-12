@@ -2,7 +2,7 @@
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using static Mech3DotNet.Reader.Convert;
+using static Mech3DotNet.Reader.ReaderConvert;
 using static Mech3DotNet.Reader.Query;
 
 namespace Mech3DotNetTests.Reader
@@ -83,36 +83,6 @@ namespace Mech3DotNetTests.Reader
             var token = JToken.Parse(@"['foo', 42]");
             var query = Q(token, null) / "foo";
             Assert.AreEqual("/foo: [\n  42\n]", query.ToString());
-        }
-
-        [TestMethod]
-        public void FindFirst_NotArray_Throws()
-        {
-            var token = JToken.Parse(@"42");
-            Assert.ThrowsException<NotFoundException>(() => Q(token, null) / First());
-        }
-
-        [TestMethod]
-        public void FindFirst_NoItems_Throws()
-        {
-            var token = JToken.Parse(@"[]");
-            Assert.ThrowsException<NotFoundException>(() => Q(token, null) / First());
-        }
-
-        [TestMethod]
-        public void FindFirst_HasItems_ReturnsFirst()
-        {
-            var token = JToken.Parse(@"[42, 43]");
-            var first = Q(token, null) / First() / Int();
-            Assert.AreEqual(42, first);
-        }
-
-        [TestMethod]
-        public void FindFirst_Applied_ModifiesPath()
-        {
-            var token = JToken.Parse(@"[42, 43]");
-            var query = Q(token, null) / First();
-            Assert.AreEqual("/.first: 42", query.ToString());
         }
 
         [TestMethod]

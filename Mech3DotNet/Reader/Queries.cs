@@ -35,11 +35,6 @@ namespace Mech3DotNet.Reader
             return new Query(token, new ReaderDeserializer());
         }
 
-        public static FindFirst First()
-        {
-            return new FindFirst();
-        }
-
         public static FindOnly Only()
         {
             return new FindOnly();
@@ -131,23 +126,6 @@ namespace Mech3DotNet.Reader
             }
             path.Add(this.index.ToString());
             return item;
-        }
-    }
-
-    public struct FindFirst : IQueryOperation
-    {
-        public JToken Apply(JToken token, List<string> path)
-        {
-            if (token.Type != JTokenType.Array)
-                throw new NotFoundException(AddPath("First item not found (not an array)", path));
-
-            foreach (var child in token.Children())
-            {
-                path.Add(".first");
-                return child;
-            }
-
-            throw new NotFoundException(AddPath("First item not found (no items)", path));
         }
     }
 

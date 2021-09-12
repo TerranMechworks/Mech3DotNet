@@ -12,7 +12,7 @@ namespace Mech3DotNetTests.Reader
         public void ReadWrite_Roundtrip_ReturnsSameJson()
         {
             var expected = Normalize("[['foo']]");
-            var reader = ReaderData.Deserialize(expected);
+            var reader = ReaderData.Deserialize(expected, null);
             var actual = Normalize(reader.Serialize());
             Assert.AreEqual(expected, actual);
         }
@@ -20,13 +20,13 @@ namespace Mech3DotNetTests.Reader
         [TestMethod]
         public void Read_MultipleChildren_ThrowsInvalidRoot()
         {
-            Assert.ThrowsException<InvalidRootException>(() => ReaderData.Deserialize("[['foo'], ['bar']]"));
+            Assert.ThrowsException<InvalidRootException>(() => ReaderData.Deserialize("[['foo'], ['bar']]", null));
         }
 
         [TestMethod]
         public void Read_NoChildren_ThrowsInvalidRoot()
         {
-            Assert.ThrowsException<InvalidRootException>(() => ReaderData.Deserialize("[]"));
+            Assert.ThrowsException<InvalidRootException>(() => ReaderData.Deserialize("[]", null));
         }
     }
 }

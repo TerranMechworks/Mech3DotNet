@@ -1,6 +1,6 @@
-using System;
-using System.Reflection;
+﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Newtonsoft.Json.Linq;
 using static Mech3DotNet.Reader.Helpers;
 
@@ -35,12 +35,13 @@ namespace Mech3DotNet.Reader
                     return converter.Convert(this, token, path);
             }
 
-            Attribute[] attrs = new Attribute[] {};
+            Attribute[] attrs = new Attribute[] { };
             try
             {
                 attrs = Attribute.GetCustomAttributes(type);
-            } catch (NotSupportedException) {}
-            catch (TypeLoadException) {}
+            }
+            catch (NotSupportedException) { }
+            catch (TypeLoadException) { }
 
             foreach (var attr in attrs)
             {

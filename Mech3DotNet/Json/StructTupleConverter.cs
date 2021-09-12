@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 using static Mech3DotNet.Json.Helpers;
 
 namespace Mech3DotNet.Json

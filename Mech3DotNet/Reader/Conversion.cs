@@ -1,6 +1,6 @@
-using System;
-using System.Reflection;
+﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Newtonsoft.Json.Linq;
 using static Mech3DotNet.Reader.Helpers;
 
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Reader
         }
     }
 
-    public struct Token: IReaderConverter<JToken>
+    public struct Token : IReaderConverter<JToken>
     {
         public JToken ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
@@ -68,7 +68,7 @@ namespace Mech3DotNet.Reader
         }
     }
 
-    public struct ToString: IReaderConverter, IReaderConverter<string>
+    public struct ToString : IReaderConverter, IReaderConverter<string>
     {
         public string ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
@@ -91,7 +91,7 @@ namespace Mech3DotNet.Reader
         }
     }
 
-    public struct ToInt: IReaderConverter, IReaderConverter<int>
+    public struct ToInt : IReaderConverter, IReaderConverter<int>
     {
         public int ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
@@ -114,7 +114,7 @@ namespace Mech3DotNet.Reader
         }
     }
 
-    public struct ToFloat: IReaderConverter, IReaderConverter<float>
+    public struct ToFloat : IReaderConverter, IReaderConverter<float>
     {
         public float ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
@@ -176,7 +176,7 @@ namespace Mech3DotNet.Reader
         }
     }
 
-    public struct ToList<T>: IReaderConverter, IReaderConverter<List<T>>
+    public struct ToList<T> : IReaderConverter, IReaderConverter<List<T>>
     {
         public List<T> ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
@@ -208,7 +208,7 @@ namespace Mech3DotNet.Reader
         }
     }
 
-    public class ToClass<T>: IReaderConverter, IReaderConverter<T>
+    public class ToClass<T> : IReaderConverter, IReaderConverter<T>
     {
         protected class Introspector
         {
@@ -255,11 +255,11 @@ namespace Mech3DotNet.Reader
         {
             var array = InvalidTypeException.Array(token, path);
             var inst = introspector.constructor.Invoke(null);
-            #if NETSTANDARD
+#if NETSTANDARD
             var processed = new HashSet<string>(introspector.fieldInfos.Keys);
-            #else
+#else
             var processed = new List<string>(introspector.fieldInfos.Keys);
-            #endif
+#endif
 
             string key = null;
             List<string> keyPath = null;
@@ -299,11 +299,11 @@ namespace Mech3DotNet.Reader
 
             if (this.requireAll && processed.Count > 0)
             {
-                #if NETSTANDARD
+#if NETSTANDARD
                 var fields = string.Join(",", processed);
-                #else
+#else
                 var fields = string.Join(",", processed.ToArray());
-                #endif
+#endif
                 throw new RequiredFieldsException(AddPath($"Fields '{fields}' not set on type '{introspector.type.Name}'", path));
             }
 
@@ -328,15 +328,15 @@ namespace Mech3DotNet.Reader
 
     public class ToClassStrict<T> : ToClass<T>
     {
-        public ToClassStrict() : base(false, true) {}
+        public ToClassStrict() : base(false, true) { }
     }
 
     public class ToClassLenient<T> : ToClass<T>
     {
-        public ToClassLenient() : base(true, false) {}
+        public ToClassLenient() : base(true, false) { }
     }
 
-    public class ToStruct<T>: IReaderConverter, IReaderConverter<T>
+    public class ToStruct<T> : IReaderConverter, IReaderConverter<T>
     {
         protected class Introspector
         {

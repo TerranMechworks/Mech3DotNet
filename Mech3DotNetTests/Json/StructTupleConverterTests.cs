@@ -1,7 +1,7 @@
-﻿using Mech3DotNet.Json;
+﻿using System;
+using Mech3DotNet.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using System;
 
 namespace Mech3DotNetTests.Json
 {

@@ -1,9 +1,9 @@
-﻿using Mech3DotNet;
+﻿using System;
+using System.Collections.Generic;
+using Mech3DotNet;
 using Mech3DotNet.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using static Mech3DotNetTests.Json.Helpers;
 
 namespace Mech3DotNetTests.Json

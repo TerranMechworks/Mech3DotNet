@@ -1,7 +1,7 @@
-﻿using Mech3DotNet.Json;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
+using Mech3DotNet.Json;
+using Newtonsoft.Json;
 
 namespace Mech3DotNet
 {

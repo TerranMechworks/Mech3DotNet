@@ -1,8 +1,8 @@
-﻿using Mech3DotNet;
-using Mech3DotNet.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Mech3DotNet;
+using Mech3DotNet.Json;
 using static Mech3DotNet.FileCompare;
 using static RoundtripTests.RecursiveFileGlob;
 

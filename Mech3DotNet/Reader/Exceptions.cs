@@ -1,6 +1,6 @@
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using static Mech3DotNet.Reader.Helpers;
 
 namespace Mech3DotNet.Reader

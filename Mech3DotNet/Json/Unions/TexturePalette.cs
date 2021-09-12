@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 
 namespace Mech3DotNet.Json
 {

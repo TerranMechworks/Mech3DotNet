@@ -1,0 +1,135 @@
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
+[*]
+indent_style = space
+insert_final_newline = true
+charset = utf-8-bom
+
+[*.csproj]
+indent_size = 2
+
+[*.cs]
+indent_size = 4
+
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# Prefer to be prefaced with `this.`
+dotnet_style_qualification_for_field = true
+dotnet_style_qualification_for_property = true
+dotnet_style_qualification_for_method = true
+dotnet_style_qualification_for_event = true
+
+# Prefer `var` to declare variables where possible
+csharp_style_var_for_built_in_types = true
+csharp_style_var_when_type_is_apparent = true
+csharp_style_var_elsewhere = true
+
+# Prefer no curly braces if allowed
+csharp_prefer_braces = false
+
+# Prefer to use throw expressions instead of throw statements
+csharp_style_throw_expression = true
+
+# Prefer objects to be initialized using object initializers when possible
+dotnet_style_object_initializer = true
+
+# Prefer out variables to be declared inline in the argument list of a method call when possible
+csharp_style_inlined_variable_declaration = true
+
+# Prefer pattern matching instead of as expressions with null checks to determine if something is of a particular type
+csharp_style_pattern_matching_over_as_with_null_check = true
+
+# Prefer pattern matching instead of is expressions with type casts
+csharp_style_pattern_matching_over_is_with_cast_check = true
+
+# Prefer expression bodies when they will be a single line
+csharp_style_expression_bodied_constructors = when_on_single_line
+csharp_style_expression_bodied_methods = when_on_single_line
+csharp_style_expression_bodied_operators = when_on_single_line
+csharp_style_expression_bodied_properties = when_on_single_line
+csharp_style_expression_bodied_indexers = when_on_single_line
+csharp_style_expression_bodied_accessors = when_on_single_line
+csharp_style_expression_bodied_lambdas = true
+csharp_style_expression_bodied_local_functions = false
+
+# Prefer collections to be initialized using collection initializers when possible
+dotnet_style_collection_initializer = true
+
+# Prefer null coalescing expressions to ternary operator checking
+dotnet_style_coalesce_expression = true
+
+# Prefer to use null-conditional operator when possible
+dotnet_style_null_propagation = true
+
+#  Prefer auto properties over properties with private backing fields
+dotnet_style_prefer_auto_properties = true
+
+# Prefer tuple names to ItemX properties
+dotnet_style_explicit_tuple_names = true
+
+# Prefer default over default(T)
+csharp_prefer_simple_default_expression = true
+
+# Prefer inferred tuple element names
+dotnet_style_prefer_inferred_tuple_names = true
+
+# Prefer inferred anonymous type member names
+dotnet_style_prefer_inferred_anonymous_type_member_names = true
+
+# Prefer local functions over anonymous functions
+csharp_style_pattern_local_over_anonymous_function = true
+
+# Prefer accessibility modifiers to be specified
+dotnet_style_require_accessibility_modifiers = always
+
+# Prefer is null check over reference equality method
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true
+
+# Prefer deconstructed variable declaration
+csharp_style_deconstructed_variable_declaration = true
+
+# Prefer that fields should be marked with readonly
+dotnet_style_readonly_field = true
+
+# Prefer assignments with a ternary conditional over an if-else statement
+dotnet_style_prefer_conditional_expression_over_assignment = true
+
+# Prefer return statements to use a ternary conditional over an if-else statement
+dotnet_style_prefer_conditional_expression_over_return = true
+
+# Prefer the language keyword, instead of the type name
+dotnet_style_predefined_type_for_locals_parameters_members = true
+dotnet_style_predefined_type_for_member_access = true
+
+# Prefer compound assignment expressions
+dotnet_style_prefer_compound_assignment = true
+
+# Prefer to use the ^ operator when calculating an index from the end of a collection
+csharp_style_prefer_index_operator = true
+
+# Prefer to use the range operator .. when extracting a "slice" of a collection
+csharp_style_prefer_range_operator = true
+
+# Prefer to assign an unused expression to a discard
+csharp_style_unused_value_expression_statement_preference = discard_variable
+csharp_style_unused_value_assignment_preference = discard_variable
+
+# Flag only non-public methods that contain unused parameters
+dotnet_code_quality_unused_parameters = non_public
+
+# Prefer local functions to be marked static
+csharp_prefer_static_local_function = true
+
+# Would be true, but requires C# 8.0
+csharp_prefer_simple_using_statement = false
+
+# Prefer using directives to be placed outside the namespace
+csharp_using_directive_placement = outside_namespace
+
+# Would be true, but requires C# 8.0
+csharp_style_prefer_switch_expression = false
+
+# Prefer simplified interpolated strings
+dotnet_style_prefer_simplified_interpolation = true

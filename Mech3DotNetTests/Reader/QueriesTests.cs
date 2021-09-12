@@ -1,7 +1,7 @@
+﻿using System.Collections.Generic;
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using static Mech3DotNet.Reader.Convert;
 using static Mech3DotNet.Reader.Query;
 

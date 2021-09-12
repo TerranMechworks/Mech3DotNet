@@ -1,6 +1,6 @@
-﻿using Mech3DotNet.Json;
+﻿using System.Collections.Generic;
+using Mech3DotNet.Json;
 using Mech3DotNet.Unsafe;
-using System.Collections.Generic;
 using static Mech3DotNet.Helpers;
 
 namespace Mech3DotNet

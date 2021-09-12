@@ -1,6 +1,6 @@
-﻿using Mech3DotNet.Reader;
+﻿using System.Collections.Generic;
+using Mech3DotNet.Reader;
 using Mech3DotNet.Unsafe;
-using System.Collections.Generic;
 
 namespace Mech3DotNet
 {

@@ -1,8 +1,8 @@
-﻿using Mech3DotNet.Json;
+﻿using System;
+using System.Collections.Generic;
+using Mech3DotNet.Json;
 using Mech3DotNet.Unsafe;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 
 namespace Mech3DotNet
 {

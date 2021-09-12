@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
 using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mech3DotNetTests
 {

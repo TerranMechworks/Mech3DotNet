@@ -1,7 +1,7 @@
+﻿using System.Collections.Generic;
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 
 namespace Mech3DotNetTests.Reader
 {
@@ -152,9 +152,10 @@ namespace Mech3DotNetTests.Reader
             StringAssert.EndsWith(message, ". Path '/path/1'.");
         }
 
-        class TestClassWithString {
+        class TestClassWithString
+        {
             public string foo = default;
-            public TestClassWithString() {}
+            public TestClassWithString() { }
         }
 
         [TestMethod]
@@ -167,9 +168,10 @@ namespace Mech3DotNetTests.Reader
             Assert.AreEqual("bar", actual.foo);
         }
 
-        class TestClassWithInt {
+        class TestClassWithInt
+        {
             public int foo = default;
-            public TestClassWithInt() {}
+            public TestClassWithInt() { }
         }
 
         [TestMethod]
@@ -182,9 +184,10 @@ namespace Mech3DotNetTests.Reader
             Assert.AreEqual(42, actual.foo);
         }
 
-        class TestClassWithFloat {
+        class TestClassWithFloat
+        {
             public float foo = default;
-            public TestClassWithFloat() {}
+            public TestClassWithFloat() { }
         }
 
         [TestMethod]
@@ -198,14 +201,16 @@ namespace Mech3DotNetTests.Reader
         }
 
         [ReaderConverter(typeof(ToClassStrict<TestInnerClass>))]
-        class TestInnerClass {
+        class TestInnerClass
+        {
             public string foo = default;
-            public TestInnerClass() {}
+            public TestInnerClass() { }
         }
 
-        class TestOuterClass {
+        class TestOuterClass
+        {
             public TestInnerClass inner = default;
-            public TestOuterClass() {}
+            public TestOuterClass() { }
         }
 
         [TestMethod]
@@ -347,9 +352,11 @@ namespace Mech3DotNetTests.Reader
             Assert.AreEqual(expected, actual);
         }
 
-        struct TestStructWithString {
+        struct TestStructWithString
+        {
             public string foo;
-            public TestStructWithString(string foo) {
+            public TestStructWithString(string foo)
+            {
                 this.foo = foo;
             }
         }
@@ -364,9 +371,11 @@ namespace Mech3DotNetTests.Reader
             Assert.AreEqual("bar", actual.foo);
         }
 
-        struct TestStructWithInt {
+        struct TestStructWithInt
+        {
             public int foo;
-            public TestStructWithInt(int foo) {
+            public TestStructWithInt(int foo)
+            {
                 this.foo = foo;
             }
         }
@@ -381,9 +390,11 @@ namespace Mech3DotNetTests.Reader
             Assert.AreEqual(42, actual.foo);
         }
 
-        struct TestStructWithFloat {
+        struct TestStructWithFloat
+        {
             public float foo;
-            public TestStructWithFloat(float foo) {
+            public TestStructWithFloat(float foo)
+            {
                 this.foo = foo;
             }
         }

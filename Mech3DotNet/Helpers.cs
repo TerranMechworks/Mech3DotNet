@@ -1,5 +1,5 @@
-﻿using Mech3DotNet.Unsafe;
-using System;
+﻿using System;
+using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {

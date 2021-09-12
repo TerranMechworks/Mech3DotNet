@@ -1,6 +1,6 @@
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using static Mech3DotNet.Reader.Helpers;
 
 namespace Mech3DotNet.Reader
@@ -141,7 +141,8 @@ namespace Mech3DotNet.Reader
             if (token.Type != JTokenType.Array)
                 throw new NotFoundException(AddPath("First item not found (not an array)", path));
 
-            foreach (var child in token.Children()) {
+            foreach (var child in token.Children())
+            {
                 path.Add(".first");
                 return child;
             }

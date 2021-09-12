@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace Mech3DotNet.Reader
 {

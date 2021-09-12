@@ -226,21 +226,5 @@ namespace Mech3DotNetTests.Json
             Assert.ThrowsException<FailConverter<float>.Fail>(
                 () => JsonConvert.DeserializeObject<TestValue>("{'Foo': {'value': 1.0}}", settings));
         }
-
-        [TestMethod]
-        public void SerDe_NegativeZero_Roundtrips()
-        {
-            var converter = new NegativeZeroFloatConverter();
-            var expectedDecoded = "{\"Foo\":{\"value\":-0.0}}";
-            var expectedEncoded = NegativeZeroFloatConverter.EncodeNegativeZero(expectedDecoded);
-            var test = JsonConvert.DeserializeObject<TestValue>(expectedEncoded, converter);
-            NegativeZeroFloatConverterTests.FloatsAreEqual(
-                NegativeZeroFloatConverter.NEGATIVE_ZERO_FLOAT,
-                test.As<TestValue.Foo>().value);
-            var actualEncoded = JsonConvert.SerializeObject(test, Formatting.None, converter);
-            Assert.AreEqual(expectedEncoded, actualEncoded);
-            var actualDecoded = NegativeZeroFloatConverter.DecodeNegativeZero(actualEncoded);
-            Assert.AreEqual(expectedDecoded, actualDecoded);
-        }
     }
 }

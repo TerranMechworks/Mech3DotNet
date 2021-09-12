@@ -11,9 +11,6 @@ namespace Mech3DotNet
 
         public delegate string JsonTransform(string json);
 
-        public static JsonTransform PreDeserializeHook = null;
-        public static JsonTransform PostSerializeHook = null;
-
         public static List<JsonConverter> GetDefaultConverters() => new List<JsonConverter>
         {
             new MotionPartConverter<Vec3, Vec4>(),
@@ -61,17 +58,12 @@ namespace Mech3DotNet
 
         public static T DeserializeObject<T>(string json)
         {
-            if (Settings.PreDeserializeHook != null)
-                json = Settings.PreDeserializeHook(json);
             return JsonConvert.DeserializeObject<T>(json, Settings.Serialization);
         }
 
         public static string SerializeObject(object value)
         {
-            var json = JsonConvert.SerializeObject(value, Settings.Serialization);
-            if (Settings.PostSerializeHook != null)
-                json = Settings.PostSerializeHook(json);
-            return json;
+            return JsonConvert.SerializeObject(value, Settings.Serialization);
         }
     }
 }

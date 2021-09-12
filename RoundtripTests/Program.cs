@@ -108,18 +108,8 @@ namespace RoundtripTests
                 Mech3DotNet.GameZ.WriteMW);
         }
 
-        static void SetupNegativeZeroRoundtripSupport()
-        {
-            var converters = Settings.GetDefaultConverters();
-            converters.Add(new NegativeZeroFloatConverter());
-            Settings.Serialization = Settings.GetSerializerSettings(converters);
-            Settings.PreDeserializeHook = NegativeZeroFloatConverter.EncodeNegativeZero;
-            Settings.PostSerializeHook = NegativeZeroFloatConverter.DecodeNegativeZero;
-        }
-
         static void Main(string[] args)
         {
-            SetupNegativeZeroRoundtripSupport();
             string basePath = @"C:\Program Files (x86)\MechWarrior 3\";
             string zbdPath = basePath + @"zbd\";
             Sounds(zbdPath);

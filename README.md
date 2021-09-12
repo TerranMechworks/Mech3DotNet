@@ -6,9 +6,7 @@ Obviously, this is an unofficial fan effort and not connected to the developers 
 
 ## .NET and negative zero floating point values
 
-IEEE Standard for Floating-Point Arithmetic (IEEE 754) specifies signed zero values for both single and double precision numbers (although `mech3ax` is largely concerned with single precision). For all floating point numbers in the base game, `mech3ax` and the JSON serialization/deserialization it employs correctly round-trip those values. However, .NET does not correctly round-trip negative zero until [.NET Core 3.0](https://devblogs.microsoft.com/dotnet/floating-point-parsing-and-formatting-improvements-in-net-core-3-0/), in violation of IEEE 754/the JSON specification. When JSON is parsed or emitted, negative zero becomes positive zero. Negative zero has a different bit pattern than positive zero. Therefore, if you need bit accurate round-tripping, you must use the `NegativeZeroFloatConverter`, and the corresponding `PreDeserializeHook` (`EncodeNegativeZero`) and `PostSerializeHook` (`DecodeNegativeZero`) to preserve single precision negative zero values.
-
-In short, `EncodeNegativeZero` replaces only negative zero (`-0.0`, not e.g. `-0.01`) with a string-quoted value (`"-0.0"`) before the JSON is deserialized. Then, `NegativeZeroFloatConverter` is able to parse this into the correct `float` representation. Equally, `NegativeZeroFloatConverter` serializes only negative zero to `"-0.0"`, which is then replaced with `-0.0`. This is a nasty hack, but seems to work so far.
+If you use `Mech3DotNet` targeting .NET Standard 2.0, this is not an issue. If you use `Mech3Dot` targeting the (very old) .NET Framework 2.0, you will not be able to roundtrip negative zero floating point values properly. There is no fix for this.
 
 ## Mono and type GUIDs
 

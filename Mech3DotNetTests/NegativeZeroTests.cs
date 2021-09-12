@@ -9,7 +9,7 @@ namespace Mech3DotNetTests
     /// zero. This is annoying, since it prevents roundtripping floating point
     /// values. In e.g. .NET Core 3.0+,
     /// <see href="https://devblogs.microsoft.com/dotnet/floating-point-parsing-and-formatting-improvements-in-net-core-3-0/">
-    /// the bad negative zero parsing is fixed</see>. If these tests fail, then
+    /// the bad negative zero parsing is fixed</see>. If these tests pass, then
     /// this problem is fixed.
     ///
     /// There's no way to work around this in Json.NET. There are two floating

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Terran Mechworks")]
 [assembly: AssemblyProduct("Mech3DotNet")]
-[assembly: AssemblyCopyright("Copyright © 2021 Toby Fleming")]
+[assembly: AssemblyCopyright("Copyright © 2021-2022 Toby Fleming")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

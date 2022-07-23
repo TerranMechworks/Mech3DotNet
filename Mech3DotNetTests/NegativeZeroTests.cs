@@ -11,9 +11,9 @@ namespace Mech3DotNetTests
     /// <see href="https://devblogs.microsoft.com/dotnet/floating-point-parsing-and-formatting-improvements-in-net-core-3-0/">
     /// the bad negative zero parsing is fixed</see>. If these tests fail, then
     /// this problem is fixed.
-    /// 
+    ///
     /// There's no way to work around this in Json.NET. There are two floating
-    /// point parse settings, 
+    /// point parse settings,
     /// <see cref="Newtonsoft.Json.FloatParseHandling.Double"/> and
     /// <see cref="Newtonsoft.Json.FloatParseHandling.Decimal"/>. It isn't
     /// possible to patch the fundamentally broken <see cref="double.Parse(string)"/>
@@ -24,7 +24,7 @@ namespace Mech3DotNetTests
     /// makes bit comparisons tricky. But worse, decimal doesn't cover the same
     /// range as float (values in MechWarrior 3 are generally floats/singles).
     /// So that doesn't work either.
-    /// 
+    ///
     /// Finally, you might think you could write your own
     /// <see cref="Newtonsoft.Json.JsonConverter"/>. This is also not possible.
     /// You'd have to get the parser to read the float token as a string
@@ -51,39 +51,39 @@ namespace Mech3DotNetTests
         private static readonly ulong DOUBLE_NEG_ZERO_BITS = DoubleToUInt64Bits(DOUBLE_NEG_ZERO);
 
         [TestMethod]
-        public void Float_NegativeZeroParse_IsBroken()
+        public void Float_NegativeZeroParse_IsNotBroken()
         {
             var value = FloatToUInt32Bits(float.Parse("-0.0", CultureInfo.InvariantCulture));
-            Assert.AreNotEqual(FLOAT_NEG_ZERO_BITS, value);
-            Assert.AreEqual(FLOAT_POS_ZERO_BITS, value);
+            Assert.AreEqual(FLOAT_NEG_ZERO_BITS, value);
+            Assert.AreNotEqual(FLOAT_POS_ZERO_BITS, value);
         }
 
         [TestMethod]
-        public void Double_NegativeZeroParse_IsBroken()
+        public void Double_NegativeZeroParse_IsNotBroken()
         {
             var value = DoubleToUInt64Bits(double.Parse("-0.0", CultureInfo.InvariantCulture));
-            Assert.AreNotEqual(DOUBLE_NEG_ZERO_BITS, value);
-            Assert.AreEqual(DOUBLE_POS_ZERO_BITS, value);
+            Assert.AreEqual(DOUBLE_NEG_ZERO_BITS, value);
+            Assert.AreNotEqual(DOUBLE_POS_ZERO_BITS, value);
         }
 
         [TestMethod]
-        public void Float_NegativeZeroToString_IsBroken()
+        public void Float_NegativeZeroToString_IsNotBroken()
         {
             var positive = FLOAT_POS_ZERO.ToString("G9", CultureInfo.InvariantCulture);
             Assert.AreEqual("0", positive);
             var negative = FLOAT_NEG_ZERO.ToString("G9", CultureInfo.InvariantCulture);
-            Assert.AreEqual(positive, negative);
-            Assert.AreNotEqual("-0", negative);
+            Assert.AreEqual("-0", negative);
+            Assert.AreNotEqual(positive, negative);
         }
 
         [TestMethod]
-        public void Double_NegativeZeroToString_IsBroken()
+        public void Double_NegativeZeroToString_IsNotBroken()
         {
             var positive = DOUBLE_POS_ZERO.ToString("R", CultureInfo.InvariantCulture);
             Assert.AreEqual("0", positive);
             var negative = DOUBLE_NEG_ZERO.ToString("R", CultureInfo.InvariantCulture);
-            Assert.AreEqual(positive, negative);
-            Assert.AreNotEqual("-0", negative);
+            Assert.AreEqual("-0", negative);
+            Assert.AreNotEqual(positive, negative);
         }
     }
 }

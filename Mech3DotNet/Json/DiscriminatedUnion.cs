@@ -149,7 +149,7 @@ namespace Mech3DotNet.Json
 
             if (!reader.Read())
                 throw new JsonSerializationException(
-                    AddPath(reader, "Unexpected end when deserializing object"));
+                    AddPath(reader, "Unexpected end when reading JSON"));
 
             // I don't know if this is allowed to happen?
             if (reader.TokenType != JsonToken.PropertyName)

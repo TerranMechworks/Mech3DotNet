@@ -6,8 +6,7 @@ namespace Mech3DotNet.Unsafe
     public class Interop
     {
         private const String MECH3AX = @"mech3ax-0.4.2";
-        // TODO: use UnmanagedType.LPUTF8Str over UnmanagedType.LPStr on .NET 4.7+
-        private const UnmanagedType PStr = UnmanagedType.LPStr;
+        private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
 
         public delegate void DataCb(IntPtr pointer, ulong length);
         public delegate int NameDataCb(IntPtr name, ulong nlength, IntPtr data, ulong dlength);

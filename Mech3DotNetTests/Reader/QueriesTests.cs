@@ -82,7 +82,8 @@ namespace Mech3DotNetTests.Reader
         {
             var token = JToken.Parse(@"['foo', 42]");
             var query = Q(token, null) / "foo";
-            Assert.AreEqual("/foo: [\n  42\n]", query.ToString());
+            var expected = "/foo: [\n  42\n]".Replace("\n", System.Environment.NewLine);
+            Assert.AreEqual(expected, query.ToString());
         }
 
         [TestMethod]

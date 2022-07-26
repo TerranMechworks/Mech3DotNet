@@ -106,14 +106,7 @@ namespace Mech3DotNetTests.Json
         [TestMethod]
         public void Deserialize_InvalidEnd_Throws()
         {
-            // sometimes, there is no rhyme or reason to Json.NET's error messages:
-            var result = CompareDeserialize<JsonReaderException>("[0.1,0.2}");
-            Assert.AreEqual(
-                "Unexpected character encountered while parsing value: }. Path '[1]', line 1, position 9.",
-                result.Item1);
-            Assert.AreEqual(
-                $"JsonToken {JsonToken.EndObject} is not valid for closing JsonType Array. Path '', line 1, position 9.",
-                result.Item2);
+            CompareErrors<JsonReaderException>("[0.1,0.2}");
         }
 
         [TestMethod]

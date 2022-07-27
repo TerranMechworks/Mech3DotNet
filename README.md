@@ -20,6 +20,14 @@ The development SDK is the LTS [.NET 6.0 SDK](https://dotnet.microsoft.com/en-us
 
 The main library targets .NET Standard 2.1 for Unity compatibility (`netstandard2.1`). The unit and functional tests target .NET 6.0 (`net6.0`).
 
+Also required are [mech3ax 0.5.0](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.5.0) native dependencies:
+
+* `mech3ax-0.5.0.dll` (Windows x64)
+* `libmech3ax-0.5.0.so` (Linux x64)
+* `libmech3ax-0.5.0.dylib` (MacOS x64, or ARM when supported)
+
+Put these in `Mech3DotNet/`.
+
 ## License
 
 Licensed under the European Union Public Licence (EUPL) 1.2 ([LICENSE](LICENSE) or https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12).

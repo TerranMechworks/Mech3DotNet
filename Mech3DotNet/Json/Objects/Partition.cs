@@ -12,17 +12,23 @@ namespace Mech3DotNet.Json
         public int y;
         [JsonProperty("nodes", Required = Required.Always)]
         public List<uint> nodes;
-        [JsonProperty("unk", Required = Required.Always)]
-        public Vec3 unk;
+        [JsonProperty("z_min", Required = Required.Always)]
+        public float zMin;
+        [JsonProperty("z_max", Required = Required.Always)]
+        public float zMax;
+        [JsonProperty("z_mid", Required = Required.Always)]
+        public float zMid;
         [JsonProperty("ptr", Required = Required.Always)]
         public uint ptr;
 
-        public Partition(int x, int y, List<uint> nodes, Vec3 unk, uint ptr)
+        public Partition(int x, int y, List<uint> nodes, float zMin, float zMax, float zMid, uint ptr)
         {
             this.x = x;
             this.y = y;
             this.nodes = nodes ?? throw new ArgumentNullException(nameof(nodes));
-            this.unk = unk;
+            this.zMin = zMin;
+            this.zMax = zMax;
+            this.zMid = zMid;
             this.ptr = ptr;
         }
 

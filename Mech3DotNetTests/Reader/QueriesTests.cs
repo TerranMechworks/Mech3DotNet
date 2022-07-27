@@ -2,8 +2,8 @@
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using static Mech3DotNet.Reader.ReaderConvert;
 using static Mech3DotNet.Reader.Query;
+using static Mech3DotNet.Reader.ReaderConvert;
 
 namespace Mech3DotNetTests.Reader
 {

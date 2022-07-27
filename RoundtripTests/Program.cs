@@ -109,6 +109,69 @@ namespace RoundtripTests
                 Mech3DotNet.GameZ.WriteMW);
         }
 
+        static void SoundWav(string basePath)
+        {
+            var matches = RecursiveGlob(new Regex(@".*\.wav$"), basePath);
+            var failures = new List<Exception>();
+
+            foreach (var inputPath in matches)
+            {
+                Console.WriteLine(inputPath);
+                var expectedName = System.IO.Path.GetFileName(inputPath);
+                try
+                {
+                    Mech3DotNet.Sounds.ReadSoundAsWav(inputPath, (string actualName, int channels, int frequency, float[] samples) =>
+                    {
+                        if (expectedName != actualName)
+                            throw new ArgumentException(
+                                String.Format("'{0}' != '{1}", expectedName, actualName),
+                                "name"
+                            );
+                    });
+                }
+                catch (Exception e)
+                {
+                    failures.Add(e);
+                }
+            }
+            if (failures.Count > 0)
+            {
+                Console.WriteLine("--- ReadSoundAsWav failures ---");
+                foreach (var failure in failures)
+                    Console.WriteLine(failure);
+            }
+            else
+                Console.WriteLine("--- ReadSoundAsWav OK ---");
+        }
+
+        static void SoundsWav(string basePath)
+        {
+            var matches = RecursiveGlob(new Regex(@"sounds[LH]\.zbd$"), basePath);
+            var failures = new List<Exception>();
+
+            foreach (var inputPath in matches)
+            {
+                Console.WriteLine(inputPath);
+                try
+                {
+                    Mech3DotNet.Sounds.ReadSoundsAsWav(inputPath, false, (string name, int channels, int frequency, float[] samples) =>
+                    { });
+                }
+                catch (Exception e)
+                {
+                    failures.Add(e);
+                }
+            }
+            if (failures.Count > 0)
+            {
+                Console.WriteLine("--- ReadSoundsAsWav failures ---");
+                foreach (var failure in failures)
+                    Console.WriteLine(failure);
+            }
+            else
+                Console.WriteLine("--- ReadSoundsAsWav OK ---");
+        }
+
         static void Main(string[] args)
         {
             if (args.Length != 1)
@@ -125,6 +188,9 @@ namespace RoundtripTests
             Interp(zbdPath);
             GameZ(zbdPath);
             Readers(zbdPath);
+
+            SoundWav(zbdPath);
+            SoundsWav(zbdPath);
 
             Console.WriteLine("All tests complete, press any key to exit...");
             Console.ReadKey();

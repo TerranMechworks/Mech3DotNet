@@ -17,22 +17,5 @@ namespace Mech3DotNet.Json
             this.id = id;
             this.value = value;
         }
-
-        public override bool Equals(object obj)
-        {
-            return obj is MessageEntry entry &&
-                   key == entry.key &&
-                   id == entry.id &&
-                   value == entry.value;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = -2002921770;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(key);
-            hashCode = hashCode * -1521134295 + id.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(value);
-            return hashCode;
-        }
     }
 }

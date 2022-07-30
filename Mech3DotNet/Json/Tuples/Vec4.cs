@@ -17,24 +17,5 @@ namespace Mech3DotNet.Json
             this.z = z;
             this.w = w;
         }
-
-        public override bool Equals(object obj)
-        {
-            return obj is Vec4 vec &&
-                   x == vec.x &&
-                   y == vec.y &&
-                   z == vec.z &&
-                   w == vec.w;
-        }
-
-        public override int GetHashCode()
-        {
-            int hashCode = -1743314642;
-            hashCode = hashCode * -1521134295 + x.GetHashCode();
-            hashCode = hashCode * -1521134295 + y.GetHashCode();
-            hashCode = hashCode * -1521134295 + z.GetHashCode();
-            hashCode = hashCode * -1521134295 + w.GetHashCode();
-            return hashCode;
-        }
     }
 }

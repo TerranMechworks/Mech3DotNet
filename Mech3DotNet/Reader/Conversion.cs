@@ -306,12 +306,7 @@ namespace Mech3DotNet.Reader
         {
             var array = InvalidTypeException.Array(token, path);
             var inst = Construct(path);
-
-#if NETSTANDARD
             var processed = new HashSet<string>(introspector.fieldInfos.Keys);
-#else
-            var processed = new List<string>(introspector.fieldInfos.Keys);
-#endif
 
             (string, List<String>)? keyAndPath = null;
             var index = 0;
@@ -357,11 +352,7 @@ namespace Mech3DotNet.Reader
 
             if (this.requireAll && processed.Count > 0)
             {
-#if NETSTANDARD
                 var fields = string.Join(",", processed);
-#else
-                var fields = string.Join(",", processed.ToArray());
-#endif
                 throw new RequiredFieldsException(AddPath($"Fields '{fields}' not set on type '{introspector.type.Name}'", path));
             }
 

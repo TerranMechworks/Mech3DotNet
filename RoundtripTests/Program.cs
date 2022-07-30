@@ -123,10 +123,7 @@ namespace RoundtripTests
                     Mech3DotNet.Sounds.ReadSoundAsWav(inputPath, (string actualName, int channels, int frequency, float[] samples) =>
                     {
                         if (expectedName != actualName)
-                            throw new ArgumentException(
-                                String.Format("'{0}' != '{1}", expectedName, actualName),
-                                "name"
-                            );
+                            throw new ArgumentException($"'{expectedName}' != '{actualName}", "name");
                     });
                 }
                 catch (Exception e)

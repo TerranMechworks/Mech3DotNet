@@ -115,7 +115,7 @@ namespace Mech3DotNet.Reader
             // allow negative indexing, i.e. from back of list
             if (index < 0)
                 index = count + index;
-            JToken? item = null;
+            JToken item;
             try
             {
                 item = array[index];

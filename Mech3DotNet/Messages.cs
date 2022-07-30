@@ -16,11 +16,14 @@ namespace Mech3DotNet
         public Messages(int languageId, List<MessageEntry> entries)
         {
             this.languageId = languageId;
-            this.entries = entries ?? throw new ArgumentNullException(nameof(entries));
+            this.entries = entries;
         }
 
         [JsonConstructor]
-        private Messages() { }
+        private Messages()
+        {
+            this.entries = new List<MessageEntry>();
+        }
 
         public static Messages Deserialize(string json)
         {
@@ -36,8 +39,8 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception ex = null;
-            Messages messages = null;
+            Exception? ex = null;
+            Messages? messages = null;
             var res = Interop.read_messages(inputPath, (IntPtr pointer, ulong length) =>
             {
                 try
@@ -54,6 +57,8 @@ namespace Mech3DotNet
                 throw ex;
             if (res != 0)
                 Interop.ThrowLastError();
+            if (messages == null)
+                throw new InvalidOperationException("messages is null after reading");
             return messages;
         }
 

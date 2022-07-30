@@ -34,7 +34,7 @@ namespace Mech3DotNet
 
         private static Dictionary<string, Model<V2, V3, Color>> Read(string inputPath, bool isPM, out byte[] manifest, out List<Material> materials)
         {
-            List<Material> capture = null;
+            List<Material>? capture = null;
             var models = new Dictionary<string, Model<V2, V3, Color>>();
             manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.read_mechlib, (string name, byte[] data) =>
             {
@@ -74,7 +74,7 @@ namespace Mech3DotNet
                 if (name == "version")
                     return isPM ? VERSION_PM : VERSION_MW;
 
-                string json = null;
+                string json;
                 if (name == "materials")
                     json = Settings.SerializeObject(archive.materials);
                 else

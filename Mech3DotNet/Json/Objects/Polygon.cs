@@ -11,9 +11,9 @@ namespace Mech3DotNet.Json
         [JsonProperty("vertex_colors", Required = Required.Always)]
         public List<Color> vertexColors;
         [JsonProperty("normal_indices", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public List<uint> normalIndices = null;
+        public List<uint>? normalIndices = null;
         [JsonProperty("uv_coords", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public List<V2> uvCoords = null;
+        public List<V2>? uvCoords = null;
         [JsonProperty("texture_index", Required = Required.Always)]
         public uint textureIndex;
         [JsonProperty("texture_info", Required = Required.Always)]
@@ -37,8 +37,8 @@ namespace Mech3DotNet.Json
 
         public Polygon(List<uint> vertexIndices, List<Color> vertexColors, List<uint> normalIndices, List<V2> uvCoords, uint textureIndex, uint textureInfo, uint unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
         {
-            this.vertexIndices = vertexIndices ?? throw new ArgumentNullException(nameof(vertexIndices));
-            this.vertexColors = vertexColors ?? throw new ArgumentNullException(nameof(vertexColors));
+            this.vertexIndices = vertexIndices;
+            this.vertexColors = vertexColors;
             this.normalIndices = normalIndices;
             this.uvCoords = uvCoords;
             this.textureIndex = textureIndex;

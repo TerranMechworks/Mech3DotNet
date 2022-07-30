@@ -12,7 +12,7 @@ namespace Mech3DotNet.Json
     }
 
     [JsonConverter(typeof(DiscriminatedUnionConverter<TexturePalette>))]
-    public class TexturePalette : DiscriminatedUnion
+    public class TexturePalette : IDiscriminatedUnion
     {
         [Guid("DF240ABE-A5AA-44E3-BACC-B166278FF42D")]
         public sealed class None
@@ -28,7 +28,7 @@ namespace Mech3DotNet.Json
 
             public Local(byte[] palette)
             {
-                this.palette = palette ?? throw new ArgumentNullException(nameof(palette));
+                this.palette = palette;
             }
         }
 
@@ -46,24 +46,28 @@ namespace Mech3DotNet.Json
             }
         }
 
-        public TexturePaletteType Variant { get; protected set; }
-
         public TexturePalette(None none)
         {
-            value = none ?? throw new ArgumentNullException(nameof(none));
+            value = none;
             Variant = TexturePaletteType.None;
         }
 
         public TexturePalette(Local local)
         {
-            value = local ?? throw new ArgumentNullException(nameof(local));
+            value = local;
             Variant = TexturePaletteType.Local;
         }
 
         public TexturePalette(Global global)
         {
-            value = global ?? throw new ArgumentNullException(nameof(global));
+            value = global;
             Variant = TexturePaletteType.Global;
         }
+
+        protected object value;
+        public TexturePaletteType Variant { get; protected set; }
+        public bool Is<T>() where T : class { return typeof(T).IsInstanceOfType(value); }
+        public T As<T>() where T : class { return (T)value; }
+        public object GetValue() { return value; }
     }
 }

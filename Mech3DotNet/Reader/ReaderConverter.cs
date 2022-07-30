@@ -6,7 +6,7 @@ namespace Mech3DotNet.Reader
     public class ReaderConverter : Attribute
     {
         public Type ConverterType { get; }
-        public object[] ConverterParameters { get; }
+        public object[]? ConverterParameters { get; }
 
         public ReaderConverter(Type converterType)
         {

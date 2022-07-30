@@ -50,7 +50,7 @@ namespace Mech3DotNet.Json
             this.unk00 = unk00;
             this.unk04 = unk04;
             this.unk08 = unk08;
-            this.extra = extra ?? throw new ArgumentNullException(nameof(extra));
+            this.extra = extra;
             this.unk16 = unk16;
             this.unk20 = unk20;
             this.unk24 = unk24;

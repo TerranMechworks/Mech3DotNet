@@ -4,8 +4,14 @@ using Newtonsoft.Json;
 
 namespace Mech3DotNet.Json
 {
+    public enum MaterialType
+    {
+        Textured,
+        Colored,
+    }
+
     [JsonConverter(typeof(DiscriminatedUnionConverter<Material>))]
-    public class Material : DiscriminatedUnion
+    public class Material : IDiscriminatedUnion
     {
         [Guid("936D3B97-3F4C-4405-B401-0A9408886E45")]
         public class Textured
@@ -15,17 +21,17 @@ namespace Mech3DotNet.Json
             [JsonProperty("pointer", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore)]
             public uint pointer = 0;
             [JsonProperty("cycle", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore)]
-            public CycleData cycle = null;
+            public CycleData? cycle = null;
             [JsonProperty("unk32", Required = Required.Always)]
             public uint unk32;
             [JsonProperty("flag", Required = Required.Always)]
             public bool flag;
 
-            public Textured(string texture, uint pointer, CycleData cycle, uint unk32, bool flag)
+            public Textured(string texture, uint pointer, CycleData? cycle, uint unk32, bool flag)
             {
-                this.texture = texture ?? throw new ArgumentNullException(nameof(texture));
+                this.texture = texture;
                 this.pointer = pointer;
-                this.cycle = cycle ?? throw new ArgumentNullException(nameof(cycle));
+                this.cycle = cycle;
                 this.unk32 = unk32;
                 this.flag = flag;
             }
@@ -46,7 +52,7 @@ namespace Mech3DotNet.Json
 
             public Colored(Color color, byte unk00, uint unk32)
             {
-                this.color = color ?? throw new ArgumentNullException(nameof(color));
+                this.color = color;
                 this.unk00 = unk00;
                 this.unk32 = unk32;
             }
@@ -57,12 +63,20 @@ namespace Mech3DotNet.Json
 
         public Material(Textured textured)
         {
-            value = textured ?? throw new ArgumentNullException(nameof(textured));
+            value = textured;
+            Variant = MaterialType.Textured;
         }
 
         public Material(Colored colored)
         {
-            value = colored ?? throw new ArgumentNullException(nameof(colored));
+            value = colored;
+            Variant = MaterialType.Colored;
         }
+
+        protected object value;
+        public MaterialType Variant { get; protected set; }
+        public bool Is<T>() where T : class { return typeof(T).IsInstanceOfType(value); }
+        public T As<T>() where T : class { return (T)value; }
+        public object GetValue() { return value; }
     }
 }

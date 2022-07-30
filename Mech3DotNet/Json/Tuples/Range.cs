@@ -3,7 +3,7 @@
 namespace Mech3DotNet.Json
 {
     [JsonConverter(typeof(TupleConverter<Range>))]
-    public class Range
+    public struct Range
     {
         public float near;
         public float far;

@@ -61,7 +61,7 @@ namespace Mech3DotNet
             return JsonConvert.DeserializeObject<T>(json, Settings.Serialization);
         }
 
-        public static string SerializeObject(object value)
+        public static string SerializeObject(object? value)
         {
             return JsonConvert.SerializeObject(value, Settings.Serialization);
         }

@@ -40,7 +40,7 @@ namespace Mech3DotNet.Json
                     fieldInfos.Add(fieldInfo);
                 fieldCount = fieldInfos.Count;
 
-                constructor = null;
+                ConstructorInfo? constructor = null;
                 foreach (var ctorInfo in type.GetConstructors())
                 {
                     var paramInfos = ctorInfo.GetParameters();
@@ -66,12 +66,13 @@ namespace Mech3DotNet.Json
                 if (constructor == null)
                     throw new TupleMissingConstructorException(
                         $"Type '{type}' contains no constructor matching all fields");
+                this.constructor = constructor;
             }
         }
 
         protected static Introspector introspector = new Introspector();
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
                 return null;

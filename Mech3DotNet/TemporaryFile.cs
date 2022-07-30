@@ -5,7 +5,7 @@ namespace Mech3DotNet
 {
     public class TemporaryFile : IDisposable
     {
-        private string filePath;
+        private string? filePath;
 
         public TemporaryFile()
         {
@@ -24,7 +24,7 @@ namespace Mech3DotNet
             File.WriteAllText(filePath, data, System.Text.Encoding.UTF8);
         }
 
-        public static implicit operator string(TemporaryFile tempFile)
+        public static implicit operator string?(TemporaryFile tempFile)
         {
             return tempFile.filePath;
         }

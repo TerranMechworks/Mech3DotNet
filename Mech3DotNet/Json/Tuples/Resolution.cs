@@ -3,7 +3,7 @@
 namespace Mech3DotNet.Json
 {
     [JsonConverter(typeof(TupleConverter<Resolution>))]
-    public class Resolution
+    public struct Resolution
     {
         public uint x;
         public uint y;

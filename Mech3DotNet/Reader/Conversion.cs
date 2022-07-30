@@ -8,7 +8,7 @@ namespace Mech3DotNet.Reader
 {
     public interface IReaderConverter
     {
-        object Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path);
+        object? Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path);
         Type ConvertType { get; }
     }
 
@@ -266,7 +266,7 @@ namespace Mech3DotNet.Reader
                 foreach (var fieldInfo in type.GetFields())
                     fieldInfos.Add(fieldInfo.Name, fieldInfo);
 
-                constructor = null;
+                ConstructorInfo? constructor = null;
                 foreach (var ctorInfo in type.GetConstructors())
                 {
                     var paramInfos = ctorInfo.GetParameters();
@@ -279,6 +279,7 @@ namespace Mech3DotNet.Reader
 
                 if (constructor == null)
                     throw new NoConstructorException($"No parameterless constructor found for '{type.Name}'");
+                this.constructor = constructor;
             }
         }
 
@@ -293,41 +294,52 @@ namespace Mech3DotNet.Reader
             this.requireAll = requireAll;
         }
 
+        private T Construct(IEnumerable<string> path)
+        {
+            var obj = introspector.constructor.Invoke(null);
+            if (obj is T inst)
+                return inst;
+            throw new ConversionException(AddPath($"Couldn't construct type", path));
+        }
+
         public T ConvertTo(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
             var array = InvalidTypeException.Array(token, path);
-            var inst = introspector.constructor.Invoke(null);
+            var inst = Construct(path);
+
 #if NETSTANDARD
             var processed = new HashSet<string>(introspector.fieldInfos.Keys);
 #else
             var processed = new List<string>(introspector.fieldInfos.Keys);
 #endif
 
-            string key = null;
-            List<string> keyPath = null;
+            (string, List<String>)? keyAndPath = null;
             var index = 0;
             foreach (var child in array)
             {
                 var childPath = ExtendPath(path, index.ToString());
-                if (key == null)
+                if (keyAndPath == null)
                 {
-                    keyPath = childPath;
-                    key = InvalidTypeException.String(child, keyPath);
+                    keyAndPath = (
+                        InvalidTypeException.String(child, childPath),
+                        childPath
+                    );
                 }
                 else
                 {
+                    // appease compiler, we have already checked it is non-null
+                    var (key, keyPath) = keyAndPath ?? default;
                     var fieldName = key;
                     // no matter which path we take, the next value should be read as a key again
-                    key = null;
+                    keyAndPath = null;
 
-                    FieldInfo fieldInfo = null;
+                    FieldInfo fieldInfo;
                     if (!introspector.fieldInfos.TryGetValue(fieldName, out fieldInfo))
                     {
                         if (this.skipUnknown)
                             continue;
                         throw new UnknownFieldException(AddPath($"No field '{fieldName}' on type '{introspector.type.Name}'", keyPath));
                     }
-                    keyPath = null;
 
                     var fieldValue = deserializer.Deserialize(child, fieldInfo.FieldType, childPath);
                     fieldInfo.SetValue(inst, fieldValue);
@@ -336,8 +348,12 @@ namespace Mech3DotNet.Reader
                 index++;
             }
 
-            if (key != null && !this.skipUnknown)
+            if (keyAndPath != null && !this.skipUnknown)
+            {
+                // appease compiler, we have already checked it is non-null
+                var (key, keyPath) = keyAndPath ?? default;
                 throw new ConversionException(AddPath($"Key '{key}' without value", keyPath));
+            }
 
             if (this.requireAll && processed.Count > 0)
             {
@@ -349,10 +365,10 @@ namespace Mech3DotNet.Reader
                 throw new RequiredFieldsException(AddPath($"Fields '{fields}' not set on type '{introspector.type.Name}'", path));
             }
 
-            return (T)inst;
+            return inst;
         }
 
-        public object Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
+        public object? Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
             return ConvertTo(deserializer, token, path);
         }
@@ -397,7 +413,7 @@ namespace Mech3DotNet.Reader
             if (array.Count != this.paramInfos.Length)
                 throw new ConversionException(AddPath($"Expected {this.paramInfos.Length} fields, but found {array.Count} fields", path));
 
-            var parameters = new List<object>(this.paramInfos.Length);
+            var parameters = new List<object?>(this.paramInfos.Length);
             for (var i = 0; i < this.paramInfos.Length; i++)
             {
                 var paramInfo = this.paramInfos[i];
@@ -407,10 +423,13 @@ namespace Mech3DotNet.Reader
                 parameters.Add(fieldValue);
             }
 
-            return (T)this.ctorInfo.Invoke(parameters.ToArray());
+            var obj = this.ctorInfo.Invoke(parameters.ToArray());
+            if (obj is T inst)
+                return inst;
+            throw new ConversionException(AddPath($"Couldn't convert '{obj}' to '{this.type}'", path));
         }
 
-        public object Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
+        public object? Convert(ReaderDeserializer deserializer, JToken token, IEnumerable<string> path)
         {
             return ConvertTo(deserializer, token, path);
         }

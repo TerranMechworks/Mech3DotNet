@@ -21,7 +21,7 @@ namespace Mech3DotNet.Json
 
         public CycleData(List<string> textures, bool unk00, uint unk04, float unk12, uint infoPtr, uint dataPtr)
         {
-            this.textures = textures ?? throw new ArgumentNullException(nameof(textures));
+            this.textures = textures;
             this.unk00 = unk00;
             this.unk04 = unk04;
             this.unk12 = unk12;

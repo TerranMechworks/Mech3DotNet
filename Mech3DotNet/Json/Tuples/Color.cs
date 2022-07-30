@@ -3,7 +3,7 @@
 namespace Mech3DotNet.Json
 {
     [JsonConverter(typeof(TupleConverter<Color>))]
-    public class Color
+    public struct Color
     {
         public float r;
         public float g;

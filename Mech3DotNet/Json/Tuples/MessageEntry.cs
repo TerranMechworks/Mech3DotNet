@@ -13,9 +13,9 @@ namespace Mech3DotNet.Json
 
         public MessageEntry(string key, int id, string value)
         {
-            this.key = key ?? throw new ArgumentNullException(nameof(key));
+            this.key = key;
             this.id = id;
-            this.value = value ?? throw new ArgumentNullException(nameof(value));
+            this.value = value;
         }
 
         public override bool Equals(object obj)

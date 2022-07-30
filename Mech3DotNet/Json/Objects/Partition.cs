@@ -25,7 +25,7 @@ namespace Mech3DotNet.Json
         {
             this.x = x;
             this.y = y;
-            this.nodes = nodes ?? throw new ArgumentNullException(nameof(nodes));
+            this.nodes = nodes;
             this.zMin = zMin;
             this.zMax = zMax;
             this.zMid = zMid;

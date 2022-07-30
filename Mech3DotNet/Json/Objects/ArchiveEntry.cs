@@ -13,8 +13,8 @@ namespace Mech3DotNet.Json
 
         public ArchiveEntry(string name, byte[] garbage)
         {
-            this.name = name ?? throw new ArgumentNullException(nameof(name));
-            this.garbage = garbage ?? throw new ArgumentNullException(nameof(garbage));
+            this.name = name;
+            this.garbage = garbage;
         }
 
         [JsonConstructor]

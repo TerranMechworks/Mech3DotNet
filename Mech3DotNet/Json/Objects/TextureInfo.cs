@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json
 
         public TextureInfo(string name, TextureAlpha alpha, ushort width, ushort height, TextureStretch stretch, bool imageLoaded, bool alphaLoaded, bool paletteLoaded, TexturePalette palette)
         {
-            this.name = name ?? throw new ArgumentNullException(nameof(name));
+            this.name = name;
             this.alpha = alpha;
             this.width = width;
             this.height = height;
@@ -34,7 +34,7 @@ namespace Mech3DotNet.Json
             this.imageLoaded = imageLoaded;
             this.alphaLoaded = alphaLoaded;
             this.paletteLoaded = paletteLoaded;
-            this.palette = palette ?? throw new ArgumentNullException(nameof(palette));
+            this.palette = palette;
         }
 
         [JsonConstructor]

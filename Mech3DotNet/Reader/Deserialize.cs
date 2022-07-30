@@ -24,9 +24,9 @@ namespace Mech3DotNet.Reader
             this.converters.Add(type, converter);
         }
 
-        public object Deserialize(JToken token, Type type, IEnumerable<string> path)
+        public object? Deserialize(JToken token, Type type, IEnumerable<string> path)
         {
-            IReaderConverter converter = null;
+            IReaderConverter? converter = null;
             if (this.converters.TryGetValue(type, out converter))
                 return converter.Convert(this, token, path);
 
@@ -35,7 +35,10 @@ namespace Mech3DotNet.Reader
 
         public T Deserialize<T>(JToken token, IEnumerable<string> path)
         {
-            return (T)Deserialize(token, typeof(T), path);
+            var obj = Deserialize(token, typeof(T), path);
+            if (obj is T inst)
+                return inst;
+            throw new UnknownTypeException(AddPath($"Couldn't deserialize '{obj}' to '{typeof(T)}'", path));
         }
     }
 }

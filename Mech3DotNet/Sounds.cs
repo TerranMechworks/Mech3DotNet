@@ -70,7 +70,7 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception ex = null;
+            Exception? ex = null;
             var res = Interop.read_sounds_as_wav(
                 inputPath,
                 isPM,
@@ -107,7 +107,7 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception ex = null;
+            Exception? ex = null;
             var res = Interop.read_sound_as_wav(
                 inputPath,
                 (int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>

@@ -16,7 +16,7 @@ namespace Mech3DotNet.Json
         public Motion(float loopTime, List<MotionPart<V3, V4>> parts, int frameCount)
         {
             this.loopTime = loopTime;
-            this.parts = parts ?? throw new ArgumentNullException(nameof(parts));
+            this.parts = parts;
             this.frameCount = frameCount;
         }
 

@@ -19,11 +19,11 @@ namespace Mech3DotNet.Json
 
         public GameZData(GameZMetadata metadata, List<string> textures, List<Material> materials, List<Mesh<V2, V3, Color>> meshes, List<IndexedNode> nodes)
         {
-            this.metadata = metadata ?? throw new ArgumentNullException(nameof(metadata));
-            this.textures = textures ?? throw new ArgumentNullException(nameof(textures));
-            this.materials = materials ?? throw new ArgumentNullException(nameof(materials));
-            this.meshes = meshes ?? throw new ArgumentNullException(nameof(meshes));
-            this.nodes = nodes ?? throw new ArgumentNullException(nameof(nodes));
+            this.metadata = metadata;
+            this.textures = textures;
+            this.materials = materials;
+            this.meshes = meshes;
+            this.nodes = nodes;
         }
 
         [JsonConstructor]

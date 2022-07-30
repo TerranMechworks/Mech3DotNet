@@ -18,8 +18,8 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception ex = null;
-            byte[] manifest = null;
+            Exception? ex = null;
+            byte[]? manifest = null;
             var res = readFunction(inputPath, isPM, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
             {
                 try
@@ -55,7 +55,7 @@ namespace Mech3DotNet
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
             var manifestLength = (ulong)manifest.Length;
-            Exception ex = null;
+            Exception? ex = null;
             int res;
             using (var manifestPointer = new PinnedGCHandle(manifest))
             {
@@ -92,8 +92,8 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception ex = null;
-            byte[] data = null;
+            Exception? ex = null;
+            byte[]? data = null;
             var res = readFunction(inputPath, isPM, (IntPtr pointer, ulong length) =>
             {
                 try
@@ -109,6 +109,8 @@ namespace Mech3DotNet
                 throw ex;
             if (res != 0)
                 Interop.ThrowLastError();
+            if (data == null)
+                throw new InvalidOperationException("data is null after reading");
             return data;
         }
 

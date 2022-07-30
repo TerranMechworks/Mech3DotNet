@@ -13,8 +13,8 @@ namespace Mech3DotNet.Json
 
         public TextureManifest(List<TextureInfo> textureInfos, List<byte[]> globalPalettes)
         {
-            this.textureInfos = textureInfos ?? throw new ArgumentNullException(nameof(textureInfos));
-            this.globalPalettes = globalPalettes ?? throw new ArgumentNullException(nameof(globalPalettes));
+            this.textureInfos = textureInfos;
+            this.globalPalettes = globalPalettes;
         }
 
         [JsonConstructor]

@@ -12,8 +12,8 @@ namespace Mech3DotNet
 
         public Texture(TextureInfo info, byte[] data)
         {
-            this.info = info ?? throw new ArgumentNullException(nameof(info));
-            this.data = data ?? throw new ArgumentNullException(nameof(data));
+            this.info = info;
+            this.data = data;
         }
     }
 
@@ -25,9 +25,9 @@ namespace Mech3DotNet
 
         public TextureArchive(Dictionary<string, byte[]> textureData, List<TextureInfo> textureInfos, List<byte[]> globalPalettes)
         {
-            this.textureData = textureData ?? throw new ArgumentNullException(nameof(textureData));
-            this.textureInfos = textureInfos ?? throw new ArgumentNullException(nameof(textureInfos));
-            this.globalPalettes = globalPalettes ?? throw new ArgumentNullException(nameof(globalPalettes));
+            this.textureData = textureData;
+            this.textureInfos = textureInfos;
+            this.globalPalettes = globalPalettes;
         }
     }
 
@@ -38,8 +38,8 @@ namespace Mech3DotNet
             var textures = new Dictionary<string, byte[]>();
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception ex = null;
-            byte[] capture = null;
+            Exception? ex = null;
+            byte[]? capture = null;
             var res = Interop.read_textures(inputPath, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
             {
                 try
@@ -114,7 +114,7 @@ namespace Mech3DotNet
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
             var manifestLength = (ulong)manifest.Length;
-            Exception ex = null;
+            Exception? ex = null;
             int res;
             using (var manifestPointer = new PinnedGCHandle(manifest))
             {

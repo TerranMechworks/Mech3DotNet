@@ -138,7 +138,7 @@ namespace Mech3DotNet.Unsafe
             IntPtr pointer,
             ulong length);
 
-        public static String GetLastError()
+        public static string? GetLastError()
         {
             var length = last_error_length();
             if (length == 0)

@@ -10,7 +10,7 @@ using static Mech3DotNetTests.Json.Helpers;
 namespace Mech3DotNetTests.Json
 {
     [JsonConverter(typeof(DiscriminatedUnionConverter<TestUnion>))]
-    class TestUnion : DiscriminatedUnion
+    class TestUnion : IDiscriminatedUnion
     {
         public sealed class Foo
         {
@@ -19,6 +19,10 @@ namespace Mech3DotNetTests.Json
             public Foo() { }
         }
         public sealed class Bar { public Bar() { } }
+        protected object value;
+        public bool Is<T>() where T : class { return typeof(T).IsInstanceOfType(value); }
+        public T As<T>() where T : class { return (T)value; }
+        public object GetValue() { return value; }
         public TestUnion(Foo value) { this.value = value; }
         public TestUnion(Bar value) { this.value = value; }
     }
@@ -207,7 +211,7 @@ namespace Mech3DotNetTests.Json
         }
 
         [JsonConverter(typeof(DiscriminatedUnionConverter<TestValue>))]
-        class TestValue : DiscriminatedUnion
+        class TestValue : IDiscriminatedUnion
         {
             public sealed class Foo
             {
@@ -217,6 +221,10 @@ namespace Mech3DotNetTests.Json
                 private Foo() { }
             }
 
+            protected object value;
+            public bool Is<T>() where T : class { return typeof(T).IsInstanceOfType(value); }
+            public T As<T>() where T : class { return (T)value; }
+            public object GetValue() { return value; }
             public TestValue(Foo value) { this.value = value; }
         }
 

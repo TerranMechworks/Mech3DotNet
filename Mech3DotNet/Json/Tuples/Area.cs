@@ -3,7 +3,7 @@
 namespace Mech3DotNet.Json
 {
     [JsonConverter(typeof(TupleConverter<Area>))]
-    public class Area
+    public struct Area
     {
         public int left;
         public int top;

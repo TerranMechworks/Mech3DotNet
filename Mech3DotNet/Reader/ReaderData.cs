@@ -5,19 +5,21 @@ namespace Mech3DotNet.Reader
 {
     public class ReaderData
     {
-        public JToken root;
+        public JToken? root;
         private ReaderDeserializer deserializer;
 
-        public ReaderData(JToken root, ReaderDeserializer deserializer)
+        public ReaderData(JToken? root, ReaderDeserializer deserializer)
         {
             this.root = root;
             this.deserializer = deserializer;
         }
 
-        public ReaderData(JToken root) : this(root, new ReaderDeserializer()) { }
+        public ReaderData(JToken? root) : this(root, new ReaderDeserializer()) { }
 
         public static Query operator /(ReaderData reader, IQueryOperation op)
         {
+            if (reader.root == null)
+                throw new ArgumentNullException("root");
             var query = new Query(reader.root, reader.deserializer);
             return query / op;
         }
@@ -35,7 +37,7 @@ namespace Mech3DotNet.Reader
         /// <summary>Deserialize reader data from JSON</summary>
         public static ReaderData Deserialize(string json, ReaderDeserializer deserializer)
         {
-            var root = Settings.DeserializeObject<JArray>(json);
+            var root = Settings.DeserializeObject<JArray?>(json);
             // some reader files (c2/mobilerepair.zrd) contain empty arrays,
             // and mech3ax deserializes this as null
             if (root == null)
@@ -61,7 +63,9 @@ namespace Mech3DotNet.Reader
 
         public override string ToString()
         {
-            return root.ToString();
+            if (this.root == null)
+                throw new ArgumentNullException("root");
+            return this.root.ToString();
         }
     }
 }

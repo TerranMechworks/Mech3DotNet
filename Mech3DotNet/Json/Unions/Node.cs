@@ -17,7 +17,7 @@ namespace Mech3DotNet.Json
         World,
     }
 
-    public class Node<N> : DiscriminatedUnion
+    public class Node<N> : IDiscriminatedUnion
     {
         [Guid("918EF3A0-6941-4D1D-86E4-8A05CC14E6C4")]
         public sealed class Camera
@@ -33,9 +33,9 @@ namespace Mech3DotNet.Json
 
             public Camera(string name, Range clip, Range fov, uint dataPtr)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
-                this.clip = clip ?? throw new ArgumentNullException(nameof(clip));
-                this.fov = fov ?? throw new ArgumentNullException(nameof(fov));
+                this.name = name;
+                this.clip = clip;
+                this.fov = fov;
                 this.dataPtr = dataPtr;
             }
 
@@ -57,9 +57,9 @@ namespace Mech3DotNet.Json
 
             public Display(string name, Resolution resolution, Color clearColor, uint dataPtr)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
-                this.resolution = resolution ?? throw new ArgumentNullException(nameof(resolution));
-                this.clearColor = clearColor ?? throw new ArgumentNullException(nameof(clearColor));
+                this.name = name;
+                this.resolution = resolution;
+                this.clearColor = clearColor;
                 this.dataPtr = dataPtr;
             }
 
@@ -89,13 +89,13 @@ namespace Mech3DotNet.Json
 
             public Empty(string name, NodeFlags flags, uint unk044, uint zoneId, Block unk116, Block unk140, Block unk164, uint parent)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
-                this.flags = flags ?? throw new ArgumentNullException(nameof(flags));
+                this.name = name;
+                this.flags = flags;
                 this.unk044 = unk044;
                 this.zoneId = zoneId;
-                this.unk116 = unk116 ?? throw new ArgumentNullException(nameof(unk116));
-                this.unk140 = unk140 ?? throw new ArgumentNullException(nameof(unk140));
-                this.unk164 = unk164 ?? throw new ArgumentNullException(nameof(unk164));
+                this.unk116 = unk116;
+                this.unk140 = unk140;
+                this.unk164 = unk164;
                 this.parent = parent;
             }
 
@@ -125,12 +125,12 @@ namespace Mech3DotNet.Json
 
             public Light(string name, Vec3 direction, float diffuse, float ambient, Color color, Range range, uint parentPtr, uint dataPtr)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
+                this.name = name;
                 this.direction = direction;
                 this.diffuse = diffuse;
                 this.ambient = ambient;
-                this.color = color ?? throw new ArgumentNullException(nameof(color));
-                this.range = range ?? throw new ArgumentNullException(nameof(range));
+                this.color = color;
+                this.range = range;
                 this.parentPtr = parentPtr;
                 this.dataPtr = dataPtr;
             }
@@ -157,7 +157,7 @@ namespace Mech3DotNet.Json
             [JsonProperty("zone_id", Required = Required.Always)]
             public uint zoneId;
             [JsonProperty("area_partition", Required = Required.AllowNull)]
-            public AreaPartition areaPartition;
+            public AreaPartition? areaPartition;
             [JsonProperty("parent", Required = Required.Always)]
             public uint parent;
             [JsonProperty("children", Required = Required.Always)]
@@ -171,22 +171,22 @@ namespace Mech3DotNet.Json
             [JsonProperty("unk116", Required = Required.Always)]
             public Block unk116;
 
-            public Lod(string name, bool level, Range range, float unk60, uint? unk76, NodeFlags flags, uint zoneId, AreaPartition areaPartition, uint parent, List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Block unk116)
+            public Lod(string name, bool level, Range range, float unk60, uint? unk76, NodeFlags flags, uint zoneId, AreaPartition? areaPartition, uint parent, List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Block unk116)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
+                this.name = name;
                 this.level = level;
-                this.range = range ?? throw new ArgumentNullException(nameof(range));
+                this.range = range;
                 this.unk60 = unk60;
                 this.unk76 = unk76;
-                this.flags = flags ?? throw new ArgumentNullException(nameof(flags));
+                this.flags = flags;
                 this.zoneId = zoneId;
-                this.areaPartition = areaPartition; // Option
+                this.areaPartition = areaPartition;
                 this.parent = parent;
-                this.children = children ?? throw new ArgumentNullException(nameof(children));
+                this.children = children;
                 this.dataPtr = dataPtr;
                 this.parentArrayPtr = parentArrayPtr;
                 this.childrenArrayPtr = childrenArrayPtr;
-                this.unk116 = unk116 ?? throw new ArgumentNullException(nameof(unk116));
+                this.unk116 = unk116;
             }
 
             [JsonConstructor]
@@ -199,7 +199,7 @@ namespace Mech3DotNet.Json
             [JsonProperty("name", Required = Required.Always)]
             public String name;
             [JsonProperty("transformation", Required = Required.AllowNull)]
-            public Transformation transformation;
+            public Transformation? transformation;
             [JsonProperty("matrix_signs", Required = Required.Always)]
             public uint matrixSigns;
             [JsonProperty("flags", Required = Required.Always)]
@@ -207,7 +207,7 @@ namespace Mech3DotNet.Json
             [JsonProperty("zone_id", Required = Required.Always)]
             public uint zoneId;
             [JsonProperty("area_partition", Required = Required.AllowNull)]
-            public AreaPartition areaPartition;
+            public AreaPartition? areaPartition;
             [JsonProperty("mesh_index", Required = Required.Always)]
             public int meshIndex;
             [JsonProperty("parent", Required = Required.AllowNull)]
@@ -227,23 +227,23 @@ namespace Mech3DotNet.Json
             [JsonProperty("unk164", Required = Required.Always)]
             public Block unk164;
 
-            public Object3d(string name, Transformation transformation, uint matrixSigns, NodeFlags flags, uint zoneId, AreaPartition areaPartition, int meshIndex, uint? parent, List<N> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Block unk116, Block unk140, Block unk164)
+            public Object3d(string name, Transformation? transformation, uint matrixSigns, NodeFlags flags, uint zoneId, AreaPartition? areaPartition, int meshIndex, uint? parent, List<N> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Block unk116, Block unk140, Block unk164)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
-                this.transformation = transformation; // Option
+                this.name = name;
+                this.transformation = transformation;
                 this.matrixSigns = matrixSigns;
-                this.flags = flags ?? throw new ArgumentNullException(nameof(flags));
+                this.flags = flags;
                 this.zoneId = zoneId;
-                this.areaPartition = areaPartition; // Option
+                this.areaPartition = areaPartition;
                 this.meshIndex = meshIndex;
                 this.parent = parent;
-                this.children = children ?? throw new ArgumentNullException(nameof(children));
+                this.children = children;
                 this.dataPtr = dataPtr;
                 this.parentArrayPtr = parentArrayPtr;
                 this.childrenArrayPtr = childrenArrayPtr;
-                this.unk116 = unk116 ?? throw new ArgumentNullException(nameof(unk116));
-                this.unk140 = unk140 ?? throw new ArgumentNullException(nameof(unk140));
-                this.unk164 = unk164 ?? throw new ArgumentNullException(nameof(unk164));
+                this.unk116 = unk116;
+                this.unk140 = unk140;
+                this.unk164 = unk164;
             }
 
             [JsonConstructor]
@@ -262,8 +262,8 @@ namespace Mech3DotNet.Json
 
             public Window(string name, Resolution resolution, uint dataPtr)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
-                this.resolution = resolution ?? throw new ArgumentNullException(nameof(resolution));
+                this.name = name;
+                this.resolution = resolution;
                 this.dataPtr = dataPtr;
             }
 
@@ -305,9 +305,9 @@ namespace Mech3DotNet.Json
 
             public World(string name, Area area, List<List<Partition>> partitions, uint areaPartitionXCount, uint areaPartitionYCount, bool fudgeCount, uint areaPartitionPtr, uint virtPartitionPtr, uint worldChildrenPtr, uint worldChildValue, uint worldLightsPtr, List<uint> children, uint dataPtr, uint childrenArrayPtr)
             {
-                this.name = name ?? throw new ArgumentNullException(nameof(name));
-                this.area = area ?? throw new ArgumentNullException(nameof(area));
-                this.partitions = partitions ?? throw new ArgumentNullException(nameof(partitions));
+                this.name = name;
+                this.area = area;
+                this.partitions = partitions;
                 this.areaPartitionXCount = areaPartitionXCount;
                 this.areaPartitionYCount = areaPartitionYCount;
                 this.fudgeCount = fudgeCount;
@@ -316,7 +316,7 @@ namespace Mech3DotNet.Json
                 this.worldChildrenPtr = worldChildrenPtr;
                 this.worldChildValue = worldChildValue;
                 this.worldLightsPtr = worldLightsPtr;
-                this.children = children ?? throw new ArgumentNullException(nameof(children));
+                this.children = children;
                 this.dataPtr = dataPtr;
                 this.childrenArrayPtr = childrenArrayPtr;
             }
@@ -325,110 +325,88 @@ namespace Mech3DotNet.Json
             private World() { }
         }
 
+        protected Node(object value, NodeType variant)
+        {
+            this.value = value;
+            this.Variant = variant;
+        }
+
+        protected object value;
         public NodeType Variant { get; protected set; }
+        public bool Is<T>() where T : class { return typeof(T).IsInstanceOfType(value); }
+        public T As<T>() where T : class { return (T)value; }
+        public object GetValue() { return value; }
     }
 
     [JsonConverter(typeof(DiscriminatedUnionConverter<ResolvedNode>))]
     public class ResolvedNode : Node<ResolvedNode>
     {
-        public ResolvedNode(Camera camera)
+        public ResolvedNode(Camera camera) : base(camera, NodeType.Camera)
         {
-            value = camera ?? throw new ArgumentNullException(nameof(camera));
-            Variant = NodeType.Camera;
         }
 
-        public ResolvedNode(Display display)
+        public ResolvedNode(Display display) : base(display, NodeType.Display)
         {
-            value = display ?? throw new ArgumentNullException(nameof(display));
-            Variant = NodeType.Display;
         }
 
-        public ResolvedNode(Empty empty)
+        public ResolvedNode(Empty empty) : base(empty, NodeType.Empty)
         {
-            value = empty ?? throw new ArgumentNullException(nameof(empty));
-            Variant = NodeType.Empty;
         }
 
-        public ResolvedNode(Light light)
+        public ResolvedNode(Light light) : base(light, NodeType.Light)
         {
-            value = light ?? throw new ArgumentNullException(nameof(light));
-            Variant = NodeType.Light;
         }
 
-        public ResolvedNode(Lod lod)
+        public ResolvedNode(Lod lod) : base(lod, NodeType.Lod)
         {
-            value = lod ?? throw new ArgumentNullException(nameof(lod));
-            Variant = NodeType.Lod;
         }
 
-        public ResolvedNode(Object3d object3d)
+        public ResolvedNode(Object3d object3d) : base(object3d, NodeType.Object3d)
         {
-            value = object3d ?? throw new ArgumentNullException(nameof(object3d));
-            Variant = NodeType.Object3d;
         }
 
-        public ResolvedNode(Window window)
+        public ResolvedNode(Window window) : base(window, NodeType.Window)
         {
-            value = window ?? throw new ArgumentNullException(nameof(window));
-            Variant = NodeType.Window;
         }
 
-        public ResolvedNode(World world)
+        public ResolvedNode(World world) : base(world, NodeType.World)
         {
-            value = world ?? throw new ArgumentNullException(nameof(world));
-            Variant = NodeType.World;
         }
     }
 
     [JsonConverter(typeof(DiscriminatedUnionConverter<IndexedNode>))]
     public class IndexedNode : Node<uint>
     {
-        public IndexedNode(Camera camera)
+        public IndexedNode(Camera camera) : base(camera, NodeType.Camera)
         {
-            value = camera ?? throw new ArgumentNullException(nameof(camera));
-            Variant = NodeType.Camera;
         }
 
-        public IndexedNode(Display display)
+        public IndexedNode(Display display) : base(display, NodeType.Display)
         {
-            value = display ?? throw new ArgumentNullException(nameof(display));
-            Variant = NodeType.Display;
         }
 
-        public IndexedNode(Empty empty)
+        public IndexedNode(Empty empty) : base(empty, NodeType.Empty)
         {
-            value = empty ?? throw new ArgumentNullException(nameof(empty));
-            Variant = NodeType.Empty;
         }
 
-        public IndexedNode(Light light)
+        public IndexedNode(Light light) : base(light, NodeType.Light)
         {
-            value = light ?? throw new ArgumentNullException(nameof(light));
-            Variant = NodeType.Light;
         }
 
-        public IndexedNode(Lod lod)
+        public IndexedNode(Lod lod) : base(lod, NodeType.Lod)
         {
-            value = lod ?? throw new ArgumentNullException(nameof(lod));
-            Variant = NodeType.Lod;
         }
 
-        public IndexedNode(Object3d object3d)
+        public IndexedNode(Object3d object3d) : base(object3d, NodeType.Object3d)
         {
-            value = object3d ?? throw new ArgumentNullException(nameof(object3d));
-            Variant = NodeType.Object3d;
         }
 
-        public IndexedNode(Window window)
+        public IndexedNode(Window window) : base(window, NodeType.Window)
         {
-            value = window ?? throw new ArgumentNullException(nameof(window));
-            Variant = NodeType.Window;
         }
 
-        public IndexedNode(World world)
+        public IndexedNode(World world) : base(world, NodeType.World)
         {
-            value = world ?? throw new ArgumentNullException(nameof(world));
-            Variant = NodeType.World;
         }
     }
 }

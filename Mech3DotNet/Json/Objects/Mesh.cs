@@ -49,11 +49,11 @@ namespace Mech3DotNet.Json
 
         public Mesh(List<V3> vertices, List<V3> normals, List<V3> morphs, List<Light<V3>> lights, List<Polygon<V2, Color>> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, bool unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
         {
-            this.vertices = vertices ?? throw new ArgumentNullException(nameof(vertices));
-            this.normals = normals ?? throw new ArgumentNullException(nameof(normals));
-            this.morphs = morphs ?? throw new ArgumentNullException(nameof(morphs));
-            this.lights = lights ?? throw new ArgumentNullException(nameof(lights));
-            this.polygons = polygons ?? throw new ArgumentNullException(nameof(polygons));
+            this.vertices = vertices;
+            this.normals = normals;
+            this.morphs = morphs;
+            this.lights = lights;
+            this.polygons = polygons;
             this.polygonsPtr = polygonsPtr;
             this.verticesPtr = verticesPtr;
             this.normalsPtr = normalsPtr;
@@ -73,6 +73,5 @@ namespace Mech3DotNet.Json
 
         [JsonConstructor]
         private Mesh() { }
-
     }
 }

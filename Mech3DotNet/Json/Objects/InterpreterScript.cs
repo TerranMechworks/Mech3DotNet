@@ -15,9 +15,9 @@ namespace Mech3DotNet.Json
 
         public InterpreterScript(string name, DateTime lastModified, List<string> lines)
         {
-            this.name = name ?? throw new ArgumentNullException(nameof(name));
+            this.name = name;
             this.lastModified = lastModified;
-            this.lines = lines ?? throw new ArgumentNullException(nameof(lines));
+            this.lines = lines;
         }
 
         [JsonConstructor]

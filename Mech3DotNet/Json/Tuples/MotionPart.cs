@@ -10,8 +10,8 @@ namespace Mech3DotNet.Json
 
         public MotionPart(string name, List<MotionFrame<V3, V4>> frames)
         {
-            this.name = name ?? throw new ArgumentNullException(nameof(name));
-            this.frames = frames ?? throw new ArgumentNullException(nameof(frames));
+            this.name = name;
+            this.frames = frames;
         }
     }
 

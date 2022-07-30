@@ -6,12 +6,12 @@ namespace Mech3DotNet
     {
         const int CHUNK_SIZE = 4 * 1024;
 
-        public static string CompareFiles(string srcPath, string dstPath)
+        public static string? CompareFiles(string srcPath, string dstPath)
         {
             return CompareFiles(srcPath, dstPath, CHUNK_SIZE);
         }
 
-        public static string CompareFiles(string srcPath, string dstPath, int chunkSize)
+        public static string? CompareFiles(string srcPath, string dstPath, int chunkSize)
         {
             using (var srcStream = File.OpenRead(srcPath))
             using (var dstStream = File.OpenRead(dstPath))

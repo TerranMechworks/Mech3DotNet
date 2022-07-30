@@ -20,7 +20,7 @@ namespace Mech3DotNet.Json
                     throw new ArgumentException($"Type '{type}' can only have one field");
                 field = fieldInfos[0];
 
-                constructor = null;
+                ConstructorInfo? constructor = null;
                 foreach (var ctorInfo in type.GetConstructors())
                 {
                     var paramInfos = ctorInfo.GetParameters();
@@ -34,6 +34,7 @@ namespace Mech3DotNet.Json
                 if (constructor == null)
                     throw new ArgumentException(
                         $"Type '{type}' contains no constructor matching all fields");
+                this.constructor = constructor;
             }
         }
 

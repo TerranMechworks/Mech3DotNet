@@ -15,9 +15,9 @@ namespace Mech3DotNet.Json
 
         public Model(ResolvedNode root, List<Mesh<V2, V3, Color>> meshes, List<int> meshPtrs)
         {
-            this.root = root ?? throw new ArgumentNullException(nameof(root));
-            this.meshes = meshes ?? throw new ArgumentNullException(nameof(meshes));
-            this.meshPtrs = meshPtrs ?? throw new ArgumentNullException(nameof(meshPtrs));
+            this.root = root;
+            this.meshes = meshes;
+            this.meshPtrs = meshPtrs;
         }
 
         [JsonConstructor]

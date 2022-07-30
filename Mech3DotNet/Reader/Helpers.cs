@@ -7,9 +7,7 @@ namespace Mech3DotNet.Reader
     {
         internal static string AddPath(string message, IEnumerable<string> path)
         {
-            // stupid .NET 2.0 -.-
-            var list = new List<string>(path);
-            var displayPath = string.Join("/", list.ToArray());
+            var displayPath = string.Join("/", path);
             return $"{message}. Path '{displayPath}'.";
         }
 

@@ -19,7 +19,7 @@ namespace Mech3DotNet.Json
             this.paramInfos = this.ctorInfo.GetParameters();
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.Null)
                 return null;

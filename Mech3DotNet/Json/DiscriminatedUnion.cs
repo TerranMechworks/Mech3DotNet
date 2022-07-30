@@ -13,14 +13,6 @@ namespace Mech3DotNet.Json
         object GetValue();
     }
 
-    public class DiscriminatedUnion : IDiscriminatedUnion
-    {
-        protected object value;
-        public bool Is<T>() where T : class { return typeof(T).IsInstanceOfType(value); }
-        public T As<T>() where T : class { return (T)value; }
-        public object GetValue() { return value; }
-    }
-
     public class DiscriminatedUnionException : Exception
     {
         public DiscriminatedUnionException(string message) : base(message) { }
@@ -122,7 +114,7 @@ namespace Mech3DotNet.Json
         private object ReadMemberWithoutValues(JsonReader reader, Type objectType, JsonSerializer serializer)
         {
             var memberName = (string)reader.Value;
-            Type memberType = null;
+            Type memberType;
             try
             {
                 memberType = introspector.namesToTypes[memberName];
@@ -155,7 +147,7 @@ namespace Mech3DotNet.Json
                 throw new JsonSerializationException(
                     AddPath(reader, $"Unexpected token when deserializing object: {reader.TokenType}"));
 
-            string memberName = null;
+            string memberName;
             try
             {
                 memberName = (string)reader.Value;
@@ -167,7 +159,7 @@ namespace Mech3DotNet.Json
                     AddPath(reader, $"Error converting value {reader.Value} to type 'string'"), ex);
             }
 
-            Type memberType = null;
+            Type memberType;
             try
             {
                 memberType = introspector.namesToTypes[memberName];

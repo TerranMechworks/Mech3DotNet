@@ -71,7 +71,7 @@ namespace Mech3DotNet.Json
         public sealed class Empty
         {
             [JsonProperty("name", Required = Required.Always)]
-            public String name;
+            public string name;
             [JsonProperty("flags", Required = Required.Always)]
             public NodeFlags flags;
             [JsonProperty("unk044", Required = Required.Always)]
@@ -197,7 +197,7 @@ namespace Mech3DotNet.Json
         public sealed class Object3d
         {
             [JsonProperty("name", Required = Required.Always)]
-            public String name;
+            public string name;
             [JsonProperty("transformation", Required = Required.AllowNull)]
             public Transformation? transformation;
             [JsonProperty("matrix_signs", Required = Required.Always)]
@@ -275,7 +275,7 @@ namespace Mech3DotNet.Json
         public sealed class World
         {
             [JsonProperty("name", Required = Required.Always)]
-            public String name;
+            public string name;
             [JsonProperty("area", Required = Required.Always)]
             public Area area;
             [JsonProperty("partitions", Required = Required.Always)]

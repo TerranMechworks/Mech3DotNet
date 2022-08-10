@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.ExceptionServices;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
@@ -18,7 +19,7 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             byte[]? manifest = null;
             var res = readFunction(inputPath, isPM, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
             {
@@ -34,14 +35,14 @@ namespace Mech3DotNet
                 }
                 catch (Exception e)
                 {
-                    ex = e;
+                    ex = ExceptionDispatchInfo.Capture(e);
                     return -1;
                 }
             });
             if (res != 0)
             {
                 if (ex != null)
-                    throw ex;
+                    ex.Throw();
                 else
                     Interop.ThrowLastError();
             }
@@ -55,7 +56,7 @@ namespace Mech3DotNet
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
             var manifestLength = (ulong)manifest.Length;
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             int res;
             using (var manifestPointer = new PinnedGCHandle(manifest))
             {
@@ -74,7 +75,7 @@ namespace Mech3DotNet
                     }
                     catch (Exception e)
                     {
-                        ex = e;
+                        ex = ExceptionDispatchInfo.Capture(e);
                         return -1;
                     }
                 });
@@ -82,7 +83,7 @@ namespace Mech3DotNet
             if (res != 0)
             {
                 if (ex != null)
-                    throw ex;
+                    ex.Throw();
                 else
                     Interop.ThrowLastError();
             }
@@ -92,7 +93,7 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             byte[]? data = null;
             var res = readFunction(inputPath, isPM, (IntPtr pointer, ulong length) =>
             {
@@ -102,11 +103,11 @@ namespace Mech3DotNet
                 }
                 catch (Exception e)
                 {
-                    ex = e;
+                    ex = ExceptionDispatchInfo.Capture(e);
                 }
             });
             if (ex != null)
-                throw ex;
+                ex.Throw();
             if (res != 0)
                 Interop.ThrowLastError();
             if (data == null)

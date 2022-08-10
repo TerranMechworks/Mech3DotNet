@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using Mech3DotNet.Json;
 using Mech3DotNet.Unsafe;
 
@@ -38,7 +39,7 @@ namespace Mech3DotNet
             var textures = new Dictionary<string, byte[]>();
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             byte[]? capture = null;
             var res = Interop.read_textures(inputPath, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
             {
@@ -54,14 +55,14 @@ namespace Mech3DotNet
                 }
                 catch (Exception e)
                 {
-                    ex = e;
+                    ex = ExceptionDispatchInfo.Capture(e);
                     return -1;
                 }
             });
             if (res != 0)
             {
                 if (ex != null)
-                    throw ex;
+                    ex.Throw();
                 else
                     Interop.ThrowLastError();
             }
@@ -114,7 +115,7 @@ namespace Mech3DotNet
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
             var manifestLength = (ulong)manifest.Length;
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             int res;
             using (var manifestPointer = new PinnedGCHandle(manifest))
             {
@@ -133,7 +134,7 @@ namespace Mech3DotNet
                     }
                     catch (Exception e)
                     {
-                        ex = e;
+                        ex = ExceptionDispatchInfo.Capture(e);
                         return -1;
                     }
                 });
@@ -141,7 +142,7 @@ namespace Mech3DotNet
             if (res != 0)
             {
                 if (ex != null)
-                    throw ex;
+                    ex.Throw();
                 else
                     Interop.ThrowLastError();
             }

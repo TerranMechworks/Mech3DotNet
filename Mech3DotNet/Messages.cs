@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using Mech3DotNet.Json;
 using Mech3DotNet.Unsafe;
 using Newtonsoft.Json;
@@ -39,7 +40,7 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             Messages? messages = null;
             var res = Interop.read_messages(inputPath, (IntPtr pointer, ulong length) =>
             {
@@ -50,11 +51,11 @@ namespace Mech3DotNet
                 }
                 catch (Exception e)
                 {
-                    ex = e;
+                    ex = ExceptionDispatchInfo.Capture(e);
                 }
             });
             if (ex != null)
-                throw ex;
+                ex.Throw();
             if (res != 0)
                 Interop.ThrowLastError();
             if (messages == null)

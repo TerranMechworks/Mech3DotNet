@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using Mech3DotNet.Unsafe;
 
@@ -70,7 +71,7 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             var res = Interop.read_sounds_as_wav(
                 inputPath,
                 isPM,
@@ -87,14 +88,14 @@ namespace Mech3DotNet
                     }
                     catch (Exception e)
                     {
-                        ex = e;
+                        ex = ExceptionDispatchInfo.Capture(e);
                         return -1;
                     }
                 });
             if (res != 0)
             {
                 if (ex != null)
-                    throw ex;
+                    ex.Throw();
                 else
                     Interop.ThrowLastError();
             }
@@ -107,7 +108,7 @@ namespace Mech3DotNet
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
-            Exception? ex = null;
+            ExceptionDispatchInfo? ex = null;
             var res = Interop.read_sound_as_wav(
                 inputPath,
                 (int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
@@ -123,14 +124,14 @@ namespace Mech3DotNet
                     }
                     catch (Exception e)
                     {
-                        ex = e;
+                        ex = ExceptionDispatchInfo.Capture(e);
                         return -1;
                     }
                 });
             if (res != 0)
             {
                 if (ex != null)
-                    throw ex;
+                    ex.Throw();
                 else
                     Interop.ThrowLastError();
             }

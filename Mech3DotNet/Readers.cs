@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Mech3DotNet.Reader;
 using Mech3DotNet.Unsafe;
 

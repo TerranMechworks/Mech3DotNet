@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Mech3DotNet;
 using Mech3DotNet.Json;

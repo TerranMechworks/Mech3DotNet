@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Globalization;
 using Mech3DotNet.Json;
 using Newtonsoft.Json;

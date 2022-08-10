@@ -1,4 +1,4 @@
-﻿using Mech3DotNet.Reader;
+using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using static Mech3DotNetTests.Json.Helpers;

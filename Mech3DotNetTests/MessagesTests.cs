@@ -1,4 +1,4 @@
-﻿using Mech3DotNet;
+using Mech3DotNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using static Mech3DotNetTests.Json.Helpers;

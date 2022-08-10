@@ -1,4 +1,4 @@
-﻿using Mech3DotNet;
+using Mech3DotNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Mech3DotNet.FileCompare;
 

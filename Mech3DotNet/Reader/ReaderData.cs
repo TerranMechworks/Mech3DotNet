@@ -1,26 +1,65 @@
 using System;
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace Mech3DotNet.Reader
 {
     public class ReaderData
     {
-        public JToken? root;
-        private ReaderDeserializer deserializer;
+        private static readonly byte[] NULL_LITERAL = System.Text.Encoding.ASCII.GetBytes("null");
 
-        public ReaderData(JToken? root, ReaderDeserializer deserializer)
+        public JsonNode? root;
+
+        public ReaderData(JsonNode? root)
         {
             this.root = root;
-            this.deserializer = deserializer;
         }
 
-        public ReaderData(JToken? root) : this(root, new ReaderDeserializer()) { }
+        private static bool DataIsNullLiteral(byte[] data)
+        {
+            if (data.Length != NULL_LITERAL.Length)
+                return false;
+            for (var i = 0; i < NULL_LITERAL.Length; i++)
+            {
+                if (data[i] != NULL_LITERAL[i])
+                    return false;
+            }
+            return true;
+        }
+
+        public static ReaderData Deserialize(byte[] data)
+        {
+            // some reader files (c2/mobilerepair.zrd) contain empty arrays,
+            // and mech3ax deserializes this as null, which JsonNode.Parse
+            // can't handle
+            if (DataIsNullLiteral(data))
+                return new ReaderData(null);
+            var root = JsonNode.Parse(data);
+            // since we couldn't disambiguate this from the null case, this is
+            // not allowed to happen
+            if (root is null)
+                throw new InvalidOperationException("Parsed JsonNode was null");
+            return new ReaderData(root);
+        }
+
+        public byte[] Serialize()
+        {
+            if (root is null)
+                return NULL_LITERAL;
+
+            using var stream = new System.IO.MemoryStream();
+            using (var writer = new Utf8JsonWriter(stream))
+            {
+                root.WriteTo(writer);
+            }
+            return stream.ToArray();
+        }
 
         public static Query operator /(ReaderData reader, IQueryOperation op)
         {
             if (reader.root == null)
                 throw new ArgumentNullException("root");
-            var query = new Query(reader.root, reader.deserializer);
+            var query = new Query(reader.root);
             return query / op;
         }
 
@@ -32,40 +71,6 @@ namespace Mech3DotNet.Reader
         public static Query operator /(ReaderData reader, string key)
         {
             return reader / new FindByKey(key);
-        }
-
-        /// <summary>Deserialize reader data from JSON</summary>
-        public static ReaderData Deserialize(string json, ReaderDeserializer deserializer)
-        {
-            var root = Settings.DeserializeObject<JArray?>(json);
-            // some reader files (c2/mobilerepair.zrd) contain empty arrays,
-            // and mech3ax deserializes this as null
-            if (root == null)
-                return new ReaderData(null, deserializer);
-            // we strip the first array, since all readers have this
-            if (root.Count != 1)
-                throw new InvalidRootException();
-            return new ReaderData(root.First, deserializer);
-        }
-
-        /// <summary>Serialize reader data to JSON</summary>
-        public string Serialize()
-        {
-            // some reader files (c2/mobilerepair.zrd) contain empty arrays,
-            // and mech3ax deserializes this as null
-            if (this.root == null)
-                return Settings.SerializeObject(null);
-            // since we strip the first array on load, add it back
-            var new_root = new JArray();
-            new_root.Add(root);
-            return Settings.SerializeObject(new_root);
-        }
-
-        public override string ToString()
-        {
-            if (this.root == null)
-                throw new ArgumentNullException("root");
-            return this.root.ToString();
         }
     }
 }

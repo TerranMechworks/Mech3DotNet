@@ -5,21 +5,18 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
-    public class Archive<T>
+    public class Archive<TEntry>
     {
-        public Dictionary<string, T> items;
+        public Dictionary<string, TEntry> items;
         public List<ArchiveEntry> entries;
 
-        public Archive(Dictionary<string, T> items, byte[] manifest)
+        public Archive(Dictionary<string, TEntry> items, byte[] manifest)
         {
-            if (manifest == null)
-                throw new ArgumentNullException(nameof(manifest));
             this.items = items ?? throw new ArgumentNullException(nameof(items));
-            var json = Interop.GetString(manifest);
-            entries = Settings.DeserializeObject<List<ArchiveEntry>>(json);
+            this.entries = Interop.Deserialize<List<ArchiveEntry>>(manifest);
         }
 
-        public Archive(Dictionary<string, T> items, List<ArchiveEntry> entries)
+        public Archive(Dictionary<string, TEntry> items, List<ArchiveEntry> entries)
         {
             this.items = items ?? throw new ArgumentNullException(nameof(items));
             this.entries = entries ?? throw new ArgumentNullException(nameof(entries));
@@ -27,8 +24,7 @@ namespace Mech3DotNet
 
         public byte[] GetManifest()
         {
-            var json = Settings.SerializeObject(entries);
-            return Interop.GetBytes(json);
+            return Interop.Serialize(entries);
         }
     }
 }

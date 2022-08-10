@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Mech3DotNet.Reader;
 using Mech3DotNet.Unsafe;
 
@@ -6,13 +8,12 @@ namespace Mech3DotNet
 {
     public static class Readers
     {
-        private static Dictionary<string, ReaderData> Read(string inputPath, bool isPM, ReaderDeserializer deserializer, out byte[] manifest)
+        private static Dictionary<string, ReaderData> Read(string inputPath, bool isPM, out byte[] manifest)
         {
             var readers = new Dictionary<string, ReaderData>();
             manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.read_reader, (string name, byte[] data) =>
             {
-                var json = Interop.GetString(data);
-                var reader = ReaderData.Deserialize(json, deserializer);
+                var reader = ReaderData.Deserialize(data);
                 readers.Add(name, reader);
             });
             return readers;
@@ -25,9 +26,9 @@ namespace Mech3DotNet
         /// the original order is lost, as well as the archive metadata/comment
         /// for each entry.
         /// </summary>
-        public static Dictionary<string, ReaderData> ReadMW(string inputPath, ReaderDeserializer deserializer)
+        public static Dictionary<string, ReaderData> ReadMW(string inputPath)
         {
-            return Read(inputPath, false, deserializer, out _);
+            return Read(inputPath, false, out _);
         }
 
         /// <summary>
@@ -37,18 +38,9 @@ namespace Mech3DotNet
         /// the original order is lost, as well as the archive metadata/comment
         /// for each entry.
         /// </summary>
-        public static Dictionary<string, ReaderData> ReadPM(string inputPath, ReaderDeserializer deserializer)
+        public static Dictionary<string, ReaderData> ReadPM(string inputPath)
         {
-            return Read(inputPath, true, deserializer, out _);
-        }
-
-        /// <summary>
-        /// Read a reader archive (reader*.zbd) from the base game.
-        /// </summary>
-        public static Archive<ReaderData> ReadArchiveMW(string inputPath, ReaderDeserializer deserializer)
-        {
-            var items = Read(inputPath, false, deserializer, out byte[] manifest);
-            return new Archive<ReaderData>(items, manifest);
+            return Read(inputPath, true, out _);
         }
 
         /// <summary>
@@ -56,15 +48,7 @@ namespace Mech3DotNet
         /// </summary>
         public static Archive<ReaderData> ReadArchiveMW(string inputPath)
         {
-            return ReadArchiveMW(inputPath, new ReaderDeserializer());
-        }
-
-        /// <summary>
-        /// Read a reader archive (reader*.zbd) from the expansion.
-        /// </summary>
-        public static Archive<ReaderData> ReadArchivePM(string inputPath, ReaderDeserializer deserializer)
-        {
-            var items = Read(inputPath, true, deserializer, out byte[] manifest);
+            var items = Read(inputPath, false, out byte[] manifest);
             return new Archive<ReaderData>(items, manifest);
         }
 
@@ -73,7 +57,8 @@ namespace Mech3DotNet
         /// </summary>
         public static Archive<ReaderData> ReadArchivePM(string inputPath)
         {
-            return ReadArchivePM(inputPath, new ReaderDeserializer());
+            var items = Read(inputPath, true, out byte[] manifest);
+            return new Archive<ReaderData>(items, manifest);
         }
 
         private static void Write(string outputPath, bool isPM, Archive<ReaderData> archive)
@@ -82,8 +67,7 @@ namespace Mech3DotNet
             Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.write_reader, (string name) =>
             {
                 var item = archive.items[name];
-                var json = item.Serialize();
-                return Interop.GetBytes(json);
+                return item.Serialize();
             });
         }
 

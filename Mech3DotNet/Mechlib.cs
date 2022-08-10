@@ -38,15 +38,19 @@ namespace Mech3DotNet
             var models = new Dictionary<string, Model>();
             manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.read_mechlib, (string name, byte[] data) =>
             {
-                if (name == "format" || name == "version")
-                    return;
-                var json = Interop.GetString(data);
-                if (name == "materials")
-                    capture = Settings.DeserializeObject<List<Material>>(json);
-                else
+                switch (name)
                 {
-                    var model = Settings.DeserializeObject<Model>(json);
-                    models.Add(name, model);
+                    case "format":
+                        return;
+                    case "version":
+                        return;
+                    case "materials":
+                        capture = Interop.Deserialize<List<Material>>(data);
+                        return;
+                    default:
+                        var model = Interop.Deserialize<Model>(data);
+                        models.Add(name, model);
+                        return;
                 }
             });
             if (capture == null)
@@ -67,22 +71,21 @@ namespace Mech3DotNet
         private static void Write(string outputPath, bool isPM, MechlibArchive archive)
         {
             var manifest = archive.GetManifest();
+            var version = isPM ? VERSION_PM : VERSION_MW;
             Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.write_mechlib, (string name) =>
             {
-                if (name == "format")
-                    return FORMAT;
-                if (name == "version")
-                    return isPM ? VERSION_PM : VERSION_MW;
-
-                string json;
-                if (name == "materials")
-                    json = Settings.SerializeObject(archive.materials);
-                else
+                switch (name)
                 {
-                    var item = archive.items[name];
-                    json = Settings.SerializeObject(item);
+                    case "format":
+                        return FORMAT;
+                    case "version":
+                        return version;
+                    case "materials":
+                        return Interop.Serialize(archive.materials);
+                    default:
+                        var item = archive.items[name];
+                        return Interop.Serialize(item);
                 }
-                return Interop.GetBytes(json);
             });
         }
 

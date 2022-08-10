@@ -22,9 +22,9 @@ namespace Mech3DotNet
     {
         public Dictionary<string, byte[]> textureData;
         public List<TextureInfo> textureInfos;
-        public List<byte[]> globalPalettes;
+        public List<PaletteData> globalPalettes;
 
-        public TextureArchive(Dictionary<string, byte[]> textureData, List<TextureInfo> textureInfos, List<byte[]> globalPalettes)
+        public TextureArchive(Dictionary<string, byte[]> textureData, List<TextureInfo> textureInfos, List<PaletteData> globalPalettes)
         {
             this.textureData = textureData;
             this.textureInfos = textureInfos;
@@ -72,12 +72,6 @@ namespace Mech3DotNet
             return textures;
         }
 
-        protected static TextureManifest DeserializeManifest(byte[] manifest)
-        {
-            var json = Interop.GetString(manifest);
-            return Settings.DeserializeObject<TextureManifest>(json);
-        }
-
         /// <summary>
         /// Read a texture archive from either the base game or the expansion.
         ///
@@ -87,7 +81,7 @@ namespace Mech3DotNet
         public static Dictionary<string, Texture> Read(string inputPath)
         {
             var datas = ReadRaw(inputPath, out byte[] bmanifest);
-            var manifest = DeserializeManifest(bmanifest);
+            var manifest = Interop.Deserialize<TextureManifest>(bmanifest);
             var textures = new Dictionary<string, Texture>(manifest.textureInfos.Count);
             foreach (var info in manifest.textureInfos)
             {
@@ -106,7 +100,7 @@ namespace Mech3DotNet
         public static TextureArchive ReadArchive(string inputPath)
         {
             var datas = ReadRaw(inputPath, out byte[] bmanifest);
-            var manifest = DeserializeManifest(bmanifest);
+            var manifest = Interop.Deserialize<TextureManifest>(bmanifest);
             return new TextureArchive(datas, manifest.textureInfos, manifest.globalPalettes);
         }
 
@@ -148,19 +142,14 @@ namespace Mech3DotNet
             }
         }
 
-        protected static byte[] SerializeManifest(TextureManifest manifest)
-        {
-            var json = Settings.SerializeObject(manifest);
-            return Interop.GetBytes(json);
-        }
-
         /// <summary>
         /// Write a texture archive from either the base game or the expansion.
         /// </summary>
         public static void WriteArchive(string outputPath, TextureArchive archive)
         {
-            var manifest = SerializeManifest(new TextureManifest(archive.textureInfos, archive.globalPalettes));
-            WriteRaw(outputPath, manifest, archive.textureData);
+            var manifest = new TextureManifest(archive.textureInfos, archive.globalPalettes);
+            var data = Interop.Serialize(manifest);
+            WriteRaw(outputPath, data, archive.textureData);
         }
     }
 }

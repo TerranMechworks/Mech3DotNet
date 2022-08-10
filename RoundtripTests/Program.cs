@@ -1,119 +1,153 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Mech3DotNet;
+using Mech3DotNet.FileUtils;
 using Mech3DotNet.Json;
-using static Mech3DotNet.FileCompare;
+using static Mech3DotNet.FileUtils.FileCompare;
 using static RoundtripTests.RecursiveFileGlob;
 
 namespace RoundtripTests
 {
-    static class Program
+    public class Tester
     {
-        delegate T ReadArchive<T>(string inputPath);
-        delegate void WriteArchive<T>(string outputPath, T archive);
+        private delegate T ReadArchive<T>(string inputPath);
+        private delegate void WriteArchive<T>(string outputPath, T archive);
 
-        static void Roundtrip<T>(string basePath, string name, string glob, ReadArchive<T> readFn, WriteArchive<T> writeFn)
+        private List<string> failures;
+        private string basePath;
+
+        public Tester(string basePath)
+        {
+            this.failures = new List<string>();
+            this.basePath = basePath;
+        }
+
+        static string nonNull(string? value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+            return value;
+        }
+
+        private void Roundtrip<T>(string name, string glob, ReadArchive<T> readFn, WriteArchive<T> writeFn)
         {
             var matches = RecursiveGlob(new Regex(glob), basePath);
-            var failures = new List<string>();
+            var failed = false;
             foreach (var inputPath in matches)
             {
                 Console.WriteLine(inputPath);
                 var archive = readFn(inputPath);
                 using (var outputPath = new TemporaryFile())
                 {
-                    writeFn(outputPath, archive);
+                    writeFn(nonNull(outputPath), archive);
                     var cmp = CompareFiles(inputPath, outputPath);
                     if (cmp != null)
-                        failures.Add($"{inputPath}: {cmp}");
+                    {
+                        failures.Add($"[{name}] {inputPath}: {cmp}");
+                        failed = true;
+                    }
                 }
             }
-            if (failures.Count > 0)
-            {
-                Console.WriteLine("--- {0} failures ---", name);
-                foreach (var failure in failures)
-                    Console.WriteLine(failure);
-            }
+            if (failed)
+                Console.WriteLine("--- {0} FAIL ---", name);
             else
                 Console.WriteLine("--- {0} OK ---", name);
         }
 
-        static void Sounds(string basePath)
+        public void Sounds()
         {
             Roundtrip(
-                basePath,
                 "Sounds",
                 @"sounds[LH]\.zbd$",
                 Mech3DotNet.Sounds.ReadArchiveMW,
                 Mech3DotNet.Sounds.WriteArchiveMW);
         }
 
-        static void Readers(string basePath)
+        public void Interp()
         {
             Roundtrip(
-                basePath,
-                "Readers",
-                @"reader.*\.zbd$",
-                Mech3DotNet.Readers.ReadArchiveMW,
-                Mech3DotNet.Readers.WriteArchiveMW);
-        }
-
-        static void Motions(string basePath)
-        {
-            Roundtrip(
-                basePath,
-                "Motions",
-                @"motion\.zbd$",
-                Mech3DotNet.Motions<Vec3, Vec4>.ReadArchiveMW,
-                Mech3DotNet.Motions<Vec3, Vec4>.WriteArchiveMW);
-        }
-
-        static void Mechlib(string basePath)
-        {
-            Roundtrip(
-                basePath,
-                "Mechlib",
-                @"mechlib\.zbd$",
-                Mech3DotNet.Mechlib.ReadArchiveMW,
-                Mech3DotNet.Mechlib.WriteArchiveMW);
-        }
-
-        static void Textures(string basePath)
-        {
-            Roundtrip(
-                basePath,
-                "Textures",
-                @"r?texture[12]?\.zbd$",
-                Mech3DotNet.Textures.ReadArchive,
-                Mech3DotNet.Textures.WriteArchive);
-        }
-
-        static void Interp(string basePath)
-        {
-            Roundtrip(
-                basePath,
                 "Interpreter",
                 @"interp\.zbd$",
                 Mech3DotNet.Interp.Read,
                 Mech3DotNet.Interp.Write);
         }
 
-        static void GameZ(string basePath)
+        public void Motions()
         {
             Roundtrip(
-                basePath,
+                "Motions",
+                @"motion\.zbd$",
+                Mech3DotNet.Motions<Quaternion, Vec3>.ReadArchiveMW,
+                Mech3DotNet.Motions<Quaternion, Vec3>.WriteArchiveMW);
+        }
+
+        public void Textures()
+        {
+            Roundtrip(
+                "Textures",
+                @"r?texture[12]?\.zbd$",
+                Mech3DotNet.Textures.ReadArchive,
+                Mech3DotNet.Textures.WriteArchive);
+        }
+
+        public void Mechlib()
+        {
+            Roundtrip(
+                "Mechlib",
+                @"mechlib\.zbd$",
+                Mech3DotNet.Mechlib.ReadArchiveMW,
+                Mech3DotNet.Mechlib.WriteArchiveMW);
+        }
+
+        public void GameZ()
+        {
+            Roundtrip(
                 "GameZ",
                 @"gamez\.zbd$",
                 Mech3DotNet.GameZ.ReadMW,
                 Mech3DotNet.GameZ.WriteMW);
         }
 
-        static void SoundWav(string basePath)
+        public void Readers()
+        {
+            Roundtrip(
+                "Readers",
+                @"reader.*\.zbd$",
+                Mech3DotNet.Readers.ReadArchiveMW,
+                Mech3DotNet.Readers.WriteArchiveMW);
+        }
+
+        public void Mech3Msg()
+        {
+            var matches = RecursiveGlob(new Regex(@"Mech3Msg\.dll$"), basePath);
+            var name = "Mech3Msg";
+            var failed = false;
+            foreach (var inputPath in matches)
+            {
+                Console.WriteLine(inputPath);
+                try
+                {
+                    Mech3DotNet.Mech3Msg.Read(inputPath);
+                }
+                catch (Exception e)
+                {
+                    failures.Add($"[{name}] {inputPath}: {e}");
+                    failed = true;
+                }
+            }
+            if (failed)
+                Console.WriteLine("--- {0} FAIL ---", name);
+            else
+                Console.WriteLine("--- {0} OK ---", name);
+        }
+
+        public void SoundWav()
         {
             var matches = RecursiveGlob(new Regex(@".*\.wav$"), basePath);
-            var failures = new List<Exception>();
-
+            var name = "ReadSoundAsWav";
+            var failed = false;
             foreach (var inputPath in matches)
             {
                 Console.WriteLine(inputPath);
@@ -128,24 +162,21 @@ namespace RoundtripTests
                 }
                 catch (Exception e)
                 {
-                    failures.Add(e);
+                    failures.Add($"[{name}] {inputPath}: {e}");
+                    failed = true;
                 }
             }
-            if (failures.Count > 0)
-            {
-                Console.WriteLine("--- ReadSoundAsWav failures ---");
-                foreach (var failure in failures)
-                    Console.WriteLine(failure);
-            }
+            if (failed)
+                Console.WriteLine("--- {0} FAIL ---", name);
             else
-                Console.WriteLine("--- ReadSoundAsWav OK ---");
+                Console.WriteLine("--- {0} OK ---", name);
         }
 
-        static void SoundsWav(string basePath)
+        public void SoundsWav()
         {
             var matches = RecursiveGlob(new Regex(@"sounds[LH]\.zbd$"), basePath);
-            var failures = new List<Exception>();
-
+            var name = "ReadSoundsAsWav";
+            var failed = false;
             foreach (var inputPath in matches)
             {
                 Console.WriteLine(inputPath);
@@ -156,41 +187,67 @@ namespace RoundtripTests
                 }
                 catch (Exception e)
                 {
-                    failures.Add(e);
+                    failures.Add($"[{name}] {inputPath}: {e}");
+                    failed = true;
                 }
             }
+            if (failed)
+                Console.WriteLine("--- {0} FAIL ---", name);
+            else
+                Console.WriteLine("--- {0} OK ---", name);
+        }
+
+        public void PrintResults()
+        {
             if (failures.Count > 0)
             {
-                Console.WriteLine("--- ReadSoundsAsWav failures ---");
+                Console.WriteLine("--- FAIL ---");
                 foreach (var failure in failures)
                     Console.WriteLine(failure);
             }
             else
-                Console.WriteLine("--- ReadSoundsAsWav OK ---");
+                Console.WriteLine("--- ALL OK ---");
         }
+    }
+
+    static class Program
+    {
 
         static void Main(string[] args)
         {
             if (args.Length != 1)
             {
-                Console.WriteLine("usage: RoundtripTests <zbdPath>");
+                Console.WriteLine("usage: RoundtripTests <basePath>");
                 return;
             }
 
-            string zbdPath = args[0];
-            Sounds(zbdPath);
-            Motions(zbdPath);
-            Mechlib(zbdPath);
-            Textures(zbdPath);
-            Interp(zbdPath);
-            GameZ(zbdPath);
-            Readers(zbdPath);
+            var consoleTracer = new ConsoleTraceListener(true); // stderr
+            consoleTracer.Name = "Roundtrip";
+            Trace.Listeners.Add(consoleTracer);
 
-            SoundWav(zbdPath);
-            SoundsWav(zbdPath);
+            string basePath = args[0];
+            var tester = new Tester(basePath);
+
+            tester.Sounds();
+            tester.Interp();
+            tester.Motions();
+            tester.Textures();
+            tester.Mechlib();
+            tester.GameZ();
+            tester.Mech3Msg();
+            tester.SoundWav();
+            tester.SoundsWav();
+            tester.Readers();
+
+            tester.PrintResults();
 
             Console.WriteLine("All tests complete, press any key to exit...");
             Console.ReadKey();
+
+            Trace.Flush();
+            Trace.Listeners.Remove(consoleTracer);
+            consoleTracer.Close();
+            Trace.Close();
         }
     }
 }

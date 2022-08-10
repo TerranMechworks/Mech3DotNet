@@ -115,11 +115,10 @@ namespace Mech3DotNet
             return data;
         }
 
-        public static T ReadData<T>(string inputPath, bool isPM, ReadDataFn readFunction)
+        public static T ReadData<T>(string inputPath, bool isPM, ReadDataFn readFunction) where T : class
         {
             var data = ReadDataRaw(inputPath, isPM, readFunction);
-            var json = Interop.GetString(data);
-            return Settings.DeserializeObject<T>(json);
+            return Interop.Deserialize<T>(data);
         }
 
         public static void WriteDataRaw(string outputPath, bool isPM, WriteDataFn writeFunction, byte[] data)
@@ -138,8 +137,7 @@ namespace Mech3DotNet
 
         public static void WriteData(string outputPath, bool isPM, WriteDataFn writeFunction, object value)
         {
-            var json = Settings.SerializeObject(value);
-            var data = Interop.GetBytes(json);
+            var data = Interop.Serialize(value);
             WriteDataRaw(outputPath, isPM, writeFunction, data);
         }
     }

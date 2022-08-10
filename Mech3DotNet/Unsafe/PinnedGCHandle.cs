@@ -7,7 +7,7 @@ namespace Mech3DotNet.Unsafe
     {
         private GCHandle handle;
 
-        public PinnedGCHandle(Object value)
+        public PinnedGCHandle(object value)
         {
             this.handle = GCHandle.Alloc(value ?? throw new ArgumentNullException(nameof(value)), GCHandleType.Pinned);
         }

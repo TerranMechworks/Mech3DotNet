@@ -6,7 +6,7 @@ namespace Mech3DotNet.Unsafe
     public class Interop
     {
         // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
-        private const String MECH3AX = @"mech3ax-0.5.0";
+        private const string MECH3AX = @"mech3ax-0.6.0";
         private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
 
         public delegate void DataCb(IntPtr pointer, ulong length);
@@ -172,19 +172,22 @@ namespace Mech3DotNet.Unsafe
             return buffer;
         }
 
-        public static string GetString(byte[] data)
-        {
-            return System.Text.Encoding.UTF8.GetString(data);
-        }
-
         public static string DecodeString(IntPtr pointer, ulong length)
         {
-            return GetString(DecodeBytes(pointer, length));
+            return System.Text.Encoding.UTF8.GetString(DecodeBytes(pointer, length));
         }
 
-        public static byte[] GetBytes(string value)
+        public static T Deserialize<T>(byte[] json) where T : class
         {
-            return System.Text.Encoding.UTF8.GetBytes(value);
+            T? value = System.Text.Json.JsonSerializer.Deserialize<T>(json, Mech3DotNet.Json.Converters.Options.GlobalOptions);
+            if (value is null)
+                throw new InvalidOperationException("Deserialize returned null");
+            return value;
+        }
+
+        public static byte[] Serialize<T>(T value)
+        {
+            return System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(value, Mech3DotNet.Json.Converters.Options.GlobalOptions);
         }
     }
 }

@@ -51,6 +51,15 @@ namespace Mech3DotNet.Reader
             throw new ConversionException("Value is not an array", path, node);
         }
 
+        public static JsonArray ArrayFixed(JsonNode? node, IEnumerable<string> path, int count)
+        {
+            if (node is null)
+                throw new ConversionException("Value is null", path);
+            if (node is JsonArray array && array.Count == count)
+                return array;
+            throw new ConversionException($"Value is not an array of size {count}", path, node);
+        }
+
         public static JsonValue Scalar(JsonNode? node, IEnumerable<string> path)
         {
             if (node is null)
@@ -72,24 +81,4 @@ namespace Mech3DotNet.Reader
             throw new ConversionException("Value is not a scalar", path, node);
         }
     }
-
-    // public class UnknownTypeException : ConversionException
-    // {
-    //     public UnknownTypeException(string message) : base(message) { }
-    // }
-
-    // public class NoConstructorException : ConversionException
-    // {
-    //     public NoConstructorException(string message) : base(message) { }
-    // }
-
-    // public class UnknownFieldException : ConversionException
-    // {
-    //     public UnknownFieldException(string message) : base(message) { }
-    // }
-
-    // public class RequiredFieldsException : ConversionException
-    // {
-    //     public RequiredFieldsException(string message) : base(message) { }
-    // }
 }

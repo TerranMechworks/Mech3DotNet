@@ -228,19 +228,30 @@ namespace RoundtripTests
             string basePath = args[0];
             var tester = new Tester(basePath);
 
-            tester.Sounds();
-            tester.Interp();
-            tester.Motions();
-            tester.Textures();
-            tester.Mechlib();
-            tester.GameZ();
-            tester.Mech3Msg();
-            tester.SoundWav();
-            tester.SoundsWav();
-            tester.Readers();
+            // tester.Sounds();
+            // tester.Interp();
+            // tester.Motions();
+            // tester.Textures();
+            // tester.Mechlib();
+            // tester.GameZ();
+            // tester.Mech3Msg();
+            // tester.SoundWav();
+            // tester.SoundsWav();
+            // tester.Readers();
 
             tester.PrintResults();
 
+            var matches = RecursiveGlob(new Regex(@"/zbd/reader\.zbd"), basePath);
+            foreach (var inputPath in matches)
+            {
+                Console.WriteLine(inputPath);
+                var archive = Mech3DotNet.Readers.ReadArchiveMW(inputPath);
+                var fonts = archive.GetFonts();
+                foreach (var font in fonts)
+                {
+                    Console.WriteLine("{0} {1}", font.Key, font.Value);
+                }
+            }
             Console.WriteLine("All tests complete, press any key to exit...");
             Console.ReadKey();
 

@@ -13,16 +13,20 @@ namespace Mech3DotNet.Reader
             this.key = key;
         }
 
-        public JsonNode? Apply(JsonNode? element, List<string> path)
+        public JsonNode? Apply(JsonNode? node, List<string> path)
         {
-            var array = NotAnArrayException.Cast(element, path);
+            var array = ConversionException.Array(node, path);
 
             var found = new List<JsonNode?>();
             for (var i = 0; i < array.Count - 1; i++)
             {
                 var child = array[i];
-                string? childName;
-                if (child is JsonValue value && value != null && value.TryGetValue<string>(out childName) && childName == key)
+                if (
+                    child is JsonValue value
+                    && value != null
+                    && value.TryGetValue<string>(out string? childName)
+                    && childName == key
+                )
                 {
                     var item = array[i + 1];
                     if (item == null)

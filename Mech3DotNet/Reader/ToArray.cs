@@ -12,30 +12,23 @@ namespace Mech3DotNet.Reader
             this.op = op;
         }
 
-        public T[] ConvertTo(JsonNode? element, IEnumerable<string> path)
+        public T[] ConvertTo(JsonNode? node, IEnumerable<string> path)
         {
-            if (element is null)
-                throw new ConversionException("Element is null", path);
-
-            if (element is JsonArray array)
+            var array = ConversionException.Array(node, path);
+            var childPath = new List<string>(path);
+            childPath.Add(""); // will be overwritten by loop index
+            var list = new T[array.Count];
+            for (var i = 0; i < array.Count; i++)
             {
-                var childPath = new List<string>(path);
-                childPath.Add("");
-                var list = new T[array.Count];
-                for (var i = 0; i < array.Count; i++)
-                {
-                    childPath[childPath.Count - 1] = i.ToString();
-                    list[i] = op.ConvertTo(array[i], childPath);
-                }
-                return list;
+                childPath[childPath.Count - 1] = i.ToString();
+                list[i] = op.ConvertTo(array[i], childPath);
             }
-
-            throw new ConversionException($"Element `{element}` is not an array", path);
+            return list;
         }
 
         public static T[] operator /(Query query, ToArray<T> op)
         {
-            return op.ConvertTo(query.element, query.path);
+            return op.ConvertTo(query.node, query.path);
         }
     }
 }

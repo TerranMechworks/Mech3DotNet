@@ -6,6 +6,6 @@ namespace Mech3DotNet.Reader
 {
     public interface IQueryOperation
     {
-        JsonNode? Apply(JsonNode? element, List<string> path);
+        JsonNode? Apply(JsonNode? node, List<string> path);
     }
 }

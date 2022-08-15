@@ -5,35 +5,39 @@ using static Mech3DotNetTests.Reader.Helpers;
 namespace Mech3DotNetTests.Reader
 {
     [TestClass]
-    public class ToIntTests
+    public class ToBoolTests
     {
-        [DataRow(@"42")]
-        [DataRow(@"[42]")]
+        [DataRow(@"""true""", true)]
+        [DataRow(@"[""true""]", true)]
+        [DataRow(@"""false""", false)]
+        [DataRow(@"[""false""]", false)]
         [DataTestMethod]
-        public void Valid(string json)
+        public void Valid(string json, bool expected)
         {
-            var actual = ConvertSuccess(json, Int());
-            Assert.AreEqual(42, actual);
+            var actual = ConvertSuccess(json, Bool());
+            Assert.AreEqual(expected, actual);
         }
 
         [DataRow(@"null")] // direct null
+        [DataRow(@"42")] // direct int
         [DataRow(@"42.1")] // direct float
-        [DataRow(@"""foo""")] // direct string
         [DataRow(@"true")] // direct bool
         [DataRow(@"false")] // direct bool
+        [DataRow(@"""foo""")] // direct string
         [DataRow(@"[null]")] // nested null
+        [DataRow(@"[42]")] // nested int
         [DataRow(@"[42.1]")] // nested float
-        [DataRow(@"[""foo""]")] // nested string
         [DataRow(@"[true]")] // nested bool
         [DataRow(@"[false]")] // nested bool
+        [DataRow(@"[""foo""]")] // nested string
         [DataRow(@"[[]]")] // nested array
         [DataRow(@"[]")] // empty array
-        [DataRow(@"[42,43]")] // multi array
+        [DataRow(@"[""foo"",""bar""]")] // multi array
         [DataRow(@"{}")]
         [DataTestMethod]
         public void Invalid(string json)
         {
-            var message = ConvertFailure(json, Int());
+            var message = ConvertFailure(json, Bool());
             StringAssert.Contains(message, ". Path '/path'.");
         }
     }

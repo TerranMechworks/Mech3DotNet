@@ -12,7 +12,7 @@ namespace Mech3DotNetTests.Reader
         public void FindOnly_NotArray_Throws()
         {
             var element = JsonNode.Parse(@"42");
-            Assert.ThrowsException<NotAnArrayException>(() => Q(element) / Only());
+            Assert.ThrowsException<ConversionException>(() => Q(element) / Only());
         }
 
         [TestMethod]

@@ -13,9 +13,9 @@ namespace Mech3DotNet.Reader
             this.index = index;
         }
 
-        public JsonNode? Apply(JsonNode? element, List<string> path)
+        public JsonNode? Apply(JsonNode? node, List<string> path)
         {
-            var array = NotAnArrayException.Cast(element, path);
+            var array = ConversionException.Array(node, path);
 
             var index = this.index;
             var count = array.Count;

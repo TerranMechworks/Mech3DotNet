@@ -34,7 +34,7 @@ namespace Mech3DotNetTests.Reader
         public void Invalid(string json)
         {
             var message = ConvertFailure(json, String());
-            StringAssert.EndsWith(message, ". Path '/path'.");
+            StringAssert.Contains(message, ". Path '/path'.");
         }
     }
 }

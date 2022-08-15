@@ -55,7 +55,7 @@ namespace Mech3DotNetTests.Reader
         public void InvalidOuter(string json)
         {
             var message = ConvertFailure(json, List(Int()));
-            StringAssert.EndsWith(message, ". Path '/path'.");
+            StringAssert.Contains(message, ". Path '/path'.");
         }
 
         [TestMethod]
@@ -63,7 +63,7 @@ namespace Mech3DotNetTests.Reader
         {
             var json = @"[42,null]";
             var message = ConvertFailure(json, List(Int()));
-            StringAssert.EndsWith(message, ". Path '/path/1'.");
+            StringAssert.Contains(message, ". Path '/path/1'.");
         }
     }
 }

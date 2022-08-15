@@ -13,7 +13,7 @@ namespace Mech3DotNetTests.Reader
         public void NotArray_Throws()
         {
             var element = JsonNode.Parse(@"42");
-            Assert.ThrowsException<NotAnArrayException>(() => Q(element) / "foo");
+            Assert.ThrowsException<ConversionException>(() => Q(element) / "foo");
         }
 
         [TestMethod]

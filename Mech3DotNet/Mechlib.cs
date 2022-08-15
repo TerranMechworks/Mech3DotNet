@@ -5,12 +5,12 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
-    public class MechlibArchive<V2, V3, Color> : Archive<Model<V2, V3, Color>>
+    public class MechlibArchive : Archive<Model>
     {
         public List<Material> materials;
 
         public MechlibArchive(
-            Dictionary<string, Model<V2, V3, Color>> items,
+            Dictionary<string, Model> items,
             List<Material> materials,
             byte[] manifest) : base(items, manifest)
         {
@@ -18,7 +18,7 @@ namespace Mech3DotNet
         }
 
         public MechlibArchive(
-            Dictionary<string, Model<V2, V3, Color>> items,
+            Dictionary<string, Model> items,
             List<Material> materials,
             List<ArchiveEntry> entries) : base(items, entries)
         {
@@ -26,16 +26,16 @@ namespace Mech3DotNet
         }
     }
 
-    public static class Mechlib<V2, V3, Color>
+    public static class Mechlib
     {
         private static readonly byte[] VERSION_MW = BitConverter.GetBytes(27u);
         private static readonly byte[] VERSION_PM = BitConverter.GetBytes(41u);
         private static readonly byte[] FORMAT = BitConverter.GetBytes(1u);
 
-        private static Dictionary<string, Model<V2, V3, Color>> Read(string inputPath, bool isPM, out byte[] manifest, out List<Material> materials)
+        private static Dictionary<string, Model> Read(string inputPath, bool isPM, out byte[] manifest, out List<Material> materials)
         {
             List<Material>? capture = null;
-            var models = new Dictionary<string, Model<V2, V3, Color>>();
+            var models = new Dictionary<string, Model>();
             manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.read_mechlib, (string name, byte[] data) =>
             {
                 if (name == "format" || name == "version")
@@ -45,7 +45,7 @@ namespace Mech3DotNet
                     capture = Settings.DeserializeObject<List<Material>>(json);
                 else
                 {
-                    var model = Settings.DeserializeObject<Model<V2, V3, Color>>(json);
+                    var model = Settings.DeserializeObject<Model>(json);
                     models.Add(name, model);
                 }
             });
@@ -58,13 +58,13 @@ namespace Mech3DotNet
         /// <summary>
         /// Read a mechlib archive (mechlib.zbd) from the base game.
         /// </summary>
-        public static MechlibArchive<V2, V3, Color> ReadArchiveMW(string inputPath)
+        public static MechlibArchive ReadArchiveMW(string inputPath)
         {
             var items = Read(inputPath, false, out byte[] manifest, out List<Material> materials);
-            return new MechlibArchive<V2, V3, Color>(items, materials, manifest);
+            return new MechlibArchive(items, materials, manifest);
         }
 
-        private static void Write(string outputPath, bool isPM, MechlibArchive<V2, V3, Color> archive)
+        private static void Write(string outputPath, bool isPM, MechlibArchive archive)
         {
             var manifest = archive.GetManifest();
             Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.write_mechlib, (string name) =>
@@ -89,7 +89,7 @@ namespace Mech3DotNet
         /// <summary>
         /// Write a mechlib archive (mechlib.zbd) from the base game.
         /// </summary>
-        public static void WriteArchiveMW(string outputPath, MechlibArchive<V2, V3, Color> archive)
+        public static void WriteArchiveMW(string outputPath, MechlibArchive archive)
         {
             Write(outputPath, false, archive);
         }

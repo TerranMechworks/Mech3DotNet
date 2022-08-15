@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Mech3DotNet.Json
 {
-    public class Light<V3>
+    public class Light
     {
         [JsonProperty("unk00", Required = Required.Always)]
         public uint unk00;
@@ -13,7 +13,7 @@ namespace Mech3DotNet.Json
         [JsonProperty("unk08", Required = Required.Always)]
         public uint unk08;
         [JsonProperty("extra", Required = Required.Always)]
-        public List<V3> extra;
+        public List<Vec3> extra;
         [JsonProperty("unk16", Required = Required.Always)]
         public uint unk16;
         [JsonProperty("unk20", Required = Required.Always)]
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Json
         [JsonProperty("unk72", Required = Required.Always)]
         public float unk72;
 
-        public Light(uint unk00, uint unk04, uint unk08, List<V3> extra, uint unk16, uint unk20, uint unk24, float unk28, float unk32, float unk36, float unk40, uint ptr, float unk48, float unk52, float unk56, float unk60, float unk64, float unk68, float unk72)
+        public Light(uint unk00, uint unk04, uint unk08, List<Vec3> extra, uint unk16, uint unk20, uint unk24, float unk28, float unk32, float unk36, float unk40, uint ptr, float unk48, float unk52, float unk56, float unk60, float unk64, float unk68, float unk72)
         {
             this.unk00 = unk00;
             this.unk04 = unk04;

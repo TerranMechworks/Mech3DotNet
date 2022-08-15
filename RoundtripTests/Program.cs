@@ -65,8 +65,8 @@ namespace RoundtripTests
                 basePath,
                 "Motions",
                 @"motion\.zbd$",
-                Motions<Vec3, Vec4>.ReadArchiveMW,
-                Motions<Vec3, Vec4>.WriteArchiveMW);
+                Mech3DotNet.Motions<Vec3, Vec4>.ReadArchiveMW,
+                Mech3DotNet.Motions<Vec3, Vec4>.WriteArchiveMW);
         }
 
         static void Mechlib(string basePath)
@@ -75,8 +75,8 @@ namespace RoundtripTests
                 basePath,
                 "Mechlib",
                 @"mechlib\.zbd$",
-                Mechlib<Vec2, Vec3, Color>.ReadArchiveMW,
-                Mechlib<Vec2, Vec3, Color>.WriteArchiveMW);
+                Mech3DotNet.Mechlib.ReadArchiveMW,
+                Mech3DotNet.Mechlib.WriteArchiveMW);
         }
 
         static void Textures(string basePath)
@@ -105,7 +105,7 @@ namespace RoundtripTests
                 basePath,
                 "GameZ",
                 @"gamez\.zbd$",
-                Mech3DotNet.GameZ.ReadMW<Vec2, Vec3, Color>,
+                Mech3DotNet.GameZ.ReadMW,
                 Mech3DotNet.GameZ.WriteMW);
         }
 

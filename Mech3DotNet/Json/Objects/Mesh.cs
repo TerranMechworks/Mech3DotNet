@@ -4,18 +4,18 @@ using Newtonsoft.Json;
 
 namespace Mech3DotNet.Json
 {
-    public class Mesh<V2, V3, Color>
+    public class Mesh
     {
         [JsonProperty("vertices", Required = Required.Always)]
-        public List<V3> vertices;
+        public List<Vec3> vertices;
         [JsonProperty("normals", Required = Required.Always)]
-        public List<V3> normals;
+        public List<Vec3> normals;
         [JsonProperty("morphs", Required = Required.Always)]
-        public List<V3> morphs;
+        public List<Vec3> morphs;
         [JsonProperty("lights", Required = Required.Always)]
-        public List<Light<V3>> lights;
+        public List<Light> lights;
         [JsonProperty("polygons", Required = Required.Always)]
-        public List<Polygon<V2, Color>> polygons;
+        public List<Polygon> polygons;
         [JsonProperty("polygons_ptr", Required = Required.Always)]
         public uint polygonsPtr;
         [JsonProperty("vertices_ptr", Required = Required.Always)]
@@ -47,7 +47,7 @@ namespace Mech3DotNet.Json
         [JsonProperty("unk84", Required = Required.Always)]
         public float unk84;
 
-        public Mesh(List<V3> vertices, List<V3> normals, List<V3> morphs, List<Light<V3>> lights, List<Polygon<V2, Color>> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, bool unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
+        public Mesh(List<Vec3> vertices, List<Vec3> normals, List<Vec3> morphs, List<Light> lights, List<Polygon> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, bool unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
         {
             this.vertices = vertices;
             this.normals = normals;

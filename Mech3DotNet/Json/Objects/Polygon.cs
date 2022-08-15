@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Mech3DotNet.Json
 {
-    public class Polygon<V2, Color>
+    public class Polygon
     {
         [JsonProperty("vertex_indices", Required = Required.Always)]
         public List<uint> vertexIndices;
@@ -13,7 +13,7 @@ namespace Mech3DotNet.Json
         [JsonProperty("normal_indices", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore)]
         public List<uint>? normalIndices = null;
         [JsonProperty("uv_coords", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public List<V2>? uvCoords = null;
+        public List<Vec2>? uvCoords = null;
         [JsonProperty("texture_index", Required = Required.Always)]
         public uint textureIndex;
         [JsonProperty("texture_info", Required = Required.Always)]
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Json
         [JsonProperty("unk_ptr", Required = Required.Always)]
         public uint unkPtr;
 
-        public Polygon(List<uint> vertexIndices, List<Color> vertexColors, List<uint> normalIndices, List<V2> uvCoords, uint textureIndex, uint textureInfo, uint unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
+        public Polygon(List<uint> vertexIndices, List<Color> vertexColors, List<uint> normalIndices, List<Vec2> uvCoords, uint textureIndex, uint textureInfo, uint unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
         {
             this.vertexIndices = vertexIndices;
             this.vertexColors = vertexColors;

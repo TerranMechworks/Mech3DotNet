@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Mech3DotNet.Json
 {
-    public class GameZData<V2, V3, Color>
+    public class GameZData
     {
         [JsonProperty("metadata", Required = Required.Always)]
         public GameZMetadata metadata;
@@ -13,11 +13,11 @@ namespace Mech3DotNet.Json
         [JsonProperty("materials", Required = Required.Always)]
         public List<Material> materials;
         [JsonProperty("meshes", Required = Required.Always)]
-        public List<Mesh<V2, V3, Color>> meshes;
+        public List<Mesh> meshes;
         [JsonProperty("nodes", Required = Required.Always)]
         public List<IndexedNode> nodes;
 
-        public GameZData(GameZMetadata metadata, List<string> textures, List<Material> materials, List<Mesh<V2, V3, Color>> meshes, List<IndexedNode> nodes)
+        public GameZData(GameZMetadata metadata, List<string> textures, List<Material> materials, List<Mesh> meshes, List<IndexedNode> nodes)
         {
             this.metadata = metadata;
             this.textures = textures;

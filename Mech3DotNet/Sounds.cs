@@ -19,18 +19,12 @@ namespace Mech3DotNet
             return sounds;
         }
 
-        /// <summary>
-        /// Read a sound archive (soundsL.zbd, soundsH.zbd) from the base game.
-        /// </summary>
         public static Archive<byte[]> ReadArchiveMW(string inputPath)
         {
             var items = ReadRaw(inputPath, false, out byte[] manifest);
             return new Archive<byte[]>(items, manifest);
         }
 
-        /// <summary>
-        /// Read a sound archive (soundsL.zbd, soundsH.zbd) from the expansion.
-        /// </summary>
         public static Archive<byte[]> ReadArchivePM(string inputPath)
         {
             var items = ReadRaw(inputPath, true, out byte[] manifest);
@@ -46,17 +40,11 @@ namespace Mech3DotNet
             });
         }
 
-        /// <summary>
-        /// Write a sound archive (soundsL.zbd, soundsH.zbd) from the base game.
-        /// </summary>
         public static void WriteArchiveMW(string outputPath, Archive<byte[]> archive)
         {
             WriteRaw(outputPath, false, archive);
         }
 
-        /// <summary>
-        /// Write a sound archive (soundsL.zbd, soundsH.zbd) from the expansion.
-        /// </summary>
         public static void WriteArchivePM(string outputPath, Archive<byte[]> archive)
         {
             WriteRaw(outputPath, true, archive);

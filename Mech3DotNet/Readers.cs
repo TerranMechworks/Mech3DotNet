@@ -19,42 +19,22 @@ namespace Mech3DotNet
             return readers;
         }
 
-        /// <summary>
-        /// Read a reader archive (reader*.zbd) from the base game.
-        ///
-        /// This is a lossy operation, the manifest is discarded. This means
-        /// the original order is lost, as well as the archive metadata/comment
-        /// for each entry.
-        /// </summary>
         public static Dictionary<string, ReaderData> ReadMW(string inputPath)
         {
             return Read(inputPath, false, out _);
         }
 
-        /// <summary>
-        /// Read a reader archive (reader*.zbd) from the expansion.
-        ///
-        /// This is a lossy operation, the manifest is discarded. This means
-        /// the original order is lost, as well as the archive metadata/comment
-        /// for each entry.
-        /// </summary>
         public static Dictionary<string, ReaderData> ReadPM(string inputPath)
         {
             return Read(inputPath, true, out _);
         }
 
-        /// <summary>
-        /// Read a reader archive (reader*.zbd) from the base game.
-        /// </summary>
         public static Archive<ReaderData> ReadArchiveMW(string inputPath)
         {
             var items = Read(inputPath, false, out byte[] manifest);
             return new Archive<ReaderData>(items, manifest);
         }
 
-        /// <summary>
-        /// Read a reader archive (reader*.zbd) from the expansion.
-        /// </summary>
         public static Archive<ReaderData> ReadArchivePM(string inputPath)
         {
             var items = Read(inputPath, true, out byte[] manifest);
@@ -71,17 +51,11 @@ namespace Mech3DotNet
             });
         }
 
-        /// <summary>
-        /// Write a reader archive (reader*.zbd) from the base game.
-        /// </summary>
         public static void WriteArchiveMW(string outputPath, Archive<ReaderData> archive)
         {
             Write(outputPath, false, archive);
         }
 
-        /// <summary>
-        /// Write a reader archive (reader*.zbd) from the expansion.
-        /// </summary>
         public static void WriteArchivePM(string outputPath, Archive<ReaderData> archive)
         {
             Write(outputPath, true, archive);

@@ -72,12 +72,6 @@ namespace Mech3DotNet
             return textures;
         }
 
-        /// <summary>
-        /// Read a texture archive from either the base game or the expansion.
-        ///
-        /// This is a lossy operation, the global palette is discarded and the
-        /// original order is lost.
-        /// </summary>
         public static Dictionary<string, Texture> Read(string inputPath)
         {
             var datas = ReadRaw(inputPath, out byte[] bmanifest);
@@ -94,9 +88,6 @@ namespace Mech3DotNet
             return textures;
         }
 
-        /// <summary>
-        /// Read a texture archive from either the base game or the expansion.
-        /// </summary>
         public static TextureArchive ReadArchive(string inputPath)
         {
             var datas = ReadRaw(inputPath, out byte[] bmanifest);
@@ -142,9 +133,6 @@ namespace Mech3DotNet
             }
         }
 
-        /// <summary>
-        /// Write a texture archive from either the base game or the expansion.
-        /// </summary>
         public static void WriteArchive(string outputPath, TextureArchive archive)
         {
             var manifest = new TextureManifest(archive.textureInfos, archive.globalPalettes);

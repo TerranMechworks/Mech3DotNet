@@ -59,9 +59,6 @@ namespace Mech3DotNet
             return models;
         }
 
-        /// <summary>
-        /// Read a mechlib archive (mechlib.zbd) from the base game.
-        /// </summary>
         public static MechlibArchive ReadArchiveMW(string inputPath)
         {
             var items = Read(inputPath, false, out byte[] manifest, out List<Material> materials);
@@ -89,9 +86,6 @@ namespace Mech3DotNet
             });
         }
 
-        /// <summary>
-        /// Write a mechlib archive (mechlib.zbd) from the base game.
-        /// </summary>
         public static void WriteArchiveMW(string outputPath, MechlibArchive archive)
         {
             Write(outputPath, false, archive);

@@ -36,7 +36,7 @@ namespace Mech3DotNet
         {
             List<Material>? capture = null;
             var models = new Dictionary<string, Model>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.read_mechlib, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.ReadMechlib, (string name, byte[] data) =>
             {
                 switch (name)
                 {
@@ -72,7 +72,7 @@ namespace Mech3DotNet
         {
             var manifest = archive.GetManifest();
             var version = isPM ? VERSION_PM : VERSION_MW;
-            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.write_mechlib, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteMechlib, (string name) =>
             {
                 switch (name)
                 {

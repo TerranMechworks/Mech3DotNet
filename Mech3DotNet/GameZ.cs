@@ -8,12 +8,12 @@ namespace Mech3DotNet
     {
         public static GameZData ReadMW(string inputPath)
         {
-            return ReadData<GameZData>(inputPath, false, Interop.read_gamez);
+            return ReadData<GameZData>(inputPath, false, Interop.ReadGameZ);
         }
 
         public static void WriteMW(string outputPath, GameZData gamez)
         {
-            WriteData(outputPath, false, Interop.write_gamez, gamez);
+            WriteData(outputPath, false, Interop.WriteGameZ, gamez);
         }
     }
 }

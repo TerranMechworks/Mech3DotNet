@@ -69,7 +69,7 @@ namespace Mech3DotNet
                         var dataLength = (ulong)data.Length;
                         using (var dataPointer = new PinnedGCHandle(data))
                         {
-                            Interop.buffer_set_data(buffer, dataPointer, dataLength);
+                            Interop.BufferSetData(buffer, dataPointer, dataLength);
                         }
                         return 0;
                     }

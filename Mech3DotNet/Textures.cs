@@ -41,7 +41,7 @@ namespace Mech3DotNet
                 throw new ArgumentNullException(nameof(inputPath));
             ExceptionDispatchInfo? ex = null;
             byte[]? capture = null;
-            var res = Interop.read_textures(inputPath, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
+            var res = Interop.ReadTextures(inputPath, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
             {
                 try
                 {
@@ -113,7 +113,7 @@ namespace Mech3DotNet
             int res;
             using (var manifestPointer = new PinnedGCHandle(manifest))
             {
-                res = Interop.write_textures(outputPath, manifestPointer, manifestLength, (IntPtr namePointer, ulong nameLength, IntPtr buffer) =>
+                res = Interop.WriteTextures(outputPath, manifestPointer, manifestLength, (IntPtr namePointer, ulong nameLength, IntPtr buffer) =>
                 {
                     try
                     {
@@ -122,7 +122,7 @@ namespace Mech3DotNet
                         var dataLength = (ulong)data.Length;
                         using (var dataPointer = new PinnedGCHandle(data))
                         {
-                            Interop.buffer_set_data(buffer, dataPointer, dataLength);
+                            Interop.BufferSetData(buffer, dataPointer, dataLength);
                         }
                         return 0;
                     }

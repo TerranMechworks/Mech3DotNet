@@ -11,7 +11,7 @@ namespace Mech3DotNet
         private static Dictionary<string, byte[]> ReadRaw(string inputPath, bool isPM, out byte[] manifest)
         {
             var sounds = new Dictionary<string, byte[]>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.read_sounds, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.ReadSounds, (string name, byte[] data) =>
             {
                 // there are duplicate sounds in the archive
                 sounds[name] = data;
@@ -40,7 +40,7 @@ namespace Mech3DotNet
         private static void WriteRaw(string outputPath, bool isPM, Archive<byte[]> archive)
         {
             var manifest = archive.GetManifest();
-            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.write_sounds, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteSounds, (string name) =>
             {
                 return archive.items[name];
             });
@@ -72,7 +72,7 @@ namespace Mech3DotNet
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
             ExceptionDispatchInfo? ex = null;
-            var res = Interop.read_sounds_as_wav(
+            var res = Interop.ReadSoundsAsWav(
                 inputPath,
                 isPM,
                 (IntPtr namePtr, ulong nameLen, int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
@@ -109,7 +109,7 @@ namespace Mech3DotNet
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
             ExceptionDispatchInfo? ex = null;
-            var res = Interop.read_sound_as_wav(
+            var res = Interop.ReadSoundAsWav(
                 inputPath,
                 (int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
                 {

@@ -10,7 +10,7 @@ namespace Mech3DotNet
         public static List<Script> Read(string inputPath)
         {
             // interp.zbd has no Script between MW and PM, it's just for consistency
-            return ReadData<List<Script>>(inputPath, false, Interop.read_interp);
+            return ReadData<List<Script>>(inputPath, false, Interop.ReadInterp);
         }
 
         public static Dictionary<string, Script> ReadAsDict(string inputPath)
@@ -25,7 +25,7 @@ namespace Mech3DotNet
         public static void Write(string outputPath, List<Script> scripts)
         {
             // interp.zbd has no difference between MW and PM, it's just for consistency
-            WriteData(outputPath, false, Interop.write_interp, scripts);
+            WriteData(outputPath, false, Interop.WriteInterp, scripts);
         }
     }
 }

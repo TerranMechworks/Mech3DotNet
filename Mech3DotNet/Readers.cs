@@ -11,7 +11,7 @@ namespace Mech3DotNet
         private static Dictionary<string, ReaderData> Read(string inputPath, bool isPM, out byte[] manifest)
         {
             var readers = new Dictionary<string, ReaderData>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.read_reader, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.ReadReader, (string name, byte[] data) =>
             {
                 var reader = ReaderData.Deserialize(data);
                 readers.Add(name, reader);
@@ -64,7 +64,7 @@ namespace Mech3DotNet
         private static void Write(string outputPath, bool isPM, Archive<ReaderData> archive)
         {
             var manifest = archive.GetManifest();
-            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.write_reader, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteReader, (string name) =>
             {
                 var item = archive.items[name];
                 return item.Serialize();

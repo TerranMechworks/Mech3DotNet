@@ -14,7 +14,7 @@ namespace Mech3DotNet
                 throw new ArgumentNullException(nameof(inputPath));
             ExceptionDispatchInfo? ex = null;
             Messages? messages = null;
-            var res = Interop.read_messages(inputPath, (IntPtr pointer, ulong length) =>
+            var res = Interop.ReadMessages(inputPath, (IntPtr pointer, ulong length) =>
             {
                 try
                 {

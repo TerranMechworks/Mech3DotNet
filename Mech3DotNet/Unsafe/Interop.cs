@@ -85,6 +85,20 @@ namespace Mech3DotNet.Unsafe
             ulong manifest_len,
             NameBufferCb callback);
 
+        [DllImport(MECH3AX, EntryPoint = "read_reader_raw")]
+        public static extern int ReadReaderRaw(
+            [MarshalAs(PStr)] string filename,
+            [MarshalAs(UnmanagedType.Bool)] bool is_pm,
+            NameDataCb callback);
+
+        [DllImport(MECH3AX, EntryPoint = "write_reader_raw")]
+        public static extern int WriteReaderRaw(
+            [MarshalAs(PStr)] string filename,
+            [MarshalAs(UnmanagedType.Bool)] bool is_pm,
+            IntPtr manifest_ptr,
+            ulong manifest_len,
+            NameBufferCb callback);
+
         [DllImport(MECH3AX, EntryPoint = "read_motion")]
         public static extern int ReadMotion(
             [MarshalAs(PStr)] string filename,

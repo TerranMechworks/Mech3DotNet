@@ -43,6 +43,16 @@ namespace Mech3DotNet.Reader
             return new FindOnly();
         }
 
+        public static Combinator Only(string key)
+        {
+            return new Combinator(new FindByKey(key), new FindOnly());
+        }
+
+        public static Query Root(ReaderValue value)
+        {
+            return value / new FindOnly();
+        }
+
         public static ToInt Int()
         {
             return new ToInt();

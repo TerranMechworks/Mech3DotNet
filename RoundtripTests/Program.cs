@@ -266,6 +266,11 @@ namespace RoundtripTests
                         Console.WriteLine("{0}", soundDef);
                     }
                 }
+                var soundGroups = archive.GetSoundGroups();
+                foreach (var soundGroup in soundGroups)
+                {
+                    Console.WriteLine("{0}", soundGroup);
+                }
             }
 
             Console.WriteLine("All tests complete, press any key to exit...");

@@ -21,19 +21,25 @@ namespace Mech3DotNet
         public Dictionary<string, Font> GetFonts()
         {
             var reader = items["fonts.zrd"];
-            return reader / Only() / "WINDOWS_FONTS" / Only() / Dict(new ToFont());
+            return Root(reader) / Only("WINDOWS_FONTS") / Dict(new ToFont());
         }
 
         public List<SatMap> GetSatMaps()
         {
             var reader = items["maps.zrd"];
-            return reader / Only() / "maps" / Only() / List(new ToSatMap());
+            return Root(reader) / Only("maps") / List(new ToSatMap());
         }
 
         public Dictionary<string, SoundSet> GetSoundSets()
         {
             var reader = items["sounds.zrd"];
-            return reader / Only() / "SETS" / Only() / Dict(new ToSoundSet());
+            return Root(reader) / Only("SETS") / Dict(new ToSoundSet());
+        }
+
+        public List<SoundGroup> GetSoundGroups()
+        {
+            var reader = items["sounds.zrd"];
+            return Root(reader) / Only("SOUND_GROUPS") / List(new ToSoundGroup());
         }
     }
 

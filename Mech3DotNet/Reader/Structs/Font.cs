@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
-using ToStr = Mech3DotNet.Reader.ToString;
 
 namespace Mech3DotNet.Reader.Structs
 {
@@ -17,9 +15,9 @@ namespace Mech3DotNet.Reader.Structs
 
     public struct ToFont : IConvertOperation<Font>
     {
-        public static Font Convert(JsonNode? node, IEnumerable<string> path)
+        public static Font Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var pairWise = new PairWise(node, path);
+            var pairWise = new PairWise(value, path);
             var font = new Font();
             foreach (var item in pairWise)
             {
@@ -41,20 +39,20 @@ namespace Mech3DotNet.Reader.Structs
                         font.align = ToStr.Convert(item.value, item.path);
                         break;
                     default:
-                        throw new ConversionException($"Unknown key '{item.key}'", path, pairWise.Array);
+                        throw new ConversionException($"Unknown key '{item.key}'", path, pairWise.Underlying);
                 }
             }
             return font;
         }
 
-        public Font ConvertTo(JsonNode? node, IEnumerable<string> path)
+        public Font ConvertTo(ReaderValue value, IEnumerable<string> path)
         {
-            return Convert(node, path);
+            return Convert(value, path);
         }
 
         public static Font operator /(Query query, ToFont op)
         {
-            return op.ConvertTo(query.node, query.path);
+            return op.ConvertTo(query.value, query.path);
         }
     }
 }

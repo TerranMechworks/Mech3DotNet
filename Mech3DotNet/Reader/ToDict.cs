@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
 
 namespace Mech3DotNet.Reader
 {
@@ -12,22 +11,22 @@ namespace Mech3DotNet.Reader
             this.valueOp = valueOp;
         }
 
-        public Dictionary<string, T> ConvertTo(JsonNode? node, IEnumerable<string> path)
+        public Dictionary<string, T> ConvertTo(ReaderValue value, IEnumerable<string> path)
         {
-            var pairWise = new PairWise(node, path);
+            var pairWise = new PairWise(value, path);
             var dict = new Dictionary<string, T>(pairWise.Count);
             foreach (var item in pairWise)
             {
-                var value = valueOp.ConvertTo(item.value, item.path);
-                if (!dict.TryAdd(item.key, value))
-                    throw new ConversionException($"Duplicate key '{item.key}'", path, pairWise.Array);
+                var res = valueOp.ConvertTo(item.value, item.path);
+                if (!dict.TryAdd(item.key, res))
+                    throw new ConversionException($"Duplicate key '{item.key}'", path, pairWise.Underlying);
             }
             return dict;
         }
 
         public static Dictionary<string, T> operator /(Query query, ToDict<T> op)
         {
-            return op.ConvertTo(query.node, query.path);
+            return op.ConvertTo(query.value, query.path);
         }
     }
 }

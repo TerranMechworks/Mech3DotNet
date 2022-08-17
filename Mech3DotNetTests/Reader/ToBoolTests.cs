@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Mech3DotNet.Reader.Query;
 using static Mech3DotNetTests.Reader.Helpers;
@@ -7,37 +9,40 @@ namespace Mech3DotNetTests.Reader
     [TestClass]
     public class ToBoolTests
     {
-        [DataRow(@"""true""", true)]
-        [DataRow(@"[""true""]", true)]
-        [DataRow(@"""false""", false)]
-        [DataRow(@"[""false""]", false)]
-        [DataTestMethod]
-        public void Valid(string json, bool expected)
+        public static IEnumerable<object[]> ValidCases()
         {
-            var actual = ConvertSuccess(json, Bool());
+            yield return O(RS("true"), true);
+            yield return O(RL("true"), true);
+            yield return O(RS("false"), false);
+            yield return O(RL("false"), false);
+        }
+
+        [DynamicData(nameof(ValidCases), DynamicDataSourceType.Method)]
+        [DataTestMethod]
+        public void Valid(ReaderValue value, bool expected)
+        {
+            var actual = ConvertSuccess(value, Bool());
             Assert.AreEqual(expected, actual);
         }
 
-        [DataRow(@"null")] // direct null
-        [DataRow(@"42")] // direct int
-        [DataRow(@"42.1")] // direct float
-        [DataRow(@"true")] // direct bool
-        [DataRow(@"false")] // direct bool
-        [DataRow(@"""foo""")] // direct string
-        [DataRow(@"[null]")] // nested null
-        [DataRow(@"[42]")] // nested int
-        [DataRow(@"[42.1]")] // nested float
-        [DataRow(@"[true]")] // nested bool
-        [DataRow(@"[false]")] // nested bool
-        [DataRow(@"[""foo""]")] // nested string
-        [DataRow(@"[[]]")] // nested array
-        [DataRow(@"[]")] // empty array
-        [DataRow(@"[""foo"",""bar""]")] // multi array
-        [DataRow(@"{}")]
-        [DataTestMethod]
-        public void Invalid(string json)
+        public static IEnumerable<object[]> InvalidCases()
         {
-            var message = ConvertFailure(json, Bool());
+            yield return O(RI(42));
+            yield return O(RF(42f));
+            yield return O(RS("foo"));
+            yield return O(RL());
+            yield return O(RL(42));
+            yield return O(RL(42f));
+            yield return O(RL("foo"));
+            yield return O(RL("true", "false"));
+            yield return O(RL(RL()));
+        }
+
+        [DynamicData(nameof(InvalidCases), DynamicDataSourceType.Method)]
+        [DataTestMethod]
+        public void Invalid(ReaderValue value)
+        {
+            var message = ConvertFailure(value, Bool());
             StringAssert.Contains(message, ". Path '/path'.");
         }
     }

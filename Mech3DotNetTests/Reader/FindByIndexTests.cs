@@ -1,7 +1,7 @@
-using System.Text.Json.Nodes;
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Mech3DotNet.Reader.Query;
+using static Mech3DotNetTests.Reader.Helpers;
 
 namespace Mech3DotNetTests.Reader
 {
@@ -11,8 +11,8 @@ namespace Mech3DotNetTests.Reader
         [TestMethod]
         public void NotArray_Throws()
         {
-            var element = JsonNode.Parse(@"42");
-            Assert.ThrowsException<ConversionException>(() => Q(element) / 0);
+            var value = RI(42);
+            Assert.ThrowsException<ConversionException>(() => value / 0);
         }
 
         [DataTestMethod]
@@ -22,8 +22,8 @@ namespace Mech3DotNetTests.Reader
         [DataRow(-3)]
         public void InvalidIndex_Throws(int index)
         {
-            var element = JsonNode.Parse(@"[42]");
-            Assert.ThrowsException<NotFoundException>(() => Q(element) / index);
+            var value = RL(42);
+            Assert.ThrowsException<NotFoundException>(() => value / index);
         }
 
         [DataTestMethod]
@@ -31,16 +31,16 @@ namespace Mech3DotNetTests.Reader
         [DataRow(-1)]
         public void ValidIndex_ReturnsItem(int index)
         {
-            var element = JsonNode.Parse(@"[42]");
-            var item = Q(element) / index / Int();
+            var value = RL(42);
+            var item = value / index / Int();
             Assert.AreEqual(42, item);
         }
 
         [TestMethod]
         public void Apply_ModifiesPath()
         {
-            var element = JsonNode.Parse(@"[42,43]");
-            var query = Q(element) / 1;
+            var value = RL(42, 43);
+            var query = value / 1;
             Assert.AreEqual("/1: 43", query.ToString());
         }
     }

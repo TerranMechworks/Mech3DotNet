@@ -1,37 +1,32 @@
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
 
 namespace Mech3DotNet.Reader
 {
     public struct ToBool : IConvertOperation<bool>
     {
-        public static bool Convert(JsonNode? node, IEnumerable<string> path)
+        public static bool Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var scalar = ConversionException.Scalar(node, path);
+            var scalar = ConversionException.Scalar<ReaderString>(value, path, "Value is not a boolean");
             // reader data does not have a data type for booleans
-            if (scalar.TryGetValue<string>(out string? value) && value != null)
+            switch (scalar.Value)
             {
-                switch (value)
-                {
-                    case "true":
-                        return true;
-                    case "false":
-                        return false;
-                    default:
-                        throw new ConversionException($"Value '{value}' is not a bool", path, scalar);
-                }
+                case "true":
+                    return true;
+                case "false":
+                    return false;
+                default:
+                    throw new ConversionException($"Value '{value}' is not a boolean", path, scalar);
             }
-            throw new ConversionException("Value is not a string (for bool)", path, scalar);
         }
 
-        public bool ConvertTo(JsonNode? node, IEnumerable<string> path)
+        public bool ConvertTo(ReaderValue value, IEnumerable<string> path)
         {
-            return Convert(node, path);
+            return Convert(value, path);
         }
 
         public static bool operator /(Query query, ToBool op)
         {
-            return op.ConvertTo(query.node, query.path);
+            return op.ConvertTo(query.value, query.path);
         }
     }
 }

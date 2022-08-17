@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
 
 namespace Mech3DotNet.Reader
 {
@@ -12,23 +11,23 @@ namespace Mech3DotNet.Reader
             this.op = op;
         }
 
-        public List<T> ConvertTo(JsonNode? node, IEnumerable<string> path)
+        public List<T> ConvertTo(ReaderValue value, IEnumerable<string> path)
         {
-            var array = ConversionException.Array(node, path);
+            var list = ConversionException.List(value, path);
             var childPath = new List<string>(path);
             childPath.Add(""); // will be overwritten by loop index
-            var list = new List<T>(array.Count);
-            for (var i = 0; i < array.Count; i++)
+            var res = new List<T>(list.Count);
+            for (var i = 0; i < list.Count; i++)
             {
                 childPath[childPath.Count - 1] = i.ToString();
-                list.Add(op.ConvertTo(array[i], childPath));
+                res.Add(op.ConvertTo(list[i], childPath));
             }
-            return list;
+            return res;
         }
 
         public static List<T> operator /(Query query, ToList<T> op)
         {
-            return op.ConvertTo(query.node, query.path);
+            return op.ConvertTo(query.value, query.path);
         }
     }
 }

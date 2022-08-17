@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
 
 namespace Mech3DotNet.Reader
 {
@@ -13,19 +12,19 @@ namespace Mech3DotNet.Reader
             this.index = index;
         }
 
-        public JsonNode? Apply(JsonNode? node, List<string> path)
+        public ReaderValue Apply(ReaderValue value, List<string> path)
         {
-            var array = ConversionException.Array(node, path);
+            var list = ConversionException.List(value, path);
 
             var index = this.index;
-            var count = array.Count;
+            var count = list.Count;
             // allow negative indexing, i.e. from back of list
             if (index < 0)
                 index = count + index;
-            JsonNode? item;
+            ReaderValue item;
             try
             {
-                item = array[index];
+                item = list[index];
             }
             catch (ArgumentOutOfRangeException)
             {

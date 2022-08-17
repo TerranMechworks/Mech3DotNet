@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Mech3DotNet.Reader.Query;
 using static Mech3DotNetTests.Reader.Helpers;
@@ -7,42 +9,30 @@ namespace Mech3DotNetTests.Reader
     [TestClass]
     public class ToFloatTests
     {
-        [DataRow(@"42.1")]
-        [DataRow(@"[42.1]")]
-        [DataTestMethod]
-        public void Valid(string json)
+        [TestMethod]
+        public void Valid()
         {
-            var actual = ConvertSuccess(json, Float());
+            var actual = ConvertSuccess(RF(42.1f), Float());
+            Assert.AreEqual(42.1, actual, 0.0001);
+            actual = ConvertSuccess(RL(42.1f), Float());
             Assert.AreEqual(42.1, actual, 0.0001);
         }
 
-        [DataRow(@"42")]
-        [DataRow(@"[42]")]
-        [DataTestMethod]
-        public void Integers(string json)
+        public static IEnumerable<object[]> InvalidCases()
         {
-            var actual = ConvertSuccess(json, Float());
-            Assert.AreEqual(42.0, actual, 0.0001);
+            yield return O(RI(42));
+            yield return O(RS("foo"));
+            yield return O(RL());
+            yield return O(RL(42));
+            yield return O(RL("foo"));
+            yield return O(RL(42f, 43f));
+            yield return O(RL(RL()));
         }
 
-        [DataRow(@"null")] // direct null
-        // [DataRow(@"42")] // direct int
-        [DataRow(@"""foo""")] // direct string
-        [DataRow(@"true")] // direct bool
-        [DataRow(@"false")] // direct bool
-        [DataRow(@"[null]")] // nested null
-        // [DataRow(@"[42]")] // nested int
-        [DataRow(@"[""foo""]")] // nested string
-        [DataRow(@"[true]")] // nested bool
-        [DataRow(@"[false]")] // nested bool
-        [DataRow(@"[[]]")] // nested array
-        [DataRow(@"[]")] // empty array
-        [DataRow(@"[42.1,43.1]")] // multi array
-        [DataRow(@"{}")]
-        [DataTestMethod]
-        public void Invalid(string json)
+        [DynamicData(nameof(InvalidCases), DynamicDataSourceType.Method)]
+        public void Invalid(ReaderValue value)
         {
-            var message = ConvertFailure(json, Float());
+            var message = ConvertFailure(value, Float());
             StringAssert.Contains(message, ". Path '/path'.");
         }
     }

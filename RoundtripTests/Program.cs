@@ -226,32 +226,47 @@ namespace RoundtripTests
             Trace.Listeners.Add(consoleTracer);
 
             string basePath = args[0];
-            var tester = new Tester(basePath);
 
-            tester.Sounds();
-            tester.Interp();
-            tester.Motions();
-            tester.Textures();
-            tester.Mechlib();
-            tester.GameZ();
-            tester.Mech3Msg();
-            tester.SoundWav();
-            tester.SoundsWav();
-            tester.Readers();
+            // var tester = new Tester(basePath);
 
-            tester.PrintResults();
+            // tester.Sounds();
+            // tester.Interp();
+            // tester.Motions();
+            // tester.Textures();
+            // tester.Mechlib();
+            // tester.GameZ();
+            // tester.Mech3Msg();
+            // tester.SoundWav();
+            // tester.SoundsWav();
+            // tester.Readers();
 
-            // var matches = RecursiveGlob(new Regex(@"/zbd/reader\.zbd"), basePath);
-            // foreach (var inputPath in matches)
-            // {
-            //     Console.WriteLine(inputPath);
-            //     var archive = Mech3DotNet.Readers.ReadArchiveMW(inputPath);
-            //     var fonts = archive.GetFonts();
-            //     foreach (var font in fonts)
-            //     {
-            //         Console.WriteLine("{0} {1}", font.Key, font.Value);
-            //     }
-            // }
+            // tester.PrintResults();
+
+            var matches = RecursiveGlob(new Regex(@"/zbd/reader\.zbd"), basePath);
+            foreach (var inputPath in matches)
+            {
+                Console.WriteLine(inputPath);
+                var archive = Mech3DotNet.Readers.ReadArchiveMW(inputPath);
+                var fonts = archive.GetFonts();
+                foreach (var font in fonts)
+                {
+                    Console.WriteLine("{0} {1}", font.Key, font.Value);
+                }
+                var satmaps = archive.GetSatMaps();
+                foreach (var satmap in satmaps)
+                {
+                    Console.WriteLine("{0}", satmap);
+                }
+                var soundSets = archive.GetSoundSets();
+                foreach (var soundSet in soundSets)
+                {
+                    Console.WriteLine("{0}", soundSet.Key);
+                    foreach (var soundDef in soundSet.Value.definitions)
+                    {
+                        Console.WriteLine("{0}", soundDef);
+                    }
+                }
+            }
 
             Console.WriteLine("All tests complete, press any key to exit...");
             Console.ReadKey();

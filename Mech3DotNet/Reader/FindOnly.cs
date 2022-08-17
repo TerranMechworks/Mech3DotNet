@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
-
 namespace Mech3DotNet.Reader
 {
     public struct FindOnly : IQueryOperation
     {
-        public JsonNode? Apply(JsonNode? node, List<string> path)
+        public ReaderValue Apply(ReaderValue value, List<string> path)
         {
-            var array = ConversionException.Array(node, path);
-            if (array.Count != 1)
-                throw new NotFoundException($"Single value not found (count: {array.Count})", path);
+            var list = ConversionException.List(value, path);
+            if (list.Count != 1)
+                throw new NotFoundException($"Single value not found (count: {list.Count})", path);
             path.Add(".only");
-            return array[0];
+            return list[0];
         }
     }
 }

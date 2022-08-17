@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using System.Text.Json.Nodes;
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Mech3DotNet.Reader.Query;
+using static Mech3DotNetTests.Reader.Helpers;
 
 namespace Mech3DotNetTests.Reader
 {
@@ -12,41 +11,41 @@ namespace Mech3DotNetTests.Reader
         [TestMethod]
         public void NotArray_Throws()
         {
-            var element = JsonNode.Parse(@"42");
-            Assert.ThrowsException<ConversionException>(() => Q(element) / "foo");
+            var value = RI(42);
+            Assert.ThrowsException<ConversionException>(() => value / "foo");
         }
 
         [TestMethod]
         public void MissingKey_Throws()
         {
-            var element = JsonNode.Parse(@"[""foo"",42]");
-            Assert.ThrowsException<NotFoundException>(() => Q(element) / "bar");
+            var value = RL("foo", 42);
+            Assert.ThrowsException<NotFoundException>(() => value / "bar");
         }
 
         [TestMethod]
         public void ValidKey_ReturnsItems()
         {
-            var element = JsonNode.Parse(@"[""foo"",42]");
+            var value = RL("foo", 42);
             // this works because ToInt() flattens a single list
-            var item = Q(element) / "foo" / Int();
+            var item = value / "foo" / Int();
             Assert.AreEqual(42, item);
         }
 
         [TestMethod]
         public void ValidKeys_ReturnsItems()
         {
-            var element = JsonNode.Parse(@"[""foo"",42,""foo"",43]");
-            var items = Q(element) / "foo" / Array(Int());
+            var value = RL("foo", 42, "foo", 43);
+            var items = value / "foo" / Array(Int());
             CollectionAssert.AreEqual(new int[] { 42, 43 }, items);
         }
 
         [TestMethod]
         public void Apply_ModifiesPath()
         {
-            var element = JsonNode.Parse(@"[""foo"",42]");
-            var query = Q(element) / "foo";
-            var expected = "/foo: [\n  42\n]".Replace("\n", System.Environment.NewLine);
-            Assert.AreEqual(expected, query.ToString());
+            var value = RL("foo", 42);
+            var query = value / "foo";
+            var expected = "/foo: [  42,]";
+            Assert.AreEqual(expected, query.ToString().Replace(System.Environment.NewLine, ""));
         }
     }
 }

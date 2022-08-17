@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using Mech3DotNet.Json;
 using Mech3DotNet.Reader;
+using Mech3DotNet.Reader.Structs;
 using Mech3DotNet.Unsafe;
 using static Mech3DotNet.Reader.Query;
 
@@ -17,11 +18,23 @@ namespace Mech3DotNet
             Dictionary<string, ReaderValue> items,
             List<ArchiveEntry> entries) : base(items, entries) { }
 
-        // public Dictionary<string, Font> GetFonts()
-        // {
-        //     var reader = items["fonts.zrd"];
-        //     return reader / Only() / "WINDOWS_FONTS" / Only() / Dict(new ToFont());
-        // }
+        public Dictionary<string, Font> GetFonts()
+        {
+            var reader = items["fonts.zrd"];
+            return reader / Only() / "WINDOWS_FONTS" / Only() / Dict(new ToFont());
+        }
+
+        public List<SatMap> GetSatMaps()
+        {
+            var reader = items["maps.zrd"];
+            return reader / Only() / "maps" / Only() / List(new ToSatMap());
+        }
+
+        public Dictionary<string, SoundSet> GetSoundSets()
+        {
+            var reader = items["sounds.zrd"];
+            return reader / Only() / "SETS" / Only() / Dict(new ToSoundSet());
+        }
     }
 
     public static class Readers

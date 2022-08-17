@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using System.Text;
 
 namespace Mech3DotNet.Reader
 {
@@ -45,6 +47,12 @@ namespace Mech3DotNet.Reader
         }
 
         public abstract void Write(BinaryWriter writer);
+
+        internal abstract void Repr(StringBuilder builder, int level);
+
+        public static Query operator /(ReaderValue value, IQueryOperation op) => new Query(value) / op;
+        public static Query operator /(ReaderValue value, int index) => value / new FindByIndex(index);
+        public static Query operator /(ReaderValue value, string key) => value / new FindByKey(key);
     }
 
     public sealed class ReaderInt : ReaderValue
@@ -52,7 +60,7 @@ namespace Mech3DotNet.Reader
         public int Value { get; set; }
         public override ReaderValueKind Kind => ReaderValueKind.Int;
 
-        public ReaderInt() {}
+        public ReaderInt() { }
 
         public ReaderInt(int value)
         {
@@ -70,15 +78,16 @@ namespace Mech3DotNet.Reader
             writer.Write(Value);
         }
 
-        public static implicit operator ReaderInt(int value)
+        internal override void Repr(StringBuilder builder, int level)
         {
-            return new ReaderInt(value);
+            builder.Append(' ', level * 2);
+            builder.Append(ToString());
         }
 
-        public static implicit operator int(ReaderInt value)
-        {
-            return value.Value;
-        }
+        public override string ToString() => Value.ToString(CultureInfo.InvariantCulture);
+
+        public static implicit operator ReaderInt(int value) => new ReaderInt(value);
+        public static implicit operator int(ReaderInt value) => value.Value;
     }
 
     public sealed class ReaderFloat : ReaderValue
@@ -104,15 +113,16 @@ namespace Mech3DotNet.Reader
             writer.Write(Value);
         }
 
-        public static implicit operator ReaderFloat(float value)
+        internal override void Repr(StringBuilder builder, int level)
         {
-            return new ReaderFloat(value);
+            builder.Append(' ', level * 2);
+            builder.Append(ToString());
         }
 
-        public static implicit operator float(ReaderFloat value)
-        {
-            return value.Value;
-        }
+        public override string ToString() => Value.ToString(CultureInfo.InvariantCulture);
+
+        public static implicit operator ReaderFloat(float value) => new ReaderFloat(value);
+        public static implicit operator float(ReaderFloat value) => value.Value;
     }
 
     public sealed class ReaderString : ReaderValue
@@ -150,15 +160,16 @@ namespace Mech3DotNet.Reader
             writer.Write(bytes);
         }
 
-        public static implicit operator ReaderString(string value)
+        public override string ToString() => Value;
+
+        internal override void Repr(StringBuilder builder, int level)
         {
-            return new ReaderString(value);
+            builder.Append(' ', level * 2);
+            builder.Append(ToString());
         }
 
-        public static implicit operator string(ReaderString value)
-        {
-            return value.Value;
-        }
+        public static implicit operator ReaderString(string value) => new ReaderString(value);
+        public static implicit operator string(ReaderString value) => value.Value;
     }
 
     public sealed class ReaderList : ReaderValue, IEnumerable<ReaderValue>, ICollection<ReaderValue>, IList<ReaderValue>
@@ -203,6 +214,28 @@ namespace Mech3DotNet.Reader
                 value.Write(writer);
         }
 
+        internal override void Repr(StringBuilder builder, int level)
+        {
+            builder.Append(' ', level * 2);
+            builder.Append('[');
+            builder.Append('\n');
+            foreach (var value in values)
+            {
+                value.Repr(builder, level + 1);
+                builder.Append(',');
+                builder.Append('\n');
+            }
+            builder.Append(' ', level * 2);
+            builder.Append(']');
+        }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            Repr(builder, 0);
+            return builder.ToString();
+        }
+
         public IEnumerator<ReaderValue> GetEnumerator() => values.GetEnumerator();
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => values.GetEnumerator();
 
@@ -214,7 +247,8 @@ namespace Mech3DotNet.Reader
         public void CopyTo(ReaderValue[] array, int arrayIndex) => values.CopyTo(array, arrayIndex);
         public bool Remove(ReaderValue item) => values.Remove(item);
 
-        public ReaderValue this[int index] {
+        public ReaderValue this[int index]
+        {
             get { return values[index]; }
             set { values[index] = value; }
         }

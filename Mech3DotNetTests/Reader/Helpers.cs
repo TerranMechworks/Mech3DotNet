@@ -1,25 +1,49 @@
+using System;
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
 using Mech3DotNet.Reader;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static Mech3DotNet.Reader.Query;
 
 namespace Mech3DotNetTests.Reader
 {
     public static class Helpers
     {
-        public static IEnumerable<string> EmptyPath() => new List<string>() { "", "path" };
-
-        public static TConv ConvertSuccess<TConv>(string json, IConvertOperation<TConv> op)
+        public static ReaderInt RI(int value) => new ReaderInt(value);
+        public static ReaderFloat RF(float value) => new ReaderFloat(value);
+        public static ReaderString RS(string value) => new ReaderString(value);
+        public static ReaderList RL(params object[] values)
         {
-            var element = JsonNode.Parse(json);
-            return op.ConvertTo(element, EmptyPath());
+            var conv = new List<ReaderValue>(values.Length);
+            foreach (var value in values)
+            {
+                ReaderValue v = value switch
+                {
+                    int i => RI(i),
+                    float f => RF(f),
+                    string s => RS(s),
+                    ReaderInt ri => ri,
+                    ReaderFloat rf => rf,
+                    ReaderString rs => rs,
+                    ReaderList rl => rl,
+                    _ => throw new ArgumentOutOfRangeException(),
+
+                };
+                conv.Add(v);
+            }
+            return new ReaderList(conv);
         }
 
-        public static string ConvertFailure<TConv>(string json, IConvertOperation<TConv> op)
+        public static object[] O(params object[] values) => values;
+
+        public static IEnumerable<string> EmptyPath() => new List<string>() { "", "path" };
+
+        public static TConv ConvertSuccess<TConv>(ReaderValue value, IConvertOperation<TConv> op)
         {
-            var element = JsonNode.Parse(json);
-            var e = Assert.ThrowsException<ConversionException>(() => op.ConvertTo(element, EmptyPath()));
+            return op.ConvertTo(value, EmptyPath());
+        }
+
+        public static string ConvertFailure<TConv>(ReaderValue value, IConvertOperation<TConv> op)
+        {
+            var e = Assert.ThrowsException<ConversionException>(() => op.ConvertTo(value, EmptyPath()));
             return e.Message;
         }
     }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json.Nodes;
 
 namespace Mech3DotNet.Reader.Structs
 {
@@ -12,30 +11,29 @@ namespace Mech3DotNet.Reader.Structs
         public override string ToString() => $"Color<r={r}, g={g}, b={b}>";
     }
 
-    public struct ToColor: IConvertOperation<Color>
+    public struct ToColor : IConvertOperation<Color>
     {
-        public static Color Convert(JsonNode? node, IEnumerable<string> path)
+        public static Color Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var array = ConversionException.ArrayFixed(node, path, 3);
-            var childPath = new List<string>(path);
-            childPath.Add("0");
+            var list = ConversionException.ListFixed(value, path, 3);
+            var childPath = new IndexPath(path);
             var color = new Color();
-            color.r = ToInt.Convert(array[0], childPath);
-            childPath[childPath.Count - 1] = "1";
-            color.g = ToInt.Convert(array[1], childPath);
-            childPath[childPath.Count - 1] = "2";
-            color.b = ToInt.Convert(array[2], childPath);
+            color.r = ToInt.Convert(list[0], childPath.Path);
+            childPath.Next();
+            color.g = ToInt.Convert(list[1], childPath.Path);
+            childPath.Next();
+            color.b = ToInt.Convert(list[2], childPath.Path);
             return color;
         }
 
-        public Color ConvertTo(JsonNode? node, IEnumerable<string> path)
+        public Color ConvertTo(ReaderValue value, IEnumerable<string> path)
         {
-            return Convert(node, path);
+            return Convert(value, path);
         }
 
         public static Color operator /(Query query, ToColor op)
         {
-            return op.ConvertTo(query.node, query.path);
+            return op.ConvertTo(query.value, query.path);
         }
     }
 }

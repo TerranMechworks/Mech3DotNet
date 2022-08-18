@@ -9,7 +9,7 @@ namespace Mech3DotNet.Reader.Structs
         internal static string F(List<int>? list)
         {
             if (list == null)
-                return "null";
+                return "";
             return "[" + string.Join(",", list.Select(v => v.ToString())) + "]";
         }
     }

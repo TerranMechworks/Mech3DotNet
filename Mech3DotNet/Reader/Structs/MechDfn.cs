@@ -34,6 +34,8 @@ namespace Mech3DotNet.Reader.Structs
         public EngineRating engineMinMax;
         public MechHud hud;
         public object? camera;
+        public MechConfigAnims animations;
+        public MechSkin skin;
         public Dictionary<string, MechFirepoint> firepoints = new Dictionary<string, MechFirepoint>();
         public Dictionary<string, MechConfig> configurations = new Dictionary<string, MechConfig>();
 
@@ -68,6 +70,8 @@ namespace Mech3DotNet.Reader.Structs
             sb.AppendFormat("  engineMinMax={0},\n", engineMinMax);
             sb.AppendFormat("  hud={0},\n", hud);
             sb.AppendFormat("  camera={0},\n", camera);
+            sb.AppendFormat("  animations={0},\n", animations);
+            sb.AppendFormat("  skin={0},\n", skin);
 
             sb.Append("  firepoints={\n");
             foreach (var firepoint in firepoints)
@@ -269,17 +273,14 @@ namespace Mech3DotNet.Reader.Structs
                         index.Next();
                         mechDfn.camera = ToMechCamera.Convert(index.Current, index.Path);
                         break;
-
                     case "animations":
                         index.Next();
-                        // System.Diagnostics.Debug.WriteLine(index.Current.ToString());
+                        mechDfn.animations = ToMechConfigAnims.Convert(index.Current, index.Path, chassisName);
                         break;
-
                     case "skins":
                         index.Next();
-                        // System.Diagnostics.Debug.WriteLine(index.Current.ToString());
+                        mechDfn.skin = ToMechSkin.Convert(index.Current, index.Path, chassisName);
                         break;
-
                     case "firepoints":
                         {
                             index.Next();

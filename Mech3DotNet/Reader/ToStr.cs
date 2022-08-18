@@ -11,6 +11,13 @@ namespace Mech3DotNet.Reader
                 throw new ConversionException($"Expected '{expected}', got '{scalar.Value}'", index.Path, index.Underlying);
         }
 
+        public static void ConvertExpected(ReaderValue value, IEnumerable<string> path, string expected, ReaderValue underlying)
+        {
+            var scalar = ConversionException.Scalar<ReaderString>(value, path, "Value is not a string");
+            if (scalar.Value != expected)
+                throw new ConversionException($"Expected '{expected}', got '{scalar.Value}'", path, underlying);
+        }
+
         public static string Convert(ReaderValue value, IEnumerable<string> path)
         {
             var scalar = ConversionException.Scalar<ReaderString>(value, path, "Value is not a string");

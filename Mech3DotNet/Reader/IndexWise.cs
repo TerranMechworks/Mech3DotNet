@@ -12,6 +12,7 @@ namespace Mech3DotNet.Reader
 
         public ReaderList Underlying => _list;
         public int Index => _index;
+        public int Count => _list.Count;
         public IEnumerable<string> Path => _path;
         public ReaderValue Current => _list[_index];
         public bool HasItems => _index < _list.Count;

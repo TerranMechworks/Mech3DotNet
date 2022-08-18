@@ -11,7 +11,7 @@ namespace Mech3DotNet.Reader
             this.valueOp = valueOp;
         }
 
-        public Dictionary<string, T> ConvertTo(ReaderValue value, IEnumerable<string> path)
+        public static Dictionary<string, T> Convert(ReaderValue value, IEnumerable<string> path, IConvertOperation<T> valueOp)
         {
             var pairWise = new PairWise(value, path);
             var dict = new Dictionary<string, T>(pairWise.Count);
@@ -22,6 +22,11 @@ namespace Mech3DotNet.Reader
                     throw new ConversionException($"Duplicate key '{item.key}'", path, pairWise.Underlying);
             }
             return dict;
+        }
+
+        public Dictionary<string, T> ConvertTo(ReaderValue value, IEnumerable<string> path)
+        {
+            return Convert(value, path, valueOp);
         }
 
         public static Dictionary<string, T> operator /(Query query, ToDict<T> op)

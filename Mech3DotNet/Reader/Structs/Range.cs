@@ -14,12 +14,11 @@ namespace Mech3DotNet.Reader.Structs
     {
         public static Range Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.ListFixed(value, path, 2);
-            var childPath = new IndexPath(path);
+            var index = new IndexWise(value, path, 2);
             var range = new Range();
-            range.min = ToFloat.Convert(list[0], childPath.Path);
-            childPath.Next();
-            range.max = ToFloat.Convert(list[1], childPath.Path);
+            range.min = ToFloat.Convert(index.Current, index.Path);
+            index.Next();
+            range.max = ToFloat.Convert(index.Current, index.Path);
             return range;
         }
 
@@ -30,7 +29,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static Range operator /(Query query, ToRange op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

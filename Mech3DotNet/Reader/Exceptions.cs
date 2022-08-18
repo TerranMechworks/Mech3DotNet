@@ -51,6 +51,17 @@ namespace Mech3DotNet.Reader
             throw new ConversionException("Value is not a list", path, value);
         }
 
+        public static ReaderList ListSized(ReaderValue value, IEnumerable<string> path, int min, int max)
+        {
+            if (value is ReaderList list)
+            {
+                if (list.Count >= min && list.Count <= max)
+                    return list;
+                throw new ConversionException($"Value is not a list of size {min}-{max}", path, value);
+            }
+            throw new ConversionException("Value is not a list", path, value);
+        }
+
         public static TValue Scalar<TValue>(ReaderValue value, IEnumerable<string> path, string message) where TValue : ReaderValue
         {
             if (value is TValue direct_value)

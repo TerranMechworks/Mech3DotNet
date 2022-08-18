@@ -15,14 +15,13 @@ namespace Mech3DotNet.Reader.Structs
     {
         public static Vec3 Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.ListFixed(value, path, 3);
-            var childPath = new IndexPath(path);
+            var index = new IndexWise(value, path, 3);
             var vec = new Vec3();
-            vec.x = ToNumber.Convert(list[0], childPath.Path);
-            childPath.Next();
-            vec.y = ToNumber.Convert(list[1], childPath.Path);
-            childPath.Next();
-            vec.z = ToNumber.Convert(list[2], childPath.Path);
+            vec.x = ToNumber.Convert(index.Current, index.Path);
+            index.Next();
+            vec.y = ToNumber.Convert(index.Current, index.Path);
+            index.Next();
+            vec.z = ToNumber.Convert(index.Current, index.Path);
             return vec;
         }
 
@@ -33,7 +32,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static Vec3 operator /(Query query, ToVec3 op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

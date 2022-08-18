@@ -13,28 +13,24 @@ namespace Mech3DotNet.Reader.Structs
     {
         public static SoundSet Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.List(value, path);
-            var childPath = new IndexPath(path);
+            var index = new IndexWise(value, path);
             var soundSet = new SoundSet()
             {
                 definitions = new List<SoundDef>(),
             };
-            for (var i = 0; i < list.Count; i++)
+            while (index.HasItems)
             {
-                var item = list[i];
-                if (item is ReaderString s && s.Value == "SUB_SET")
+                if (index.Current is ReaderString s && s.Value == "SUB_SET")
                 {
-                    var conv = List(String());
-                    childPath.Next();
-                    item = list[++i];
-                    soundSet.subSets = conv.ConvertTo(item, childPath.Path);
+                    index.Next();
+                    soundSet.subSets = ToList<string>.Convert(index.Current, index.Path, String());
                 }
                 else
                 {
-                    var def = ToSoundDef.Convert(item, childPath.Path);
+                    var def = ToSoundDef.Convert(index.Current, index.Path);
                     soundSet.definitions.Add(def);
                 }
-                childPath.Next();
+                index.Next();
             }
             return soundSet;
         }
@@ -46,7 +42,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static SoundSet operator /(Query query, ToSoundSet op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

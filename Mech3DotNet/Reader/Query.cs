@@ -5,26 +5,26 @@ namespace Mech3DotNet.Reader
 {
     public struct Query
     {
-        internal ReaderValue value;
-        internal List<string> path;
+        internal ReaderValue _value;
+        internal List<string> _path;
 
         internal Query(ReaderValue value)
         {
-            this.value = value;
-            this.path = new List<string>();
+            _value = value;
+            _path = new List<string>();
             // ensure path starts with "/"
-            this.path.Add("");
+            _path.Add("");
         }
 
         public override string ToString()
         {
-            var displayPath = string.Join("/", path);
-            return $"{displayPath}: {value.ToString()}";
+            var displayPath = string.Join("/", _path);
+            return $"{displayPath}: {_value.ToString()}";
         }
 
         public static Query operator /(Query query, IQueryOperation op)
         {
-            query.value = op.Apply(query.value, query.path);
+            query._value = op.Apply(query._value, query._path);
             return query;
         }
 

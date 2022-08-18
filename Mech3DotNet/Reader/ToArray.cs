@@ -28,7 +28,7 @@ namespace Mech3DotNet.Reader
 
         public static T[] operator /(Query query, ToArray<T> op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

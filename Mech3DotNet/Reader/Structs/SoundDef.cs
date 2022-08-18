@@ -46,25 +46,27 @@ namespace Mech3DotNet.Reader.Structs
     {
         public static SoundDef Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.List(value, path);
-            var childPath = new IndexPath(path);
+            var index = new IndexWise(value, path);
             var soundDef = new SoundDef()
             {
                 volume = 1.0f,
             };
-            soundDef.name = ToStr.Convert(list[0], childPath.Path);
-            childPath.Next();
-            soundDef.filename = ToStr.Convert(list[1], childPath.Path);
-            childPath.Next();
-            for (var i = 2; i < list.Count; i++)
+            soundDef.name = ToStr.Convert(index.Current, index.Path);
+            index.Next();
+            soundDef.filename = ToStr.Convert(index.Current, index.Path);
+            index.Next();
+            while (index.HasItems)
             {
-                var item = list[i];
                 // skip empty lists
-                if (item is ReaderList nested_list && nested_list.Count == 0)
+                if (index.Current is ReaderList nested_list && nested_list.Count == 0)
+                {
+                    index.Next();
                     continue;
+                }
 
-                var key = ToStr.Convert(item, childPath.Path);
-                childPath.Next();
+                var key = ToStr.Convert(index.Current, index.Path);
+                // do not advance index yet, since we might need index.Path to
+                // throw an error
                 switch (key)
                 {
                     case "PURGEABLE":
@@ -80,11 +82,10 @@ namespace Mech3DotNet.Reader.Structs
                         soundDef.threeD = true;
                         {
                             // this sound def is missing "RANGE"
-                            if (soundDef.name == "wep_ams_fire" && list[i + 1] is ReaderList)
+                            if (soundDef.name == "wep_ams_fire" && index.PeekNext is ReaderList)
                             {
-                                i++;
-                                soundDef.range = ToRange.Convert(list[i], childPath.Path);
-                                childPath.Next();
+                                index.Next();
+                                soundDef.range = ToRange.Convert(index.Current, index.Path);
                             }
                         }
                         break;
@@ -100,23 +101,21 @@ namespace Mech3DotNet.Reader.Structs
                         soundDef.queue = true;
                         break;
                     case "VOLUME":
-                        i++;
-                        soundDef.volume = ToFloat.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        soundDef.volume = ToFloat.Convert(index.Current, index.Path);
                         break;
                     case "RANGE":
-                        i++;
-                        soundDef.range = ToRange.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        soundDef.range = ToRange.Convert(index.Current, index.Path);
                         break;
                     case "SUBTITLE":
-                        i++;
-                        soundDef.subtitle = ToStr.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        soundDef.subtitle = ToStr.Convert(index.Current, index.Path);
                         break;
                     default:
-                        throw new ConversionException($"Unknown key '{key}'", childPath.Path, list);
+                        throw new ConversionException($"Unknown key '{key}'", index.Path, index.Underlying);
                 }
+                index.Next();
             }
             return soundDef;
         }
@@ -128,7 +127,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static SoundDef operator /(Query query, ToSoundDef op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

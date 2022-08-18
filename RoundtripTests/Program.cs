@@ -271,6 +271,33 @@ namespace RoundtripTests
                 {
                     Console.WriteLine("{0}", soundGroup);
                 }
+                var chassisNames = new string[] {
+                    "annihilator",
+                    "avatar",
+                    "blackhawk",
+                    "bushwacker",
+                    "cauldron",
+                    "champion",
+                    "daishi",
+                    "elemental",
+                    "firefly",
+                    "madcat",
+                    "orion",
+                    "owens",
+                    "puma",
+                    "shadowcat",
+                    "strider",
+                    "sunder",
+                    "supernova",
+                    "thor",
+                    "vulture",
+                };
+                foreach (var chassisName in chassisNames)
+                {
+                    Console.WriteLine("{0}", chassisName);
+                    var chassisDef = archive.GetMechDfn(chassisName);
+                    Console.WriteLine("{0}", chassisDef);
+                }
             }
 
             Console.WriteLine("All tests complete, press any key to exit...");

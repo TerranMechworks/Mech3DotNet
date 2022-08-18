@@ -174,22 +174,22 @@ namespace Mech3DotNet.Reader
 
     public sealed class ReaderList : ReaderValue, IEnumerable<ReaderValue>, ICollection<ReaderValue>, IList<ReaderValue>
     {
-        private List<ReaderValue> values;
+        private List<ReaderValue> _values;
         public override ReaderValueKind Kind => ReaderValueKind.List;
 
         public ReaderList(List<ReaderValue> values)
         {
-            this.values = values;
+            _values = values;
         }
 
         public ReaderList(IEnumerable<ReaderValue> values)
         {
-            this.values = new List<ReaderValue>(values);
+            _values = new List<ReaderValue>(values);
         }
 
         public ReaderList(params ReaderValue[] values)
         {
-            this.values = new List<ReaderValue>(values);
+            this._values = new List<ReaderValue>(values);
         }
 
         internal static ReaderList ReadValue(BinaryReader reader)
@@ -207,10 +207,10 @@ namespace Mech3DotNet.Reader
 
         public override void Write(BinaryWriter writer)
         {
-            var count = values.Count + 1;
+            var count = _values.Count + 1;
             writer.Write(LIST);
             writer.Write(count);
-            foreach (var value in values)
+            foreach (var value in _values)
                 value.Write(writer);
         }
 
@@ -219,7 +219,7 @@ namespace Mech3DotNet.Reader
             builder.Append(' ', level * 2);
             builder.Append('[');
             builder.Append('\n');
-            foreach (var value in values)
+            foreach (var value in _values)
             {
                 value.Repr(builder, level + 1);
                 builder.Append(',');
@@ -236,24 +236,24 @@ namespace Mech3DotNet.Reader
             return builder.ToString();
         }
 
-        public IEnumerator<ReaderValue> GetEnumerator() => values.GetEnumerator();
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => values.GetEnumerator();
+        public IEnumerator<ReaderValue> GetEnumerator() => _values.GetEnumerator();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => _values.GetEnumerator();
 
-        public int Count => values.Count;
+        public int Count => _values.Count;
         public bool IsReadOnly => false;
-        public void Add(ReaderValue item) => values.Add(item);
-        public void Clear() => values.Clear();
-        public bool Contains(ReaderValue item) => values.Contains(item);
-        public void CopyTo(ReaderValue[] array, int arrayIndex) => values.CopyTo(array, arrayIndex);
-        public bool Remove(ReaderValue item) => values.Remove(item);
+        public void Add(ReaderValue item) => _values.Add(item);
+        public void Clear() => _values.Clear();
+        public bool Contains(ReaderValue item) => _values.Contains(item);
+        public void CopyTo(ReaderValue[] array, int arrayIndex) => _values.CopyTo(array, arrayIndex);
+        public bool Remove(ReaderValue item) => _values.Remove(item);
 
         public ReaderValue this[int index]
         {
-            get { return values[index]; }
-            set { values[index] = value; }
+            get { return _values[index]; }
+            set { _values[index] = value; }
         }
-        public int IndexOf(ReaderValue item) => values.IndexOf(item);
-        public void Insert(int index, ReaderValue item) => values.Insert(index, item);
-        public void RemoveAt(int index) => values.RemoveAt(index);
+        public int IndexOf(ReaderValue item) => _values.IndexOf(item);
+        public void Insert(int index, ReaderValue item) => _values.Insert(index, item);
+        public void RemoveAt(int index) => _values.RemoveAt(index);
     }
 }

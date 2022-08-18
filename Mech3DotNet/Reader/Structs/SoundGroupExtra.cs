@@ -5,32 +5,32 @@ namespace Mech3DotNet.Reader.Structs
 {
     public struct SoundGroupExtra
     {
-        public float min_delay;
+        public float minDelay;
 
-        public override string ToString() => $"Extra<min_delay={min_delay}>";
+        public override string ToString() => $"Extra<min_delay={minDelay}>";
     }
 
     public struct ToSoundGroupExtra : IConvertOperation<SoundGroupExtra>
     {
         public static SoundGroupExtra Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.List(value, path);
-            var childPath = new IndexPath(path);
+            var index = new IndexWise(value, path);
             var extra = new SoundGroupExtra();
-            for (var i = 0; i < list.Count; i++)
+            while (index.HasItems)
             {
-                var key = ToStr.Convert(list[i], childPath.Path);
-                childPath.Next();
+                var key = ToStr.Convert(index.Current, index.Path);
+                // do not advance index yet, since we might need index.Path to
+                // throw an error
                 switch (key)
                 {
                     case "MINDELAY":
-                        i++;
-                        extra.min_delay = ToFloat.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        extra.minDelay = ToFloat.Convert(index.Current, index.Path);
                         break;
                     default:
-                        throw new ConversionException($"Unknown key '{key}'", childPath.Path, list);
+                        throw new ConversionException($"Unknown key '{key}'", index.Path, index.Underlying);
                 }
+                index.Next();
             }
             return extra;
         }
@@ -42,7 +42,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static SoundGroupExtra operator /(Query query, ToSoundGroupExtra op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

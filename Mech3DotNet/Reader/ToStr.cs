@@ -4,6 +4,13 @@ namespace Mech3DotNet.Reader
 {
     public struct ToStr : IConvertOperation<string>
     {
+        public static void ConvertExpected(IndexWise index, string expected)
+        {
+            var scalar = ConversionException.Scalar<ReaderString>(index.Current, index.Path, "Value is not a string");
+            if (scalar.Value != expected)
+                throw new ConversionException($"Expected '{expected}', got '{scalar.Value}'", index.Path, index.Underlying);
+        }
+
         public static string Convert(ReaderValue value, IEnumerable<string> path)
         {
             var scalar = ConversionException.Scalar<ReaderString>(value, path, "Value is not a string");
@@ -17,7 +24,7 @@ namespace Mech3DotNet.Reader
 
         public static string operator /(Query query, ToStr op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

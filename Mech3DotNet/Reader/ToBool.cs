@@ -26,7 +26,7 @@ namespace Mech3DotNet.Reader
 
         public static bool operator /(Query query, ToBool op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

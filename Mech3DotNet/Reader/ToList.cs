@@ -11,7 +11,7 @@ namespace Mech3DotNet.Reader
             this.op = op;
         }
 
-        public List<T> ConvertTo(ReaderValue value, IEnumerable<string> path)
+        public static List<T> Convert(ReaderValue value, IEnumerable<string> path, IConvertOperation<T> op)
         {
             var list = ConversionException.List(value, path);
             var childPath = new List<string>(path);
@@ -25,9 +25,14 @@ namespace Mech3DotNet.Reader
             return res;
         }
 
+        public List<T> ConvertTo(ReaderValue value, IEnumerable<string> path)
+        {
+            return Convert(value, path, op);
+        }
+
         public static List<T> operator /(Query query, ToList<T> op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

@@ -41,6 +41,14 @@ namespace Mech3DotNet
             var reader = items["sounds.zrd"];
             return Root(reader) / Only("SOUND_GROUPS") / List(new ToSoundGroup());
         }
+
+        public MechDfn GetMechDfn(string chassisName)
+        {
+            chassisName = chassisName.ToLowerInvariant();
+            var zrdName = $"dfn_{chassisName}.zrd";
+            var reader = items[zrdName];
+            return Root(reader) / new ToMechDfn(chassisName);
+        }
     }
 
     public static class Readers

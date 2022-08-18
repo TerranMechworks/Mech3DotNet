@@ -25,7 +25,7 @@ namespace Mech3DotNet.Reader
 
         public static float operator /(Query query, ToNumber op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

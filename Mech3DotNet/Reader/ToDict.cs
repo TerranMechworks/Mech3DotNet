@@ -26,7 +26,7 @@ namespace Mech3DotNet.Reader
 
         public static Dictionary<string, T> operator /(Query query, ToDict<T> op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

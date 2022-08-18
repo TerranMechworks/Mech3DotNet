@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,71 +6,71 @@ namespace Mech3DotNet.Reader
 {
     public struct PairWise : IEnumerable<(string key, ReaderValue value, IEnumerable<string> path)>
     {
-        private ReaderList list;
-        private int fullCount;
-        private int halfCount;
-        private IEnumerable<string> path;
+        private ReaderList _list;
+        private int _fullCount;
+        private int _halfCount;
+        private IEnumerable<string> _path;
 
-        public int Count => halfCount;
-        public ReaderList Underlying => list;
+        public int Count => _halfCount;
+        public ReaderList Underlying => _list;
 
         public PairWise(ReaderValue value, IEnumerable<string> path)
         {
-            list = ConversionException.List(value, path);
-            this.path = path;
+            _list = ConversionException.List(value, path);
+            _path = path;
 
-            fullCount = list.Count;
-            halfCount = fullCount / 2;
-            if (halfCount * 2 != fullCount)
-                throw new ConversionException($"Value has uneven count {fullCount}", path, list);
+            _fullCount = _list.Count;
+            _halfCount = _fullCount / 2;
+            if (_halfCount * 2 != _fullCount)
+                throw new ConversionException($"Value has uneven count {_fullCount}", path, _list);
         }
 
-        public IEnumerator<(string key, ReaderValue value, IEnumerable<string> path)> GetEnumerator() => new PairWiseEnumerator(list, path, fullCount);
+        public IEnumerator<(string key, ReaderValue value, IEnumerable<string> path)> GetEnumerator() => new PairWiseEnumerator(_list, _path, _fullCount);
         IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
     }
 
     public struct PairWiseEnumerator : IEnumerator<(string key, ReaderValue value, IEnumerable<string> path)>
     {
-        private ReaderList list;
-        private int count;
-        private int i;
-        private int j;
+        private ReaderList _list;
+        private int _count;
+        private int _i;
+        private int _j;
 
-        private string key;
-        private ReaderValue value;
-        private List<string> childPath;
+        private string _key;
+        private ReaderValue _value;
+        private List<string> _childPath;
 
         public PairWiseEnumerator(ReaderList list, IEnumerable<string> path, int count)
         {
-            this.list = list;
-            this.count = count;
+            _list = list;
+            _count = count;
 
-            i = 0 - 2;
-            j = 1 - 2;
+            _i = 0 - 2;
+            _j = 1 - 2;
 
-            key = string.Empty;
-            value = new ReaderInt(); // pick something for uninitialized value
-            childPath = new List<string>(path);
-            childPath.Add(""); // will be overwritten by loop index
+            _key = string.Empty;
+            _value = new ReaderInt(); // pick something for uninitialized value
+            _childPath = new List<string>(path);
+            _childPath.Add(""); // will be overwritten by loop index
         }
 
         public bool MoveNext()
         {
-            i += 2;
-            j += 2;
-            if (i >= count)
+            _i += 2;
+            _j += 2;
+            if (_i >= _count)
                 return false;
 
-            childPath[childPath.Count - 1] = i.ToString();
-            key = ToStr.Convert(list[i], childPath);
-            childPath[childPath.Count - 1] = j.ToString();
-            value = list[j];
+            _childPath[_childPath.Count - 1] = _i.ToString();
+            _key = ToStr.Convert(_list[_i], _childPath);
+            _childPath[_childPath.Count - 1] = _j.ToString();
+            _value = _list[_j];
             return true;
         }
 
         public (string key, ReaderValue value, IEnumerable<string> path) Current
         {
-            get { return (key, value, childPath); }
+            get { return (_key, _value, _childPath); }
         }
 
         object IEnumerator.Current => Current;

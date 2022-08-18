@@ -6,30 +6,30 @@ namespace Mech3DotNet.Reader.Structs
     public struct SoundGroup
     {
         public string name;
-        public int? play_count;
-        public bool play_solo;
-        public float? dynamic_weights;
+        public int? playCount;
+        public bool playSolo;
+        public float? dynamicWeights;
         public float? weight;
-        public float? delay_play;
-        public float? min_delay;
+        public float? delayPlay;
+        public float? minDelay;
         public List<SoundGroup> sounds;
 
         private void Repr(StringBuilder sb, int level)
         {
             sb.Append(' ', level * 2);
             sb.AppendFormat("SoundGroup<name='{0}'", name);
-            if (play_count != null)
-                sb.AppendFormat(", play_count={0}", play_count);
-            if (play_solo)
+            if (playCount != null)
+                sb.AppendFormat(", play_count={0}", playCount);
+            if (playSolo)
                 sb.Append(", play_solo");
-            if (dynamic_weights != null)
-                sb.AppendFormat(", dynamic_weights={0}", dynamic_weights);
+            if (dynamicWeights != null)
+                sb.AppendFormat(", dynamic_weights={0}", dynamicWeights);
             if (weight != null)
                 sb.AppendFormat(", weight={0}", weight);
-            if (delay_play != null)
-                sb.AppendFormat(", delay_play={0}", delay_play);
-            if (min_delay != null)
-                sb.AppendFormat(", min_delay={0}", min_delay);
+            if (delayPlay != null)
+                sb.AppendFormat(", delay_play={0}", delayPlay);
+            if (minDelay != null)
+                sb.AppendFormat(", min_delay={0}", minDelay);
             if (sounds.Count > 0)
             {
                 sb.Append(", sounds=[\n");
@@ -56,67 +56,60 @@ namespace Mech3DotNet.Reader.Structs
     {
         public static SoundGroup Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.List(value, path);
-            var childPath = new IndexPath(path);
+            var index = new IndexWise(value, path);
             var soundGroup = new SoundGroup()
             {
                 sounds = new List<SoundGroup>(),
             };
             // every sound group has the name first
-            soundGroup.name = ToStr.Convert(list[0], childPath.Path);
-            childPath.Next();
+            soundGroup.name = ToStr.Convert(index.Current, index.Path);
+            index.Next();
             // then, the sound group has zero or more properties
-            int i = 1;
-            for (; i < list.Count; i++)
+            while (index.HasItems)
             {
-                var item = list[i];
                 // if we see a list, the properties have ended
-                if (item is ReaderList)
+                if (index.Current is ReaderList)
                     break;
 
-                var key = ToStr.Convert(item, childPath.Path);
-                childPath.Next();
+                var key = ToStr.Convert(index.Current, index.Path);
+                // do not advance index yet, since we might need index.Path to
+                // throw an error
                 switch (key)
                 {
                     case "DYNAMIC_WEIGHTS":
-                        i++;
-                        soundGroup.dynamic_weights = ToFloat.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        soundGroup.dynamicWeights = ToFloat.Convert(index.Current, index.Path);
                         break;
                     case "WEIGHT":
-                        i++;
-                        soundGroup.weight = ToFloat.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        soundGroup.weight = ToFloat.Convert(index.Current, index.Path);
                         break;
                     case "PLAY_COUNT":
-                        i++;
-                        soundGroup.play_count = ToInt.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        soundGroup.playCount = ToInt.Convert(index.Current, index.Path);
                         break;
                     case "DELAY_PLAY":
-                        i++;
-                        soundGroup.delay_play = ToFloat.Convert(list[i], childPath.Path);
-                        childPath.Next();
+                        index.Next();
+                        soundGroup.delayPlay = ToFloat.Convert(index.Current, index.Path);
                         break;
                     case "PLAY_SOLO":
-                        soundGroup.play_solo = true;
+                        soundGroup.playSolo = true;
                         break;
                     case "EXTRA":
-                        i++;
-                        var extra = ToSoundGroupExtra.Convert(list[i], childPath.Path);
-                        soundGroup.min_delay = extra.min_delay;
-                        childPath.Next();
+                        index.Next();
+                        var extra = ToSoundGroupExtra.Convert(index.Current, index.Path);
+                        soundGroup.minDelay = extra.minDelay;
                         break;
                     default:
-                        throw new ConversionException($"Unknown key '{key}'", childPath.Path, list);
+                        throw new ConversionException($"Unknown key '{key}'", index.Path, index.Underlying);
                 }
+                index.Next();
             }
             // finally, the sound group contains other groups?
-            for (; i < list.Count; i++)
+            while (index.HasItems)
             {
-                var item = list[i];
-                var child = ToSoundGroup.Convert(item, childPath.Path);
-                childPath.Next();
+                var child = ToSoundGroup.Convert(index.Current, index.Path);
+                index.Next();
                 soundGroup.sounds.Add(child);
             }
             return soundGroup;
@@ -129,7 +122,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static SoundGroup operator /(Query query, ToSoundGroup op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

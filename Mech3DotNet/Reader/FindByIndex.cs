@@ -5,18 +5,18 @@ namespace Mech3DotNet.Reader
 {
     public struct FindByIndex : IQueryOperation
     {
-        private int index;
+        private int _index;
 
         public FindByIndex(int index)
         {
-            this.index = index;
+            _index = index;
         }
 
         public ReaderValue Apply(ReaderValue value, List<string> path)
         {
             var list = ConversionException.List(value, path);
 
-            var index = this.index;
+            var index = _index;
             var count = list.Count;
             // allow negative indexing, i.e. from back of list
             if (index < 0)
@@ -28,9 +28,9 @@ namespace Mech3DotNet.Reader
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new NotFoundException($"Index '{this.index}' not found (index: 0 <= {index} < {count})", path);
+                throw new NotFoundException($"Index '{_index}' not found (index: 0 <= {index} < {count})", path);
             }
-            path.Add(this.index.ToString());
+            path.Add(_index.ToString());
             return item;
         }
     }

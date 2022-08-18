@@ -15,14 +15,13 @@ namespace Mech3DotNet.Reader.Structs
     {
         public static Color Convert(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.ListFixed(value, path, 3);
-            var childPath = new IndexPath(path);
+            var index = new IndexWise(value, path, 3);
             var color = new Color();
-            color.r = ToInt.Convert(list[0], childPath.Path);
-            childPath.Next();
-            color.g = ToInt.Convert(list[1], childPath.Path);
-            childPath.Next();
-            color.b = ToInt.Convert(list[2], childPath.Path);
+            color.r = ToInt.Convert(index.Current, index.Path);
+            index.Next();
+            color.g = ToInt.Convert(index.Current, index.Path);
+            index.Next();
+            color.b = ToInt.Convert(index.Current, index.Path);
             return color;
         }
 
@@ -33,7 +32,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static Color operator /(Query query, ToColor op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Mech3DotNet.Reader.Structs
 
         public static SatMap operator /(Query query, ToSatMap op)
         {
-            return op.ConvertTo(query.value, query.path);
+            return op.ConvertTo(query._value, query._path);
         }
     }
 }

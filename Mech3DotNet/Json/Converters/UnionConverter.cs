@@ -6,8 +6,8 @@ namespace Mech3DotNet.Json.Converters
 {
     public interface IDiscriminatedUnion<E>
     {
-        bool Is<T>() where T : class;
-        T As<T>() where T : class;
+        bool Is<T>();
+        T As<T>();
         object GetValue();
         E Variant { get; }
     }

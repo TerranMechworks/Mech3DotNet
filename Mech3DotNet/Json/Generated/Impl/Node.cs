@@ -70,8 +70,8 @@ namespace Mech3DotNet.Json
 
         protected object value;
         public NodeVariant Variant { get; protected set; }
-        public bool Is<T>() where T : class { return typeof(T).IsInstanceOfType(value); }
-        public T As<T>() where T : class { return (T)value; }
+        public bool Is<T>() { return typeof(T).IsInstanceOfType(value); }
+        public T As<T>() { return (T)value; }
         public object GetValue() { return value; }
     }
 }

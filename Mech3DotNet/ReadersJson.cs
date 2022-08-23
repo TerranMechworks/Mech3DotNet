@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using Mech3DotNet.Reader;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet

@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\mech3dotnet\Mech3DotNet.csproj" />
+    <ProjectReference Include="..\Mech3DotNet\Mech3DotNet.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="6.0.5" />

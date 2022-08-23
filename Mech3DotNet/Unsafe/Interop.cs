@@ -130,11 +130,13 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_textures")]
         public static extern int ReadTextures(
             [MarshalAs(PStr)] string filename,
+            [MarshalAs(UnmanagedType.Bool)] bool is_pm,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_textures")]
         public static extern int WriteTextures(
             [MarshalAs(PStr)] string filename,
+            [MarshalAs(UnmanagedType.Bool)] bool is_pm,
             IntPtr manifest_ptr,
             ulong manifest_len,
             NameBufferCb callback);

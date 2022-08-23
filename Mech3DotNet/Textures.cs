@@ -6,6 +6,34 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
+    public class TexturePackage
+    {
+        public Dictionary<string, byte[]> textureData;
+        public List<TextureInfo> textureInfos;
+        public List<PaletteData> globalPalettes;
+
+        public TexturePackage(Dictionary<string, byte[]> textureData, List<TextureInfo> textureInfos, List<PaletteData> globalPalettes)
+        {
+            this.textureData = textureData;
+            this.textureInfos = textureInfos;
+            this.globalPalettes = globalPalettes;
+        }
+
+        public TexturePackage(Dictionary<string, byte[]> textureData, byte[] bmanifest)
+        {
+            var manifest = Interop.Deserialize<TextureManifest>(bmanifest);
+            this.textureData = textureData;
+            this.textureInfos = manifest.textureInfos;
+            this.globalPalettes = manifest.globalPalettes;
+        }
+
+        public byte[] SerializeManifest()
+        {
+            var manifest = new TextureManifest(textureInfos, globalPalettes);
+            return Interop.Serialize(manifest);
+        }
+    }
+
     public sealed class Texture
     {
         public TextureInfo info;
@@ -18,126 +46,56 @@ namespace Mech3DotNet
         }
     }
 
-    public class TextureArchive
+    public static class Textures
     {
-        public Dictionary<string, byte[]> textureData;
-        public List<TextureInfo> textureInfos;
-        public List<PaletteData> globalPalettes;
-
-        public TextureArchive(Dictionary<string, byte[]> textureData, List<TextureInfo> textureInfos, List<PaletteData> globalPalettes)
+        private static Dictionary<string, byte[]> ReadRaw(string inputPath, out byte[] manifest)
         {
-            this.textureData = textureData;
-            this.textureInfos = textureInfos;
-            this.globalPalettes = globalPalettes;
-        }
-    }
-
-    public class Textures
-    {
-        protected static Dictionary<string, byte[]> ReadRaw(string inputPath, out byte[] manifest)
-        {
-            var textures = new Dictionary<string, byte[]>();
-            if (inputPath == null)
-                throw new ArgumentNullException(nameof(inputPath));
-            ExceptionDispatchInfo? ex = null;
-            byte[]? capture = null;
-            var res = Interop.ReadTextures(inputPath, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
+            var textureData = new Dictionary<string, byte[]>();
+            // textures have no difference between MW and PM, it's just for consistency
+            manifest = Helpers.ReadArchiveRaw(inputPath, false, "manifest.json", Interop.ReadTextures, (string name, byte[] data) =>
             {
-                try
-                {
-                    var name = Interop.DecodeString(namePointer, nameLength);
-                    var data = Interop.DecodeBytes(dataPointer, dataLength);
-                    if (name == "manifest.json")
-                        capture = data;
-                    else
-                        textures.Add(name, data);
-                    return 0;
-                }
-                catch (Exception e)
-                {
-                    ex = ExceptionDispatchInfo.Capture(e);
-                    return -1;
-                }
+                textureData.Add(name, data);
             });
-            if (res != 0)
-            {
-                if (ex != null)
-                    ex.Throw();
-                else
-                    Interop.ThrowLastError();
-            }
-            if (capture == null)
-                throw new InvalidOperationException("manifest is null after reading");
-            manifest = capture;
-            return textures;
+            return textureData;
         }
 
+        // This fuses the information from the manifest with the texture data.
+        // It also disregards global palette information.
         public static Dictionary<string, Texture> Read(string inputPath)
         {
-            var datas = ReadRaw(inputPath, out byte[] bmanifest);
+            var textureData = ReadRaw(inputPath, out byte[] bmanifest);
             var manifest = Interop.Deserialize<TextureManifest>(bmanifest);
-            var textures = new Dictionary<string, Texture>(manifest.textureInfos.Count);
+            var fused = new Dictionary<string, Texture>(manifest.textureInfos.Count);
             foreach (var info in manifest.textureInfos)
             {
-                var data = datas[info.name];
-                datas.Remove(info.name);
-                textures.Add(info.name, new Texture(info, data));
+                var data = textureData[info.name];
+                textureData.Remove(info.name);
+                fused.Add(info.name, new Texture(info, data));
             }
-            if (datas.Count != 0)
-                throw new InvalidOperationException($"{datas.Count} textures not used in manifest");
-            return textures;
+            if (textureData.Count != 0)
+                throw new InvalidOperationException($"{textureData.Count} textures not used in manifest");
+            return fused;
         }
 
-        public static TextureArchive ReadArchive(string inputPath)
+        public static TexturePackage ReadPackage(string inputPath)
         {
-            var datas = ReadRaw(inputPath, out byte[] bmanifest);
-            var manifest = Interop.Deserialize<TextureManifest>(bmanifest);
-            return new TextureArchive(datas, manifest.textureInfos, manifest.globalPalettes);
+            var textureData = ReadRaw(inputPath, out byte[] manifest);
+            return new TexturePackage(textureData, manifest);
         }
 
-        protected static void WriteRaw(string outputPath, byte[] manifest, Dictionary<string, byte[]> textures)
+        private static void WriteRaw(string outputPath, TexturePackage package)
         {
-            if (outputPath == null)
-                throw new ArgumentNullException(nameof(outputPath));
-            var manifestLength = (ulong)manifest.Length;
-            ExceptionDispatchInfo? ex = null;
-            int res;
-            using (var manifestPointer = new PinnedGCHandle(manifest))
+            var manifest = package.SerializeManifest();
+            // textures have no difference between MW and PM, it's just for consistency
+            Helpers.WriteArchiveRaw(outputPath, false, manifest, Interop.WriteTextures, (string name) =>
             {
-                res = Interop.WriteTextures(outputPath, manifestPointer, manifestLength, (IntPtr namePointer, ulong nameLength, IntPtr buffer) =>
-                {
-                    try
-                    {
-                        var name = Interop.DecodeString(namePointer, nameLength);
-                        var data = textures[name];
-                        var dataLength = (ulong)data.Length;
-                        using (var dataPointer = new PinnedGCHandle(data))
-                        {
-                            Interop.BufferSetData(buffer, dataPointer, dataLength);
-                        }
-                        return 0;
-                    }
-                    catch (Exception e)
-                    {
-                        ex = ExceptionDispatchInfo.Capture(e);
-                        return -1;
-                    }
-                });
-            }
-            if (res != 0)
-            {
-                if (ex != null)
-                    ex.Throw();
-                else
-                    Interop.ThrowLastError();
-            }
+                return package.textureData[name];
+            });
         }
 
-        public static void WriteArchive(string outputPath, TextureArchive archive)
+        public static void WritePackage(string outputPath, TexturePackage package)
         {
-            var manifest = new TextureManifest(archive.textureInfos, archive.globalPalettes);
-            var data = Interop.Serialize(manifest);
-            WriteRaw(outputPath, data, archive.textureData);
+            WriteRaw(outputPath, package);
         }
     }
 }

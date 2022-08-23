@@ -15,7 +15,7 @@ namespace Mech3DotNet
         public delegate int ReadDataFn(string filename, bool is_pm, Interop.DataCb callback);
         public delegate int WriteDataFn(string filename, bool is_pm, IntPtr pointer, ulong length);
 
-        public static byte[] ReadArchiveRaw(string inputPath, bool isPM, ReadArchiveFn readFunction, ReadArchiveCb readCallback)
+        public static byte[] ReadArchiveRaw(string inputPath, bool isPM, string manifestName, ReadArchiveFn readFunction, ReadArchiveCb readCallback)
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
@@ -27,7 +27,7 @@ namespace Mech3DotNet
                 {
                     var name = Interop.DecodeString(namePointer, nameLength);
                     var data = Interop.DecodeBytes(dataPointer, dataLength);
-                    if (name == "manifest.json")
+                    if (name == manifestName)
                         manifest = data;
                     else
                         readCallback(name, data);

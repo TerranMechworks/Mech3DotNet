@@ -9,7 +9,7 @@ namespace Mech3DotNet
         private static Dictionary<string, Motion<TQuaternion, TVec3>> Read(string inputPath, bool isPM, out byte[] manifest)
         {
             var motions = new Dictionary<string, Motion<TQuaternion, TVec3>>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.ReadMotion, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadMotion, (string name, byte[] data) =>
             {
                 var motion = Interop.Deserialize<Motion<TQuaternion, TVec3>>(data);
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
@@ -42,7 +42,7 @@ namespace Mech3DotNet
 
         private static void Write(string outputPath, bool isPM, Archive<Motion<TQuaternion, TVec3>> archive)
         {
-            var manifest = archive.GetManifest();
+            var manifest = archive.SerializeManifest();
             Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteMotion, (string name) =>
             {
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased

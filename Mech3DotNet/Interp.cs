@@ -9,7 +9,7 @@ namespace Mech3DotNet
     {
         public static List<Script> Read(string inputPath)
         {
-            // interp.zbd has no Script between MW and PM, it's just for consistency
+            // interp.zbd has no difference between MW and PM, it's just for consistency
             return ReadData<List<Script>>(inputPath, false, Interop.ReadInterp);
         }
 

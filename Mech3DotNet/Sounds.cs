@@ -11,7 +11,7 @@ namespace Mech3DotNet
         private static Dictionary<string, byte[]> ReadRaw(string inputPath, bool isPM, out byte[] manifest)
         {
             var sounds = new Dictionary<string, byte[]>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.ReadSounds, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadSounds, (string name, byte[] data) =>
             {
                 // there are duplicate sounds in the archive
                 sounds[name] = data;
@@ -33,7 +33,7 @@ namespace Mech3DotNet
 
         private static void WriteRaw(string outputPath, bool isPM, Archive<byte[]> archive)
         {
-            var manifest = archive.GetManifest();
+            var manifest = archive.SerializeManifest();
             Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteSounds, (string name) =>
             {
                 return archive.items[name];

@@ -22,9 +22,6 @@ namespace Mech3DotNet
             this.entries = entries ?? throw new ArgumentNullException(nameof(entries));
         }
 
-        public byte[] GetManifest()
-        {
-            return Interop.Serialize(entries);
-        }
+        public byte[] SerializeManifest() => Interop.Serialize(entries);
     }
 }

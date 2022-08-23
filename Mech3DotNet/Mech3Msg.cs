@@ -26,10 +26,13 @@ namespace Mech3DotNet
                     ex = ExceptionDispatchInfo.Capture(e);
                 }
             });
-            if (ex != null)
-                ex.Throw();
             if (res != 0)
-                Interop.ThrowLastError();
+            {
+                if (ex != null)
+                    ex.Throw();
+                else
+                    Interop.ThrowLastError();
+            }
             if (messages == null)
                 throw new InvalidOperationException("messages is null after reading");
             return messages;

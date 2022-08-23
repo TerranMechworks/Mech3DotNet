@@ -11,7 +11,7 @@ namespace Mech3DotNet
         private static Dictionary<string, byte[]> Read(string inputPath, bool isPM, out byte[] manifest)
         {
             var readers = new Dictionary<string, byte[]>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.ReadReader, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadReader, (string name, byte[] data) =>
             {
                 readers.Add(name, data);
             });

@@ -56,7 +56,7 @@ namespace Mech3DotNet
         private static Dictionary<string, ReaderValue> Read(string inputPath, bool isPM, out byte[] manifest)
         {
             var readers = new Dictionary<string, ReaderValue>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, Interop.ReadReaderRaw, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadReaderRaw, (string name, byte[] data) =>
             {
                 var stream = new MemoryStream(data);
                 var reader = new BinaryReader(stream);
@@ -90,7 +90,7 @@ namespace Mech3DotNet
 
         private static void Write(string outputPath, bool isPM, ReaderArchive archive)
         {
-            var manifest = archive.GetManifest();
+            var manifest = archive.SerializeManifest();
             Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteReaderRaw, (string name) =>
             {
                 var root = archive.items[name];

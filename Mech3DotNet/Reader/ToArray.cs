@@ -14,14 +14,12 @@ namespace Mech3DotNet.Reader
 
         public T[] ConvertTo(ReaderValue value, IEnumerable<string> path)
         {
-            var list = ConversionException.List(value, path);
-            var childPath = new List<string>(path);
-            childPath.Add(""); // will be overwritten by loop index
-            var array = new T[list.Count];
-            for (var i = 0; i < list.Count; i++)
+            var index = new IndexWise(value, path);
+            var array = new T[index.Count];
+            while (index.HasItems)
             {
-                childPath[childPath.Count - 1] = i.ToString();
-                array[i] = op.ConvertTo(list[i], childPath);
+                array[index.Index] = op.ConvertTo(index.Current, index.Path);
+                index.Next();
             }
             return array;
         }

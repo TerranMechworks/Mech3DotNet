@@ -154,6 +154,20 @@ namespace Mech3DotNet.Unsafe
             IntPtr pointer,
             ulong length);
 
+        [DllImport(MECH3AX, EntryPoint = "read_anim")]
+        public static extern int ReadAnim(
+            [MarshalAs(PStr)] string filename,
+            [MarshalAs(UnmanagedType.Bool)] bool is_pm,
+            NameDataCb callback);
+
+        [DllImport(MECH3AX, EntryPoint = "write_anim")]
+        public static extern int WriteAnim(
+            [MarshalAs(PStr)] string filename,
+            [MarshalAs(UnmanagedType.Bool)] bool is_pm,
+            IntPtr metadata_ptr,
+            ulong metadata_len,
+            NameBufferCb callback);
+
         public static string? GetLastError()
         {
             var length = LastErrorLength();

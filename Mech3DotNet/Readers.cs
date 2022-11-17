@@ -42,6 +42,13 @@ namespace Mech3DotNet
             return Root(reader) / Only("SOUND_GROUPS") / List(new ToSoundGroup());
         }
 
+        public IONet GetIONet(string worldName)
+        {
+            var name = $"reg_ionet_{worldName}.zrd";
+            var reader = items[name];
+            return Root(reader) / new ToIONet();
+        }
+
         public MechDfn GetMechDfn(string chassisName)
         {
             chassisName = chassisName.ToLowerInvariant();

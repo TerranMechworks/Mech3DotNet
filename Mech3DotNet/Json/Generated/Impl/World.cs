@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(WorldConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.WorldConverter))]
     public class World
     {
         public string name;
         public Area area;
-        public List<List<Partition>> partitions;
+        public System.Collections.Generic.List<System.Collections.Generic.List<Partition>> partitions;
         public uint areaPartitionXCount;
         public uint areaPartitionYCount;
         public bool fudgeCount;
@@ -20,11 +14,11 @@ namespace Mech3DotNet.Json
         public uint worldChildrenPtr;
         public uint worldChildValue;
         public uint worldLightsPtr;
-        public List<uint> children;
+        public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint childrenArrayPtr;
 
-        public World(string name, Area area, List<List<Partition>> partitions, uint areaPartitionXCount, uint areaPartitionYCount, bool fudgeCount, uint areaPartitionPtr, uint virtPartitionPtr, uint worldChildrenPtr, uint worldChildValue, uint worldLightsPtr, List<uint> children, uint dataPtr, uint childrenArrayPtr)
+        public World(string name, Area area, System.Collections.Generic.List<System.Collections.Generic.List<Partition>> partitions, uint areaPartitionXCount, uint areaPartitionYCount, bool fudgeCount, uint areaPartitionPtr, uint virtPartitionPtr, uint worldChildrenPtr, uint worldChildValue, uint worldLightsPtr, System.Collections.Generic.List<uint> children, uint dataPtr, uint childrenArrayPtr)
         {
             this.name = name;
             this.area = area;

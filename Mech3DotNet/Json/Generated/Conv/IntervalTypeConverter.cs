@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class IntervalTypeConverter : EnumConverter<IntervalType>
+    public class IntervalTypeConverter : Mech3DotNet.Json.Converters.EnumConverter<IntervalType>
     {
         public override IntervalType ReadVariant(string? name) => name switch
         {
@@ -21,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
             IntervalType.Unset => "Unset",
             IntervalType.Time => "Time",
             IntervalType.Distance => "Distance",
-            _ => throw new ArgumentOutOfRangeException("IntervalType"),
+            _ => throw new System.ArgumentOutOfRangeException("IntervalType"),
         };
     }
 }

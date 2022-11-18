@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class CycleDataConverter : StructConverter<CycleData>
+    public class CycleDataConverter : Mech3DotNet.Json.Converters.StructConverter<CycleData>
     {
         protected override CycleData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var texturesField = new Option<List<string>>();
-            var unk00Field = new Option<bool>();
-            var unk04Field = new Option<uint>();
-            var unk12Field = new Option<float>();
-            var infoPtrField = new Option<uint>();
-            var dataPtrField = new Option<uint>();
+            var texturesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<string>>();
+            var unk00Field = new Mech3DotNet.Json.Converters.Option<bool>();
+            var unk04Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk12Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var infoPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -23,7 +19,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "textures":
                         {
-                            List<string>? __value = ReadFieldValue<List<string>?>(ref __reader, __options);
+                            System.Collections.Generic.List<string>? __value = ReadFieldValue<System.Collections.Generic.List<string>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'textures' was null for 'CycleData'");

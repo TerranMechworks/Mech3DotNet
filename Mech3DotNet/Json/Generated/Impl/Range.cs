@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(RangeConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.RangeConverter))]
     public struct Range
     {
         public float min;

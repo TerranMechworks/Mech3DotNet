@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ForwardRotationTimeConverter : StructConverter<ForwardRotationTime>
+    public class ForwardRotationTimeConverter : Mech3DotNet.Json.Converters.StructConverter<ForwardRotationTime>
     {
         protected override ForwardRotationTime ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var v1Field = new Option<float>();
-            var v2Field = new Option<float>();
+            var v1Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var v2Field = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

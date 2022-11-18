@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum IfVariant
@@ -14,8 +9,8 @@ namespace Mech3DotNet.Json
         PlayerFirstPerson,
     }
 
-    [JsonConverter(typeof(IfConverter))]
-    public class If : IDiscriminatedUnion<IfVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.IfConverter))]
+    public class If : Mech3DotNet.Json.Converters.IDiscriminatedUnion<IfVariant>
     {
         public If(RandomWeightCond value)
         {

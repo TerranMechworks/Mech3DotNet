@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(ResetStateConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ResetStateConverter))]
     public class ResetState
     {
-        public List<Event> events;
+        public System.Collections.Generic.List<Event> events;
         public uint pointer;
 
-        public ResetState(List<Event> events, uint pointer)
+        public ResetState(System.Collections.Generic.List<Event> events, uint pointer)
         {
             this.events = events;
             this.pointer = pointer;

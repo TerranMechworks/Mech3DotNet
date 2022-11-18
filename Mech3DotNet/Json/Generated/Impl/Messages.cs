@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(MessagesConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MessagesConverter))]
     public class Messages
     {
         public uint languageId;
-        public List<MessageEntry> entries;
+        public System.Collections.Generic.List<MessageEntry> entries;
 
-        public Messages(uint languageId, List<MessageEntry> entries)
+        public Messages(uint languageId, System.Collections.Generic.List<MessageEntry> entries)
         {
             this.languageId = languageId;
             this.entries = entries;

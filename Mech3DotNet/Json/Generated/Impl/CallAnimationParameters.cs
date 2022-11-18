@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum CallAnimationParametersVariant
@@ -13,8 +8,8 @@ namespace Mech3DotNet.Json
         None,
     }
 
-    [JsonConverter(typeof(CallAnimationParametersConverter))]
-    public class CallAnimationParameters : IDiscriminatedUnion<CallAnimationParametersVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.CallAnimationParametersConverter))]
+    public class CallAnimationParameters : Mech3DotNet.Json.Converters.IDiscriminatedUnion<CallAnimationParametersVariant>
     {
         public sealed class None
         {

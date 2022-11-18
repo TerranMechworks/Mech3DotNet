@@ -1,11 +1,8 @@
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class IfConverter : UnionConverter<If>
+    public class IfConverter : Mech3DotNet.Json.Converters.UnionConverter<If>
     {
         public override If ReadUnitVariant(string? name)
         {
@@ -141,7 +138,7 @@ namespace Mech3DotNet.Json.Converters
                         break;
                     }
                 default:
-                    throw new ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'If'");
+                    throw new System.ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'If'");
             }
         }
     }

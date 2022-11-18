@@ -1,11 +1,8 @@
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ActivationPrereqConverter : UnionConverter<ActivationPrereq>
+    public class ActivationPrereqConverter : Mech3DotNet.Json.Converters.UnionConverter<ActivationPrereq>
     {
         public override ActivationPrereq ReadUnitVariant(string? name)
         {
@@ -103,7 +100,7 @@ namespace Mech3DotNet.Json.Converters
                         break;
                     }
                 default:
-                    throw new ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'ActivationPrereq'");
+                    throw new System.ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'ActivationPrereq'");
             }
         }
     }

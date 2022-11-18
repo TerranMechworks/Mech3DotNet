@@ -1,25 +1,21 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class TextureInfoConverter : StructConverter<TextureInfo>
+    public class TextureInfoConverter : Mech3DotNet.Json.Converters.StructConverter<TextureInfo>
     {
         protected override TextureInfo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var renameField = new Option<string?>(null);
-            var alphaField = new Option<TextureAlpha>();
-            var widthField = new Option<ushort>();
-            var heightField = new Option<ushort>();
-            var stretchField = new Option<TextureStretch>();
-            var imageLoadedField = new Option<bool>();
-            var alphaLoadedField = new Option<bool>();
-            var paletteLoadedField = new Option<bool>();
-            var paletteField = new Option<TexturePalette>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var renameField = new Mech3DotNet.Json.Converters.Option<string?>(null);
+            var alphaField = new Mech3DotNet.Json.Converters.Option<TextureAlpha>();
+            var widthField = new Mech3DotNet.Json.Converters.Option<ushort>();
+            var heightField = new Mech3DotNet.Json.Converters.Option<ushort>();
+            var stretchField = new Mech3DotNet.Json.Converters.Option<TextureStretch>();
+            var imageLoadedField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var alphaLoadedField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var paletteLoadedField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var paletteField = new Mech3DotNet.Json.Converters.Option<TexturePalette>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

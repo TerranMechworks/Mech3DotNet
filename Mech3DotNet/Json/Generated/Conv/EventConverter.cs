@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class EventConverter : StructConverter<Event>
+    public class EventConverter : Mech3DotNet.Json.Converters.StructConverter<Event>
     {
         protected override Event ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var dataField = new Option<EventData>();
-            var startField = new Option<EventStart?>();
+            var dataField = new Mech3DotNet.Json.Converters.Option<EventData>();
+            var startField = new Mech3DotNet.Json.Converters.Option<EventStart?>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

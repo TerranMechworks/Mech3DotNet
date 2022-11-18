@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum ForwardRotationVariant
@@ -11,8 +6,8 @@ namespace Mech3DotNet.Json
         Distance,
     }
 
-    [JsonConverter(typeof(ForwardRotationConverter))]
-    public class ForwardRotation : IDiscriminatedUnion<ForwardRotationVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ForwardRotationConverter))]
+    public class ForwardRotation : Mech3DotNet.Json.Converters.IDiscriminatedUnion<ForwardRotationVariant>
     {
         public ForwardRotation(ForwardRotationTime value)
         {

@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(AnimMetadataConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.AnimMetadataConverter))]
     public class AnimMetadata
     {
         public uint basePtr;
         public uint worldPtr;
-        public List<AnimName> animNames;
-        public List<AnimPtr> animPtrs;
+        public System.Collections.Generic.List<AnimName> animNames;
+        public System.Collections.Generic.List<AnimPtr> animPtrs;
 
-        public AnimMetadata(uint basePtr, uint worldPtr, List<AnimName> animNames, List<AnimPtr> animPtrs)
+        public AnimMetadata(uint basePtr, uint worldPtr, System.Collections.Generic.List<AnimName> animNames, System.Collections.Generic.List<AnimPtr> animPtrs)
         {
             this.basePtr = basePtr;
             this.worldPtr = worldPtr;

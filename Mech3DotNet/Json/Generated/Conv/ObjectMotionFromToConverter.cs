@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectMotionFromToConverter : StructConverter<ObjectMotionFromTo>
+    public class ObjectMotionFromToConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotionFromTo>
     {
         protected override ObjectMotionFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var runTimeField = new Option<float>();
-            var morphField = new Option<FloatFromTo?>(null);
-            var translateField = new Option<Vec3FromTo?>(null);
-            var rotateField = new Option<Vec3FromTo?>(null);
-            var scaleField = new Option<Vec3FromTo?>(null);
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var runTimeField = new Mech3DotNet.Json.Converters.Option<float>();
+            var morphField = new Mech3DotNet.Json.Converters.Option<FloatFromTo?>(null);
+            var translateField = new Mech3DotNet.Json.Converters.Option<Vec3FromTo?>(null);
+            var rotateField = new Mech3DotNet.Json.Converters.Option<Vec3FromTo?>(null);
+            var scaleField = new Mech3DotNet.Json.Converters.Option<Vec3FromTo?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

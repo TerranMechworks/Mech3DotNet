@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class DetonateWeaponConverter : StructConverter<DetonateWeapon>
+    public class DetonateWeaponConverter : Mech3DotNet.Json.Converters.StructConverter<DetonateWeapon>
     {
         protected override DetonateWeapon ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var atNodeField = new Option<AtNode>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<AtNode>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

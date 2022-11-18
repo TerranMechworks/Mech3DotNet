@@ -1,26 +1,22 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class LightStateConverter : StructConverter<LightState>
+    public class LightStateConverter : Mech3DotNet.Json.Converters.StructConverter<LightState>
     {
         protected override LightState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var activeStateField = new Option<bool>();
-            var directionalField = new Option<bool?>(null);
-            var saturatedField = new Option<bool?>(null);
-            var subdivideField = new Option<bool?>(null);
-            var static_Field = new Option<bool?>(null);
-            var atNodeField = new Option<AtNode?>(null);
-            var rangeField = new Option<Range?>(null);
-            var colorField = new Option<Color?>(null);
-            var ambientField = new Option<float?>(null);
-            var diffuseField = new Option<float?>(null);
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var activeStateField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var directionalField = new Mech3DotNet.Json.Converters.Option<bool?>(null);
+            var saturatedField = new Mech3DotNet.Json.Converters.Option<bool?>(null);
+            var subdivideField = new Mech3DotNet.Json.Converters.Option<bool?>(null);
+            var static_Field = new Mech3DotNet.Json.Converters.Option<bool?>(null);
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<AtNode?>(null);
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
+            var colorField = new Mech3DotNet.Json.Converters.Option<Color?>(null);
+            var ambientField = new Mech3DotNet.Json.Converters.Option<float?>(null);
+            var diffuseField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

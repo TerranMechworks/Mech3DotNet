@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PufferStateCycleTexturesConverter : StructConverter<PufferStateCycleTextures>
+    public class PufferStateCycleTexturesConverter : Mech3DotNet.Json.Converters.StructConverter<PufferStateCycleTextures>
     {
         protected override PufferStateCycleTextures ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var texture1Field = new Option<string?>();
-            var texture2Field = new Option<string?>();
-            var texture3Field = new Option<string?>();
-            var texture4Field = new Option<string?>();
-            var texture5Field = new Option<string?>();
-            var texture6Field = new Option<string?>();
+            var texture1Field = new Mech3DotNet.Json.Converters.Option<string?>();
+            var texture2Field = new Mech3DotNet.Json.Converters.Option<string?>();
+            var texture3Field = new Mech3DotNet.Json.Converters.Option<string?>();
+            var texture4Field = new Mech3DotNet.Json.Converters.Option<string?>();
+            var texture5Field = new Mech3DotNet.Json.Converters.Option<string?>();
+            var texture6Field = new Mech3DotNet.Json.Converters.Option<string?>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

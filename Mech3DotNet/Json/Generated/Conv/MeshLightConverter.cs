@@ -1,30 +1,26 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MeshLightConverter : StructConverter<MeshLight>
+    public class MeshLightConverter : Mech3DotNet.Json.Converters.StructConverter<MeshLight>
     {
         protected override MeshLight ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var unk00Field = new Option<uint>();
-            var unk04Field = new Option<uint>();
-            var unk08Field = new Option<float>();
-            var extraField = new Option<List<Vec3>>();
-            var unk24Field = new Option<uint>();
-            var colorField = new Option<Color>();
-            var flagsField = new Option<ushort>();
-            var ptrField = new Option<uint>();
-            var unk48Field = new Option<float>();
-            var unk52Field = new Option<float>();
-            var unk56Field = new Option<float>();
-            var unk60Field = new Option<uint>();
-            var unk64Field = new Option<float>();
-            var unk68Field = new Option<float>();
-            var unk72Field = new Option<float>();
+            var unk00Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk04Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk08Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var extraField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Vec3>>();
+            var unk24Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<ushort>();
+            var ptrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk48Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk52Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk56Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk60Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk64Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk68Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk72Field = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -50,7 +46,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "extra":
                         {
-                            List<Vec3>? __value = ReadFieldValue<List<Vec3>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Vec3>? __value = ReadFieldValue<System.Collections.Generic.List<Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'extra' was null for 'MeshLight'");

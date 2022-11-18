@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectMotionSiScriptConverter : StructConverter<ObjectMotionSiScript>
+    public class ObjectMotionSiScriptConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotionSiScript>
     {
         protected override ObjectMotionSiScript ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var framesField = new Option<List<ObjectMotionSiFrame>>();
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var framesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<ObjectMotionSiFrame>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -30,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "frames":
                         {
-                            List<ObjectMotionSiFrame>? __value = ReadFieldValue<List<ObjectMotionSiFrame>?>(ref __reader, __options);
+                            System.Collections.Generic.List<ObjectMotionSiFrame>? __value = ReadFieldValue<System.Collections.Generic.List<ObjectMotionSiFrame>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'frames' was null for 'ObjectMotionSiScript'");

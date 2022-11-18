@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(ObjectMotionSiScriptConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ObjectMotionSiScriptConverter))]
     public class ObjectMotionSiScript
     {
         public string node;
-        public List<ObjectMotionSiFrame> frames;
+        public System.Collections.Generic.List<ObjectMotionSiFrame> frames;
 
-        public ObjectMotionSiScript(string node, List<ObjectMotionSiFrame> frames)
+        public ObjectMotionSiScript(string node, System.Collections.Generic.List<ObjectMotionSiFrame> frames)
         {
             this.node = node;
             this.frames = frames;

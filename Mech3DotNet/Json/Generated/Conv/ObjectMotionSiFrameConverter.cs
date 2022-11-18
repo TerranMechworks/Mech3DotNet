@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectMotionSiFrameConverter : StructConverter<ObjectMotionSiFrame>
+    public class ObjectMotionSiFrameConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotionSiFrame>
     {
         protected override ObjectMotionSiFrame ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var startTimeField = new Option<float>();
-            var endTimeField = new Option<float>();
-            var translationField = new Option<TranslateData?>(null);
-            var rotationField = new Option<RotateData?>(null);
-            var scaleField = new Option<ScaleData?>(null);
+            var startTimeField = new Mech3DotNet.Json.Converters.Option<float>();
+            var endTimeField = new Mech3DotNet.Json.Converters.Option<float>();
+            var translationField = new Mech3DotNet.Json.Converters.Option<TranslateData?>(null);
+            var rotationField = new Mech3DotNet.Json.Converters.Option<RotateData?>(null);
+            var scaleField = new Mech3DotNet.Json.Converters.Option<ScaleData?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

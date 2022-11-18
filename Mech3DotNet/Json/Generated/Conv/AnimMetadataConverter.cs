@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class AnimMetadataConverter : StructConverter<AnimMetadata>
+    public class AnimMetadataConverter : Mech3DotNet.Json.Converters.StructConverter<AnimMetadata>
     {
         protected override AnimMetadata ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var basePtrField = new Option<uint>();
-            var worldPtrField = new Option<uint>();
-            var animNamesField = new Option<List<AnimName>>();
-            var animPtrsField = new Option<List<AnimPtr>>();
+            var basePtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var worldPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var animNamesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<AnimName>>();
+            var animPtrsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<AnimPtr>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -33,7 +29,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "anim_names":
                         {
-                            List<AnimName>? __value = ReadFieldValue<List<AnimName>?>(ref __reader, __options);
+                            System.Collections.Generic.List<AnimName>? __value = ReadFieldValue<System.Collections.Generic.List<AnimName>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'anim_names' was null for 'AnimMetadata'");
@@ -44,7 +40,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "anim_ptrs":
                         {
-                            List<AnimPtr>? __value = ReadFieldValue<List<AnimPtr>?>(ref __reader, __options);
+                            System.Collections.Generic.List<AnimPtr>? __value = ReadFieldValue<System.Collections.Generic.List<AnimPtr>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'anim_ptrs' was null for 'AnimMetadata'");

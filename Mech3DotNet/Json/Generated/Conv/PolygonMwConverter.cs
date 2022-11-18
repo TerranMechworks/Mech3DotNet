@@ -1,29 +1,25 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PolygonMwConverter : StructConverter<PolygonMw>
+    public class PolygonMwConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonMw>
     {
         protected override PolygonMw ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var vertexIndicesField = new Option<List<uint>>();
-            var vertexColorsField = new Option<List<Color>>();
-            var normalIndicesField = new Option<List<uint>?>();
-            var uvCoordsField = new Option<List<UvCoord>?>();
-            var textureIndexField = new Option<uint>();
-            var textureInfoField = new Option<uint>();
-            var unk04Field = new Option<int>();
-            var unkBitField = new Option<bool>();
-            var vtxBitField = new Option<bool>();
-            var verticesPtrField = new Option<uint>();
-            var normalsPtrField = new Option<uint>();
-            var uvsPtrField = new Option<uint>();
-            var colorsPtrField = new Option<uint>();
-            var unkPtrField = new Option<uint>();
+            var vertexIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
+            var vertexColorsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Color>>();
+            var normalIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>?>();
+            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<UvCoord>?>();
+            var textureIndexField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var textureInfoField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk04Field = new Mech3DotNet.Json.Converters.Option<int>();
+            var unkBitField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var vtxBitField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var verticesPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var normalsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var uvsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var colorsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unkPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -31,7 +27,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "vertex_indices":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertex_indices' was null for 'PolygonMw'");
@@ -42,7 +38,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "vertex_colors":
                         {
-                            List<Color>? __value = ReadFieldValue<List<Color>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Color>? __value = ReadFieldValue<System.Collections.Generic.List<Color>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertex_colors' was null for 'PolygonMw'");
@@ -53,13 +49,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "normal_indices":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             normalIndicesField.Set(__value);
                             break;
                         }
                     case "uv_coords":
                         {
-                            List<UvCoord>? __value = ReadFieldValue<List<UvCoord>?>(ref __reader, __options);
+                            System.Collections.Generic.List<UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<UvCoord>?>(ref __reader, __options);
                             uvCoordsField.Set(__value);
                             break;
                         }

@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum NodePmVariant
@@ -11,8 +6,8 @@ namespace Mech3DotNet.Json
         Object3d,
     }
 
-    [JsonConverter(typeof(NodePmConverter))]
-    public class NodePm : IDiscriminatedUnion<NodePmVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.NodePmConverter))]
+    public class NodePm : Mech3DotNet.Json.Converters.IDiscriminatedUnion<NodePmVariant>
     {
         public NodePm(LodPm value)
         {

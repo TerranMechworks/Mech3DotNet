@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class StartOffsetConverter : EnumConverter<StartOffset>
+    public class StartOffsetConverter : Mech3DotNet.Json.Converters.EnumConverter<StartOffset>
     {
         public override StartOffset ReadVariant(string? name) => name switch
         {
@@ -21,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
             StartOffset.Animation => "Animation",
             StartOffset.Sequence => "Sequence",
             StartOffset.Event => "Event",
-            _ => throw new ArgumentOutOfRangeException("StartOffset"),
+            _ => throw new System.ArgumentOutOfRangeException("StartOffset"),
         };
     }
 }

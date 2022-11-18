@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum EventDataVariant
@@ -42,8 +37,8 @@ namespace Mech3DotNet.Json
         PufferState,
     }
 
-    [JsonConverter(typeof(EventDataConverter))]
-    public class EventData : IDiscriminatedUnion<EventDataVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.EventDataConverter))]
+    public class EventData : Mech3DotNet.Json.Converters.IDiscriminatedUnion<EventDataVariant>
     {
         public EventData(Sound value)
         {

@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class GravityModeConverter : EnumConverter<GravityMode>
+    public class GravityModeConverter : Mech3DotNet.Json.Converters.EnumConverter<GravityMode>
     {
         public override GravityMode ReadVariant(string? name) => name switch
         {
@@ -21,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
             GravityMode.Local => "Local",
             GravityMode.Complex => "Complex",
             GravityMode.NoAltitude => "NoAltitude",
-            _ => throw new ArgumentOutOfRangeException("GravityMode"),
+            _ => throw new System.ArgumentOutOfRangeException("GravityMode"),
         };
     }
 }

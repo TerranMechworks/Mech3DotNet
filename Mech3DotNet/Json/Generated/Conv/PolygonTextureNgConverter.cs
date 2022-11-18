@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PolygonTextureNgConverter : StructConverter<PolygonTextureNg>
+    public class PolygonTextureNgConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonTextureNg>
     {
         protected override PolygonTextureNg ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var textureIndexField = new Option<uint>();
-            var uvCoordsField = new Option<List<UvCoord>>();
+            var textureIndexField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<UvCoord>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -25,7 +21,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "uv_coords":
                         {
-                            List<UvCoord>? __value = ReadFieldValue<List<UvCoord>?>(ref __reader, __options);
+                            System.Collections.Generic.List<UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<UvCoord>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'uv_coords' was null for 'PolygonTextureNg'");

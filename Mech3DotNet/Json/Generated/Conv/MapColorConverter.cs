@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MapColorConverter : StructConverter<MapColor>
+    public class MapColorConverter : Mech3DotNet.Json.Converters.StructConverter<MapColor>
     {
         protected override MapColor ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var rField = new Option<byte>();
-            var gField = new Option<byte>();
-            var bField = new Option<byte>();
+            var rField = new Mech3DotNet.Json.Converters.Option<byte>();
+            var gField = new Mech3DotNet.Json.Converters.Option<byte>();
+            var bField = new Mech3DotNet.Json.Converters.Option<byte>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

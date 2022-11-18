@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class Vec3FromToConverter : StructConverter<Vec3FromTo>
+    public class Vec3FromToConverter : Mech3DotNet.Json.Converters.StructConverter<Vec3FromTo>
     {
         protected override Vec3FromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var fromField = new Option<Vec3>();
-            var toField = new Option<Vec3>();
-            var deltaField = new Option<Vec3>();
+            var fromField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var toField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var deltaField = new Mech3DotNet.Json.Converters.Option<Vec3>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

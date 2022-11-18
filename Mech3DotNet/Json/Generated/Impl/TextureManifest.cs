@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(TextureManifestConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.TextureManifestConverter))]
     public class TextureManifest
     {
-        public List<TextureInfo> textureInfos;
-        public List<PaletteData> globalPalettes;
+        public System.Collections.Generic.List<TextureInfo> textureInfos;
+        public System.Collections.Generic.List<PaletteData> globalPalettes;
 
-        public TextureManifest(List<TextureInfo> textureInfos, List<PaletteData> globalPalettes)
+        public TextureManifest(System.Collections.Generic.List<TextureInfo> textureInfos, System.Collections.Generic.List<PaletteData> globalPalettes)
         {
             this.textureInfos = textureInfos;
             this.globalPalettes = globalPalettes;

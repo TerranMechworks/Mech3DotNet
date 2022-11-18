@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ModelPmConverter : StructConverter<ModelPm>
+    public class ModelPmConverter : Mech3DotNet.Json.Converters.StructConverter<ModelPm>
     {
         protected override ModelPm ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodesField = new Option<List<NodePm>>();
-            var meshesField = new Option<List<MeshNg>>();
-            var meshPtrsField = new Option<List<int>>();
+            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NodePm>>();
+            var meshesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MeshNg>>();
+            var meshPtrsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<int>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -20,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "nodes":
                         {
-                            List<NodePm>? __value = ReadFieldValue<List<NodePm>?>(ref __reader, __options);
+                            System.Collections.Generic.List<NodePm>? __value = ReadFieldValue<System.Collections.Generic.List<NodePm>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'nodes' was null for 'ModelPm'");
@@ -31,7 +27,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "meshes":
                         {
-                            List<MeshNg>? __value = ReadFieldValue<List<MeshNg>?>(ref __reader, __options);
+                            System.Collections.Generic.List<MeshNg>? __value = ReadFieldValue<System.Collections.Generic.List<MeshNg>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'meshes' was null for 'ModelPm'");
@@ -42,7 +38,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "mesh_ptrs":
                         {
-                            List<int>? __value = ReadFieldValue<List<int>?>(ref __reader, __options);
+                            System.Collections.Generic.List<int>? __value = ReadFieldValue<System.Collections.Generic.List<int>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'mesh_ptrs' was null for 'ModelPm'");

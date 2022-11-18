@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PolygonFlagsConverter : StructConverter<PolygonFlags>
+    public class PolygonFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonFlags>
     {
         protected override PolygonFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var unk2Field = new Option<bool>(false);
-            var unk3Field = new Option<bool>(false);
-            var triangleStripField = new Option<bool>(false);
-            var unk6Field = new Option<bool>(false);
+            var unk2Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var unk3Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var triangleStripField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var unk6Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

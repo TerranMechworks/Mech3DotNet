@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum MaterialVariant
@@ -11,8 +6,8 @@ namespace Mech3DotNet.Json
         Colored,
     }
 
-    [JsonConverter(typeof(MaterialConverter))]
-    public class Material : IDiscriminatedUnion<MaterialVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MaterialConverter))]
+    public class Material : Mech3DotNet.Json.Converters.IDiscriminatedUnion<MaterialVariant>
     {
         public Material(TexturedMaterial value)
         {

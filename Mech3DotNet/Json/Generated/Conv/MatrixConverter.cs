@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MatrixConverter : StructConverter<Matrix>
+    public class MatrixConverter : Mech3DotNet.Json.Converters.StructConverter<Matrix>
     {
         protected override Matrix ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var aField = new Option<float>();
-            var bField = new Option<float>();
-            var cField = new Option<float>();
-            var dField = new Option<float>();
-            var eField = new Option<float>();
-            var fField = new Option<float>();
-            var gField = new Option<float>();
-            var hField = new Option<float>();
-            var iField = new Option<float>();
+            var aField = new Mech3DotNet.Json.Converters.Option<float>();
+            var bField = new Mech3DotNet.Json.Converters.Option<float>();
+            var cField = new Mech3DotNet.Json.Converters.Option<float>();
+            var dField = new Mech3DotNet.Json.Converters.Option<float>();
+            var eField = new Mech3DotNet.Json.Converters.Option<float>();
+            var fField = new Mech3DotNet.Json.Converters.Option<float>();
+            var gField = new Mech3DotNet.Json.Converters.Option<float>();
+            var hField = new Mech3DotNet.Json.Converters.Option<float>();
+            var iField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

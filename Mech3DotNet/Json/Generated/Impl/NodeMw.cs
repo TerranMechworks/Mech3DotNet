@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum NodeMwVariant
@@ -17,8 +12,8 @@ namespace Mech3DotNet.Json
         World,
     }
 
-    [JsonConverter(typeof(NodeMwConverter))]
-    public class NodeMw : IDiscriminatedUnion<NodeMwVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.NodeMwConverter))]
+    public class NodeMw : Mech3DotNet.Json.Converters.IDiscriminatedUnion<NodeMwVariant>
     {
         public NodeMw(Camera value)
         {

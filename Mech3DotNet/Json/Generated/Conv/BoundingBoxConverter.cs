@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class BoundingBoxConverter : StructConverter<BoundingBox>
+    public class BoundingBoxConverter : Mech3DotNet.Json.Converters.StructConverter<BoundingBox>
     {
         protected override BoundingBox ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var aField = new Option<Vec3>();
-            var bField = new Option<Vec3>();
+            var aField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var bField = new Mech3DotNet.Json.Converters.Option<Vec3>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

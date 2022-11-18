@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PrereqObjectConverter : StructConverter<PrereqObject>
+    public class PrereqObjectConverter : Mech3DotNet.Json.Converters.StructConverter<PrereqObject>
     {
         protected override PrereqObject ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var requiredField = new Option<bool>();
-            var activeField = new Option<bool>();
-            var pointerField = new Option<uint>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var requiredField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var activeField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var pointerField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

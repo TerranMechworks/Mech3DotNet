@@ -1,28 +1,24 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class AnimPtrConverter : StructConverter<AnimPtr>
+    public class AnimPtrConverter : Mech3DotNet.Json.Converters.StructConverter<AnimPtr>
     {
         protected override AnimPtr ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var fileNameField = new Option<string>();
-            var animPtrField = new Option<uint>();
-            var animRootPtrField = new Option<uint>();
-            var objectsPtrField = new Option<uint>();
-            var nodesPtrField = new Option<uint>();
-            var lightsPtrField = new Option<uint>();
-            var puffersPtrField = new Option<uint>();
-            var dynamicSoundsPtrField = new Option<uint>();
-            var staticSoundsPtrField = new Option<uint>();
-            var activPrereqsPtrField = new Option<uint>();
-            var animRefsPtrField = new Option<uint>();
-            var resetStatePtrField = new Option<uint>();
-            var seqDefsPtrField = new Option<uint>();
+            var fileNameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var animPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var animRootPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var objectsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var nodesPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var lightsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var puffersPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var dynamicSoundsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var staticSoundsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var activPrereqsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var animRefsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var resetStatePtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var seqDefsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

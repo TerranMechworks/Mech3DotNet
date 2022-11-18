@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class TexturedMaterialConverter : StructConverter<TexturedMaterial>
+    public class TexturedMaterialConverter : Mech3DotNet.Json.Converters.StructConverter<TexturedMaterial>
     {
         protected override TexturedMaterial ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var textureField = new Option<string>();
-            var pointerField = new Option<uint>(0);
-            var cycleField = new Option<CycleData?>(null);
-            var specularField = new Option<float>();
-            var flagField = new Option<bool>();
+            var textureField = new Mech3DotNet.Json.Converters.Option<string>();
+            var pointerField = new Mech3DotNet.Json.Converters.Option<uint>(0);
+            var cycleField = new Mech3DotNet.Json.Converters.Option<CycleData?>(null);
+            var specularField = new Mech3DotNet.Json.Converters.Option<float>();
+            var flagField = new Mech3DotNet.Json.Converters.Option<bool>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

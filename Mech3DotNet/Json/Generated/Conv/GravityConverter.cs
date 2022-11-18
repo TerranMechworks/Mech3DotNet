@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class GravityConverter : StructConverter<Gravity>
+    public class GravityConverter : Mech3DotNet.Json.Converters.StructConverter<Gravity>
     {
         protected override Gravity ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var modeField = new Option<GravityMode>();
-            var valueField = new Option<float>();
+            var modeField = new Mech3DotNet.Json.Converters.Option<GravityMode>();
+            var valueField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

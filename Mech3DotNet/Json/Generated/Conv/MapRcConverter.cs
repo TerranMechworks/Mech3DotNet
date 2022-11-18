@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MapRcConverter : StructConverter<MapRc>
+    public class MapRcConverter : Mech3DotNet.Json.Converters.StructConverter<MapRc>
     {
         protected override MapRc ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var unk04Field = new Option<uint>();
-            var maxXField = new Option<float>();
-            var maxYField = new Option<float>();
-            var featuresField = new Option<List<MapFeature>>();
+            var unk04Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var maxXField = new Mech3DotNet.Json.Converters.Option<float>();
+            var maxYField = new Mech3DotNet.Json.Converters.Option<float>();
+            var featuresField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MapFeature>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -39,7 +35,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "features":
                         {
-                            List<MapFeature>? __value = ReadFieldValue<List<MapFeature>?>(ref __reader, __options);
+                            System.Collections.Generic.List<MapFeature>? __value = ReadFieldValue<System.Collections.Generic.List<MapFeature>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'features' was null for 'MapRc'");

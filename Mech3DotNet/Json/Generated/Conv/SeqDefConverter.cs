@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class SeqDefConverter : StructConverter<SeqDef>
+    public class SeqDefConverter : Mech3DotNet.Json.Converters.StructConverter<SeqDef>
     {
         protected override SeqDef ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var activationField = new Option<SeqActivation>();
-            var eventsField = new Option<List<Event>>();
-            var pointerField = new Option<uint>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var activationField = new Mech3DotNet.Json.Converters.Option<SeqActivation>();
+            var eventsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Event>>();
+            var pointerField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -38,7 +34,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "events":
                         {
-                            List<Event>? __value = ReadFieldValue<List<Event>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Event>? __value = ReadFieldValue<System.Collections.Generic.List<Event>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'events' was null for 'SeqDef'");

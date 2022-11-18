@@ -1,26 +1,22 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class LodPmConverter : StructConverter<LodPm>
+    public class LodPmConverter : Mech3DotNet.Json.Converters.StructConverter<LodPm>
     {
         protected override LodPm ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var levelField = new Option<bool>();
-            var rangeField = new Option<Range>();
-            var unk64Field = new Option<float>();
-            var unk72Field = new Option<float>();
-            var parentField = new Option<uint>();
-            var childrenField = new Option<List<uint>>();
-            var dataPtrField = new Option<uint>();
-            var parentArrayPtrField = new Option<uint>();
-            var childrenArrayPtrField = new Option<uint>();
-            var unk164Field = new Option<BoundingBox>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var levelField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var unk64Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk72Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var parentField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var childrenField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
+            var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var parentArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var childrenArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk164Field = new Mech3DotNet.Json.Converters.Option<BoundingBox>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -69,7 +65,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "children":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'children' was null for 'LodPm'");

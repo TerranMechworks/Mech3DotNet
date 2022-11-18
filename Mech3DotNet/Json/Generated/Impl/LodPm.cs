@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(LodPmConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.LodPmConverter))]
     public class LodPm
     {
         public string name;
@@ -15,13 +9,13 @@ namespace Mech3DotNet.Json
         public float unk64;
         public float unk72;
         public uint parent;
-        public List<uint> children;
+        public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint parentArrayPtr;
         public uint childrenArrayPtr;
         public BoundingBox unk164;
 
-        public LodPm(string name, bool level, Range range, float unk64, float unk72, uint parent, List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, BoundingBox unk164)
+        public LodPm(string name, bool level, Range range, float unk64, float unk72, uint parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, BoundingBox unk164)
         {
             this.name = name;
             this.level = level;

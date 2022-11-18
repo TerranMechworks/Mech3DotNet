@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class GameZMwMetadataConverter : StructConverter<GameZMwMetadata>
+    public class GameZMwMetadataConverter : Mech3DotNet.Json.Converters.StructConverter<GameZMwMetadata>
     {
         protected override GameZMwMetadata ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var materialArraySizeField = new Option<short>();
-            var meshesArraySizeField = new Option<int>();
-            var nodeArraySizeField = new Option<uint>();
-            var nodeDataCountField = new Option<uint>();
+            var materialArraySizeField = new Mech3DotNet.Json.Converters.Option<short>();
+            var meshesArraySizeField = new Mech3DotNet.Json.Converters.Option<int>();
+            var nodeArraySizeField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var nodeDataCountField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

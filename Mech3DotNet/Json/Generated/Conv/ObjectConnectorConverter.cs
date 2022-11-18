@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectConnectorConverter : StructConverter<ObjectConnector>
+    public class ObjectConnectorConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectConnector>
     {
         protected override ObjectConnector ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var fromNodeField = new Option<string?>(null);
-            var toNodeField = new Option<string?>(null);
-            var fromPosField = new Option<Vec3?>(null);
-            var toPosField = new Option<Vec3?>(null);
-            var maxLengthField = new Option<float?>(null);
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var fromNodeField = new Mech3DotNet.Json.Converters.Option<string?>(null);
+            var toNodeField = new Mech3DotNet.Json.Converters.Option<string?>(null);
+            var fromPosField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var toPosField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var maxLengthField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

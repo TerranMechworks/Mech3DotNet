@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ScaleDataConverter : StructConverter<ScaleData>
+    public class ScaleDataConverter : Mech3DotNet.Json.Converters.StructConverter<ScaleData>
     {
         protected override ScaleData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var valueField = new Option<Vec3>();
-            var unkField = new Option<byte[]>();
+            var valueField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var unkField = new Mech3DotNet.Json.Converters.Option<byte[]>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class WindowConverter : StructConverter<Window>
+    public class WindowConverter : Mech3DotNet.Json.Converters.StructConverter<Window>
     {
         protected override Window ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var resolutionXField = new Option<uint>();
-            var resolutionYField = new Option<uint>();
-            var dataPtrField = new Option<uint>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var resolutionXField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var resolutionYField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class TransformationConverter : StructConverter<Transformation>
+    public class TransformationConverter : Mech3DotNet.Json.Converters.StructConverter<Transformation>
     {
         protected override Transformation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var rotationField = new Option<Vec3>();
-            var translationField = new Option<Vec3>();
-            var matrixField = new Option<Matrix?>();
+            var rotationField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var translationField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var matrixField = new Mech3DotNet.Json.Converters.Option<Matrix?>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

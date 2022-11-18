@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class NodeFlagsConverter : StructConverter<NodeFlags>
+    public class NodeFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<NodeFlags>
     {
         protected override NodeFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var altitudeSurfaceField = new Option<bool>(false);
-            var intersectSurfaceField = new Option<bool>(false);
-            var intersectBboxField = new Option<bool>(false);
-            var landmarkField = new Option<bool>(false);
-            var unk08Field = new Option<bool>(false);
-            var hasMeshField = new Option<bool>(false);
-            var unk10Field = new Option<bool>(false);
-            var terrainField = new Option<bool>(false);
-            var canModifyField = new Option<bool>(false);
-            var clipToField = new Option<bool>(false);
-            var unk25Field = new Option<bool>(false);
-            var unk28Field = new Option<bool>(false);
+            var altitudeSurfaceField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var intersectSurfaceField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var intersectBboxField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var landmarkField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var unk08Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var hasMeshField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var unk10Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var terrainField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var canModifyField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var clipToField = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var unk25Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
+            var unk28Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

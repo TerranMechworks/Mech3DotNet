@@ -1,34 +1,30 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PufferStateConverter : StructConverter<PufferState>
+    public class PufferStateConverter : Mech3DotNet.Json.Converters.StructConverter<PufferState>
     {
         protected override PufferState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var stateField = new Option<bool>();
-            var translateField = new Option<bool>();
-            var activeStateField = new Option<int?>(null);
-            var atNodeField = new Option<AtNode?>(null);
-            var localVelocityField = new Option<Vec3?>(null);
-            var worldVelocityField = new Option<Vec3?>(null);
-            var minRandomVelocityField = new Option<Vec3?>(null);
-            var maxRandomVelocityField = new Option<Vec3?>(null);
-            var worldAccelerationField = new Option<Vec3?>(null);
-            var intervalField = new Option<Interval>();
-            var sizeRangeField = new Option<Range?>(null);
-            var lifetimeRangeField = new Option<Range?>(null);
-            var startAgeRangeField = new Option<Range?>(null);
-            var deviationDistanceField = new Option<float?>(null);
-            var fadeRangeField = new Option<Range?>(null);
-            var frictionField = new Option<float?>(null);
-            var texturesField = new Option<PufferStateCycleTextures?>(null);
-            var growthFactorField = new Option<float?>(null);
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var stateField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var translateField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var activeStateField = new Mech3DotNet.Json.Converters.Option<int?>(null);
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<AtNode?>(null);
+            var localVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var worldVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var minRandomVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var maxRandomVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var worldAccelerationField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var intervalField = new Mech3DotNet.Json.Converters.Option<Interval>();
+            var sizeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
+            var lifetimeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
+            var startAgeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
+            var deviationDistanceField = new Mech3DotNet.Json.Converters.Option<float?>(null);
+            var fadeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
+            var frictionField = new Mech3DotNet.Json.Converters.Option<float?>(null);
+            var texturesField = new Mech3DotNet.Json.Converters.Option<PufferStateCycleTextures?>(null);
+            var growthFactorField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

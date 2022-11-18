@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectTranslateStateConverter : StructConverter<ObjectTranslateState>
+    public class ObjectTranslateStateConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectTranslateState>
     {
         protected override ObjectTranslateState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var translateField = new Option<Vec3>();
-            var atNodeField = new Option<string?>(null);
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var translateField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<string?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

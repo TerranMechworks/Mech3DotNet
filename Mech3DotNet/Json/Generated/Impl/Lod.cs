@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(LodConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.LodConverter))]
     public class Lod
     {
         public string name;
@@ -18,13 +12,13 @@ namespace Mech3DotNet.Json
         public uint zoneId;
         public AreaPartition? areaPartition;
         public uint parent;
-        public List<uint> children;
+        public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint parentArrayPtr;
         public uint childrenArrayPtr;
         public BoundingBox unk116;
 
-        public Lod(string name, bool level, Range range, float unk60, uint? unk76, NodeFlags flags, uint zoneId, AreaPartition? areaPartition, uint parent, List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, BoundingBox unk116)
+        public Lod(string name, bool level, Range range, float unk60, uint? unk76, NodeFlags flags, uint zoneId, AreaPartition? areaPartition, uint parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, BoundingBox unk116)
         {
             this.name = name;
             this.level = level;

@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class RangeConverter : StructConverter<Range>
+    public class RangeConverter : Mech3DotNet.Json.Converters.StructConverter<Range>
     {
         protected override Range ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var minField = new Option<float>();
-            var maxField = new Option<float>();
+            var minField = new Mech3DotNet.Json.Converters.Option<float>();
+            var maxField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MapFeatureConverter : StructConverter<MapFeature>
+    public class MapFeatureConverter : Mech3DotNet.Json.Converters.StructConverter<MapFeature>
     {
         protected override MapFeature ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var colorField = new Option<MapColor>();
-            var verticesField = new Option<List<MapVertex>>();
-            var objectiveField = new Option<int>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<MapColor>();
+            var verticesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MapVertex>>();
+            var objectiveField = new Mech3DotNet.Json.Converters.Option<int>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -26,7 +22,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "vertices":
                         {
-                            List<MapVertex>? __value = ReadFieldValue<List<MapVertex>?>(ref __reader, __options);
+                            System.Collections.Generic.List<MapVertex>? __value = ReadFieldValue<System.Collections.Generic.List<MapVertex>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertices' was null for 'MapFeature'");

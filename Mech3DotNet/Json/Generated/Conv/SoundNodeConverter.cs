@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class SoundNodeConverter : StructConverter<SoundNode>
+    public class SoundNodeConverter : Mech3DotNet.Json.Converters.StructConverter<SoundNode>
     {
         protected override SoundNode ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var activeStateField = new Option<bool>();
-            var atNodeField = new Option<AtNode?>(null);
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var activeStateField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<AtNode?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

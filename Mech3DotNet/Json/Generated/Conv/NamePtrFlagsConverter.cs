@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class NamePtrFlagsConverter : StructConverter<NamePtrFlags>
+    public class NamePtrFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<NamePtrFlags>
     {
         protected override NamePtrFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var pointerField = new Option<uint>();
-            var flagsField = new Option<uint>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var pointerField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

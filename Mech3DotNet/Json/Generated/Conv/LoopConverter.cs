@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class LoopConverter : StructConverter<Loop>
+    public class LoopConverter : Mech3DotNet.Json.Converters.StructConverter<Loop>
     {
         protected override Loop ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var startField = new Option<int>();
-            var loopCountField = new Option<int>();
+            var startField = new Mech3DotNet.Json.Converters.Option<int>();
+            var loopCountField = new Mech3DotNet.Json.Converters.Option<int>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

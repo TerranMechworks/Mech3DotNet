@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(MapFeatureConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MapFeatureConverter))]
     public class MapFeature
     {
         public MapColor color;
-        public List<MapVertex> vertices;
+        public System.Collections.Generic.List<MapVertex> vertices;
         public int objective;
 
-        public MapFeature(MapColor color, List<MapVertex> vertices, int objective)
+        public MapFeature(MapColor color, System.Collections.Generic.List<MapVertex> vertices, int objective)
         {
             this.color = color;
             this.vertices = vertices;

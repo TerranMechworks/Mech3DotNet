@@ -1,30 +1,26 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class Object3dPmConverter : StructConverter<Object3dPm>
+    public class Object3dPmConverter : Mech3DotNet.Json.Converters.StructConverter<Object3dPm>
     {
         protected override Object3dPm ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var transformationField = new Option<Transformation?>();
-            var matrixSignsField = new Option<uint>();
-            var flagsField = new Option<NodeFlags>();
-            var meshIndexField = new Option<int>();
-            var parentField = new Option<uint?>();
-            var childrenField = new Option<List<uint>>();
-            var dataPtrField = new Option<uint>();
-            var parentArrayPtrField = new Option<uint>();
-            var childrenArrayPtrField = new Option<uint>();
-            var unk044Field = new Option<uint>();
-            var unk112Field = new Option<uint>();
-            var unk116Field = new Option<BoundingBox>();
-            var unk140Field = new Option<BoundingBox>();
-            var unk164Field = new Option<BoundingBox>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var transformationField = new Mech3DotNet.Json.Converters.Option<Transformation?>();
+            var matrixSignsField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<NodeFlags>();
+            var meshIndexField = new Mech3DotNet.Json.Converters.Option<int>();
+            var parentField = new Mech3DotNet.Json.Converters.Option<uint?>();
+            var childrenField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
+            var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var parentArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var childrenArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk044Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk112Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk116Field = new Mech3DotNet.Json.Converters.Option<BoundingBox>();
+            var unk140Field = new Mech3DotNet.Json.Converters.Option<BoundingBox>();
+            var unk164Field = new Mech3DotNet.Json.Converters.Option<BoundingBox>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -78,7 +74,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "children":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'children' was null for 'Object3dPm'");

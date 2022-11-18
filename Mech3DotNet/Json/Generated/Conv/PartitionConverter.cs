@@ -1,22 +1,18 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PartitionConverter : StructConverter<Partition>
+    public class PartitionConverter : Mech3DotNet.Json.Converters.StructConverter<Partition>
     {
         protected override Partition ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var xField = new Option<int>();
-            var yField = new Option<int>();
-            var zMinField = new Option<float>();
-            var zMaxField = new Option<float>();
-            var zMidField = new Option<float>();
-            var nodesField = new Option<List<uint>>();
-            var ptrField = new Option<uint>();
+            var xField = new Mech3DotNet.Json.Converters.Option<int>();
+            var yField = new Mech3DotNet.Json.Converters.Option<int>();
+            var zMinField = new Mech3DotNet.Json.Converters.Option<float>();
+            var zMaxField = new Mech3DotNet.Json.Converters.Option<float>();
+            var zMidField = new Mech3DotNet.Json.Converters.Option<float>();
+            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
+            var ptrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -54,7 +50,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "nodes":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'nodes' was null for 'Partition'");

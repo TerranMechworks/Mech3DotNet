@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class FloatFromToConverter : StructConverter<FloatFromTo>
+    public class FloatFromToConverter : Mech3DotNet.Json.Converters.StructConverter<FloatFromTo>
     {
         protected override FloatFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var fromField = new Option<float>();
-            var toField = new Option<float>();
-            var deltaField = new Option<float>();
+            var fromField = new Mech3DotNet.Json.Converters.Option<float>();
+            var toField = new Mech3DotNet.Json.Converters.Option<float>();
+            var deltaField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

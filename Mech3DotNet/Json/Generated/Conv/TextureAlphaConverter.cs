@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class TextureAlphaConverter : EnumConverter<TextureAlpha>
+    public class TextureAlphaConverter : Mech3DotNet.Json.Converters.EnumConverter<TextureAlpha>
     {
         public override TextureAlpha ReadVariant(string? name) => name switch
         {
@@ -21,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
             TextureAlpha.None => "None",
             TextureAlpha.Simple => "Simple",
             TextureAlpha.Full => "Full",
-            _ => throw new ArgumentOutOfRangeException("TextureAlpha"),
+            _ => throw new System.ArgumentOutOfRangeException("TextureAlpha"),
         };
     }
 }

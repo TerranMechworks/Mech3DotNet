@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class FogTypeConverter : EnumConverter<FogType>
+    public class FogTypeConverter : Mech3DotNet.Json.Converters.EnumConverter<FogType>
     {
         public override FogType ReadVariant(string? name) => name switch
         {
@@ -21,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
             FogType.Off => "Off",
             FogType.Linear => "Linear",
             FogType.Exponential => "Exponential",
-            _ => throw new ArgumentOutOfRangeException("FogType"),
+            _ => throw new System.ArgumentOutOfRangeException("FogType"),
         };
     }
 }

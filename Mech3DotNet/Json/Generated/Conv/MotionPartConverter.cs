@@ -1,26 +1,22 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MotionPartConverter<TQuaternion, TVec3> : StructConverter<MotionPart<TQuaternion, TVec3>>
+    public class MotionPartConverter<TQuaternion, TVec3> : Mech3DotNet.Json.Converters.StructConverter<MotionPart<TQuaternion, TVec3>>
     {
-        private readonly Type __framesType;
-        private readonly JsonConverter<List<MotionFrame<TQuaternion, TVec3>>?>? __framesConverter;
+        private readonly System.Type __framesType;
+        private readonly System.Text.Json.Serialization.JsonConverter<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>?>? __framesConverter;
 
         public MotionPartConverter(JsonSerializerOptions options)
         {
-            __framesType = typeof(List<MotionFrame<TQuaternion, TVec3>>);
-            __framesConverter = (JsonConverter<List<MotionFrame<TQuaternion, TVec3>>?>?)options.GetConverter(__framesType);
+            __framesType = typeof(System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>);
+            __framesConverter = (System.Text.Json.Serialization.JsonConverter<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>?>?)options.GetConverter(__framesType);
         }
 
         protected override MotionPart<TQuaternion, TVec3> ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var framesField = new Option<List<MotionFrame<TQuaternion, TVec3>>>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var framesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -40,7 +36,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "frames":
                         {
-                            List<MotionFrame<TQuaternion, TVec3>>? __value = ReadFieldGeneric<List<MotionFrame<TQuaternion, TVec3>>?>(
+                            System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>? __value = ReadFieldGeneric<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>?>(
                                 ref __reader,
                                 __options,
                                 __framesConverter,

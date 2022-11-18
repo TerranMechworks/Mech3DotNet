@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class LightAnimationConverter : StructConverter<LightAnimation>
+    public class LightAnimationConverter : Mech3DotNet.Json.Converters.StructConverter<LightAnimation>
     {
         protected override LightAnimation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var rangeField = new Option<Range>();
-            var colorField = new Option<Color>();
-            var runtimeField = new Option<float>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
+            var runtimeField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

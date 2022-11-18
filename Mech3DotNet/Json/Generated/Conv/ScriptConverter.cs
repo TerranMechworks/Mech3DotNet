@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ScriptConverter : StructConverter<Script>
+    public class ScriptConverter : Mech3DotNet.Json.Converters.StructConverter<Script>
     {
         protected override Script ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var lastModifiedField = new Option<DateTime>();
-            var linesField = new Option<List<string>>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var lastModifiedField = new Mech3DotNet.Json.Converters.Option<System.DateTime>();
+            var linesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<string>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -31,13 +27,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "last_modified":
                         {
-                            DateTime __value = ReadFieldValue<DateTime>(ref __reader, __options);
+                            System.DateTime __value = ReadFieldValue<System.DateTime>(ref __reader, __options);
                             lastModifiedField.Set(__value);
                             break;
                         }
                     case "lines":
                         {
-                            List<string>? __value = ReadFieldValue<List<string>?>(ref __reader, __options);
+                            System.Collections.Generic.List<string>? __value = ReadFieldValue<System.Collections.Generic.List<string>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'lines' was null for 'Script'");

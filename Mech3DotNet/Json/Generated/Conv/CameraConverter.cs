@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class CameraConverter : StructConverter<Camera>
+    public class CameraConverter : Mech3DotNet.Json.Converters.StructConverter<Camera>
     {
         protected override Camera ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var clipField = new Option<Range>();
-            var fovField = new Option<Range>();
-            var dataPtrField = new Option<uint>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var clipField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var fovField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class GameZCsMetadataConverter : StructConverter<GameZCsMetadata>
+    public class GameZCsMetadataConverter : Mech3DotNet.Json.Converters.StructConverter<GameZCsMetadata>
     {
         protected override GameZCsMetadata ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var gamezHeaderUnk08Field = new Option<uint>();
-            var materialArraySizeField = new Option<short>();
-            var nodeArraySizeField = new Option<uint>();
-            var nodeDataCountField = new Option<uint>();
-            var texturePtrsField = new Option<List<uint?>>();
+            var gamezHeaderUnk08Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var materialArraySizeField = new Mech3DotNet.Json.Converters.Option<short>();
+            var nodeArraySizeField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var nodeDataCountField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var texturePtrsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint?>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -46,7 +42,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "texture_ptrs":
                         {
-                            List<uint?>? __value = ReadFieldValue<List<uint?>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint?>? __value = ReadFieldValue<System.Collections.Generic.List<uint?>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'texture_ptrs' was null for 'GameZCsMetadata'");

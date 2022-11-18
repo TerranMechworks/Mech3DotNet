@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(ModelPmConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ModelPmConverter))]
     public class ModelPm
     {
-        public List<NodePm> nodes;
-        public List<MeshNg> meshes;
-        public List<int> meshPtrs;
+        public System.Collections.Generic.List<NodePm> nodes;
+        public System.Collections.Generic.List<MeshNg> meshes;
+        public System.Collections.Generic.List<int> meshPtrs;
 
-        public ModelPm(List<NodePm> nodes, List<MeshNg> meshes, List<int> meshPtrs)
+        public ModelPm(System.Collections.Generic.List<NodePm> nodes, System.Collections.Generic.List<MeshNg> meshes, System.Collections.Generic.List<int> meshPtrs)
         {
             this.nodes = nodes;
             this.meshes = meshes;

@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class QuaternionConverter : StructConverter<Quaternion>
+    public class QuaternionConverter : Mech3DotNet.Json.Converters.StructConverter<Quaternion>
     {
         protected override Quaternion ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var xField = new Option<float>();
-            var yField = new Option<float>();
-            var zField = new Option<float>();
-            var wField = new Option<float>();
+            var xField = new Mech3DotNet.Json.Converters.Option<float>();
+            var yField = new Mech3DotNet.Json.Converters.Option<float>();
+            var zField = new Mech3DotNet.Json.Converters.Option<float>();
+            var wField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

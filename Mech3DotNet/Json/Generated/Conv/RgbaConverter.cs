@@ -1,19 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class RgbaConverter : StructConverter<Rgba>
+    public class RgbaConverter : Mech3DotNet.Json.Converters.StructConverter<Rgba>
     {
         protected override Rgba ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var rField = new Option<float>();
-            var gField = new Option<float>();
-            var bField = new Option<float>();
-            var aField = new Option<float>();
+            var rField = new Mech3DotNet.Json.Converters.Option<float>();
+            var gField = new Mech3DotNet.Json.Converters.Option<float>();
+            var bField = new Mech3DotNet.Json.Converters.Option<float>();
+            var aField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

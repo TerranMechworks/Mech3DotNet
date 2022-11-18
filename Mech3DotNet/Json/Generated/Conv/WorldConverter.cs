@@ -1,29 +1,25 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class WorldConverter : StructConverter<World>
+    public class WorldConverter : Mech3DotNet.Json.Converters.StructConverter<World>
     {
         protected override World ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var areaField = new Option<Area>();
-            var partitionsField = new Option<List<List<Partition>>>();
-            var areaPartitionXCountField = new Option<uint>();
-            var areaPartitionYCountField = new Option<uint>();
-            var fudgeCountField = new Option<bool>();
-            var areaPartitionPtrField = new Option<uint>();
-            var virtPartitionPtrField = new Option<uint>();
-            var worldChildrenPtrField = new Option<uint>();
-            var worldChildValueField = new Option<uint>();
-            var worldLightsPtrField = new Option<uint>();
-            var childrenField = new Option<List<uint>>();
-            var dataPtrField = new Option<uint>();
-            var childrenArrayPtrField = new Option<uint>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var areaField = new Mech3DotNet.Json.Converters.Option<Area>();
+            var partitionsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<System.Collections.Generic.List<Partition>>>();
+            var areaPartitionXCountField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var areaPartitionYCountField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var fudgeCountField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var areaPartitionPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var virtPartitionPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var worldChildrenPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var worldChildValueField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var worldLightsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var childrenField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
+            var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var childrenArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -48,7 +44,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "partitions":
                         {
-                            List<List<Partition>>? __value = ReadFieldValue<List<List<Partition>>?>(ref __reader, __options);
+                            System.Collections.Generic.List<System.Collections.Generic.List<Partition>>? __value = ReadFieldValue<System.Collections.Generic.List<System.Collections.Generic.List<Partition>>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'partitions' was null for 'World'");
@@ -107,7 +103,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "children":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'children' was null for 'World'");

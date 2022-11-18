@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(PolygonNgConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.PolygonNgConverter))]
     public class PolygonNg
     {
         public PolygonFlags flags;
-        public List<uint> vertexIndices;
-        public List<Color> vertexColors;
-        public List<uint>? normalIndices;
-        public List<PolygonTextureNg> textures;
+        public System.Collections.Generic.List<uint> vertexIndices;
+        public System.Collections.Generic.List<Color> vertexColors;
+        public System.Collections.Generic.List<uint>? normalIndices;
+        public System.Collections.Generic.List<PolygonTextureNg> textures;
         public int unk04;
         public uint verticesPtr;
         public uint normalsPtr;
@@ -23,7 +17,7 @@ namespace Mech3DotNet.Json
         public uint unk32;
         public uint unk36;
 
-        public PolygonNg(PolygonFlags flags, List<uint> vertexIndices, List<Color> vertexColors, List<uint>? normalIndices, List<PolygonTextureNg> textures, int unk04, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unk28, uint unk32, uint unk36)
+        public PolygonNg(PolygonFlags flags, System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<PolygonTextureNg> textures, int unk04, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unk28, uint unk32, uint unk36)
         {
             this.flags = flags;
             this.vertexIndices = vertexIndices;

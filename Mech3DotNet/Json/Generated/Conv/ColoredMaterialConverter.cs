@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ColoredMaterialConverter : StructConverter<ColoredMaterial>
+    public class ColoredMaterialConverter : Mech3DotNet.Json.Converters.StructConverter<ColoredMaterial>
     {
         protected override ColoredMaterial ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var colorField = new Option<Color>();
-            var alphaField = new Option<byte>();
-            var specularField = new Option<float>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
+            var alphaField = new Mech3DotNet.Json.Converters.Option<byte>();
+            var specularField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

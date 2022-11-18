@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class EndIfConverter : StructConverter<EndIf>
+    public class EndIfConverter : Mech3DotNet.Json.Converters.StructConverter<EndIf>
     {
         protected override EndIf ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {

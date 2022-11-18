@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PaletteDataConverter : StructConverter<PaletteData>
+    public class PaletteDataConverter : Mech3DotNet.Json.Converters.StructConverter<PaletteData>
     {
         protected override PaletteData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var dataField = new Option<byte[]>();
+            var dataField = new Mech3DotNet.Json.Converters.Option<byte[]>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

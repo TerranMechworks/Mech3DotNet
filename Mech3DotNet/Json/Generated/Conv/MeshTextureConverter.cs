@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MeshTextureConverter : StructConverter<MeshTexture>
+    public class MeshTextureConverter : Mech3DotNet.Json.Converters.StructConverter<MeshTexture>
     {
         protected override MeshTexture ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var textureIndexField = new Option<uint>();
-            var polygonUsageCountField = new Option<uint>();
-            var unkPtrField = new Option<uint>();
+            var textureIndexField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var polygonUsageCountField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unkPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

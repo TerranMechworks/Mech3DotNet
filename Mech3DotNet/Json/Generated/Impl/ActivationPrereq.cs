@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum ActivationPrereqVariant
@@ -12,8 +7,8 @@ namespace Mech3DotNet.Json
         Object,
     }
 
-    [JsonConverter(typeof(ActivationPrereqConverter))]
-    public class ActivationPrereq : IDiscriminatedUnion<ActivationPrereqVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ActivationPrereqConverter))]
+    public class ActivationPrereq : Mech3DotNet.Json.Converters.IDiscriminatedUnion<ActivationPrereqVariant>
     {
         public ActivationPrereq(PrereqAnimation value)
         {

@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class TextureManifestConverter : StructConverter<TextureManifest>
+    public class TextureManifestConverter : Mech3DotNet.Json.Converters.StructConverter<TextureManifest>
     {
         protected override TextureManifest ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var textureInfosField = new Option<List<TextureInfo>>();
-            var globalPalettesField = new Option<List<PaletteData>>();
+            var textureInfosField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<TextureInfo>>();
+            var globalPalettesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<PaletteData>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -19,7 +15,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "texture_infos":
                         {
-                            List<TextureInfo>? __value = ReadFieldValue<List<TextureInfo>?>(ref __reader, __options);
+                            System.Collections.Generic.List<TextureInfo>? __value = ReadFieldValue<System.Collections.Generic.List<TextureInfo>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'texture_infos' was null for 'TextureManifest'");
@@ -30,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "global_palettes":
                         {
-                            List<PaletteData>? __value = ReadFieldValue<List<PaletteData>?>(ref __reader, __options);
+                            System.Collections.Generic.List<PaletteData>? __value = ReadFieldValue<System.Collections.Generic.List<PaletteData>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'global_palettes' was null for 'TextureManifest'");

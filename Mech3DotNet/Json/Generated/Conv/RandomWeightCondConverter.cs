@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class RandomWeightCondConverter : StructConverter<RandomWeightCond>
+    public class RandomWeightCondConverter : Mech3DotNet.Json.Converters.StructConverter<RandomWeightCond>
     {
         protected override RandomWeightCond ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var valueField = new Option<float>();
+            var valueField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

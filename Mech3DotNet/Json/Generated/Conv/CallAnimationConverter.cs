@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class CallAnimationConverter : StructConverter<CallAnimation>
+    public class CallAnimationConverter : Mech3DotNet.Json.Converters.StructConverter<CallAnimation>
     {
         protected override CallAnimation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var waitForCompletionField = new Option<ushort?>(null);
-            var parametersField = new Option<CallAnimationParameters>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var waitForCompletionField = new Mech3DotNet.Json.Converters.Option<ushort?>(null);
+            var parametersField = new Mech3DotNet.Json.Converters.Option<CallAnimationParameters>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

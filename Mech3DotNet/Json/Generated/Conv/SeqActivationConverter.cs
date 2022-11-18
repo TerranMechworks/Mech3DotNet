@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class SeqActivationConverter : EnumConverter<SeqActivation>
+    public class SeqActivationConverter : Mech3DotNet.Json.Converters.EnumConverter<SeqActivation>
     {
         public override SeqActivation ReadVariant(string? name) => name switch
         {
@@ -19,7 +14,7 @@ namespace Mech3DotNet.Json.Converters
         {
             SeqActivation.Initial => "Initial",
             SeqActivation.OnCall => "OnCall",
-            _ => throw new ArgumentOutOfRangeException("SeqActivation"),
+            _ => throw new System.ArgumentOutOfRangeException("SeqActivation"),
         };
     }
 }

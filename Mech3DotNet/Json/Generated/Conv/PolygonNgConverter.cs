@@ -1,28 +1,24 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class PolygonNgConverter : StructConverter<PolygonNg>
+    public class PolygonNgConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonNg>
     {
         protected override PolygonNg ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var flagsField = new Option<PolygonFlags>();
-            var vertexIndicesField = new Option<List<uint>>();
-            var vertexColorsField = new Option<List<Color>>();
-            var normalIndicesField = new Option<List<uint>?>();
-            var texturesField = new Option<List<PolygonTextureNg>>();
-            var unk04Field = new Option<int>();
-            var verticesPtrField = new Option<uint>();
-            var normalsPtrField = new Option<uint>();
-            var uvsPtrField = new Option<uint>();
-            var colorsPtrField = new Option<uint>();
-            var unk28Field = new Option<uint>();
-            var unk32Field = new Option<uint>();
-            var unk36Field = new Option<uint>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<PolygonFlags>();
+            var vertexIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
+            var vertexColorsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Color>>();
+            var normalIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>?>();
+            var texturesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<PolygonTextureNg>>();
+            var unk04Field = new Mech3DotNet.Json.Converters.Option<int>();
+            var verticesPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var normalsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var uvsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var colorsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk28Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk32Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk36Field = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -41,7 +37,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "vertex_indices":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertex_indices' was null for 'PolygonNg'");
@@ -52,7 +48,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "vertex_colors":
                         {
-                            List<Color>? __value = ReadFieldValue<List<Color>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Color>? __value = ReadFieldValue<System.Collections.Generic.List<Color>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertex_colors' was null for 'PolygonNg'");
@@ -63,13 +59,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "normal_indices":
                         {
-                            List<uint>? __value = ReadFieldValue<List<uint>?>(ref __reader, __options);
+                            System.Collections.Generic.List<uint>? __value = ReadFieldValue<System.Collections.Generic.List<uint>?>(ref __reader, __options);
                             normalIndicesField.Set(__value);
                             break;
                         }
                     case "textures":
                         {
-                            List<PolygonTextureNg>? __value = ReadFieldValue<List<PolygonTextureNg>?>(ref __reader, __options);
+                            System.Collections.Generic.List<PolygonTextureNg>? __value = ReadFieldValue<System.Collections.Generic.List<PolygonTextureNg>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'textures' was null for 'PolygonNg'");

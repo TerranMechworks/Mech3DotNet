@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(PartitionConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.PartitionConverter))]
     public class Partition
     {
         public int x;
@@ -14,10 +8,10 @@ namespace Mech3DotNet.Json
         public float zMin;
         public float zMax;
         public float zMid;
-        public List<uint> nodes;
+        public System.Collections.Generic.List<uint> nodes;
         public uint ptr;
 
-        public Partition(int x, int y, float zMin, float zMax, float zMid, List<uint> nodes, uint ptr)
+        public Partition(int x, int y, float zMin, float zMax, float zMid, System.Collections.Generic.List<uint> nodes, uint ptr)
         {
             this.x = x;
             this.y = y;

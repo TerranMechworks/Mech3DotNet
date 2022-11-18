@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum TexturePaletteVariant
@@ -12,8 +7,8 @@ namespace Mech3DotNet.Json
         Global,
     }
 
-    [JsonConverter(typeof(TexturePaletteConverter))]
-    public class TexturePalette : IDiscriminatedUnion<TexturePaletteVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.TexturePaletteConverter))]
+    public class TexturePalette : Mech3DotNet.Json.Converters.IDiscriminatedUnion<TexturePaletteVariant>
     {
         public sealed class None
         {

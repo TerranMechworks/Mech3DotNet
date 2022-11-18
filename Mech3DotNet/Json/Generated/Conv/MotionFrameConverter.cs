@@ -1,30 +1,26 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MotionFrameConverter<TQuaternion, TVec3> : StructConverter<MotionFrame<TQuaternion, TVec3>>
+    public class MotionFrameConverter<TQuaternion, TVec3> : Mech3DotNet.Json.Converters.StructConverter<MotionFrame<TQuaternion, TVec3>>
     {
-        private readonly Type __translationType;
-        private readonly JsonConverter<TVec3>? __translationConverter;
-        private readonly Type __rotationType;
-        private readonly JsonConverter<TQuaternion>? __rotationConverter;
+        private readonly System.Type __translationType;
+        private readonly System.Text.Json.Serialization.JsonConverter<TVec3>? __translationConverter;
+        private readonly System.Type __rotationType;
+        private readonly System.Text.Json.Serialization.JsonConverter<TQuaternion>? __rotationConverter;
 
         public MotionFrameConverter(JsonSerializerOptions options)
         {
             __translationType = typeof(TVec3);
-            __translationConverter = (JsonConverter<TVec3>?)options.GetConverter(__translationType);
+            __translationConverter = (System.Text.Json.Serialization.JsonConverter<TVec3>?)options.GetConverter(__translationType);
             __rotationType = typeof(TQuaternion);
-            __rotationConverter = (JsonConverter<TQuaternion>?)options.GetConverter(__rotationType);
+            __rotationConverter = (System.Text.Json.Serialization.JsonConverter<TQuaternion>?)options.GetConverter(__rotationType);
         }
 
         protected override MotionFrame<TQuaternion, TVec3> ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var translationField = new Option<TVec3>();
-            var rotationField = new Option<TQuaternion>();
+            var translationField = new Mech3DotNet.Json.Converters.Option<TVec3>();
+            var rotationField = new Mech3DotNet.Json.Converters.Option<TQuaternion>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

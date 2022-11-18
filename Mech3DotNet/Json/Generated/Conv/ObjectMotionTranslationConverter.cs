@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectMotionTranslationConverter : StructConverter<ObjectMotionTranslation>
+    public class ObjectMotionTranslationConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotionTranslation>
     {
         protected override ObjectMotionTranslation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var deltaField = new Option<Vec3>();
-            var initialField = new Option<Vec3>();
-            var unkField = new Option<Vec3>();
+            var deltaField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var initialField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var unkField = new Mech3DotNet.Json.Converters.Option<Vec3>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

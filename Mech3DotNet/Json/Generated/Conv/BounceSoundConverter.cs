@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class BounceSoundConverter : StructConverter<BounceSound>
+    public class BounceSoundConverter : Mech3DotNet.Json.Converters.StructConverter<BounceSound>
     {
         protected override BounceSound ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var volumeField = new Option<float>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var volumeField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

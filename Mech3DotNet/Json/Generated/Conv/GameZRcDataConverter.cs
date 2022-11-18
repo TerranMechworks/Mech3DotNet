@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class GameZRcDataConverter : StructConverter<GameZRcData>
+    public class GameZRcDataConverter : Mech3DotNet.Json.Converters.StructConverter<GameZRcData>
     {
         protected override GameZRcData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var texturesField = new Option<List<string>>();
-            var materialsField = new Option<List<Material>>();
-            var meshesField = new Option<List<MeshRc>>();
-            var nodesField = new Option<byte[]>();
-            var metadataField = new Option<GameZRcMetadata>();
+            var texturesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<string>>();
+            var materialsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Material>>();
+            var meshesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MeshRc>>();
+            var nodesField = new Mech3DotNet.Json.Converters.Option<byte[]>();
+            var metadataField = new Mech3DotNet.Json.Converters.Option<GameZRcMetadata>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -22,7 +18,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "textures":
                         {
-                            List<string>? __value = ReadFieldValue<List<string>?>(ref __reader, __options);
+                            System.Collections.Generic.List<string>? __value = ReadFieldValue<System.Collections.Generic.List<string>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'textures' was null for 'GameZRcData'");
@@ -33,7 +29,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "materials":
                         {
-                            List<Material>? __value = ReadFieldValue<List<Material>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Material>? __value = ReadFieldValue<System.Collections.Generic.List<Material>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'materials' was null for 'GameZRcData'");
@@ -44,7 +40,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "meshes":
                         {
-                            List<MeshRc>? __value = ReadFieldValue<List<MeshRc>?>(ref __reader, __options);
+                            System.Collections.Generic.List<MeshRc>? __value = ReadFieldValue<System.Collections.Generic.List<MeshRc>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'meshes' was null for 'GameZRcData'");

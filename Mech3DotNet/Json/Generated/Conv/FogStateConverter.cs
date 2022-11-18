@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class FogStateConverter : StructConverter<FogState>
+    public class FogStateConverter : Mech3DotNet.Json.Converters.StructConverter<FogState>
     {
         protected override FogState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var fogTypeField = new Option<FogType>();
-            var colorField = new Option<Color>();
-            var altitudeField = new Option<Range>();
-            var rangeField = new Option<Range>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var fogTypeField = new Mech3DotNet.Json.Converters.Option<FogType>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
+            var altitudeField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Range>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(GameZPmMetadataConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.GameZPmMetadataConverter))]
     public class GameZPmMetadata
     {
         public uint gamezHeaderUnk08;
@@ -14,9 +8,9 @@ namespace Mech3DotNet.Json
         public int meshesArraySize;
         public uint nodeArraySize;
         public uint nodeDataCount;
-        public List<uint?> texturePtrs;
+        public System.Collections.Generic.List<uint?> texturePtrs;
 
-        public GameZPmMetadata(uint gamezHeaderUnk08, short materialArraySize, int meshesArraySize, uint nodeArraySize, uint nodeDataCount, List<uint?> texturePtrs)
+        public GameZPmMetadata(uint gamezHeaderUnk08, short materialArraySize, int meshesArraySize, uint nodeArraySize, uint nodeDataCount, System.Collections.Generic.List<uint?> texturePtrs)
         {
             this.gamezHeaderUnk08 = gamezHeaderUnk08;
             this.materialArraySize = materialArraySize;

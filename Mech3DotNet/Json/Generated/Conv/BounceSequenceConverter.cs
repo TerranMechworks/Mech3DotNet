@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class BounceSequenceConverter : StructConverter<BounceSequence>
+    public class BounceSequenceConverter : Mech3DotNet.Json.Converters.StructConverter<BounceSequence>
     {
         protected override BounceSequence ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var seqName0Field = new Option<string?>();
-            var seqName1Field = new Option<string?>();
-            var seqName2Field = new Option<string?>();
+            var seqName0Field = new Mech3DotNet.Json.Converters.Option<string?>();
+            var seqName1Field = new Mech3DotNet.Json.Converters.Option<string?>();
+            var seqName2Field = new Mech3DotNet.Json.Converters.Option<string?>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

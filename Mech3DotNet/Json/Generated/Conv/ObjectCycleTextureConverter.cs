@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectCycleTextureConverter : StructConverter<ObjectCycleTexture>
+    public class ObjectCycleTextureConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectCycleTexture>
     {
         protected override ObjectCycleTexture ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var resetField = new Option<ushort>();
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var resetField = new Mech3DotNet.Json.Converters.Option<ushort>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

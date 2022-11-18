@@ -1,8 +1,3 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
     public enum ExecutionVariant
@@ -12,8 +7,8 @@ namespace Mech3DotNet.Json
         None,
     }
 
-    [JsonConverter(typeof(ExecutionConverter))]
-    public class Execution : IDiscriminatedUnion<ExecutionVariant>
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ExecutionConverter))]
+    public class Execution : Mech3DotNet.Json.Converters.IDiscriminatedUnion<ExecutionVariant>
     {
         public sealed class ByZone
         {

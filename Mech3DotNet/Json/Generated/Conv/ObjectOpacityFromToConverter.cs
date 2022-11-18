@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectOpacityFromToConverter : StructConverter<ObjectOpacityFromTo>
+    public class ObjectOpacityFromToConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectOpacityFromTo>
     {
         protected override ObjectOpacityFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var opacityFromField = new Option<ObjectOpacity>();
-            var opacityToField = new Option<ObjectOpacity>();
-            var runtimeField = new Option<float>();
-            var fudgeField = new Option<bool>(false);
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var opacityFromField = new Mech3DotNet.Json.Converters.Option<ObjectOpacity>();
+            var opacityToField = new Mech3DotNet.Json.Converters.Option<ObjectOpacity>();
+            var runtimeField = new Mech3DotNet.Json.Converters.Option<float>();
+            var fudgeField = new Mech3DotNet.Json.Converters.Option<bool>(false);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(AnimDefConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.AnimDefConverter))]
     public class AnimDef
     {
         public string name;
@@ -23,18 +17,18 @@ namespace Mech3DotNet.Json
         public float health;
         public bool proximityDamage;
         public byte activPrereqMinToSatisfy;
-        public List<NamePad>? objects = null;
-        public List<NamePtr>? nodes = null;
-        public List<NamePtr>? lights = null;
-        public List<NamePtrFlags>? puffers = null;
-        public List<NamePtr>? dynamicSounds = null;
-        public List<NamePad>? staticSounds = null;
-        public List<ActivationPrereq>? activPrereqs = null;
-        public List<NamePad>? animRefs = null;
+        public System.Collections.Generic.List<NamePad>? objects = null;
+        public System.Collections.Generic.List<NamePtr>? nodes = null;
+        public System.Collections.Generic.List<NamePtr>? lights = null;
+        public System.Collections.Generic.List<NamePtrFlags>? puffers = null;
+        public System.Collections.Generic.List<NamePtr>? dynamicSounds = null;
+        public System.Collections.Generic.List<NamePad>? staticSounds = null;
+        public System.Collections.Generic.List<ActivationPrereq>? activPrereqs = null;
+        public System.Collections.Generic.List<NamePad>? animRefs = null;
         public ResetState? resetState;
-        public List<SeqDef> sequences;
+        public System.Collections.Generic.List<SeqDef> sequences;
 
-        public AnimDef(string name, NamePad animName, NamePad animRoot, string fileName, bool autoResetNodeStates, AnimActivation activation, Execution execution, bool? networkLog, bool? saveLog, bool hasCallbacks, float? resetTime, float health, bool proximityDamage, byte activPrereqMinToSatisfy, List<NamePad>? objects, List<NamePtr>? nodes, List<NamePtr>? lights, List<NamePtrFlags>? puffers, List<NamePtr>? dynamicSounds, List<NamePad>? staticSounds, List<ActivationPrereq>? activPrereqs, List<NamePad>? animRefs, ResetState? resetState, List<SeqDef> sequences)
+        public AnimDef(string name, NamePad animName, NamePad animRoot, string fileName, bool autoResetNodeStates, AnimActivation activation, Execution execution, bool? networkLog, bool? saveLog, bool hasCallbacks, float? resetTime, float health, bool proximityDamage, byte activPrereqMinToSatisfy, System.Collections.Generic.List<NamePad>? objects, System.Collections.Generic.List<NamePtr>? nodes, System.Collections.Generic.List<NamePtr>? lights, System.Collections.Generic.List<NamePtrFlags>? puffers, System.Collections.Generic.List<NamePtr>? dynamicSounds, System.Collections.Generic.List<NamePad>? staticSounds, System.Collections.Generic.List<ActivationPrereq>? activPrereqs, System.Collections.Generic.List<NamePad>? animRefs, ResetState? resetState, System.Collections.Generic.List<SeqDef> sequences)
         {
             this.name = name;
             this.animName = animName;

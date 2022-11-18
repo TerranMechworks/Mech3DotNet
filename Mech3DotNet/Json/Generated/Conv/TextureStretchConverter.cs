@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class TextureStretchConverter : EnumConverter<TextureStretch>
+    public class TextureStretchConverter : Mech3DotNet.Json.Converters.EnumConverter<TextureStretch>
     {
         public override TextureStretch ReadVariant(string? name) => name switch
         {
@@ -29,7 +24,7 @@ namespace Mech3DotNet.Json.Converters
             TextureStretch.Unk4 => "Unk4",
             TextureStretch.Unk7 => "Unk7",
             TextureStretch.Unk8 => "Unk8",
-            _ => throw new ArgumentOutOfRangeException("TextureStretch"),
+            _ => throw new System.ArgumentOutOfRangeException("TextureStretch"),
         };
     }
 }

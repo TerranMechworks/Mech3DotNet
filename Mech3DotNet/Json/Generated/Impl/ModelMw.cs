@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(ModelMwConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ModelMwConverter))]
     public class ModelMw
     {
-        public List<NodeMw> nodes;
-        public List<MeshMw> meshes;
-        public List<int> meshPtrs;
+        public System.Collections.Generic.List<NodeMw> nodes;
+        public System.Collections.Generic.List<MeshMw> meshes;
+        public System.Collections.Generic.List<int> meshPtrs;
 
-        public ModelMw(List<NodeMw> nodes, List<MeshMw> meshes, List<int> meshPtrs)
+        public ModelMw(System.Collections.Generic.List<NodeMw> nodes, System.Collections.Generic.List<MeshMw> meshes, System.Collections.Generic.List<int> meshPtrs)
         {
             this.nodes = nodes;
             this.meshes = meshes;

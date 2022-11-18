@@ -1,23 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class LightConverter : StructConverter<Light>
+    public class LightConverter : Mech3DotNet.Json.Converters.StructConverter<Light>
     {
         protected override Light ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var directionField = new Option<Vec3>();
-            var diffuseField = new Option<float>();
-            var ambientField = new Option<float>();
-            var colorField = new Option<Color>();
-            var rangeField = new Option<Range>();
-            var parentPtrField = new Option<uint>();
-            var dataPtrField = new Option<uint>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var directionField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var diffuseField = new Mech3DotNet.Json.Converters.Option<float>();
+            var ambientField = new Mech3DotNet.Json.Converters.Option<float>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var parentPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

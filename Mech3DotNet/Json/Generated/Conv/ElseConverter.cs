@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ElseConverter : StructConverter<Else>
+    public class ElseConverter : Mech3DotNet.Json.Converters.StructConverter<Else>
     {
         protected override Else ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {

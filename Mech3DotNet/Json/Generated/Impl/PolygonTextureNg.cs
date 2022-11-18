@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(PolygonTextureNgConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.PolygonTextureNgConverter))]
     public class PolygonTextureNg
     {
         public uint textureIndex;
-        public List<UvCoord> uvCoords;
+        public System.Collections.Generic.List<UvCoord> uvCoords;
 
-        public PolygonTextureNg(uint textureIndex, List<UvCoord> uvCoords)
+        public PolygonTextureNg(uint textureIndex, System.Collections.Generic.List<UvCoord> uvCoords)
         {
             this.textureIndex = textureIndex;
             this.uvCoords = uvCoords;

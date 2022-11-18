@@ -1,11 +1,6 @@
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
-
 namespace Mech3DotNet.Json.Converters
 {
-    public class AnimActivationConverter : EnumConverter<AnimActivation>
+    public class AnimActivationConverter : Mech3DotNet.Json.Converters.EnumConverter<AnimActivation>
     {
         public override AnimActivation ReadVariant(string? name) => name switch
         {
@@ -25,7 +20,7 @@ namespace Mech3DotNet.Json.Converters
             AnimActivation.WeaponOrCollideHit => "WeaponOrCollideHit",
             AnimActivation.OnCall => "OnCall",
             AnimActivation.OnStartup => "OnStartup",
-            _ => throw new ArgumentOutOfRangeException("AnimActivation"),
+            _ => throw new System.ArgumentOutOfRangeException("AnimActivation"),
         };
     }
 }

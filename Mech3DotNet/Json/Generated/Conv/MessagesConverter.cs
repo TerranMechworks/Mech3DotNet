@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MessagesConverter : StructConverter<Messages>
+    public class MessagesConverter : Mech3DotNet.Json.Converters.StructConverter<Messages>
     {
         protected override Messages ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var languageIdField = new Option<uint>();
-            var entriesField = new Option<List<MessageEntry>>();
+            var languageIdField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var entriesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MessageEntry>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -25,7 +21,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "entries":
                         {
-                            List<MessageEntry>? __value = ReadFieldValue<List<MessageEntry>?>(ref __reader, __options);
+                            System.Collections.Generic.List<MessageEntry>? __value = ReadFieldValue<System.Collections.Generic.List<MessageEntry>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'entries' was null for 'Messages'");

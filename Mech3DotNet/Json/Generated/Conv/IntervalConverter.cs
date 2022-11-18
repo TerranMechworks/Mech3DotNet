@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class IntervalConverter : StructConverter<Interval>
+    public class IntervalConverter : Mech3DotNet.Json.Converters.StructConverter<Interval>
     {
         protected override Interval ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var intervalTypeField = new Option<IntervalType>();
-            var intervalValueField = new Option<float>();
-            var flagField = new Option<bool>();
+            var intervalTypeField = new Mech3DotNet.Json.Converters.Option<IntervalType>();
+            var intervalValueField = new Mech3DotNet.Json.Converters.Option<float>();
+            var flagField = new Mech3DotNet.Json.Converters.Option<bool>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

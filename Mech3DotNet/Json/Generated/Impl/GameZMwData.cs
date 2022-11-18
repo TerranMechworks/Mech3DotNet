@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(GameZMwDataConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.GameZMwDataConverter))]
     public class GameZMwData
     {
-        public List<string> textures;
-        public List<Material> materials;
-        public List<MeshMw> meshes;
-        public List<NodeMw> nodes;
+        public System.Collections.Generic.List<string> textures;
+        public System.Collections.Generic.List<Material> materials;
+        public System.Collections.Generic.List<MeshMw> meshes;
+        public System.Collections.Generic.List<NodeMw> nodes;
         public GameZMwMetadata metadata;
 
-        public GameZMwData(List<string> textures, List<Material> materials, List<MeshMw> meshes, List<NodeMw> nodes, GameZMwMetadata metadata)
+        public GameZMwData(System.Collections.Generic.List<string> textures, System.Collections.Generic.List<Material> materials, System.Collections.Generic.List<MeshMw> meshes, System.Collections.Generic.List<NodeMw> nodes, GameZMwMetadata metadata)
         {
             this.textures = textures;
             this.materials = materials;

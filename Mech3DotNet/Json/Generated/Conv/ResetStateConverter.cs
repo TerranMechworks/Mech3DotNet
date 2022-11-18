@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ResetStateConverter : StructConverter<ResetState>
+    public class ResetStateConverter : Mech3DotNet.Json.Converters.StructConverter<ResetState>
     {
         protected override ResetState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var eventsField = new Option<List<Event>>();
-            var pointerField = new Option<uint>();
+            var eventsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Event>>();
+            var pointerField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -19,7 +15,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "events":
                         {
-                            List<Event>? __value = ReadFieldValue<List<Event>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Event>? __value = ReadFieldValue<System.Collections.Generic.List<Event>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'events' was null for 'ResetState'");

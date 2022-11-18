@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(MeshMwConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MeshMwConverter))]
     public class MeshMw
     {
-        public List<Vec3> vertices;
-        public List<Vec3> normals;
-        public List<Vec3> morphs;
-        public List<MeshLight> lights;
-        public List<PolygonMw> polygons;
+        public System.Collections.Generic.List<Vec3> vertices;
+        public System.Collections.Generic.List<Vec3> normals;
+        public System.Collections.Generic.List<Vec3> morphs;
+        public System.Collections.Generic.List<MeshLight> lights;
+        public System.Collections.Generic.List<PolygonMw> polygons;
         public uint polygonsPtr;
         public uint verticesPtr;
         public uint normalsPtr;
@@ -30,7 +24,7 @@ namespace Mech3DotNet.Json
         public float unk80;
         public float unk84;
 
-        public MeshMw(List<Vec3> vertices, List<Vec3> normals, List<Vec3> morphs, List<MeshLight> lights, List<PolygonMw> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
+        public MeshMw(System.Collections.Generic.List<Vec3> vertices, System.Collections.Generic.List<Vec3> normals, System.Collections.Generic.List<Vec3> morphs, System.Collections.Generic.List<MeshLight> lights, System.Collections.Generic.List<PolygonMw> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
         {
             this.vertices = vertices;
             this.normals = normals;

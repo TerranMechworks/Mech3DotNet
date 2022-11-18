@@ -1,17 +1,13 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectActiveStateConverter : StructConverter<ObjectActiveState>
+    public class ObjectActiveStateConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectActiveState>
     {
         protected override ObjectActiveState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var stateField = new Option<bool>();
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var stateField = new Mech3DotNet.Json.Converters.Option<bool>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

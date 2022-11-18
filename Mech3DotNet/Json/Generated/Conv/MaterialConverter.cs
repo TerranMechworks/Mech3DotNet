@@ -1,11 +1,8 @@
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MaterialConverter : UnionConverter<Material>
+    public class MaterialConverter : Mech3DotNet.Json.Converters.UnionConverter<Material>
     {
         public override Material ReadUnitVariant(string? name)
         {
@@ -94,7 +91,7 @@ namespace Mech3DotNet.Json.Converters
                         break;
                     }
                 default:
-                    throw new ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'Material'");
+                    throw new System.ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'Material'");
             }
         }
     }

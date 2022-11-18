@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ArchiveEntryConverter : StructConverter<ArchiveEntry>
+    public class ArchiveEntryConverter : Mech3DotNet.Json.Converters.StructConverter<ArchiveEntry>
     {
         protected override ArchiveEntry ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nameField = new Option<string>();
-            var renameField = new Option<string?>(null);
-            var garbageField = new Option<byte[]>();
+            var nameField = new Mech3DotNet.Json.Converters.Option<string>();
+            var renameField = new Mech3DotNet.Json.Converters.Option<string?>(null);
+            var garbageField = new Mech3DotNet.Json.Converters.Option<byte[]>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

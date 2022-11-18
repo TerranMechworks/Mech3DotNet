@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json.Converters;
-
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(Object3dPmConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.Object3dPmConverter))]
     public class Object3dPm
     {
         public string name;
@@ -15,7 +9,7 @@ namespace Mech3DotNet.Json
         public NodeFlags flags;
         public int meshIndex;
         public uint? parent;
-        public List<uint> children;
+        public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint parentArrayPtr;
         public uint childrenArrayPtr;
@@ -25,7 +19,7 @@ namespace Mech3DotNet.Json
         public BoundingBox unk140;
         public BoundingBox unk164;
 
-        public Object3dPm(string name, Transformation? transformation, uint matrixSigns, NodeFlags flags, int meshIndex, uint? parent, List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, uint unk044, uint unk112, BoundingBox unk116, BoundingBox unk140, BoundingBox unk164)
+        public Object3dPm(string name, Transformation? transformation, uint matrixSigns, NodeFlags flags, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, uint unk044, uint unk112, BoundingBox unk116, BoundingBox unk140, BoundingBox unk164)
         {
             this.name = name;
             this.transformation = transformation;

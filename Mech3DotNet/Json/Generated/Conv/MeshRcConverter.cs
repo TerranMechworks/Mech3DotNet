@@ -1,32 +1,28 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MeshRcConverter : StructConverter<MeshRc>
+    public class MeshRcConverter : Mech3DotNet.Json.Converters.StructConverter<MeshRc>
     {
         protected override MeshRc ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var verticesField = new Option<List<Vec3>>();
-            var normalsField = new Option<List<Vec3>>();
-            var morphsField = new Option<List<Vec3>>();
-            var lightsField = new Option<List<MeshLight>>();
-            var polygonsField = new Option<List<PolygonRc>>();
-            var polygonsPtrField = new Option<uint>();
-            var verticesPtrField = new Option<uint>();
-            var normalsPtrField = new Option<uint>();
-            var lightsPtrField = new Option<uint>();
-            var morphsPtrField = new Option<uint>();
-            var filePtrField = new Option<bool>();
-            var unk04Field = new Option<uint>();
-            var parentCountField = new Option<uint>();
-            var unk68Field = new Option<float>();
-            var unk72Field = new Option<float>();
-            var unk76Field = new Option<float>();
-            var unk80Field = new Option<float>();
+            var verticesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Vec3>>();
+            var normalsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Vec3>>();
+            var morphsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Vec3>>();
+            var lightsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MeshLight>>();
+            var polygonsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<PolygonRc>>();
+            var polygonsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var verticesPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var normalsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var lightsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var morphsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var filePtrField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var unk04Field = new Mech3DotNet.Json.Converters.Option<uint>();
+            var parentCountField = new Mech3DotNet.Json.Converters.Option<uint>();
+            var unk68Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk72Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk76Field = new Mech3DotNet.Json.Converters.Option<float>();
+            var unk80Field = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -34,7 +30,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "vertices":
                         {
-                            List<Vec3>? __value = ReadFieldValue<List<Vec3>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Vec3>? __value = ReadFieldValue<System.Collections.Generic.List<Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertices' was null for 'MeshRc'");
@@ -45,7 +41,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "normals":
                         {
-                            List<Vec3>? __value = ReadFieldValue<List<Vec3>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Vec3>? __value = ReadFieldValue<System.Collections.Generic.List<Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'normals' was null for 'MeshRc'");
@@ -56,7 +52,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "morphs":
                         {
-                            List<Vec3>? __value = ReadFieldValue<List<Vec3>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Vec3>? __value = ReadFieldValue<System.Collections.Generic.List<Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'morphs' was null for 'MeshRc'");
@@ -67,7 +63,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "lights":
                         {
-                            List<MeshLight>? __value = ReadFieldValue<List<MeshLight>?>(ref __reader, __options);
+                            System.Collections.Generic.List<MeshLight>? __value = ReadFieldValue<System.Collections.Generic.List<MeshLight>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'lights' was null for 'MeshRc'");
@@ -78,7 +74,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "polygons":
                         {
-                            List<PolygonRc>? __value = ReadFieldValue<List<PolygonRc>?>(ref __reader, __options);
+                            System.Collections.Generic.List<PolygonRc>? __value = ReadFieldValue<System.Collections.Generic.List<PolygonRc>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'polygons' was null for 'MeshRc'");

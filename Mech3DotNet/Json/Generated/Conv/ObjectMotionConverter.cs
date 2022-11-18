@@ -1,27 +1,23 @@
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ObjectMotionConverter : StructConverter<ObjectMotion>
+    public class ObjectMotionConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotion>
     {
         protected override ObjectMotion ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodeField = new Option<string>();
-            var impactForceField = new Option<bool>();
-            var gravityField = new Option<Gravity?>(null);
-            var translationRangeMinField = new Option<Quaternion?>(null);
-            var translationRangeMaxField = new Option<Quaternion?>(null);
-            var translationField = new Option<ObjectMotionTranslation?>(null);
-            var forwardRotationField = new Option<ForwardRotation?>(null);
-            var xyzRotationField = new Option<XyzRotation?>(null);
-            var scaleField = new Option<ObjectMotionScale?>(null);
-            var bounceSequenceField = new Option<BounceSequence?>(null);
-            var bounceSoundField = new Option<BounceSound?>(null);
-            var runtimeField = new Option<float?>(null);
+            var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
+            var impactForceField = new Mech3DotNet.Json.Converters.Option<bool>();
+            var gravityField = new Mech3DotNet.Json.Converters.Option<Gravity?>(null);
+            var translationRangeMinField = new Mech3DotNet.Json.Converters.Option<Quaternion?>(null);
+            var translationRangeMaxField = new Mech3DotNet.Json.Converters.Option<Quaternion?>(null);
+            var translationField = new Mech3DotNet.Json.Converters.Option<ObjectMotionTranslation?>(null);
+            var forwardRotationField = new Mech3DotNet.Json.Converters.Option<ForwardRotation?>(null);
+            var xyzRotationField = new Mech3DotNet.Json.Converters.Option<XyzRotation?>(null);
+            var scaleField = new Mech3DotNet.Json.Converters.Option<ObjectMotionScale?>(null);
+            var bounceSequenceField = new Mech3DotNet.Json.Converters.Option<BounceSequence?>(null);
+            var bounceSoundField = new Mech3DotNet.Json.Converters.Option<BounceSound?>(null);
+            var runtimeField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {

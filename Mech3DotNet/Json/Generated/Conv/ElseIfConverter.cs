@@ -1,11 +1,8 @@
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class ElseIfConverter : UnionConverter<ElseIf>
+    public class ElseIfConverter : Mech3DotNet.Json.Converters.UnionConverter<ElseIf>
     {
         public override ElseIf ReadUnitVariant(string? name)
         {
@@ -141,7 +138,7 @@ namespace Mech3DotNet.Json.Converters
                         break;
                     }
                 default:
-                    throw new ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'ElseIf'");
+                    throw new System.ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'ElseIf'");
             }
         }
     }

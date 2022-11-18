@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class CallAnimationTargetNodeConverter : Mech3DotNet.Json.Converters.StructConverter<CallAnimationTargetNode>
+    public class CallAnimationTargetNodeConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.CallAnimationTargetNode>
     {
-        protected override CallAnimationTargetNode ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.CallAnimationTargetNode ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var operandNodeField = new Mech3DotNet.Json.Converters.Option<string>();
             string? __fieldName = null;
@@ -32,10 +32,10 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var operandNode = operandNodeField.Unwrap("operand_node");
-            return new CallAnimationTargetNode(operandNode);
+            return new Mech3DotNet.Json.Anim.Events.CallAnimationTargetNode(operandNode);
         }
 
-        public override void Write(Utf8JsonWriter writer, CallAnimationTargetNode value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.CallAnimationTargetNode value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("operand_node");

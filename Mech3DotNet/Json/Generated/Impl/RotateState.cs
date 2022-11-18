@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
     public enum RotateStateVariant
     {
@@ -7,7 +7,7 @@ namespace Mech3DotNet.Json
         AtNodeMatrix,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.RotateStateConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.RotateStateConverter))]
     public class RotateState : Mech3DotNet.Json.Converters.IDiscriminatedUnion<RotateStateVariant>
     {
         public sealed class AtNodeXYZ
@@ -20,7 +20,7 @@ namespace Mech3DotNet.Json
             public AtNodeMatrix() { }
         }
 
-        public RotateState(Vec3 value)
+        public RotateState(Mech3DotNet.Json.Types.Vec3 value)
         {
             this.value = value;
             Variant = RotateStateVariant.Absolute;

@@ -1,17 +1,17 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Image.Converters
 {
-    public class TexturePaletteConverter : Mech3DotNet.Json.Converters.UnionConverter<TexturePalette>
+    public class TexturePaletteConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Image.TexturePalette>
     {
-        public override TexturePalette ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Image.TexturePalette ReadUnitVariant(string? name)
         {
             switch (name)
             {
                 case "None":
                     {
-                        var inner = new TexturePalette.None();
-                        return new TexturePalette(inner);
+                        var inner = new Mech3DotNet.Json.Image.TexturePalette.None();
+                        return new Mech3DotNet.Json.Image.TexturePalette(inner);
                     }
                 case "Local":
                     {
@@ -36,29 +36,29 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override TexturePalette ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Image.TexturePalette ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "Local":
                     {
-                        var inner = JsonSerializer.Deserialize<PaletteData>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Image.PaletteData>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Local' was null for 'TexturePalette'");
                             throw new JsonException();
                         }
-                        return new TexturePalette(inner);
+                        return new Mech3DotNet.Json.Image.TexturePalette(inner);
                     }
                 case "Global":
                     {
-                        var inner = JsonSerializer.Deserialize<GlobalPalette>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Image.GlobalPalette>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Global' was null for 'TexturePalette'");
                             throw new JsonException();
                         }
-                        return new TexturePalette(inner);
+                        return new Mech3DotNet.Json.Image.TexturePalette(inner);
                     }
                 case "None":
                     {
@@ -78,27 +78,27 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, TexturePalette value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Image.TexturePalette value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case TexturePaletteVariant.None:
+                case Mech3DotNet.Json.Image.TexturePaletteVariant.None:
                     {
                         writer.WriteStringValue("None");
                         break;
                     }
-                case TexturePaletteVariant.Local:
+                case Mech3DotNet.Json.Image.TexturePaletteVariant.Local:
                     {
-                        var inner = value.As<PaletteData>();
+                        var inner = value.As<Mech3DotNet.Json.Image.PaletteData>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Local");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case TexturePaletteVariant.Global:
+                case Mech3DotNet.Json.Image.TexturePaletteVariant.Global:
                     {
-                        var inner = value.As<GlobalPalette>();
+                        var inner = value.As<Mech3DotNet.Json.Image.GlobalPalette>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Global");
                         JsonSerializer.Serialize(writer, inner, options);

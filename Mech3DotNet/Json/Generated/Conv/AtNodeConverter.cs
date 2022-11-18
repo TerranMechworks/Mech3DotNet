@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class AtNodeConverter : Mech3DotNet.Json.Converters.StructConverter<AtNode>
+    public class AtNodeConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.AtNode>
     {
-        protected override AtNode ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.AtNode ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
-            var translationField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var translationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "translation":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             translationField.Set(__value);
                             break;
                         }
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var node = nodeField.Unwrap("node");
             var translation = translationField.Unwrap("translation");
-            return new AtNode(node, translation);
+            return new Mech3DotNet.Json.Anim.Events.AtNode(node, translation);
         }
 
-        public override void Write(Utf8JsonWriter writer, AtNode value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.AtNode value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

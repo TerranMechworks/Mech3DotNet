@@ -1,25 +1,25 @@
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class AnimActivationConverter : Mech3DotNet.Json.Converters.EnumConverter<AnimActivation>
+    public class AnimActivationConverter : Mech3DotNet.Json.Converters.EnumConverter<Mech3DotNet.Json.Anim.AnimActivation>
     {
-        public override AnimActivation ReadVariant(string? name) => name switch
+        public override Mech3DotNet.Json.Anim.AnimActivation ReadVariant(string? name) => name switch
         {
-            "WeaponHit" => AnimActivation.WeaponHit,
-            "CollideHit" => AnimActivation.CollideHit,
-            "WeaponOrCollideHit" => AnimActivation.WeaponOrCollideHit,
-            "OnCall" => AnimActivation.OnCall,
-            "OnStartup" => AnimActivation.OnStartup,
+            "WeaponHit" => Mech3DotNet.Json.Anim.AnimActivation.WeaponHit,
+            "CollideHit" => Mech3DotNet.Json.Anim.AnimActivation.CollideHit,
+            "WeaponOrCollideHit" => Mech3DotNet.Json.Anim.AnimActivation.WeaponOrCollideHit,
+            "OnCall" => Mech3DotNet.Json.Anim.AnimActivation.OnCall,
+            "OnStartup" => Mech3DotNet.Json.Anim.AnimActivation.OnStartup,
             null => DebugAndThrow("Variant cannot be null for 'AnimActivation'"),
             _ => DebugAndThrow($"Invalid variant '{name}' for 'AnimActivation'"),
         };
 
-        public override string WriteVariant(AnimActivation value) => value switch
+        public override string WriteVariant(Mech3DotNet.Json.Anim.AnimActivation value) => value switch
         {
-            AnimActivation.WeaponHit => "WeaponHit",
-            AnimActivation.CollideHit => "CollideHit",
-            AnimActivation.WeaponOrCollideHit => "WeaponOrCollideHit",
-            AnimActivation.OnCall => "OnCall",
-            AnimActivation.OnStartup => "OnStartup",
+            Mech3DotNet.Json.Anim.AnimActivation.WeaponHit => "WeaponHit",
+            Mech3DotNet.Json.Anim.AnimActivation.CollideHit => "CollideHit",
+            Mech3DotNet.Json.Anim.AnimActivation.WeaponOrCollideHit => "WeaponOrCollideHit",
+            Mech3DotNet.Json.Anim.AnimActivation.OnCall => "OnCall",
+            Mech3DotNet.Json.Anim.AnimActivation.OnStartup => "OnStartup",
             _ => throw new System.ArgumentOutOfRangeException("AnimActivation"),
         };
     }

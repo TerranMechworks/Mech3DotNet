@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class NamePadConverter : Mech3DotNet.Json.Converters.StructConverter<NamePad>
+    public class NamePadConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.NamePad>
     {
-        protected override NamePad ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.NamePad ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var padField = new Mech3DotNet.Json.Converters.Option<byte[]>();
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var name = nameField.Unwrap("name");
             var pad = padField.Unwrap("pad");
-            return new NamePad(name, pad);
+            return new Mech3DotNet.Json.Anim.NamePad(name, pad);
         }
 
-        public override void Write(Utf8JsonWriter writer, NamePad value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.NamePad value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

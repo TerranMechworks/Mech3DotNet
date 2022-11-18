@@ -1,14 +1,14 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Mesh.Ng
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MeshNgConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Mesh.Ng.Converters.MeshNgConverter))]
     public class MeshNg
     {
-        public System.Collections.Generic.List<Vec3> vertices;
-        public System.Collections.Generic.List<Vec3> normals;
-        public System.Collections.Generic.List<Vec3> morphs;
-        public System.Collections.Generic.List<MeshLight> lights;
-        public System.Collections.Generic.List<PolygonNg> polygons;
-        public System.Collections.Generic.List<MeshTexture> textures;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> vertices;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> normals;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> morphs;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.MeshLight> lights;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonNg> polygons;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.MeshTexture> textures;
         public uint polygonsPtr;
         public uint verticesPtr;
         public uint normalsPtr;
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json
         public float unk80;
         public float unk84;
 
-        public MeshNg(System.Collections.Generic.List<Vec3> vertices, System.Collections.Generic.List<Vec3> normals, System.Collections.Generic.List<Vec3> morphs, System.Collections.Generic.List<MeshLight> lights, System.Collections.Generic.List<PolygonNg> polygons, System.Collections.Generic.List<MeshTexture> textures, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, uint texturePtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
+        public MeshNg(System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> vertices, System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> normals, System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> morphs, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.MeshLight> lights, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonNg> polygons, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.MeshTexture> textures, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, uint texturePtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
         {
             this.vertices = vertices;
             this.normals = normals;

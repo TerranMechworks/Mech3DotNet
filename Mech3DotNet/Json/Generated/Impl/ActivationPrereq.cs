@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim
 {
     public enum ActivationPrereqVariant
     {
@@ -7,22 +7,22 @@ namespace Mech3DotNet.Json
         Object,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ActivationPrereqConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Converters.ActivationPrereqConverter))]
     public class ActivationPrereq : Mech3DotNet.Json.Converters.IDiscriminatedUnion<ActivationPrereqVariant>
     {
-        public ActivationPrereq(PrereqAnimation value)
+        public ActivationPrereq(Mech3DotNet.Json.Anim.PrereqAnimation value)
         {
             this.value = value;
             Variant = ActivationPrereqVariant.Animation;
         }
 
-        public ActivationPrereq(PrereqParent value)
+        public ActivationPrereq(Mech3DotNet.Json.Anim.PrereqParent value)
         {
             this.value = value;
             Variant = ActivationPrereqVariant.Parent;
         }
 
-        public ActivationPrereq(PrereqObject value)
+        public ActivationPrereq(Mech3DotNet.Json.Anim.PrereqObject value)
         {
             this.value = value;
             Variant = ActivationPrereqVariant.Object;

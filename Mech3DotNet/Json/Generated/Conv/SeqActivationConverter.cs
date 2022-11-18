@@ -1,19 +1,19 @@
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class SeqActivationConverter : Mech3DotNet.Json.Converters.EnumConverter<SeqActivation>
+    public class SeqActivationConverter : Mech3DotNet.Json.Converters.EnumConverter<Mech3DotNet.Json.Anim.SeqActivation>
     {
-        public override SeqActivation ReadVariant(string? name) => name switch
+        public override Mech3DotNet.Json.Anim.SeqActivation ReadVariant(string? name) => name switch
         {
-            "Initial" => SeqActivation.Initial,
-            "OnCall" => SeqActivation.OnCall,
+            "Initial" => Mech3DotNet.Json.Anim.SeqActivation.Initial,
+            "OnCall" => Mech3DotNet.Json.Anim.SeqActivation.OnCall,
             null => DebugAndThrow("Variant cannot be null for 'SeqActivation'"),
             _ => DebugAndThrow($"Invalid variant '{name}' for 'SeqActivation'"),
         };
 
-        public override string WriteVariant(SeqActivation value) => value switch
+        public override string WriteVariant(Mech3DotNet.Json.Anim.SeqActivation value) => value switch
         {
-            SeqActivation.Initial => "Initial",
-            SeqActivation.OnCall => "OnCall",
+            Mech3DotNet.Json.Anim.SeqActivation.Initial => "Initial",
+            Mech3DotNet.Json.Anim.SeqActivation.OnCall => "OnCall",
             _ => throw new System.ArgumentOutOfRangeException("SeqActivation"),
         };
     }

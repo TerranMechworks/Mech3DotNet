@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectActiveStateConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectActiveState>
+    public class ObjectActiveStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectActiveState>
     {
-        protected override ObjectActiveState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectActiveState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var stateField = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var node = nodeField.Unwrap("node");
             var state = stateField.Unwrap("state");
-            return new ObjectActiveState(node, state);
+            return new Mech3DotNet.Json.Anim.Events.ObjectActiveState(node, state);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectActiveState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectActiveState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

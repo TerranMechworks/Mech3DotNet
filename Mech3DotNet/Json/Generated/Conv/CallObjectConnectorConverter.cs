@@ -1,15 +1,15 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class CallObjectConnectorConverter : Mech3DotNet.Json.Converters.StructConverter<CallObjectConnector>
+    public class CallObjectConnectorConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.CallObjectConnector>
     {
-        protected override CallObjectConnector ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.CallObjectConnector ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var fromNodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var toNodeField = new Mech3DotNet.Json.Converters.Option<string>();
-            var toPosField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var toPosField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -50,7 +50,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "to_pos":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             toPosField.Set(__value);
                             break;
                         }
@@ -66,10 +66,10 @@ namespace Mech3DotNet.Json.Converters
             var fromNode = fromNodeField.Unwrap("from_node");
             var toNode = toNodeField.Unwrap("to_node");
             var toPos = toPosField.Unwrap("to_pos");
-            return new CallObjectConnector(node, fromNode, toNode, toPos);
+            return new Mech3DotNet.Json.Anim.Events.CallObjectConnector(node, fromNode, toNode, toPos);
         }
 
-        public override void Write(Utf8JsonWriter writer, CallObjectConnector value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.CallObjectConnector value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

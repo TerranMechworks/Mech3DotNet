@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Mesh.Ng
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MeshTextureConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Mesh.Ng.Converters.MeshTextureConverter))]
     public class MeshTexture
     {
         public uint textureIndex;

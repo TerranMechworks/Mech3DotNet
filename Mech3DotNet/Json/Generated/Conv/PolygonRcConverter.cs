@@ -1,14 +1,14 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Rc.Converters
 {
-    public class PolygonRcConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonRc>
+    public class PolygonRcConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.Rc.PolygonRc>
     {
-        protected override PolygonRc ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.Rc.PolygonRc ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var vertexIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
             var normalIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>?>();
-            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<UvCoord>?>();
+            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>?>();
             var textureIndexField = new Mech3DotNet.Json.Converters.Option<uint>();
             var unk0FlagField = new Mech3DotNet.Json.Converters.Option<bool>();
             var unk04Field = new Mech3DotNet.Json.Converters.Option<int>();
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "uv_coords":
                         {
-                            System.Collections.Generic.List<UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<UvCoord>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>?>(ref __reader, __options);
                             uvCoordsField.Set(__value);
                             break;
                         }
@@ -104,10 +104,10 @@ namespace Mech3DotNet.Json.Converters
             var verticesPtr = verticesPtrField.Unwrap("vertices_ptr");
             var normalsPtr = normalsPtrField.Unwrap("normals_ptr");
             var uvsPtr = uvsPtrField.Unwrap("uvs_ptr");
-            return new PolygonRc(vertexIndices, normalIndices, uvCoords, textureIndex, unk0Flag, unk04, unk24, verticesPtr, normalsPtr, uvsPtr);
+            return new Mech3DotNet.Json.Gamez.Mesh.Rc.PolygonRc(vertexIndices, normalIndices, uvCoords, textureIndex, unk0Flag, unk04, unk24, verticesPtr, normalsPtr, uvsPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, PolygonRc value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.Rc.PolygonRc value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("vertex_indices");

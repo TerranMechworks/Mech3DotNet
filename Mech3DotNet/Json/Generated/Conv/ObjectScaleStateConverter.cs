@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectScaleStateConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectScaleState>
+    public class ObjectScaleStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectScaleState>
     {
-        protected override ObjectScaleState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectScaleState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
-            var scaleField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var scaleField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "scale":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             scaleField.Set(__value);
                             break;
                         }
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var node = nodeField.Unwrap("node");
             var scale = scaleField.Unwrap("scale");
-            return new ObjectScaleState(node, scale);
+            return new Mech3DotNet.Json.Anim.Events.ObjectScaleState(node, scale);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectScaleState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectScaleState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

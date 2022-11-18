@@ -1,16 +1,16 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ObjectMotionFromToConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.ObjectMotionFromToConverter))]
     public class ObjectMotionFromTo
     {
         public string node;
         public float runTime;
-        public FloatFromTo? morph = null;
-        public Vec3FromTo? translate = null;
-        public Vec3FromTo? rotate = null;
-        public Vec3FromTo? scale = null;
+        public Mech3DotNet.Json.Anim.Events.FloatFromTo? morph = null;
+        public Mech3DotNet.Json.Anim.Events.Vec3FromTo? translate = null;
+        public Mech3DotNet.Json.Anim.Events.Vec3FromTo? rotate = null;
+        public Mech3DotNet.Json.Anim.Events.Vec3FromTo? scale = null;
 
-        public ObjectMotionFromTo(string node, float runTime, FloatFromTo? morph, Vec3FromTo? translate, Vec3FromTo? rotate, Vec3FromTo? scale)
+        public ObjectMotionFromTo(string node, float runTime, Mech3DotNet.Json.Anim.Events.FloatFromTo? morph, Mech3DotNet.Json.Anim.Events.Vec3FromTo? translate, Mech3DotNet.Json.Anim.Events.Vec3FromTo? rotate, Mech3DotNet.Json.Anim.Events.Vec3FromTo? scale)
         {
             this.node = node;
             this.runTime = runTime;

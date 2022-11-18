@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.CallbackConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.CallbackConverter))]
     public class Callback
     {
         public uint value;

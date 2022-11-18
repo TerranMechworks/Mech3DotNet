@@ -1,18 +1,18 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.EmptyConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.EmptyConverter))]
     public class Empty
     {
         public string name;
-        public NodeFlags flags;
+        public Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags;
         public uint unk044;
         public uint zoneId;
-        public BoundingBox unk116;
-        public BoundingBox unk140;
-        public BoundingBox unk164;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164;
         public uint parent;
 
-        public Empty(string name, NodeFlags flags, uint unk044, uint zoneId, BoundingBox unk116, BoundingBox unk140, BoundingBox unk164, uint parent)
+        public Empty(string name, Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags, uint unk044, uint zoneId, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164, uint parent)
         {
             this.name = name;
             this.flags = flags;

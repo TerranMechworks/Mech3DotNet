@@ -1,15 +1,15 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Materials
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.TexturedMaterialConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Materials.Converters.TexturedMaterialConverter))]
     public class TexturedMaterial
     {
         public string texture;
         public uint pointer = 0;
-        public CycleData? cycle = null;
+        public Mech3DotNet.Json.Gamez.Materials.CycleData? cycle = null;
         public float specular;
         public bool flag;
 
-        public TexturedMaterial(string texture, uint pointer, CycleData? cycle, float specular, bool flag)
+        public TexturedMaterial(string texture, uint pointer, Mech3DotNet.Json.Gamez.Materials.CycleData? cycle, float specular, bool flag)
         {
             this.texture = texture;
             this.pointer = pointer;

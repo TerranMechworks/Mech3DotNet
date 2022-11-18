@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
     public enum EventDataVariant
     {
@@ -37,202 +37,202 @@ namespace Mech3DotNet.Json
         PufferState,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.EventDataConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.EventDataConverter))]
     public class EventData : Mech3DotNet.Json.Converters.IDiscriminatedUnion<EventDataVariant>
     {
-        public EventData(Sound value)
+        public EventData(Mech3DotNet.Json.Anim.Events.Sound value)
         {
             this.value = value;
             Variant = EventDataVariant.Sound;
         }
 
-        public EventData(SoundNode value)
+        public EventData(Mech3DotNet.Json.Anim.Events.SoundNode value)
         {
             this.value = value;
             Variant = EventDataVariant.SoundNode;
         }
 
-        public EventData(LightState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.LightState value)
         {
             this.value = value;
             Variant = EventDataVariant.LightState;
         }
 
-        public EventData(LightAnimation value)
+        public EventData(Mech3DotNet.Json.Anim.Events.LightAnimation value)
         {
             this.value = value;
             Variant = EventDataVariant.LightAnimation;
         }
 
-        public EventData(ObjectActiveState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectActiveState value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectActiveState;
         }
 
-        public EventData(ObjectTranslateState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectTranslateState value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectTranslateState;
         }
 
-        public EventData(ObjectScaleState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectScaleState value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectScaleState;
         }
 
-        public EventData(ObjectRotateState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectRotateState value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectRotateState;
         }
 
-        public EventData(ObjectMotion value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectMotion value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectMotion;
         }
 
-        public EventData(ObjectMotionFromTo value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectMotionFromTo value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectMotionFromTo;
         }
 
-        public EventData(ObjectMotionSiScript value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectMotionSiScript value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectMotionSIScript;
         }
 
-        public EventData(ObjectOpacityState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectOpacityState value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectOpacityState;
         }
 
-        public EventData(ObjectOpacityFromTo value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectOpacityFromTo value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectOpacityFromTo;
         }
 
-        public EventData(ObjectAddChild value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectAddChild value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectAddChild;
         }
 
-        public EventData(ObjectCycleTexture value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectCycleTexture value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectCycleTexture;
         }
 
-        public EventData(ObjectConnector value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ObjectConnector value)
         {
             this.value = value;
             Variant = EventDataVariant.ObjectConnector;
         }
 
-        public EventData(CallObjectConnector value)
+        public EventData(Mech3DotNet.Json.Anim.Events.CallObjectConnector value)
         {
             this.value = value;
             Variant = EventDataVariant.CallObjectConnector;
         }
 
-        public EventData(CallSequence value)
+        public EventData(Mech3DotNet.Json.Anim.Events.CallSequence value)
         {
             this.value = value;
             Variant = EventDataVariant.CallSequence;
         }
 
-        public EventData(StopSequence value)
+        public EventData(Mech3DotNet.Json.Anim.Events.StopSequence value)
         {
             this.value = value;
             Variant = EventDataVariant.StopSequence;
         }
 
-        public EventData(CallAnimation value)
+        public EventData(Mech3DotNet.Json.Anim.Events.CallAnimation value)
         {
             this.value = value;
             Variant = EventDataVariant.CallAnimation;
         }
 
-        public EventData(StopAnimation value)
+        public EventData(Mech3DotNet.Json.Anim.Events.StopAnimation value)
         {
             this.value = value;
             Variant = EventDataVariant.StopAnimation;
         }
 
-        public EventData(ResetAnimation value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ResetAnimation value)
         {
             this.value = value;
             Variant = EventDataVariant.ResetAnimation;
         }
 
-        public EventData(InvalidateAnimation value)
+        public EventData(Mech3DotNet.Json.Anim.Events.InvalidateAnimation value)
         {
             this.value = value;
             Variant = EventDataVariant.InvalidateAnimation;
         }
 
-        public EventData(FogState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.FogState value)
         {
             this.value = value;
             Variant = EventDataVariant.FogState;
         }
 
-        public EventData(Loop value)
+        public EventData(Mech3DotNet.Json.Anim.Events.Loop value)
         {
             this.value = value;
             Variant = EventDataVariant.Loop;
         }
 
-        public EventData(If value)
+        public EventData(Mech3DotNet.Json.Anim.Events.If value)
         {
             this.value = value;
             Variant = EventDataVariant.If;
         }
 
-        public EventData(Else value)
+        public EventData(Mech3DotNet.Json.Anim.Events.Else value)
         {
             this.value = value;
             Variant = EventDataVariant.Else;
         }
 
-        public EventData(ElseIf value)
+        public EventData(Mech3DotNet.Json.Anim.Events.ElseIf value)
         {
             this.value = value;
             Variant = EventDataVariant.Elif;
         }
 
-        public EventData(EndIf value)
+        public EventData(Mech3DotNet.Json.Anim.Events.EndIf value)
         {
             this.value = value;
             Variant = EventDataVariant.Endif;
         }
 
-        public EventData(Callback value)
+        public EventData(Mech3DotNet.Json.Anim.Events.Callback value)
         {
             this.value = value;
             Variant = EventDataVariant.Callback;
         }
 
-        public EventData(FrameBufferEffectColor value)
+        public EventData(Mech3DotNet.Json.Anim.Events.FrameBufferEffectColor value)
         {
             this.value = value;
             Variant = EventDataVariant.FrameBufferEffectColorFromTo;
         }
 
-        public EventData(DetonateWeapon value)
+        public EventData(Mech3DotNet.Json.Anim.Events.DetonateWeapon value)
         {
             this.value = value;
             Variant = EventDataVariant.DetonateWeapon;
         }
 
-        public EventData(PufferState value)
+        public EventData(Mech3DotNet.Json.Anim.Events.PufferState value)
         {
             this.value = value;
             Variant = EventDataVariant.PufferState;

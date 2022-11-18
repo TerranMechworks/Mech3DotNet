@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Interp.Converters
 {
-    public class ScriptConverter : Mech3DotNet.Json.Converters.StructConverter<Script>
+    public class ScriptConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Interp.Script>
     {
-        protected override Script ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Interp.Script ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var lastModifiedField = new Mech3DotNet.Json.Converters.Option<System.DateTime>();
@@ -53,10 +53,10 @@ namespace Mech3DotNet.Json.Converters
             var name = nameField.Unwrap("name");
             var lastModified = lastModifiedField.Unwrap("last_modified");
             var lines = linesField.Unwrap("lines");
-            return new Script(name, lastModified, lines);
+            return new Mech3DotNet.Json.Interp.Script(name, lastModified, lines);
         }
 
-        public override void Write(Utf8JsonWriter writer, Script value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Interp.Script value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

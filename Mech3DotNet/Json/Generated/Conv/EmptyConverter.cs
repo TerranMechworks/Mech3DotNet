@@ -1,18 +1,18 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class EmptyConverter : Mech3DotNet.Json.Converters.StructConverter<Empty>
+    public class EmptyConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Empty>
     {
-        protected override Empty ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.Empty ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var flagsField = new Mech3DotNet.Json.Converters.Option<NodeFlags>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.NodeFlags>();
             var unk044Field = new Mech3DotNet.Json.Converters.Option<uint>();
             var zoneIdField = new Mech3DotNet.Json.Converters.Option<uint>();
-            var unk116Field = new Mech3DotNet.Json.Converters.Option<BoundingBox>();
-            var unk140Field = new Mech3DotNet.Json.Converters.Option<BoundingBox>();
-            var unk164Field = new Mech3DotNet.Json.Converters.Option<BoundingBox>();
+            var unk116Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
+            var unk140Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
+            var unk164Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
             var parentField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -32,7 +32,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "flags":
                         {
-                            NodeFlags? __value = ReadFieldValue<NodeFlags?>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.Nodes.NodeFlags? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.NodeFlags?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'flags' was null for 'Empty'");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "unk116":
                         {
-                            BoundingBox? __value = ReadFieldValue<BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk116' was null for 'Empty'");
@@ -66,7 +66,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "unk140":
                         {
-                            BoundingBox? __value = ReadFieldValue<BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk140' was null for 'Empty'");
@@ -77,7 +77,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "unk164":
                         {
-                            BoundingBox? __value = ReadFieldValue<BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk164' was null for 'Empty'");
@@ -108,10 +108,10 @@ namespace Mech3DotNet.Json.Converters
             var unk140 = unk140Field.Unwrap("unk140");
             var unk164 = unk164Field.Unwrap("unk164");
             var parent = parentField.Unwrap("parent");
-            return new Empty(name, flags, unk044, zoneId, unk116, unk140, unk164, parent);
+            return new Mech3DotNet.Json.Gamez.Nodes.Empty(name, flags, unk044, zoneId, unk116, unk140, unk164, parent);
         }
 
-        public override void Write(Utf8JsonWriter writer, Empty value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Empty value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

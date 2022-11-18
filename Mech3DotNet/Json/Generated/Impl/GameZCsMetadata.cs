@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.GameZCsMetadataConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Converters.GameZCsMetadataConverter))]
     public class GameZCsMetadata
     {
         public uint gamezHeaderUnk08;

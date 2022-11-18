@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ForwardRotationTimeConverter : Mech3DotNet.Json.Converters.StructConverter<ForwardRotationTime>
+    public class ForwardRotationTimeConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ForwardRotationTime>
     {
-        protected override ForwardRotationTime ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ForwardRotationTime ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var v1Field = new Mech3DotNet.Json.Converters.Option<float>();
             var v2Field = new Mech3DotNet.Json.Converters.Option<float>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var v1 = v1Field.Unwrap("v1");
             var v2 = v2Field.Unwrap("v2");
-            return new ForwardRotationTime(v1, v2);
+            return new Mech3DotNet.Json.Anim.Events.ForwardRotationTime(v1, v2);
         }
 
-        public override void Write(Utf8JsonWriter writer, ForwardRotationTime value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ForwardRotationTime value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("v1");

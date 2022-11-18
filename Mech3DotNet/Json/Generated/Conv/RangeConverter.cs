@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Types.Converters
 {
-    public class RangeConverter : Mech3DotNet.Json.Converters.StructConverter<Range>
+    public class RangeConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Types.Range>
     {
-        protected override Range ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Types.Range ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var minField = new Mech3DotNet.Json.Converters.Option<float>();
             var maxField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var min = minField.Unwrap("min");
             var max = maxField.Unwrap("max");
-            return new Range(min, max);
+            return new Mech3DotNet.Json.Types.Range(min, max);
         }
 
-        public override void Write(Utf8JsonWriter writer, Range value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Types.Range value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("min");

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class AnimPtrConverter : Mech3DotNet.Json.Converters.StructConverter<AnimPtr>
+    public class AnimPtrConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.AnimPtr>
     {
-        protected override AnimPtr ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.AnimPtr ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var fileNameField = new Mech3DotNet.Json.Converters.Option<string>();
             var animPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
@@ -128,10 +128,10 @@ namespace Mech3DotNet.Json.Converters
             var animRefsPtr = animRefsPtrField.Unwrap("anim_refs_ptr");
             var resetStatePtr = resetStatePtrField.Unwrap("reset_state_ptr");
             var seqDefsPtr = seqDefsPtrField.Unwrap("seq_defs_ptr");
-            return new AnimPtr(fileName, animPtr, animRootPtr, objectsPtr, nodesPtr, lightsPtr, puffersPtr, dynamicSoundsPtr, staticSoundsPtr, activPrereqsPtr, animRefsPtr, resetStatePtr, seqDefsPtr);
+            return new Mech3DotNet.Json.Anim.AnimPtr(fileName, animPtr, animRootPtr, objectsPtr, nodesPtr, lightsPtr, puffersPtr, dynamicSoundsPtr, staticSoundsPtr, activPrereqsPtr, animRefsPtr, resetStatePtr, seqDefsPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, AnimPtr value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.AnimPtr value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("file_name");

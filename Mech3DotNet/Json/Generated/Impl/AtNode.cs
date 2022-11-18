@@ -1,12 +1,12 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.AtNodeConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.AtNodeConverter))]
     public class AtNode
     {
         public string node;
-        public Vec3 translation;
+        public Mech3DotNet.Json.Types.Vec3 translation;
 
-        public AtNode(string node, Vec3 translation)
+        public AtNode(string node, Mech3DotNet.Json.Types.Vec3 translation)
         {
             this.node = node;
             this.translation = translation;

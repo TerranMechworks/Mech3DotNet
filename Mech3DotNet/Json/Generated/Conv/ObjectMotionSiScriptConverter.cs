@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectMotionSiScriptConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotionSiScript>
+    public class ObjectMotionSiScriptConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectMotionSiScript>
     {
-        protected override ObjectMotionSiScript ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectMotionSiScript ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
-            var framesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<ObjectMotionSiFrame>>();
+            var framesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.ObjectMotionSiFrame>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "frames":
                         {
-                            System.Collections.Generic.List<ObjectMotionSiFrame>? __value = ReadFieldValue<System.Collections.Generic.List<ObjectMotionSiFrame>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.ObjectMotionSiFrame>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.ObjectMotionSiFrame>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'frames' was null for 'ObjectMotionSiScript'");
@@ -45,10 +45,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var node = nodeField.Unwrap("node");
             var frames = framesField.Unwrap("frames");
-            return new ObjectMotionSiScript(node, frames);
+            return new Mech3DotNet.Json.Anim.Events.ObjectMotionSiScript(node, frames);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectMotionSiScript value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectMotionSiScript value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

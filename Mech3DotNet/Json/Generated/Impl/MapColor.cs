@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Zmap
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MapColorConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Zmap.Converters.MapColorConverter))]
     public struct MapColor
     {
         public byte r;

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class PlayerRangeCondConverter : Mech3DotNet.Json.Converters.StructConverter<PlayerRangeCond>
+    public class PlayerRangeCondConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.PlayerRangeCond>
     {
-        protected override PlayerRangeCond ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.PlayerRangeCond ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var valueField = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
@@ -27,10 +27,10 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var value = valueField.Unwrap("value");
-            return new PlayerRangeCond(value);
+            return new Mech3DotNet.Json.Anim.Events.PlayerRangeCond(value);
         }
 
-        public override void Write(Utf8JsonWriter writer, PlayerRangeCond value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.PlayerRangeCond value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value");

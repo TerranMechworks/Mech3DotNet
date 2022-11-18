@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class LoopConverter : Mech3DotNet.Json.Converters.StructConverter<Loop>
+    public class LoopConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.Loop>
     {
-        protected override Loop ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.Loop ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var startField = new Mech3DotNet.Json.Converters.Option<int>();
             var loopCountField = new Mech3DotNet.Json.Converters.Option<int>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var start = startField.Unwrap("start");
             var loopCount = loopCountField.Unwrap("loop_count");
-            return new Loop(start, loopCount);
+            return new Mech3DotNet.Json.Anim.Events.Loop(start, loopCount);
         }
 
-        public override void Write(Utf8JsonWriter writer, Loop value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.Loop value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("start");

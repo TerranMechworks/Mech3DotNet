@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
     public enum IfVariant
     {
@@ -9,34 +9,34 @@ namespace Mech3DotNet.Json
         PlayerFirstPerson,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.IfConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.IfConverter))]
     public class If : Mech3DotNet.Json.Converters.IDiscriminatedUnion<IfVariant>
     {
-        public If(RandomWeightCond value)
+        public If(Mech3DotNet.Json.Anim.Events.RandomWeightCond value)
         {
             this.value = value;
             Variant = IfVariant.RandomWeight;
         }
 
-        public If(PlayerRangeCond value)
+        public If(Mech3DotNet.Json.Anim.Events.PlayerRangeCond value)
         {
             this.value = value;
             Variant = IfVariant.PlayerRange;
         }
 
-        public If(AnimationLodCond value)
+        public If(Mech3DotNet.Json.Anim.Events.AnimationLodCond value)
         {
             this.value = value;
             Variant = IfVariant.AnimationLod;
         }
 
-        public If(HwRenderCond value)
+        public If(Mech3DotNet.Json.Anim.Events.HwRenderCond value)
         {
             this.value = value;
             Variant = IfVariant.HwRender;
         }
 
-        public If(PlayerFirstPersonCond value)
+        public If(Mech3DotNet.Json.Anim.Events.PlayerFirstPersonCond value)
         {
             this.value = value;
             Variant = IfVariant.PlayerFirstPerson;

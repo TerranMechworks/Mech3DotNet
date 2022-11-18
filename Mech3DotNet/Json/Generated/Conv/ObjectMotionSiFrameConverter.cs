@@ -1,16 +1,16 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectMotionSiFrameConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotionSiFrame>
+    public class ObjectMotionSiFrameConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectMotionSiFrame>
     {
-        protected override ObjectMotionSiFrame ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectMotionSiFrame ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var startTimeField = new Mech3DotNet.Json.Converters.Option<float>();
             var endTimeField = new Mech3DotNet.Json.Converters.Option<float>();
-            var translationField = new Mech3DotNet.Json.Converters.Option<TranslateData?>(null);
-            var rotationField = new Mech3DotNet.Json.Converters.Option<RotateData?>(null);
-            var scaleField = new Mech3DotNet.Json.Converters.Option<ScaleData?>(null);
+            var translationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.TranslateData?>(null);
+            var rotationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.RotateData?>(null);
+            var scaleField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.ScaleData?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -30,19 +30,19 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "translation":
                         {
-                            TranslateData? __value = ReadFieldValue<TranslateData?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.TranslateData? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.TranslateData?>(ref __reader, __options);
                             translationField.Set(__value);
                             break;
                         }
                     case "rotation":
                         {
-                            RotateData? __value = ReadFieldValue<RotateData?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.RotateData? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.RotateData?>(ref __reader, __options);
                             rotationField.Set(__value);
                             break;
                         }
                     case "scale":
                         {
-                            ScaleData? __value = ReadFieldValue<ScaleData?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.ScaleData? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.ScaleData?>(ref __reader, __options);
                             scaleField.Set(__value);
                             break;
                         }
@@ -59,10 +59,10 @@ namespace Mech3DotNet.Json.Converters
             var translation = translationField.Unwrap("translation");
             var rotation = rotationField.Unwrap("rotation");
             var scale = scaleField.Unwrap("scale");
-            return new ObjectMotionSiFrame(startTime, endTime, translation, rotation, scale);
+            return new Mech3DotNet.Json.Anim.Events.ObjectMotionSiFrame(startTime, endTime, translation, rotation, scale);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectMotionSiFrame value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectMotionSiFrame value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("start_time");

@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
     public enum ElseIfVariant
     {
@@ -9,34 +9,34 @@ namespace Mech3DotNet.Json
         PlayerFirstPerson,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ElseIfConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.ElseIfConverter))]
     public class ElseIf : Mech3DotNet.Json.Converters.IDiscriminatedUnion<ElseIfVariant>
     {
-        public ElseIf(RandomWeightCond value)
+        public ElseIf(Mech3DotNet.Json.Anim.Events.RandomWeightCond value)
         {
             this.value = value;
             Variant = ElseIfVariant.RandomWeight;
         }
 
-        public ElseIf(PlayerRangeCond value)
+        public ElseIf(Mech3DotNet.Json.Anim.Events.PlayerRangeCond value)
         {
             this.value = value;
             Variant = ElseIfVariant.PlayerRange;
         }
 
-        public ElseIf(AnimationLodCond value)
+        public ElseIf(Mech3DotNet.Json.Anim.Events.AnimationLodCond value)
         {
             this.value = value;
             Variant = ElseIfVariant.AnimationLod;
         }
 
-        public ElseIf(HwRenderCond value)
+        public ElseIf(Mech3DotNet.Json.Anim.Events.HwRenderCond value)
         {
             this.value = value;
             Variant = ElseIfVariant.HwRender;
         }
 
-        public ElseIf(PlayerFirstPersonCond value)
+        public ElseIf(Mech3DotNet.Json.Anim.Events.PlayerFirstPersonCond value)
         {
             this.value = value;
             Variant = ElseIfVariant.PlayerFirstPerson;

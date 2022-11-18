@@ -1,14 +1,14 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class CallAnimationConverter : Mech3DotNet.Json.Converters.StructConverter<CallAnimation>
+    public class CallAnimationConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.CallAnimation>
     {
-        protected override CallAnimation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.CallAnimation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var waitForCompletionField = new Mech3DotNet.Json.Converters.Option<ushort?>(null);
-            var parametersField = new Mech3DotNet.Json.Converters.Option<CallAnimationParameters>();
+            var parametersField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.CallAnimationParameters>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -33,7 +33,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "parameters":
                         {
-                            CallAnimationParameters? __value = ReadFieldValue<CallAnimationParameters?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.CallAnimationParameters? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.CallAnimationParameters?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'parameters' was null for 'CallAnimation'");
@@ -53,10 +53,10 @@ namespace Mech3DotNet.Json.Converters
             var name = nameField.Unwrap("name");
             var waitForCompletion = waitForCompletionField.Unwrap("wait_for_completion");
             var parameters = parametersField.Unwrap("parameters");
-            return new CallAnimation(name, waitForCompletion, parameters);
+            return new Mech3DotNet.Json.Anim.Events.CallAnimation(name, waitForCompletion, parameters);
         }
 
-        public override void Write(Utf8JsonWriter writer, CallAnimation value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.CallAnimation value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

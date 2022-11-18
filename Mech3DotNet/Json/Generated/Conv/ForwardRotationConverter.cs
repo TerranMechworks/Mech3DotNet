@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ForwardRotationConverter : Mech3DotNet.Json.Converters.UnionConverter<ForwardRotation>
+    public class ForwardRotationConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Anim.Events.ForwardRotation>
     {
-        public override ForwardRotation ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Anim.Events.ForwardRotation ReadUnitVariant(string? name)
         {
             switch (name)
             {
@@ -31,19 +31,19 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override ForwardRotation ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Anim.Events.ForwardRotation ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "Time":
                     {
-                        var inner = JsonSerializer.Deserialize<ForwardRotationTime>(ref reader, options);
-                        return new ForwardRotation(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ForwardRotationTime>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.ForwardRotation(inner);
                     }
                 case "Distance":
                     {
-                        var inner = JsonSerializer.Deserialize<ForwardRotationDistance>(ref reader, options);
-                        return new ForwardRotation(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ForwardRotationDistance>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.ForwardRotation(inner);
                     }
                 case null:
                     {
@@ -58,22 +58,22 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, ForwardRotation value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ForwardRotation value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case ForwardRotationVariant.Time:
+                case Mech3DotNet.Json.Anim.Events.ForwardRotationVariant.Time:
                     {
-                        var inner = value.As<ForwardRotationTime>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ForwardRotationTime>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Time");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case ForwardRotationVariant.Distance:
+                case Mech3DotNet.Json.Anim.Events.ForwardRotationVariant.Distance:
                     {
-                        var inner = value.As<ForwardRotationDistance>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ForwardRotationDistance>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Distance");
                         JsonSerializer.Serialize(writer, inner, options);

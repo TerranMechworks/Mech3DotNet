@@ -1,12 +1,12 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.Object3dPmConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.Object3dPmConverter))]
     public class Object3dPm
     {
         public string name;
-        public Transformation? transformation;
+        public Mech3DotNet.Json.Gamez.Nodes.Transformation? transformation;
         public uint matrixSigns;
-        public NodeFlags flags;
+        public Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags;
         public int meshIndex;
         public uint? parent;
         public System.Collections.Generic.List<uint> children;
@@ -15,11 +15,11 @@ namespace Mech3DotNet.Json
         public uint childrenArrayPtr;
         public uint unk044;
         public uint unk112;
-        public BoundingBox unk116;
-        public BoundingBox unk140;
-        public BoundingBox unk164;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164;
 
-        public Object3dPm(string name, Transformation? transformation, uint matrixSigns, NodeFlags flags, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, uint unk044, uint unk112, BoundingBox unk116, BoundingBox unk140, BoundingBox unk164)
+        public Object3dPm(string name, Mech3DotNet.Json.Gamez.Nodes.Transformation? transformation, uint matrixSigns, Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, uint unk044, uint unk112, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164)
         {
             this.name = name;
             this.transformation = transformation;

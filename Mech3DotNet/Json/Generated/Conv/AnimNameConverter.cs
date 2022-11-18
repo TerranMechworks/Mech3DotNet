@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class AnimNameConverter : Mech3DotNet.Json.Converters.StructConverter<AnimName>
+    public class AnimNameConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.AnimName>
     {
-        protected override AnimName ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.AnimName ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var padField = new Mech3DotNet.Json.Converters.Option<byte[]>();
@@ -48,10 +48,10 @@ namespace Mech3DotNet.Json.Converters
             var name = nameField.Unwrap("name");
             var pad = padField.Unwrap("pad");
             var unknown = unknownField.Unwrap("unknown");
-            return new AnimName(name, pad, unknown);
+            return new Mech3DotNet.Json.Anim.AnimName(name, pad, unknown);
         }
 
-        public override void Write(Utf8JsonWriter writer, AnimName value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.AnimName value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

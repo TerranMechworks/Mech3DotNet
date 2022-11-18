@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class PrereqParentConverter : Mech3DotNet.Json.Converters.StructConverter<PrereqParent>
+    public class PrereqParentConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.PrereqParent>
     {
-        protected override PrereqParent ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.PrereqParent ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var requiredField = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -56,10 +56,10 @@ namespace Mech3DotNet.Json.Converters
             var required = requiredField.Unwrap("required");
             var active = activeField.Unwrap("active");
             var pointer = pointerField.Unwrap("pointer");
-            return new PrereqParent(name, required, active, pointer);
+            return new Mech3DotNet.Json.Anim.PrereqParent(name, required, active, pointer);
         }
 
-        public override void Write(Utf8JsonWriter writer, PrereqParent value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.PrereqParent value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

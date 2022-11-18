@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Types.Converters
 {
-    public class QuaternionConverter : Mech3DotNet.Json.Converters.StructConverter<Quaternion>
+    public class QuaternionConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Types.Quaternion>
     {
-        protected override Quaternion ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Types.Quaternion ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var xField = new Mech3DotNet.Json.Converters.Option<float>();
             var yField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -51,10 +51,10 @@ namespace Mech3DotNet.Json.Converters
             var y = yField.Unwrap("y");
             var z = zField.Unwrap("z");
             var w = wField.Unwrap("w");
-            return new Quaternion(x, y, z, w);
+            return new Mech3DotNet.Json.Types.Quaternion(x, y, z, w);
         }
 
-        public override void Write(Utf8JsonWriter writer, Quaternion value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Types.Quaternion value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("x");

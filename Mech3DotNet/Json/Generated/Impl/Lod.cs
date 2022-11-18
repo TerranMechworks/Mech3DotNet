@@ -1,24 +1,24 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.LodConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.LodConverter))]
     public class Lod
     {
         public string name;
         public bool level;
-        public Range range;
+        public Mech3DotNet.Json.Types.Range range;
         public float unk60;
         public uint? unk76;
-        public NodeFlags flags;
+        public Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags;
         public uint zoneId;
-        public AreaPartition? areaPartition;
+        public Mech3DotNet.Json.Gamez.Nodes.AreaPartition? areaPartition;
         public uint parent;
         public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint parentArrayPtr;
         public uint childrenArrayPtr;
-        public BoundingBox unk116;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116;
 
-        public Lod(string name, bool level, Range range, float unk60, uint? unk76, NodeFlags flags, uint zoneId, AreaPartition? areaPartition, uint parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, BoundingBox unk116)
+        public Lod(string name, bool level, Mech3DotNet.Json.Types.Range range, float unk60, uint? unk76, Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags, uint zoneId, Mech3DotNet.Json.Gamez.Nodes.AreaPartition? areaPartition, uint parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116)
         {
             this.name = name;
             this.level = level;

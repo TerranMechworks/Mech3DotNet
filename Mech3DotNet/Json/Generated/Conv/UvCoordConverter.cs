@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Converters
 {
-    public class UvCoordConverter : Mech3DotNet.Json.Converters.StructConverter<UvCoord>
+    public class UvCoordConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.UvCoord>
     {
-        protected override UvCoord ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.UvCoord ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var uField = new Mech3DotNet.Json.Converters.Option<float>();
             var vField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var u = uField.Unwrap("u");
             var v = vField.Unwrap("v");
-            return new UvCoord(u, v);
+            return new Mech3DotNet.Json.Gamez.Mesh.UvCoord(u, v);
         }
 
-        public override void Write(Utf8JsonWriter writer, UvCoord value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.UvCoord value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("u");

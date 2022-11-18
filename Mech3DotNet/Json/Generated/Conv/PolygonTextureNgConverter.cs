@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Ng.Converters
 {
-    public class PolygonTextureNgConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonTextureNg>
+    public class PolygonTextureNgConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg>
     {
-        protected override PolygonTextureNg ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var textureIndexField = new Mech3DotNet.Json.Converters.Option<uint>();
-            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<UvCoord>>();
+            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -21,7 +21,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "uv_coords":
                         {
-                            System.Collections.Generic.List<UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<UvCoord>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'uv_coords' was null for 'PolygonTextureNg'");
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var textureIndex = textureIndexField.Unwrap("texture_index");
             var uvCoords = uvCoordsField.Unwrap("uv_coords");
-            return new PolygonTextureNg(textureIndex, uvCoords);
+            return new Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg(textureIndex, uvCoords);
         }
 
-        public override void Write(Utf8JsonWriter writer, PolygonTextureNg value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("texture_index");

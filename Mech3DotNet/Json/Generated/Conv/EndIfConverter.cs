@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class EndIfConverter : Mech3DotNet.Json.Converters.StructConverter<EndIf>
+    public class EndIfConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.EndIf>
     {
-        protected override EndIf ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.EndIf ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -19,10 +19,10 @@ namespace Mech3DotNet.Json.Converters
                 }
             }
             // pray there are no naming collisions
-            return new EndIf();
+            return new Mech3DotNet.Json.Anim.Events.EndIf();
         }
 
-        public override void Write(Utf8JsonWriter writer, EndIf value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.EndIf value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();

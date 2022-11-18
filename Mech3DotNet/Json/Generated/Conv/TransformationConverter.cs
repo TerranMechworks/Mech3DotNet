@@ -1,14 +1,14 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class TransformationConverter : Mech3DotNet.Json.Converters.StructConverter<Transformation>
+    public class TransformationConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Transformation>
     {
-        protected override Transformation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.Transformation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var rotationField = new Mech3DotNet.Json.Converters.Option<Vec3>();
-            var translationField = new Mech3DotNet.Json.Converters.Option<Vec3>();
-            var matrixField = new Mech3DotNet.Json.Converters.Option<Matrix?>();
+            var rotationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
+            var translationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
+            var matrixField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Matrix?>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -16,19 +16,19 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "rotation":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             rotationField.Set(__value);
                             break;
                         }
                     case "translation":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             translationField.Set(__value);
                             break;
                         }
                     case "matrix":
                         {
-                            Matrix? __value = ReadFieldValue<Matrix?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Matrix? __value = ReadFieldValue<Mech3DotNet.Json.Types.Matrix?>(ref __reader, __options);
                             matrixField.Set(__value);
                             break;
                         }
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var rotation = rotationField.Unwrap("rotation");
             var translation = translationField.Unwrap("translation");
             var matrix = matrixField.Unwrap("matrix");
-            return new Transformation(rotation, translation, matrix);
+            return new Mech3DotNet.Json.Gamez.Nodes.Transformation(rotation, translation, matrix);
         }
 
-        public override void Write(Utf8JsonWriter writer, Transformation value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Transformation value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("rotation");

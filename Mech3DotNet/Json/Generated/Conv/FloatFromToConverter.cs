@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class FloatFromToConverter : Mech3DotNet.Json.Converters.StructConverter<FloatFromTo>
+    public class FloatFromToConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.FloatFromTo>
     {
-        protected override FloatFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.FloatFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var fromField = new Mech3DotNet.Json.Converters.Option<float>();
             var toField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var from = fromField.Unwrap("from");
             var to = toField.Unwrap("to");
             var delta = deltaField.Unwrap("delta");
-            return new FloatFromTo(from, to, delta);
+            return new Mech3DotNet.Json.Anim.Events.FloatFromTo(from, to, delta);
         }
 
-        public override void Write(Utf8JsonWriter writer, FloatFromTo value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.FloatFromTo value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("from");

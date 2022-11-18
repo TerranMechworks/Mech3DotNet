@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
-using Mech3DotNet.Json;
+using Mech3DotNet.Json.Anim;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class NodeFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<NodeFlags>
+    public class NodeFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.NodeFlags>
     {
-        protected override NodeFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.NodeFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var altitudeSurfaceField = new Mech3DotNet.Json.Converters.Option<bool>(false);
             var intersectSurfaceField = new Mech3DotNet.Json.Converters.Option<bool>(false);
@@ -115,10 +115,10 @@ namespace Mech3DotNet.Json.Converters
             var clipTo = clipToField.Unwrap("clip_to");
             var unk25 = unk25Field.Unwrap("unk25");
             var unk28 = unk28Field.Unwrap("unk28");
-            return new NodeFlags(altitudeSurface, intersectSurface, intersectBbox, landmark, unk08, hasMesh, unk10, terrain, canModify, clipTo, unk25, unk28);
+            return new Mech3DotNet.Json.Gamez.Nodes.NodeFlags(altitudeSurface, intersectSurface, intersectBbox, landmark, unk08, hasMesh, unk10, terrain, canModify, clipTo, unk25, unk28);
         }
 
-        public override void Write(Utf8JsonWriter writer, NodeFlags value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.NodeFlags value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             if (value.altitudeSurface != false)

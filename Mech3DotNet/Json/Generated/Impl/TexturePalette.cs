@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Image
 {
     public enum TexturePaletteVariant
     {
@@ -7,7 +7,7 @@ namespace Mech3DotNet.Json
         Global,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.TexturePaletteConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Image.Converters.TexturePaletteConverter))]
     public class TexturePalette : Mech3DotNet.Json.Converters.IDiscriminatedUnion<TexturePaletteVariant>
     {
         public sealed class None
@@ -21,13 +21,13 @@ namespace Mech3DotNet.Json
             Variant = TexturePaletteVariant.None;
         }
 
-        public TexturePalette(PaletteData value)
+        public TexturePalette(Mech3DotNet.Json.Image.PaletteData value)
         {
             this.value = value;
             Variant = TexturePaletteVariant.Local;
         }
 
-        public TexturePalette(GlobalPalette value)
+        public TexturePalette(Mech3DotNet.Json.Image.GlobalPalette value)
         {
             this.value = value;
             Variant = TexturePaletteVariant.Global;

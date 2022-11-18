@@ -1,12 +1,12 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.BoundingBoxConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.BoundingBoxConverter))]
     public class BoundingBox
     {
-        public Vec3 a;
-        public Vec3 b;
+        public Mech3DotNet.Json.Types.Vec3 a;
+        public Mech3DotNet.Json.Types.Vec3 b;
 
-        public BoundingBox(Vec3 a, Vec3 b)
+        public BoundingBox(Mech3DotNet.Json.Types.Vec3 a, Mech3DotNet.Json.Types.Vec3 b)
         {
             this.a = a;
             this.b = b;

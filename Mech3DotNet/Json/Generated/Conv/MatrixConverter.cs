@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Types.Converters
 {
-    public class MatrixConverter : Mech3DotNet.Json.Converters.StructConverter<Matrix>
+    public class MatrixConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Types.Matrix>
     {
-        protected override Matrix ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Types.Matrix ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var aField = new Mech3DotNet.Json.Converters.Option<float>();
             var bField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -91,10 +91,10 @@ namespace Mech3DotNet.Json.Converters
             var g = gField.Unwrap("g");
             var h = hField.Unwrap("h");
             var i = iField.Unwrap("i");
-            return new Matrix(a, b, c, d, e, f, g, h, i);
+            return new Mech3DotNet.Json.Types.Matrix(a, b, c, d, e, f, g, h, i);
         }
 
-        public override void Write(Utf8JsonWriter writer, Matrix value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Types.Matrix value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("a");

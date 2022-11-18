@@ -1,13 +1,13 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ObjectTranslateStateConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.ObjectTranslateStateConverter))]
     public class ObjectTranslateState
     {
         public string node;
-        public Vec3 translate;
+        public Mech3DotNet.Json.Types.Vec3 translate;
         public string? atNode = null;
 
-        public ObjectTranslateState(string node, Vec3 translate, string? atNode)
+        public ObjectTranslateState(string node, Mech3DotNet.Json.Types.Vec3 translate, string? atNode)
         {
             this.node = node;
             this.translate = translate;

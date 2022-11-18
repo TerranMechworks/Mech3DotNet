@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class NodePmConverter : Mech3DotNet.Json.Converters.UnionConverter<NodePm>
+    public class NodePmConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Gamez.Nodes.NodePm>
     {
-        public override NodePm ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Gamez.Nodes.NodePm ReadUnitVariant(string? name)
         {
             switch (name)
             {
@@ -31,29 +31,29 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override NodePm ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Gamez.Nodes.NodePm ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "Lod":
                     {
-                        var inner = JsonSerializer.Deserialize<LodPm>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Gamez.Nodes.LodPm>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Lod' was null for 'NodePm'");
                             throw new JsonException();
                         }
-                        return new NodePm(inner);
+                        return new Mech3DotNet.Json.Gamez.Nodes.NodePm(inner);
                     }
                 case "Object3d":
                     {
-                        var inner = JsonSerializer.Deserialize<Object3dPm>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Gamez.Nodes.Object3dPm>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Object3d' was null for 'NodePm'");
                             throw new JsonException();
                         }
-                        return new NodePm(inner);
+                        return new Mech3DotNet.Json.Gamez.Nodes.NodePm(inner);
                     }
                 case null:
                     {
@@ -68,22 +68,22 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, NodePm value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.NodePm value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case NodePmVariant.Lod:
+                case Mech3DotNet.Json.Gamez.Nodes.NodePmVariant.Lod:
                     {
-                        var inner = value.As<LodPm>();
+                        var inner = value.As<Mech3DotNet.Json.Gamez.Nodes.LodPm>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Lod");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case NodePmVariant.Object3d:
+                case Mech3DotNet.Json.Gamez.Nodes.NodePmVariant.Object3d:
                     {
-                        var inner = value.As<Object3dPm>();
+                        var inner = value.As<Mech3DotNet.Json.Gamez.Nodes.Object3dPm>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Object3d");
                         JsonSerializer.Serialize(writer, inner, options);

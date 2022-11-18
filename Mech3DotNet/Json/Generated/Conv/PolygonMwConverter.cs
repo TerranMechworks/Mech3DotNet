@@ -1,15 +1,15 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Mw.Converters
 {
-    public class PolygonMwConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonMw>
+    public class PolygonMwConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.Mw.PolygonMw>
     {
-        protected override PolygonMw ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.Mw.PolygonMw ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var vertexIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
-            var vertexColorsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Color>>();
+            var vertexColorsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Types.Color>>();
             var normalIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>?>();
-            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<UvCoord>?>();
+            var uvCoordsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>?>();
             var textureIndexField = new Mech3DotNet.Json.Converters.Option<uint>();
             var textureInfoField = new Mech3DotNet.Json.Converters.Option<uint>();
             var unk04Field = new Mech3DotNet.Json.Converters.Option<int>();
@@ -38,7 +38,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "vertex_colors":
                         {
-                            System.Collections.Generic.List<Color>? __value = ReadFieldValue<System.Collections.Generic.List<Color>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Types.Color>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Types.Color>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertex_colors' was null for 'PolygonMw'");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "uv_coords":
                         {
-                            System.Collections.Generic.List<UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<UvCoord>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>?>(ref __reader, __options);
                             uvCoordsField.Set(__value);
                             break;
                         }
@@ -141,10 +141,10 @@ namespace Mech3DotNet.Json.Converters
             var uvsPtr = uvsPtrField.Unwrap("uvs_ptr");
             var colorsPtr = colorsPtrField.Unwrap("colors_ptr");
             var unkPtr = unkPtrField.Unwrap("unk_ptr");
-            return new PolygonMw(vertexIndices, vertexColors, normalIndices, uvCoords, textureIndex, textureInfo, unk04, unkBit, vtxBit, verticesPtr, normalsPtr, uvsPtr, colorsPtr, unkPtr);
+            return new Mech3DotNet.Json.Gamez.Mesh.Mw.PolygonMw(vertexIndices, vertexColors, normalIndices, uvCoords, textureIndex, textureInfo, unk04, unkBit, vtxBit, verticesPtr, normalsPtr, uvsPtr, colorsPtr, unkPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, PolygonMw value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.Mw.PolygonMw value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("vertex_indices");

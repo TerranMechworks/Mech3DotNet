@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Materials.Converters
 {
-    public class MaterialConverter : Mech3DotNet.Json.Converters.UnionConverter<Material>
+    public class MaterialConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Gamez.Materials.Material>
     {
-        public override Material ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Gamez.Materials.Material ReadUnitVariant(string? name)
         {
             switch (name)
             {
@@ -31,29 +31,29 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override Material ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Gamez.Materials.Material ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "Textured":
                     {
-                        var inner = JsonSerializer.Deserialize<TexturedMaterial>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Gamez.Materials.TexturedMaterial>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Textured' was null for 'Material'");
                             throw new JsonException();
                         }
-                        return new Material(inner);
+                        return new Mech3DotNet.Json.Gamez.Materials.Material(inner);
                     }
                 case "Colored":
                     {
-                        var inner = JsonSerializer.Deserialize<ColoredMaterial>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Gamez.Materials.ColoredMaterial>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Colored' was null for 'Material'");
                             throw new JsonException();
                         }
-                        return new Material(inner);
+                        return new Mech3DotNet.Json.Gamez.Materials.Material(inner);
                     }
                 case null:
                     {
@@ -68,22 +68,22 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, Material value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Materials.Material value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case MaterialVariant.Textured:
+                case Mech3DotNet.Json.Gamez.Materials.MaterialVariant.Textured:
                     {
-                        var inner = value.As<TexturedMaterial>();
+                        var inner = value.As<Mech3DotNet.Json.Gamez.Materials.TexturedMaterial>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Textured");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case MaterialVariant.Colored:
+                case Mech3DotNet.Json.Gamez.Materials.MaterialVariant.Colored:
                     {
-                        var inner = value.As<ColoredMaterial>();
+                        var inner = value.As<Mech3DotNet.Json.Gamez.Materials.ColoredMaterial>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Colored");
                         JsonSerializer.Serialize(writer, inner, options);

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Image.Converters
 {
-    public class GlobalPaletteConverter : Mech3DotNet.Json.Converters.StructConverter<GlobalPalette>
+    public class GlobalPaletteConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Image.GlobalPalette>
     {
-        protected override GlobalPalette ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Image.GlobalPalette ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var indexField = new Mech3DotNet.Json.Converters.Option<int>();
             var countField = new Mech3DotNet.Json.Converters.Option<ushort>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var index = indexField.Unwrap("index");
             var count = countField.Unwrap("count");
-            return new GlobalPalette(index, count);
+            return new Mech3DotNet.Json.Image.GlobalPalette(index, count);
         }
 
-        public override void Write(Utf8JsonWriter writer, GlobalPalette value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Image.GlobalPalette value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("index");

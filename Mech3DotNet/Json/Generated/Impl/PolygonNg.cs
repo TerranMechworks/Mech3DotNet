@@ -1,13 +1,13 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Mesh.Ng
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.PolygonNgConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Mesh.Ng.Converters.PolygonNgConverter))]
     public class PolygonNg
     {
-        public PolygonFlags flags;
+        public Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags flags;
         public System.Collections.Generic.List<uint> vertexIndices;
-        public System.Collections.Generic.List<Color> vertexColors;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Color> vertexColors;
         public System.Collections.Generic.List<uint>? normalIndices;
-        public System.Collections.Generic.List<PolygonTextureNg> textures;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg> textures;
         public int unk04;
         public uint verticesPtr;
         public uint normalsPtr;
@@ -17,7 +17,7 @@ namespace Mech3DotNet.Json
         public uint unk32;
         public uint unk36;
 
-        public PolygonNg(PolygonFlags flags, System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<PolygonTextureNg> textures, int unk04, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unk28, uint unk32, uint unk36)
+        public PolygonNg(Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags flags, System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Mech3DotNet.Json.Types.Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg> textures, int unk04, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unk28, uint unk32, uint unk36)
         {
             this.flags = flags;
             this.vertexIndices = vertexIndices;

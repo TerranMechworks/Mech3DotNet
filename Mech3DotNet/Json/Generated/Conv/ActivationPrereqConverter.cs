@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class ActivationPrereqConverter : Mech3DotNet.Json.Converters.UnionConverter<ActivationPrereq>
+    public class ActivationPrereqConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Anim.ActivationPrereq>
     {
-        public override ActivationPrereq ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Anim.ActivationPrereq ReadUnitVariant(string? name)
         {
             switch (name)
             {
@@ -36,24 +36,24 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override ActivationPrereq ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Anim.ActivationPrereq ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "Animation":
                     {
-                        var inner = JsonSerializer.Deserialize<PrereqAnimation>(ref reader, options);
-                        return new ActivationPrereq(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.PrereqAnimation>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.ActivationPrereq(inner);
                     }
                 case "Parent":
                     {
-                        var inner = JsonSerializer.Deserialize<PrereqParent>(ref reader, options);
-                        return new ActivationPrereq(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.PrereqParent>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.ActivationPrereq(inner);
                     }
                 case "Object":
                     {
-                        var inner = JsonSerializer.Deserialize<PrereqObject>(ref reader, options);
-                        return new ActivationPrereq(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.PrereqObject>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.ActivationPrereq(inner);
                     }
                 case null:
                     {
@@ -68,31 +68,31 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, ActivationPrereq value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.ActivationPrereq value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case ActivationPrereqVariant.Animation:
+                case Mech3DotNet.Json.Anim.ActivationPrereqVariant.Animation:
                     {
-                        var inner = value.As<PrereqAnimation>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.PrereqAnimation>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Animation");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case ActivationPrereqVariant.Parent:
+                case Mech3DotNet.Json.Anim.ActivationPrereqVariant.Parent:
                     {
-                        var inner = value.As<PrereqParent>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.PrereqParent>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Parent");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case ActivationPrereqVariant.Object:
+                case Mech3DotNet.Json.Anim.ActivationPrereqVariant.Object:
                     {
-                        var inner = value.As<PrereqObject>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.PrereqObject>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Object");
                         JsonSerializer.Serialize(writer, inner, options);

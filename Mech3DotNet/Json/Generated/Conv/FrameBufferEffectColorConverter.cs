@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class FrameBufferEffectColorConverter : Mech3DotNet.Json.Converters.StructConverter<FrameBufferEffectColor>
+    public class FrameBufferEffectColorConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.FrameBufferEffectColor>
     {
-        protected override FrameBufferEffectColor ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.FrameBufferEffectColor ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var fromField = new Mech3DotNet.Json.Converters.Option<Rgba>();
-            var toField = new Mech3DotNet.Json.Converters.Option<Rgba>();
+            var fromField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.Rgba>();
+            var toField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.Rgba>();
             var runtimeField = new Mech3DotNet.Json.Converters.Option<float>();
             var fudgeAlphaField = new Mech3DotNet.Json.Converters.Option<bool>(false);
             string? __fieldName = null;
@@ -17,13 +17,13 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "from":
                         {
-                            Rgba __value = ReadFieldValue<Rgba>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.Rgba __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.Rgba>(ref __reader, __options);
                             fromField.Set(__value);
                             break;
                         }
                     case "to":
                         {
-                            Rgba __value = ReadFieldValue<Rgba>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.Rgba __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.Rgba>(ref __reader, __options);
                             toField.Set(__value);
                             break;
                         }
@@ -51,10 +51,10 @@ namespace Mech3DotNet.Json.Converters
             var to = toField.Unwrap("to");
             var runtime = runtimeField.Unwrap("runtime");
             var fudgeAlpha = fudgeAlphaField.Unwrap("fudge_alpha");
-            return new FrameBufferEffectColor(from, to, runtime, fudgeAlpha);
+            return new Mech3DotNet.Json.Anim.Events.FrameBufferEffectColor(from, to, runtime, fudgeAlpha);
         }
 
-        public override void Write(Utf8JsonWriter writer, FrameBufferEffectColor value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.FrameBufferEffectColor value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("from");

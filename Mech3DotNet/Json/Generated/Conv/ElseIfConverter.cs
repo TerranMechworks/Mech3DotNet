@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ElseIfConverter : Mech3DotNet.Json.Converters.UnionConverter<ElseIf>
+    public class ElseIfConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Anim.Events.ElseIf>
     {
-        public override ElseIf ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Anim.Events.ElseIf ReadUnitVariant(string? name)
         {
             switch (name)
             {
@@ -46,34 +46,34 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override ElseIf ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Anim.Events.ElseIf ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "RandomWeight":
                     {
-                        var inner = JsonSerializer.Deserialize<RandomWeightCond>(ref reader, options);
-                        return new ElseIf(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.RandomWeightCond>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.ElseIf(inner);
                     }
                 case "PlayerRange":
                     {
-                        var inner = JsonSerializer.Deserialize<PlayerRangeCond>(ref reader, options);
-                        return new ElseIf(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.PlayerRangeCond>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.ElseIf(inner);
                     }
                 case "AnimationLod":
                     {
-                        var inner = JsonSerializer.Deserialize<AnimationLodCond>(ref reader, options);
-                        return new ElseIf(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.AnimationLodCond>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.ElseIf(inner);
                     }
                 case "HwRender":
                     {
-                        var inner = JsonSerializer.Deserialize<HwRenderCond>(ref reader, options);
-                        return new ElseIf(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.HwRenderCond>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.ElseIf(inner);
                     }
                 case "PlayerFirstPerson":
                     {
-                        var inner = JsonSerializer.Deserialize<PlayerFirstPersonCond>(ref reader, options);
-                        return new ElseIf(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.PlayerFirstPersonCond>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.ElseIf(inner);
                     }
                 case null:
                     {
@@ -88,49 +88,49 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, ElseIf value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ElseIf value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case ElseIfVariant.RandomWeight:
+                case Mech3DotNet.Json.Anim.Events.ElseIfVariant.RandomWeight:
                     {
-                        var inner = value.As<RandomWeightCond>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.RandomWeightCond>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("RandomWeight");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case ElseIfVariant.PlayerRange:
+                case Mech3DotNet.Json.Anim.Events.ElseIfVariant.PlayerRange:
                     {
-                        var inner = value.As<PlayerRangeCond>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.PlayerRangeCond>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("PlayerRange");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case ElseIfVariant.AnimationLod:
+                case Mech3DotNet.Json.Anim.Events.ElseIfVariant.AnimationLod:
                     {
-                        var inner = value.As<AnimationLodCond>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.AnimationLodCond>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("AnimationLod");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case ElseIfVariant.HwRender:
+                case Mech3DotNet.Json.Anim.Events.ElseIfVariant.HwRender:
                     {
-                        var inner = value.As<HwRenderCond>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.HwRenderCond>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("HwRender");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case ElseIfVariant.PlayerFirstPerson:
+                case Mech3DotNet.Json.Anim.Events.ElseIfVariant.PlayerFirstPerson:
                     {
-                        var inner = value.As<PlayerFirstPersonCond>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.PlayerFirstPersonCond>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("PlayerFirstPerson");
                         JsonSerializer.Serialize(writer, inner, options);

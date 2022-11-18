@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Materials.Converters
 {
-    public class CycleDataConverter : Mech3DotNet.Json.Converters.StructConverter<CycleData>
+    public class CycleDataConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Materials.CycleData>
     {
-        protected override CycleData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Materials.CycleData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var texturesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<string>>();
             var unk00Field = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -72,10 +72,10 @@ namespace Mech3DotNet.Json.Converters
             var unk12 = unk12Field.Unwrap("unk12");
             var infoPtr = infoPtrField.Unwrap("info_ptr");
             var dataPtr = dataPtrField.Unwrap("data_ptr");
-            return new CycleData(textures, unk00, unk04, unk12, infoPtr, dataPtr);
+            return new Mech3DotNet.Json.Gamez.Materials.CycleData(textures, unk00, unk04, unk12, infoPtr, dataPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, CycleData value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Materials.CycleData value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("textures");

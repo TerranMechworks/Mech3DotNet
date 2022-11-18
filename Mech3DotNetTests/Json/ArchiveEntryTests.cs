@@ -1,6 +1,5 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using Mech3DotNet.Json;
+using Mech3DotNet.Json.Archive;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mech3DotNetTests.Json

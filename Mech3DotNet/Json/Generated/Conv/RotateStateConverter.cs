@@ -1,22 +1,22 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class RotateStateConverter : Mech3DotNet.Json.Converters.UnionConverter<RotateState>
+    public class RotateStateConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Anim.Events.RotateState>
     {
-        public override RotateState ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Anim.Events.RotateState ReadUnitVariant(string? name)
         {
             switch (name)
             {
                 case "AtNodeXYZ":
                     {
-                        var inner = new RotateState.AtNodeXYZ();
-                        return new RotateState(inner);
+                        var inner = new Mech3DotNet.Json.Anim.Events.RotateState.AtNodeXYZ();
+                        return new Mech3DotNet.Json.Anim.Events.RotateState(inner);
                     }
                 case "AtNodeMatrix":
                     {
-                        var inner = new RotateState.AtNodeMatrix();
-                        return new RotateState(inner);
+                        var inner = new Mech3DotNet.Json.Anim.Events.RotateState.AtNodeMatrix();
+                        return new Mech3DotNet.Json.Anim.Events.RotateState(inner);
                     }
                 case "Absolute":
                     {
@@ -36,14 +36,14 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override RotateState ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Anim.Events.RotateState ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "Absolute":
                     {
-                        var inner = JsonSerializer.Deserialize<Vec3>(ref reader, options);
-                        return new RotateState(inner);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Types.Vec3>(ref reader, options);
+                        return new Mech3DotNet.Json.Anim.Events.RotateState(inner);
                     }
                 case "AtNodeXYZ":
                     {
@@ -68,25 +68,25 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, RotateState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.RotateState value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case RotateStateVariant.Absolute:
+                case Mech3DotNet.Json.Anim.Events.RotateStateVariant.Absolute:
                     {
-                        var inner = value.As<Vec3>();
+                        var inner = value.As<Mech3DotNet.Json.Types.Vec3>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Absolute");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case RotateStateVariant.AtNodeXYZ:
+                case Mech3DotNet.Json.Anim.Events.RotateStateVariant.AtNodeXYZ:
                     {
                         writer.WriteStringValue("AtNodeXYZ");
                         break;
                     }
-                case RotateStateVariant.AtNodeMatrix:
+                case Mech3DotNet.Json.Anim.Events.RotateStateVariant.AtNodeMatrix:
                     {
                         writer.WriteStringValue("AtNodeMatrix");
                         break;

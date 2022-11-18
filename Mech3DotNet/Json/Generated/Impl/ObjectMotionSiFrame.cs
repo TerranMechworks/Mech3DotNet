@@ -1,15 +1,15 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ObjectMotionSiFrameConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.ObjectMotionSiFrameConverter))]
     public class ObjectMotionSiFrame
     {
         public float startTime;
         public float endTime;
-        public TranslateData? translation = null;
-        public RotateData? rotation = null;
-        public ScaleData? scale = null;
+        public Mech3DotNet.Json.Anim.Events.TranslateData? translation = null;
+        public Mech3DotNet.Json.Anim.Events.RotateData? rotation = null;
+        public Mech3DotNet.Json.Anim.Events.ScaleData? scale = null;
 
-        public ObjectMotionSiFrame(float startTime, float endTime, TranslateData? translation, RotateData? rotation, ScaleData? scale)
+        public ObjectMotionSiFrame(float startTime, float endTime, Mech3DotNet.Json.Anim.Events.TranslateData? translation, Mech3DotNet.Json.Anim.Events.RotateData? rotation, Mech3DotNet.Json.Anim.Events.ScaleData? scale)
         {
             this.startTime = startTime;
             this.endTime = endTime;

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectOpacityConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectOpacity>
+    public class ObjectOpacityConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectOpacity>
     {
-        protected override ObjectOpacity ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectOpacity ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var valueField = new Mech3DotNet.Json.Converters.Option<float>();
             var stateField = new Mech3DotNet.Json.Converters.Option<short>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var value = valueField.Unwrap("value");
             var state = stateField.Unwrap("state");
-            return new ObjectOpacity(value, state);
+            return new Mech3DotNet.Json.Anim.Events.ObjectOpacity(value, state);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectOpacity value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectOpacity value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value");

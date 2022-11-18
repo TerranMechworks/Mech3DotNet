@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class NamePtrConverter : Mech3DotNet.Json.Converters.StructConverter<NamePtr>
+    public class NamePtrConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.NamePtr>
     {
-        protected override NamePtr ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.NamePtr ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var pointerField = new Mech3DotNet.Json.Converters.Option<uint>();
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var name = nameField.Unwrap("name");
             var pointer = pointerField.Unwrap("pointer");
-            return new NamePtr(name, pointer);
+            return new Mech3DotNet.Json.Anim.NamePtr(name, pointer);
         }
 
-        public override void Write(Utf8JsonWriter writer, NamePtr value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.NamePtr value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

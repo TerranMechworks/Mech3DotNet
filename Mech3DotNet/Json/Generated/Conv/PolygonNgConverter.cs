@@ -1,16 +1,16 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Ng.Converters
 {
-    public class PolygonNgConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonNg>
+    public class PolygonNgConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonNg>
     {
-        protected override PolygonNg ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonNg ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var flagsField = new Mech3DotNet.Json.Converters.Option<PolygonFlags>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags>();
             var vertexIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
-            var vertexColorsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Color>>();
+            var vertexColorsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Types.Color>>();
             var normalIndicesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>?>();
-            var texturesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<PolygonTextureNg>>();
+            var texturesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg>>();
             var unk04Field = new Mech3DotNet.Json.Converters.Option<int>();
             var verticesPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var normalsPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "flags":
                         {
-                            PolygonFlags? __value = ReadFieldValue<PolygonFlags?>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'flags' was null for 'PolygonNg'");
@@ -48,7 +48,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "vertex_colors":
                         {
-                            System.Collections.Generic.List<Color>? __value = ReadFieldValue<System.Collections.Generic.List<Color>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Types.Color>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Types.Color>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertex_colors' was null for 'PolygonNg'");
@@ -65,7 +65,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "textures":
                         {
-                            System.Collections.Generic.List<PolygonTextureNg>? __value = ReadFieldValue<System.Collections.Generic.List<PolygonTextureNg>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonTextureNg>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'textures' was null for 'PolygonNg'");
@@ -143,10 +143,10 @@ namespace Mech3DotNet.Json.Converters
             var unk28 = unk28Field.Unwrap("unk28");
             var unk32 = unk32Field.Unwrap("unk32");
             var unk36 = unk36Field.Unwrap("unk36");
-            return new PolygonNg(flags, vertexIndices, vertexColors, normalIndices, textures, unk04, verticesPtr, normalsPtr, uvsPtr, colorsPtr, unk28, unk32, unk36);
+            return new Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonNg(flags, vertexIndices, vertexColors, normalIndices, textures, unk04, verticesPtr, normalsPtr, uvsPtr, colorsPtr, unk28, unk32, unk36);
         }
 
-        public override void Write(Utf8JsonWriter writer, PolygonNg value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonNg value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("flags");

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class WindowConverter : Mech3DotNet.Json.Converters.StructConverter<Window>
+    public class WindowConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Window>
     {
-        protected override Window ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.Window ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var resolutionXField = new Mech3DotNet.Json.Converters.Option<uint>();
@@ -56,10 +56,10 @@ namespace Mech3DotNet.Json.Converters
             var resolutionX = resolutionXField.Unwrap("resolution_x");
             var resolutionY = resolutionYField.Unwrap("resolution_y");
             var dataPtr = dataPtrField.Unwrap("data_ptr");
-            return new Window(name, resolutionX, resolutionY, dataPtr);
+            return new Mech3DotNet.Json.Gamez.Nodes.Window(name, resolutionX, resolutionY, dataPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, Window value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Window value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

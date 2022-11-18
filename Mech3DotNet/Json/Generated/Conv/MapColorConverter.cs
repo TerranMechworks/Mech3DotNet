@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Zmap.Converters
 {
-    public class MapColorConverter : Mech3DotNet.Json.Converters.StructConverter<MapColor>
+    public class MapColorConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Zmap.MapColor>
     {
-        protected override MapColor ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Zmap.MapColor ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var rField = new Mech3DotNet.Json.Converters.Option<byte>();
             var gField = new Mech3DotNet.Json.Converters.Option<byte>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var r = rField.Unwrap("r");
             var g = gField.Unwrap("g");
             var b = bField.Unwrap("b");
-            return new MapColor(r, g, b);
+            return new Mech3DotNet.Json.Zmap.MapColor(r, g, b);
         }
 
-        public override void Write(Utf8JsonWriter writer, MapColor value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Zmap.MapColor value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("r");

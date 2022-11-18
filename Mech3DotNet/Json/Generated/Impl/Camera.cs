@@ -1,14 +1,14 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.CameraConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.CameraConverter))]
     public class Camera
     {
         public string name;
-        public Range clip;
-        public Range fov;
+        public Mech3DotNet.Json.Types.Range clip;
+        public Mech3DotNet.Json.Types.Range fov;
         public uint dataPtr;
 
-        public Camera(string name, Range clip, Range fov, uint dataPtr)
+        public Camera(string name, Mech3DotNet.Json.Types.Range clip, Mech3DotNet.Json.Types.Range fov, uint dataPtr)
         {
             this.name = name;
             this.clip = clip;

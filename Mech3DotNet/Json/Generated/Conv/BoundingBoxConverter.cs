@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class BoundingBoxConverter : Mech3DotNet.Json.Converters.StructConverter<BoundingBox>
+    public class BoundingBoxConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>
     {
-        protected override BoundingBox ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.BoundingBox ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var aField = new Mech3DotNet.Json.Converters.Option<Vec3>();
-            var bField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var aField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
+            var bField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -15,13 +15,13 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "a":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             aField.Set(__value);
                             break;
                         }
                     case "b":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             bField.Set(__value);
                             break;
                         }
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var a = aField.Unwrap("a");
             var b = bField.Unwrap("b");
-            return new BoundingBox(a, b);
+            return new Mech3DotNet.Json.Gamez.Nodes.BoundingBox(a, b);
         }
 
-        public override void Write(Utf8JsonWriter writer, BoundingBox value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.BoundingBox value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("a");

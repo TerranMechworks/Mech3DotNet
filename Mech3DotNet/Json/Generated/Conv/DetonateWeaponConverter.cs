@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class DetonateWeaponConverter : Mech3DotNet.Json.Converters.StructConverter<DetonateWeapon>
+    public class DetonateWeaponConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.DetonateWeapon>
     {
-        protected override DetonateWeapon ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.DetonateWeapon ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var atNodeField = new Mech3DotNet.Json.Converters.Option<AtNode>();
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.AtNode>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "at_node":
                         {
-                            AtNode? __value = ReadFieldValue<AtNode?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.AtNode? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.AtNode?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'at_node' was null for 'DetonateWeapon'");
@@ -45,10 +45,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var name = nameField.Unwrap("name");
             var atNode = atNodeField.Unwrap("at_node");
-            return new DetonateWeapon(name, atNode);
+            return new Mech3DotNet.Json.Anim.Events.DetonateWeapon(name, atNode);
         }
 
-        public override void Write(Utf8JsonWriter writer, DetonateWeapon value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.DetonateWeapon value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

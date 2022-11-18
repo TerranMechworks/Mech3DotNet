@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class NamePtrFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<NamePtrFlags>
+    public class NamePtrFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.NamePtrFlags>
     {
-        protected override NamePtrFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.NamePtrFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var pointerField = new Mech3DotNet.Json.Converters.Option<uint>();
@@ -48,10 +48,10 @@ namespace Mech3DotNet.Json.Converters
             var name = nameField.Unwrap("name");
             var pointer = pointerField.Unwrap("pointer");
             var flags = flagsField.Unwrap("flags");
-            return new NamePtrFlags(name, pointer, flags);
+            return new Mech3DotNet.Json.Anim.NamePtrFlags(name, pointer, flags);
         }
 
-        public override void Write(Utf8JsonWriter writer, NamePtrFlags value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.NamePtrFlags value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

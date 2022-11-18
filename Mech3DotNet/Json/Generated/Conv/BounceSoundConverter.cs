@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class BounceSoundConverter : Mech3DotNet.Json.Converters.StructConverter<BounceSound>
+    public class BounceSoundConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.BounceSound>
     {
-        protected override BounceSound ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.BounceSound ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var volumeField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var name = nameField.Unwrap("name");
             var volume = volumeField.Unwrap("volume");
-            return new BounceSound(name, volume);
+            return new Mech3DotNet.Json.Anim.Events.BounceSound(name, volume);
         }
 
-        public override void Write(Utf8JsonWriter writer, BounceSound value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.BounceSound value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

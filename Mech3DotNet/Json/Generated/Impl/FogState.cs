@@ -1,15 +1,15 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.FogStateConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.FogStateConverter))]
     public class FogState
     {
         public string name;
-        public FogType fogType;
-        public Color color;
-        public Range altitude;
-        public Range range;
+        public Mech3DotNet.Json.Anim.Events.FogType fogType;
+        public Mech3DotNet.Json.Types.Color color;
+        public Mech3DotNet.Json.Types.Range altitude;
+        public Mech3DotNet.Json.Types.Range range;
 
-        public FogState(string name, FogType fogType, Color color, Range altitude, Range range)
+        public FogState(string name, Mech3DotNet.Json.Anim.Events.FogType fogType, Mech3DotNet.Json.Types.Color color, Mech3DotNet.Json.Types.Range altitude, Mech3DotNet.Json.Types.Range range)
         {
             this.name = name;
             this.fogType = fogType;

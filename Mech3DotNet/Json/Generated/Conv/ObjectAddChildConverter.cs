@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectAddChildConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectAddChild>
+    public class ObjectAddChildConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectAddChild>
     {
-        protected override ObjectAddChild ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectAddChild ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var parentField = new Mech3DotNet.Json.Converters.Option<string>();
             var childField = new Mech3DotNet.Json.Converters.Option<string>();
@@ -45,10 +45,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var parent = parentField.Unwrap("parent");
             var child = childField.Unwrap("child");
-            return new ObjectAddChild(parent, child);
+            return new Mech3DotNet.Json.Anim.Events.ObjectAddChild(parent, child);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectAddChild value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectAddChild value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("parent");

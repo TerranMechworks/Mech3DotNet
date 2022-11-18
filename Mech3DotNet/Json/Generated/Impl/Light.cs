@@ -1,18 +1,18 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.LightConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.LightConverter))]
     public class Light
     {
         public string name;
-        public Vec3 direction;
+        public Mech3DotNet.Json.Types.Vec3 direction;
         public float diffuse;
         public float ambient;
-        public Color color;
-        public Range range;
+        public Mech3DotNet.Json.Types.Color color;
+        public Mech3DotNet.Json.Types.Range range;
         public uint parentPtr;
         public uint dataPtr;
 
-        public Light(string name, Vec3 direction, float diffuse, float ambient, Color color, Range range, uint parentPtr, uint dataPtr)
+        public Light(string name, Mech3DotNet.Json.Types.Vec3 direction, float diffuse, float ambient, Mech3DotNet.Json.Types.Color color, Mech3DotNet.Json.Types.Range range, uint parentPtr, uint dataPtr)
         {
             this.name = name;
             this.direction = direction;

@@ -3,11 +3,11 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Motion.Converters
 {
     public class MotionFrameConverterFactory : JsonConverterFactory
     {
-        public override bool CanConvert(Type typeToConvert)
+        public override bool CanConvert(System.Type typeToConvert)
         {
             if (!typeToConvert.IsGenericType)
                 return false;
@@ -16,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
             return true;
         }
 
-        public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
+        public override JsonConverter CreateConverter(System.Type type, JsonSerializerOptions options)
         {
             return (JsonConverter)Activator.CreateInstance(
                 typeof(MotionFrameConverter<,>).MakeGenericType(type.GetGenericArguments()),

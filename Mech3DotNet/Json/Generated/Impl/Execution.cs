@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim
 {
     public enum ExecutionVariant
     {
@@ -7,7 +7,7 @@ namespace Mech3DotNet.Json
         None,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ExecutionConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Converters.ExecutionConverter))]
     public class Execution : Mech3DotNet.Json.Converters.IDiscriminatedUnion<ExecutionVariant>
     {
         public sealed class ByZone
@@ -20,7 +20,7 @@ namespace Mech3DotNet.Json
             public None() { }
         }
 
-        public Execution(Range value)
+        public Execution(Mech3DotNet.Json.Types.Range value)
         {
             this.value = value;
             Variant = ExecutionVariant.ByRange;

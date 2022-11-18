@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectOpacityStateConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectOpacityState>
+    public class ObjectOpacityStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectOpacityState>
     {
-        protected override ObjectOpacityState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectOpacityState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var isSetField = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -56,10 +56,10 @@ namespace Mech3DotNet.Json.Converters
             var isSet = isSetField.Unwrap("is_set");
             var state = stateField.Unwrap("state");
             var opacity = opacityField.Unwrap("opacity");
-            return new ObjectOpacityState(node, isSet, state, opacity);
+            return new Mech3DotNet.Json.Anim.Events.ObjectOpacityState(node, isSet, state, opacity);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectOpacityState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectOpacityState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

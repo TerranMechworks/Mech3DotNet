@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ResetAnimationConverter : Mech3DotNet.Json.Converters.StructConverter<ResetAnimation>
+    public class ResetAnimationConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ResetAnimation>
     {
-        protected override ResetAnimation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ResetAnimation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             string? __fieldName = null;
@@ -32,10 +32,10 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var name = nameField.Unwrap("name");
-            return new ResetAnimation(name);
+            return new Mech3DotNet.Json.Anim.Events.ResetAnimation(name);
         }
 
-        public override void Write(Utf8JsonWriter writer, ResetAnimation value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ResetAnimation value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

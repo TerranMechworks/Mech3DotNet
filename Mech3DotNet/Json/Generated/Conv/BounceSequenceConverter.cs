@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class BounceSequenceConverter : Mech3DotNet.Json.Converters.StructConverter<BounceSequence>
+    public class BounceSequenceConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.BounceSequence>
     {
-        protected override BounceSequence ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.BounceSequence ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var seqName0Field = new Mech3DotNet.Json.Converters.Option<string?>();
             var seqName1Field = new Mech3DotNet.Json.Converters.Option<string?>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var seqName0 = seqName0Field.Unwrap("seq_name0");
             var seqName1 = seqName1Field.Unwrap("seq_name1");
             var seqName2 = seqName2Field.Unwrap("seq_name2");
-            return new BounceSequence(seqName0, seqName1, seqName2);
+            return new Mech3DotNet.Json.Anim.Events.BounceSequence(seqName0, seqName1, seqName2);
         }
 
-        public override void Write(Utf8JsonWriter writer, BounceSequence value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.BounceSequence value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("seq_name0");

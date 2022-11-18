@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Motion
 {
     public class MotionFrame<TQuaternion, TVec3>
     {

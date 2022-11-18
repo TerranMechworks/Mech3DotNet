@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectRotateStateConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectRotateState>
+    public class ObjectRotateStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectRotateState>
     {
-        protected override ObjectRotateState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectRotateState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
-            var rotateField = new Mech3DotNet.Json.Converters.Option<RotateState>();
+            var rotateField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.RotateState>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "rotate":
                         {
-                            RotateState? __value = ReadFieldValue<RotateState?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.RotateState? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.RotateState?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'rotate' was null for 'ObjectRotateState'");
@@ -45,10 +45,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var node = nodeField.Unwrap("node");
             var rotate = rotateField.Unwrap("rotate");
-            return new ObjectRotateState(node, rotate);
+            return new Mech3DotNet.Json.Anim.Events.ObjectRotateState(node, rotate);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectRotateState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectRotateState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

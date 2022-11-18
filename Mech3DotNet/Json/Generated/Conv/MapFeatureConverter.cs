@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Zmap.Converters
 {
-    public class MapFeatureConverter : Mech3DotNet.Json.Converters.StructConverter<MapFeature>
+    public class MapFeatureConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Zmap.MapFeature>
     {
-        protected override MapFeature ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Zmap.MapFeature ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var colorField = new Mech3DotNet.Json.Converters.Option<MapColor>();
-            var verticesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MapVertex>>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Zmap.MapColor>();
+            var verticesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Zmap.MapVertex>>();
             var objectiveField = new Mech3DotNet.Json.Converters.Option<int>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -16,13 +16,13 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "color":
                         {
-                            MapColor __value = ReadFieldValue<MapColor>(ref __reader, __options);
+                            Mech3DotNet.Json.Zmap.MapColor __value = ReadFieldValue<Mech3DotNet.Json.Zmap.MapColor>(ref __reader, __options);
                             colorField.Set(__value);
                             break;
                         }
                     case "vertices":
                         {
-                            System.Collections.Generic.List<MapVertex>? __value = ReadFieldValue<System.Collections.Generic.List<MapVertex>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Zmap.MapVertex>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Zmap.MapVertex>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'vertices' was null for 'MapFeature'");
@@ -48,10 +48,10 @@ namespace Mech3DotNet.Json.Converters
             var color = colorField.Unwrap("color");
             var vertices = verticesField.Unwrap("vertices");
             var objective = objectiveField.Unwrap("objective");
-            return new MapFeature(color, vertices, objective);
+            return new Mech3DotNet.Json.Zmap.MapFeature(color, vertices, objective);
         }
 
-        public override void Write(Utf8JsonWriter writer, MapFeature value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Zmap.MapFeature value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("color");

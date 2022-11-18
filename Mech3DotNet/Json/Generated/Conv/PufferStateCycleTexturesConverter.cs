@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class PufferStateCycleTexturesConverter : Mech3DotNet.Json.Converters.StructConverter<PufferStateCycleTextures>
+    public class PufferStateCycleTexturesConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures>
     {
-        protected override PufferStateCycleTextures ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var texture1Field = new Mech3DotNet.Json.Converters.Option<string?>();
             var texture2Field = new Mech3DotNet.Json.Converters.Option<string?>();
@@ -67,10 +67,10 @@ namespace Mech3DotNet.Json.Converters
             var texture4 = texture4Field.Unwrap("texture4");
             var texture5 = texture5Field.Unwrap("texture5");
             var texture6 = texture6Field.Unwrap("texture6");
-            return new PufferStateCycleTextures(texture1, texture2, texture3, texture4, texture5, texture6);
+            return new Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures(texture1, texture2, texture3, texture4, texture5, texture6);
         }
 
-        public override void Write(Utf8JsonWriter writer, PufferStateCycleTextures value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("texture1");

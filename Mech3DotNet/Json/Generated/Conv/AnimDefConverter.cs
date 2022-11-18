@@ -1,18 +1,18 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class AnimDefConverter : Mech3DotNet.Json.Converters.StructConverter<AnimDef>
+    public class AnimDefConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.AnimDef>
     {
-        protected override AnimDef ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.AnimDef ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var animNameField = new Mech3DotNet.Json.Converters.Option<NamePad>();
-            var animRootField = new Mech3DotNet.Json.Converters.Option<NamePad>();
+            var animNameField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.NamePad>();
+            var animRootField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.NamePad>();
             var fileNameField = new Mech3DotNet.Json.Converters.Option<string>();
             var autoResetNodeStatesField = new Mech3DotNet.Json.Converters.Option<bool>();
-            var activationField = new Mech3DotNet.Json.Converters.Option<AnimActivation>();
-            var executionField = new Mech3DotNet.Json.Converters.Option<Execution>();
+            var activationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.AnimActivation>();
+            var executionField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Execution>();
             var networkLogField = new Mech3DotNet.Json.Converters.Option<bool?>(null);
             var saveLogField = new Mech3DotNet.Json.Converters.Option<bool?>(null);
             var hasCallbacksField = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -20,16 +20,16 @@ namespace Mech3DotNet.Json.Converters
             var healthField = new Mech3DotNet.Json.Converters.Option<float>();
             var proximityDamageField = new Mech3DotNet.Json.Converters.Option<bool>();
             var activPrereqMinToSatisfyField = new Mech3DotNet.Json.Converters.Option<byte>();
-            var objectsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NamePad>?>(null);
-            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NamePtr>?>(null);
-            var lightsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NamePtr>?>(null);
-            var puffersField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NamePtrFlags>?>(null);
-            var dynamicSoundsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NamePtr>?>(null);
-            var staticSoundsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NamePad>?>(null);
-            var activPrereqsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<ActivationPrereq>?>(null);
-            var animRefsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NamePad>?>(null);
-            var resetStateField = new Mech3DotNet.Json.Converters.Option<ResetState?>();
-            var sequencesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<SeqDef>>();
+            var objectsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>?>(null);
+            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>?>(null);
+            var lightsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>?>(null);
+            var puffersField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtrFlags>?>(null);
+            var dynamicSoundsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>?>(null);
+            var staticSoundsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>?>(null);
+            var activPrereqsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.ActivationPrereq>?>(null);
+            var animRefsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>?>(null);
+            var resetStateField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.ResetState?>();
+            var sequencesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.SeqDef>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -48,13 +48,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "anim_name":
                         {
-                            NamePad __value = ReadFieldValue<NamePad>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.NamePad __value = ReadFieldValue<Mech3DotNet.Json.Anim.NamePad>(ref __reader, __options);
                             animNameField.Set(__value);
                             break;
                         }
                     case "anim_root":
                         {
-                            NamePad __value = ReadFieldValue<NamePad>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.NamePad __value = ReadFieldValue<Mech3DotNet.Json.Anim.NamePad>(ref __reader, __options);
                             animRootField.Set(__value);
                             break;
                         }
@@ -77,13 +77,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "activation":
                         {
-                            AnimActivation __value = ReadFieldValue<AnimActivation>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.AnimActivation __value = ReadFieldValue<Mech3DotNet.Json.Anim.AnimActivation>(ref __reader, __options);
                             activationField.Set(__value);
                             break;
                         }
                     case "execution":
                         {
-                            Execution? __value = ReadFieldValue<Execution?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Execution? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Execution?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'execution' was null for 'AnimDef'");
@@ -136,61 +136,61 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "objects":
                         {
-                            System.Collections.Generic.List<NamePad>? __value = ReadFieldValue<System.Collections.Generic.List<NamePad>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>?>(ref __reader, __options);
                             objectsField.Set(__value);
                             break;
                         }
                     case "nodes":
                         {
-                            System.Collections.Generic.List<NamePtr>? __value = ReadFieldValue<System.Collections.Generic.List<NamePtr>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>?>(ref __reader, __options);
                             nodesField.Set(__value);
                             break;
                         }
                     case "lights":
                         {
-                            System.Collections.Generic.List<NamePtr>? __value = ReadFieldValue<System.Collections.Generic.List<NamePtr>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>?>(ref __reader, __options);
                             lightsField.Set(__value);
                             break;
                         }
                     case "puffers":
                         {
-                            System.Collections.Generic.List<NamePtrFlags>? __value = ReadFieldValue<System.Collections.Generic.List<NamePtrFlags>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtrFlags>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtrFlags>?>(ref __reader, __options);
                             puffersField.Set(__value);
                             break;
                         }
                     case "dynamic_sounds":
                         {
-                            System.Collections.Generic.List<NamePtr>? __value = ReadFieldValue<System.Collections.Generic.List<NamePtr>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePtr>?>(ref __reader, __options);
                             dynamicSoundsField.Set(__value);
                             break;
                         }
                     case "static_sounds":
                         {
-                            System.Collections.Generic.List<NamePad>? __value = ReadFieldValue<System.Collections.Generic.List<NamePad>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>?>(ref __reader, __options);
                             staticSoundsField.Set(__value);
                             break;
                         }
                     case "activ_prereqs":
                         {
-                            System.Collections.Generic.List<ActivationPrereq>? __value = ReadFieldValue<System.Collections.Generic.List<ActivationPrereq>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.ActivationPrereq>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.ActivationPrereq>?>(ref __reader, __options);
                             activPrereqsField.Set(__value);
                             break;
                         }
                     case "anim_refs":
                         {
-                            System.Collections.Generic.List<NamePad>? __value = ReadFieldValue<System.Collections.Generic.List<NamePad>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.NamePad>?>(ref __reader, __options);
                             animRefsField.Set(__value);
                             break;
                         }
                     case "reset_state":
                         {
-                            ResetState? __value = ReadFieldValue<ResetState?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.ResetState? __value = ReadFieldValue<Mech3DotNet.Json.Anim.ResetState?>(ref __reader, __options);
                             resetStateField.Set(__value);
                             break;
                         }
                     case "sequences":
                         {
-                            System.Collections.Generic.List<SeqDef>? __value = ReadFieldValue<System.Collections.Generic.List<SeqDef>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.SeqDef>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.SeqDef>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'sequences' was null for 'AnimDef'");
@@ -231,10 +231,10 @@ namespace Mech3DotNet.Json.Converters
             var animRefs = animRefsField.Unwrap("anim_refs");
             var resetState = resetStateField.Unwrap("reset_state");
             var sequences = sequencesField.Unwrap("sequences");
-            return new AnimDef(name, animName, animRoot, fileName, autoResetNodeStates, activation, execution, networkLog, saveLog, hasCallbacks, resetTime, health, proximityDamage, activPrereqMinToSatisfy, objects, nodes, lights, puffers, dynamicSounds, staticSounds, activPrereqs, animRefs, resetState, sequences);
+            return new Mech3DotNet.Json.Anim.AnimDef(name, animName, animRoot, fileName, autoResetNodeStates, activation, execution, networkLog, saveLog, hasCallbacks, resetTime, health, proximityDamage, activPrereqMinToSatisfy, objects, nodes, lights, puffers, dynamicSounds, staticSounds, activPrereqs, animRefs, resetState, sequences);
         }
 
-        public override void Write(Utf8JsonWriter writer, AnimDef value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.AnimDef value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

@@ -1,16 +1,16 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectConnectorConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectConnector>
+    public class ObjectConnectorConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectConnector>
     {
-        protected override ObjectConnector ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectConnector ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var fromNodeField = new Mech3DotNet.Json.Converters.Option<string?>(null);
             var toNodeField = new Mech3DotNet.Json.Converters.Option<string?>(null);
-            var fromPosField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
-            var toPosField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
+            var fromPosField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3?>(null);
+            var toPosField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3?>(null);
             var maxLengthField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -42,13 +42,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "from_pos":
                         {
-                            Vec3? __value = ReadFieldValue<Vec3?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3? __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3?>(ref __reader, __options);
                             fromPosField.Set(__value);
                             break;
                         }
                     case "to_pos":
                         {
-                            Vec3? __value = ReadFieldValue<Vec3?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3? __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3?>(ref __reader, __options);
                             toPosField.Set(__value);
                             break;
                         }
@@ -72,10 +72,10 @@ namespace Mech3DotNet.Json.Converters
             var fromPos = fromPosField.Unwrap("from_pos");
             var toPos = toPosField.Unwrap("to_pos");
             var maxLength = maxLengthField.Unwrap("max_length");
-            return new ObjectConnector(node, fromNode, toNode, fromPos, toPos, maxLength);
+            return new Mech3DotNet.Json.Anim.Events.ObjectConnector(node, fromNode, toNode, fromPos, toPos, maxLength);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectConnector value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectConnector value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

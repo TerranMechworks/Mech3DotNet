@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Archive.Converters
 {
-    public class ArchiveEntryConverter : Mech3DotNet.Json.Converters.StructConverter<ArchiveEntry>
+    public class ArchiveEntryConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Archive.ArchiveEntry>
     {
-        protected override ArchiveEntry ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Archive.ArchiveEntry ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var renameField = new Mech3DotNet.Json.Converters.Option<string?>(null);
@@ -48,10 +48,10 @@ namespace Mech3DotNet.Json.Converters
             var name = nameField.Unwrap("name");
             var rename = renameField.Unwrap("rename");
             var garbage = garbageField.Unwrap("garbage");
-            return new ArchiveEntry(name, rename, garbage);
+            return new Mech3DotNet.Json.Archive.ArchiveEntry(name, rename, garbage);
         }
 
-        public override void Write(Utf8JsonWriter writer, ArchiveEntry value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Archive.ArchiveEntry value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

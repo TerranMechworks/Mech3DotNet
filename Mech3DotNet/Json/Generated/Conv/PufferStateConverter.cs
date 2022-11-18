@@ -1,29 +1,29 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class PufferStateConverter : Mech3DotNet.Json.Converters.StructConverter<PufferState>
+    public class PufferStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.PufferState>
     {
-        protected override PufferState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.PufferState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var stateField = new Mech3DotNet.Json.Converters.Option<bool>();
             var translateField = new Mech3DotNet.Json.Converters.Option<bool>();
             var activeStateField = new Mech3DotNet.Json.Converters.Option<int?>(null);
-            var atNodeField = new Mech3DotNet.Json.Converters.Option<AtNode?>(null);
-            var localVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
-            var worldVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
-            var minRandomVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
-            var maxRandomVelocityField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
-            var worldAccelerationField = new Mech3DotNet.Json.Converters.Option<Vec3?>(null);
-            var intervalField = new Mech3DotNet.Json.Converters.Option<Interval>();
-            var sizeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
-            var lifetimeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
-            var startAgeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.AtNode?>(null);
+            var localVelocityField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3?>(null);
+            var worldVelocityField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3?>(null);
+            var minRandomVelocityField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3?>(null);
+            var maxRandomVelocityField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3?>(null);
+            var worldAccelerationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3?>(null);
+            var intervalField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.Interval>();
+            var sizeRangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range?>(null);
+            var lifetimeRangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range?>(null);
+            var startAgeRangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range?>(null);
             var deviationDistanceField = new Mech3DotNet.Json.Converters.Option<float?>(null);
-            var fadeRangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
+            var fadeRangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range?>(null);
             var frictionField = new Mech3DotNet.Json.Converters.Option<float?>(null);
-            var texturesField = new Mech3DotNet.Json.Converters.Option<PufferStateCycleTextures?>(null);
+            var texturesField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures?>(null);
             var growthFactorField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -61,43 +61,43 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "at_node":
                         {
-                            AtNode? __value = ReadFieldValue<AtNode?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.AtNode? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.AtNode?>(ref __reader, __options);
                             atNodeField.Set(__value);
                             break;
                         }
                     case "local_velocity":
                         {
-                            Vec3? __value = ReadFieldValue<Vec3?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3? __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3?>(ref __reader, __options);
                             localVelocityField.Set(__value);
                             break;
                         }
                     case "world_velocity":
                         {
-                            Vec3? __value = ReadFieldValue<Vec3?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3? __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3?>(ref __reader, __options);
                             worldVelocityField.Set(__value);
                             break;
                         }
                     case "min_random_velocity":
                         {
-                            Vec3? __value = ReadFieldValue<Vec3?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3? __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3?>(ref __reader, __options);
                             minRandomVelocityField.Set(__value);
                             break;
                         }
                     case "max_random_velocity":
                         {
-                            Vec3? __value = ReadFieldValue<Vec3?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3? __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3?>(ref __reader, __options);
                             maxRandomVelocityField.Set(__value);
                             break;
                         }
                     case "world_acceleration":
                         {
-                            Vec3? __value = ReadFieldValue<Vec3?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3? __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3?>(ref __reader, __options);
                             worldAccelerationField.Set(__value);
                             break;
                         }
                     case "interval":
                         {
-                            Interval? __value = ReadFieldValue<Interval?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.Interval? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.Interval?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'interval' was null for 'PufferState'");
@@ -108,19 +108,19 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "size_range":
                         {
-                            Range? __value = ReadFieldValue<Range?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range? __value = ReadFieldValue<Mech3DotNet.Json.Types.Range?>(ref __reader, __options);
                             sizeRangeField.Set(__value);
                             break;
                         }
                     case "lifetime_range":
                         {
-                            Range? __value = ReadFieldValue<Range?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range? __value = ReadFieldValue<Mech3DotNet.Json.Types.Range?>(ref __reader, __options);
                             lifetimeRangeField.Set(__value);
                             break;
                         }
                     case "start_age_range":
                         {
-                            Range? __value = ReadFieldValue<Range?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range? __value = ReadFieldValue<Mech3DotNet.Json.Types.Range?>(ref __reader, __options);
                             startAgeRangeField.Set(__value);
                             break;
                         }
@@ -132,7 +132,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "fade_range":
                         {
-                            Range? __value = ReadFieldValue<Range?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range? __value = ReadFieldValue<Mech3DotNet.Json.Types.Range?>(ref __reader, __options);
                             fadeRangeField.Set(__value);
                             break;
                         }
@@ -144,7 +144,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "textures":
                         {
-                            PufferStateCycleTextures? __value = ReadFieldValue<PufferStateCycleTextures?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures?>(ref __reader, __options);
                             texturesField.Set(__value);
                             break;
                         }
@@ -181,10 +181,10 @@ namespace Mech3DotNet.Json.Converters
             var friction = frictionField.Unwrap("friction");
             var textures = texturesField.Unwrap("textures");
             var growthFactor = growthFactorField.Unwrap("growth_factor");
-            return new PufferState(name, state, translate, activeState, atNode, localVelocity, worldVelocity, minRandomVelocity, maxRandomVelocity, worldAcceleration, interval, sizeRange, lifetimeRange, startAgeRange, deviationDistance, fadeRange, friction, textures, growthFactor);
+            return new Mech3DotNet.Json.Anim.Events.PufferState(name, state, translate, activeState, atNode, localVelocity, worldVelocity, minRandomVelocity, maxRandomVelocity, worldAcceleration, interval, sizeRange, lifetimeRange, startAgeRange, deviationDistance, fadeRange, friction, textures, growthFactor);
         }
 
-        public override void Write(Utf8JsonWriter writer, PufferState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.PufferState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

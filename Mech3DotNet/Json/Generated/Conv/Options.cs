@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Mech3DotNet.Json.Converters
@@ -8,9 +7,9 @@ namespace Mech3DotNet.Json.Converters
     {
         public static List<JsonConverter> GetDefaultConverters() => new List<JsonConverter>
         {
-            new MotionConverterFactory(),
-            new MotionFrameConverterFactory(),
-            new MotionPartConverterFactory(),
+            new Mech3DotNet.Json.Motion.Converters.MotionConverterFactory(),
+            new Mech3DotNet.Json.Motion.Converters.MotionFrameConverterFactory(),
+            new Mech3DotNet.Json.Motion.Converters.MotionPartConverterFactory(),
         };
     }
 }

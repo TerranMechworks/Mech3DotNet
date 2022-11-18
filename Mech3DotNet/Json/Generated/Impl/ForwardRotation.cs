@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
     public enum ForwardRotationVariant
     {
@@ -6,16 +6,16 @@ namespace Mech3DotNet.Json
         Distance,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ForwardRotationConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.ForwardRotationConverter))]
     public class ForwardRotation : Mech3DotNet.Json.Converters.IDiscriminatedUnion<ForwardRotationVariant>
     {
-        public ForwardRotation(ForwardRotationTime value)
+        public ForwardRotation(Mech3DotNet.Json.Anim.Events.ForwardRotationTime value)
         {
             this.value = value;
             Variant = ForwardRotationVariant.Time;
         }
 
-        public ForwardRotation(ForwardRotationDistance value)
+        public ForwardRotation(Mech3DotNet.Json.Anim.Events.ForwardRotationDistance value)
         {
             this.value = value;
             Variant = ForwardRotationVariant.Distance;

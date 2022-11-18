@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class EventConverter : Mech3DotNet.Json.Converters.StructConverter<Event>
+    public class EventConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.Event>
     {
-        protected override Event ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.Event ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var dataField = new Mech3DotNet.Json.Converters.Option<EventData>();
-            var startField = new Mech3DotNet.Json.Converters.Option<EventStart?>();
+            var dataField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.EventData>();
+            var startField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.EventStart?>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -15,7 +15,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "data":
                         {
-                            EventData? __value = ReadFieldValue<EventData?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.EventData? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.EventData?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'data' was null for 'Event'");
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "start":
                         {
-                            EventStart? __value = ReadFieldValue<EventStart?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.EventStart? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.EventStart?>(ref __reader, __options);
                             startField.Set(__value);
                             break;
                         }
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var data = dataField.Unwrap("data");
             var start = startField.Unwrap("start");
-            return new Event(data, start);
+            return new Mech3DotNet.Json.Anim.Events.Event(data, start);
         }
 
-        public override void Write(Utf8JsonWriter writer, Event value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.Event value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("data");

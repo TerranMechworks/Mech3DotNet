@@ -1,14 +1,14 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Mesh
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MeshLightConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Mesh.Converters.MeshLightConverter))]
     public class MeshLight
     {
         public uint unk00;
         public uint unk04;
         public float unk08;
-        public System.Collections.Generic.List<Vec3> extra;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> extra;
         public uint unk24;
-        public Color color;
+        public Mech3DotNet.Json.Types.Color color;
         public ushort flags;
         public uint ptr;
         public float unk48;
@@ -19,7 +19,7 @@ namespace Mech3DotNet.Json
         public float unk68;
         public float unk72;
 
-        public MeshLight(uint unk00, uint unk04, float unk08, System.Collections.Generic.List<Vec3> extra, uint unk24, Color color, ushort flags, uint ptr, float unk48, float unk52, float unk56, uint unk60, float unk64, float unk68, float unk72)
+        public MeshLight(uint unk00, uint unk04, float unk08, System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> extra, uint unk24, Mech3DotNet.Json.Types.Color color, ushort flags, uint ptr, float unk48, float unk52, float unk56, uint unk60, float unk64, float unk68, float unk72)
         {
             this.unk00 = unk00;
             this.unk04 = unk04;

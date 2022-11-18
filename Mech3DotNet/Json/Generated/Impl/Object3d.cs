@@ -1,25 +1,25 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.Object3dConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.Object3dConverter))]
     public class Object3d
     {
         public string name;
-        public Transformation? transformation;
+        public Mech3DotNet.Json.Gamez.Nodes.Transformation? transformation;
         public uint matrixSigns;
-        public NodeFlags flags;
+        public Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags;
         public uint zoneId;
-        public AreaPartition? areaPartition;
+        public Mech3DotNet.Json.Gamez.Nodes.AreaPartition? areaPartition;
         public int meshIndex;
         public uint? parent;
         public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint parentArrayPtr;
         public uint childrenArrayPtr;
-        public BoundingBox unk116;
-        public BoundingBox unk140;
-        public BoundingBox unk164;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140;
+        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164;
 
-        public Object3d(string name, Transformation? transformation, uint matrixSigns, NodeFlags flags, uint zoneId, AreaPartition? areaPartition, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, BoundingBox unk116, BoundingBox unk140, BoundingBox unk164)
+        public Object3d(string name, Mech3DotNet.Json.Gamez.Nodes.Transformation? transformation, uint matrixSigns, Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags, uint zoneId, Mech3DotNet.Json.Gamez.Nodes.AreaPartition? areaPartition, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164)
         {
             this.name = name;
             this.transformation = transformation;

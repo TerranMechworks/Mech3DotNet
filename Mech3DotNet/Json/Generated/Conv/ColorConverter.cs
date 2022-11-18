@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Types.Converters
 {
-    public class ColorConverter : Mech3DotNet.Json.Converters.StructConverter<Color>
+    public class ColorConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Types.Color>
     {
-        protected override Color ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Types.Color ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var rField = new Mech3DotNet.Json.Converters.Option<float>();
             var gField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var r = rField.Unwrap("r");
             var g = gField.Unwrap("g");
             var b = bField.Unwrap("b");
-            return new Color(r, g, b);
+            return new Mech3DotNet.Json.Types.Color(r, g, b);
         }
 
-        public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Types.Color value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("r");

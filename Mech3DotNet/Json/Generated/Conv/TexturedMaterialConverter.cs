@@ -1,14 +1,14 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Materials.Converters
 {
-    public class TexturedMaterialConverter : Mech3DotNet.Json.Converters.StructConverter<TexturedMaterial>
+    public class TexturedMaterialConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Materials.TexturedMaterial>
     {
-        protected override TexturedMaterial ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Materials.TexturedMaterial ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var textureField = new Mech3DotNet.Json.Converters.Option<string>();
             var pointerField = new Mech3DotNet.Json.Converters.Option<uint>(0);
-            var cycleField = new Mech3DotNet.Json.Converters.Option<CycleData?>(null);
+            var cycleField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Materials.CycleData?>(null);
             var specularField = new Mech3DotNet.Json.Converters.Option<float>();
             var flagField = new Mech3DotNet.Json.Converters.Option<bool>();
             string? __fieldName = null;
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "cycle":
                         {
-                            CycleData? __value = ReadFieldValue<CycleData?>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.Materials.CycleData? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Materials.CycleData?>(ref __reader, __options);
                             cycleField.Set(__value);
                             break;
                         }
@@ -64,10 +64,10 @@ namespace Mech3DotNet.Json.Converters
             var cycle = cycleField.Unwrap("cycle");
             var specular = specularField.Unwrap("specular");
             var flag = flagField.Unwrap("flag");
-            return new TexturedMaterial(texture, pointer, cycle, specular, flag);
+            return new Mech3DotNet.Json.Gamez.Materials.TexturedMaterial(texture, pointer, cycle, specular, flag);
         }
 
-        public override void Write(Utf8JsonWriter writer, TexturedMaterial value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Materials.TexturedMaterial value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("texture");

@@ -1,12 +1,12 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ResetStateConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Converters.ResetStateConverter))]
     public class ResetState
     {
-        public System.Collections.Generic.List<Event> events;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.Event> events;
         public uint pointer;
 
-        public ResetState(System.Collections.Generic.List<Event> events, uint pointer)
+        public ResetState(System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.Event> events, uint pointer)
         {
             this.events = events;
             this.pointer = pointer;

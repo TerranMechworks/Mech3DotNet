@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Nodes
 {
     public enum NodeMwVariant
     {
@@ -12,52 +12,52 @@ namespace Mech3DotNet.Json
         World,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.NodeMwConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.NodeMwConverter))]
     public class NodeMw : Mech3DotNet.Json.Converters.IDiscriminatedUnion<NodeMwVariant>
     {
-        public NodeMw(Camera value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.Camera value)
         {
             this.value = value;
             Variant = NodeMwVariant.Camera;
         }
 
-        public NodeMw(Display value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.Display value)
         {
             this.value = value;
             Variant = NodeMwVariant.Display;
         }
 
-        public NodeMw(Empty value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.Empty value)
         {
             this.value = value;
             Variant = NodeMwVariant.Empty;
         }
 
-        public NodeMw(Light value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.Light value)
         {
             this.value = value;
             Variant = NodeMwVariant.Light;
         }
 
-        public NodeMw(Lod value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.Lod value)
         {
             this.value = value;
             Variant = NodeMwVariant.Lod;
         }
 
-        public NodeMw(Object3d value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.Object3d value)
         {
             this.value = value;
             Variant = NodeMwVariant.Object3d;
         }
 
-        public NodeMw(Window value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.Window value)
         {
             this.value = value;
             Variant = NodeMwVariant.Window;
         }
 
-        public NodeMw(World value)
+        public NodeMw(Mech3DotNet.Json.Gamez.Nodes.World value)
         {
             this.value = value;
             Variant = NodeMwVariant.World;

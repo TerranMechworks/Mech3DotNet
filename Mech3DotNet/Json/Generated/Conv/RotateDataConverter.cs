@@ -1,12 +1,12 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class RotateDataConverter : Mech3DotNet.Json.Converters.StructConverter<RotateData>
+    public class RotateDataConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.RotateData>
     {
-        protected override RotateData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.RotateData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var valueField = new Mech3DotNet.Json.Converters.Option<Quaternion>();
+            var valueField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Quaternion>();
             var unkField = new Mech3DotNet.Json.Converters.Option<byte[]>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -15,7 +15,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "value":
                         {
-                            Quaternion __value = ReadFieldValue<Quaternion>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Quaternion __value = ReadFieldValue<Mech3DotNet.Json.Types.Quaternion>(ref __reader, __options);
                             valueField.Set(__value);
                             break;
                         }
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var value = valueField.Unwrap("value");
             var unk = unkField.Unwrap("unk");
-            return new RotateData(value, unk);
+            return new Mech3DotNet.Json.Anim.Events.RotateData(value, unk);
         }
 
-        public override void Write(Utf8JsonWriter writer, RotateData value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.RotateData value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value");

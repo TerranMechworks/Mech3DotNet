@@ -1,22 +1,22 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Motion.Converters
 {
-    public class MotionPartConverter<TQuaternion, TVec3> : Mech3DotNet.Json.Converters.StructConverter<MotionPart<TQuaternion, TVec3>>
+    public class MotionPartConverter<TQuaternion, TVec3> : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Motion.MotionPart<TQuaternion, TVec3>>
     {
         private readonly System.Type __framesType;
-        private readonly System.Text.Json.Serialization.JsonConverter<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>?>? __framesConverter;
+        private readonly System.Text.Json.Serialization.JsonConverter<System.Collections.Generic.List<Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>>?>? __framesConverter;
 
         public MotionPartConverter(JsonSerializerOptions options)
         {
-            __framesType = typeof(System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>);
-            __framesConverter = (System.Text.Json.Serialization.JsonConverter<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>?>?)options.GetConverter(__framesType);
+            __framesType = typeof(System.Collections.Generic.List<Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>>);
+            __framesConverter = (System.Text.Json.Serialization.JsonConverter<System.Collections.Generic.List<Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>>?>?)options.GetConverter(__framesType);
         }
 
-        protected override MotionPart<TQuaternion, TVec3> ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Motion.MotionPart<TQuaternion, TVec3> ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var framesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>>();
+            var framesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -36,7 +36,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "frames":
                         {
-                            System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>? __value = ReadFieldGeneric<System.Collections.Generic.List<MotionFrame<TQuaternion, TVec3>>?>(
+                            System.Collections.Generic.List<Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>>? __value = ReadFieldGeneric<System.Collections.Generic.List<Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>>?>(
                                 ref __reader,
                                 __options,
                                 __framesConverter,
@@ -59,10 +59,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var name = nameField.Unwrap("name");
             var frames = framesField.Unwrap("frames");
-            return new MotionPart<TQuaternion, TVec3>(name, frames);
+            return new Mech3DotNet.Json.Motion.MotionPart<TQuaternion, TVec3>(name, frames);
         }
 
-        public override void Write(Utf8JsonWriter writer, MotionPart<TQuaternion, TVec3> value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Motion.MotionPart<TQuaternion, TVec3> value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

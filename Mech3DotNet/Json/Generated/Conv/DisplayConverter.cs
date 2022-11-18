@@ -1,15 +1,15 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class DisplayConverter : Mech3DotNet.Json.Converters.StructConverter<Display>
+    public class DisplayConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Display>
     {
-        protected override Display ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.Display ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var resolutionXField = new Mech3DotNet.Json.Converters.Option<uint>();
             var resolutionYField = new Mech3DotNet.Json.Converters.Option<uint>();
-            var clearColorField = new Mech3DotNet.Json.Converters.Option<Color>();
+            var clearColorField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Color>();
             var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "clear_color":
                         {
-                            Color __value = ReadFieldValue<Color>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Color __value = ReadFieldValue<Mech3DotNet.Json.Types.Color>(ref __reader, __options);
                             clearColorField.Set(__value);
                             break;
                         }
@@ -64,10 +64,10 @@ namespace Mech3DotNet.Json.Converters
             var resolutionY = resolutionYField.Unwrap("resolution_y");
             var clearColor = clearColorField.Unwrap("clear_color");
             var dataPtr = dataPtrField.Unwrap("data_ptr");
-            return new Display(name, resolutionX, resolutionY, clearColor, dataPtr);
+            return new Mech3DotNet.Json.Gamez.Nodes.Display(name, resolutionX, resolutionY, clearColor, dataPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, Display value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Display value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

@@ -1,12 +1,12 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.DetonateWeaponConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.DetonateWeaponConverter))]
     public class DetonateWeapon
     {
         public string name;
-        public AtNode atNode;
+        public Mech3DotNet.Json.Anim.Events.AtNode atNode;
 
-        public DetonateWeapon(string name, AtNode atNode)
+        public DetonateWeapon(string name, Mech3DotNet.Json.Anim.Events.AtNode atNode)
         {
             this.name = name;
             this.atNode = atNode;

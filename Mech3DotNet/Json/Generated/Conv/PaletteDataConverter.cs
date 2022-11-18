@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Image.Converters
 {
-    public class PaletteDataConverter : Mech3DotNet.Json.Converters.StructConverter<PaletteData>
+    public class PaletteDataConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Image.PaletteData>
     {
-        protected override PaletteData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Image.PaletteData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var dataField = new Mech3DotNet.Json.Converters.Option<byte[]>();
             string? __fieldName = null;
@@ -27,10 +27,10 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var data = dataField.Unwrap("data");
-            return new PaletteData(data);
+            return new Mech3DotNet.Json.Image.PaletteData(data);
         }
 
-        public override void Write(Utf8JsonWriter writer, PaletteData value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Image.PaletteData value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("data");

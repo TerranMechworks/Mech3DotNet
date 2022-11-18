@@ -1,17 +1,17 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class LightConverter : Mech3DotNet.Json.Converters.StructConverter<Light>
+    public class LightConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Light>
     {
-        protected override Light ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.Light ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var directionField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var directionField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             var diffuseField = new Mech3DotNet.Json.Converters.Option<float>();
             var ambientField = new Mech3DotNet.Json.Converters.Option<float>();
-            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
-            var rangeField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Color>();
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range>();
             var parentPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
@@ -32,7 +32,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "direction":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             directionField.Set(__value);
                             break;
                         }
@@ -50,13 +50,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "color":
                         {
-                            Color __value = ReadFieldValue<Color>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Color __value = ReadFieldValue<Mech3DotNet.Json.Types.Color>(ref __reader, __options);
                             colorField.Set(__value);
                             break;
                         }
                     case "range":
                         {
-                            Range __value = ReadFieldValue<Range>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range __value = ReadFieldValue<Mech3DotNet.Json.Types.Range>(ref __reader, __options);
                             rangeField.Set(__value);
                             break;
                         }
@@ -88,10 +88,10 @@ namespace Mech3DotNet.Json.Converters
             var range = rangeField.Unwrap("range");
             var parentPtr = parentPtrField.Unwrap("parent_ptr");
             var dataPtr = dataPtrField.Unwrap("data_ptr");
-            return new Light(name, direction, diffuse, ambient, color, range, parentPtr, dataPtr);
+            return new Mech3DotNet.Json.Gamez.Nodes.Light(name, direction, diffuse, ambient, color, range, parentPtr, dataPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, Light value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Light value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

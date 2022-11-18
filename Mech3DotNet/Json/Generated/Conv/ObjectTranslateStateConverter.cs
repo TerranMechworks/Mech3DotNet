@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectTranslateStateConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectTranslateState>
+    public class ObjectTranslateStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectTranslateState>
     {
-        protected override ObjectTranslateState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectTranslateState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
-            var translateField = new Mech3DotNet.Json.Converters.Option<Vec3>();
+            var translateField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             var atNodeField = new Mech3DotNet.Json.Converters.Option<string?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -27,7 +27,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "translate":
                         {
-                            Vec3 __value = ReadFieldValue<Vec3>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Vec3 __value = ReadFieldValue<Mech3DotNet.Json.Types.Vec3>(ref __reader, __options);
                             translateField.Set(__value);
                             break;
                         }
@@ -48,10 +48,10 @@ namespace Mech3DotNet.Json.Converters
             var node = nodeField.Unwrap("node");
             var translate = translateField.Unwrap("translate");
             var atNode = atNodeField.Unwrap("at_node");
-            return new ObjectTranslateState(node, translate, atNode);
+            return new Mech3DotNet.Json.Anim.Events.ObjectTranslateState(node, translate, atNode);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectTranslateState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectTranslateState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

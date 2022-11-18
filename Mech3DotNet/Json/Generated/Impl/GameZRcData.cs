@@ -1,15 +1,15 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.GameZRcDataConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Converters.GameZRcDataConverter))]
     public class GameZRcData
     {
         public System.Collections.Generic.List<string> textures;
-        public System.Collections.Generic.List<Material> materials;
-        public System.Collections.Generic.List<MeshRc> meshes;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Materials.Material> materials;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Rc.MeshRc> meshes;
         public byte[] nodes;
-        public GameZRcMetadata metadata;
+        public Mech3DotNet.Json.Gamez.GameZRcMetadata metadata;
 
-        public GameZRcData(System.Collections.Generic.List<string> textures, System.Collections.Generic.List<Material> materials, System.Collections.Generic.List<MeshRc> meshes, byte[] nodes, GameZRcMetadata metadata)
+        public GameZRcData(System.Collections.Generic.List<string> textures, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Materials.Material> materials, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Rc.MeshRc> meshes, byte[] nodes, Mech3DotNet.Json.Gamez.GameZRcMetadata metadata)
         {
             this.textures = textures;
             this.materials = materials;

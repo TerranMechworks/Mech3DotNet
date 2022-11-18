@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class PartitionConverter : Mech3DotNet.Json.Converters.StructConverter<Partition>
+    public class PartitionConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Partition>
     {
-        protected override Partition ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.Partition ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var xField = new Mech3DotNet.Json.Converters.Option<int>();
             var yField = new Mech3DotNet.Json.Converters.Option<int>();
@@ -80,10 +80,10 @@ namespace Mech3DotNet.Json.Converters
             var zMid = zMidField.Unwrap("z_mid");
             var nodes = nodesField.Unwrap("nodes");
             var ptr = ptrField.Unwrap("ptr");
-            return new Partition(x, y, zMin, zMax, zMid, nodes, ptr);
+            return new Mech3DotNet.Json.Gamez.Nodes.Partition(x, y, zMin, zMax, zMid, nodes, ptr);
         }
 
-        public override void Write(Utf8JsonWriter writer, Partition value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Partition value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("x");

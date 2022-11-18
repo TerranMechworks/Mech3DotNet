@@ -1,17 +1,17 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectMotionFromToConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotionFromTo>
+    public class ObjectMotionFromToConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectMotionFromTo>
     {
-        protected override ObjectMotionFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectMotionFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var runTimeField = new Mech3DotNet.Json.Converters.Option<float>();
-            var morphField = new Mech3DotNet.Json.Converters.Option<FloatFromTo?>(null);
-            var translateField = new Mech3DotNet.Json.Converters.Option<Vec3FromTo?>(null);
-            var rotateField = new Mech3DotNet.Json.Converters.Option<Vec3FromTo?>(null);
-            var scaleField = new Mech3DotNet.Json.Converters.Option<Vec3FromTo?>(null);
+            var morphField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.FloatFromTo?>(null);
+            var translateField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.Vec3FromTo?>(null);
+            var rotateField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.Vec3FromTo?>(null);
+            var scaleField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.Vec3FromTo?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -36,25 +36,25 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "morph":
                         {
-                            FloatFromTo? __value = ReadFieldValue<FloatFromTo?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.FloatFromTo? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.FloatFromTo?>(ref __reader, __options);
                             morphField.Set(__value);
                             break;
                         }
                     case "translate":
                         {
-                            Vec3FromTo? __value = ReadFieldValue<Vec3FromTo?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.Vec3FromTo? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.Vec3FromTo?>(ref __reader, __options);
                             translateField.Set(__value);
                             break;
                         }
                     case "rotate":
                         {
-                            Vec3FromTo? __value = ReadFieldValue<Vec3FromTo?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.Vec3FromTo? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.Vec3FromTo?>(ref __reader, __options);
                             rotateField.Set(__value);
                             break;
                         }
                     case "scale":
                         {
-                            Vec3FromTo? __value = ReadFieldValue<Vec3FromTo?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.Vec3FromTo? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.Vec3FromTo?>(ref __reader, __options);
                             scaleField.Set(__value);
                             break;
                         }
@@ -72,10 +72,10 @@ namespace Mech3DotNet.Json.Converters
             var translate = translateField.Unwrap("translate");
             var rotate = rotateField.Unwrap("rotate");
             var scale = scaleField.Unwrap("scale");
-            return new ObjectMotionFromTo(node, runTime, morph, translate, rotate, scale);
+            return new Mech3DotNet.Json.Anim.Events.ObjectMotionFromTo(node, runTime, morph, translate, rotate, scale);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectMotionFromTo value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectMotionFromTo value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

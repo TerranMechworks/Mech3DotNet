@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class LightStateConverter : Mech3DotNet.Json.Converters.StructConverter<LightState>
+    public class LightStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.LightState>
     {
-        protected override LightState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.LightState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var activeStateField = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -12,9 +12,9 @@ namespace Mech3DotNet.Json.Converters
             var saturatedField = new Mech3DotNet.Json.Converters.Option<bool?>(null);
             var subdivideField = new Mech3DotNet.Json.Converters.Option<bool?>(null);
             var static_Field = new Mech3DotNet.Json.Converters.Option<bool?>(null);
-            var atNodeField = new Mech3DotNet.Json.Converters.Option<AtNode?>(null);
-            var rangeField = new Mech3DotNet.Json.Converters.Option<Range?>(null);
-            var colorField = new Mech3DotNet.Json.Converters.Option<Color?>(null);
+            var atNodeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.AtNode?>(null);
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range?>(null);
+            var colorField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Color?>(null);
             var ambientField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             var diffuseField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
@@ -65,19 +65,19 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "at_node":
                         {
-                            AtNode? __value = ReadFieldValue<AtNode?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.AtNode? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.AtNode?>(ref __reader, __options);
                             atNodeField.Set(__value);
                             break;
                         }
                     case "range":
                         {
-                            Range? __value = ReadFieldValue<Range?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range? __value = ReadFieldValue<Mech3DotNet.Json.Types.Range?>(ref __reader, __options);
                             rangeField.Set(__value);
                             break;
                         }
                     case "color":
                         {
-                            Color? __value = ReadFieldValue<Color?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Color? __value = ReadFieldValue<Mech3DotNet.Json.Types.Color?>(ref __reader, __options);
                             colorField.Set(__value);
                             break;
                         }
@@ -112,10 +112,10 @@ namespace Mech3DotNet.Json.Converters
             var color = colorField.Unwrap("color");
             var ambient = ambientField.Unwrap("ambient");
             var diffuse = diffuseField.Unwrap("diffuse");
-            return new LightState(name, activeState, directional, saturated, subdivide, static_, atNode, range, color, ambient, diffuse);
+            return new Mech3DotNet.Json.Anim.Events.LightState(name, activeState, directional, saturated, subdivide, static_, atNode, range, color, ambient, diffuse);
         }
 
-        public override void Write(Utf8JsonWriter writer, LightState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.LightState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

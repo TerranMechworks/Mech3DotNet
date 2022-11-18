@@ -1,16 +1,16 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Converters
 {
-    public class GameZMwDataConverter : Mech3DotNet.Json.Converters.StructConverter<GameZMwData>
+    public class GameZMwDataConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.GameZMwData>
     {
-        protected override GameZMwData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.GameZMwData ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var texturesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<string>>();
-            var materialsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Material>>();
-            var meshesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MeshMw>>();
-            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NodeMw>>();
-            var metadataField = new Mech3DotNet.Json.Converters.Option<GameZMwMetadata>();
+            var materialsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Materials.Material>>();
+            var meshesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.MeshMw>>();
+            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.NodeMw>>();
+            var metadataField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.GameZMwMetadata>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -29,7 +29,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "materials":
                         {
-                            System.Collections.Generic.List<Material>? __value = ReadFieldValue<System.Collections.Generic.List<Material>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Materials.Material>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Materials.Material>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'materials' was null for 'GameZMwData'");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "meshes":
                         {
-                            System.Collections.Generic.List<MeshMw>? __value = ReadFieldValue<System.Collections.Generic.List<MeshMw>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.MeshMw>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.MeshMw>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'meshes' was null for 'GameZMwData'");
@@ -51,7 +51,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "nodes":
                         {
-                            System.Collections.Generic.List<NodeMw>? __value = ReadFieldValue<System.Collections.Generic.List<NodeMw>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.NodeMw>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.NodeMw>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'nodes' was null for 'GameZMwData'");
@@ -62,7 +62,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "metadata":
                         {
-                            GameZMwMetadata? __value = ReadFieldValue<GameZMwMetadata?>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.GameZMwMetadata? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.GameZMwMetadata?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'metadata' was null for 'GameZMwData'");
@@ -84,10 +84,10 @@ namespace Mech3DotNet.Json.Converters
             var meshes = meshesField.Unwrap("meshes");
             var nodes = nodesField.Unwrap("nodes");
             var metadata = metadataField.Unwrap("metadata");
-            return new GameZMwData(textures, materials, meshes, nodes, metadata);
+            return new Mech3DotNet.Json.Gamez.GameZMwData(textures, materials, meshes, nodes, metadata);
         }
 
-        public override void Write(Utf8JsonWriter writer, GameZMwData value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.GameZMwData value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("textures");

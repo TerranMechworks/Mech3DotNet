@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
     public enum CallAnimationParametersVariant
     {
@@ -8,7 +8,7 @@ namespace Mech3DotNet.Json
         None,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.CallAnimationParametersConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.CallAnimationParametersConverter))]
     public class CallAnimationParameters : Mech3DotNet.Json.Converters.IDiscriminatedUnion<CallAnimationParametersVariant>
     {
         public sealed class None
@@ -16,19 +16,19 @@ namespace Mech3DotNet.Json
             public None() { }
         }
 
-        public CallAnimationParameters(CallAnimationAtNode value)
+        public CallAnimationParameters(Mech3DotNet.Json.Anim.Events.CallAnimationAtNode value)
         {
             this.value = value;
             Variant = CallAnimationParametersVariant.AtNode;
         }
 
-        public CallAnimationParameters(CallAnimationWithNode value)
+        public CallAnimationParameters(Mech3DotNet.Json.Anim.Events.CallAnimationWithNode value)
         {
             this.value = value;
             Variant = CallAnimationParametersVariant.WithNode;
         }
 
-        public CallAnimationParameters(CallAnimationTargetNode value)
+        public CallAnimationParameters(Mech3DotNet.Json.Anim.Events.CallAnimationTargetNode value)
         {
             this.value = value;
             Variant = CallAnimationParametersVariant.TargetNode;

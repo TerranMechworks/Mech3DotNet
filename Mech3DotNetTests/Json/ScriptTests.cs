@@ -1,6 +1,6 @@
 using System;
 using System.Text.Json;
-using Mech3DotNet.Json;
+using Mech3DotNet.Json.Interp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mech3DotNetTests.Json

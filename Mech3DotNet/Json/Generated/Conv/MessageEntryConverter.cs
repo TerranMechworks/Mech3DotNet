@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Messages.Converters
 {
-    public class MessageEntryConverter : Mech3DotNet.Json.Converters.StructConverter<MessageEntry>
+    public class MessageEntryConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Messages.MessageEntry>
     {
-        protected override MessageEntry ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Messages.MessageEntry ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var keyField = new Mech3DotNet.Json.Converters.Option<string>();
             var idField = new Mech3DotNet.Json.Converters.Option<uint>();
@@ -53,10 +53,10 @@ namespace Mech3DotNet.Json.Converters
             var key = keyField.Unwrap("key");
             var id = idField.Unwrap("id");
             var value = valueField.Unwrap("value");
-            return new MessageEntry(key, id, value);
+            return new Mech3DotNet.Json.Messages.MessageEntry(key, id, value);
         }
 
-        public override void Write(Utf8JsonWriter writer, MessageEntry value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Messages.MessageEntry value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("key");

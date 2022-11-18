@@ -1,13 +1,13 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mechlib.Converters
 {
-    public class ModelMwConverter : Mech3DotNet.Json.Converters.StructConverter<ModelMw>
+    public class ModelMwConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mechlib.ModelMw>
     {
-        protected override ModelMw ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mechlib.ModelMw ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<NodeMw>>();
-            var meshesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MeshMw>>();
+            var nodesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.NodeMw>>();
+            var meshesField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.MeshMw>>();
             var meshPtrsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<int>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -16,7 +16,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "nodes":
                         {
-                            System.Collections.Generic.List<NodeMw>? __value = ReadFieldValue<System.Collections.Generic.List<NodeMw>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.NodeMw>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.NodeMw>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'nodes' was null for 'ModelMw'");
@@ -27,7 +27,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "meshes":
                         {
-                            System.Collections.Generic.List<MeshMw>? __value = ReadFieldValue<System.Collections.Generic.List<MeshMw>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.MeshMw>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.MeshMw>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'meshes' was null for 'ModelMw'");
@@ -58,10 +58,10 @@ namespace Mech3DotNet.Json.Converters
             var nodes = nodesField.Unwrap("nodes");
             var meshes = meshesField.Unwrap("meshes");
             var meshPtrs = meshPtrsField.Unwrap("mesh_ptrs");
-            return new ModelMw(nodes, meshes, meshPtrs);
+            return new Mech3DotNet.Json.Gamez.Mechlib.ModelMw(nodes, meshes, meshPtrs);
         }
 
-        public override void Write(Utf8JsonWriter writer, ModelMw value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mechlib.ModelMw value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("nodes");

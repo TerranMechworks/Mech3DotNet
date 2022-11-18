@@ -1,12 +1,12 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Converters
 {
-    public class ResetStateConverter : Mech3DotNet.Json.Converters.StructConverter<ResetState>
+    public class ResetStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.ResetState>
     {
-        protected override ResetState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.ResetState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
-            var eventsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Event>>();
+            var eventsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.Event>>();
             var pointerField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -15,7 +15,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "events":
                         {
-                            System.Collections.Generic.List<Event>? __value = ReadFieldValue<System.Collections.Generic.List<Event>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.Event>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Anim.Events.Event>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'events' was null for 'ResetState'");
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var events = eventsField.Unwrap("events");
             var pointer = pointerField.Unwrap("pointer");
-            return new ResetState(events, pointer);
+            return new Mech3DotNet.Json.Anim.ResetState(events, pointer);
         }
 
-        public override void Write(Utf8JsonWriter writer, ResetState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.ResetState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("events");

@@ -1,15 +1,15 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Zmap.Converters
 {
-    public class MapRcConverter : Mech3DotNet.Json.Converters.StructConverter<MapRc>
+    public class MapRcConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Zmap.MapRc>
     {
-        protected override MapRc ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Zmap.MapRc ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var unk04Field = new Mech3DotNet.Json.Converters.Option<uint>();
             var maxXField = new Mech3DotNet.Json.Converters.Option<float>();
             var maxYField = new Mech3DotNet.Json.Converters.Option<float>();
-            var featuresField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<MapFeature>>();
+            var featuresField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Zmap.MapFeature>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "features":
                         {
-                            System.Collections.Generic.List<MapFeature>? __value = ReadFieldValue<System.Collections.Generic.List<MapFeature>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Zmap.MapFeature>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Zmap.MapFeature>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'features' was null for 'MapRc'");
@@ -56,10 +56,10 @@ namespace Mech3DotNet.Json.Converters
             var maxX = maxXField.Unwrap("max_x");
             var maxY = maxYField.Unwrap("max_y");
             var features = featuresField.Unwrap("features");
-            return new MapRc(unk04, maxX, maxY, features);
+            return new Mech3DotNet.Json.Zmap.MapRc(unk04, maxX, maxY, features);
         }
 
-        public override void Write(Utf8JsonWriter writer, MapRc value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Zmap.MapRc value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("unk04");

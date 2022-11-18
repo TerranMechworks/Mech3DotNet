@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Materials
 {
     public enum MaterialVariant
     {
@@ -6,16 +6,16 @@ namespace Mech3DotNet.Json
         Colored,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MaterialConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Materials.Converters.MaterialConverter))]
     public class Material : Mech3DotNet.Json.Converters.IDiscriminatedUnion<MaterialVariant>
     {
-        public Material(TexturedMaterial value)
+        public Material(Mech3DotNet.Json.Gamez.Materials.TexturedMaterial value)
         {
             this.value = value;
             Variant = MaterialVariant.Textured;
         }
 
-        public Material(ColoredMaterial value)
+        public Material(Mech3DotNet.Json.Gamez.Materials.ColoredMaterial value)
         {
             this.value = value;
             Variant = MaterialVariant.Colored;

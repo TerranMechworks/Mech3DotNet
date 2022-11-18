@@ -1,12 +1,12 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Mesh.Mw
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.PolygonMwConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Mesh.Mw.Converters.PolygonMwConverter))]
     public class PolygonMw
     {
         public System.Collections.Generic.List<uint> vertexIndices;
-        public System.Collections.Generic.List<Color> vertexColors;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Color> vertexColors;
         public System.Collections.Generic.List<uint>? normalIndices;
-        public System.Collections.Generic.List<UvCoord>? uvCoords;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>? uvCoords;
         public uint textureIndex;
         public uint textureInfo;
         public int unk04;
@@ -18,7 +18,7 @@ namespace Mech3DotNet.Json
         public uint colorsPtr;
         public uint unkPtr;
 
-        public PolygonMw(System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<UvCoord>? uvCoords, uint textureIndex, uint textureInfo, int unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
+        public PolygonMw(System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Mech3DotNet.Json.Types.Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.UvCoord>? uvCoords, uint textureIndex, uint textureInfo, int unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
         {
             this.vertexIndices = vertexIndices;
             this.vertexColors = vertexColors;

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class EventDataConverter : Mech3DotNet.Json.Converters.UnionConverter<EventData>
+    public class EventDataConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Anim.Events.EventData>
     {
-        public override EventData ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Anim.Events.EventData ReadUnitVariant(string? name)
         {
             switch (name)
             {
@@ -186,339 +186,339 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override EventData ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Anim.Events.EventData ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "Sound":
                     {
-                        var inner = JsonSerializer.Deserialize<Sound>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.Sound>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Sound' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "SoundNode":
                     {
-                        var inner = JsonSerializer.Deserialize<SoundNode>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.SoundNode>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'SoundNode' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "LightState":
                     {
-                        var inner = JsonSerializer.Deserialize<LightState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.LightState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'LightState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "LightAnimation":
                     {
-                        var inner = JsonSerializer.Deserialize<LightAnimation>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.LightAnimation>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'LightAnimation' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectActiveState":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectActiveState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectActiveState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectActiveState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectTranslateState":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectTranslateState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectTranslateState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectTranslateState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectScaleState":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectScaleState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectScaleState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectScaleState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectRotateState":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectRotateState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectRotateState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectRotateState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectMotion":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectMotion>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectMotion>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectMotion' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectMotionFromTo":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectMotionFromTo>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectMotionFromTo>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectMotionFromTo' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectMotionSIScript":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectMotionSiScript>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectMotionSiScript>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectMotionSIScript' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectOpacityState":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectOpacityState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectOpacityState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectOpacityState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectOpacityFromTo":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectOpacityFromTo>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectOpacityFromTo>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectOpacityFromTo' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectAddChild":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectAddChild>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectAddChild>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectAddChild' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectCycleTexture":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectCycleTexture>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectCycleTexture>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectCycleTexture' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ObjectConnector":
                     {
-                        var inner = JsonSerializer.Deserialize<ObjectConnector>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ObjectConnector>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ObjectConnector' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "CallObjectConnector":
                     {
-                        var inner = JsonSerializer.Deserialize<CallObjectConnector>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.CallObjectConnector>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'CallObjectConnector' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "CallSequence":
                     {
-                        var inner = JsonSerializer.Deserialize<CallSequence>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.CallSequence>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'CallSequence' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "StopSequence":
                     {
-                        var inner = JsonSerializer.Deserialize<StopSequence>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.StopSequence>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'StopSequence' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "CallAnimation":
                     {
-                        var inner = JsonSerializer.Deserialize<CallAnimation>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.CallAnimation>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'CallAnimation' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "StopAnimation":
                     {
-                        var inner = JsonSerializer.Deserialize<StopAnimation>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.StopAnimation>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'StopAnimation' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "ResetAnimation":
                     {
-                        var inner = JsonSerializer.Deserialize<ResetAnimation>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ResetAnimation>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'ResetAnimation' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "InvalidateAnimation":
                     {
-                        var inner = JsonSerializer.Deserialize<InvalidateAnimation>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.InvalidateAnimation>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'InvalidateAnimation' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "FogState":
                     {
-                        var inner = JsonSerializer.Deserialize<FogState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.FogState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'FogState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "Loop":
                     {
-                        var inner = JsonSerializer.Deserialize<Loop>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.Loop>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Loop' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "If":
                     {
-                        var inner = JsonSerializer.Deserialize<If>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.If>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'If' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "Else":
                     {
-                        var inner = JsonSerializer.Deserialize<Else>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.Else>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Else' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "Elif":
                     {
-                        var inner = JsonSerializer.Deserialize<ElseIf>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.ElseIf>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Elif' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "Endif":
                     {
-                        var inner = JsonSerializer.Deserialize<EndIf>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.EndIf>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Endif' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "Callback":
                     {
-                        var inner = JsonSerializer.Deserialize<Callback>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.Callback>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'Callback' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "FrameBufferEffectColorFromTo":
                     {
-                        var inner = JsonSerializer.Deserialize<FrameBufferEffectColor>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.FrameBufferEffectColor>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'FrameBufferEffectColorFromTo' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "DetonateWeapon":
                     {
-                        var inner = JsonSerializer.Deserialize<DetonateWeapon>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.DetonateWeapon>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'DetonateWeapon' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case "PufferState":
                     {
-                        var inner = JsonSerializer.Deserialize<PufferState>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.PufferState>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'PufferState' was null for 'EventData'");
                             throw new JsonException();
                         }
-                        return new EventData(inner);
+                        return new Mech3DotNet.Json.Anim.Events.EventData(inner);
                     }
                 case null:
                     {
@@ -533,301 +533,301 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, EventData value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.EventData value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case EventDataVariant.Sound:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.Sound:
                     {
-                        var inner = value.As<Sound>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.Sound>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Sound");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.SoundNode:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.SoundNode:
                     {
-                        var inner = value.As<SoundNode>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.SoundNode>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("SoundNode");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.LightState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.LightState:
                     {
-                        var inner = value.As<LightState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.LightState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("LightState");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.LightAnimation:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.LightAnimation:
                     {
-                        var inner = value.As<LightAnimation>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.LightAnimation>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("LightAnimation");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectActiveState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectActiveState:
                     {
-                        var inner = value.As<ObjectActiveState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectActiveState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectActiveState");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectTranslateState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectTranslateState:
                     {
-                        var inner = value.As<ObjectTranslateState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectTranslateState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectTranslateState");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectScaleState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectScaleState:
                     {
-                        var inner = value.As<ObjectScaleState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectScaleState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectScaleState");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectRotateState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectRotateState:
                     {
-                        var inner = value.As<ObjectRotateState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectRotateState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectRotateState");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectMotion:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectMotion:
                     {
-                        var inner = value.As<ObjectMotion>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectMotion>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectMotion");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectMotionFromTo:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectMotionFromTo:
                     {
-                        var inner = value.As<ObjectMotionFromTo>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectMotionFromTo>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectMotionFromTo");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectMotionSIScript:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectMotionSIScript:
                     {
-                        var inner = value.As<ObjectMotionSiScript>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectMotionSiScript>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectMotionSIScript");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectOpacityState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectOpacityState:
                     {
-                        var inner = value.As<ObjectOpacityState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectOpacityState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectOpacityState");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectOpacityFromTo:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectOpacityFromTo:
                     {
-                        var inner = value.As<ObjectOpacityFromTo>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectOpacityFromTo>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectOpacityFromTo");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectAddChild:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectAddChild:
                     {
-                        var inner = value.As<ObjectAddChild>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectAddChild>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectAddChild");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectCycleTexture:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectCycleTexture:
                     {
-                        var inner = value.As<ObjectCycleTexture>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectCycleTexture>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectCycleTexture");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ObjectConnector:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ObjectConnector:
                     {
-                        var inner = value.As<ObjectConnector>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ObjectConnector>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ObjectConnector");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.CallObjectConnector:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.CallObjectConnector:
                     {
-                        var inner = value.As<CallObjectConnector>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.CallObjectConnector>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("CallObjectConnector");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.CallSequence:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.CallSequence:
                     {
-                        var inner = value.As<CallSequence>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.CallSequence>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("CallSequence");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.StopSequence:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.StopSequence:
                     {
-                        var inner = value.As<StopSequence>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.StopSequence>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("StopSequence");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.CallAnimation:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.CallAnimation:
                     {
-                        var inner = value.As<CallAnimation>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.CallAnimation>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("CallAnimation");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.StopAnimation:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.StopAnimation:
                     {
-                        var inner = value.As<StopAnimation>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.StopAnimation>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("StopAnimation");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.ResetAnimation:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.ResetAnimation:
                     {
-                        var inner = value.As<ResetAnimation>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ResetAnimation>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("ResetAnimation");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.InvalidateAnimation:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.InvalidateAnimation:
                     {
-                        var inner = value.As<InvalidateAnimation>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.InvalidateAnimation>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("InvalidateAnimation");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.FogState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.FogState:
                     {
-                        var inner = value.As<FogState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.FogState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("FogState");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.Loop:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.Loop:
                     {
-                        var inner = value.As<Loop>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.Loop>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Loop");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.If:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.If:
                     {
-                        var inner = value.As<If>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.If>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("If");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.Else:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.Else:
                     {
-                        var inner = value.As<Else>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.Else>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Else");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.Elif:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.Elif:
                     {
-                        var inner = value.As<ElseIf>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.ElseIf>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Elif");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.Endif:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.Endif:
                     {
-                        var inner = value.As<EndIf>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.EndIf>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Endif");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.Callback:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.Callback:
                     {
-                        var inner = value.As<Callback>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.Callback>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("Callback");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.FrameBufferEffectColorFromTo:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.FrameBufferEffectColorFromTo:
                     {
-                        var inner = value.As<FrameBufferEffectColor>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.FrameBufferEffectColor>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("FrameBufferEffectColorFromTo");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.DetonateWeapon:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.DetonateWeapon:
                     {
-                        var inner = value.As<DetonateWeapon>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.DetonateWeapon>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("DetonateWeapon");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case EventDataVariant.PufferState:
+                case Mech3DotNet.Json.Anim.Events.EventDataVariant.PufferState:
                     {
-                        var inner = value.As<PufferState>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.PufferState>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("PufferState");
                         JsonSerializer.Serialize(writer, inner, options);

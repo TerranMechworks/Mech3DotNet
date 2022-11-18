@@ -1,17 +1,17 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class CallAnimationParametersConverter : Mech3DotNet.Json.Converters.UnionConverter<CallAnimationParameters>
+    public class CallAnimationParametersConverter : Mech3DotNet.Json.Converters.UnionConverter<Mech3DotNet.Json.Anim.Events.CallAnimationParameters>
     {
-        public override CallAnimationParameters ReadUnitVariant(string? name)
+        public override Mech3DotNet.Json.Anim.Events.CallAnimationParameters ReadUnitVariant(string? name)
         {
             switch (name)
             {
                 case "None":
                     {
-                        var inner = new CallAnimationParameters.None();
-                        return new CallAnimationParameters(inner);
+                        var inner = new Mech3DotNet.Json.Anim.Events.CallAnimationParameters.None();
+                        return new Mech3DotNet.Json.Anim.Events.CallAnimationParameters(inner);
                     }
                 case "AtNode":
                     {
@@ -41,39 +41,39 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override CallAnimationParameters ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override Mech3DotNet.Json.Anim.Events.CallAnimationParameters ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
                 case "AtNode":
                     {
-                        var inner = JsonSerializer.Deserialize<CallAnimationAtNode>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.CallAnimationAtNode>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'AtNode' was null for 'CallAnimationParameters'");
                             throw new JsonException();
                         }
-                        return new CallAnimationParameters(inner);
+                        return new Mech3DotNet.Json.Anim.Events.CallAnimationParameters(inner);
                     }
                 case "WithNode":
                     {
-                        var inner = JsonSerializer.Deserialize<CallAnimationWithNode>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.CallAnimationWithNode>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'WithNode' was null for 'CallAnimationParameters'");
                             throw new JsonException();
                         }
-                        return new CallAnimationParameters(inner);
+                        return new Mech3DotNet.Json.Anim.Events.CallAnimationParameters(inner);
                     }
                 case "TargetNode":
                     {
-                        var inner = JsonSerializer.Deserialize<CallAnimationTargetNode>(ref reader, options);
+                        var inner = JsonSerializer.Deserialize<Mech3DotNet.Json.Anim.Events.CallAnimationTargetNode>(ref reader, options);
                         if (inner is null)
                         {
                             System.Diagnostics.Debug.WriteLine("Value of 'TargetNode' was null for 'CallAnimationParameters'");
                             throw new JsonException();
                         }
-                        return new CallAnimationParameters(inner);
+                        return new Mech3DotNet.Json.Anim.Events.CallAnimationParameters(inner);
                     }
                 case "None":
                     {
@@ -93,38 +93,38 @@ namespace Mech3DotNet.Json.Converters
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, CallAnimationParameters value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.CallAnimationParameters value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case CallAnimationParametersVariant.AtNode:
+                case Mech3DotNet.Json.Anim.Events.CallAnimationParametersVariant.AtNode:
                     {
-                        var inner = value.As<CallAnimationAtNode>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.CallAnimationAtNode>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("AtNode");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case CallAnimationParametersVariant.WithNode:
+                case Mech3DotNet.Json.Anim.Events.CallAnimationParametersVariant.WithNode:
                     {
-                        var inner = value.As<CallAnimationWithNode>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.CallAnimationWithNode>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("WithNode");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case CallAnimationParametersVariant.TargetNode:
+                case Mech3DotNet.Json.Anim.Events.CallAnimationParametersVariant.TargetNode:
                     {
-                        var inner = value.As<CallAnimationTargetNode>();
+                        var inner = value.As<Mech3DotNet.Json.Anim.Events.CallAnimationTargetNode>();
                         writer.WriteStartObject();
                         writer.WritePropertyName("TargetNode");
                         JsonSerializer.Serialize(writer, inner, options);
                         writer.WriteEndObject();
                         break;
                     }
-                case CallAnimationParametersVariant.None:
+                case Mech3DotNet.Json.Anim.Events.CallAnimationParametersVariant.None:
                     {
                         writer.WriteStringValue("None");
                         break;

@@ -1,13 +1,13 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Gamez.Mesh.Mw
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.MeshMwConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Mesh.Mw.Converters.MeshMwConverter))]
     public class MeshMw
     {
-        public System.Collections.Generic.List<Vec3> vertices;
-        public System.Collections.Generic.List<Vec3> normals;
-        public System.Collections.Generic.List<Vec3> morphs;
-        public System.Collections.Generic.List<MeshLight> lights;
-        public System.Collections.Generic.List<PolygonMw> polygons;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> vertices;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> normals;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> morphs;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.MeshLight> lights;
+        public System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.PolygonMw> polygons;
         public uint polygonsPtr;
         public uint verticesPtr;
         public uint normalsPtr;
@@ -24,7 +24,7 @@ namespace Mech3DotNet.Json
         public float unk80;
         public float unk84;
 
-        public MeshMw(System.Collections.Generic.List<Vec3> vertices, System.Collections.Generic.List<Vec3> normals, System.Collections.Generic.List<Vec3> morphs, System.Collections.Generic.List<MeshLight> lights, System.Collections.Generic.List<PolygonMw> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
+        public MeshMw(System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> vertices, System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> normals, System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3> morphs, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.MeshLight> lights, System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Mesh.Mw.PolygonMw> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
         {
             this.vertices = vertices;
             this.normals = normals;

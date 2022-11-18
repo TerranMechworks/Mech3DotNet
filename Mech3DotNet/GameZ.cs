@@ -1,4 +1,4 @@
-using Mech3DotNet.Json;
+using Mech3DotNet.Json.Gamez;
 using Mech3DotNet.Unsafe;
 using static Mech3DotNet.Helpers;
 

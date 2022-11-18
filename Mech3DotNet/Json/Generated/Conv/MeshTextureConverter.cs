@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Ng.Converters
 {
-    public class MeshTextureConverter : Mech3DotNet.Json.Converters.StructConverter<MeshTexture>
+    public class MeshTextureConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.Ng.MeshTexture>
     {
-        protected override MeshTexture ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.Ng.MeshTexture ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var textureIndexField = new Mech3DotNet.Json.Converters.Option<uint>();
             var polygonUsageCountField = new Mech3DotNet.Json.Converters.Option<uint>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var textureIndex = textureIndexField.Unwrap("texture_index");
             var polygonUsageCount = polygonUsageCountField.Unwrap("polygon_usage_count");
             var unkPtr = unkPtrField.Unwrap("unk_ptr");
-            return new MeshTexture(textureIndex, polygonUsageCount, unkPtr);
+            return new Mech3DotNet.Json.Gamez.Mesh.Ng.MeshTexture(textureIndex, polygonUsageCount, unkPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, MeshTexture value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.Ng.MeshTexture value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("texture_index");

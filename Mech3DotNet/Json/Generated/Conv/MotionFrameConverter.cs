@@ -1,8 +1,8 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Motion.Converters
 {
-    public class MotionFrameConverter<TQuaternion, TVec3> : Mech3DotNet.Json.Converters.StructConverter<MotionFrame<TQuaternion, TVec3>>
+    public class MotionFrameConverter<TQuaternion, TVec3> : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>>
     {
         private readonly System.Type __translationType;
         private readonly System.Text.Json.Serialization.JsonConverter<TVec3>? __translationConverter;
@@ -17,7 +17,7 @@ namespace Mech3DotNet.Json.Converters
             __rotationConverter = (System.Text.Json.Serialization.JsonConverter<TQuaternion>?)options.GetConverter(__rotationType);
         }
 
-        protected override MotionFrame<TQuaternion, TVec3> ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3> ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var translationField = new Mech3DotNet.Json.Converters.Option<TVec3>();
             var rotationField = new Mech3DotNet.Json.Converters.Option<TQuaternion>();
@@ -56,10 +56,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var translation = translationField.Unwrap("translation");
             var rotation = rotationField.Unwrap("rotation");
-            return new MotionFrame<TQuaternion, TVec3>(translation, rotation);
+            return new Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3>(translation, rotation);
         }
 
-        public override void Write(Utf8JsonWriter writer, MotionFrame<TQuaternion, TVec3> value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Motion.MotionFrame<TQuaternion, TVec3> value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("translation");

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Zmap.Converters
 {
-    public class MapVertexConverter : Mech3DotNet.Json.Converters.StructConverter<MapVertex>
+    public class MapVertexConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Zmap.MapVertex>
     {
-        protected override MapVertex ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Zmap.MapVertex ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var xField = new Mech3DotNet.Json.Converters.Option<float>();
             var zField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var x = xField.Unwrap("x");
             var z = zField.Unwrap("z");
             var y = yField.Unwrap("y");
-            return new MapVertex(x, z, y);
+            return new Mech3DotNet.Json.Zmap.MapVertex(x, z, y);
         }
 
-        public override void Write(Utf8JsonWriter writer, MapVertex value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Zmap.MapVertex value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("x");

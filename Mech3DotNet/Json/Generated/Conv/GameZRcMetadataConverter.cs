@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Converters
 {
-    public class GameZRcMetadataConverter : Mech3DotNet.Json.Converters.StructConverter<GameZRcMetadata>
+    public class GameZRcMetadataConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.GameZRcMetadata>
     {
-        protected override GameZRcMetadata ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.GameZRcMetadata ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var materialArraySizeField = new Mech3DotNet.Json.Converters.Option<short>();
             var meshesArraySizeField = new Mech3DotNet.Json.Converters.Option<int>();
@@ -51,10 +51,10 @@ namespace Mech3DotNet.Json.Converters
             var meshesArraySize = meshesArraySizeField.Unwrap("meshes_array_size");
             var nodeArraySize = nodeArraySizeField.Unwrap("node_array_size");
             var nodeDataCount = nodeDataCountField.Unwrap("node_data_count");
-            return new GameZRcMetadata(materialArraySize, meshesArraySize, nodeArraySize, nodeDataCount);
+            return new Mech3DotNet.Json.Gamez.GameZRcMetadata(materialArraySize, meshesArraySize, nodeArraySize, nodeDataCount);
         }
 
-        public override void Write(Utf8JsonWriter writer, GameZRcMetadata value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.GameZRcMetadata value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("material_array_size");

@@ -1,13 +1,13 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.CallAnimationAtNodeConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.CallAnimationAtNodeConverter))]
     public class CallAnimationAtNode
     {
         public string node;
-        public Vec3? translation;
-        public Vec3? rotation;
+        public Mech3DotNet.Json.Types.Vec3? translation;
+        public Mech3DotNet.Json.Types.Vec3? rotation;
 
-        public CallAnimationAtNode(string node, Vec3? translation, Vec3? rotation)
+        public CallAnimationAtNode(string node, Mech3DotNet.Json.Types.Vec3? translation, Mech3DotNet.Json.Types.Vec3? rotation)
         {
             this.node = node;
             this.translation = translation;

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ForwardRotationDistanceConverter : Mech3DotNet.Json.Converters.StructConverter<ForwardRotationDistance>
+    public class ForwardRotationDistanceConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ForwardRotationDistance>
     {
-        protected override ForwardRotationDistance ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ForwardRotationDistance ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var v1Field = new Mech3DotNet.Json.Converters.Option<float>();
             string? __fieldName = null;
@@ -27,10 +27,10 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var v1 = v1Field.Unwrap("v1");
-            return new ForwardRotationDistance(v1);
+            return new Mech3DotNet.Json.Anim.Events.ForwardRotationDistance(v1);
         }
 
-        public override void Write(Utf8JsonWriter writer, ForwardRotationDistance value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ForwardRotationDistance value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("v1");

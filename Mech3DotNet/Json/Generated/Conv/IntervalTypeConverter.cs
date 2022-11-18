@@ -1,21 +1,21 @@
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class IntervalTypeConverter : Mech3DotNet.Json.Converters.EnumConverter<IntervalType>
+    public class IntervalTypeConverter : Mech3DotNet.Json.Converters.EnumConverter<Mech3DotNet.Json.Anim.Events.IntervalType>
     {
-        public override IntervalType ReadVariant(string? name) => name switch
+        public override Mech3DotNet.Json.Anim.Events.IntervalType ReadVariant(string? name) => name switch
         {
-            "Unset" => IntervalType.Unset,
-            "Time" => IntervalType.Time,
-            "Distance" => IntervalType.Distance,
+            "Unset" => Mech3DotNet.Json.Anim.Events.IntervalType.Unset,
+            "Time" => Mech3DotNet.Json.Anim.Events.IntervalType.Time,
+            "Distance" => Mech3DotNet.Json.Anim.Events.IntervalType.Distance,
             null => DebugAndThrow("Variant cannot be null for 'IntervalType'"),
             _ => DebugAndThrow($"Invalid variant '{name}' for 'IntervalType'"),
         };
 
-        public override string WriteVariant(IntervalType value) => value switch
+        public override string WriteVariant(Mech3DotNet.Json.Anim.Events.IntervalType value) => value switch
         {
-            IntervalType.Unset => "Unset",
-            IntervalType.Time => "Time",
-            IntervalType.Distance => "Distance",
+            Mech3DotNet.Json.Anim.Events.IntervalType.Unset => "Unset",
+            Mech3DotNet.Json.Anim.Events.IntervalType.Time => "Time",
+            Mech3DotNet.Json.Anim.Events.IntervalType.Distance => "Distance",
             _ => throw new System.ArgumentOutOfRangeException("IntervalType"),
         };
     }

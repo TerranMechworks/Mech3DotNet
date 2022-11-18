@@ -1,20 +1,20 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Image
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.TextureInfoConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Image.Converters.TextureInfoConverter))]
     public class TextureInfo
     {
         public string name;
         public string? rename = null;
-        public TextureAlpha alpha;
+        public Mech3DotNet.Json.Image.TextureAlpha alpha;
         public ushort width;
         public ushort height;
-        public TextureStretch stretch;
+        public Mech3DotNet.Json.Image.TextureStretch stretch;
         public bool imageLoaded;
         public bool alphaLoaded;
         public bool paletteLoaded;
-        public TexturePalette palette;
+        public Mech3DotNet.Json.Image.TexturePalette palette;
 
-        public TextureInfo(string name, string? rename, TextureAlpha alpha, ushort width, ushort height, TextureStretch stretch, bool imageLoaded, bool alphaLoaded, bool paletteLoaded, TexturePalette palette)
+        public TextureInfo(string name, string? rename, Mech3DotNet.Json.Image.TextureAlpha alpha, ushort width, ushort height, Mech3DotNet.Json.Image.TextureStretch stretch, bool imageLoaded, bool alphaLoaded, bool paletteLoaded, Mech3DotNet.Json.Image.TexturePalette palette)
         {
             this.name = name;
             this.rename = rename;

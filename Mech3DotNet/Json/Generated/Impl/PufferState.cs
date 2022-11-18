@@ -1,29 +1,29 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.PufferStateConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.PufferStateConverter))]
     public class PufferState
     {
         public string name;
         public bool state;
         public bool translate;
         public int? activeState = null;
-        public AtNode? atNode = null;
-        public Vec3? localVelocity = null;
-        public Vec3? worldVelocity = null;
-        public Vec3? minRandomVelocity = null;
-        public Vec3? maxRandomVelocity = null;
-        public Vec3? worldAcceleration = null;
-        public Interval interval;
-        public Range? sizeRange = null;
-        public Range? lifetimeRange = null;
-        public Range? startAgeRange = null;
+        public Mech3DotNet.Json.Anim.Events.AtNode? atNode = null;
+        public Mech3DotNet.Json.Types.Vec3? localVelocity = null;
+        public Mech3DotNet.Json.Types.Vec3? worldVelocity = null;
+        public Mech3DotNet.Json.Types.Vec3? minRandomVelocity = null;
+        public Mech3DotNet.Json.Types.Vec3? maxRandomVelocity = null;
+        public Mech3DotNet.Json.Types.Vec3? worldAcceleration = null;
+        public Mech3DotNet.Json.Anim.Events.Interval interval;
+        public Mech3DotNet.Json.Types.Range? sizeRange = null;
+        public Mech3DotNet.Json.Types.Range? lifetimeRange = null;
+        public Mech3DotNet.Json.Types.Range? startAgeRange = null;
         public float? deviationDistance = null;
-        public Range? fadeRange = null;
+        public Mech3DotNet.Json.Types.Range? fadeRange = null;
         public float? friction = null;
-        public PufferStateCycleTextures? textures = null;
+        public Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures? textures = null;
         public float? growthFactor = null;
 
-        public PufferState(string name, bool state, bool translate, int? activeState, AtNode? atNode, Vec3? localVelocity, Vec3? worldVelocity, Vec3? minRandomVelocity, Vec3? maxRandomVelocity, Vec3? worldAcceleration, Interval interval, Range? sizeRange, Range? lifetimeRange, Range? startAgeRange, float? deviationDistance, Range? fadeRange, float? friction, PufferStateCycleTextures? textures, float? growthFactor)
+        public PufferState(string name, bool state, bool translate, int? activeState, Mech3DotNet.Json.Anim.Events.AtNode? atNode, Mech3DotNet.Json.Types.Vec3? localVelocity, Mech3DotNet.Json.Types.Vec3? worldVelocity, Mech3DotNet.Json.Types.Vec3? minRandomVelocity, Mech3DotNet.Json.Types.Vec3? maxRandomVelocity, Mech3DotNet.Json.Types.Vec3? worldAcceleration, Mech3DotNet.Json.Anim.Events.Interval interval, Mech3DotNet.Json.Types.Range? sizeRange, Mech3DotNet.Json.Types.Range? lifetimeRange, Mech3DotNet.Json.Types.Range? startAgeRange, float? deviationDistance, Mech3DotNet.Json.Types.Range? fadeRange, float? friction, Mech3DotNet.Json.Anim.Events.PufferStateCycleTextures? textures, float? growthFactor)
         {
             this.name = name;
             this.state = state;

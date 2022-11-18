@@ -1,22 +1,22 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectMotionConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectMotion>
+    public class ObjectMotionConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectMotion>
     {
-        protected override ObjectMotion ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectMotion ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var impactForceField = new Mech3DotNet.Json.Converters.Option<bool>();
-            var gravityField = new Mech3DotNet.Json.Converters.Option<Gravity?>(null);
-            var translationRangeMinField = new Mech3DotNet.Json.Converters.Option<Quaternion?>(null);
-            var translationRangeMaxField = new Mech3DotNet.Json.Converters.Option<Quaternion?>(null);
-            var translationField = new Mech3DotNet.Json.Converters.Option<ObjectMotionTranslation?>(null);
-            var forwardRotationField = new Mech3DotNet.Json.Converters.Option<ForwardRotation?>(null);
-            var xyzRotationField = new Mech3DotNet.Json.Converters.Option<XyzRotation?>(null);
-            var scaleField = new Mech3DotNet.Json.Converters.Option<ObjectMotionScale?>(null);
-            var bounceSequenceField = new Mech3DotNet.Json.Converters.Option<BounceSequence?>(null);
-            var bounceSoundField = new Mech3DotNet.Json.Converters.Option<BounceSound?>(null);
+            var gravityField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.Gravity?>(null);
+            var translationRangeMinField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Quaternion?>(null);
+            var translationRangeMaxField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Quaternion?>(null);
+            var translationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.ObjectMotionTranslation?>(null);
+            var forwardRotationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.ForwardRotation?>(null);
+            var xyzRotationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.XyzRotation?>(null);
+            var scaleField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.ObjectMotionScale?>(null);
+            var bounceSequenceField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.BounceSequence?>(null);
+            var bounceSoundField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.BounceSound?>(null);
             var runtimeField = new Mech3DotNet.Json.Converters.Option<float?>(null);
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -42,55 +42,55 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "gravity":
                         {
-                            Gravity? __value = ReadFieldValue<Gravity?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.Gravity? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.Gravity?>(ref __reader, __options);
                             gravityField.Set(__value);
                             break;
                         }
                     case "translation_range_min":
                         {
-                            Quaternion? __value = ReadFieldValue<Quaternion?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Quaternion? __value = ReadFieldValue<Mech3DotNet.Json.Types.Quaternion?>(ref __reader, __options);
                             translationRangeMinField.Set(__value);
                             break;
                         }
                     case "translation_range_max":
                         {
-                            Quaternion? __value = ReadFieldValue<Quaternion?>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Quaternion? __value = ReadFieldValue<Mech3DotNet.Json.Types.Quaternion?>(ref __reader, __options);
                             translationRangeMaxField.Set(__value);
                             break;
                         }
                     case "translation":
                         {
-                            ObjectMotionTranslation? __value = ReadFieldValue<ObjectMotionTranslation?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.ObjectMotionTranslation? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.ObjectMotionTranslation?>(ref __reader, __options);
                             translationField.Set(__value);
                             break;
                         }
                     case "forward_rotation":
                         {
-                            ForwardRotation? __value = ReadFieldValue<ForwardRotation?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.ForwardRotation? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.ForwardRotation?>(ref __reader, __options);
                             forwardRotationField.Set(__value);
                             break;
                         }
                     case "xyz_rotation":
                         {
-                            XyzRotation? __value = ReadFieldValue<XyzRotation?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.XyzRotation? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.XyzRotation?>(ref __reader, __options);
                             xyzRotationField.Set(__value);
                             break;
                         }
                     case "scale":
                         {
-                            ObjectMotionScale? __value = ReadFieldValue<ObjectMotionScale?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.ObjectMotionScale? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.ObjectMotionScale?>(ref __reader, __options);
                             scaleField.Set(__value);
                             break;
                         }
                     case "bounce_sequence":
                         {
-                            BounceSequence? __value = ReadFieldValue<BounceSequence?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.BounceSequence? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.BounceSequence?>(ref __reader, __options);
                             bounceSequenceField.Set(__value);
                             break;
                         }
                     case "bounce_sound":
                         {
-                            BounceSound? __value = ReadFieldValue<BounceSound?>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.BounceSound? __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.BounceSound?>(ref __reader, __options);
                             bounceSoundField.Set(__value);
                             break;
                         }
@@ -120,10 +120,10 @@ namespace Mech3DotNet.Json.Converters
             var bounceSequence = bounceSequenceField.Unwrap("bounce_sequence");
             var bounceSound = bounceSoundField.Unwrap("bounce_sound");
             var runtime = runtimeField.Unwrap("runtime");
-            return new ObjectMotion(node, impactForce, gravity, translationRangeMin, translationRangeMax, translation, forwardRotation, xyzRotation, scale, bounceSequence, bounceSound, runtime);
+            return new Mech3DotNet.Json.Anim.Events.ObjectMotion(node, impactForce, gravity, translationRangeMin, translationRangeMax, translation, forwardRotation, xyzRotation, scale, bounceSequence, bounceSound, runtime);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectMotion value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectMotion value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

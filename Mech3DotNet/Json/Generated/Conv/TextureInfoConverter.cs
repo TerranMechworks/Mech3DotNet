@@ -1,21 +1,21 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Image.Converters
 {
-    public class TextureInfoConverter : Mech3DotNet.Json.Converters.StructConverter<TextureInfo>
+    public class TextureInfoConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Image.TextureInfo>
     {
-        protected override TextureInfo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Image.TextureInfo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var renameField = new Mech3DotNet.Json.Converters.Option<string?>(null);
-            var alphaField = new Mech3DotNet.Json.Converters.Option<TextureAlpha>();
+            var alphaField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Image.TextureAlpha>();
             var widthField = new Mech3DotNet.Json.Converters.Option<ushort>();
             var heightField = new Mech3DotNet.Json.Converters.Option<ushort>();
-            var stretchField = new Mech3DotNet.Json.Converters.Option<TextureStretch>();
+            var stretchField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Image.TextureStretch>();
             var imageLoadedField = new Mech3DotNet.Json.Converters.Option<bool>();
             var alphaLoadedField = new Mech3DotNet.Json.Converters.Option<bool>();
             var paletteLoadedField = new Mech3DotNet.Json.Converters.Option<bool>();
-            var paletteField = new Mech3DotNet.Json.Converters.Option<TexturePalette>();
+            var paletteField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Image.TexturePalette>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "alpha":
                         {
-                            TextureAlpha __value = ReadFieldValue<TextureAlpha>(ref __reader, __options);
+                            Mech3DotNet.Json.Image.TextureAlpha __value = ReadFieldValue<Mech3DotNet.Json.Image.TextureAlpha>(ref __reader, __options);
                             alphaField.Set(__value);
                             break;
                         }
@@ -58,7 +58,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "stretch":
                         {
-                            TextureStretch __value = ReadFieldValue<TextureStretch>(ref __reader, __options);
+                            Mech3DotNet.Json.Image.TextureStretch __value = ReadFieldValue<Mech3DotNet.Json.Image.TextureStretch>(ref __reader, __options);
                             stretchField.Set(__value);
                             break;
                         }
@@ -82,7 +82,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "palette":
                         {
-                            TexturePalette? __value = ReadFieldValue<TexturePalette?>(ref __reader, __options);
+                            Mech3DotNet.Json.Image.TexturePalette? __value = ReadFieldValue<Mech3DotNet.Json.Image.TexturePalette?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'palette' was null for 'TextureInfo'");
@@ -109,10 +109,10 @@ namespace Mech3DotNet.Json.Converters
             var alphaLoaded = alphaLoadedField.Unwrap("alpha_loaded");
             var paletteLoaded = paletteLoadedField.Unwrap("palette_loaded");
             var palette = paletteField.Unwrap("palette");
-            return new TextureInfo(name, rename, alpha, width, height, stretch, imageLoaded, alphaLoaded, paletteLoaded, palette);
+            return new Mech3DotNet.Json.Image.TextureInfo(name, rename, alpha, width, height, stretch, imageLoaded, alphaLoaded, paletteLoaded, palette);
         }
 
-        public override void Write(Utf8JsonWriter writer, TextureInfo value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Image.TextureInfo value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Ng.Converters
 {
-    public class PolygonFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<PolygonFlags>
+    public class PolygonFlagsConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags>
     {
-        protected override PolygonFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var unk2Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
             var unk3Field = new Mech3DotNet.Json.Converters.Option<bool>(false);
@@ -51,10 +51,10 @@ namespace Mech3DotNet.Json.Converters
             var unk3 = unk3Field.Unwrap("unk3");
             var triangleStrip = triangleStripField.Unwrap("triangle_strip");
             var unk6 = unk6Field.Unwrap("unk6");
-            return new PolygonFlags(unk2, unk3, triangleStrip, unk6);
+            return new Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags(unk2, unk3, triangleStrip, unk6);
         }
 
-        public override void Write(Utf8JsonWriter writer, PolygonFlags value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.Ng.PolygonFlags value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             if (value.unk2 != false)

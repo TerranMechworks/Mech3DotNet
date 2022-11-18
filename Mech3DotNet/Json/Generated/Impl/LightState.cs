@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.LightStateConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.LightStateConverter))]
     public class LightState
     {
         public string name;
@@ -9,13 +9,13 @@ namespace Mech3DotNet.Json
         public bool? saturated = null;
         public bool? subdivide = null;
         public bool? static_ = null;
-        public AtNode? atNode = null;
-        public Range? range = null;
-        public Color? color = null;
+        public Mech3DotNet.Json.Anim.Events.AtNode? atNode = null;
+        public Mech3DotNet.Json.Types.Range? range = null;
+        public Mech3DotNet.Json.Types.Color? color = null;
         public float? ambient = null;
         public float? diffuse = null;
 
-        public LightState(string name, bool activeState, bool? directional, bool? saturated, bool? subdivide, bool? static_, AtNode? atNode, Range? range, Color? color, float? ambient, float? diffuse)
+        public LightState(string name, bool activeState, bool? directional, bool? saturated, bool? subdivide, bool? static_, Mech3DotNet.Json.Anim.Events.AtNode? atNode, Mech3DotNet.Json.Types.Range? range, Mech3DotNet.Json.Types.Color? color, float? ambient, float? diffuse)
         {
             this.name = name;
             this.activeState = activeState;

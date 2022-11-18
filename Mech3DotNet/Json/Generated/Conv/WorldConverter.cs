@@ -1,14 +1,14 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Nodes.Converters
 {
-    public class WorldConverter : Mech3DotNet.Json.Converters.StructConverter<World>
+    public class WorldConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.World>
     {
-        protected override World ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Nodes.World ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var areaField = new Mech3DotNet.Json.Converters.Option<Area>();
-            var partitionsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<System.Collections.Generic.List<Partition>>>();
+            var areaField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.Area>();
+            var partitionsField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.Partition>>>();
             var areaPartitionXCountField = new Mech3DotNet.Json.Converters.Option<uint>();
             var areaPartitionYCountField = new Mech3DotNet.Json.Converters.Option<uint>();
             var fudgeCountField = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -38,13 +38,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "area":
                         {
-                            Area __value = ReadFieldValue<Area>(ref __reader, __options);
+                            Mech3DotNet.Json.Gamez.Nodes.Area __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.Area>(ref __reader, __options);
                             areaField.Set(__value);
                             break;
                         }
                     case "partitions":
                         {
-                            System.Collections.Generic.List<System.Collections.Generic.List<Partition>>? __value = ReadFieldValue<System.Collections.Generic.List<System.Collections.Generic.List<Partition>>?>(ref __reader, __options);
+                            System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.Partition>>? __value = ReadFieldValue<System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.Partition>>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'partitions' was null for 'World'");
@@ -146,10 +146,10 @@ namespace Mech3DotNet.Json.Converters
             var children = childrenField.Unwrap("children");
             var dataPtr = dataPtrField.Unwrap("data_ptr");
             var childrenArrayPtr = childrenArrayPtrField.Unwrap("children_array_ptr");
-            return new World(name, area, partitions, areaPartitionXCount, areaPartitionYCount, fudgeCount, areaPartitionPtr, virtPartitionPtr, worldChildrenPtr, worldChildValue, worldLightsPtr, children, dataPtr, childrenArrayPtr);
+            return new Mech3DotNet.Json.Gamez.Nodes.World(name, area, partitions, areaPartitionXCount, areaPartitionYCount, fudgeCount, areaPartitionPtr, virtPartitionPtr, worldChildrenPtr, worldChildValue, worldLightsPtr, children, dataPtr, childrenArrayPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, World value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.World value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

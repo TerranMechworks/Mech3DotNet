@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class AnimationLodCondConverter : Mech3DotNet.Json.Converters.StructConverter<AnimationLodCond>
+    public class AnimationLodCondConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.AnimationLodCond>
     {
-        protected override AnimationLodCond ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.AnimationLodCond ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var valueField = new Mech3DotNet.Json.Converters.Option<uint>();
             string? __fieldName = null;
@@ -27,10 +27,10 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var value = valueField.Unwrap("value");
-            return new AnimationLodCond(value);
+            return new Mech3DotNet.Json.Anim.Events.AnimationLodCond(value);
         }
 
-        public override void Write(Utf8JsonWriter writer, AnimationLodCond value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.AnimationLodCond value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value");

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Types.Converters
 {
-    public class Vec3Converter : Mech3DotNet.Json.Converters.StructConverter<Vec3>
+    public class Vec3Converter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Types.Vec3>
     {
-        protected override Vec3 ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Types.Vec3 ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var xField = new Mech3DotNet.Json.Converters.Option<float>();
             var yField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
             var x = xField.Unwrap("x");
             var y = yField.Unwrap("y");
             var z = zField.Unwrap("z");
-            return new Vec3(x, y, z);
+            return new Mech3DotNet.Json.Types.Vec3(x, y, z);
         }
 
-        public override void Write(Utf8JsonWriter writer, Vec3 value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Types.Vec3 value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("x");

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ElseConverter : Mech3DotNet.Json.Converters.StructConverter<Else>
+    public class ElseConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.Else>
     {
-        protected override Else ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.Else ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -19,10 +19,10 @@ namespace Mech3DotNet.Json.Converters
                 }
             }
             // pray there are no naming collisions
-            return new Else();
+            return new Mech3DotNet.Json.Anim.Events.Else();
         }
 
-        public override void Write(Utf8JsonWriter writer, Else value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.Else value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();

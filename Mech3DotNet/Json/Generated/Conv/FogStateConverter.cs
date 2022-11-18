@@ -1,16 +1,16 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class FogStateConverter : Mech3DotNet.Json.Converters.StructConverter<FogState>
+    public class FogStateConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.FogState>
     {
-        protected override FogState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.FogState ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var fogTypeField = new Mech3DotNet.Json.Converters.Option<FogType>();
-            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
-            var altitudeField = new Mech3DotNet.Json.Converters.Option<Range>();
-            var rangeField = new Mech3DotNet.Json.Converters.Option<Range>();
+            var fogTypeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.FogType>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Color>();
+            var altitudeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range>();
+            var rangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -29,25 +29,25 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "fog_type":
                         {
-                            FogType __value = ReadFieldValue<FogType>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.FogType __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.FogType>(ref __reader, __options);
                             fogTypeField.Set(__value);
                             break;
                         }
                     case "color":
                         {
-                            Color __value = ReadFieldValue<Color>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Color __value = ReadFieldValue<Mech3DotNet.Json.Types.Color>(ref __reader, __options);
                             colorField.Set(__value);
                             break;
                         }
                     case "altitude":
                         {
-                            Range __value = ReadFieldValue<Range>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range __value = ReadFieldValue<Mech3DotNet.Json.Types.Range>(ref __reader, __options);
                             altitudeField.Set(__value);
                             break;
                         }
                     case "range":
                         {
-                            Range __value = ReadFieldValue<Range>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Range __value = ReadFieldValue<Mech3DotNet.Json.Types.Range>(ref __reader, __options);
                             rangeField.Set(__value);
                             break;
                         }
@@ -64,10 +64,10 @@ namespace Mech3DotNet.Json.Converters
             var color = colorField.Unwrap("color");
             var altitude = altitudeField.Unwrap("altitude");
             var range = rangeField.Unwrap("range");
-            return new FogState(name, fogType, color, altitude, range);
+            return new Mech3DotNet.Json.Anim.Events.FogState(name, fogType, color, altitude, range);
         }
 
-        public override void Write(Utf8JsonWriter writer, FogState value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.FogState value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

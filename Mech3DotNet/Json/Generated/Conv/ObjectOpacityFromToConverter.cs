@@ -1,14 +1,14 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectOpacityFromToConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectOpacityFromTo>
+    public class ObjectOpacityFromToConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectOpacityFromTo>
     {
-        protected override ObjectOpacityFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectOpacityFromTo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
-            var opacityFromField = new Mech3DotNet.Json.Converters.Option<ObjectOpacity>();
-            var opacityToField = new Mech3DotNet.Json.Converters.Option<ObjectOpacity>();
+            var opacityFromField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.ObjectOpacity>();
+            var opacityToField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Anim.Events.ObjectOpacity>();
             var runtimeField = new Mech3DotNet.Json.Converters.Option<float>();
             var fudgeField = new Mech3DotNet.Json.Converters.Option<bool>(false);
             string? __fieldName = null;
@@ -29,13 +29,13 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "opacity_from":
                         {
-                            ObjectOpacity __value = ReadFieldValue<ObjectOpacity>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.ObjectOpacity __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.ObjectOpacity>(ref __reader, __options);
                             opacityFromField.Set(__value);
                             break;
                         }
                     case "opacity_to":
                         {
-                            ObjectOpacity __value = ReadFieldValue<ObjectOpacity>(ref __reader, __options);
+                            Mech3DotNet.Json.Anim.Events.ObjectOpacity __value = ReadFieldValue<Mech3DotNet.Json.Anim.Events.ObjectOpacity>(ref __reader, __options);
                             opacityToField.Set(__value);
                             break;
                         }
@@ -64,10 +64,10 @@ namespace Mech3DotNet.Json.Converters
             var opacityTo = opacityToField.Unwrap("opacity_to");
             var runtime = runtimeField.Unwrap("runtime");
             var fudge = fudgeField.Unwrap("fudge");
-            return new ObjectOpacityFromTo(node, opacityFrom, opacityTo, runtime, fudge);
+            return new Mech3DotNet.Json.Anim.Events.ObjectOpacityFromTo(node, opacityFrom, opacityTo, runtime, fudge);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectOpacityFromTo value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectOpacityFromTo value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

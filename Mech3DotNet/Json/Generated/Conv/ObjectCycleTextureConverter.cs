@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class ObjectCycleTextureConverter : Mech3DotNet.Json.Converters.StructConverter<ObjectCycleTexture>
+    public class ObjectCycleTextureConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.ObjectCycleTexture>
     {
-        protected override ObjectCycleTexture ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.ObjectCycleTexture ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nodeField = new Mech3DotNet.Json.Converters.Option<string>();
             var resetField = new Mech3DotNet.Json.Converters.Option<ushort>();
@@ -40,10 +40,10 @@ namespace Mech3DotNet.Json.Converters
             // pray there are no naming collisions
             var node = nodeField.Unwrap("node");
             var reset = resetField.Unwrap("reset");
-            return new ObjectCycleTexture(node, reset);
+            return new Mech3DotNet.Json.Anim.Events.ObjectCycleTexture(node, reset);
         }
 
-        public override void Write(Utf8JsonWriter writer, ObjectCycleTexture value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.ObjectCycleTexture value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("node");

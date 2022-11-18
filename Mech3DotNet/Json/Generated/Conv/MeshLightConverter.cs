@@ -1,17 +1,17 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Gamez.Mesh.Converters
 {
-    public class MeshLightConverter : Mech3DotNet.Json.Converters.StructConverter<MeshLight>
+    public class MeshLightConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Mesh.MeshLight>
     {
-        protected override MeshLight ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Gamez.Mesh.MeshLight ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var unk00Field = new Mech3DotNet.Json.Converters.Option<uint>();
             var unk04Field = new Mech3DotNet.Json.Converters.Option<uint>();
             var unk08Field = new Mech3DotNet.Json.Converters.Option<float>();
-            var extraField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Vec3>>();
+            var extraField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3>>();
             var unk24Field = new Mech3DotNet.Json.Converters.Option<uint>();
-            var colorField = new Mech3DotNet.Json.Converters.Option<Color>();
+            var colorField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Color>();
             var flagsField = new Mech3DotNet.Json.Converters.Option<ushort>();
             var ptrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var unk48Field = new Mech3DotNet.Json.Converters.Option<float>();
@@ -46,7 +46,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "extra":
                         {
-                            System.Collections.Generic.List<Vec3>? __value = ReadFieldValue<System.Collections.Generic.List<Vec3>?>(ref __reader, __options);
+                            System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3>? __value = ReadFieldValue<System.Collections.Generic.List<Mech3DotNet.Json.Types.Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'extra' was null for 'MeshLight'");
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "color":
                         {
-                            Color __value = ReadFieldValue<Color>(ref __reader, __options);
+                            Mech3DotNet.Json.Types.Color __value = ReadFieldValue<Mech3DotNet.Json.Types.Color>(ref __reader, __options);
                             colorField.Set(__value);
                             break;
                         }
@@ -144,10 +144,10 @@ namespace Mech3DotNet.Json.Converters
             var unk64 = unk64Field.Unwrap("unk64");
             var unk68 = unk68Field.Unwrap("unk68");
             var unk72 = unk72Field.Unwrap("unk72");
-            return new MeshLight(unk00, unk04, unk08, extra, unk24, color, flags, ptr, unk48, unk52, unk56, unk60, unk64, unk68, unk72);
+            return new Mech3DotNet.Json.Gamez.Mesh.MeshLight(unk00, unk04, unk08, extra, unk24, color, flags, ptr, unk48, unk52, unk56, unk60, unk64, unk68, unk72);
         }
 
-        public override void Write(Utf8JsonWriter writer, MeshLight value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Mesh.MeshLight value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("unk00");

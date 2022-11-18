@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Converters
+namespace Mech3DotNet.Json.Anim.Events.Converters
 {
-    public class RgbaConverter : Mech3DotNet.Json.Converters.StructConverter<Rgba>
+    public class RgbaConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Anim.Events.Rgba>
     {
-        protected override Rgba ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Anim.Events.Rgba ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var rField = new Mech3DotNet.Json.Converters.Option<float>();
             var gField = new Mech3DotNet.Json.Converters.Option<float>();
@@ -51,10 +51,10 @@ namespace Mech3DotNet.Json.Converters
             var g = gField.Unwrap("g");
             var b = bField.Unwrap("b");
             var a = aField.Unwrap("a");
-            return new Rgba(r, g, b, a);
+            return new Mech3DotNet.Json.Anim.Events.Rgba(r, g, b, a);
         }
 
-        public override void Write(Utf8JsonWriter writer, Rgba value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Anim.Events.Rgba value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("r");

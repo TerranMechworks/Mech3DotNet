@@ -1,15 +1,15 @@
-namespace Mech3DotNet.Json
+namespace Mech3DotNet.Json.Anim.Events
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Converters.ObjectOpacityFromToConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Anim.Events.Converters.ObjectOpacityFromToConverter))]
     public class ObjectOpacityFromTo
     {
         public string node;
-        public ObjectOpacity opacityFrom;
-        public ObjectOpacity opacityTo;
+        public Mech3DotNet.Json.Anim.Events.ObjectOpacity opacityFrom;
+        public Mech3DotNet.Json.Anim.Events.ObjectOpacity opacityTo;
         public float runtime;
         public bool fudge = false;
 
-        public ObjectOpacityFromTo(string node, ObjectOpacity opacityFrom, ObjectOpacity opacityTo, float runtime, bool fudge)
+        public ObjectOpacityFromTo(string node, Mech3DotNet.Json.Anim.Events.ObjectOpacity opacityFrom, Mech3DotNet.Json.Anim.Events.ObjectOpacity opacityTo, float runtime, bool fudge)
         {
             this.node = node;
             this.opacityFrom = opacityFrom;

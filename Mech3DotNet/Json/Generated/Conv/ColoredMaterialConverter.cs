@@ -11,8 +11,8 @@ namespace Mech3DotNet.Json.Converters
         protected override ColoredMaterial ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var colorField = new Option<Color>();
-            var unk00Field = new Option<byte>();
-            var unk32Field = new Option<uint>();
+            var alphaField = new Option<byte>();
+            var specularField = new Option<float>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -24,16 +24,16 @@ namespace Mech3DotNet.Json.Converters
                             colorField.Set(__value);
                             break;
                         }
-                    case "unk00":
+                    case "alpha":
                         {
                             byte __value = ReadFieldValue<byte>(ref __reader, __options);
-                            unk00Field.Set(__value);
+                            alphaField.Set(__value);
                             break;
                         }
-                    case "unk32":
+                    case "specular":
                         {
-                            uint __value = ReadFieldValue<uint>(ref __reader, __options);
-                            unk32Field.Set(__value);
+                            float __value = ReadFieldValue<float>(ref __reader, __options);
+                            specularField.Set(__value);
                             break;
                         }
                     default:
@@ -45,9 +45,9 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var color = colorField.Unwrap("color");
-            var unk00 = unk00Field.Unwrap("unk00");
-            var unk32 = unk32Field.Unwrap("unk32");
-            return new ColoredMaterial(color, unk00, unk32);
+            var alpha = alphaField.Unwrap("alpha");
+            var specular = specularField.Unwrap("specular");
+            return new ColoredMaterial(color, alpha, specular);
         }
 
         public override void Write(Utf8JsonWriter writer, ColoredMaterial value, JsonSerializerOptions options)
@@ -55,10 +55,10 @@ namespace Mech3DotNet.Json.Converters
             writer.WriteStartObject();
             writer.WritePropertyName("color");
             JsonSerializer.Serialize(writer, value.color, options);
-            writer.WritePropertyName("unk00");
-            JsonSerializer.Serialize(writer, value.unk00, options);
-            writer.WritePropertyName("unk32");
-            JsonSerializer.Serialize(writer, value.unk32, options);
+            writer.WritePropertyName("alpha");
+            JsonSerializer.Serialize(writer, value.alpha, options);
+            writer.WritePropertyName("specular");
+            JsonSerializer.Serialize(writer, value.specular, options);
             writer.WriteEndObject();
         }
     }

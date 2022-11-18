@@ -6,22 +6,22 @@ using Mech3DotNet.Json.Converters;
 
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(GameZDataConverter))]
-    public class GameZData
+    [JsonConverter(typeof(GameZPmDataConverter))]
+    public class GameZPmData
     {
-        public GameZMetadata metadata;
         public List<string> textures;
         public List<Material> materials;
-        public List<Mesh> meshes;
-        public List<Node> nodes;
+        public List<MeshNg> meshes;
+        public byte[] nodes;
+        public GameZPmMetadata metadata;
 
-        public GameZData(GameZMetadata metadata, List<string> textures, List<Material> materials, List<Mesh> meshes, List<Node> nodes)
+        public GameZPmData(List<string> textures, List<Material> materials, List<MeshNg> meshes, byte[] nodes, GameZPmMetadata metadata)
         {
-            this.metadata = metadata;
             this.textures = textures;
             this.materials = materials;
             this.meshes = meshes;
             this.nodes = nodes;
+            this.metadata = metadata;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Mech3DotNet.Json.Converters
             var staticSoundsField = new Option<List<NamePad>?>(null);
             var activPrereqsField = new Option<List<ActivationPrereq>?>(null);
             var animRefsField = new Option<List<NamePad>?>(null);
-            var resetSequenceField = new Option<SeqDef?>();
+            var resetStateField = new Option<ResetState?>();
             var sequencesField = new Option<List<SeqDef>>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -186,10 +186,10 @@ namespace Mech3DotNet.Json.Converters
                             animRefsField.Set(__value);
                             break;
                         }
-                    case "reset_sequence":
+                    case "reset_state":
                         {
-                            SeqDef? __value = ReadFieldValue<SeqDef?>(ref __reader, __options);
-                            resetSequenceField.Set(__value);
+                            ResetState? __value = ReadFieldValue<ResetState?>(ref __reader, __options);
+                            resetStateField.Set(__value);
                             break;
                         }
                     case "sequences":
@@ -233,9 +233,9 @@ namespace Mech3DotNet.Json.Converters
             var staticSounds = staticSoundsField.Unwrap("static_sounds");
             var activPrereqs = activPrereqsField.Unwrap("activ_prereqs");
             var animRefs = animRefsField.Unwrap("anim_refs");
-            var resetSequence = resetSequenceField.Unwrap("reset_sequence");
+            var resetState = resetStateField.Unwrap("reset_state");
             var sequences = sequencesField.Unwrap("sequences");
-            return new AnimDef(name, animName, animRoot, fileName, autoResetNodeStates, activation, execution, networkLog, saveLog, hasCallbacks, resetTime, health, proximityDamage, activPrereqMinToSatisfy, objects, nodes, lights, puffers, dynamicSounds, staticSounds, activPrereqs, animRefs, resetSequence, sequences);
+            return new AnimDef(name, animName, animRoot, fileName, autoResetNodeStates, activation, execution, networkLog, saveLog, hasCallbacks, resetTime, health, proximityDamage, activPrereqMinToSatisfy, objects, nodes, lights, puffers, dynamicSounds, staticSounds, activPrereqs, animRefs, resetState, sequences);
         }
 
         public override void Write(Utf8JsonWriter writer, AnimDef value, JsonSerializerOptions options)
@@ -318,8 +318,8 @@ namespace Mech3DotNet.Json.Converters
                 writer.WritePropertyName("anim_refs");
                 JsonSerializer.Serialize(writer, value.animRefs, options);
             }
-            writer.WritePropertyName("reset_sequence");
-            JsonSerializer.Serialize(writer, value.resetSequence, options);
+            writer.WritePropertyName("reset_state");
+            JsonSerializer.Serialize(writer, value.resetState, options);
             writer.WritePropertyName("sequences");
             JsonSerializer.Serialize(writer, value.sequences, options);
             writer.WriteEndObject();

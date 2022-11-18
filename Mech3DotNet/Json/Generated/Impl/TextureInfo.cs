@@ -10,6 +10,7 @@ namespace Mech3DotNet.Json
     public class TextureInfo
     {
         public string name;
+        public string? rename = null;
         public TextureAlpha alpha;
         public ushort width;
         public ushort height;
@@ -19,9 +20,10 @@ namespace Mech3DotNet.Json
         public bool paletteLoaded;
         public TexturePalette palette;
 
-        public TextureInfo(string name, TextureAlpha alpha, ushort width, ushort height, TextureStretch stretch, bool imageLoaded, bool alphaLoaded, bool paletteLoaded, TexturePalette palette)
+        public TextureInfo(string name, string? rename, TextureAlpha alpha, ushort width, ushort height, TextureStretch stretch, bool imageLoaded, bool alphaLoaded, bool paletteLoaded, TexturePalette palette)
         {
             this.name = name;
+            this.rename = rename;
             this.alpha = alpha;
             this.width = width;
             this.height = height;

@@ -6,14 +6,14 @@ using Mech3DotNet.Json.Converters;
 
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(ModelConverter))]
-    public class Model
+    [JsonConverter(typeof(ModelPmConverter))]
+    public class ModelPm
     {
-        public List<Object3d> nodes;
-        public List<Mesh> meshes;
+        public List<NodePm> nodes;
+        public List<MeshNg> meshes;
         public List<int> meshPtrs;
 
-        public Model(List<Object3d> nodes, List<Mesh> meshes, List<int> meshPtrs)
+        public ModelPm(List<NodePm> nodes, List<MeshNg> meshes, List<int> meshPtrs)
         {
             this.nodes = nodes;
             this.meshes = meshes;

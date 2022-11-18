@@ -6,9 +6,9 @@ using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class GameZMetadataConverter : StructConverter<GameZMetadata>
+    public class GameZMwMetadataConverter : StructConverter<GameZMwMetadata>
     {
-        protected override GameZMetadata ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override GameZMwMetadata ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var materialArraySizeField = new Option<short>();
             var meshesArraySizeField = new Option<int>();
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     default:
                         {
-                            System.Diagnostics.Debug.WriteLine($"Invalid field '{__fieldName}' for 'GameZMetadata'");
+                            System.Diagnostics.Debug.WriteLine($"Invalid field '{__fieldName}' for 'GameZMwMetadata'");
                             throw new JsonException();
                         }
                 }
@@ -55,10 +55,10 @@ namespace Mech3DotNet.Json.Converters
             var meshesArraySize = meshesArraySizeField.Unwrap("meshes_array_size");
             var nodeArraySize = nodeArraySizeField.Unwrap("node_array_size");
             var nodeDataCount = nodeDataCountField.Unwrap("node_data_count");
-            return new GameZMetadata(materialArraySize, meshesArraySize, nodeArraySize, nodeDataCount);
+            return new GameZMwMetadata(materialArraySize, meshesArraySize, nodeArraySize, nodeDataCount);
         }
 
-        public override void Write(Utf8JsonWriter writer, GameZMetadata value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, GameZMwMetadata value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("material_array_size");

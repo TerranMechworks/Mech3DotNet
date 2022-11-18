@@ -5,7 +5,7 @@ using Mech3DotNet.Json.Converters;
 
 namespace Mech3DotNet.Json
 {
-    public enum NodeVariant
+    public enum NodeMwVariant
     {
         Camera,
         Display,
@@ -17,59 +17,59 @@ namespace Mech3DotNet.Json
         World,
     }
 
-    [JsonConverter(typeof(NodeConverter))]
-    public class Node : IDiscriminatedUnion<NodeVariant>
+    [JsonConverter(typeof(NodeMwConverter))]
+    public class NodeMw : IDiscriminatedUnion<NodeMwVariant>
     {
-        public Node(Camera value)
+        public NodeMw(Camera value)
         {
             this.value = value;
-            Variant = NodeVariant.Camera;
+            Variant = NodeMwVariant.Camera;
         }
 
-        public Node(Display value)
+        public NodeMw(Display value)
         {
             this.value = value;
-            Variant = NodeVariant.Display;
+            Variant = NodeMwVariant.Display;
         }
 
-        public Node(Empty value)
+        public NodeMw(Empty value)
         {
             this.value = value;
-            Variant = NodeVariant.Empty;
+            Variant = NodeMwVariant.Empty;
         }
 
-        public Node(Light value)
+        public NodeMw(Light value)
         {
             this.value = value;
-            Variant = NodeVariant.Light;
+            Variant = NodeMwVariant.Light;
         }
 
-        public Node(Lod value)
+        public NodeMw(Lod value)
         {
             this.value = value;
-            Variant = NodeVariant.Lod;
+            Variant = NodeMwVariant.Lod;
         }
 
-        public Node(Object3d value)
+        public NodeMw(Object3d value)
         {
             this.value = value;
-            Variant = NodeVariant.Object3d;
+            Variant = NodeMwVariant.Object3d;
         }
 
-        public Node(Window value)
+        public NodeMw(Window value)
         {
             this.value = value;
-            Variant = NodeVariant.Window;
+            Variant = NodeMwVariant.Window;
         }
 
-        public Node(World value)
+        public NodeMw(World value)
         {
             this.value = value;
-            Variant = NodeVariant.World;
+            Variant = NodeMwVariant.World;
         }
 
         protected object value;
-        public NodeVariant Variant { get; protected set; }
+        public NodeMwVariant Variant { get; protected set; }
         public bool Is<T>() { return typeof(T).IsInstanceOfType(value); }
         public T As<T>() { return (T)value; }
         public object GetValue() { return value; }

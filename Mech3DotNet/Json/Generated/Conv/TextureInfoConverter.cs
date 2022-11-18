@@ -11,6 +11,7 @@ namespace Mech3DotNet.Json.Converters
         protected override TextureInfo ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Option<string>();
+            var renameField = new Option<string?>(null);
             var alphaField = new Option<TextureAlpha>();
             var widthField = new Option<ushort>();
             var heightField = new Option<ushort>();
@@ -33,6 +34,12 @@ namespace Mech3DotNet.Json.Converters
                                 throw new JsonException();
                             }
                             nameField.Set(__value);
+                            break;
+                        }
+                    case "rename":
+                        {
+                            string? __value = ReadFieldValue<string?>(ref __reader, __options);
+                            renameField.Set(__value);
                             break;
                         }
                     case "alpha":
@@ -97,6 +104,7 @@ namespace Mech3DotNet.Json.Converters
             }
             // pray there are no naming collisions
             var name = nameField.Unwrap("name");
+            var rename = renameField.Unwrap("rename");
             var alpha = alphaField.Unwrap("alpha");
             var width = widthField.Unwrap("width");
             var height = heightField.Unwrap("height");
@@ -105,7 +113,7 @@ namespace Mech3DotNet.Json.Converters
             var alphaLoaded = alphaLoadedField.Unwrap("alpha_loaded");
             var paletteLoaded = paletteLoadedField.Unwrap("palette_loaded");
             var palette = paletteField.Unwrap("palette");
-            return new TextureInfo(name, alpha, width, height, stretch, imageLoaded, alphaLoaded, paletteLoaded, palette);
+            return new TextureInfo(name, rename, alpha, width, height, stretch, imageLoaded, alphaLoaded, paletteLoaded, palette);
         }
 
         public override void Write(Utf8JsonWriter writer, TextureInfo value, JsonSerializerOptions options)
@@ -113,6 +121,11 @@ namespace Mech3DotNet.Json.Converters
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             JsonSerializer.Serialize(writer, value.name, options);
+            if (value.rename != null)
+            {
+                writer.WritePropertyName("rename");
+                JsonSerializer.Serialize(writer, value.rename, options);
+            }
             writer.WritePropertyName("alpha");
             JsonSerializer.Serialize(writer, value.alpha, options);
             writer.WritePropertyName("width");

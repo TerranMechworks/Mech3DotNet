@@ -12,15 +12,15 @@ namespace Mech3DotNet.Json
         public string texture;
         public uint pointer = 0;
         public CycleData? cycle = null;
-        public uint unk32;
+        public float specular;
         public bool flag;
 
-        public TexturedMaterial(string texture, uint pointer, CycleData? cycle, uint unk32, bool flag)
+        public TexturedMaterial(string texture, uint pointer, CycleData? cycle, float specular, bool flag)
         {
             this.texture = texture;
             this.pointer = pointer;
             this.cycle = cycle;
-            this.unk32 = unk32;
+            this.specular = specular;
             this.flag = flag;
         }
     }

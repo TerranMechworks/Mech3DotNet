@@ -10,14 +10,14 @@ namespace Mech3DotNet.Json
     public class ColoredMaterial
     {
         public Color color;
-        public byte unk00;
-        public uint unk32;
+        public byte alpha;
+        public float specular;
 
-        public ColoredMaterial(Color color, byte unk00, uint unk32)
+        public ColoredMaterial(Color color, byte alpha, float specular)
         {
             this.color = color;
-            this.unk00 = unk00;
-            this.unk32 = unk32;
+            this.alpha = alpha;
+            this.specular = specular;
         }
     }
 }

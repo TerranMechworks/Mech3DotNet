@@ -5,12 +5,12 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
-    public class MechlibArchive : Archive<Model>
+    public class MechlibArchive : Archive<ModelMw>
     {
         public List<Material> materials;
 
         public MechlibArchive(
-            Dictionary<string, Model> items,
+            Dictionary<string, ModelMw> items,
             List<Material> materials,
             byte[] manifest) : base(items, manifest)
         {
@@ -18,7 +18,7 @@ namespace Mech3DotNet
         }
 
         public MechlibArchive(
-            Dictionary<string, Model> items,
+            Dictionary<string, ModelMw> items,
             List<Material> materials,
             List<ArchiveEntry> entries) : base(items, entries)
         {
@@ -32,10 +32,10 @@ namespace Mech3DotNet
         private static readonly byte[] VERSION_PM = BitConverter.GetBytes(41u);
         private static readonly byte[] FORMAT = BitConverter.GetBytes(1u);
 
-        private static Dictionary<string, Model> Read(string inputPath, bool isPM, out byte[] manifest, out List<Material> materials)
+        private static Dictionary<string, ModelMw> Read(string inputPath, bool isPM, out byte[] manifest, out List<Material> materials)
         {
             List<Material>? capture = null;
-            var models = new Dictionary<string, Model>();
+            var models = new Dictionary<string, ModelMw>();
             manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadMechlib, (string name, byte[] data) =>
             {
                 switch (name)
@@ -48,7 +48,7 @@ namespace Mech3DotNet
                         capture = Interop.Deserialize<List<Material>>(data);
                         return;
                     default:
-                        var model = Interop.Deserialize<Model>(data);
+                        var model = Interop.Deserialize<ModelMw>(data);
                         models.Add(name, model);
                         return;
                 }

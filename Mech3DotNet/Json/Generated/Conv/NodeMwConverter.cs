@@ -5,66 +5,66 @@ using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class NodeConverter : UnionConverter<Node>
+    public class NodeMwConverter : UnionConverter<NodeMw>
     {
-        public override Node ReadUnitVariant(string? name)
+        public override NodeMw ReadUnitVariant(string? name)
         {
             switch (name)
             {
                 case "Camera":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Camera' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Camera' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case "Display":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Display' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Display' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case "Empty":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Empty' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Empty' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case "Light":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Light' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Light' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case "Lod":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Lod' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Lod' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case "Object3d":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Object3d' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Object3d' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case "Window":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Window' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'Window' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case "World":
                     {
-                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'World' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Invalid unit variant 'World' for 'NodeMw'");
                         throw new JsonException();
                     }
                 case null:
                     {
-                        System.Diagnostics.Debug.WriteLine("Variant cannot be null for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Variant cannot be null for 'NodeMw'");
                         throw new JsonException();
                     }
                 default:
                     {
-                        System.Diagnostics.Debug.WriteLine($"Invalid variant '{name}' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine($"Invalid variant '{name}' for 'NodeMw'");
                         throw new JsonException();
                     }
             }
         }
 
-        public override Node ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
+        public override NodeMw ReadStructVariant(ref Utf8JsonReader reader, string? name, JsonSerializerOptions options)
         {
             switch (name)
             {
@@ -73,99 +73,99 @@ namespace Mech3DotNet.Json.Converters
                         var inner = JsonSerializer.Deserialize<Camera>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'Camera' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'Camera' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case "Display":
                     {
                         var inner = JsonSerializer.Deserialize<Display>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'Display' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'Display' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case "Empty":
                     {
                         var inner = JsonSerializer.Deserialize<Empty>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'Empty' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'Empty' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case "Light":
                     {
                         var inner = JsonSerializer.Deserialize<Light>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'Light' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'Light' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case "Lod":
                     {
                         var inner = JsonSerializer.Deserialize<Lod>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'Lod' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'Lod' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case "Object3d":
                     {
                         var inner = JsonSerializer.Deserialize<Object3d>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'Object3d' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'Object3d' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case "Window":
                     {
                         var inner = JsonSerializer.Deserialize<Window>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'Window' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'Window' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case "World":
                     {
                         var inner = JsonSerializer.Deserialize<World>(ref reader, options);
                         if (inner is null)
                         {
-                            System.Diagnostics.Debug.WriteLine("Value of 'World' was null for 'Node'");
+                            System.Diagnostics.Debug.WriteLine("Value of 'World' was null for 'NodeMw'");
                             throw new JsonException();
                         }
-                        return new Node(inner);
+                        return new NodeMw(inner);
                     }
                 case null:
                     {
-                        System.Diagnostics.Debug.WriteLine("Variant cannot be null for 'Node'");
+                        System.Diagnostics.Debug.WriteLine("Variant cannot be null for 'NodeMw'");
                         throw new JsonException();
                     }
                 default:
                     {
-                        System.Diagnostics.Debug.WriteLine($"Invalid variant '{name}' for 'Node'");
+                        System.Diagnostics.Debug.WriteLine($"Invalid variant '{name}' for 'NodeMw'");
                         throw new JsonException();
                     }
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, Node value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, NodeMw value, JsonSerializerOptions options)
         {
             switch (value.Variant)
             {
-                case NodeVariant.Camera:
+                case NodeMwVariant.Camera:
                     {
                         var inner = value.As<Camera>();
                         writer.WriteStartObject();
@@ -174,7 +174,7 @@ namespace Mech3DotNet.Json.Converters
                         writer.WriteEndObject();
                         break;
                     }
-                case NodeVariant.Display:
+                case NodeMwVariant.Display:
                     {
                         var inner = value.As<Display>();
                         writer.WriteStartObject();
@@ -183,7 +183,7 @@ namespace Mech3DotNet.Json.Converters
                         writer.WriteEndObject();
                         break;
                     }
-                case NodeVariant.Empty:
+                case NodeMwVariant.Empty:
                     {
                         var inner = value.As<Empty>();
                         writer.WriteStartObject();
@@ -192,7 +192,7 @@ namespace Mech3DotNet.Json.Converters
                         writer.WriteEndObject();
                         break;
                     }
-                case NodeVariant.Light:
+                case NodeMwVariant.Light:
                     {
                         var inner = value.As<Light>();
                         writer.WriteStartObject();
@@ -201,7 +201,7 @@ namespace Mech3DotNet.Json.Converters
                         writer.WriteEndObject();
                         break;
                     }
-                case NodeVariant.Lod:
+                case NodeMwVariant.Lod:
                     {
                         var inner = value.As<Lod>();
                         writer.WriteStartObject();
@@ -210,7 +210,7 @@ namespace Mech3DotNet.Json.Converters
                         writer.WriteEndObject();
                         break;
                     }
-                case NodeVariant.Object3d:
+                case NodeMwVariant.Object3d:
                     {
                         var inner = value.As<Object3d>();
                         writer.WriteStartObject();
@@ -219,7 +219,7 @@ namespace Mech3DotNet.Json.Converters
                         writer.WriteEndObject();
                         break;
                     }
-                case NodeVariant.Window:
+                case NodeMwVariant.Window:
                     {
                         var inner = value.As<Window>();
                         writer.WriteStartObject();
@@ -228,7 +228,7 @@ namespace Mech3DotNet.Json.Converters
                         writer.WriteEndObject();
                         break;
                     }
-                case NodeVariant.World:
+                case NodeMwVariant.World:
                     {
                         var inner = value.As<World>();
                         writer.WriteStartObject();
@@ -238,7 +238,7 @@ namespace Mech3DotNet.Json.Converters
                         break;
                     }
                 default:
-                    throw new ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'Node'");
+                    throw new ArgumentOutOfRangeException("Variant", $"Invalid variant '{value.Variant}' for 'NodeMw'");
             }
         }
     }

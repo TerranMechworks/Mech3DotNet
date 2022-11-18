@@ -22,7 +22,6 @@ namespace Mech3DotNet.Json.Converters
             var activPrereqsPtrField = new Option<uint>();
             var animRefsPtrField = new Option<uint>();
             var resetStatePtrField = new Option<uint>();
-            var resetStateEventsPtrField = new Option<uint>();
             var seqDefsPtrField = new Option<uint>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -106,12 +105,6 @@ namespace Mech3DotNet.Json.Converters
                             resetStatePtrField.Set(__value);
                             break;
                         }
-                    case "reset_state_events_ptr":
-                        {
-                            uint __value = ReadFieldValue<uint>(ref __reader, __options);
-                            resetStateEventsPtrField.Set(__value);
-                            break;
-                        }
                     case "seq_defs_ptr":
                         {
                             uint __value = ReadFieldValue<uint>(ref __reader, __options);
@@ -138,9 +131,8 @@ namespace Mech3DotNet.Json.Converters
             var activPrereqsPtr = activPrereqsPtrField.Unwrap("activ_prereqs_ptr");
             var animRefsPtr = animRefsPtrField.Unwrap("anim_refs_ptr");
             var resetStatePtr = resetStatePtrField.Unwrap("reset_state_ptr");
-            var resetStateEventsPtr = resetStateEventsPtrField.Unwrap("reset_state_events_ptr");
             var seqDefsPtr = seqDefsPtrField.Unwrap("seq_defs_ptr");
-            return new AnimPtr(fileName, animPtr, animRootPtr, objectsPtr, nodesPtr, lightsPtr, puffersPtr, dynamicSoundsPtr, staticSoundsPtr, activPrereqsPtr, animRefsPtr, resetStatePtr, resetStateEventsPtr, seqDefsPtr);
+            return new AnimPtr(fileName, animPtr, animRootPtr, objectsPtr, nodesPtr, lightsPtr, puffersPtr, dynamicSoundsPtr, staticSoundsPtr, activPrereqsPtr, animRefsPtr, resetStatePtr, seqDefsPtr);
         }
 
         public override void Write(Utf8JsonWriter writer, AnimPtr value, JsonSerializerOptions options)
@@ -170,8 +162,6 @@ namespace Mech3DotNet.Json.Converters
             JsonSerializer.Serialize(writer, value.animRefsPtr, options);
             writer.WritePropertyName("reset_state_ptr");
             JsonSerializer.Serialize(writer, value.resetStatePtr, options);
-            writer.WritePropertyName("reset_state_events_ptr");
-            JsonSerializer.Serialize(writer, value.resetStateEventsPtr, options);
             writer.WritePropertyName("seq_defs_ptr");
             JsonSerializer.Serialize(writer, value.seqDefsPtr, options);
             writer.WriteEndObject();

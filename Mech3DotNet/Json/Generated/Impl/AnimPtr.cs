@@ -21,10 +21,9 @@ namespace Mech3DotNet.Json
         public uint activPrereqsPtr;
         public uint animRefsPtr;
         public uint resetStatePtr;
-        public uint resetStateEventsPtr;
         public uint seqDefsPtr;
 
-        public AnimPtr(string fileName, uint animPtr, uint animRootPtr, uint objectsPtr, uint nodesPtr, uint lightsPtr, uint puffersPtr, uint dynamicSoundsPtr, uint staticSoundsPtr, uint activPrereqsPtr, uint animRefsPtr, uint resetStatePtr, uint resetStateEventsPtr, uint seqDefsPtr)
+        public AnimPtr(string fileName, uint animPtr, uint animRootPtr, uint objectsPtr, uint nodesPtr, uint lightsPtr, uint puffersPtr, uint dynamicSoundsPtr, uint staticSoundsPtr, uint activPrereqsPtr, uint animRefsPtr, uint resetStatePtr, uint seqDefsPtr)
         {
             this.fileName = fileName;
             this.animPtr = animPtr;
@@ -38,7 +37,6 @@ namespace Mech3DotNet.Json
             this.activPrereqsPtr = activPrereqsPtr;
             this.animRefsPtr = animRefsPtr;
             this.resetStatePtr = resetStatePtr;
-            this.resetStateEventsPtr = resetStateEventsPtr;
             this.seqDefsPtr = seqDefsPtr;
         }
     }

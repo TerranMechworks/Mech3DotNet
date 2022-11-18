@@ -18,12 +18,7 @@ namespace Mech3DotNet.Json.Converters
                 {
                     case "data":
                         {
-                            byte[]? __value = ReadFieldValue<byte[]?>(ref __reader, __options);
-                            if (__value is null)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Value of 'data' was null for 'PaletteData'");
-                                throw new JsonException();
-                            }
+                            byte[] __value = ReadFieldValue<byte[]>(ref __reader, __options);
                             dataField.Set(__value);
                             break;
                         }

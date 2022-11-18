@@ -25,12 +25,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "unk":
                         {
-                            byte[]? __value = ReadFieldValue<byte[]?>(ref __reader, __options);
-                            if (__value is null)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Value of 'unk' was null for 'ScaleData'");
-                                throw new JsonException();
-                            }
+                            byte[] __value = ReadFieldValue<byte[]>(ref __reader, __options);
                             unkField.Set(__value);
                             break;
                         }

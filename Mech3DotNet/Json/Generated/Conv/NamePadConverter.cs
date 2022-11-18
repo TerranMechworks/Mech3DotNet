@@ -30,12 +30,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "pad":
                         {
-                            byte[]? __value = ReadFieldValue<byte[]?>(ref __reader, __options);
-                            if (__value is null)
-                            {
-                                System.Diagnostics.Debug.WriteLine("Value of 'pad' was null for 'NamePad'");
-                                throw new JsonException();
-                            }
+                            byte[] __value = ReadFieldValue<byte[]>(ref __reader, __options);
                             padField.Set(__value);
                             break;
                         }

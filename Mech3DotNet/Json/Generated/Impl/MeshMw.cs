@@ -6,21 +6,21 @@ using Mech3DotNet.Json.Converters;
 
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(MeshConverter))]
-    public class Mesh
+    [JsonConverter(typeof(MeshMwConverter))]
+    public class MeshMw
     {
         public List<Vec3> vertices;
         public List<Vec3> normals;
         public List<Vec3> morphs;
         public List<MeshLight> lights;
-        public List<Polygon> polygons;
+        public List<PolygonMw> polygons;
         public uint polygonsPtr;
         public uint verticesPtr;
         public uint normalsPtr;
         public uint lightsPtr;
         public uint morphsPtr;
         public bool filePtr;
-        public bool unk04;
+        public uint unk04;
         public uint unk08;
         public uint parentCount;
         public float unk40;
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Json
         public float unk80;
         public float unk84;
 
-        public Mesh(List<Vec3> vertices, List<Vec3> normals, List<Vec3> morphs, List<MeshLight> lights, List<Polygon> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, bool unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
+        public MeshMw(List<Vec3> vertices, List<Vec3> normals, List<Vec3> morphs, List<MeshLight> lights, List<PolygonMw> polygons, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
         {
             this.vertices = vertices;
             this.normals = normals;

@@ -13,7 +13,7 @@ namespace Mech3DotNet.Json.Converters
             var textureField = new Option<string>();
             var pointerField = new Option<uint>(0);
             var cycleField = new Option<CycleData?>(null);
-            var unk32Field = new Option<uint>();
+            var specularField = new Option<float>();
             var flagField = new Option<bool>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Converters
                             cycleField.Set(__value);
                             break;
                         }
-                    case "unk32":
+                    case "specular":
                         {
-                            uint __value = ReadFieldValue<uint>(ref __reader, __options);
-                            unk32Field.Set(__value);
+                            float __value = ReadFieldValue<float>(ref __reader, __options);
+                            specularField.Set(__value);
                             break;
                         }
                     case "flag":
@@ -66,9 +66,9 @@ namespace Mech3DotNet.Json.Converters
             var texture = textureField.Unwrap("texture");
             var pointer = pointerField.Unwrap("pointer");
             var cycle = cycleField.Unwrap("cycle");
-            var unk32 = unk32Field.Unwrap("unk32");
+            var specular = specularField.Unwrap("specular");
             var flag = flagField.Unwrap("flag");
-            return new TexturedMaterial(texture, pointer, cycle, unk32, flag);
+            return new TexturedMaterial(texture, pointer, cycle, specular, flag);
         }
 
         public override void Write(Utf8JsonWriter writer, TexturedMaterial value, JsonSerializerOptions options)
@@ -86,8 +86,8 @@ namespace Mech3DotNet.Json.Converters
                 writer.WritePropertyName("cycle");
                 JsonSerializer.Serialize(writer, value.cycle, options);
             }
-            writer.WritePropertyName("unk32");
-            JsonSerializer.Serialize(writer, value.unk32, options);
+            writer.WritePropertyName("specular");
+            JsonSerializer.Serialize(writer, value.specular, options);
             writer.WritePropertyName("flag");
             JsonSerializer.Serialize(writer, value.flag, options);
             writer.WriteEndObject();

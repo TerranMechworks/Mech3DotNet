@@ -13,6 +13,9 @@ namespace Mech3DotNet.Json.Converters
             "Vertical" => TextureStretch.Vertical,
             "Horizontal" => TextureStretch.Horizontal,
             "Both" => TextureStretch.Both,
+            "Unk4" => TextureStretch.Unk4,
+            "Unk7" => TextureStretch.Unk7,
+            "Unk8" => TextureStretch.Unk8,
             null => DebugAndThrow("Variant cannot be null for 'TextureStretch'"),
             _ => DebugAndThrow($"Invalid variant '{name}' for 'TextureStretch'"),
         };
@@ -23,6 +26,9 @@ namespace Mech3DotNet.Json.Converters
             TextureStretch.Vertical => "Vertical",
             TextureStretch.Horizontal => "Horizontal",
             TextureStretch.Both => "Both",
+            TextureStretch.Unk4 => "Unk4",
+            TextureStretch.Unk7 => "Unk7",
+            TextureStretch.Unk8 => "Unk8",
             _ => throw new ArgumentOutOfRangeException("TextureStretch"),
         };
     }

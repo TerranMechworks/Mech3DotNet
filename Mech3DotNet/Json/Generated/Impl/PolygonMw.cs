@@ -6,8 +6,8 @@ using Mech3DotNet.Json.Converters;
 
 namespace Mech3DotNet.Json
 {
-    [JsonConverter(typeof(PolygonConverter))]
-    public class Polygon
+    [JsonConverter(typeof(PolygonMwConverter))]
+    public class PolygonMw
     {
         public List<uint> vertexIndices;
         public List<Color> vertexColors;
@@ -15,7 +15,7 @@ namespace Mech3DotNet.Json
         public List<UvCoord>? uvCoords;
         public uint textureIndex;
         public uint textureInfo;
-        public uint unk04;
+        public int unk04;
         public bool unkBit;
         public bool vtxBit;
         public uint verticesPtr;
@@ -24,7 +24,7 @@ namespace Mech3DotNet.Json
         public uint colorsPtr;
         public uint unkPtr;
 
-        public Polygon(List<uint> vertexIndices, List<Color> vertexColors, List<uint>? normalIndices, List<UvCoord>? uvCoords, uint textureIndex, uint textureInfo, uint unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
+        public PolygonMw(List<uint> vertexIndices, List<Color> vertexColors, List<uint>? normalIndices, List<UvCoord>? uvCoords, uint textureIndex, uint textureInfo, int unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
         {
             this.vertexIndices = vertexIndices;
             this.vertexColors = vertexColors;

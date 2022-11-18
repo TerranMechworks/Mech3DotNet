@@ -12,5 +12,8 @@ namespace Mech3DotNet.Json
         Vertical,
         Horizontal,
         Both,
+        Unk4,
+        Unk7,
+        Unk8,
     }
 }

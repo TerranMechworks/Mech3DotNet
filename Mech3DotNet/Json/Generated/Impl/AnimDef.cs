@@ -31,10 +31,10 @@ namespace Mech3DotNet.Json
         public List<NamePad>? staticSounds = null;
         public List<ActivationPrereq>? activPrereqs = null;
         public List<NamePad>? animRefs = null;
-        public SeqDef? resetSequence;
+        public ResetState? resetState;
         public List<SeqDef> sequences;
 
-        public AnimDef(string name, NamePad animName, NamePad animRoot, string fileName, bool autoResetNodeStates, AnimActivation activation, Execution execution, bool? networkLog, bool? saveLog, bool hasCallbacks, float? resetTime, float health, bool proximityDamage, byte activPrereqMinToSatisfy, List<NamePad>? objects, List<NamePtr>? nodes, List<NamePtr>? lights, List<NamePtrFlags>? puffers, List<NamePtr>? dynamicSounds, List<NamePad>? staticSounds, List<ActivationPrereq>? activPrereqs, List<NamePad>? animRefs, SeqDef? resetSequence, List<SeqDef> sequences)
+        public AnimDef(string name, NamePad animName, NamePad animRoot, string fileName, bool autoResetNodeStates, AnimActivation activation, Execution execution, bool? networkLog, bool? saveLog, bool hasCallbacks, float? resetTime, float health, bool proximityDamage, byte activPrereqMinToSatisfy, List<NamePad>? objects, List<NamePtr>? nodes, List<NamePtr>? lights, List<NamePtrFlags>? puffers, List<NamePtr>? dynamicSounds, List<NamePad>? staticSounds, List<ActivationPrereq>? activPrereqs, List<NamePad>? animRefs, ResetState? resetState, List<SeqDef> sequences)
         {
             this.name = name;
             this.animName = animName;
@@ -58,7 +58,7 @@ namespace Mech3DotNet.Json
             this.staticSounds = staticSounds;
             this.activPrereqs = activPrereqs;
             this.animRefs = animRefs;
-            this.resetSequence = resetSequence;
+            this.resetState = resetState;
             this.sequences = sequences;
         }
     }

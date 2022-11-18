@@ -6,22 +6,22 @@ using Mech3DotNet.Json;
 
 namespace Mech3DotNet.Json.Converters
 {
-    public class MeshConverter : StructConverter<Mesh>
+    public class MeshMwConverter : StructConverter<MeshMw>
     {
-        protected override Mesh ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override MeshMw ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var verticesField = new Option<List<Vec3>>();
             var normalsField = new Option<List<Vec3>>();
             var morphsField = new Option<List<Vec3>>();
             var lightsField = new Option<List<MeshLight>>();
-            var polygonsField = new Option<List<Polygon>>();
+            var polygonsField = new Option<List<PolygonMw>>();
             var polygonsPtrField = new Option<uint>();
             var verticesPtrField = new Option<uint>();
             var normalsPtrField = new Option<uint>();
             var lightsPtrField = new Option<uint>();
             var morphsPtrField = new Option<uint>();
             var filePtrField = new Option<bool>();
-            var unk04Field = new Option<bool>();
+            var unk04Field = new Option<uint>();
             var unk08Field = new Option<uint>();
             var parentCountField = new Option<uint>();
             var unk40Field = new Option<float>();
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Json.Converters
                             List<Vec3>? __value = ReadFieldValue<List<Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
-                                System.Diagnostics.Debug.WriteLine("Value of 'vertices' was null for 'Mesh'");
+                                System.Diagnostics.Debug.WriteLine("Value of 'vertices' was null for 'MeshMw'");
                                 throw new JsonException();
                             }
                             verticesField.Set(__value);
@@ -51,7 +51,7 @@ namespace Mech3DotNet.Json.Converters
                             List<Vec3>? __value = ReadFieldValue<List<Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
-                                System.Diagnostics.Debug.WriteLine("Value of 'normals' was null for 'Mesh'");
+                                System.Diagnostics.Debug.WriteLine("Value of 'normals' was null for 'MeshMw'");
                                 throw new JsonException();
                             }
                             normalsField.Set(__value);
@@ -62,7 +62,7 @@ namespace Mech3DotNet.Json.Converters
                             List<Vec3>? __value = ReadFieldValue<List<Vec3>?>(ref __reader, __options);
                             if (__value is null)
                             {
-                                System.Diagnostics.Debug.WriteLine("Value of 'morphs' was null for 'Mesh'");
+                                System.Diagnostics.Debug.WriteLine("Value of 'morphs' was null for 'MeshMw'");
                                 throw new JsonException();
                             }
                             morphsField.Set(__value);
@@ -73,7 +73,7 @@ namespace Mech3DotNet.Json.Converters
                             List<MeshLight>? __value = ReadFieldValue<List<MeshLight>?>(ref __reader, __options);
                             if (__value is null)
                             {
-                                System.Diagnostics.Debug.WriteLine("Value of 'lights' was null for 'Mesh'");
+                                System.Diagnostics.Debug.WriteLine("Value of 'lights' was null for 'MeshMw'");
                                 throw new JsonException();
                             }
                             lightsField.Set(__value);
@@ -81,10 +81,10 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "polygons":
                         {
-                            List<Polygon>? __value = ReadFieldValue<List<Polygon>?>(ref __reader, __options);
+                            List<PolygonMw>? __value = ReadFieldValue<List<PolygonMw>?>(ref __reader, __options);
                             if (__value is null)
                             {
-                                System.Diagnostics.Debug.WriteLine("Value of 'polygons' was null for 'Mesh'");
+                                System.Diagnostics.Debug.WriteLine("Value of 'polygons' was null for 'MeshMw'");
                                 throw new JsonException();
                             }
                             polygonsField.Set(__value);
@@ -128,7 +128,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     case "unk04":
                         {
-                            bool __value = ReadFieldValue<bool>(ref __reader, __options);
+                            uint __value = ReadFieldValue<uint>(ref __reader, __options);
                             unk04Field.Set(__value);
                             break;
                         }
@@ -182,7 +182,7 @@ namespace Mech3DotNet.Json.Converters
                         }
                     default:
                         {
-                            System.Diagnostics.Debug.WriteLine($"Invalid field '{__fieldName}' for 'Mesh'");
+                            System.Diagnostics.Debug.WriteLine($"Invalid field '{__fieldName}' for 'MeshMw'");
                             throw new JsonException();
                         }
                 }
@@ -208,10 +208,10 @@ namespace Mech3DotNet.Json.Converters
             var unk76 = unk76Field.Unwrap("unk76");
             var unk80 = unk80Field.Unwrap("unk80");
             var unk84 = unk84Field.Unwrap("unk84");
-            return new Mesh(vertices, normals, morphs, lights, polygons, polygonsPtr, verticesPtr, normalsPtr, lightsPtr, morphsPtr, filePtr, unk04, unk08, parentCount, unk40, unk44, unk72, unk76, unk80, unk84);
+            return new MeshMw(vertices, normals, morphs, lights, polygons, polygonsPtr, verticesPtr, normalsPtr, lightsPtr, morphsPtr, filePtr, unk04, unk08, parentCount, unk40, unk44, unk72, unk76, unk80, unk84);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mesh value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, MeshMw value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("vertices");

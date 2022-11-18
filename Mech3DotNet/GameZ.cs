@@ -6,12 +6,12 @@ namespace Mech3DotNet
 {
     public static class GameZ
     {
-        public static GameZData ReadMW(string inputPath)
+        public static GameZMwData ReadMW(string inputPath)
         {
-            return ReadData<GameZData>(inputPath, false, Interop.ReadGameZ);
+            return ReadData<GameZMwData>(inputPath, false, Interop.ReadGameZ);
         }
 
-        public static void WriteMW(string outputPath, GameZData gamez)
+        public static void WriteMW(string outputPath, GameZMwData gamez)
         {
             WriteData(outputPath, false, Interop.WriteGameZ, gamez);
         }

@@ -1,25 +1,25 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Mw.Converters
 {
-    public class LodConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Lod>
+    public class LodConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.Mw.Lod>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.Lod ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.Mw.Lod ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var levelField = new Mech3DotNet.Json.Converters.Option<bool>();
             var rangeField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range>();
             var unk60Field = new Mech3DotNet.Json.Converters.Option<float>();
             var unk76Field = new Mech3DotNet.Json.Converters.Option<uint?>();
-            var flagsField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.NodeFlags>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.NodeFlags>();
             var zoneIdField = new Mech3DotNet.Json.Converters.Option<uint>();
-            var areaPartitionField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.AreaPartition?>();
+            var areaPartitionField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.AreaPartition?>();
             var parentField = new Mech3DotNet.Json.Converters.Option<uint>();
             var childrenField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
             var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var parentArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var childrenArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
-            var unk116Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
+            var unk116Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.BoundingBox>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -62,7 +62,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "flags":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.NodeFlags? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.NodeFlags?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.NodeFlags? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.NodeFlags?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'flags' was null for 'Lod'");
@@ -79,7 +79,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "area_partition":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.AreaPartition? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.AreaPartition?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.AreaPartition? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.AreaPartition?>(ref __reader, __options);
                             areaPartitionField.Set(__value);
                             break;
                         }
@@ -120,7 +120,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "unk116":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk116' was null for 'Lod'");
@@ -151,10 +151,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var parentArrayPtr = parentArrayPtrField.Unwrap("parent_array_ptr");
             var childrenArrayPtr = childrenArrayPtrField.Unwrap("children_array_ptr");
             var unk116 = unk116Field.Unwrap("unk116");
-            return new Mech3DotNet.Json.Gamez.Nodes.Lod(name, level, range, unk60, unk76, flags, zoneId, areaPartition, parent, children, dataPtr, parentArrayPtr, childrenArrayPtr, unk116);
+            return new Mech3DotNet.Json.Nodes.Mw.Lod(name, level, range, unk60, unk76, flags, zoneId, areaPartition, parent, children, dataPtr, parentArrayPtr, childrenArrayPtr, unk116);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Lod value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.Mw.Lod value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

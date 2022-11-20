@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json.Gamez.Nodes
+namespace Mech3DotNet.Json.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.NodeFlagsConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Nodes.Converters.NodeFlagsConverter))]
     public class NodeFlags
     {
         public bool altitudeSurface = false;

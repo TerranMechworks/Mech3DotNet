@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Converters
 {
-    public class AreaPartitionConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.AreaPartition>
+    public class AreaPartitionConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.AreaPartition>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.AreaPartition ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.AreaPartition ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var xField = new Mech3DotNet.Json.Converters.Option<int>();
             var yField = new Mech3DotNet.Json.Converters.Option<int>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             // pray there are no naming collisions
             var x = xField.Unwrap("x");
             var y = yField.Unwrap("y");
-            return new Mech3DotNet.Json.Gamez.Nodes.AreaPartition(x, y);
+            return new Mech3DotNet.Json.Nodes.AreaPartition(x, y);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.AreaPartition value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.AreaPartition value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("x");

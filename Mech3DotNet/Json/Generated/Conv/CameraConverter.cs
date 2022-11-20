@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Mw.Converters
 {
-    public class CameraConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Camera>
+    public class CameraConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.Mw.Camera>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.Camera ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.Mw.Camera ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var clipField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Range>();
@@ -56,10 +56,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var clip = clipField.Unwrap("clip");
             var fov = fovField.Unwrap("fov");
             var dataPtr = dataPtrField.Unwrap("data_ptr");
-            return new Mech3DotNet.Json.Gamez.Nodes.Camera(name, clip, fov, dataPtr);
+            return new Mech3DotNet.Json.Nodes.Mw.Camera(name, clip, fov, dataPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Camera value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.Mw.Camera value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

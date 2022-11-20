@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json.Gamez.Nodes
+namespace Mech3DotNet.Json.Nodes
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.TransformationConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Nodes.Converters.TransformationConverter))]
     public class Transformation
     {
         public Mech3DotNet.Json.Types.Vec3 rotation;

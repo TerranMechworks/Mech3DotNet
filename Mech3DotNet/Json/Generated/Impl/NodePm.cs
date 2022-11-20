@@ -1,4 +1,4 @@
-namespace Mech3DotNet.Json.Gamez.Nodes
+namespace Mech3DotNet.Json.Nodes.Pm
 {
     public enum NodePmVariant
     {
@@ -6,16 +6,16 @@ namespace Mech3DotNet.Json.Gamez.Nodes
         Object3d,
     }
 
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.NodePmConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Nodes.Pm.Converters.NodePmConverter))]
     public class NodePm : Mech3DotNet.Json.Converters.IDiscriminatedUnion<NodePmVariant>
     {
-        public NodePm(Mech3DotNet.Json.Gamez.Nodes.LodPm value)
+        public NodePm(Mech3DotNet.Json.Nodes.Pm.LodPm value)
         {
             this.value = value;
             Variant = NodePmVariant.Lod;
         }
 
-        public NodePm(Mech3DotNet.Json.Gamez.Nodes.Object3dPm value)
+        public NodePm(Mech3DotNet.Json.Nodes.Pm.Object3dPm value)
         {
             this.value = value;
             Variant = NodePmVariant.Object3d;

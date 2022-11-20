@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Converters
 {
-    public class TransformationConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Transformation>
+    public class TransformationConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.Transformation>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.Transformation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.Transformation ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var rotationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             var translationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
@@ -43,10 +43,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var rotation = rotationField.Unwrap("rotation");
             var translation = translationField.Unwrap("translation");
             var matrix = matrixField.Unwrap("matrix");
-            return new Mech3DotNet.Json.Gamez.Nodes.Transformation(rotation, translation, matrix);
+            return new Mech3DotNet.Json.Nodes.Transformation(rotation, translation, matrix);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Transformation value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.Transformation value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("rotation");

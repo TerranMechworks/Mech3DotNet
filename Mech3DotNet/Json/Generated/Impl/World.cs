@@ -1,11 +1,11 @@
-namespace Mech3DotNet.Json.Gamez.Nodes
+namespace Mech3DotNet.Json.Nodes.Mw
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.WorldConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Nodes.Mw.Converters.WorldConverter))]
     public class World
     {
         public string name;
-        public Mech3DotNet.Json.Gamez.Nodes.Area area;
-        public System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.Partition>> partitions;
+        public Mech3DotNet.Json.Nodes.Area area;
+        public System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Json.Nodes.Partition>> partitions;
         public uint areaPartitionXCount;
         public uint areaPartitionYCount;
         public bool fudgeCount;
@@ -18,7 +18,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes
         public uint dataPtr;
         public uint childrenArrayPtr;
 
-        public World(string name, Mech3DotNet.Json.Gamez.Nodes.Area area, System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Json.Gamez.Nodes.Partition>> partitions, uint areaPartitionXCount, uint areaPartitionYCount, bool fudgeCount, uint areaPartitionPtr, uint virtPartitionPtr, uint worldChildrenPtr, uint worldChildValue, uint worldLightsPtr, System.Collections.Generic.List<uint> children, uint dataPtr, uint childrenArrayPtr)
+        public World(string name, Mech3DotNet.Json.Nodes.Area area, System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Json.Nodes.Partition>> partitions, uint areaPartitionXCount, uint areaPartitionYCount, bool fudgeCount, uint areaPartitionPtr, uint virtPartitionPtr, uint worldChildrenPtr, uint worldChildValue, uint worldLightsPtr, System.Collections.Generic.List<uint> children, uint dataPtr, uint childrenArrayPtr)
         {
             this.name = name;
             this.area = area;

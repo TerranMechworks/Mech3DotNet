@@ -1,6 +1,6 @@
-namespace Mech3DotNet.Json.Gamez.Nodes
+namespace Mech3DotNet.Json.Nodes.Pm
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.LodPmConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Nodes.Pm.Converters.LodPmConverter))]
     public class LodPm
     {
         public string name;
@@ -13,9 +13,9 @@ namespace Mech3DotNet.Json.Gamez.Nodes
         public uint dataPtr;
         public uint parentArrayPtr;
         public uint childrenArrayPtr;
-        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164;
+        public Mech3DotNet.Json.Nodes.BoundingBox unk164;
 
-        public LodPm(string name, bool level, Mech3DotNet.Json.Types.Range range, float unk64, float unk72, uint parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164)
+        public LodPm(string name, bool level, Mech3DotNet.Json.Types.Range range, float unk64, float unk72, uint parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Json.Nodes.BoundingBox unk164)
         {
             this.name = name;
             this.level = level;

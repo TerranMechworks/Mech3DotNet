@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Mw.Converters
 {
-    public class LightConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Light>
+    public class LightConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.Mw.Light>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.Light ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.Mw.Light ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var directionField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
@@ -88,10 +88,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var range = rangeField.Unwrap("range");
             var parentPtr = parentPtrField.Unwrap("parent_ptr");
             var dataPtr = dataPtrField.Unwrap("data_ptr");
-            return new Mech3DotNet.Json.Gamez.Nodes.Light(name, direction, diffuse, ambient, color, range, parentPtr, dataPtr);
+            return new Mech3DotNet.Json.Nodes.Mw.Light(name, direction, diffuse, ambient, color, range, parentPtr, dataPtr);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Light value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.Mw.Light value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

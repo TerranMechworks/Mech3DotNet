@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Converters
 {
-    public class BoundingBoxConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>
+    public class BoundingBoxConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.BoundingBox>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.BoundingBox ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.BoundingBox ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var aField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
             var bField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Types.Vec3>();
@@ -35,10 +35,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             // pray there are no naming collisions
             var a = aField.Unwrap("a");
             var b = bField.Unwrap("b");
-            return new Mech3DotNet.Json.Gamez.Nodes.BoundingBox(a, b);
+            return new Mech3DotNet.Json.Nodes.BoundingBox(a, b);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.BoundingBox value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.BoundingBox value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("a");

@@ -1,10 +1,10 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Pm.Converters
 {
-    public class LodPmConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.LodPm>
+    public class LodPmConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.Pm.LodPm>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.LodPm ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.Pm.LodPm ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
             var levelField = new Mech3DotNet.Json.Converters.Option<bool>();
@@ -16,7 +16,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var dataPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var parentArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var childrenArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
-            var unk164Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
+            var unk164Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.BoundingBox>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -94,7 +94,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "unk164":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk164' was null for 'LodPm'");
@@ -122,10 +122,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var parentArrayPtr = parentArrayPtrField.Unwrap("parent_array_ptr");
             var childrenArrayPtr = childrenArrayPtrField.Unwrap("children_array_ptr");
             var unk164 = unk164Field.Unwrap("unk164");
-            return new Mech3DotNet.Json.Gamez.Nodes.LodPm(name, level, range, unk64, unk72, parent, children, dataPtr, parentArrayPtr, childrenArrayPtr, unk164);
+            return new Mech3DotNet.Json.Nodes.Pm.LodPm(name, level, range, unk64, unk72, parent, children, dataPtr, parentArrayPtr, childrenArrayPtr, unk164);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.LodPm value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.Pm.LodPm value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

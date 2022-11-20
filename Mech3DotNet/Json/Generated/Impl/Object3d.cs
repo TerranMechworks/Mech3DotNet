@@ -1,25 +1,25 @@
-namespace Mech3DotNet.Json.Gamez.Nodes
+namespace Mech3DotNet.Json.Nodes.Mw
 {
-    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Gamez.Nodes.Converters.Object3dConverter))]
+    [System.Text.Json.Serialization.JsonConverter(typeof(Mech3DotNet.Json.Nodes.Mw.Converters.Object3dConverter))]
     public class Object3d
     {
         public string name;
-        public Mech3DotNet.Json.Gamez.Nodes.Transformation? transformation;
+        public Mech3DotNet.Json.Nodes.Transformation? transformation;
         public uint matrixSigns;
-        public Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags;
+        public Mech3DotNet.Json.Nodes.NodeFlags flags;
         public uint zoneId;
-        public Mech3DotNet.Json.Gamez.Nodes.AreaPartition? areaPartition;
+        public Mech3DotNet.Json.Nodes.AreaPartition? areaPartition;
         public int meshIndex;
         public uint? parent;
         public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint parentArrayPtr;
         public uint childrenArrayPtr;
-        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116;
-        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140;
-        public Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164;
+        public Mech3DotNet.Json.Nodes.BoundingBox unk116;
+        public Mech3DotNet.Json.Nodes.BoundingBox unk140;
+        public Mech3DotNet.Json.Nodes.BoundingBox unk164;
 
-        public Object3d(string name, Mech3DotNet.Json.Gamez.Nodes.Transformation? transformation, uint matrixSigns, Mech3DotNet.Json.Gamez.Nodes.NodeFlags flags, uint zoneId, Mech3DotNet.Json.Gamez.Nodes.AreaPartition? areaPartition, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk116, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk140, Mech3DotNet.Json.Gamez.Nodes.BoundingBox unk164)
+        public Object3d(string name, Mech3DotNet.Json.Nodes.Transformation? transformation, uint matrixSigns, Mech3DotNet.Json.Nodes.NodeFlags flags, uint zoneId, Mech3DotNet.Json.Nodes.AreaPartition? areaPartition, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Json.Nodes.BoundingBox unk116, Mech3DotNet.Json.Nodes.BoundingBox unk140, Mech3DotNet.Json.Nodes.BoundingBox unk164)
         {
             this.name = name;
             this.transformation = transformation;

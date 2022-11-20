@@ -1,15 +1,15 @@
 using System.Text.Json;
 
-namespace Mech3DotNet.Json.Gamez.Nodes.Converters
+namespace Mech3DotNet.Json.Nodes.Pm.Converters
 {
-    public class Object3dPmConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Gamez.Nodes.Object3dPm>
+    public class Object3dPmConverter : Mech3DotNet.Json.Converters.StructConverter<Mech3DotNet.Json.Nodes.Pm.Object3dPm>
     {
-        protected override Mech3DotNet.Json.Gamez.Nodes.Object3dPm ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
+        protected override Mech3DotNet.Json.Nodes.Pm.Object3dPm ReadStruct(ref Utf8JsonReader __reader, JsonSerializerOptions __options)
         {
             var nameField = new Mech3DotNet.Json.Converters.Option<string>();
-            var transformationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.Transformation?>();
+            var transformationField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.Transformation?>();
             var matrixSignsField = new Mech3DotNet.Json.Converters.Option<uint>();
-            var flagsField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.NodeFlags>();
+            var flagsField = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.NodeFlags>();
             var meshIndexField = new Mech3DotNet.Json.Converters.Option<int>();
             var parentField = new Mech3DotNet.Json.Converters.Option<uint?>();
             var childrenField = new Mech3DotNet.Json.Converters.Option<System.Collections.Generic.List<uint>>();
@@ -18,9 +18,9 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var childrenArrayPtrField = new Mech3DotNet.Json.Converters.Option<uint>();
             var unk044Field = new Mech3DotNet.Json.Converters.Option<uint>();
             var unk112Field = new Mech3DotNet.Json.Converters.Option<uint>();
-            var unk116Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
-            var unk140Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
-            var unk164Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Gamez.Nodes.BoundingBox>();
+            var unk116Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.BoundingBox>();
+            var unk140Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.BoundingBox>();
+            var unk164Field = new Mech3DotNet.Json.Converters.Option<Mech3DotNet.Json.Nodes.BoundingBox>();
             string? __fieldName = null;
             while (ReadFieldName(ref __reader, out __fieldName))
             {
@@ -39,7 +39,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "transformation":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.Transformation? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.Transformation?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.Transformation? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.Transformation?>(ref __reader, __options);
                             transformationField.Set(__value);
                             break;
                         }
@@ -51,7 +51,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "flags":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.NodeFlags? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.NodeFlags?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.NodeFlags? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.NodeFlags?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'flags' was null for 'Object3dPm'");
@@ -115,7 +115,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "unk116":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk116' was null for 'Object3dPm'");
@@ -126,7 +126,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "unk140":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk140' was null for 'Object3dPm'");
@@ -137,7 +137,7 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
                         }
                     case "unk164":
                         {
-                            Mech3DotNet.Json.Gamez.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Gamez.Nodes.BoundingBox?>(ref __reader, __options);
+                            Mech3DotNet.Json.Nodes.BoundingBox? __value = ReadFieldValue<Mech3DotNet.Json.Nodes.BoundingBox?>(ref __reader, __options);
                             if (__value is null)
                             {
                                 System.Diagnostics.Debug.WriteLine("Value of 'unk164' was null for 'Object3dPm'");
@@ -169,10 +169,10 @@ namespace Mech3DotNet.Json.Gamez.Nodes.Converters
             var unk116 = unk116Field.Unwrap("unk116");
             var unk140 = unk140Field.Unwrap("unk140");
             var unk164 = unk164Field.Unwrap("unk164");
-            return new Mech3DotNet.Json.Gamez.Nodes.Object3dPm(name, transformation, matrixSigns, flags, meshIndex, parent, children, dataPtr, parentArrayPtr, childrenArrayPtr, unk044, unk112, unk116, unk140, unk164);
+            return new Mech3DotNet.Json.Nodes.Pm.Object3dPm(name, transformation, matrixSigns, flags, meshIndex, parent, children, dataPtr, parentArrayPtr, childrenArrayPtr, unk044, unk112, unk116, unk140, unk164);
         }
 
-        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Gamez.Nodes.Object3dPm value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Mech3DotNet.Json.Nodes.Pm.Object3dPm value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name");

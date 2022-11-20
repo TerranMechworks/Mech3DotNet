@@ -28,10 +28,10 @@ namespace Mech3DotNet
 
     public static class Anim
     {
-        private static Dictionary<string, AnimDef> ReadRaw(string inputPath, bool isPM, out byte[] metadata)
+        private static Dictionary<string, AnimDef> ReadRaw(string inputPath, GameType gameType, out byte[] metadata)
         {
             var animations = new Dictionary<string, AnimDef>();
-            metadata = Helpers.ReadArchiveRaw(inputPath, isPM, "metadata.json", Interop.ReadAnim, (string name, byte[] data) =>
+            metadata = Helpers.ReadArchiveRaw(inputPath, gameType, "metadata.json", Interop.ReadAnim, (string name, byte[] data) =>
             {
                 var anim = Interop.Deserialize<AnimDef>(data);
                 animations.Add(name, anim);
@@ -41,19 +41,19 @@ namespace Mech3DotNet
 
         public static Dictionary<string, AnimDef> ReadMW(string inputPath)
         {
-            return ReadRaw(inputPath, false, out _);
+            return ReadRaw(inputPath, GameType.MW, out _);
         }
 
         public static AnimPackage ReadPackageMW(string inputPath)
         {
-            var animations = ReadRaw(inputPath, false, out byte[] metadata);
+            var animations = ReadRaw(inputPath, GameType.MW, out byte[] metadata);
             return new AnimPackage(animations, metadata);
         }
 
-        private static void Write(string outputPath, bool isPM, AnimPackage package)
+        private static void Write(string outputPath, GameType gameType, AnimPackage package)
         {
             var metadata = package.SerializeMetadata();
-            Helpers.WriteArchiveRaw(outputPath, isPM, metadata, Interop.WriteAnim, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, gameType, metadata, Interop.WriteAnim, (string name) =>
             {
                 var anim = package.animations[name];
                 return Interop.Serialize(anim);
@@ -62,7 +62,7 @@ namespace Mech3DotNet
 
         public static void WritePackageMW(string outputPath, AnimPackage package)
         {
-            Write(outputPath, false, package);
+            Write(outputPath, GameType.MW, package);
         }
     }
 }

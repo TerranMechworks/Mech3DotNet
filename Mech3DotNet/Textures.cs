@@ -51,8 +51,7 @@ namespace Mech3DotNet
         private static Dictionary<string, byte[]> ReadRaw(string inputPath, out byte[] manifest)
         {
             var textureData = new Dictionary<string, byte[]>();
-            // textures have no difference between MW and PM, it's just for consistency
-            manifest = Helpers.ReadArchiveRaw(inputPath, false, "manifest.json", Interop.ReadTextures, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, Helpers.IGNORED, "manifest.json", Interop.ReadTextures, (string name, byte[] data) =>
             {
                 textureData.Add(name, data);
             });
@@ -86,8 +85,7 @@ namespace Mech3DotNet
         private static void WriteRaw(string outputPath, TexturePackage package)
         {
             var manifest = package.SerializeManifest();
-            // textures have no difference between MW and PM, it's just for consistency
-            Helpers.WriteArchiveRaw(outputPath, false, manifest, Interop.WriteTextures, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, Helpers.IGNORED, manifest, Interop.WriteTextures, (string name) =>
             {
                 return package.textureData[name];
             });

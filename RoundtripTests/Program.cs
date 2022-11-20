@@ -23,16 +23,17 @@ namespace RoundtripTests
             string basePath = args[0];
 
             var tester = new Tester(basePath);
+            Console.WriteLine("{0}", tester.gameType);
 
             tester.Sounds();
             tester.Interp();
-            tester.Motions();
+            tester.Messages();
+            tester.Readers();
             tester.Textures();
             tester.Mechlib();
+            tester.Motions();
             tester.GameZ();
-            tester.Readers();
             tester.Anims();
-            tester.Mech3Msg();
             tester.SoundWav();
             tester.SoundsWav();
 

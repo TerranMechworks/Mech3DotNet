@@ -5,24 +5,25 @@ namespace Mech3DotNet
 {
     public static class ReadersJson
     {
-        private static Dictionary<string, byte[]> Read(string inputPath, bool isPM, out byte[] manifest)
+        private static Dictionary<string, byte[]> Read(string inputPath, GameType gameType, out byte[] manifest)
         {
             var readers = new Dictionary<string, byte[]>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadReader, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadReader, (string name, byte[] data) =>
             {
                 readers.Add(name, data);
             });
             return readers;
         }
 
+        [System.Obsolete("Use Read with a specific GameType instead.")]
         public static Dictionary<string, byte[]> ReadMW(string inputPath)
         {
-            return Read(inputPath, false, out _);
+            return Read(inputPath, GameType.MW, out _);
         }
 
-        public static Dictionary<string, byte[]> ReadPM(string inputPath)
+        public static Dictionary<string, byte[]> Read(string inputPath, GameType gameType)
         {
-            return Read(inputPath, true, out _);
+            return Read(inputPath, gameType, out _);
         }
     }
 }

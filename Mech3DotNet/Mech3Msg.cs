@@ -8,13 +8,14 @@ namespace Mech3DotNet
 {
     public class Mech3Msg
     {
-        public static Messages Read(string inputPath)
+        public static Messages Read(string inputPath, GameType gameType)
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
+            var gameTypeId = Helpers.GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             Messages? messages = null;
-            var res = Interop.ReadMessages(inputPath, (IntPtr pointer, ulong length) =>
+            var res = Interop.ReadMessages(inputPath, gameTypeId, (IntPtr pointer, ulong length) =>
             {
                 try
                 {
@@ -38,9 +39,9 @@ namespace Mech3DotNet
             return messages;
         }
 
-        public static Dictionary<string, string> ReadAsDict(string inputPath)
+        public static Dictionary<string, string> ReadAsDict(string inputPath, GameType gameType)
         {
-            var messages = Read(inputPath);
+            var messages = Read(inputPath, gameType);
             var dict = new Dictionary<string, string>(messages.entries.Count);
             foreach (var entry in messages.entries)
                 dict.Add(entry.key, entry.value);

@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
 using Mech3DotNet.Json.Archive;
-using Mech3DotNet.Json.Gamez.Mechlib;
 using Mech3DotNet.Json.Gamez.Materials;
+using Mech3DotNet.Json.Gamez.Mechlib;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
-    public class MechlibArchive : Archive<ModelMw>
+    public class MechlibArchiveMw : Archive<ModelMw>
     {
         public List<Material> materials;
 
-        public MechlibArchive(
+        public MechlibArchiveMw(
             Dictionary<string, ModelMw> items,
             List<Material> materials,
             byte[] manifest) : base(items, manifest)
@@ -19,7 +19,7 @@ namespace Mech3DotNet
             this.materials = materials ?? throw new ArgumentNullException(nameof(materials));
         }
 
-        public MechlibArchive(
+        public MechlibArchiveMw(
             Dictionary<string, ModelMw> items,
             List<Material> materials,
             List<ArchiveEntry> entries) : base(items, entries)
@@ -28,17 +28,17 @@ namespace Mech3DotNet
         }
     }
 
-    public static class Mechlib
+    public static class MechlibMw
     {
         private static readonly byte[] VERSION_MW = BitConverter.GetBytes(27u);
         private static readonly byte[] VERSION_PM = BitConverter.GetBytes(41u);
         private static readonly byte[] FORMAT = BitConverter.GetBytes(1u);
 
-        private static Dictionary<string, ModelMw> Read(string inputPath, bool isPM, out byte[] manifest, out List<Material> materials)
+        private static Dictionary<string, ModelMw> Read(string inputPath, out byte[] manifest, out List<Material> materials)
         {
             List<Material>? capture = null;
             var models = new Dictionary<string, ModelMw>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadMechlib, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, GameType.MW, "manifest.json", Interop.ReadMechlib, (string name, byte[] data) =>
             {
                 switch (name)
                 {
@@ -61,24 +61,23 @@ namespace Mech3DotNet
             return models;
         }
 
-        public static MechlibArchive ReadArchiveMW(string inputPath)
+        public static MechlibArchiveMw ReadArchive(string inputPath)
         {
-            var items = Read(inputPath, false, out byte[] manifest, out List<Material> materials);
-            return new MechlibArchive(items, materials, manifest);
+            var items = Read(inputPath, out byte[] manifest, out List<Material> materials);
+            return new MechlibArchiveMw(items, materials, manifest);
         }
 
-        private static void Write(string outputPath, bool isPM, MechlibArchive archive)
+        private static void Write(string outputPath, MechlibArchiveMw archive)
         {
             var manifest = archive.SerializeManifest();
-            var version = isPM ? VERSION_PM : VERSION_MW;
-            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteMechlib, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, GameType.MW, manifest, Interop.WriteMechlib, (string name) =>
             {
                 switch (name)
                 {
                     case "format":
                         return FORMAT;
                     case "version":
-                        return version;
+                        return VERSION_MW;
                     case "materials":
                         return Interop.Serialize(archive.materials);
                     default:
@@ -88,9 +87,9 @@ namespace Mech3DotNet
             });
         }
 
-        public static void WriteArchiveMW(string outputPath, MechlibArchive archive)
+        public static void WriteArchive(string outputPath, MechlibArchiveMw archive)
         {
-            Write(outputPath, false, archive);
+            Write(outputPath, archive);
         }
     }
 }

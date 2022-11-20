@@ -17,6 +17,17 @@ namespace Mech3DotNet
         public ReaderArchive(
             Dictionary<string, ReaderValue> items,
             List<ArchiveEntry> entries) : base(items, entries) { }
+    }
+
+    public class ReaderArchiveMw : ReaderArchive
+    {
+        public ReaderArchiveMw(
+            Dictionary<string, ReaderValue> items,
+            byte[] manifest) : base(items, manifest) { }
+
+        public ReaderArchiveMw(
+            Dictionary<string, ReaderValue> items,
+            List<ArchiveEntry> entries) : base(items, entries) { }
 
         public Dictionary<string, Font> GetFonts()
         {
@@ -60,10 +71,10 @@ namespace Mech3DotNet
 
     public static class Readers
     {
-        private static Dictionary<string, ReaderValue> Read(string inputPath, bool isPM, out byte[] manifest)
+        private static Dictionary<string, ReaderValue> Read(string inputPath, GameType gameType, out byte[] manifest)
         {
             var readers = new Dictionary<string, ReaderValue>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadReaderRaw, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadReaderRaw, (string name, byte[] data) =>
             {
                 var stream = new MemoryStream(data);
                 var reader = new BinaryReader(stream);
@@ -75,30 +86,29 @@ namespace Mech3DotNet
 
         public static Dictionary<string, ReaderValue> ReadMW(string inputPath)
         {
-            return Read(inputPath, false, out _);
+            return Read(inputPath, GameType.MW, out _);
         }
 
-        public static Dictionary<string, ReaderValue> ReadPM(string inputPath)
+        public static Dictionary<string, ReaderValue> Read(string inputPath, GameType gameType)
         {
-            return Read(inputPath, true, out _);
+            return Read(inputPath, gameType, out _);
+        }
+        public static ReaderArchiveMw ReadArchiveMW(string inputPath)
+        {
+            var items = Read(inputPath, GameType.MW, out byte[] manifest);
+            return new ReaderArchiveMw(items, manifest);
         }
 
-        public static ReaderArchive ReadArchiveMW(string inputPath)
+        public static ReaderArchive ReadArchive(string inputPath, GameType gameType)
         {
-            var items = Read(inputPath, false, out byte[] manifest);
+            var items = Read(inputPath, gameType, out byte[] manifest);
             return new ReaderArchive(items, manifest);
         }
 
-        public static ReaderArchive ReadArchivePM(string inputPath)
-        {
-            var items = Read(inputPath, true, out byte[] manifest);
-            return new ReaderArchive(items, manifest);
-        }
-
-        private static void Write(string outputPath, bool isPM, ReaderArchive archive)
+        private static void Write(string outputPath, GameType gameType, ReaderArchive archive)
         {
             var manifest = archive.SerializeManifest();
-            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteReaderRaw, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, gameType, manifest, Interop.WriteReaderRaw, (string name) =>
             {
                 var root = archive.items[name];
                 var stream = new MemoryStream();
@@ -110,12 +120,12 @@ namespace Mech3DotNet
 
         public static void WriteArchiveMW(string outputPath, ReaderArchive archive)
         {
-            Write(outputPath, false, archive);
+            Write(outputPath, GameType.MW, archive);
         }
 
-        public static void WriteArchivePM(string outputPath, ReaderArchive archive)
+        public static void WriteArchive(string outputPath, GameType gameType, ReaderArchive archive)
         {
-            Write(outputPath, true, archive);
+            Write(outputPath, gameType, archive);
         }
     }
 }

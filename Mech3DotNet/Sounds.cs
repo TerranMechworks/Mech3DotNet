@@ -8,10 +8,10 @@ namespace Mech3DotNet
 {
     public static class Sounds
     {
-        private static Dictionary<string, byte[]> ReadRaw(string inputPath, bool isPM, out byte[] manifest)
+        private static Dictionary<string, byte[]> ReadRaw(string inputPath, GameType gameType, out byte[] manifest)
         {
             var sounds = new Dictionary<string, byte[]>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadSounds, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadSounds, (string name, byte[] data) =>
             {
                 // there are duplicate sounds in the archive
                 sounds[name] = data;
@@ -19,35 +19,24 @@ namespace Mech3DotNet
             return sounds;
         }
 
-        public static Archive<byte[]> ReadArchiveMW(string inputPath)
+        public static Archive<byte[]> ReadArchive(string inputPath, GameType gameType)
         {
-            var items = ReadRaw(inputPath, false, out byte[] manifest);
+            var items = ReadRaw(inputPath, gameType, out byte[] manifest);
             return new Archive<byte[]>(items, manifest);
         }
 
-        public static Archive<byte[]> ReadArchivePM(string inputPath)
-        {
-            var items = ReadRaw(inputPath, true, out byte[] manifest);
-            return new Archive<byte[]>(items, manifest);
-        }
-
-        private static void WriteRaw(string outputPath, bool isPM, Archive<byte[]> archive)
+        private static void WriteRaw(string outputPath, GameType gameType, Archive<byte[]> archive)
         {
             var manifest = archive.SerializeManifest();
-            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteSounds, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, gameType, manifest, Interop.WriteSounds, (string name) =>
             {
                 return archive.items[name];
             });
         }
 
-        public static void WriteArchiveMW(string outputPath, Archive<byte[]> archive)
+        public static void WriteArchive(string outputPath, GameType gameType, Archive<byte[]> archive)
         {
-            WriteRaw(outputPath, false, archive);
-        }
-
-        public static void WriteArchivePM(string outputPath, Archive<byte[]> archive)
-        {
-            WriteRaw(outputPath, true, archive);
+            WriteRaw(outputPath, gameType, archive);
         }
 
         public delegate void ReadWaveCb(string name, int channels, int frequency, float[] samples);
@@ -55,14 +44,24 @@ namespace Mech3DotNet
         /// <summary>
         /// Read a sound archive (soundsL.zbd, soundsH.zbd), parsed into Unity-compatible sound.
         /// </summary>
-        public static void ReadSoundsAsWav(string inputPath, bool isPM, ReadWaveCb readCallback)
+        [System.Obsolete("Use ReadSoundsAsWav with a specific GameType instead.")]
+        public static void ReadSoundsAsWav(string inputPath, ReadWaveCb readCallback)
+        {
+            ReadSoundsAsWav(inputPath, GameType.MW, readCallback);
+        }
+
+        /// <summary>
+        /// Read a sound archive (soundsL.zbd, soundsH.zbd), parsed into Unity-compatible sound.
+        /// </summary>
+        public static void ReadSoundsAsWav(string inputPath, GameType gameType, ReadWaveCb readCallback)
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
+            var gameTypeId = Helpers.GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             var res = Interop.ReadSoundsAsWav(
                 inputPath,
-                isPM,
+                gameTypeId,
                 (IntPtr namePtr, ulong nameLen, int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
                 {
                     try

@@ -6,10 +6,10 @@ namespace Mech3DotNet
 {
     public static class Motions<TQuaternion, TVec3>
     {
-        private static Dictionary<string, Motion<TQuaternion, TVec3>> Read(string inputPath, bool isPM, out byte[] manifest)
+        private static Dictionary<string, Motion<TQuaternion, TVec3>> Read(string inputPath, GameType gameType, out byte[] manifest)
         {
             var motions = new Dictionary<string, Motion<TQuaternion, TVec3>>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, isPM, "manifest.json", Interop.ReadMotion, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadMotion, (string name, byte[] data) =>
             {
                 var motion = Interop.Deserialize<Motion<TQuaternion, TVec3>>(data);
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
@@ -20,30 +20,30 @@ namespace Mech3DotNet
 
         public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadMW(string inputPath)
         {
-            return Read(inputPath, false, out _);
+            return Read(inputPath, GameType.MW, out _);
         }
 
         public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadPM(string inputPath)
         {
-            return Read(inputPath, true, out _);
+            return Read(inputPath, GameType.PM, out _);
         }
 
         public static Archive<Motion<TQuaternion, TVec3>> ReadArchiveMW(string inputPath)
         {
-            var items = Read(inputPath, false, out byte[] manifest);
+            var items = Read(inputPath, GameType.MW, out byte[] manifest);
             return new Archive<Motion<TQuaternion, TVec3>>(items, manifest);
         }
 
         public static Archive<Motion<TQuaternion, TVec3>> ReadArchivePM(string inputPath)
         {
-            var items = Read(inputPath, true, out byte[] manifest);
+            var items = Read(inputPath, GameType.PM, out byte[] manifest);
             return new Archive<Motion<TQuaternion, TVec3>>(items, manifest);
         }
 
-        private static void Write(string outputPath, bool isPM, Archive<Motion<TQuaternion, TVec3>> archive)
+        private static void Write(string outputPath, GameType gameType, Archive<Motion<TQuaternion, TVec3>> archive)
         {
             var manifest = archive.SerializeManifest();
-            Helpers.WriteArchiveRaw(outputPath, isPM, manifest, Interop.WriteMotion, (string name) =>
+            Helpers.WriteArchiveRaw(outputPath, gameType, manifest, Interop.WriteMotion, (string name) =>
             {
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
                 var item = archive.items[name.ToLowerInvariant()];
@@ -53,12 +53,12 @@ namespace Mech3DotNet
 
         public static void WriteArchiveMW(string outputPath, Archive<Motion<TQuaternion, TVec3>> archive)
         {
-            Write(outputPath, false, archive);
+            Write(outputPath, GameType.MW, archive);
         }
 
         public static void WriteArchivePM(string outputPath, Archive<Motion<TQuaternion, TVec3>> archive)
         {
-            Write(outputPath, true, archive);
+            Write(outputPath, GameType.PM, archive);
         }
     }
 }

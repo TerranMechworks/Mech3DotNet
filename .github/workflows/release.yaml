@@ -5,15 +5,17 @@ on:
     - workflow_release
     tags:
     - 'v[0-9]+.[0-9]+.[0-9]+'
+    - 'v[0-9]+.[0-9]+.[0-9]+'
+    - 'v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+    - 'v[0-9]+.[0-9]+.[0-9]+-alpha'
+    - 'v[0-9]+.[0-9]+.[0-9]+-beta'
 jobs:
   release:
     name: release
-    # runs-on: ubuntu-latest
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
     - name: Get the branch and tag
       id: info
-      shell: bash
       run: |
         branch="${GITHUB_REF#refs/heads/}"
         echo "branch: $branch"
@@ -26,9 +28,10 @@ jobs:
         fi
         date=$(env TZ=':America/Los_Angeles' date +'%Y-%m-%d')
         echo "version: $version, draft: $draft, date: $date"
-        echo "::set-output name=version::$version"
-        echo "::set-output name=draft::$draft"
-        echo "::set-output name=date::$date"
+        echo "version=$version" >> $GITHUB_OUTPUT
+        echo "draft=$draft" >> $GITHUB_OUTPUT
+        echo "date=$date" >> $GITHUB_OUTPUT
+      shell: bash
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -36,19 +39,20 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Create staging dir
       id: staging
-      shell: bash
       run: |
         staging="Mech3DotNet-${{ steps.info.outputs.version }}"
         mkdir "$staging"
         cp {README.md,LICENSE} "$staging/"
-        echo "::set-output name=staging::$staging"
+        echo "staging=$staging" >> $GITHUB_OUTPUT
+      shell: bash
 
     - name: Run dotnet restore
       run: dotnet restore
+      shell: bash
 
     - name: Run dotnet build
       id: build
@@ -59,13 +63,14 @@ jobs:
         --configuration "Release"
         --output "${{ steps.staging.outputs.staging }}"
         Mech3DotNet
+      shell: bash
 
     - name: Package archives
       id: package
-      shell: bash
       run: |
         tar czvf "${{ steps.staging.outputs.staging }}.tar.gz" "${{ steps.staging.outputs.staging }}"
         7z a "${{ steps.staging.outputs.staging }}.zip" "${{ steps.staging.outputs.staging }}"
+      shell: bash
 
     - name: Create GitHub release
       id: release

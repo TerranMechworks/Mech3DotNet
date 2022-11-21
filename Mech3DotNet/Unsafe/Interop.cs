@@ -6,7 +6,7 @@ namespace Mech3DotNet.Unsafe
     public class Interop
     {
         // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
-        private const string MECH3AX = @"mech3ax-0.6.0";
+        private const string MECH3AX = @"mech3ax-v0.6.0-rc1";
         private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
 
         public delegate void DataCb(IntPtr pointer, ulong length);
@@ -27,14 +27,14 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_interp")]
         public static extern int ReadInterp(
             [MarshalAs(PStr)] string filename,
-            // interp.zbd has no difference between games, it's just for consistency
+            // no difference between games, it's just for consistency
             int game_type_ignored,
             DataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_interp")]
         public static extern int WriteInterp(
             [MarshalAs(PStr)] string filename,
-            // interp.zbd has no difference between games, it's just for consistency
+            // no difference between games, it's just for consistency
             int game_type_ignored,
             IntPtr pointer,
             ulong length);
@@ -131,12 +131,14 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_textures")]
         public static extern int ReadTextures(
             [MarshalAs(PStr)] string filename,
+            // no difference between games, it's just for consistency
             int game_type,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_textures")]
         public static extern int WriteTextures(
             [MarshalAs(PStr)] string filename,
+            // no difference between games, it's just for consistency
             int game_type,
             IntPtr manifest_ptr,
             ulong manifest_len,

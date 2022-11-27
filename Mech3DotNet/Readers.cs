@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
-using Mech3DotNet.Json.Archive;
 using Mech3DotNet.Reader;
 using Mech3DotNet.Reader.Structs;
+using Mech3DotNet.Types.Archive;
 using Mech3DotNet.Unsafe;
 using static Mech3DotNet.Reader.Query;
 

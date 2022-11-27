@@ -1,17 +1,19 @@
 using System.Collections.Generic;
-using Mech3DotNet.Json.Motion;
+using Mech3DotNet.Types.Motion;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
     public static class Motions<TQuaternion, TVec3>
+        where TQuaternion : notnull
+        where TVec3 : notnull
     {
         private static Dictionary<string, Motion<TQuaternion, TVec3>> Read(string inputPath, GameType gameType, out byte[] manifest)
         {
             var motions = new Dictionary<string, Motion<TQuaternion, TVec3>>();
             manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadMotion, (string name, byte[] data) =>
             {
-                var motion = Interop.Deserialize<Motion<TQuaternion, TVec3>>(data);
+                var motion = Interop.Deserialize(data, Motion<TQuaternion, TVec3>.Converter);
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
                 motions.Add(name.ToLowerInvariant(), motion);
             });
@@ -47,7 +49,7 @@ namespace Mech3DotNet
             {
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
                 var item = archive.items[name.ToLowerInvariant()];
-                return Interop.Serialize(item);
+                return Interop.Serialize(item, Motion<TQuaternion, TVec3>.Converter);
             });
         }
 

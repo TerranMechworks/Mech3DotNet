@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Mech3DotNet.Json.Archive;
-using Mech3DotNet.Json.Gamez.Materials;
-using Mech3DotNet.Json.Gamez.Mechlib;
+using Mech3DotNet.Exchange;
+using Mech3DotNet.Types.Archive;
+using Mech3DotNet.Types.Gamez.Materials;
+using Mech3DotNet.Types.Gamez.Mechlib;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
@@ -33,6 +34,18 @@ namespace Mech3DotNet
         private static readonly byte[] VERSION_PM = BitConverter.GetBytes(41u);
         private static readonly byte[] FORMAT = BitConverter.GetBytes(1u);
 
+        private static readonly TypeConverter<List<Material>> MaterialsConverter = new TypeConverter<List<Material>>(DeserializeMaterials, SerializeMaterials);
+
+        private static void SerializeMaterials(List<Material> v, Serializer s)
+        {
+            s.SerializeVec(s.Serialize(Material.Converter))(v);
+        }
+
+        private static List<Material> DeserializeMaterials(Deserializer d)
+        {
+            return d.DeserializeVec(d.Deserialize(Material.Converter))();
+        }
+
         private static Dictionary<string, ModelPm> Read(string inputPath, out byte[] manifest, out List<Material> materials)
         {
             List<Material>? capture = null;
@@ -46,10 +59,10 @@ namespace Mech3DotNet
                     case "version":
                         return;
                     case "materials":
-                        capture = Interop.Deserialize<List<Material>>(data);
+                        capture = Interop.Deserialize(data, MaterialsConverter);
                         return;
                     default:
-                        var model = Interop.Deserialize<ModelPm>(data);
+                        var model = Interop.Deserialize(data, ModelPm.Converter);
                         models.Add(name, model);
                         return;
                 }
@@ -78,10 +91,10 @@ namespace Mech3DotNet
                     case "version":
                         return VERSION_PM;
                     case "materials":
-                        return Interop.Serialize(archive.materials);
+                        return Interop.Serialize(archive.materials, MaterialsConverter);
                     default:
                         var item = archive.items[name];
-                        return Interop.Serialize(item);
+                        return Interop.Serialize(item, ModelPm.Converter);
                 }
             });
         }

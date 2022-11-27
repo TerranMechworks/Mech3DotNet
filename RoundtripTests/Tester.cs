@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Mech3DotNet;
 using Mech3DotNet.FileUtils;
-using Mech3DotNet.Json.Types;
+using Mech3DotNet.Types.Types;
 using static Mech3DotNet.FileUtils.FileCompare;
 using static RoundtripTests.RecursiveFileGlob;
 

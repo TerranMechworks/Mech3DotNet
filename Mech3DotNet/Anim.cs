@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
-using Mech3DotNet.Json.Anim;
+using Mech3DotNet.Types.Anim;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
@@ -20,10 +20,10 @@ namespace Mech3DotNet
         public AnimPackage(Dictionary<string, AnimDef> animations, byte[] metadata)
         {
             this.animations = animations ?? throw new ArgumentNullException(nameof(animations));
-            this.metadata = Interop.Deserialize<AnimMetadata>(metadata);
+            this.metadata = Interop.Deserialize(metadata, AnimMetadata.Converter);
         }
 
-        public byte[] SerializeMetadata() => Interop.Serialize(metadata);
+        public byte[] SerializeMetadata() => Interop.Serialize(metadata, AnimMetadata.Converter);
     }
 
     public static class Anim
@@ -33,7 +33,7 @@ namespace Mech3DotNet
             var animations = new Dictionary<string, AnimDef>();
             metadata = Helpers.ReadArchiveRaw(inputPath, gameType, "metadata.json", Interop.ReadAnim, (string name, byte[] data) =>
             {
-                var anim = Interop.Deserialize<AnimDef>(data);
+                var anim = Interop.Deserialize(data, AnimDef.Converter);
                 animations.Add(name, anim);
             });
             return animations;
@@ -56,7 +56,7 @@ namespace Mech3DotNet
             Helpers.WriteArchiveRaw(outputPath, gameType, metadata, Interop.WriteAnim, (string name) =>
             {
                 var anim = package.animations[name];
-                return Interop.Serialize(anim);
+                return Interop.Serialize(anim, AnimDef.Converter);
             });
         }
 

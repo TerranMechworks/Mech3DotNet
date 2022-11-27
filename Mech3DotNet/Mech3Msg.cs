@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
-using Mech3DotNet.Json.Messages;
+using Mech3DotNet.Types.Messages;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
@@ -20,7 +20,7 @@ namespace Mech3DotNet
                 try
                 {
                     var data = Interop.DecodeBytes(pointer, length);
-                    messages = Interop.Deserialize<Messages>(data);
+                    messages = Interop.Deserialize(data, Messages.Converter);
                 }
                 catch (Exception e)
                 {

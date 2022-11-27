@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
-using Mech3DotNet.Json.Image;
+using Mech3DotNet.Types.Image;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
@@ -21,7 +21,7 @@ namespace Mech3DotNet
 
         public TexturePackage(Dictionary<string, byte[]> textureData, byte[] bmanifest)
         {
-            var manifest = Interop.Deserialize<TextureManifest>(bmanifest);
+            var manifest = Interop.Deserialize(bmanifest, TextureManifest.Converter);
             this.textureData = textureData;
             this.textureInfos = manifest.textureInfos;
             this.globalPalettes = manifest.globalPalettes;
@@ -30,7 +30,7 @@ namespace Mech3DotNet
         public byte[] SerializeManifest()
         {
             var manifest = new TextureManifest(textureInfos, globalPalettes);
-            return Interop.Serialize(manifest);
+            return Interop.Serialize(manifest, TextureManifest.Converter);
         }
     }
 
@@ -63,7 +63,7 @@ namespace Mech3DotNet
         public static Dictionary<string, Texture> Read(string inputPath)
         {
             var textureData = ReadRaw(inputPath, out byte[] bmanifest);
-            var manifest = Interop.Deserialize<TextureManifest>(bmanifest);
+            var manifest = Interop.Deserialize(bmanifest, TextureManifest.Converter);
             var fused = new Dictionary<string, Texture>(manifest.textureInfos.Count);
             foreach (var info in manifest.textureInfos)
             {

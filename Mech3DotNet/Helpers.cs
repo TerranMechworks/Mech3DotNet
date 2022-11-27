@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.ExceptionServices;
+using Mech3DotNet.Exchange;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
@@ -129,10 +130,10 @@ namespace Mech3DotNet
             return data;
         }
 
-        public static T ReadData<T>(string inputPath, GameType gameType, ReadDataFn readFunction) where T : class
+        public static T ReadData<T>(string inputPath, GameType gameType, ReadDataFn readFunction, TypeConverter<T> converter)
         {
             var data = ReadDataRaw(inputPath, gameType, readFunction);
-            return Interop.Deserialize<T>(data);
+            return Interop.Deserialize(data, converter);
         }
 
         public static void WriteDataRaw(string outputPath, GameType gameType, WriteDataFn writeFunction, byte[] data)
@@ -150,9 +151,9 @@ namespace Mech3DotNet
                 Interop.ThrowLastError();
         }
 
-        public static void WriteData(string outputPath, GameType gameType, WriteDataFn writeFunction, object value)
+        public static void WriteData<T>(string outputPath, GameType gameType, WriteDataFn writeFunction, T value, TypeConverter<T> converter)
         {
-            var data = Interop.Serialize(value);
+            var data = Interop.Serialize(value, converter);
             WriteDataRaw(outputPath, gameType, writeFunction, data);
         }
     }

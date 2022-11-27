@@ -1,0 +1,63 @@
+using System;
+using Mech3DotNet.Exchange;
+
+namespace Mech3DotNet.Types.Anim.Events
+{
+    public sealed class TranslateData
+    {
+        public static readonly TypeConverter<TranslateData> Converter = new TypeConverter<TranslateData>(Deserialize, Serialize);
+        public Mech3DotNet.Types.Types.Vec3 value;
+        public byte[] unk;
+
+        public TranslateData(Mech3DotNet.Types.Types.Vec3 value, byte[] unk)
+        {
+            this.value = value;
+            this.unk = unk;
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Types.Vec3> value;
+            public Field<byte[]> unk;
+        }
+
+        public static void Serialize(Mech3DotNet.Types.Anim.Events.TranslateData v, Serializer s)
+        {
+            s.SerializeStruct("TranslateData", 2);
+            s.SerializeFieldName("value");
+            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.value);
+            s.SerializeFieldName("unk");
+            ((Action<byte[]>)s.SerializeBytes)(v.unk);
+        }
+
+        public static Mech3DotNet.Types.Anim.Events.TranslateData Deserialize(Deserializer d)
+        {
+            var fields = new Fields()
+            {
+                value = new Field<Mech3DotNet.Types.Types.Vec3>(),
+                unk = new Field<byte[]>(),
+            };
+            foreach (var fieldName in d.DeserializeStruct("TranslateData"))
+            {
+                switch (fieldName)
+                {
+                    case "value":
+                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        break;
+                    case "unk":
+                        fields.unk.Value = d.DeserializeBytes();
+                        break;
+                    default:
+                        throw new UnknownFieldException("TranslateData", fieldName);
+                }
+            }
+            return new TranslateData(
+
+                fields.value.Unwrap("TranslateData", "value"),
+
+                fields.unk.Unwrap("TranslateData", "unk")
+
+            );
+        }
+    }
+}

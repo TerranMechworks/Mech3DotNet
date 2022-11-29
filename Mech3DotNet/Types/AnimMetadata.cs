@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimPtr>> animPtrs;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.AnimMetadata v, Serializer s)
+        public static void Serialize(AnimMetadata v, Serializer s)
         {
             s.SerializeStruct("AnimMetadata", 4);
             s.SerializeFieldName("base_ptr");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.AnimPtr.Converter))(v.animPtrs);
         }
 
-        public static Mech3DotNet.Types.Anim.AnimMetadata Deserialize(Deserializer d)
+        public static AnimMetadata Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

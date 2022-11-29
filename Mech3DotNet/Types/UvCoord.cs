@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Mesh
 {
     public struct UvCoord
     {
-        public static readonly TypeConverter<UvCoord> Converter = new TypeConverter<UvCoord>(Deserialize, Serialize);
         public float u;
         public float v;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Gamez.Mesh
             this.u = u;
             this.v = v;
         }
+    }
+
+    public static class UvCoordConverter
+    {
+        public static readonly TypeConverter<UvCoord> Converter = new TypeConverter<UvCoord>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
             public Field<float> v;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.UvCoord v, Serializer s)
+        public static void Serialize(UvCoord v, Serializer s)
         {
             s.SerializeStruct("UvCoord", 2);
             s.SerializeFieldName("u");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
             ((Action<float>)s.SerializeF32)(v.v);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.UvCoord Deserialize(Deserializer d)
+        public static UvCoord Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

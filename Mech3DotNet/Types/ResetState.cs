@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<uint> pointer;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.ResetState v, Serializer s)
+        public static void Serialize(ResetState v, Serializer s)
         {
             s.SerializeStruct("ResetState", 2);
             s.SerializeFieldName("events");
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim
             ((Action<uint>)s.SerializeU32)(v.pointer);
         }
 
-        public static Mech3DotNet.Types.Anim.ResetState Deserialize(Deserializer d)
+        public static ResetState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -60,7 +60,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<Mech3DotNet.Types.Nodes.BoundingBox> unk164;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.Object3d v, Serializer s)
+        public static void Serialize(Object3d v, Serializer s)
         {
             s.SerializeStruct("Object3d", 15);
             s.SerializeFieldName("name");
@@ -74,7 +74,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             s.SerializeFieldName("zone_id");
             ((Action<uint>)s.SerializeU32)(v.zoneId);
             s.SerializeFieldName("area_partition");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Nodes.AreaPartition.Converter))(v.areaPartition);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Nodes.AreaPartitionConverter.Converter))(v.areaPartition);
             s.SerializeFieldName("mesh_index");
             ((Action<int>)s.SerializeI32)(v.meshIndex);
             s.SerializeFieldName("parent");
@@ -95,7 +95,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             s.Serialize(Mech3DotNet.Types.Nodes.BoundingBox.Converter)(v.unk164);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.Object3d Deserialize(Deserializer d)
+        public static Object3d Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -135,7 +135,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.zoneId.Value = d.DeserializeU32();
                         break;
                     case "area_partition":
-                        fields.areaPartition.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Nodes.AreaPartition.Converter))();
+                        fields.areaPartition.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Nodes.AreaPartitionConverter.Converter))();
                         break;
                     case "mesh_index":
                         fields.meshIndex.Value = d.DeserializeI32();

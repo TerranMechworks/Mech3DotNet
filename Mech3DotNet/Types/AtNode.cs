@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Vec3> translation;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.AtNode v, Serializer s)
+        public static void Serialize(AtNode v, Serializer s)
         {
             s.SerializeStruct("AtNode", 2);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("translation");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.translation);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.translation);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.AtNode Deserialize(Deserializer d)
+        public static AtNode Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.node.Value = d.DeserializeString();
                         break;
                     case "translation":
-                        fields.translation.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.translation.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("AtNode", fieldName);

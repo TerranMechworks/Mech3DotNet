@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Zmap
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature>> features;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Zmap.MapRc v, Serializer s)
+        public static void Serialize(MapRc v, Serializer s)
         {
             s.SerializeStruct("MapRc", 4);
             s.SerializeFieldName("unk04");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Zmap
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Zmap.MapFeature.Converter))(v.features);
         }
 
-        public static Mech3DotNet.Types.Zmap.MapRc Deserialize(Deserializer d)
+        public static MapRc Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

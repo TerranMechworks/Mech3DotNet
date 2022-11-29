@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Gamez.Mechlib
             public Field<System.Collections.Generic.List<int>> meshPtrs;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mechlib.ModelPm v, Serializer s)
+        public static void Serialize(ModelPm v, Serializer s)
         {
             s.SerializeStruct("ModelPm", 3);
             s.SerializeFieldName("nodes");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Gamez.Mechlib
             s.SerializeVec(((Action<int>)s.SerializeI32))(v.meshPtrs);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mechlib.ModelPm Deserialize(Deserializer d)
+        public static ModelPm Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

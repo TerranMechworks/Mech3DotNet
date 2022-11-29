@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.UvCoord>> uvCoords;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonTextureNg v, Serializer s)
+        public static void Serialize(PolygonTextureNg v, Serializer s)
         {
             s.SerializeStruct("PolygonTextureNg", 2);
             s.SerializeFieldName("texture_index");
             ((Action<uint>)s.SerializeU32)(v.textureIndex);
             s.SerializeFieldName("uv_coords");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.UvCoord.Converter))(v.uvCoords);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.UvCoordConverter.Converter))(v.uvCoords);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonTextureNg Deserialize(Deserializer d)
+        public static PolygonTextureNg Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                         fields.textureIndex.Value = d.DeserializeU32();
                         break;
                     case "uv_coords":
-                        fields.uvCoords.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.UvCoord.Converter))();
+                        fields.uvCoords.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.UvCoordConverter.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("PolygonTextureNg", fieldName);

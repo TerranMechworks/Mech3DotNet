@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Nodes
 {
     public struct Area
     {
-        public static readonly TypeConverter<Area> Converter = new TypeConverter<Area>(Deserialize, Serialize);
         public int left;
         public int top;
         public int right;
@@ -18,6 +17,11 @@ namespace Mech3DotNet.Types.Nodes
             this.right = right;
             this.bottom = bottom;
         }
+    }
+
+    public static class AreaConverter
+    {
+        public static readonly TypeConverter<Area> Converter = new TypeConverter<Area>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -27,7 +31,7 @@ namespace Mech3DotNet.Types.Nodes
             public Field<int> bottom;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Area v, Serializer s)
+        public static void Serialize(Area v, Serializer s)
         {
             s.SerializeStruct("Area", 4);
             s.SerializeFieldName("left");
@@ -40,7 +44,7 @@ namespace Mech3DotNet.Types.Nodes
             ((Action<int>)s.SerializeI32)(v.bottom);
         }
 
-        public static Mech3DotNet.Types.Nodes.Area Deserialize(Deserializer d)
+        public static Area Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Range> range;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.FogState v, Serializer s)
+        public static void Serialize(FogState v, Serializer s)
         {
             s.SerializeStruct("FogState", 5);
             s.SerializeFieldName("name");
@@ -38,14 +38,14 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("fog_type");
             s.Serialize(Mech3DotNet.Types.Anim.Events.FogType.Converter)(v.fogType);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Types.Color.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("altitude");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.altitude);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.altitude);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.FogState Deserialize(Deserializer d)
+        public static FogState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -66,13 +66,13 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.fogType.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.FogType.Converter)();
                         break;
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.Color.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
                         break;
                     case "altitude":
-                        fields.altitude.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.altitude.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("FogState", fieldName);

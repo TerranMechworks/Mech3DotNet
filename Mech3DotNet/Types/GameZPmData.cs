@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Gamez
             public Field<Mech3DotNet.Types.Gamez.GameZPmMetadata> metadata;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.GameZPmData v, Serializer s)
+        public static void Serialize(GameZPmData v, Serializer s)
         {
             s.SerializeStruct("GameZPmData", 5);
             s.SerializeFieldName("textures");
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Gamez
             s.Serialize(Mech3DotNet.Types.Gamez.GameZPmMetadata.Converter)(v.metadata);
         }
 
-        public static Mech3DotNet.Types.Gamez.GameZPmData Deserialize(Deserializer d)
+        public static GameZPmData Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

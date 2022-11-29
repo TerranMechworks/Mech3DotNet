@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.SoundNode v, Serializer s)
+        public static void Serialize(SoundNode v, Serializer s)
         {
             s.SerializeStruct("SoundNode", 3);
             s.SerializeFieldName("name");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.SoundNode Deserialize(Deserializer d)
+        public static SoundNode Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

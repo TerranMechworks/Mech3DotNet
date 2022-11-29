@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<uint> dataPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.Display v, Serializer s)
+        public static void Serialize(Display v, Serializer s)
         {
             s.SerializeStruct("Display", 5);
             s.SerializeFieldName("name");
@@ -40,12 +40,12 @@ namespace Mech3DotNet.Types.Nodes.Mw
             s.SerializeFieldName("resolution_y");
             ((Action<uint>)s.SerializeU32)(v.resolutionY);
             s.SerializeFieldName("clear_color");
-            s.Serialize(Mech3DotNet.Types.Types.Color.Converter)(v.clearColor);
+            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.clearColor);
             s.SerializeFieldName("data_ptr");
             ((Action<uint>)s.SerializeU32)(v.dataPtr);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.Display Deserialize(Deserializer d)
+        public static Display Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -69,7 +69,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.resolutionY.Value = d.DeserializeU32();
                         break;
                     case "clear_color":
-                        fields.clearColor.Value = d.Deserialize(Mech3DotNet.Types.Types.Color.Converter)();
+                        fields.clearColor.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
                         break;
                     case "data_ptr":
                         fields.dataPtr.Value = d.DeserializeU32();

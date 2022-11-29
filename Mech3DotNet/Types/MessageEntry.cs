@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Messages
             public Field<string> value;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Messages.MessageEntry v, Serializer s)
+        public static void Serialize(MessageEntry v, Serializer s)
         {
             s.SerializeStruct("MessageEntry", 3);
             s.SerializeFieldName("key");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Messages
             ((Action<string>)s.SerializeString)(v.value);
         }
 
-        public static Mech3DotNet.Types.Messages.MessageEntry Deserialize(Deserializer d)
+        public static MessageEntry Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

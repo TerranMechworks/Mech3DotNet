@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct EventStart
     {
-        public static readonly TypeConverter<EventStart> Converter = new TypeConverter<EventStart>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.StartOffset offset;
         public float time;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Anim.Events
             this.offset = offset;
             this.time = time;
         }
+    }
+
+    public static class EventStartConverter
+    {
+        public static readonly TypeConverter<EventStart> Converter = new TypeConverter<EventStart>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float> time;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.EventStart v, Serializer s)
+        public static void Serialize(EventStart v, Serializer s)
         {
             s.SerializeStruct("EventStart", 2);
             s.SerializeFieldName("offset");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.time);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.EventStart Deserialize(Deserializer d)
+        public static EventStart Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

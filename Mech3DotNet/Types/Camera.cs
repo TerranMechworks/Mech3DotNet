@@ -27,20 +27,20 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<uint> dataPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.Camera v, Serializer s)
+        public static void Serialize(Camera v, Serializer s)
         {
             s.SerializeStruct("Camera", 4);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("clip");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.clip);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.clip);
             s.SerializeFieldName("fov");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.fov);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.fov);
             s.SerializeFieldName("data_ptr");
             ((Action<uint>)s.SerializeU32)(v.dataPtr);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.Camera Deserialize(Deserializer d)
+        public static Camera Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -57,10 +57,10 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "clip":
-                        fields.clip.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.clip.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     case "fov":
-                        fields.fov.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.fov.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     case "data_ptr":
                         fields.dataPtr.Value = d.DeserializeU32();

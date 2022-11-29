@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsTime();
                         s.SerializeNewTypeVariant("ForwardRotation", 0);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationTime.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationTimeConverter.Converter)(inner);
                         break;
                     }
 
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsDistance();
                         s.SerializeNewTypeVariant("ForwardRotation", 1);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationDistance.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationDistanceConverter.Converter)(inner);
                         break;
                     }
 
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ForwardRotation", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ForwardRotationTime.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ForwardRotationTimeConverter.Converter)();
                         return ForwardRotation.Time(inner);
                     }
 
@@ -71,7 +71,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ForwardRotation", 1, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ForwardRotationDistance.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ForwardRotationDistanceConverter.Converter)();
                         return ForwardRotation.Distance(inner);
                     }
 

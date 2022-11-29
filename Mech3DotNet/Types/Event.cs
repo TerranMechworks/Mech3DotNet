@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Anim.Events.EventStart?> start;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.Event v, Serializer s)
+        public static void Serialize(Event v, Serializer s)
         {
             s.SerializeStruct("Event", 2);
             s.SerializeFieldName("data");
             s.Serialize(Mech3DotNet.Types.Anim.Events.EventData.Converter)(v.data);
             s.SerializeFieldName("start");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Anim.Events.EventStart.Converter))(v.start);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Anim.Events.EventStartConverter.Converter))(v.start);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.Event Deserialize(Deserializer d)
+        public static Event Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.data.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.EventData.Converter)();
                         break;
                     case "start":
-                        fields.start.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.EventStart.Converter))();
+                        fields.start.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.EventStartConverter.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("Event", fieldName);

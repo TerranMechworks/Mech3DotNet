@@ -24,18 +24,18 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Vec3?> rotation;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationAtNode v, Serializer s)
+        public static void Serialize(CallAnimationAtNode v, Serializer s)
         {
             s.SerializeStruct("CallAnimationAtNode", 3);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("translation");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.translation);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.translation);
             s.SerializeFieldName("rotation");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.rotation);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.rotation);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.CallAnimationAtNode Deserialize(Deserializer d)
+        public static CallAnimationAtNode Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -51,10 +51,10 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.node.Value = d.DeserializeString();
                         break;
                     case "translation":
-                        fields.translation.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.translation.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "rotation":
-                        fields.rotation.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.rotation.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("CallAnimationAtNode", fieldName);

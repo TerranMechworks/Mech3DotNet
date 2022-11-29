@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float> opacity;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityState v, Serializer s)
+        public static void Serialize(ObjectOpacityState v, Serializer s)
         {
             s.SerializeStruct("ObjectOpacityState", 4);
             s.SerializeFieldName("node");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.opacity);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectOpacityState Deserialize(Deserializer d)
+        public static ObjectOpacityState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

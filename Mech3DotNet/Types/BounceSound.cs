@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float> volume;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.BounceSound v, Serializer s)
+        public static void Serialize(BounceSound v, Serializer s)
         {
             s.SerializeStruct("BounceSound", 2);
             s.SerializeFieldName("name");
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.volume);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.BounceSound Deserialize(Deserializer d)
+        public static BounceSound Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

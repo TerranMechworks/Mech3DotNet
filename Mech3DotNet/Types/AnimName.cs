@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<uint> unknown;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.AnimName v, Serializer s)
+        public static void Serialize(AnimName v, Serializer s)
         {
             s.SerializeStruct("AnimName", 3);
             s.SerializeFieldName("name");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim
             ((Action<uint>)s.SerializeU32)(v.unknown);
         }
 
-        public static Mech3DotNet.Types.Anim.AnimName Deserialize(Deserializer d)
+        public static AnimName Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

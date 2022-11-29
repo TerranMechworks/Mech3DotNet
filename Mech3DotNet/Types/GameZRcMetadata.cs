@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Gamez
             public Field<uint> nodeDataCount;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.GameZRcMetadata v, Serializer s)
+        public static void Serialize(GameZRcMetadata v, Serializer s)
         {
             s.SerializeStruct("GameZRcMetadata", 4);
             s.SerializeFieldName("material_array_size");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Gamez
             ((Action<uint>)s.SerializeU32)(v.nodeDataCount);
         }
 
-        public static Mech3DotNet.Types.Gamez.GameZRcMetadata Deserialize(Deserializer d)
+        public static GameZRcMetadata Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Vec3> unk;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.XyzRotation v, Serializer s)
+        public static void Serialize(XyzRotation v, Serializer s)
         {
             s.SerializeStruct("XyzRotation", 2);
             s.SerializeFieldName("value");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.value);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.value);
             s.SerializeFieldName("unk");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.unk);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.unk);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.XyzRotation Deserialize(Deserializer d)
+        public static XyzRotation Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -42,10 +42,10 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "value":
-                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "unk":
-                        fields.unk.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.unk.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("XyzRotation", fieldName);

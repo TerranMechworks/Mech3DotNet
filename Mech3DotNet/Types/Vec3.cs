@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Types
 {
     public struct Vec3
     {
-        public static readonly TypeConverter<Vec3> Converter = new TypeConverter<Vec3>(Deserialize, Serialize);
         public float x;
         public float y;
         public float z;
@@ -16,6 +15,11 @@ namespace Mech3DotNet.Types.Types
             this.y = y;
             this.z = z;
         }
+    }
+
+    public static class Vec3Converter
+    {
+        public static readonly TypeConverter<Vec3> Converter = new TypeConverter<Vec3>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -24,7 +28,7 @@ namespace Mech3DotNet.Types.Types
             public Field<float> z;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Types.Vec3 v, Serializer s)
+        public static void Serialize(Vec3 v, Serializer s)
         {
             s.SerializeStruct("Vec3", 3);
             s.SerializeFieldName("x");
@@ -35,7 +39,7 @@ namespace Mech3DotNet.Types.Types
             ((Action<float>)s.SerializeF32)(v.z);
         }
 
-        public static Mech3DotNet.Types.Types.Vec3 Deserialize(Deserializer d)
+        public static Vec3 Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

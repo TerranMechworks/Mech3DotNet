@@ -24,18 +24,18 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<string?> atNode;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectTranslateState v, Serializer s)
+        public static void Serialize(ObjectTranslateState v, Serializer s)
         {
             s.SerializeStruct("ObjectTranslateState", 3);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("translate");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.translate);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.translate);
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.atNode);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectTranslateState Deserialize(Deserializer d)
+        public static ObjectTranslateState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -51,7 +51,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.node.Value = d.DeserializeString();
                         break;
                     case "translate":
-                        fields.translate.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.translate.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "at_node":
                         fields.atNode.Value = d.DeserializeRefOption(d.DeserializeString)();

@@ -60,7 +60,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
             public Field<float> unk72;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.MeshLight v, Serializer s)
+        public static void Serialize(MeshLight v, Serializer s)
         {
             s.SerializeStruct("MeshLight", 15);
             s.SerializeFieldName("unk00");
@@ -70,11 +70,11 @@ namespace Mech3DotNet.Types.Gamez.Mesh
             s.SerializeFieldName("unk08");
             ((Action<float>)s.SerializeF32)(v.unk08);
             s.SerializeFieldName("extra");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.extra);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.extra);
             s.SerializeFieldName("unk24");
             ((Action<uint>)s.SerializeU32)(v.unk24);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Types.Color.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("flags");
             ((Action<ushort>)s.SerializeU16)(v.flags);
             s.SerializeFieldName("ptr");
@@ -95,7 +95,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
             ((Action<float>)s.SerializeF32)(v.unk72);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.MeshLight Deserialize(Deserializer d)
+        public static MeshLight Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -129,13 +129,13 @@ namespace Mech3DotNet.Types.Gamez.Mesh
                         fields.unk08.Value = d.DeserializeF32();
                         break;
                     case "extra":
-                        fields.extra.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.extra.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "unk24":
                         fields.unk24.Value = d.DeserializeU32();
                         break;
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.Color.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
                         break;
                     case "flags":
                         fields.flags.Value = d.DeserializeU16();

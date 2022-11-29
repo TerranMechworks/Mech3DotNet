@@ -48,7 +48,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
             public Field<Mech3DotNet.Types.Nodes.BoundingBox> unk164;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Pm.LodPm v, Serializer s)
+        public static void Serialize(LodPm v, Serializer s)
         {
             s.SerializeStruct("LodPm", 11);
             s.SerializeFieldName("name");
@@ -56,7 +56,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
             s.SerializeFieldName("level");
             ((Action<bool>)s.SerializeBool)(v.level);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("unk64");
             ((Action<float>)s.SerializeF32)(v.unk64);
             s.SerializeFieldName("unk72");
@@ -75,7 +75,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
             s.Serialize(Mech3DotNet.Types.Nodes.BoundingBox.Converter)(v.unk164);
         }
 
-        public static Mech3DotNet.Types.Nodes.Pm.LodPm Deserialize(Deserializer d)
+        public static LodPm Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -102,7 +102,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
                         fields.level.Value = d.DeserializeBool();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     case "unk64":
                         fields.unk64.Value = d.DeserializeF32();

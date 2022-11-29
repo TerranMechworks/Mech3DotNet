@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim
 {
     public struct PrereqObject
     {
-        public static readonly TypeConverter<PrereqObject> Converter = new TypeConverter<PrereqObject>(Deserialize, Serialize);
         public string name;
         public bool required;
         public bool active;
@@ -18,6 +17,11 @@ namespace Mech3DotNet.Types.Anim
             this.active = active;
             this.pointer = pointer;
         }
+    }
+
+    public static class PrereqObjectConverter
+    {
+        public static readonly TypeConverter<PrereqObject> Converter = new TypeConverter<PrereqObject>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -27,7 +31,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<uint> pointer;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.PrereqObject v, Serializer s)
+        public static void Serialize(PrereqObject v, Serializer s)
         {
             s.SerializeStruct("PrereqObject", 4);
             s.SerializeFieldName("name");
@@ -40,7 +44,7 @@ namespace Mech3DotNet.Types.Anim
             ((Action<uint>)s.SerializeU32)(v.pointer);
         }
 
-        public static Mech3DotNet.Types.Anim.PrereqObject Deserialize(Deserializer d)
+        public static PrereqObject Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

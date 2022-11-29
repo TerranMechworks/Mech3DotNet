@@ -30,22 +30,22 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<bool> fudge;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityFromTo v, Serializer s)
+        public static void Serialize(ObjectOpacityFromTo v, Serializer s)
         {
             s.SerializeStruct("ObjectOpacityFromTo", 5);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("opacity_from");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacity.Converter)(v.opacityFrom);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityConverter.Converter)(v.opacityFrom);
             s.SerializeFieldName("opacity_to");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacity.Converter)(v.opacityTo);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityConverter.Converter)(v.opacityTo);
             s.SerializeFieldName("runtime");
             ((Action<float>)s.SerializeF32)(v.runtime);
             s.SerializeFieldName("fudge");
             ((Action<bool>)s.SerializeBool)(v.fudge);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectOpacityFromTo Deserialize(Deserializer d)
+        public static ObjectOpacityFromTo Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -63,10 +63,10 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.node.Value = d.DeserializeString();
                         break;
                     case "opacity_from":
-                        fields.opacityFrom.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectOpacity.Converter)();
+                        fields.opacityFrom.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityConverter.Converter)();
                         break;
                     case "opacity_to":
-                        fields.opacityTo.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectOpacity.Converter)();
+                        fields.opacityTo.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityConverter.Converter)();
                         break;
                     case "runtime":
                         fields.runtime.Value = d.DeserializeF32();

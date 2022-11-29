@@ -39,7 +39,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<uint> parent;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.Empty v, Serializer s)
+        public static void Serialize(Empty v, Serializer s)
         {
             s.SerializeStruct("Empty", 8);
             s.SerializeFieldName("name");
@@ -60,7 +60,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             ((Action<uint>)s.SerializeU32)(v.parent);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.Empty Deserialize(Deserializer d)
+        public static Empty Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

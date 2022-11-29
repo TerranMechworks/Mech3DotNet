@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Motion
             public Field<uint> frameCount;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Motion.Motion<TQuaternion, TVec3> v, Serializer s)
+        public static void Serialize(Motion<TQuaternion, TVec3> v, Serializer s)
         {
             s.SerializeStruct("Motion", 3);
             s.SerializeFieldName("loop_time");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Motion
             ((Action<uint>)s.SerializeU32)(v.frameCount);
         }
 
-        public static Mech3DotNet.Types.Motion.Motion<TQuaternion, TVec3> Deserialize(Deserializer d)
+        public static Motion<TQuaternion, TVec3> Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

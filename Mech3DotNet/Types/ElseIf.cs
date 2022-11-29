@@ -52,7 +52,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsRandomWeight();
                         s.SerializeNewTypeVariant("ElseIf", 0);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.RandomWeightCond.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.RandomWeightCondConverter.Converter)(inner);
                         break;
                     }
 
@@ -60,7 +60,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsPlayerRange();
                         s.SerializeNewTypeVariant("ElseIf", 1);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCond.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCondConverter.Converter)(inner);
                         break;
                     }
 
@@ -68,7 +68,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsAnimationLod();
                         s.SerializeNewTypeVariant("ElseIf", 2);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.AnimationLodCond.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.AnimationLodCondConverter.Converter)(inner);
                         break;
                     }
 
@@ -76,7 +76,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsHwRender();
                         s.SerializeNewTypeVariant("ElseIf", 3);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.HwRenderCond.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.HwRenderCondConverter.Converter)(inner);
                         break;
                     }
 
@@ -84,7 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsPlayerFirstPerson();
                         s.SerializeNewTypeVariant("ElseIf", 4);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCondConverter.Converter)(inner);
                         break;
                     }
 
@@ -102,7 +102,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ElseIf", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.RandomWeightCond.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.RandomWeightCondConverter.Converter)();
                         return ElseIf.RandomWeight(inner);
                     }
 
@@ -110,7 +110,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ElseIf", 1, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCond.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCondConverter.Converter)();
                         return ElseIf.PlayerRange(inner);
                     }
 
@@ -118,7 +118,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ElseIf", 2, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.AnimationLodCond.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.AnimationLodCondConverter.Converter)();
                         return ElseIf.AnimationLod(inner);
                     }
 
@@ -126,7 +126,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ElseIf", 3, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.HwRenderCond.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.HwRenderCondConverter.Converter)();
                         return ElseIf.HwRender(inner);
                     }
 
@@ -134,7 +134,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ElseIf", 4, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCondConverter.Converter)();
                         return ElseIf.PlayerFirstPerson(inner);
                     }
 

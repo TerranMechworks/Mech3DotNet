@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Messages
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Messages.MessageEntry>> entries;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Messages.Messages v, Serializer s)
+        public static void Serialize(Messages v, Serializer s)
         {
             s.SerializeStruct("Messages", 2);
             s.SerializeFieldName("language_id");
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Messages
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Messages.MessageEntry.Converter))(v.entries);
         }
 
-        public static Mech3DotNet.Types.Messages.Messages Deserialize(Deserializer d)
+        public static Messages Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

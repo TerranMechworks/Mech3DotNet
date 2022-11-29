@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Zmap
 {
     public struct MapColor
     {
-        public static readonly TypeConverter<MapColor> Converter = new TypeConverter<MapColor>(Deserialize, Serialize);
         public byte r;
         public byte g;
         public byte b;
@@ -16,6 +15,11 @@ namespace Mech3DotNet.Types.Zmap
             this.g = g;
             this.b = b;
         }
+    }
+
+    public static class MapColorConverter
+    {
+        public static readonly TypeConverter<MapColor> Converter = new TypeConverter<MapColor>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -24,7 +28,7 @@ namespace Mech3DotNet.Types.Zmap
             public Field<byte> b;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Zmap.MapColor v, Serializer s)
+        public static void Serialize(MapColor v, Serializer s)
         {
             s.SerializeStruct("MapColor", 3);
             s.SerializeFieldName("r");
@@ -35,7 +39,7 @@ namespace Mech3DotNet.Types.Zmap
             ((Action<byte>)s.SerializeU8)(v.b);
         }
 
-        public static Mech3DotNet.Types.Zmap.MapColor Deserialize(Deserializer d)
+        public static MapColor Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

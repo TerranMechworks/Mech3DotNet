@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim
 {
     public struct NamePtr
     {
-        public static readonly TypeConverter<NamePtr> Converter = new TypeConverter<NamePtr>(Deserialize, Serialize);
         public string name;
         public uint pointer;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Anim
             this.name = name;
             this.pointer = pointer;
         }
+    }
+
+    public static class NamePtrConverter
+    {
+        public static readonly TypeConverter<NamePtr> Converter = new TypeConverter<NamePtr>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<uint> pointer;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.NamePtr v, Serializer s)
+        public static void Serialize(NamePtr v, Serializer s)
         {
             s.SerializeStruct("NamePtr", 2);
             s.SerializeFieldName("name");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Anim
             ((Action<uint>)s.SerializeU32)(v.pointer);
         }
 
-        public static Mech3DotNet.Types.Anim.NamePtr Deserialize(Deserializer d)
+        public static NamePtr Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

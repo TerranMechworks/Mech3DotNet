@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Vec3?> translation;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationWithNode v, Serializer s)
+        public static void Serialize(CallAnimationWithNode v, Serializer s)
         {
             s.SerializeStruct("CallAnimationWithNode", 2);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("translation");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.translation);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.translation);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.CallAnimationWithNode Deserialize(Deserializer d)
+        public static CallAnimationWithNode Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.node.Value = d.DeserializeString();
                         break;
                     case "translation":
-                        fields.translation.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.translation.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("CallAnimationWithNode", fieldName);

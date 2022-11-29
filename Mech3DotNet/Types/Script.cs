@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Interp
             public Field<System.Collections.Generic.List<string>> lines;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Interp.Script v, Serializer s)
+        public static void Serialize(Script v, Serializer s)
         {
             s.SerializeStruct("Script", 3);
             s.SerializeFieldName("name");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Interp
             s.SerializeVec(((Action<string>)s.SerializeString))(v.lines);
         }
 
-        public static Mech3DotNet.Types.Interp.Script Deserialize(Deserializer d)
+        public static Script Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

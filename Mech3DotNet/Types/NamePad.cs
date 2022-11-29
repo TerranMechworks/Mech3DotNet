@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim
 {
     public struct NamePad
     {
-        public static readonly TypeConverter<NamePad> Converter = new TypeConverter<NamePad>(Deserialize, Serialize);
         public string name;
         public byte[] pad;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Anim
             this.name = name;
             this.pad = pad;
         }
+    }
+
+    public static class NamePadConverter
+    {
+        public static readonly TypeConverter<NamePad> Converter = new TypeConverter<NamePad>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<byte[]> pad;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.NamePad v, Serializer s)
+        public static void Serialize(NamePad v, Serializer s)
         {
             s.SerializeStruct("NamePad", 2);
             s.SerializeFieldName("name");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Anim
             ((Action<byte[]>)s.SerializeBytes)(v.pad);
         }
 
-        public static Mech3DotNet.Types.Anim.NamePad Deserialize(Deserializer d)
+        public static NamePad Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

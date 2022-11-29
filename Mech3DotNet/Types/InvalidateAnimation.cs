@@ -18,14 +18,14 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<string> name;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.InvalidateAnimation v, Serializer s)
+        public static void Serialize(InvalidateAnimation v, Serializer s)
         {
             s.SerializeStruct("InvalidateAnimation", 1);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.InvalidateAnimation Deserialize(Deserializer d)
+        public static InvalidateAnimation Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

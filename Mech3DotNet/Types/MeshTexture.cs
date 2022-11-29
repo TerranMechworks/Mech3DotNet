@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             public Field<uint> unkPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.Ng.MeshTexture v, Serializer s)
+        public static void Serialize(MeshTexture v, Serializer s)
         {
             s.SerializeStruct("MeshTexture", 3);
             s.SerializeFieldName("texture_index");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             ((Action<uint>)s.SerializeU32)(v.unkPtr);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.Ng.MeshTexture Deserialize(Deserializer d)
+        public static MeshTexture Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

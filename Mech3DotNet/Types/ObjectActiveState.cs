@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<bool> state;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectActiveState v, Serializer s)
+        public static void Serialize(ObjectActiveState v, Serializer s)
         {
             s.SerializeStruct("ObjectActiveState", 2);
             s.SerializeFieldName("node");
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<bool>)s.SerializeBool)(v.state);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectActiveState Deserialize(Deserializer d)
+        public static ObjectActiveState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

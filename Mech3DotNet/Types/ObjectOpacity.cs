@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct ObjectOpacity
     {
-        public static readonly TypeConverter<ObjectOpacity> Converter = new TypeConverter<ObjectOpacity>(Deserialize, Serialize);
         public float value;
         public short state;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Anim.Events
             this.value = value;
             this.state = state;
         }
+    }
+
+    public static class ObjectOpacityConverter
+    {
+        public static readonly TypeConverter<ObjectOpacity> Converter = new TypeConverter<ObjectOpacity>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<short> state;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacity v, Serializer s)
+        public static void Serialize(ObjectOpacity v, Serializer s)
         {
             s.SerializeStruct("ObjectOpacity", 2);
             s.SerializeFieldName("value");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<short>)s.SerializeI16)(v.state);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectOpacity Deserialize(Deserializer d)
+        public static ObjectOpacity Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

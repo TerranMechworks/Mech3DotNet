@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Nodes
             public Field<Mech3DotNet.Types.Types.Vec3> b;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.BoundingBox v, Serializer s)
+        public static void Serialize(BoundingBox v, Serializer s)
         {
             s.SerializeStruct("BoundingBox", 2);
             s.SerializeFieldName("a");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.a);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.a);
             s.SerializeFieldName("b");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.b);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.b);
         }
 
-        public static Mech3DotNet.Types.Nodes.BoundingBox Deserialize(Deserializer d)
+        public static BoundingBox Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -42,10 +42,10 @@ namespace Mech3DotNet.Types.Nodes
                 switch (fieldName)
                 {
                     case "a":
-                        fields.a.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.a.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "b":
-                        fields.b.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.b.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("BoundingBox", fieldName);

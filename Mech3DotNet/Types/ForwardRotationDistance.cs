@@ -5,27 +5,31 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct ForwardRotationDistance
     {
-        public static readonly TypeConverter<ForwardRotationDistance> Converter = new TypeConverter<ForwardRotationDistance>(Deserialize, Serialize);
         public float v1;
 
         public ForwardRotationDistance(float v1)
         {
             this.v1 = v1;
         }
+    }
+
+    public static class ForwardRotationDistanceConverter
+    {
+        public static readonly TypeConverter<ForwardRotationDistance> Converter = new TypeConverter<ForwardRotationDistance>(Deserialize, Serialize);
 
         private struct Fields
         {
             public Field<float> v1;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationDistance v, Serializer s)
+        public static void Serialize(ForwardRotationDistance v, Serializer s)
         {
             s.SerializeStruct("ForwardRotationDistance", 1);
             s.SerializeFieldName("v1");
             ((Action<float>)s.SerializeF32)(v.v1);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ForwardRotationDistance Deserialize(Deserializer d)
+        public static ForwardRotationDistance Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

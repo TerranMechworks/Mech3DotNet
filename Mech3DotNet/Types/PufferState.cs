@@ -72,7 +72,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float?> growthFactor;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.PufferState v, Serializer s)
+        public static void Serialize(PufferState v, Serializer s)
         {
             s.SerializeStruct("PufferState", 19);
             s.SerializeFieldName("name");
@@ -86,27 +86,27 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
             s.SerializeFieldName("local_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.localVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.localVelocity);
             s.SerializeFieldName("world_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.worldVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.worldVelocity);
             s.SerializeFieldName("min_random_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.minRandomVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.minRandomVelocity);
             s.SerializeFieldName("max_random_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.maxRandomVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.maxRandomVelocity);
             s.SerializeFieldName("world_acceleration");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.worldAcceleration);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.worldAcceleration);
             s.SerializeFieldName("interval");
             s.Serialize(Mech3DotNet.Types.Anim.Events.Interval.Converter)(v.interval);
             s.SerializeFieldName("size_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Range.Converter))(v.sizeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter))(v.sizeRange);
             s.SerializeFieldName("lifetime_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Range.Converter))(v.lifetimeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter))(v.lifetimeRange);
             s.SerializeFieldName("start_age_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Range.Converter))(v.startAgeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter))(v.startAgeRange);
             s.SerializeFieldName("deviation_distance");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.deviationDistance);
             s.SerializeFieldName("fade_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Range.Converter))(v.fadeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter))(v.fadeRange);
             s.SerializeFieldName("friction");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.friction);
             s.SerializeFieldName("textures");
@@ -115,7 +115,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.growthFactor);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.PufferState Deserialize(Deserializer d)
+        public static PufferState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -159,37 +159,37 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.atNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))();
                         break;
                     case "local_velocity":
-                        fields.localVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.localVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "world_velocity":
-                        fields.worldVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.worldVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "min_random_velocity":
-                        fields.minRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.minRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "max_random_velocity":
-                        fields.maxRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.maxRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "world_acceleration":
-                        fields.worldAcceleration.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.worldAcceleration.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "interval":
                         fields.interval.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.Interval.Converter)();
                         break;
                     case "size_range":
-                        fields.sizeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Range.Converter))();
+                        fields.sizeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter))();
                         break;
                     case "lifetime_range":
-                        fields.lifetimeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Range.Converter))();
+                        fields.lifetimeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter))();
                         break;
                     case "start_age_range":
-                        fields.startAgeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Range.Converter))();
+                        fields.startAgeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter))();
                         break;
                     case "deviation_distance":
                         fields.deviationDistance.Value = d.DeserializeValOption(d.DeserializeF32)();
                         break;
                     case "fade_range":
-                        fields.fadeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Range.Converter))();
+                        fields.fadeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter))();
                         break;
                     case "friction":
                         fields.friction.Value = d.DeserializeValOption(d.DeserializeF32)();

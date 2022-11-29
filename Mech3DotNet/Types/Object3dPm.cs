@@ -60,7 +60,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
             public Field<Mech3DotNet.Types.Nodes.BoundingBox> unk164;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Pm.Object3dPm v, Serializer s)
+        public static void Serialize(Object3dPm v, Serializer s)
         {
             s.SerializeStruct("Object3dPm", 15);
             s.SerializeFieldName("name");
@@ -95,7 +95,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
             s.Serialize(Mech3DotNet.Types.Nodes.BoundingBox.Converter)(v.unk164);
         }
 
-        public static Mech3DotNet.Types.Nodes.Pm.Object3dPm Deserialize(Deserializer d)
+        public static Object3dPm Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

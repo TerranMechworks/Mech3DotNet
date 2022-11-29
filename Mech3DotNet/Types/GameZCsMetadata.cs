@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Gamez
             public Field<System.Collections.Generic.List<uint?>> texturePtrs;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.GameZCsMetadata v, Serializer s)
+        public static void Serialize(GameZCsMetadata v, Serializer s)
         {
             s.SerializeStruct("GameZCsMetadata", 5);
             s.SerializeFieldName("gamez_header_unk08");
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Gamez
             s.SerializeVec(s.SerializeValOption(((Action<uint>)s.SerializeU32)))(v.texturePtrs);
         }
 
-        public static Mech3DotNet.Types.Gamez.GameZCsMetadata Deserialize(Deserializer d)
+        public static GameZCsMetadata Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

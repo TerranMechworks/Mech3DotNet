@@ -54,7 +54,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<uint> seqDefsPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.AnimPtr v, Serializer s)
+        public static void Serialize(AnimPtr v, Serializer s)
         {
             s.SerializeStruct("AnimPtr", 13);
             s.SerializeFieldName("file_name");
@@ -85,7 +85,7 @@ namespace Mech3DotNet.Types.Anim
             ((Action<uint>)s.SerializeU32)(v.seqDefsPtr);
         }
 
-        public static Mech3DotNet.Types.Anim.AnimPtr Deserialize(Deserializer d)
+        public static AnimPtr Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

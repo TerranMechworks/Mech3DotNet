@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Image
             public Field<ushort> count;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Image.GlobalPalette v, Serializer s)
+        public static void Serialize(GlobalPalette v, Serializer s)
         {
             s.SerializeStruct("GlobalPalette", 2);
             s.SerializeFieldName("index");
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Image
             ((Action<ushort>)s.SerializeU16)(v.count);
         }
 
-        public static Mech3DotNet.Types.Image.GlobalPalette Deserialize(Deserializer d)
+        public static GlobalPalette Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

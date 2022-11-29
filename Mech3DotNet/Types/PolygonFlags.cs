@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             public Field<bool> unk6;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags v, Serializer s)
+        public static void Serialize(PolygonFlags v, Serializer s)
         {
             s.SerializeStruct("PolygonFlags", 4);
             s.SerializeFieldName("unk2");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             ((Action<bool>)s.SerializeBool)(v.unk6);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags Deserialize(Deserializer d)
+        public static PolygonFlags Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

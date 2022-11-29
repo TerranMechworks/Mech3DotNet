@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
             public Field<bool> flag;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Materials.TexturedMaterial v, Serializer s)
+        public static void Serialize(TexturedMaterial v, Serializer s)
         {
             s.SerializeStruct("TexturedMaterial", 5);
             s.SerializeFieldName("texture");
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
             ((Action<bool>)s.SerializeBool)(v.flag);
         }
 
-        public static Mech3DotNet.Types.Gamez.Materials.TexturedMaterial Deserialize(Deserializer d)
+        public static TexturedMaterial Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

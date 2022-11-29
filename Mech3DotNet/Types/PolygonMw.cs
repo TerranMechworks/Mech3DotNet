@@ -57,17 +57,17 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
             public Field<uint> unkPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.Mw.PolygonMw v, Serializer s)
+        public static void Serialize(PolygonMw v, Serializer s)
         {
             s.SerializeStruct("PolygonMw", 14);
             s.SerializeFieldName("vertex_indices");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.vertexIndices);
             s.SerializeFieldName("vertex_colors");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Color.Converter))(v.vertexColors);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter))(v.vertexColors);
             s.SerializeFieldName("normal_indices");
             s.SerializeRefOption(s.SerializeVec(((Action<uint>)s.SerializeU32)))(v.normalIndices);
             s.SerializeFieldName("uv_coords");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.UvCoord.Converter)))(v.uvCoords);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.UvCoordConverter.Converter)))(v.uvCoords);
             s.SerializeFieldName("texture_index");
             ((Action<uint>)s.SerializeU32)(v.textureIndex);
             s.SerializeFieldName("texture_info");
@@ -90,7 +90,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
             ((Action<uint>)s.SerializeU32)(v.unkPtr);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.Mw.PolygonMw Deserialize(Deserializer d)
+        public static PolygonMw Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -117,13 +117,13 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
                         fields.vertexIndices.Value = d.DeserializeVec(d.DeserializeU32)();
                         break;
                     case "vertex_colors":
-                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Color.Converter))();
+                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter))();
                         break;
                     case "normal_indices":
                         fields.normalIndices.Value = d.DeserializeRefOption(d.DeserializeVec(d.DeserializeU32))();
                         break;
                     case "uv_coords":
-                        fields.uvCoords.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.UvCoord.Converter)))();
+                        fields.uvCoords.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.UvCoordConverter.Converter)))();
                         break;
                     case "texture_index":
                         fields.textureIndex.Value = d.DeserializeU32();

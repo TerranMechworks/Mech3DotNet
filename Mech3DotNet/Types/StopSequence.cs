@@ -18,14 +18,14 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<string> name;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.StopSequence v, Serializer s)
+        public static void Serialize(StopSequence v, Serializer s)
         {
             s.SerializeStruct("StopSequence", 1);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.StopSequence Deserialize(Deserializer d)
+        public static StopSequence Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

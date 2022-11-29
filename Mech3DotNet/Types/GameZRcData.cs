@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Gamez
             public Field<Mech3DotNet.Types.Gamez.GameZRcMetadata> metadata;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.GameZRcData v, Serializer s)
+        public static void Serialize(GameZRcData v, Serializer s)
         {
             s.SerializeStruct("GameZRcData", 5);
             s.SerializeFieldName("textures");
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Gamez
             s.Serialize(Mech3DotNet.Types.Gamez.GameZRcMetadata.Converter)(v.metadata);
         }
 
-        public static Mech3DotNet.Types.Gamez.GameZRcData Deserialize(Deserializer d)
+        public static GameZRcData Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

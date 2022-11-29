@@ -27,20 +27,20 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float> runtime;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.LightAnimation v, Serializer s)
+        public static void Serialize(LightAnimation v, Serializer s)
         {
             s.SerializeStruct("LightAnimation", 4);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Types.Color.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("runtime");
             ((Action<float>)s.SerializeF32)(v.runtime);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.LightAnimation Deserialize(Deserializer d)
+        public static LightAnimation Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -57,10 +57,10 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.Color.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
                         break;
                     case "runtime":
                         fields.runtime.Value = d.DeserializeF32();

@@ -87,15 +87,15 @@ namespace Mech3DotNet.Types.Anim
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.SeqDef>> sequences;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.AnimDef v, Serializer s)
+        public static void Serialize(AnimDef v, Serializer s)
         {
             s.SerializeStruct("AnimDef", 24);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("anim_name");
-            s.Serialize(Mech3DotNet.Types.Anim.NamePad.Converter)(v.animName);
+            s.Serialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)(v.animName);
             s.SerializeFieldName("anim_root");
-            s.Serialize(Mech3DotNet.Types.Anim.NamePad.Converter)(v.animRoot);
+            s.Serialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)(v.animRoot);
             s.SerializeFieldName("file_name");
             ((Action<string>)s.SerializeString)(v.fileName);
             s.SerializeFieldName("auto_reset_node_states");
@@ -119,28 +119,28 @@ namespace Mech3DotNet.Types.Anim
             s.SerializeFieldName("activ_prereq_min_to_satisfy");
             ((Action<byte>)s.SerializeU8)(v.activPrereqMinToSatisfy);
             s.SerializeFieldName("objects");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePad.Converter)))(v.objects);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)))(v.objects);
             s.SerializeFieldName("nodes");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtr.Converter)))(v.nodes);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtrConverter.Converter)))(v.nodes);
             s.SerializeFieldName("lights");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtr.Converter)))(v.lights);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtrConverter.Converter)))(v.lights);
             s.SerializeFieldName("puffers");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtrFlags.Converter)))(v.puffers);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtrFlagsConverter.Converter)))(v.puffers);
             s.SerializeFieldName("dynamic_sounds");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtr.Converter)))(v.dynamicSounds);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePtrConverter.Converter)))(v.dynamicSounds);
             s.SerializeFieldName("static_sounds");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePad.Converter)))(v.staticSounds);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)))(v.staticSounds);
             s.SerializeFieldName("activ_prereqs");
             s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.ActivationPrereq.Converter)))(v.activPrereqs);
             s.SerializeFieldName("anim_refs");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePad.Converter)))(v.animRefs);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)))(v.animRefs);
             s.SerializeFieldName("reset_state");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.ResetState.Converter))(v.resetState);
             s.SerializeFieldName("sequences");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.SeqDef.Converter))(v.sequences);
         }
 
-        public static Mech3DotNet.Types.Anim.AnimDef Deserialize(Deserializer d)
+        public static AnimDef Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -177,10 +177,10 @@ namespace Mech3DotNet.Types.Anim
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "anim_name":
-                        fields.animName.Value = d.Deserialize(Mech3DotNet.Types.Anim.NamePad.Converter)();
+                        fields.animName.Value = d.Deserialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)();
                         break;
                     case "anim_root":
-                        fields.animRoot.Value = d.Deserialize(Mech3DotNet.Types.Anim.NamePad.Converter)();
+                        fields.animRoot.Value = d.Deserialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)();
                         break;
                     case "file_name":
                         fields.fileName.Value = d.DeserializeString();
@@ -216,28 +216,28 @@ namespace Mech3DotNet.Types.Anim
                         fields.activPrereqMinToSatisfy.Value = d.DeserializeU8();
                         break;
                     case "objects":
-                        fields.objects.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePad.Converter)))();
+                        fields.objects.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)))();
                         break;
                     case "nodes":
-                        fields.nodes.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtr.Converter)))();
+                        fields.nodes.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtrConverter.Converter)))();
                         break;
                     case "lights":
-                        fields.lights.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtr.Converter)))();
+                        fields.lights.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtrConverter.Converter)))();
                         break;
                     case "puffers":
-                        fields.puffers.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtrFlags.Converter)))();
+                        fields.puffers.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtrFlagsConverter.Converter)))();
                         break;
                     case "dynamic_sounds":
-                        fields.dynamicSounds.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtr.Converter)))();
+                        fields.dynamicSounds.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePtrConverter.Converter)))();
                         break;
                     case "static_sounds":
-                        fields.staticSounds.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePad.Converter)))();
+                        fields.staticSounds.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)))();
                         break;
                     case "activ_prereqs":
                         fields.activPrereqs.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.ActivationPrereq.Converter)))();
                         break;
                     case "anim_refs":
-                        fields.animRefs.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePad.Converter)))();
+                        fields.animRefs.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.NamePadConverter.Converter)))();
                         break;
                     case "reset_state":
                         fields.resetState.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.ResetState.Converter))();

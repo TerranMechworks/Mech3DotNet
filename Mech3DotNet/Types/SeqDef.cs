@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim
             public Field<uint> pointer;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.SeqDef v, Serializer s)
+        public static void Serialize(SeqDef v, Serializer s)
         {
             s.SerializeStruct("SeqDef", 4);
             s.SerializeFieldName("name");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim
             ((Action<uint>)s.SerializeU32)(v.pointer);
         }
 
-        public static Mech3DotNet.Types.Anim.SeqDef Deserialize(Deserializer d)
+        public static SeqDef Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

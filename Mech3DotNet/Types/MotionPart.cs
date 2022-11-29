@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Motion
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Motion.MotionFrame<TQuaternion, TVec3>>> frames;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Motion.MotionPart<TQuaternion, TVec3> v, Serializer s)
+        public static void Serialize(MotionPart<TQuaternion, TVec3> v, Serializer s)
         {
             s.SerializeStruct("MotionPart", 2);
             s.SerializeFieldName("name");
@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Motion
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Motion.MotionFrame<TQuaternion, TVec3>.Converter))(v.frames);
         }
 
-        public static Mech3DotNet.Types.Motion.MotionPart<TQuaternion, TVec3> Deserialize(Deserializer d)
+        public static MotionPart<TQuaternion, TVec3> Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -66,15 +66,15 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
             public Field<float> unk80;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.Rc.MeshRc v, Serializer s)
+        public static void Serialize(MeshRc v, Serializer s)
         {
             s.SerializeStruct("MeshRc", 17);
             s.SerializeFieldName("vertices");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.vertices);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.vertices);
             s.SerializeFieldName("normals");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.normals);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.normals);
             s.SerializeFieldName("morphs");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.morphs);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.morphs);
             s.SerializeFieldName("lights");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.MeshLight.Converter))(v.lights);
             s.SerializeFieldName("polygons");
@@ -105,7 +105,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
             ((Action<float>)s.SerializeF32)(v.unk80);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.Rc.MeshRc Deserialize(Deserializer d)
+        public static MeshRc Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -132,13 +132,13 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
                 switch (fieldName)
                 {
                     case "vertices":
-                        fields.vertices.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.vertices.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "normals":
-                        fields.normals.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.normals.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "morphs":
-                        fields.morphs.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.morphs.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "lights":
                         fields.lights.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.MeshLight.Converter))();

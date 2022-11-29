@@ -24,18 +24,18 @@ namespace Mech3DotNet.Types.Zmap
             public Field<int> objective;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Zmap.MapFeature v, Serializer s)
+        public static void Serialize(MapFeature v, Serializer s)
         {
             s.SerializeStruct("MapFeature", 3);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Zmap.MapColor.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.Zmap.MapColorConverter.Converter)(v.color);
             s.SerializeFieldName("vertices");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Zmap.MapVertex.Converter))(v.vertices);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Zmap.MapVertexConverter.Converter))(v.vertices);
             s.SerializeFieldName("objective");
             ((Action<int>)s.SerializeI32)(v.objective);
         }
 
-        public static Mech3DotNet.Types.Zmap.MapFeature Deserialize(Deserializer d)
+        public static MapFeature Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -48,10 +48,10 @@ namespace Mech3DotNet.Types.Zmap
                 switch (fieldName)
                 {
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Zmap.MapColor.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Zmap.MapColorConverter.Converter)();
                         break;
                     case "vertices":
-                        fields.vertices.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Zmap.MapVertex.Converter))();
+                        fields.vertices.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Zmap.MapVertexConverter.Converter))();
                         break;
                     case "objective":
                         fields.objective.Value = d.DeserializeI32();

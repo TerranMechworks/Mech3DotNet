@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct Rgba
     {
-        public static readonly TypeConverter<Rgba> Converter = new TypeConverter<Rgba>(Deserialize, Serialize);
         public float r;
         public float g;
         public float b;
@@ -18,6 +17,11 @@ namespace Mech3DotNet.Types.Anim.Events
             this.b = b;
             this.a = a;
         }
+    }
+
+    public static class RgbaConverter
+    {
+        public static readonly TypeConverter<Rgba> Converter = new TypeConverter<Rgba>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -27,7 +31,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float> a;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.Rgba v, Serializer s)
+        public static void Serialize(Rgba v, Serializer s)
         {
             s.SerializeStruct("Rgba", 4);
             s.SerializeFieldName("r");
@@ -40,7 +44,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.a);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.Rgba Deserialize(Deserializer d)
+        public static Rgba Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

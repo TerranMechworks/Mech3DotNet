@@ -24,18 +24,18 @@ namespace Mech3DotNet.Types.Nodes
             public Field<Mech3DotNet.Types.Types.Matrix?> matrix;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Transformation v, Serializer s)
+        public static void Serialize(Transformation v, Serializer s)
         {
             s.SerializeStruct("Transformation", 3);
             s.SerializeFieldName("rotation");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.rotation);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.rotation);
             s.SerializeFieldName("translation");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.translation);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.translation);
             s.SerializeFieldName("matrix");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Matrix.Converter))(v.matrix);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.MatrixConverter.Converter))(v.matrix);
         }
 
-        public static Mech3DotNet.Types.Nodes.Transformation Deserialize(Deserializer d)
+        public static Transformation Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -48,13 +48,13 @@ namespace Mech3DotNet.Types.Nodes
                 switch (fieldName)
                 {
                     case "rotation":
-                        fields.rotation.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.rotation.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "translation":
-                        fields.translation.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.translation.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "matrix":
-                        fields.matrix.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Matrix.Converter))();
+                        fields.matrix.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.MatrixConverter.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("Transformation", fieldName);

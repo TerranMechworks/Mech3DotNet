@@ -54,7 +54,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             public Field<uint> unk36;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonNg v, Serializer s)
+        public static void Serialize(PolygonNg v, Serializer s)
         {
             s.SerializeStruct("PolygonNg", 13);
             s.SerializeFieldName("flags");
@@ -62,7 +62,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             s.SerializeFieldName("vertex_indices");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.vertexIndices);
             s.SerializeFieldName("vertex_colors");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Color.Converter))(v.vertexColors);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter))(v.vertexColors);
             s.SerializeFieldName("normal_indices");
             s.SerializeRefOption(s.SerializeVec(((Action<uint>)s.SerializeU32)))(v.normalIndices);
             s.SerializeFieldName("textures");
@@ -85,7 +85,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             ((Action<uint>)s.SerializeU32)(v.unk36);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonNg Deserialize(Deserializer d)
+        public static PolygonNg Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -114,7 +114,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                         fields.vertexIndices.Value = d.DeserializeVec(d.DeserializeU32)();
                         break;
                     case "vertex_colors":
-                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Color.Converter))();
+                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter))();
                         break;
                     case "normal_indices":
                         fields.normalIndices.Value = d.DeserializeRefOption(d.DeserializeVec(d.DeserializeU32))();

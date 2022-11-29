@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<ushort> reset;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectCycleTexture v, Serializer s)
+        public static void Serialize(ObjectCycleTexture v, Serializer s)
         {
             s.SerializeStruct("ObjectCycleTexture", 2);
             s.SerializeFieldName("node");
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<ushort>)s.SerializeU16)(v.reset);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectCycleTexture Deserialize(Deserializer d)
+        public static ObjectCycleTexture Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

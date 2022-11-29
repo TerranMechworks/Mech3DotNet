@@ -5,27 +5,31 @@ namespace Mech3DotNet.Types.Anim
 {
     public struct PrereqAnimation
     {
-        public static readonly TypeConverter<PrereqAnimation> Converter = new TypeConverter<PrereqAnimation>(Deserialize, Serialize);
         public string name;
 
         public PrereqAnimation(string name)
         {
             this.name = name;
         }
+    }
+
+    public static class PrereqAnimationConverter
+    {
+        public static readonly TypeConverter<PrereqAnimation> Converter = new TypeConverter<PrereqAnimation>(Deserialize, Serialize);
 
         private struct Fields
         {
             public Field<string> name;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.PrereqAnimation v, Serializer s)
+        public static void Serialize(PrereqAnimation v, Serializer s)
         {
             s.SerializeStruct("PrereqAnimation", 1);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
         }
 
-        public static Mech3DotNet.Types.Anim.PrereqAnimation Deserialize(Deserializer d)
+        public static PrereqAnimation Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

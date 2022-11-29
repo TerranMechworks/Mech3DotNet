@@ -48,7 +48,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float?> diffuse;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.LightState v, Serializer s)
+        public static void Serialize(LightState v, Serializer s)
         {
             s.SerializeStruct("LightState", 11);
             s.SerializeFieldName("name");
@@ -66,16 +66,16 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
             s.SerializeFieldName("range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Range.Converter))(v.range);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter))(v.range);
             s.SerializeFieldName("color");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Color.Converter))(v.color);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter))(v.color);
             s.SerializeFieldName("ambient");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.ambient);
             s.SerializeFieldName("diffuse");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.diffuse);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.LightState Deserialize(Deserializer d)
+        public static LightState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -117,10 +117,10 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.atNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))();
                         break;
                     case "range":
-                        fields.range.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Range.Converter))();
+                        fields.range.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter))();
                         break;
                     case "color":
-                        fields.color.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Color.Converter))();
+                        fields.color.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter))();
                         break;
                     case "ambient":
                         fields.ambient.Value = d.DeserializeValOption(d.DeserializeF32)();

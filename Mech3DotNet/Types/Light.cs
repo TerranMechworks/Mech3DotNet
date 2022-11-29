@@ -39,28 +39,28 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<uint> dataPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.Light v, Serializer s)
+        public static void Serialize(Light v, Serializer s)
         {
             s.SerializeStruct("Light", 8);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("direction");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.direction);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.direction);
             s.SerializeFieldName("diffuse");
             ((Action<float>)s.SerializeF32)(v.diffuse);
             s.SerializeFieldName("ambient");
             ((Action<float>)s.SerializeF32)(v.ambient);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Types.Color.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("parent_ptr");
             ((Action<uint>)s.SerializeU32)(v.parentPtr);
             s.SerializeFieldName("data_ptr");
             ((Action<uint>)s.SerializeU32)(v.dataPtr);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.Light Deserialize(Deserializer d)
+        public static Light Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -81,7 +81,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "direction":
-                        fields.direction.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.direction.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "diffuse":
                         fields.diffuse.Value = d.DeserializeF32();
@@ -90,10 +90,10 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.ambient.Value = d.DeserializeF32();
                         break;
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.Color.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     case "parent_ptr":
                         fields.parentPtr.Value = d.DeserializeU32();

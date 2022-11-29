@@ -5,27 +5,31 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct PlayerFirstPersonCond
     {
-        public static readonly TypeConverter<PlayerFirstPersonCond> Converter = new TypeConverter<PlayerFirstPersonCond>(Deserialize, Serialize);
         public bool value;
 
         public PlayerFirstPersonCond(bool value)
         {
             this.value = value;
         }
+    }
+
+    public static class PlayerFirstPersonCondConverter
+    {
+        public static readonly TypeConverter<PlayerFirstPersonCond> Converter = new TypeConverter<PlayerFirstPersonCond>(Deserialize, Serialize);
 
         private struct Fields
         {
             public Field<bool> value;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond v, Serializer s)
+        public static void Serialize(PlayerFirstPersonCond v, Serializer s)
         {
             s.SerializeStruct("PlayerFirstPersonCond", 1);
             s.SerializeFieldName("value");
             ((Action<bool>)s.SerializeBool)(v.value);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond Deserialize(Deserializer d)
+        public static PlayerFirstPersonCond Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

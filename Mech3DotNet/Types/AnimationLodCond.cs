@@ -5,27 +5,31 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct AnimationLodCond
     {
-        public static readonly TypeConverter<AnimationLodCond> Converter = new TypeConverter<AnimationLodCond>(Deserialize, Serialize);
         public uint value;
 
         public AnimationLodCond(uint value)
         {
             this.value = value;
         }
+    }
+
+    public static class AnimationLodCondConverter
+    {
+        public static readonly TypeConverter<AnimationLodCond> Converter = new TypeConverter<AnimationLodCond>(Deserialize, Serialize);
 
         private struct Fields
         {
             public Field<uint> value;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.AnimationLodCond v, Serializer s)
+        public static void Serialize(AnimationLodCond v, Serializer s)
         {
             s.SerializeStruct("AnimationLodCond", 1);
             s.SerializeFieldName("value");
             ((Action<uint>)s.SerializeU32)(v.value);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.AnimationLodCond Deserialize(Deserializer d)
+        public static AnimationLodCond Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

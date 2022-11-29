@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsAbsolute();
                         s.SerializeNewTypeVariant("RotateState", 0);
-                        s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(inner);
                         break;
                     }
 
@@ -70,7 +70,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("RotateState", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         return RotateState.Absolute(inner);
                     }
 

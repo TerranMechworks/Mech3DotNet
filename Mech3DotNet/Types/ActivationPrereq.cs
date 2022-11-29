@@ -42,7 +42,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         var inner = v.AsAnimation();
                         s.SerializeNewTypeVariant("ActivationPrereq", 0);
-                        s.Serialize(Mech3DotNet.Types.Anim.PrereqAnimation.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.PrereqAnimationConverter.Converter)(inner);
                         break;
                     }
 
@@ -50,7 +50,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         var inner = v.AsParent();
                         s.SerializeNewTypeVariant("ActivationPrereq", 1);
-                        s.Serialize(Mech3DotNet.Types.Anim.PrereqParent.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.PrereqParentConverter.Converter)(inner);
                         break;
                     }
 
@@ -58,7 +58,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         var inner = v.AsObject();
                         s.SerializeNewTypeVariant("ActivationPrereq", 2);
-                        s.Serialize(Mech3DotNet.Types.Anim.PrereqObject.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Anim.PrereqObjectConverter.Converter)(inner);
                         break;
                     }
 
@@ -76,7 +76,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ActivationPrereq", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.PrereqAnimation.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.PrereqAnimationConverter.Converter)();
                         return ActivationPrereq.Animation(inner);
                     }
 
@@ -84,7 +84,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ActivationPrereq", 1, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.PrereqParent.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.PrereqParentConverter.Converter)();
                         return ActivationPrereq.Parent(inner);
                     }
 
@@ -92,7 +92,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("ActivationPrereq", 2, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.PrereqObject.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.PrereqObjectConverter.Converter)();
                         return ActivationPrereq.Object(inner);
                     }
 

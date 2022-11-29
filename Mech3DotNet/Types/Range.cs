@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Types
 {
     public struct Range
     {
-        public static readonly TypeConverter<Range> Converter = new TypeConverter<Range>(Deserialize, Serialize);
         public float min;
         public float max;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Types
             this.min = min;
             this.max = max;
         }
+    }
+
+    public static class RangeConverter
+    {
+        public static readonly TypeConverter<Range> Converter = new TypeConverter<Range>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Types
             public Field<float> max;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Types.Range v, Serializer s)
+        public static void Serialize(Range v, Serializer s)
         {
             s.SerializeStruct("Range", 2);
             s.SerializeFieldName("min");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Types
             ((Action<float>)s.SerializeF32)(v.max);
         }
 
-        public static Mech3DotNet.Types.Types.Range Deserialize(Deserializer d)
+        public static Range Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

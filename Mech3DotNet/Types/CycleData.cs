@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
             public Field<uint> dataPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Materials.CycleData v, Serializer s)
+        public static void Serialize(CycleData v, Serializer s)
         {
             s.SerializeStruct("CycleData", 6);
             s.SerializeFieldName("textures");
@@ -50,7 +50,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
             ((Action<uint>)s.SerializeU32)(v.dataPtr);
         }
 
-        public static Mech3DotNet.Types.Gamez.Materials.CycleData Deserialize(Deserializer d)
+        public static CycleData Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

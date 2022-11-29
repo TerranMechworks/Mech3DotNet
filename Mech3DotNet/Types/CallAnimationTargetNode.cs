@@ -18,14 +18,14 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<string> operandNode;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode v, Serializer s)
+        public static void Serialize(CallAnimationTargetNode v, Serializer s)
         {
             s.SerializeStruct("CallAnimationTargetNode", 1);
             s.SerializeFieldName("operand_node");
             ((Action<string>)s.SerializeString)(v.operandNode);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode Deserialize(Deserializer d)
+        public static CallAnimationTargetNode Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

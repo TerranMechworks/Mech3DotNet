@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<bool> flag;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.Interval v, Serializer s)
+        public static void Serialize(Interval v, Serializer s)
         {
             s.SerializeStruct("Interval", 3);
             s.SerializeFieldName("interval_type");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<bool>)s.SerializeBool)(v.flag);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.Interval Deserialize(Deserializer d)
+        public static Interval Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

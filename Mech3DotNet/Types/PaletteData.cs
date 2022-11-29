@@ -18,14 +18,14 @@ namespace Mech3DotNet.Types.Image
             public Field<byte[]> data;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Image.PaletteData v, Serializer s)
+        public static void Serialize(PaletteData v, Serializer s)
         {
             s.SerializeStruct("PaletteData", 1);
             s.SerializeFieldName("data");
             ((Action<byte[]>)s.SerializeBytes)(v.data);
         }
 
-        public static Mech3DotNet.Types.Image.PaletteData Deserialize(Deserializer d)
+        public static PaletteData Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

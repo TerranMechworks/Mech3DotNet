@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Archive
             public Field<byte[]> garbage;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Archive.ArchiveEntry v, Serializer s)
+        public static void Serialize(ArchiveEntry v, Serializer s)
         {
             s.SerializeStruct("ArchiveEntry", 3);
             s.SerializeFieldName("name");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Archive
             ((Action<byte[]>)s.SerializeBytes)(v.garbage);
         }
 
-        public static Mech3DotNet.Types.Archive.ArchiveEntry Deserialize(Deserializer d)
+        public static ArchiveEntry Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

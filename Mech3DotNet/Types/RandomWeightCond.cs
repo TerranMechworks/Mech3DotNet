@@ -5,27 +5,31 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct RandomWeightCond
     {
-        public static readonly TypeConverter<RandomWeightCond> Converter = new TypeConverter<RandomWeightCond>(Deserialize, Serialize);
         public float value;
 
         public RandomWeightCond(float value)
         {
             this.value = value;
         }
+    }
+
+    public static class RandomWeightCondConverter
+    {
+        public static readonly TypeConverter<RandomWeightCond> Converter = new TypeConverter<RandomWeightCond>(Deserialize, Serialize);
 
         private struct Fields
         {
             public Field<float> value;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.RandomWeightCond v, Serializer s)
+        public static void Serialize(RandomWeightCond v, Serializer s)
         {
             s.SerializeStruct("RandomWeightCond", 1);
             s.SerializeFieldName("value");
             ((Action<float>)s.SerializeF32)(v.value);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.RandomWeightCond Deserialize(Deserializer d)
+        public static RandomWeightCond Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

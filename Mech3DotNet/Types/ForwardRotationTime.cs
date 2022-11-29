@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct ForwardRotationTime
     {
-        public static readonly TypeConverter<ForwardRotationTime> Converter = new TypeConverter<ForwardRotationTime>(Deserialize, Serialize);
         public float v1;
         public float v2;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Anim.Events
             this.v1 = v1;
             this.v2 = v2;
         }
+    }
+
+    public static class ForwardRotationTimeConverter
+    {
+        public static readonly TypeConverter<ForwardRotationTime> Converter = new TypeConverter<ForwardRotationTime>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float> v2;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationTime v, Serializer s)
+        public static void Serialize(ForwardRotationTime v, Serializer s)
         {
             s.SerializeStruct("ForwardRotationTime", 2);
             s.SerializeFieldName("v1");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.v2);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ForwardRotationTime Deserialize(Deserializer d)
+        public static ForwardRotationTime Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float?> maxLength;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnector v, Serializer s)
+        public static void Serialize(ObjectConnector v, Serializer s)
         {
             s.SerializeStruct("ObjectConnector", 6);
             s.SerializeFieldName("node");
@@ -43,14 +43,14 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("to_node");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.toNode);
             s.SerializeFieldName("from_pos");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.fromPos);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.fromPos);
             s.SerializeFieldName("to_pos");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter))(v.toPos);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.toPos);
             s.SerializeFieldName("max_length");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.maxLength);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectConnector Deserialize(Deserializer d)
+        public static ObjectConnector Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -75,10 +75,10 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.toNode.Value = d.DeserializeRefOption(d.DeserializeString)();
                         break;
                     case "from_pos":
-                        fields.fromPos.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.fromPos.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "to_pos":
-                        fields.toPos.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter))();
+                        fields.toPos.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
                         break;
                     case "max_length":
                         fields.maxLength.Value = d.DeserializeValOption(d.DeserializeF32)();

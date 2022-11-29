@@ -57,7 +57,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<Mech3DotNet.Types.Nodes.BoundingBox> unk116;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.Lod v, Serializer s)
+        public static void Serialize(Lod v, Serializer s)
         {
             s.SerializeStruct("Lod", 14);
             s.SerializeFieldName("name");
@@ -65,7 +65,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             s.SerializeFieldName("level");
             ((Action<bool>)s.SerializeBool)(v.level);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("unk60");
             ((Action<float>)s.SerializeF32)(v.unk60);
             s.SerializeFieldName("unk76");
@@ -75,7 +75,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             s.SerializeFieldName("zone_id");
             ((Action<uint>)s.SerializeU32)(v.zoneId);
             s.SerializeFieldName("area_partition");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Nodes.AreaPartition.Converter))(v.areaPartition);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Nodes.AreaPartitionConverter.Converter))(v.areaPartition);
             s.SerializeFieldName("parent");
             ((Action<uint>)s.SerializeU32)(v.parent);
             s.SerializeFieldName("children");
@@ -90,7 +90,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             s.Serialize(Mech3DotNet.Types.Nodes.BoundingBox.Converter)(v.unk116);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.Lod Deserialize(Deserializer d)
+        public static Lod Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -120,7 +120,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.level.Value = d.DeserializeBool();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         break;
                     case "unk60":
                         fields.unk60.Value = d.DeserializeF32();
@@ -135,7 +135,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.zoneId.Value = d.DeserializeU32();
                         break;
                     case "area_partition":
-                        fields.areaPartition.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Nodes.AreaPartition.Converter))();
+                        fields.areaPartition.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Nodes.AreaPartitionConverter.Converter))();
                         break;
                     case "parent":
                         fields.parent.Value = d.DeserializeU32();

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public struct Gravity
     {
-        public static readonly TypeConverter<Gravity> Converter = new TypeConverter<Gravity>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.GravityMode mode;
         public float value;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Anim.Events
             this.mode = mode;
             this.value = value;
         }
+    }
+
+    public static class GravityConverter
+    {
+        public static readonly TypeConverter<Gravity> Converter = new TypeConverter<Gravity>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float> value;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.Gravity v, Serializer s)
+        public static void Serialize(Gravity v, Serializer s)
         {
             s.SerializeStruct("Gravity", 2);
             s.SerializeFieldName("mode");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.value);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.Gravity Deserialize(Deserializer d)
+        public static Gravity Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Vec3> toPos;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.CallObjectConnector v, Serializer s)
+        public static void Serialize(CallObjectConnector v, Serializer s)
         {
             s.SerializeStruct("CallObjectConnector", 4);
             s.SerializeFieldName("node");
@@ -37,10 +37,10 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("to_node");
             ((Action<string>)s.SerializeString)(v.toNode);
             s.SerializeFieldName("to_pos");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.toPos);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.toPos);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.CallObjectConnector Deserialize(Deserializer d)
+        public static CallObjectConnector Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.toNode.Value = d.DeserializeString();
                         break;
                     case "to_pos":
-                        fields.toPos.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.toPos.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("CallObjectConnector", fieldName);

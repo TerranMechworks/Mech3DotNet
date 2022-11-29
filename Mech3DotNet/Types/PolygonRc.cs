@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
             public Field<uint> uvsPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Mesh.Rc.PolygonRc v, Serializer s)
+        public static void Serialize(PolygonRc v, Serializer s)
         {
             s.SerializeStruct("PolygonRc", 10);
             s.SerializeFieldName("vertex_indices");
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
             s.SerializeFieldName("normal_indices");
             s.SerializeRefOption(s.SerializeVec(((Action<uint>)s.SerializeU32)))(v.normalIndices);
             s.SerializeFieldName("uv_coords");
-            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.UvCoord.Converter)))(v.uvCoords);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.UvCoordConverter.Converter)))(v.uvCoords);
             s.SerializeFieldName("texture_index");
             ((Action<uint>)s.SerializeU32)(v.textureIndex);
             s.SerializeFieldName("unk0_flag");
@@ -70,7 +70,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
             ((Action<uint>)s.SerializeU32)(v.uvsPtr);
         }
 
-        public static Mech3DotNet.Types.Gamez.Mesh.Rc.PolygonRc Deserialize(Deserializer d)
+        public static PolygonRc Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -96,7 +96,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
                         fields.normalIndices.Value = d.DeserializeRefOption(d.DeserializeVec(d.DeserializeU32))();
                         break;
                     case "uv_coords":
-                        fields.uvCoords.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.UvCoord.Converter)))();
+                        fields.uvCoords.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.UvCoordConverter.Converter)))();
                         break;
                     case "texture_index":
                         fields.textureIndex.Value = d.DeserializeU32();

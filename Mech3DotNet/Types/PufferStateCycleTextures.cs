@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<string?> texture6;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures v, Serializer s)
+        public static void Serialize(PufferStateCycleTextures v, Serializer s)
         {
             s.SerializeStruct("PufferStateCycleTextures", 6);
             s.SerializeFieldName("texture1");
@@ -50,7 +50,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.texture6);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures Deserialize(Deserializer d)
+        public static PufferStateCycleTextures Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -51,7 +51,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<float?> runtime;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotion v, Serializer s)
+        public static void Serialize(ObjectMotion v, Serializer s)
         {
             s.SerializeStruct("ObjectMotion", 12);
             s.SerializeFieldName("node");
@@ -59,11 +59,11 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("impact_force");
             ((Action<bool>)s.SerializeBool)(v.impactForce);
             s.SerializeFieldName("gravity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Anim.Events.Gravity.Converter))(v.gravity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Anim.Events.GravityConverter.Converter))(v.gravity);
             s.SerializeFieldName("translation_range_min");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Quaternion.Converter))(v.translationRangeMin);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))(v.translationRangeMin);
             s.SerializeFieldName("translation_range_max");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.Quaternion.Converter))(v.translationRangeMax);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))(v.translationRangeMax);
             s.SerializeFieldName("translation");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation.Converter))(v.translation);
             s.SerializeFieldName("forward_rotation");
@@ -80,7 +80,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.runtime);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectMotion Deserialize(Deserializer d)
+        public static ObjectMotion Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -108,13 +108,13 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.impactForce.Value = d.DeserializeBool();
                         break;
                     case "gravity":
-                        fields.gravity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.Gravity.Converter))();
+                        fields.gravity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.GravityConverter.Converter))();
                         break;
                     case "translation_range_min":
-                        fields.translationRangeMin.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Quaternion.Converter))();
+                        fields.translationRangeMin.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))();
                         break;
                     case "translation_range_max":
-                        fields.translationRangeMax.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.Quaternion.Converter))();
+                        fields.translationRangeMax.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))();
                         break;
                     case "translation":
                         fields.translation.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation.Converter))();

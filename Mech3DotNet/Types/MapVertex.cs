@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Zmap
 {
     public struct MapVertex
     {
-        public static readonly TypeConverter<MapVertex> Converter = new TypeConverter<MapVertex>(Deserialize, Serialize);
         public float x;
         public float z;
         public float y;
@@ -16,6 +15,11 @@ namespace Mech3DotNet.Types.Zmap
             this.z = z;
             this.y = y;
         }
+    }
+
+    public static class MapVertexConverter
+    {
+        public static readonly TypeConverter<MapVertex> Converter = new TypeConverter<MapVertex>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -24,7 +28,7 @@ namespace Mech3DotNet.Types.Zmap
             public Field<float> y;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Zmap.MapVertex v, Serializer s)
+        public static void Serialize(MapVertex v, Serializer s)
         {
             s.SerializeStruct("MapVertex", 3);
             s.SerializeFieldName("x");
@@ -35,7 +39,7 @@ namespace Mech3DotNet.Types.Zmap
             ((Action<float>)s.SerializeF32)(v.y);
         }
 
-        public static Mech3DotNet.Types.Zmap.MapVertex Deserialize(Deserializer d)
+        public static MapVertex Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

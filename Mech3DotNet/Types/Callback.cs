@@ -18,14 +18,14 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<uint> value;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.Callback v, Serializer s)
+        public static void Serialize(Callback v, Serializer s)
         {
             s.SerializeStruct("Callback", 1);
             s.SerializeFieldName("value");
             ((Action<uint>)s.SerializeU32)(v.value);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.Callback Deserialize(Deserializer d)
+        public static Callback Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

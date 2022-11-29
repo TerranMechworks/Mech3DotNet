@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Vec3> scale;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectScaleState v, Serializer s)
+        public static void Serialize(ObjectScaleState v, Serializer s)
         {
             s.SerializeStruct("ObjectScaleState", 2);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("scale");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.scale);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.scale);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectScaleState Deserialize(Deserializer d)
+        public static ObjectScaleState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.node.Value = d.DeserializeString();
                         break;
                     case "scale":
-                        fields.scale.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.scale.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("ObjectScaleState", fieldName);

@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         var inner = v.AsByRange();
                         s.SerializeNewTypeVariant("Execution", 0);
-                        s.Serialize(Mech3DotNet.Types.Types.Range.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(inner);
                         break;
                     }
 
@@ -70,7 +70,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("Execution", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Types.Range.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
                         return Execution.ByRange(inner);
                     }
 

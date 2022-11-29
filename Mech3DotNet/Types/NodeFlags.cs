@@ -51,7 +51,7 @@ namespace Mech3DotNet.Types.Nodes
             public Field<bool> unk28;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.NodeFlags v, Serializer s)
+        public static void Serialize(NodeFlags v, Serializer s)
         {
             s.SerializeStruct("NodeFlags", 12);
             s.SerializeFieldName("altitude_surface");
@@ -80,7 +80,7 @@ namespace Mech3DotNet.Types.Nodes
             ((Action<bool>)s.SerializeBool)(v.unk28);
         }
 
-        public static Mech3DotNet.Types.Nodes.NodeFlags Deserialize(Deserializer d)
+        public static NodeFlags Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

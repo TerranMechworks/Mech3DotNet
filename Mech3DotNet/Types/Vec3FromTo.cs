@@ -24,18 +24,18 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Types.Vec3> delta;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.Vec3FromTo v, Serializer s)
+        public static void Serialize(Vec3FromTo v, Serializer s)
         {
             s.SerializeStruct("Vec3FromTo", 3);
             s.SerializeFieldName("from");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.from);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.from);
             s.SerializeFieldName("to");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.to);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.to);
             s.SerializeFieldName("delta");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.delta);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.delta);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.Vec3FromTo Deserialize(Deserializer d)
+        public static Vec3FromTo Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -48,13 +48,13 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "from":
-                        fields.from.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.from.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "to":
-                        fields.to.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.to.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "delta":
-                        fields.delta.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.delta.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("Vec3FromTo", fieldName);

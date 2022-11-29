@@ -57,13 +57,13 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<uint> childrenArrayPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.World v, Serializer s)
+        public static void Serialize(World v, Serializer s)
         {
             s.SerializeStruct("World", 14);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("area");
-            s.Serialize(Mech3DotNet.Types.Nodes.Area.Converter)(v.area);
+            s.Serialize(Mech3DotNet.Types.Nodes.AreaConverter.Converter)(v.area);
             s.SerializeFieldName("partitions");
             s.SerializeVec(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Nodes.Partition.Converter)))(v.partitions);
             s.SerializeFieldName("area_partition_x_count");
@@ -90,7 +90,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             ((Action<uint>)s.SerializeU32)(v.childrenArrayPtr);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.World Deserialize(Deserializer d)
+        public static World Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -117,7 +117,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "area":
-                        fields.area.Value = d.Deserialize(Mech3DotNet.Types.Nodes.Area.Converter)();
+                        fields.area.Value = d.Deserialize(Mech3DotNet.Types.Nodes.AreaConverter.Converter)();
                         break;
                     case "partitions":
                         fields.partitions.Value = d.DeserializeVec(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Nodes.Partition.Converter)))();

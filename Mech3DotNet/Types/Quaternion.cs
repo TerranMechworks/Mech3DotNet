@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Types
 {
     public struct Quaternion
     {
-        public static readonly TypeConverter<Quaternion> Converter = new TypeConverter<Quaternion>(Deserialize, Serialize);
         public float x;
         public float y;
         public float z;
@@ -18,6 +17,11 @@ namespace Mech3DotNet.Types.Types
             this.z = z;
             this.w = w;
         }
+    }
+
+    public static class QuaternionConverter
+    {
+        public static readonly TypeConverter<Quaternion> Converter = new TypeConverter<Quaternion>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -27,7 +31,7 @@ namespace Mech3DotNet.Types.Types
             public Field<float> w;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Types.Quaternion v, Serializer s)
+        public static void Serialize(Quaternion v, Serializer s)
         {
             s.SerializeStruct("Quaternion", 4);
             s.SerializeFieldName("x");
@@ -40,7 +44,7 @@ namespace Mech3DotNet.Types.Types
             ((Action<float>)s.SerializeF32)(v.w);
         }
 
-        public static Mech3DotNet.Types.Types.Quaternion Deserialize(Deserializer d)
+        public static Quaternion Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

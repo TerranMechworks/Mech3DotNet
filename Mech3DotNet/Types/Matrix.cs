@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Types
 {
     public struct Matrix
     {
-        public static readonly TypeConverter<Matrix> Converter = new TypeConverter<Matrix>(Deserialize, Serialize);
         public float a;
         public float b;
         public float c;
@@ -28,6 +27,11 @@ namespace Mech3DotNet.Types.Types
             this.h = h;
             this.i = i;
         }
+    }
+
+    public static class MatrixConverter
+    {
+        public static readonly TypeConverter<Matrix> Converter = new TypeConverter<Matrix>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -42,7 +46,7 @@ namespace Mech3DotNet.Types.Types
             public Field<float> i;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Types.Matrix v, Serializer s)
+        public static void Serialize(Matrix v, Serializer s)
         {
             s.SerializeStruct("Matrix", 9);
             s.SerializeFieldName("a");
@@ -65,7 +69,7 @@ namespace Mech3DotNet.Types.Types
             ((Action<float>)s.SerializeF32)(v.i);
         }
 
-        public static Mech3DotNet.Types.Types.Matrix Deserialize(Deserializer d)
+        public static Matrix Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

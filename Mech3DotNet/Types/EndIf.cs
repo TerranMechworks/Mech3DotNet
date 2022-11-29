@@ -15,12 +15,12 @@ namespace Mech3DotNet.Types.Anim.Events
         {
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.EndIf v, Serializer s)
+        public static void Serialize(EndIf v, Serializer s)
         {
             s.SerializeStruct("EndIf", 0);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.EndIf Deserialize(Deserializer d)
+        public static EndIf Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

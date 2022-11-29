@@ -21,16 +21,16 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<byte[]> unk;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.TranslateData v, Serializer s)
+        public static void Serialize(TranslateData v, Serializer s)
         {
             s.SerializeStruct("TranslateData", 2);
             s.SerializeFieldName("value");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3.Converter)(v.value);
+            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.value);
             s.SerializeFieldName("unk");
             ((Action<byte[]>)s.SerializeBytes)(v.unk);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.TranslateData Deserialize(Deserializer d)
+        public static TranslateData Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -42,7 +42,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "value":
-                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3.Converter)();
+                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
                         break;
                     case "unk":
                         fields.unk.Value = d.DeserializeBytes();

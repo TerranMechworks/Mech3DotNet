@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Nodes
 {
     public struct AreaPartition
     {
-        public static readonly TypeConverter<AreaPartition> Converter = new TypeConverter<AreaPartition>(Deserialize, Serialize);
         public int x;
         public int y;
 
@@ -14,6 +13,11 @@ namespace Mech3DotNet.Types.Nodes
             this.x = x;
             this.y = y;
         }
+    }
+
+    public static class AreaPartitionConverter
+    {
+        public static readonly TypeConverter<AreaPartition> Converter = new TypeConverter<AreaPartition>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -21,7 +25,7 @@ namespace Mech3DotNet.Types.Nodes
             public Field<int> y;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.AreaPartition v, Serializer s)
+        public static void Serialize(AreaPartition v, Serializer s)
         {
             s.SerializeStruct("AreaPartition", 2);
             s.SerializeFieldName("x");
@@ -30,7 +34,7 @@ namespace Mech3DotNet.Types.Nodes
             ((Action<int>)s.SerializeI32)(v.y);
         }
 
-        public static Mech3DotNet.Types.Nodes.AreaPartition Deserialize(Deserializer d)
+        public static AreaPartition Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

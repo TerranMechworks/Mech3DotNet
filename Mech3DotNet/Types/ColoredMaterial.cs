@@ -24,18 +24,18 @@ namespace Mech3DotNet.Types.Gamez.Materials
             public Field<float> specular;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Gamez.Materials.ColoredMaterial v, Serializer s)
+        public static void Serialize(ColoredMaterial v, Serializer s)
         {
             s.SerializeStruct("ColoredMaterial", 3);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Types.Color.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("alpha");
             ((Action<byte>)s.SerializeU8)(v.alpha);
             s.SerializeFieldName("specular");
             ((Action<float>)s.SerializeF32)(v.specular);
         }
 
-        public static Mech3DotNet.Types.Gamez.Materials.ColoredMaterial Deserialize(Deserializer d)
+        public static ColoredMaterial Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -48,7 +48,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 switch (fieldName)
                 {
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.Color.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
                         break;
                     case "alpha":
                         fields.alpha.Value = d.DeserializeU8();

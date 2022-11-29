@@ -27,20 +27,20 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<bool> fudgeAlpha;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor v, Serializer s)
+        public static void Serialize(FrameBufferEffectColor v, Serializer s)
         {
             s.SerializeStruct("FrameBufferEffectColor", 4);
             s.SerializeFieldName("from");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.Rgba.Converter)(v.from);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.RgbaConverter.Converter)(v.from);
             s.SerializeFieldName("to");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.Rgba.Converter)(v.to);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.RgbaConverter.Converter)(v.to);
             s.SerializeFieldName("runtime");
             ((Action<float>)s.SerializeF32)(v.runtime);
             s.SerializeFieldName("fudge_alpha");
             ((Action<bool>)s.SerializeBool)(v.fudgeAlpha);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor Deserialize(Deserializer d)
+        public static FrameBufferEffectColor Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -54,10 +54,10 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "from":
-                        fields.from.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.Rgba.Converter)();
+                        fields.from.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.RgbaConverter.Converter)();
                         break;
                     case "to":
-                        fields.to.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.Rgba.Converter)();
+                        fields.to.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.RgbaConverter.Converter)();
                         break;
                     case "runtime":
                         fields.runtime.Value = d.DeserializeF32();

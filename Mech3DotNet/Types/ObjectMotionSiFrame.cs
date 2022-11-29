@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Anim.Events.ScaleData?> scale;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame v, Serializer s)
+        public static void Serialize(ObjectMotionSiFrame v, Serializer s)
         {
             s.SerializeStruct("ObjectMotionSiFrame", 5);
             s.SerializeFieldName("start_time");
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ScaleData.Converter))(v.scale);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame Deserialize(Deserializer d)
+        public static ObjectMotionSiFrame Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

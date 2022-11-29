@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<Mech3DotNet.Types.Anim.Events.CallAnimationParameters> parameters;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.CallAnimation v, Serializer s)
+        public static void Serialize(CallAnimation v, Serializer s)
         {
             s.SerializeStruct("CallAnimation", 3);
             s.SerializeFieldName("name");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationParameters.Converter)(v.parameters);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.CallAnimation Deserialize(Deserializer d)
+        public static CallAnimation Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Types
 {
     public struct Color
     {
-        public static readonly TypeConverter<Color> Converter = new TypeConverter<Color>(Deserialize, Serialize);
         public float r;
         public float g;
         public float b;
@@ -16,6 +15,11 @@ namespace Mech3DotNet.Types.Types
             this.g = g;
             this.b = b;
         }
+    }
+
+    public static class ColorConverter
+    {
+        public static readonly TypeConverter<Color> Converter = new TypeConverter<Color>(Deserialize, Serialize);
 
         private struct Fields
         {
@@ -24,7 +28,7 @@ namespace Mech3DotNet.Types.Types
             public Field<float> b;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Types.Color v, Serializer s)
+        public static void Serialize(Color v, Serializer s)
         {
             s.SerializeStruct("Color", 3);
             s.SerializeFieldName("r");
@@ -35,7 +39,7 @@ namespace Mech3DotNet.Types.Types
             ((Action<float>)s.SerializeF32)(v.b);
         }
 
-        public static Mech3DotNet.Types.Types.Color Deserialize(Deserializer d)
+        public static Color Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

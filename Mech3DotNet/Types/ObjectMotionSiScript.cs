@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame>> frames;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript v, Serializer s)
+        public static void Serialize(ObjectMotionSiScript v, Serializer s)
         {
             s.SerializeStruct("ObjectMotionSiScript", 2);
             s.SerializeFieldName("node");
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame.Converter))(v.frames);
         }
 
-        public static Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript Deserialize(Deserializer d)
+        public static ObjectMotionSiScript Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

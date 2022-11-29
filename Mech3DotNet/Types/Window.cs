@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             public Field<uint> dataPtr;
         }
 
-        public static void Serialize(Mech3DotNet.Types.Nodes.Mw.Window v, Serializer s)
+        public static void Serialize(Window v, Serializer s)
         {
             s.SerializeStruct("Window", 4);
             s.SerializeFieldName("name");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
             ((Action<uint>)s.SerializeU32)(v.dataPtr);
         }
 
-        public static Mech3DotNet.Types.Nodes.Mw.Window Deserialize(Deserializer d)
+        public static Window Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {

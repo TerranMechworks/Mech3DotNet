@@ -20,7 +20,7 @@ namespace RoundtripTests
             consoleTracer.Name = "Roundtrip";
             Trace.Listeners.Add(consoleTracer);
 
-            string basePath = args[0];
+            var basePath = args[0];
 
             var tester = new Tester(basePath);
             Console.WriteLine("{0}", tester.gameType);

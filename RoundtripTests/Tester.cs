@@ -122,7 +122,11 @@ namespace RoundtripTests
                 Console.WriteLine(inputPath);
                 try
                 {
-                    Mech3DotNet.Mech3Msg.Read(inputPath, gameType);
+                    var messages = Mech3DotNet.Mech3Msg.Read(inputPath, gameType);
+                    if (messages.languageId < 1000)
+                        throw new Exception($"Lang ID {messages.languageId}");
+                    if (messages.entries.Count < 50)
+                        throw new Exception($"Count {messages.entries.Count}");
                 }
                 catch (Exception e)
                 {

@@ -6,10 +6,17 @@ Obviously, this is an unofficial fan effort and not connected to the developers,
 
 ## Changelog
 
-### [0.6.0] - unreleased
+### [0.6.0-rc1] - unreleased
 
 * Breaking changes!
-* Tracks [mech3ax v0.6.0](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.0)
+* Tracks [mech3ax v0.6.0-rc2](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.0-rc2)
+* Migrated from System.Text.Json to custom data exchange format - no more dependencies!
+* Re-homed all API data types from `Mech3DotNet.Json` to `Mech3DotNet.Types`
+
+### [0.6.0-rc1] - 2022-11-20
+
+* Breaking changes!
+* Tracks [mech3ax v0.6.0-rc1](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.0-rc1)
 * Migrated from Newtonsoft.Json to System.Text.Json
 * Auto-generated C# data structures from Rust structures
 * Support `anim.zbd` reading and writing
@@ -59,7 +66,7 @@ v1.2-us-patched/
 The tests will recurse into the specified folder, and execute the roundtrip tests for all matching files. So:
 
 ```shell
-dotnet run --project RoundtripTests "$HOME/Documents/mw3/"
+dotnet run --project RoundtripTests "$HOME/Documents/mw3/v1.0-us-patched/"
 ```
 
 will run the tests against both versions.

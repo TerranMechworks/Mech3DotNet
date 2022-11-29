@@ -59,7 +59,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
 
         public static void Serialize(PolygonMw v, Serializer s)
         {
-            s.SerializeStruct("PolygonMw", 14);
+            s.SerializeStruct(14);
             s.SerializeFieldName("vertex_indices");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.vertexIndices);
             s.SerializeFieldName("vertex_colors");
@@ -109,7 +109,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
                 colorsPtr = new Field<uint>(),
                 unkPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PolygonMw"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

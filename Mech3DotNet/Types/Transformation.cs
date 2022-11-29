@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Nodes
 
         public static void Serialize(Transformation v, Serializer s)
         {
-            s.SerializeStruct("Transformation", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("rotation");
             s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.rotation);
             s.SerializeFieldName("translation");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Nodes
                 translation = new Field<Mech3DotNet.Types.Types.Vec3>(),
                 matrix = new Field<Mech3DotNet.Types.Types.Matrix?>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Transformation"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

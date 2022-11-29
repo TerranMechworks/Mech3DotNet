@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
 
         public static void Serialize(PolygonTextureNg v, Serializer s)
         {
-            s.SerializeStruct("PolygonTextureNg", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("texture_index");
             ((Action<uint>)s.SerializeU32)(v.textureIndex);
             s.SerializeFieldName("uv_coords");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                 textureIndex = new Field<uint>(),
                 uvCoords = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.UvCoord>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PolygonTextureNg"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

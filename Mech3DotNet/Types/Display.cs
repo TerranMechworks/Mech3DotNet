@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(Display v, Serializer s)
         {
-            s.SerializeStruct("Display", 5);
+            s.SerializeStruct(5);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("resolution_x");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 clearColor = new Field<Mech3DotNet.Types.Types.Color>(),
                 dataPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Display"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

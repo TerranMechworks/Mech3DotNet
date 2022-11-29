@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(LightAnimation v, Serializer s)
         {
-            s.SerializeStruct("LightAnimation", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("range");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 color = new Field<Mech3DotNet.Types.Types.Color>(),
                 runtime = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("LightAnimation"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

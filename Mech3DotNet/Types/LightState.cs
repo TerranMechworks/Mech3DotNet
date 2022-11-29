@@ -50,7 +50,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(LightState v, Serializer s)
         {
-            s.SerializeStruct("LightState", 11);
+            s.SerializeStruct(11);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("active_state");
@@ -91,7 +91,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 ambient = new Field<float?>(null),
                 diffuse = new Field<float?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("LightState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

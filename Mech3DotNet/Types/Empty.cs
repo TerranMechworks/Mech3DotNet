@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(Empty v, Serializer s)
         {
-            s.SerializeStruct("Empty", 8);
+            s.SerializeStruct(8);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("flags");
@@ -73,7 +73,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 unk164 = new Field<Mech3DotNet.Types.Nodes.BoundingBox>(),
                 parent = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Empty"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

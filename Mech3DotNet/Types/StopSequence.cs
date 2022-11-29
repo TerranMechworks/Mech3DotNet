@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(StopSequence v, Serializer s)
         {
-            s.SerializeStruct("StopSequence", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
         }
@@ -31,7 +31,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 name = new Field<string>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("StopSequence"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

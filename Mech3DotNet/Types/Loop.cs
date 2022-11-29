@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(Loop v, Serializer s)
         {
-            s.SerializeStruct("Loop", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("start");
             ((Action<int>)s.SerializeI32)(v.start);
             s.SerializeFieldName("loop_count");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 start = new Field<int>(),
                 loopCount = new Field<int>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Loop"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

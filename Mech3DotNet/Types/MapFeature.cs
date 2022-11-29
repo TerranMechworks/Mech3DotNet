@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Zmap
 
         public static void Serialize(MapFeature v, Serializer s)
         {
-            s.SerializeStruct("MapFeature", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("color");
             s.Serialize(Mech3DotNet.Types.Zmap.MapColorConverter.Converter)(v.color);
             s.SerializeFieldName("vertices");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Zmap
                 vertices = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapVertex>>(),
                 objective = new Field<int>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MapFeature"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

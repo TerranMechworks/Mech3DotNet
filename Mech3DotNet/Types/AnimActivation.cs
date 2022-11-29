@@ -50,7 +50,7 @@ namespace Mech3DotNet.Types.Anim
                 Variants.OnStartup => 4,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("AnimActivation", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static AnimActivation Deserialize(Deserializer d)

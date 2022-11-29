@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
 
         public static void Serialize(MeshTexture v, Serializer s)
         {
-            s.SerializeStruct("MeshTexture", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("texture_index");
             ((Action<uint>)s.SerializeU32)(v.textureIndex);
             s.SerializeFieldName("polygon_usage_count");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                 polygonUsageCount = new Field<uint>(),
                 unkPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MeshTexture"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

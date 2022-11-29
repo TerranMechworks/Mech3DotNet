@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(Window v, Serializer s)
         {
-            s.SerializeStruct("Window", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("resolution_x");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 resolutionY = new Field<uint>(),
                 dataPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Window"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

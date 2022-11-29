@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ForwardRotationTime v, Serializer s)
         {
-            s.SerializeStruct("ForwardRotationTime", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("v1");
             ((Action<float>)s.SerializeF32)(v.v1);
             s.SerializeFieldName("v2");
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 v1 = new Field<float>(),
                 v2 = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ForwardRotationTime"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

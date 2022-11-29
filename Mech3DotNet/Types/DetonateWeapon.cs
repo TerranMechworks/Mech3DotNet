@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(DetonateWeapon v, Serializer s)
         {
-            s.SerializeStruct("DetonateWeapon", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("at_node");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 name = new Field<string>(),
                 atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("DetonateWeapon"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

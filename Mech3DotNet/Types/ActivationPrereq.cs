@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Anim
                 case Variants.Animation: // 0
                     {
                         var inner = v.AsAnimation();
-                        s.SerializeNewTypeVariant("ActivationPrereq", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Anim.PrereqAnimationConverter.Converter)(inner);
                         break;
                     }
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Anim
                 case Variants.Parent: // 1
                     {
                         var inner = v.AsParent();
-                        s.SerializeNewTypeVariant("ActivationPrereq", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Anim.PrereqParentConverter.Converter)(inner);
                         break;
                     }
@@ -57,7 +57,7 @@ namespace Mech3DotNet.Types.Anim
                 case Variants.Object: // 2
                     {
                         var inner = v.AsObject();
-                        s.SerializeNewTypeVariant("ActivationPrereq", 2);
+                        s.SerializeNewTypeVariant(2);
                         s.Serialize(Mech3DotNet.Types.Anim.PrereqObjectConverter.Converter)(inner);
                         break;
                     }
@@ -69,7 +69,7 @@ namespace Mech3DotNet.Types.Anim
 
         private static ActivationPrereq Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("ActivationPrereq");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // Animation

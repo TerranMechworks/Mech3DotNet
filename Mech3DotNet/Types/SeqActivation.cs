@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim
                 Variants.OnCall => 1,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("SeqActivation", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static SeqActivation Deserialize(Deserializer d)

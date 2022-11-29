@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
         public static void Serialize(ColoredMaterial v, Serializer s)
         {
-            s.SerializeStruct("ColoredMaterial", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("color");
             s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("alpha");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 alpha = new Field<byte>(),
                 specular = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ColoredMaterial"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

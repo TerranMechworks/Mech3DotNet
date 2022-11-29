@@ -26,13 +26,6 @@ namespace Mech3DotNet.Exchange
             stream.Write(BitConverter.GetBytes(v));
         }
 
-        private void WriteStringRaw(string s)
-        {
-            var v = System.Text.Encoding.UTF8.GetBytes(s);
-            WriteUsize((ulong)v.LongLength);
-            stream.Write(v);
-        }
-
         public void WriteI8(sbyte v)
         {
             WriteType(TypeMap.I8);
@@ -83,7 +76,9 @@ namespace Mech3DotNet.Exchange
         public void WriteStr(string v)
         {
             WriteType(TypeMap.Str);
-            WriteStringRaw(v);
+            var b = System.Text.Encoding.UTF8.GetBytes(v);
+            WriteUsize((ulong)b.LongLength);
+            stream.Write(b);
         }
 
         public void WriteBytes(byte[] v)
@@ -109,30 +104,22 @@ namespace Mech3DotNet.Exchange
             WriteUsize(len);
         }
 
-        public void WriteStruct(string name, ulong len)
+        public void WriteStruct(ulong len)
         {
             WriteType(TypeMap.Struct);
-            WriteStringRaw(name);
             WriteUsize(len);
         }
 
-        private void WriteEnumVariant(uint variantIndex)
+        public void WriteEnumUnit(uint variantIndex)
         {
+            WriteType(TypeMap.EnumUnit);
             stream.Write(BitConverter.GetBytes(variantIndex));
         }
 
-        public void WriteEnumUnit(string name, uint variantIndex)
-        {
-            WriteType(TypeMap.EnumUnit);
-            WriteStringRaw(name);
-            WriteEnumVariant(variantIndex);
-        }
-
-        public void WriteEnumNewType(string name, uint variantIndex)
+        public void WriteEnumNewType(uint variantIndex)
         {
             WriteType(TypeMap.EnumNewType);
-            WriteStringRaw(name);
-            WriteEnumVariant(variantIndex);
+            stream.Write(BitConverter.GetBytes(variantIndex));
         }
     }
 }

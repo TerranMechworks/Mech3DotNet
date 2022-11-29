@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
 
         public static void Serialize(PolygonRc v, Serializer s)
         {
-            s.SerializeStruct("PolygonRc", 10);
+            s.SerializeStruct(10);
             s.SerializeFieldName("vertex_indices");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.vertexIndices);
             s.SerializeFieldName("normal_indices");
@@ -85,7 +85,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
                 normalsPtr = new Field<uint>(),
                 uvsPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PolygonRc"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

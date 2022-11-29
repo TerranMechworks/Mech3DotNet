@@ -36,7 +36,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
                 case Variants.Lod: // 0
                     {
                         var inner = v.AsLod();
-                        s.SerializeNewTypeVariant("NodePm", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Nodes.Pm.LodPm.Converter)(inner);
                         break;
                     }
@@ -44,7 +44,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
                 case Variants.Object3d: // 1
                     {
                         var inner = v.AsObject3d();
-                        s.SerializeNewTypeVariant("NodePm", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Nodes.Pm.Object3dPm.Converter)(inner);
                         break;
                     }
@@ -56,7 +56,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
 
         private static NodePm Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("NodePm");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // Lod

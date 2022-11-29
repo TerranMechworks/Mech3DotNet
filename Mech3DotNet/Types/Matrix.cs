@@ -48,7 +48,7 @@ namespace Mech3DotNet.Types.Types
 
         public static void Serialize(Matrix v, Serializer s)
         {
-            s.SerializeStruct("Matrix", 9);
+            s.SerializeStruct(9);
             s.SerializeFieldName("a");
             ((Action<float>)s.SerializeF32)(v.a);
             s.SerializeFieldName("b");
@@ -83,7 +83,7 @@ namespace Mech3DotNet.Types.Types
                 h = new Field<float>(),
                 i = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Matrix"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

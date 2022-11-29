@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(AnimationLodCond v, Serializer s)
         {
-            s.SerializeStruct("AnimationLodCond", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("value");
             ((Action<uint>)s.SerializeU32)(v.value);
         }
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 value = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("AnimationLodCond"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

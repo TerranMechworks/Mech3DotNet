@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectActiveState v, Serializer s)
         {
-            s.SerializeStruct("ObjectActiveState", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("state");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 node = new Field<string>(),
                 state = new Field<bool>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectActiveState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

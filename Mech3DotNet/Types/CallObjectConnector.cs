@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(CallObjectConnector v, Serializer s)
         {
-            s.SerializeStruct("CallObjectConnector", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("from_node");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 toNode = new Field<string>(),
                 toPos = new Field<Mech3DotNet.Types.Types.Vec3>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("CallObjectConnector"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -59,7 +59,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(Lod v, Serializer s)
         {
-            s.SerializeStruct("Lod", 14);
+            s.SerializeStruct(14);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("level");
@@ -109,7 +109,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 childrenArrayPtr = new Field<uint>(),
                 unk116 = new Field<Mech3DotNet.Types.Nodes.BoundingBox>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Lod"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

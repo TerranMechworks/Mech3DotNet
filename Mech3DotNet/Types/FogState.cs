@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(FogState v, Serializer s)
         {
-            s.SerializeStruct("FogState", 5);
+            s.SerializeStruct(5);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("fog_type");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 altitude = new Field<Mech3DotNet.Types.Types.Range>(),
                 range = new Field<Mech3DotNet.Types.Types.Range>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("FogState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectOpacityFromTo v, Serializer s)
         {
-            s.SerializeStruct("ObjectOpacityFromTo", 5);
+            s.SerializeStruct(5);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("opacity_from");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 runtime = new Field<float>(),
                 fudge = new Field<bool>(false),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectOpacityFromTo"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

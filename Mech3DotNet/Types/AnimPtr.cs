@@ -56,7 +56,7 @@ namespace Mech3DotNet.Types.Anim
 
         public static void Serialize(AnimPtr v, Serializer s)
         {
-            s.SerializeStruct("AnimPtr", 13);
+            s.SerializeStruct(13);
             s.SerializeFieldName("file_name");
             ((Action<string>)s.SerializeString)(v.fileName);
             s.SerializeFieldName("anim_ptr");
@@ -103,7 +103,7 @@ namespace Mech3DotNet.Types.Anim
                 resetStatePtr = new Field<uint>(),
                 seqDefsPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("AnimPtr"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

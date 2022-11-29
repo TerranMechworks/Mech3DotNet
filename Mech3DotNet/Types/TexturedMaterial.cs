@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
         public static void Serialize(TexturedMaterial v, Serializer s)
         {
-            s.SerializeStruct("TexturedMaterial", 5);
+            s.SerializeStruct(5);
             s.SerializeFieldName("texture");
             ((Action<string>)s.SerializeString)(v.texture);
             s.SerializeFieldName("pointer");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 specular = new Field<float>(),
                 flag = new Field<bool>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("TexturedMaterial"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

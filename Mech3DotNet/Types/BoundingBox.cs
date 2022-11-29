@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Nodes
 
         public static void Serialize(BoundingBox v, Serializer s)
         {
-            s.SerializeStruct("BoundingBox", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("a");
             s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.a);
             s.SerializeFieldName("b");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Nodes
                 a = new Field<Mech3DotNet.Types.Types.Vec3>(),
                 b = new Field<Mech3DotNet.Types.Types.Vec3>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("BoundingBox"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

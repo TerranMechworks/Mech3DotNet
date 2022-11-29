@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 Variants.Distance => 2,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("IntervalType", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static IntervalType Deserialize(Deserializer d)

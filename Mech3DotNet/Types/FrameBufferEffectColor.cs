@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(FrameBufferEffectColor v, Serializer s)
         {
-            s.SerializeStruct("FrameBufferEffectColor", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("from");
             s.Serialize(Mech3DotNet.Types.Anim.Events.RgbaConverter.Converter)(v.from);
             s.SerializeFieldName("to");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 runtime = new Field<float>(),
                 fudgeAlpha = new Field<bool>(false),
             };
-            foreach (var fieldName in d.DeserializeStruct("FrameBufferEffectColor"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

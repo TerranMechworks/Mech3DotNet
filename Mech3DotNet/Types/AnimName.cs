@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Anim
 
         public static void Serialize(AnimName v, Serializer s)
         {
-            s.SerializeStruct("AnimName", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("pad");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Anim
                 pad = new Field<byte[]>(),
                 unknown = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("AnimName"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

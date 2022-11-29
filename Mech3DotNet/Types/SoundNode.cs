@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(SoundNode v, Serializer s)
         {
-            s.SerializeStruct("SoundNode", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("active_state");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 activeState = new Field<bool>(),
                 atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("SoundNode"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

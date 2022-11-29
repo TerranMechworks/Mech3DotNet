@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Types
 
         public static void Serialize(Vec3 v, Serializer s)
         {
-            s.SerializeStruct("Vec3", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("x");
             ((Action<float>)s.SerializeF32)(v.x);
             s.SerializeFieldName("y");
@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Types
                 y = new Field<float>(),
                 z = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Vec3"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

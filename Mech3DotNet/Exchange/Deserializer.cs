@@ -84,9 +84,9 @@ namespace Mech3DotNet.Exchange
             return () => (T)DeserializeGeneric(type);
         }
 
-        public IEnumerable<string> DeserializeStruct(string name)
+        public IEnumerable<string> DeserializeStruct()
         {
-            var len = r.ReadStruct(name);
+            var len = r.ReadStruct();
             for (ulong i = 0; i < len; i++)
             {
                 var fieldName = r.ReadStr();
@@ -94,11 +94,11 @@ namespace Mech3DotNet.Exchange
             }
         }
 
-        public (EnumType, uint) DeserializeEnum(string name) => r.ReadEnum(name);
+        public (EnumType, uint) DeserializeEnum() => r.ReadEnum();
 
         public uint DeserializeUnitVariant(string name)
         {
-            var (enumType, variantIndex) = r.ReadEnum(name);
+            var (enumType, variantIndex) = r.ReadEnum();
             if (enumType != EnumType.Unit)
                 throw new InvalidVariantException(name, EnumType.Unit, enumType);
             return variantIndex;

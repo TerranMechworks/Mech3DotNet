@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Zmap
 
         public static void Serialize(MapColor v, Serializer s)
         {
-            s.SerializeStruct("MapColor", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("r");
             ((Action<byte>)s.SerializeU8)(v.r);
             s.SerializeFieldName("g");
@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Zmap
                 g = new Field<byte>(),
                 b = new Field<byte>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MapColor"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

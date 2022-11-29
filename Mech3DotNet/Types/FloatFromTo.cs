@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(FloatFromTo v, Serializer s)
         {
-            s.SerializeStruct("FloatFromTo", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("from");
             ((Action<float>)s.SerializeF32)(v.from);
             s.SerializeFieldName("to");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 to = new Field<float>(),
                 delta = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("FloatFromTo"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectOpacityState v, Serializer s)
         {
-            s.SerializeStruct("ObjectOpacityState", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("is_set");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 state = new Field<bool>(),
                 opacity = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectOpacityState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

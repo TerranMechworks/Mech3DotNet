@@ -59,7 +59,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(World v, Serializer s)
         {
-            s.SerializeStruct("World", 14);
+            s.SerializeStruct(14);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("area");
@@ -109,7 +109,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 dataPtr = new Field<uint>(),
                 childrenArrayPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("World"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(Callback v, Serializer s)
         {
-            s.SerializeStruct("Callback", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("value");
             ((Action<uint>)s.SerializeU32)(v.value);
         }
@@ -31,7 +31,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 value = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Callback"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

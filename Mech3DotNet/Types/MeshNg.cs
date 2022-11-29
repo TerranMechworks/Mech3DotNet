@@ -83,7 +83,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
 
         public static void Serialize(MeshNg v, Serializer s)
         {
-            s.SerializeStruct("MeshNg", 22);
+            s.SerializeStruct(22);
             s.SerializeFieldName("vertices");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.vertices);
             s.SerializeFieldName("normals");
@@ -157,7 +157,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                 unk80 = new Field<float>(),
                 unk84 = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MeshNg"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

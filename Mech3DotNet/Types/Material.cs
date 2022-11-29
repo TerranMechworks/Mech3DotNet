@@ -36,7 +36,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 case Variants.Textured: // 0
                     {
                         var inner = v.AsTextured();
-                        s.SerializeNewTypeVariant("Material", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Gamez.Materials.TexturedMaterial.Converter)(inner);
                         break;
                     }
@@ -44,7 +44,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 case Variants.Colored: // 1
                     {
                         var inner = v.AsColored();
-                        s.SerializeNewTypeVariant("Material", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Gamez.Materials.ColoredMaterial.Converter)(inner);
                         break;
                     }
@@ -56,7 +56,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
         private static Material Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("Material");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // Textured

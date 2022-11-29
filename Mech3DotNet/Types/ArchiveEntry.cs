@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Archive
 
         public static void Serialize(ArchiveEntry v, Serializer s)
         {
-            s.SerializeStruct("ArchiveEntry", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("rename");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Archive
                 rename = new Field<string?>(null),
                 garbage = new Field<byte[]>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ArchiveEntry"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

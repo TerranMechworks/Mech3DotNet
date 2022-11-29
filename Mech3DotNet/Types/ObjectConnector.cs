@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectConnector v, Serializer s)
         {
-            s.SerializeStruct("ObjectConnector", 6);
+            s.SerializeStruct(6);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("from_node");
@@ -61,7 +61,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 toPos = new Field<Mech3DotNet.Types.Types.Vec3?>(null),
                 maxLength = new Field<float?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectConnector"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

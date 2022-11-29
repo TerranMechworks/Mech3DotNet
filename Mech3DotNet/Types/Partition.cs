@@ -38,7 +38,7 @@ namespace Mech3DotNet.Types.Nodes
 
         public static void Serialize(Partition v, Serializer s)
         {
-            s.SerializeStruct("Partition", 7);
+            s.SerializeStruct(7);
             s.SerializeFieldName("x");
             ((Action<int>)s.SerializeI32)(v.x);
             s.SerializeFieldName("y");
@@ -67,7 +67,7 @@ namespace Mech3DotNet.Types.Nodes
                 nodes = new Field<System.Collections.Generic.List<uint>>(),
                 ptr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Partition"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

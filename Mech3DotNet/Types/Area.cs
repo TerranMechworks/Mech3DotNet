@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Nodes
 
         public static void Serialize(Area v, Serializer s)
         {
-            s.SerializeStruct("Area", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("left");
             ((Action<int>)s.SerializeI32)(v.left);
             s.SerializeFieldName("top");
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Nodes
                 right = new Field<int>(),
                 bottom = new Field<int>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Area"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

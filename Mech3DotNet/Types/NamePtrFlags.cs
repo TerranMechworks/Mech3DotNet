@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim
 
         public static void Serialize(NamePtrFlags v, Serializer s)
         {
-            s.SerializeStruct("NamePtrFlags", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("pointer");
@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Anim
                 pointer = new Field<uint>(),
                 flags = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("NamePtrFlags"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

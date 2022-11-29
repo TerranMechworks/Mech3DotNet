@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 Variants.NoAltitude => 2,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("GravityMode", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static GravityMode Deserialize(Deserializer d)

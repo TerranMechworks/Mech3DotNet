@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectMotionSiScript v, Serializer s)
         {
-            s.SerializeStruct("ObjectMotionSiScript", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("frames");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 node = new Field<string>(),
                 frames = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectMotionSiScript"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

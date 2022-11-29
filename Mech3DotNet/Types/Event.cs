@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(Event v, Serializer s)
         {
-            s.SerializeStruct("Event", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("data");
             s.Serialize(Mech3DotNet.Types.Anim.Events.EventData.Converter)(v.data);
             s.SerializeFieldName("start");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 data = new Field<Mech3DotNet.Types.Anim.Events.EventData>(),
                 start = new Field<Mech3DotNet.Types.Anim.Events.EventStart?>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Event"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -60,7 +60,7 @@ namespace Mech3DotNet.Types.Image
                 Variants.Unk8 => 6,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("TextureStretch", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static TextureStretch Deserialize(Deserializer d)

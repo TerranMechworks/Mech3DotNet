@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(RotateData v, Serializer s)
         {
-            s.SerializeStruct("RotateData", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("value");
             s.Serialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter)(v.value);
             s.SerializeFieldName("unk");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 value = new Field<Mech3DotNet.Types.Types.Quaternion>(),
                 unk = new Field<byte[]>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("RotateData"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

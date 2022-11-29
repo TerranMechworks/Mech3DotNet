@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(PlayerFirstPersonCond v, Serializer s)
         {
-            s.SerializeStruct("PlayerFirstPersonCond", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("value");
             ((Action<bool>)s.SerializeBool)(v.value);
         }
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 value = new Field<bool>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PlayerFirstPersonCond"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

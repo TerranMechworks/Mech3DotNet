@@ -68,7 +68,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
 
         public static void Serialize(MeshRc v, Serializer s)
         {
-            s.SerializeStruct("MeshRc", 17);
+            s.SerializeStruct(17);
             s.SerializeFieldName("vertices");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.vertices);
             s.SerializeFieldName("normals");
@@ -127,7 +127,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Rc
                 unk76 = new Field<float>(),
                 unk80 = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MeshRc"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

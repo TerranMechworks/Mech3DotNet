@@ -191,7 +191,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Sound: // 0
                     {
                         var inner = v.AsSound();
-                        s.SerializeNewTypeVariant("EventData", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.Sound.Converter)(inner);
                         break;
                     }
@@ -199,7 +199,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.SoundNode: // 1
                     {
                         var inner = v.AsSoundNode();
-                        s.SerializeNewTypeVariant("EventData", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.SoundNode.Converter)(inner);
                         break;
                     }
@@ -207,7 +207,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.LightState: // 2
                     {
                         var inner = v.AsLightState();
-                        s.SerializeNewTypeVariant("EventData", 2);
+                        s.SerializeNewTypeVariant(2);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.LightState.Converter)(inner);
                         break;
                     }
@@ -215,7 +215,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.LightAnimation: // 3
                     {
                         var inner = v.AsLightAnimation();
-                        s.SerializeNewTypeVariant("EventData", 3);
+                        s.SerializeNewTypeVariant(3);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.LightAnimation.Converter)(inner);
                         break;
                     }
@@ -223,7 +223,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectActiveState: // 4
                     {
                         var inner = v.AsObjectActiveState();
-                        s.SerializeNewTypeVariant("EventData", 4);
+                        s.SerializeNewTypeVariant(4);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectActiveState.Converter)(inner);
                         break;
                     }
@@ -231,7 +231,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectTranslateState: // 5
                     {
                         var inner = v.AsObjectTranslateState();
-                        s.SerializeNewTypeVariant("EventData", 5);
+                        s.SerializeNewTypeVariant(5);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectTranslateState.Converter)(inner);
                         break;
                     }
@@ -239,7 +239,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectScaleState: // 6
                     {
                         var inner = v.AsObjectScaleState();
-                        s.SerializeNewTypeVariant("EventData", 6);
+                        s.SerializeNewTypeVariant(6);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectScaleState.Converter)(inner);
                         break;
                     }
@@ -247,7 +247,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectRotateState: // 7
                     {
                         var inner = v.AsObjectRotateState();
-                        s.SerializeNewTypeVariant("EventData", 7);
+                        s.SerializeNewTypeVariant(7);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectRotateState.Converter)(inner);
                         break;
                     }
@@ -255,7 +255,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectMotion: // 8
                     {
                         var inner = v.AsObjectMotion();
-                        s.SerializeNewTypeVariant("EventData", 8);
+                        s.SerializeNewTypeVariant(8);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotion.Converter)(inner);
                         break;
                     }
@@ -263,7 +263,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectMotionFromTo: // 9
                     {
                         var inner = v.AsObjectMotionFromTo();
-                        s.SerializeNewTypeVariant("EventData", 9);
+                        s.SerializeNewTypeVariant(9);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionFromTo.Converter)(inner);
                         break;
                     }
@@ -271,7 +271,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectMotionSIScript: // 10
                     {
                         var inner = v.AsObjectMotionSIScript();
-                        s.SerializeNewTypeVariant("EventData", 10);
+                        s.SerializeNewTypeVariant(10);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript.Converter)(inner);
                         break;
                     }
@@ -279,7 +279,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectOpacityState: // 11
                     {
                         var inner = v.AsObjectOpacityState();
-                        s.SerializeNewTypeVariant("EventData", 11);
+                        s.SerializeNewTypeVariant(11);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityState.Converter)(inner);
                         break;
                     }
@@ -287,7 +287,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectOpacityFromTo: // 12
                     {
                         var inner = v.AsObjectOpacityFromTo();
-                        s.SerializeNewTypeVariant("EventData", 12);
+                        s.SerializeNewTypeVariant(12);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityFromTo.Converter)(inner);
                         break;
                     }
@@ -295,7 +295,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectAddChild: // 13
                     {
                         var inner = v.AsObjectAddChild();
-                        s.SerializeNewTypeVariant("EventData", 13);
+                        s.SerializeNewTypeVariant(13);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectAddChild.Converter)(inner);
                         break;
                     }
@@ -303,7 +303,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectCycleTexture: // 14
                     {
                         var inner = v.AsObjectCycleTexture();
-                        s.SerializeNewTypeVariant("EventData", 14);
+                        s.SerializeNewTypeVariant(14);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectCycleTexture.Converter)(inner);
                         break;
                     }
@@ -311,7 +311,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ObjectConnector: // 15
                     {
                         var inner = v.AsObjectConnector();
-                        s.SerializeNewTypeVariant("EventData", 15);
+                        s.SerializeNewTypeVariant(15);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnector.Converter)(inner);
                         break;
                     }
@@ -319,7 +319,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.CallObjectConnector: // 16
                     {
                         var inner = v.AsCallObjectConnector();
-                        s.SerializeNewTypeVariant("EventData", 16);
+                        s.SerializeNewTypeVariant(16);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallObjectConnector.Converter)(inner);
                         break;
                     }
@@ -327,7 +327,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.CallSequence: // 17
                     {
                         var inner = v.AsCallSequence();
-                        s.SerializeNewTypeVariant("EventData", 17);
+                        s.SerializeNewTypeVariant(17);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallSequence.Converter)(inner);
                         break;
                     }
@@ -335,7 +335,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.StopSequence: // 18
                     {
                         var inner = v.AsStopSequence();
-                        s.SerializeNewTypeVariant("EventData", 18);
+                        s.SerializeNewTypeVariant(18);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.StopSequence.Converter)(inner);
                         break;
                     }
@@ -343,7 +343,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.CallAnimation: // 19
                     {
                         var inner = v.AsCallAnimation();
-                        s.SerializeNewTypeVariant("EventData", 19);
+                        s.SerializeNewTypeVariant(19);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimation.Converter)(inner);
                         break;
                     }
@@ -351,7 +351,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.StopAnimation: // 20
                     {
                         var inner = v.AsStopAnimation();
-                        s.SerializeNewTypeVariant("EventData", 20);
+                        s.SerializeNewTypeVariant(20);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.StopAnimation.Converter)(inner);
                         break;
                     }
@@ -359,7 +359,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.ResetAnimation: // 21
                     {
                         var inner = v.AsResetAnimation();
-                        s.SerializeNewTypeVariant("EventData", 21);
+                        s.SerializeNewTypeVariant(21);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ResetAnimation.Converter)(inner);
                         break;
                     }
@@ -367,7 +367,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.InvalidateAnimation: // 22
                     {
                         var inner = v.AsInvalidateAnimation();
-                        s.SerializeNewTypeVariant("EventData", 22);
+                        s.SerializeNewTypeVariant(22);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.InvalidateAnimation.Converter)(inner);
                         break;
                     }
@@ -375,7 +375,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.FogState: // 23
                     {
                         var inner = v.AsFogState();
-                        s.SerializeNewTypeVariant("EventData", 23);
+                        s.SerializeNewTypeVariant(23);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.FogState.Converter)(inner);
                         break;
                     }
@@ -383,7 +383,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Loop: // 24
                     {
                         var inner = v.AsLoop();
-                        s.SerializeNewTypeVariant("EventData", 24);
+                        s.SerializeNewTypeVariant(24);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.Loop.Converter)(inner);
                         break;
                     }
@@ -391,7 +391,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.If: // 25
                     {
                         var inner = v.AsIf();
-                        s.SerializeNewTypeVariant("EventData", 25);
+                        s.SerializeNewTypeVariant(25);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.If.Converter)(inner);
                         break;
                     }
@@ -399,7 +399,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Else: // 26
                     {
                         var inner = v.AsElse();
-                        s.SerializeNewTypeVariant("EventData", 26);
+                        s.SerializeNewTypeVariant(26);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.Else.Converter)(inner);
                         break;
                     }
@@ -407,7 +407,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Elif: // 27
                     {
                         var inner = v.AsElif();
-                        s.SerializeNewTypeVariant("EventData", 27);
+                        s.SerializeNewTypeVariant(27);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ElseIf.Converter)(inner);
                         break;
                     }
@@ -415,7 +415,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Endif: // 28
                     {
                         var inner = v.AsEndif();
-                        s.SerializeNewTypeVariant("EventData", 28);
+                        s.SerializeNewTypeVariant(28);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.EndIf.Converter)(inner);
                         break;
                     }
@@ -423,7 +423,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Callback: // 29
                     {
                         var inner = v.AsCallback();
-                        s.SerializeNewTypeVariant("EventData", 29);
+                        s.SerializeNewTypeVariant(29);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.Callback.Converter)(inner);
                         break;
                     }
@@ -431,7 +431,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.FrameBufferEffectColorFromTo: // 30
                     {
                         var inner = v.AsFrameBufferEffectColorFromTo();
-                        s.SerializeNewTypeVariant("EventData", 30);
+                        s.SerializeNewTypeVariant(30);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor.Converter)(inner);
                         break;
                     }
@@ -439,7 +439,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.DetonateWeapon: // 31
                     {
                         var inner = v.AsDetonateWeapon();
-                        s.SerializeNewTypeVariant("EventData", 31);
+                        s.SerializeNewTypeVariant(31);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.DetonateWeapon.Converter)(inner);
                         break;
                     }
@@ -447,7 +447,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.PufferState: // 32
                     {
                         var inner = v.AsPufferState();
-                        s.SerializeNewTypeVariant("EventData", 32);
+                        s.SerializeNewTypeVariant(32);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.PufferState.Converter)(inner);
                         break;
                     }
@@ -459,7 +459,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         private static EventData Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("EventData");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // Sound

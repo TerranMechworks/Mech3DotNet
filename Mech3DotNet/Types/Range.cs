@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Types
 
         public static void Serialize(Range v, Serializer s)
         {
-            s.SerializeStruct("Range", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("min");
             ((Action<float>)s.SerializeF32)(v.min);
             s.SerializeFieldName("max");
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Types
                 min = new Field<float>(),
                 max = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Range"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

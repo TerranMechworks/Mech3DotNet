@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Anim
 
         public static void Serialize(PrereqParent v, Serializer s)
         {
-            s.SerializeStruct("PrereqParent", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("required");
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Anim
                 active = new Field<bool>(),
                 pointer = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PrereqParent"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

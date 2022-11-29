@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Types
 
         public static void Serialize(Quaternion v, Serializer s)
         {
-            s.SerializeStruct("Quaternion", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("x");
             ((Action<float>)s.SerializeF32)(v.x);
             s.SerializeFieldName("y");
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Types
                 z = new Field<float>(),
                 w = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Quaternion"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

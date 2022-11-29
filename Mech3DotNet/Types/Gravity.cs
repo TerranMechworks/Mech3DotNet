@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(Gravity v, Serializer s)
         {
-            s.SerializeStruct("Gravity", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("mode");
             s.Serialize(Mech3DotNet.Types.Anim.Events.GravityMode.Converter)(v.mode);
             s.SerializeFieldName("value");
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 mode = new Field<Mech3DotNet.Types.Anim.Events.GravityMode>(),
                 value = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Gravity"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

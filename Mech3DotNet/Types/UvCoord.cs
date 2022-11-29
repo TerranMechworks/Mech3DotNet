@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
 
         public static void Serialize(UvCoord v, Serializer s)
         {
-            s.SerializeStruct("UvCoord", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("u");
             ((Action<float>)s.SerializeF32)(v.u);
             s.SerializeFieldName("v");
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
                 u = new Field<float>(),
                 v = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("UvCoord"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -62,7 +62,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
 
         public static void Serialize(MeshLight v, Serializer s)
         {
-            s.SerializeStruct("MeshLight", 15);
+            s.SerializeStruct(15);
             s.SerializeFieldName("unk00");
             ((Action<uint>)s.SerializeU32)(v.unk00);
             s.SerializeFieldName("unk04");
@@ -115,7 +115,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh
                 unk68 = new Field<float>(),
                 unk72 = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MeshLight"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

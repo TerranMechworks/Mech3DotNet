@@ -74,7 +74,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(PufferState v, Serializer s)
         {
-            s.SerializeStruct("PufferState", 19);
+            s.SerializeStruct(19);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("state");
@@ -139,7 +139,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 textures = new Field<Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures?>(null),
                 growthFactor = new Field<float?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("PufferState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

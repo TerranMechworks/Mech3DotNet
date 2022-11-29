@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Messages
 
         public static void Serialize(MessageEntry v, Serializer s)
         {
-            s.SerializeStruct("MessageEntry", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("key");
             ((Action<string>)s.SerializeString)(v.key);
             s.SerializeFieldName("id");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Messages
                 id = new Field<uint>(),
                 value = new Field<string>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MessageEntry"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

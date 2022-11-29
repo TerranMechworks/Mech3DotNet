@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(RandomWeightCond v, Serializer s)
         {
-            s.SerializeStruct("RandomWeightCond", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("value");
             ((Action<float>)s.SerializeF32)(v.value);
         }
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 value = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("RandomWeightCond"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

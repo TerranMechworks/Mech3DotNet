@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectCycleTexture v, Serializer s)
         {
-            s.SerializeStruct("ObjectCycleTexture", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("reset");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 node = new Field<string>(),
                 reset = new Field<ushort>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectCycleTexture"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim
 
         public static void Serialize(PrereqAnimation v, Serializer s)
         {
-            s.SerializeStruct("PrereqAnimation", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
         }
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim
             {
                 name = new Field<string>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PrereqAnimation"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

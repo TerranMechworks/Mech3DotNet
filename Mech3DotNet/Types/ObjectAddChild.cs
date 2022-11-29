@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectAddChild v, Serializer s)
         {
-            s.SerializeStruct("ObjectAddChild", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("parent");
             ((Action<string>)s.SerializeString)(v.parent);
             s.SerializeFieldName("child");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 parent = new Field<string>(),
                 child = new Field<string>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectAddChild"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

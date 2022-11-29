@@ -17,7 +17,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(Else v, Serializer s)
         {
-            s.SerializeStruct("Else", 0);
+            s.SerializeStruct(0);
         }
 
         public static Else Deserialize(Deserializer d)
@@ -25,7 +25,7 @@ namespace Mech3DotNet.Types.Anim.Events
             var fields = new Fields()
             {
             };
-            foreach (var fieldName in d.DeserializeStruct("Else"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

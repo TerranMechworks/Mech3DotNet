@@ -89,7 +89,7 @@ namespace Mech3DotNet.Types.Anim
 
         public static void Serialize(AnimDef v, Serializer s)
         {
-            s.SerializeStruct("AnimDef", 24);
+            s.SerializeStruct(24);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("anim_name");
@@ -169,7 +169,7 @@ namespace Mech3DotNet.Types.Anim
                 resetState = new Field<Mech3DotNet.Types.Anim.ResetState?>(),
                 sequences = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.SeqDef>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("AnimDef"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -39,20 +39,20 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Absolute: // 0
                     {
                         var inner = v.AsAbsolute();
-                        s.SerializeNewTypeVariant("RotateState", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(inner);
                         break;
                     }
 
                 case Variants.AtNodeXYZ: // 1
                     {
-                        s.SerializeUnitVariant("RotateState", 1);
+                        s.SerializeUnitVariant(1);
                         break;
                     }
 
                 case Variants.AtNodeMatrix: // 2
                     {
-                        s.SerializeUnitVariant("RotateState", 2);
+                        s.SerializeUnitVariant(2);
                         break;
                     }
 
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         private static RotateState Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("RotateState");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // Absolute

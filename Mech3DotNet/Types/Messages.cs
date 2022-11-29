@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Messages
 
         public static void Serialize(Messages v, Serializer s)
         {
-            s.SerializeStruct("Messages", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("language_id");
             ((Action<uint>)s.SerializeU32)(v.languageId);
             s.SerializeFieldName("entries");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Messages
                 languageId = new Field<uint>(),
                 entries = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Messages.MessageEntry>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Messages"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

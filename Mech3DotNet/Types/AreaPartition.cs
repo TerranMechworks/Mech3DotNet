@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Nodes
 
         public static void Serialize(AreaPartition v, Serializer s)
         {
-            s.SerializeStruct("AreaPartition", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("x");
             ((Action<int>)s.SerializeI32)(v.x);
             s.SerializeFieldName("y");
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Nodes
                 x = new Field<int>(),
                 y = new Field<int>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("AreaPartition"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

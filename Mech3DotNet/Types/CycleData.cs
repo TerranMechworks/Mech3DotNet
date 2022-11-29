@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
         public static void Serialize(CycleData v, Serializer s)
         {
-            s.SerializeStruct("CycleData", 6);
+            s.SerializeStruct(6);
             s.SerializeFieldName("textures");
             s.SerializeVec(((Action<string>)s.SerializeString))(v.textures);
             s.SerializeFieldName("unk00");
@@ -61,7 +61,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 infoPtr = new Field<uint>(),
                 dataPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("CycleData"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

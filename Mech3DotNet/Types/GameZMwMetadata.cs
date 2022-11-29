@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Gamez
 
         public static void Serialize(GameZMwMetadata v, Serializer s)
         {
-            s.SerializeStruct("GameZMwMetadata", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("material_array_size");
             ((Action<short>)s.SerializeI16)(v.materialArraySize);
             s.SerializeFieldName("meshes_array_size");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Gamez
                 nodeArraySize = new Field<uint>(),
                 nodeDataCount = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("GameZMwMetadata"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(Light v, Serializer s)
         {
-            s.SerializeStruct("Light", 8);
+            s.SerializeStruct(8);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("direction");
@@ -73,7 +73,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 parentPtr = new Field<uint>(),
                 dataPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Light"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

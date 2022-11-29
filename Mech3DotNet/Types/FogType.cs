@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 Variants.Exponential => 2,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("FogType", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static FogType Deserialize(Deserializer d)

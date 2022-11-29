@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(Camera v, Serializer s)
         {
-            s.SerializeStruct("Camera", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("clip");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 fov = new Field<Mech3DotNet.Types.Types.Range>(),
                 dataPtr = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Camera"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

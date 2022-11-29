@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectMotionSiFrame v, Serializer s)
         {
-            s.SerializeStruct("ObjectMotionSiFrame", 5);
+            s.SerializeStruct(5);
             s.SerializeFieldName("start_time");
             ((Action<float>)s.SerializeF32)(v.startTime);
             s.SerializeFieldName("end_time");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 rotation = new Field<Mech3DotNet.Types.Anim.Events.RotateData?>(null),
                 scale = new Field<Mech3DotNet.Types.Anim.Events.ScaleData?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectMotionSiFrame"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Types
 
         public static void Serialize(Color v, Serializer s)
         {
-            s.SerializeStruct("Color", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("r");
             ((Action<float>)s.SerializeF32)(v.r);
             s.SerializeFieldName("g");
@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Types
                 g = new Field<float>(),
                 b = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Color"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

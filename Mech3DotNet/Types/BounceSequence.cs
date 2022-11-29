@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(BounceSequence v, Serializer s)
         {
-            s.SerializeStruct("BounceSequence", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("seq_name0");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.seqName0);
             s.SerializeFieldName("seq_name1");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 seqName1 = new Field<string?>(),
                 seqName2 = new Field<string?>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("BounceSequence"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

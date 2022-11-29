@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectMotionScale v, Serializer s)
         {
-            s.SerializeStruct("ObjectMotionScale", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("value");
             s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.value);
             s.SerializeFieldName("unk");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 value = new Field<Mech3DotNet.Types.Types.Vec3>(),
                 unk = new Field<Mech3DotNet.Types.Types.Vec3>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectMotionScale"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

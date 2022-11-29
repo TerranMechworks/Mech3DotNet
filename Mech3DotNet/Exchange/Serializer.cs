@@ -99,8 +99,8 @@ namespace Mech3DotNet.Exchange
             return (T v) => SerializeGeneric(type, v);
         }
 
-        public void SerializeStruct(string name, ulong len) => w.WriteStruct(name, len);
-        public void SerializeUnitVariant(string name, uint variantIndex) => w.WriteEnumUnit(name, variantIndex);
-        public void SerializeNewTypeVariant(string name, uint variantIndex) => w.WriteEnumNewType(name, variantIndex);
+        public void SerializeStruct(ulong len) => w.WriteStruct(len);
+        public void SerializeUnitVariant(uint variantIndex) => w.WriteEnumUnit(variantIndex);
+        public void SerializeNewTypeVariant(uint variantIndex) => w.WriteEnumNewType(variantIndex);
     }
 }

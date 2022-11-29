@@ -36,7 +36,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Time: // 0
                     {
                         var inner = v.AsTime();
-                        s.SerializeNewTypeVariant("ForwardRotation", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationTimeConverter.Converter)(inner);
                         break;
                     }
@@ -44,7 +44,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.Distance: // 1
                     {
                         var inner = v.AsDistance();
-                        s.SerializeNewTypeVariant("ForwardRotation", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotationDistanceConverter.Converter)(inner);
                         break;
                     }
@@ -56,7 +56,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         private static ForwardRotation Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("ForwardRotation");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // Time

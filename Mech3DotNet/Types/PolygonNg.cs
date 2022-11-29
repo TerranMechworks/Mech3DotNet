@@ -56,7 +56,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
 
         public static void Serialize(PolygonNg v, Serializer s)
         {
-            s.SerializeStruct("PolygonNg", 13);
+            s.SerializeStruct(13);
             s.SerializeFieldName("flags");
             s.Serialize(Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags.Converter)(v.flags);
             s.SerializeFieldName("vertex_indices");
@@ -103,7 +103,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                 unk32 = new Field<uint>(),
                 unk36 = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PolygonNg"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

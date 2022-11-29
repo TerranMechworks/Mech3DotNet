@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Zmap
 
         public static void Serialize(MapRc v, Serializer s)
         {
-            s.SerializeStruct("MapRc", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("unk04");
             ((Action<uint>)s.SerializeU32)(v.unk04);
             s.SerializeFieldName("max_x");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Zmap
                 maxY = new Field<float>(),
                 features = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MapRc"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Zmap
 
         public static void Serialize(MapVertex v, Serializer s)
         {
-            s.SerializeStruct("MapVertex", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("x");
             ((Action<float>)s.SerializeF32)(v.x);
             s.SerializeFieldName("z");
@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Zmap
                 z = new Field<float>(),
                 y = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("MapVertex"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Image
 
         public static void Serialize(TextureManifest v, Serializer s)
         {
-            s.SerializeStruct("TextureManifest", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("texture_infos");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Image.TextureInfo.Converter))(v.textureInfos);
             s.SerializeFieldName("global_palettes");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Image
                 textureInfos = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Image.TextureInfo>>(),
                 globalPalettes = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Image.PaletteData>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("TextureManifest"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

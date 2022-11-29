@@ -39,14 +39,14 @@ namespace Mech3DotNet.Types.Image
             {
                 case Variants.None: // 0
                     {
-                        s.SerializeUnitVariant("TexturePalette", 0);
+                        s.SerializeUnitVariant(0);
                         break;
                     }
 
                 case Variants.Local: // 1
                     {
                         var inner = v.AsLocal();
-                        s.SerializeNewTypeVariant("TexturePalette", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Image.PaletteData.Converter)(inner);
                         break;
                     }
@@ -54,7 +54,7 @@ namespace Mech3DotNet.Types.Image
                 case Variants.Global: // 2
                     {
                         var inner = v.AsGlobal();
-                        s.SerializeNewTypeVariant("TexturePalette", 2);
+                        s.SerializeNewTypeVariant(2);
                         s.Serialize(Mech3DotNet.Types.Image.GlobalPalette.Converter)(inner);
                         break;
                     }
@@ -66,7 +66,7 @@ namespace Mech3DotNet.Types.Image
 
         private static TexturePalette Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("TexturePalette");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // None

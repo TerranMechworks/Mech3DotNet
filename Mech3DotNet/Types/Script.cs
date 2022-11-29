@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Interp
 
         public static void Serialize(Script v, Serializer s)
         {
-            s.SerializeStruct("Script", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("last_modified");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Interp
                 lastModified = new Field<System.DateTime>(),
                 lines = new Field<System.Collections.Generic.List<string>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Script"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

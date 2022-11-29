@@ -62,7 +62,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         public static void Serialize(Object3d v, Serializer s)
         {
-            s.SerializeStruct("Object3d", 15);
+            s.SerializeStruct(15);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("transformation");
@@ -115,7 +115,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 unk140 = new Field<Mech3DotNet.Types.Nodes.BoundingBox>(),
                 unk164 = new Field<Mech3DotNet.Types.Nodes.BoundingBox>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Object3d"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

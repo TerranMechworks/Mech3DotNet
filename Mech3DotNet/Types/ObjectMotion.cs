@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectMotion v, Serializer s)
         {
-            s.SerializeStruct("ObjectMotion", 12);
+            s.SerializeStruct(12);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("impact_force");
@@ -97,7 +97,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 bounceSound = new Field<Mech3DotNet.Types.Anim.Events.BounceSound?>(null),
                 runtime = new Field<float?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectMotion"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

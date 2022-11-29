@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Gamez
 
         public static void Serialize(GameZCsMetadata v, Serializer s)
         {
-            s.SerializeStruct("GameZCsMetadata", 5);
+            s.SerializeStruct(5);
             s.SerializeFieldName("gamez_header_unk08");
             ((Action<uint>)s.SerializeU32)(v.gamezHeaderUnk08);
             s.SerializeFieldName("material_array_size");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Types.Gamez
                 nodeDataCount = new Field<uint>(),
                 texturePtrs = new Field<System.Collections.Generic.List<uint?>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("GameZCsMetadata"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

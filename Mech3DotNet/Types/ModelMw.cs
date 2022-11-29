@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Gamez.Mechlib
 
         public static void Serialize(ModelMw v, Serializer s)
         {
-            s.SerializeStruct("ModelMw", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("nodes");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Nodes.Mw.NodeMw.Converter))(v.nodes);
             s.SerializeFieldName("meshes");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Gamez.Mechlib
                 meshes = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Mw.MeshMw>>(),
                 meshPtrs = new Field<System.Collections.Generic.List<int>>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ModelMw"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

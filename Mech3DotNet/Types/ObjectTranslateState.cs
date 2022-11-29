@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectTranslateState v, Serializer s)
         {
-            s.SerializeStruct("ObjectTranslateState", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("translate");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 translate = new Field<Mech3DotNet.Types.Types.Vec3>(),
                 atNode = new Field<string?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectTranslateState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

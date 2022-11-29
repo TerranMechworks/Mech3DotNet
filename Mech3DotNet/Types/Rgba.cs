@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(Rgba v, Serializer s)
         {
-            s.SerializeStruct("Rgba", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("r");
             ((Action<float>)s.SerializeF32)(v.r);
             s.SerializeFieldName("g");
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 b = new Field<float>(),
                 a = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("Rgba"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

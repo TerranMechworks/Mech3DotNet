@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectMotionFromTo v, Serializer s)
         {
-            s.SerializeStruct("ObjectMotionFromTo", 6);
+            s.SerializeStruct(6);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("run_time");
@@ -61,7 +61,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 rotate = new Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?>(null),
                 scale = new Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?>(null),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectMotionFromTo"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

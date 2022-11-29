@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Gamez
 
         public static void Serialize(GameZMwData v, Serializer s)
         {
-            s.SerializeStruct("GameZMwData", 5);
+            s.SerializeStruct(5);
             s.SerializeFieldName("textures");
             s.SerializeVec(((Action<string>)s.SerializeString))(v.textures);
             s.SerializeFieldName("materials");
@@ -55,7 +55,7 @@ namespace Mech3DotNet.Types.Gamez
                 nodes = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Mw.NodeMw>>(),
                 metadata = new Field<Mech3DotNet.Types.Gamez.GameZMwMetadata>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("GameZMwData"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

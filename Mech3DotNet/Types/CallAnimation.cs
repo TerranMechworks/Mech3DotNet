@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(CallAnimation v, Serializer s)
         {
-            s.SerializeStruct("CallAnimation", 3);
+            s.SerializeStruct(3);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("wait_for_completion");
@@ -43,7 +43,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 waitForCompletion = new Field<ushort?>(null),
                 parameters = new Field<Mech3DotNet.Types.Anim.Events.CallAnimationParameters>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("CallAnimation"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

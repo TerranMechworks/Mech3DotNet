@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(InvalidateAnimation v, Serializer s)
         {
-            s.SerializeStruct("InvalidateAnimation", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
         }
@@ -31,7 +31,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 name = new Field<string>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("InvalidateAnimation"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

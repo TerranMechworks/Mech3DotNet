@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Image
 
         public static void Serialize(TextureInfo v, Serializer s)
         {
-            s.SerializeStruct("TextureInfo", 10);
+            s.SerializeStruct(10);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("rename");
@@ -85,7 +85,7 @@ namespace Mech3DotNet.Types.Image
                 paletteLoaded = new Field<bool>(),
                 palette = new Field<Mech3DotNet.Types.Image.TexturePalette>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("TextureInfo"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

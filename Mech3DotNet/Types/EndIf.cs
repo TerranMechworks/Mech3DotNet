@@ -17,7 +17,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(EndIf v, Serializer s)
         {
-            s.SerializeStruct("EndIf", 0);
+            s.SerializeStruct(0);
         }
 
         public static EndIf Deserialize(Deserializer d)
@@ -25,7 +25,7 @@ namespace Mech3DotNet.Types.Anim.Events
             var fields = new Fields()
             {
             };
-            foreach (var fieldName in d.DeserializeStruct("EndIf"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

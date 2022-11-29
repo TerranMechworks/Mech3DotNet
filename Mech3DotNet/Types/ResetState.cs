@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim
 
         public static void Serialize(ResetState v, Serializer s)
         {
-            s.SerializeStruct("ResetState", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("events");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.Event.Converter))(v.events);
             s.SerializeFieldName("pointer");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim
                 events = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.Event>>(),
                 pointer = new Field<uint>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ResetState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

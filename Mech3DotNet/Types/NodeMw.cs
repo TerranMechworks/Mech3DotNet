@@ -66,7 +66,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.Camera: // 0
                     {
                         var inner = v.AsCamera();
-                        s.SerializeNewTypeVariant("NodeMw", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.Camera.Converter)(inner);
                         break;
                     }
@@ -74,7 +74,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.Display: // 1
                     {
                         var inner = v.AsDisplay();
-                        s.SerializeNewTypeVariant("NodeMw", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.Display.Converter)(inner);
                         break;
                     }
@@ -82,7 +82,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.Empty: // 2
                     {
                         var inner = v.AsEmpty();
-                        s.SerializeNewTypeVariant("NodeMw", 2);
+                        s.SerializeNewTypeVariant(2);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.Empty.Converter)(inner);
                         break;
                     }
@@ -90,7 +90,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.Light: // 3
                     {
                         var inner = v.AsLight();
-                        s.SerializeNewTypeVariant("NodeMw", 3);
+                        s.SerializeNewTypeVariant(3);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.Light.Converter)(inner);
                         break;
                     }
@@ -98,7 +98,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.Lod: // 4
                     {
                         var inner = v.AsLod();
-                        s.SerializeNewTypeVariant("NodeMw", 4);
+                        s.SerializeNewTypeVariant(4);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.Lod.Converter)(inner);
                         break;
                     }
@@ -106,7 +106,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.Object3d: // 5
                     {
                         var inner = v.AsObject3d();
-                        s.SerializeNewTypeVariant("NodeMw", 5);
+                        s.SerializeNewTypeVariant(5);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.Object3d.Converter)(inner);
                         break;
                     }
@@ -114,7 +114,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.Window: // 6
                     {
                         var inner = v.AsWindow();
-                        s.SerializeNewTypeVariant("NodeMw", 6);
+                        s.SerializeNewTypeVariant(6);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.Window.Converter)(inner);
                         break;
                     }
@@ -122,7 +122,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
                 case Variants.World: // 7
                     {
                         var inner = v.AsWorld();
-                        s.SerializeNewTypeVariant("NodeMw", 7);
+                        s.SerializeNewTypeVariant(7);
                         s.Serialize(Mech3DotNet.Types.Nodes.Mw.World.Converter)(inner);
                         break;
                     }
@@ -134,7 +134,7 @@ namespace Mech3DotNet.Types.Nodes.Mw
 
         private static NodeMw Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("NodeMw");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // Camera

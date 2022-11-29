@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Image
                 Variants.Full => 2,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("TextureAlpha", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static TextureAlpha Deserialize(Deserializer d)

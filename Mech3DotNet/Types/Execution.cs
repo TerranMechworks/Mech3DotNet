@@ -39,20 +39,20 @@ namespace Mech3DotNet.Types.Anim
                 case Variants.ByRange: // 0
                     {
                         var inner = v.AsByRange();
-                        s.SerializeNewTypeVariant("Execution", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(inner);
                         break;
                     }
 
                 case Variants.ByZone: // 1
                     {
-                        s.SerializeUnitVariant("Execution", 1);
+                        s.SerializeUnitVariant(1);
                         break;
                     }
 
                 case Variants.None: // 2
                     {
-                        s.SerializeUnitVariant("Execution", 2);
+                        s.SerializeUnitVariant(2);
                         break;
                     }
 
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Anim
 
         private static Execution Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("Execution");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // ByRange

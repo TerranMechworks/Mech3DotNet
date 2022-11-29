@@ -51,7 +51,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.RandomWeight: // 0
                     {
                         var inner = v.AsRandomWeight();
-                        s.SerializeNewTypeVariant("If", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.RandomWeightCondConverter.Converter)(inner);
                         break;
                     }
@@ -59,7 +59,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.PlayerRange: // 1
                     {
                         var inner = v.AsPlayerRange();
-                        s.SerializeNewTypeVariant("If", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCondConverter.Converter)(inner);
                         break;
                     }
@@ -67,7 +67,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.AnimationLod: // 2
                     {
                         var inner = v.AsAnimationLod();
-                        s.SerializeNewTypeVariant("If", 2);
+                        s.SerializeNewTypeVariant(2);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.AnimationLodCondConverter.Converter)(inner);
                         break;
                     }
@@ -75,7 +75,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.HwRender: // 3
                     {
                         var inner = v.AsHwRender();
-                        s.SerializeNewTypeVariant("If", 3);
+                        s.SerializeNewTypeVariant(3);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.HwRenderCondConverter.Converter)(inner);
                         break;
                     }
@@ -83,7 +83,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.PlayerFirstPerson: // 4
                     {
                         var inner = v.AsPlayerFirstPerson();
-                        s.SerializeNewTypeVariant("If", 4);
+                        s.SerializeNewTypeVariant(4);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCondConverter.Converter)(inner);
                         break;
                     }
@@ -95,7 +95,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         private static If Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("If");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // RandomWeight

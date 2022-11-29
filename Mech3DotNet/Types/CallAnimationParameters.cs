@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.AtNode: // 0
                     {
                         var inner = v.AsAtNode();
-                        s.SerializeNewTypeVariant("CallAnimationParameters", 0);
+                        s.SerializeNewTypeVariant(0);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationAtNode.Converter)(inner);
                         break;
                     }
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.WithNode: // 1
                     {
                         var inner = v.AsWithNode();
-                        s.SerializeNewTypeVariant("CallAnimationParameters", 1);
+                        s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationWithNode.Converter)(inner);
                         break;
                     }
@@ -61,14 +61,14 @@ namespace Mech3DotNet.Types.Anim.Events
                 case Variants.TargetNode: // 2
                     {
                         var inner = v.AsTargetNode();
-                        s.SerializeNewTypeVariant("CallAnimationParameters", 2);
+                        s.SerializeNewTypeVariant(2);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode.Converter)(inner);
                         break;
                     }
 
                 case Variants.None: // 3
                     {
-                        s.SerializeUnitVariant("CallAnimationParameters", 3);
+                        s.SerializeUnitVariant(3);
                         break;
                     }
 
@@ -79,7 +79,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         private static CallAnimationParameters Deserialize(Deserializer d)
         {
-            var (enumType, variantIndex) = d.DeserializeEnum("CallAnimationParameters");
+            var (enumType, variantIndex) = d.DeserializeEnum();
             switch (variantIndex)
             {
                 case 0: // AtNode

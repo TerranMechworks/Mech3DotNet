@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Image
 
         public static void Serialize(PaletteData v, Serializer s)
         {
-            s.SerializeStruct("PaletteData", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("data");
             ((Action<byte[]>)s.SerializeBytes)(v.data);
         }
@@ -31,7 +31,7 @@ namespace Mech3DotNet.Types.Image
             {
                 data = new Field<byte[]>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PaletteData"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

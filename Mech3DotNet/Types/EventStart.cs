@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(EventStart v, Serializer s)
         {
-            s.SerializeStruct("EventStart", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("offset");
             s.Serialize(Mech3DotNet.Types.Anim.Events.StartOffset.Converter)(v.offset);
             s.SerializeFieldName("time");
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 offset = new Field<Mech3DotNet.Types.Anim.Events.StartOffset>(),
                 time = new Field<float>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("EventStart"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

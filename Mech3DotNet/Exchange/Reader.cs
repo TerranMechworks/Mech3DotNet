@@ -141,19 +141,9 @@ namespace Mech3DotNet.Exchange
             return ReadUsize();
         }
 
-        private void ExpectStructName(string name)
-        {
-            var actual = ReadStringRaw();
-            if (name != actual)
-            {
-                throw new ArgumentException();
-            }
-        }
-
-        public ulong ReadStruct(string name)
+        public ulong ReadStruct()
         {
             ExpectType(TypeMap.Struct);
-            ExpectStructName(name);
             return ReadUsize();
         }
 
@@ -164,7 +154,7 @@ namespace Mech3DotNet.Exchange
             return BitConverter.ToUInt32(buf);
         }
 
-        public (EnumType, uint) ReadEnum(string name)
+        public (EnumType, uint) ReadEnum()
         {
             var enumType = ReadType() switch
             {
@@ -172,7 +162,6 @@ namespace Mech3DotNet.Exchange
                 TypeMap.EnumNewType => EnumType.NewType,
                 _ => throw new ArgumentException(),
             };
-            ExpectStructName(name);
             var variantIndex = ReadEnumVariant();
             return (enumType, variantIndex);
         }

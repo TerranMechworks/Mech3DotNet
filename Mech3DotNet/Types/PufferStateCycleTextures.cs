@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(PufferStateCycleTextures v, Serializer s)
         {
-            s.SerializeStruct("PufferStateCycleTextures", 6);
+            s.SerializeStruct(6);
             s.SerializeFieldName("texture1");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.texture1);
             s.SerializeFieldName("texture2");
@@ -61,7 +61,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 texture5 = new Field<string?>(),
                 texture6 = new Field<string?>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("PufferStateCycleTextures"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

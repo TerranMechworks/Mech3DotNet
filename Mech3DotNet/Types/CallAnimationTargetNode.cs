@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(CallAnimationTargetNode v, Serializer s)
         {
-            s.SerializeStruct("CallAnimationTargetNode", 1);
+            s.SerializeStruct(1);
             s.SerializeFieldName("operand_node");
             ((Action<string>)s.SerializeString)(v.operandNode);
         }
@@ -31,7 +31,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 operandNode = new Field<string>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("CallAnimationTargetNode"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

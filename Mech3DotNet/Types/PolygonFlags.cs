@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
 
         public static void Serialize(PolygonFlags v, Serializer s)
         {
-            s.SerializeStruct("PolygonFlags", 4);
+            s.SerializeStruct(4);
             s.SerializeFieldName("unk2");
             ((Action<bool>)s.SerializeBool)(v.unk2);
             s.SerializeFieldName("unk3");
@@ -49,7 +49,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                 triangleStrip = new Field<bool>(false),
                 unk6 = new Field<bool>(false),
             };
-            foreach (var fieldName in d.DeserializeStruct("PolygonFlags"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

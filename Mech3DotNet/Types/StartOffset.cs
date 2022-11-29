@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 Variants.Event => 2,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
-            s.SerializeUnitVariant("StartOffset", variantIndex);
+            s.SerializeUnitVariant(variantIndex);
         }
 
         private static StartOffset Deserialize(Deserializer d)

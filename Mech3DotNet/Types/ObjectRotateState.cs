@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static void Serialize(ObjectRotateState v, Serializer s)
         {
-            s.SerializeStruct("ObjectRotateState", 2);
+            s.SerializeStruct(2);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("rotate");
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 node = new Field<string>(),
                 rotate = new Field<Mech3DotNet.Types.Anim.Events.RotateState>(),
             };
-            foreach (var fieldName in d.DeserializeStruct("ObjectRotateState"))
+            foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {

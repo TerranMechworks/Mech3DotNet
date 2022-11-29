@@ -35,41 +35,38 @@ namespace Mech3DotNet.Exchange
 
         public string DeserializeString() => r.ReadStr();
 
-        public Func<T?> DeserializeValOption<T>(Func<T> read) where T : struct
+        private T? DeserializeValOptionInner<T>(Func<T> read) where T : struct
         {
-            return () =>
-            {
-                if (r.ReadOption())
-                    return read();
-                else
-                    return null;
-            };
+            if (r.ReadOption())
+                return read();
+            else
+                return null;
         }
 
-        public Func<T?> DeserializeRefOption<T>(Func<T> read) where T : class
+        public Func<T?> DeserializeValOption<T>(Func<T> read) where T : struct => () => DeserializeValOptionInner(read);
+
+        private T? DeserializeRefOptionInner<T>(Func<T> read) where T : class
         {
-            return () =>
-            {
-                if (r.ReadOption())
-                    return read();
-                else
-                    return null;
-            };
+            if (r.ReadOption())
+                return read();
+            else
+                return null;
         }
 
-        public Func<List<T>> DeserializeVec<T>(Func<T> read)
+        public Func<T?> DeserializeRefOption<T>(Func<T> read) where T : class => () => DeserializeRefOptionInner(read);
+
+        private List<T> DeserializeVecInner<T>(Func<T> read)
         {
-            return () =>
+            var len = r.ReadSeqSized();
+            var vec = new List<T>((int)len);
+            for (ulong i = 0; i < len; i++)
             {
-                var len = r.ReadSeqSized();
-                var vec = new List<T>((int)len);
-                for (ulong i = 0; i < len; i++)
-                {
-                    vec.Add(read());
-                }
-                return vec;
-            };
+                vec.Add(read());
+            }
+            return vec;
         }
+
+        public Func<List<T>> DeserializeVec<T>(Func<T> read) => () => DeserializeVecInner(read);
 
         public Func<T> Deserialize<T>(TypeConverter<T> converter) => () => converter.Deserialize(this);
 

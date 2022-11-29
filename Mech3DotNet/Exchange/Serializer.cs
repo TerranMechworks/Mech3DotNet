@@ -39,11 +39,6 @@ namespace Mech3DotNet.Exchange
             w.WriteStr(v);
         }
 
-        public Action<T?> SerializeValOption<T>(Action<T> write) where T : struct
-        {
-            return (T? v) => SerializeValOption(v, write);
-        }
-
         private void SerializeValOption<T>(T? v, Action<T> write) where T : struct
         {
             if (v.HasValue)
@@ -55,10 +50,7 @@ namespace Mech3DotNet.Exchange
                 w.WriteNone();
         }
 
-        public Action<T?> SerializeRefOption<T>(Action<T> write) where T : class
-        {
-            return (T? v) => SerializeRefOption(v, write);
-        }
+        public Action<T?> SerializeValOption<T>(Action<T> write) where T : struct => (T? v) => SerializeValOption(v, write);
 
         private void SerializeRefOption<T>(T? v, Action<T> write) where T : class
         {
@@ -71,10 +63,7 @@ namespace Mech3DotNet.Exchange
                 w.WriteNone();
         }
 
-        public Action<List<T>> SerializeVec<T>(Action<T> write)
-        {
-            return (List<T> v) => SerializeVec(v, write);
-        }
+        public Action<T?> SerializeRefOption<T>(Action<T> write) where T : class => (T? v) => SerializeRefOption(v, write);
 
         private void SerializeVec<T>(List<T> v, Action<T> write)
         {
@@ -87,16 +76,9 @@ namespace Mech3DotNet.Exchange
             }
         }
 
-        public Action<T> Serialize<T>(TypeConverter<T> converter)
-        {
-            return (T v) => converter.Serialize(v, this);
-        }
+        public Action<List<T>> SerializeVec<T>(Action<T> write) => (List<T> v) => SerializeVec(v, write);
 
-        public Action<T> SerializeGeneric<T>() where T : notnull
-        {
-            var type = typeof(T);
-            return (T v) => SerializeGeneric(type, v);
-        }
+        public Action<T> Serialize<T>(TypeConverter<T> converter) => (T v) => converter.Serialize(v, this);
 
         private void SerializeGeneric(Type type, object v)
         {
@@ -109,6 +91,12 @@ namespace Mech3DotNet.Exchange
                 }
             }
             throw new UnknownGenericTypeException(type);
+        }
+
+        public Action<T> SerializeGeneric<T>() where T : notnull
+        {
+            var type = typeof(T);
+            return (T v) => SerializeGeneric(type, v);
         }
 
         public void SerializeStruct(string name, ulong len) => w.WriteStruct(name, len);

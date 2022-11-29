@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
 using Mech3DotNet.Types.Image;
 using Mech3DotNet.Unsafe;
 
@@ -51,7 +50,7 @@ namespace Mech3DotNet
         private static Dictionary<string, byte[]> ReadRaw(string inputPath, out byte[] manifest)
         {
             var textureData = new Dictionary<string, byte[]>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, Helpers.IGNORED, "manifest.json", Interop.ReadTextures, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, Helpers.IGNORED, Helpers.MANIFEST, Interop.ReadTextures, (string name, byte[] data) =>
             {
                 textureData.Add(name, data);
             });

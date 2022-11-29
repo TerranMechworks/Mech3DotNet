@@ -11,7 +11,7 @@ namespace Mech3DotNet
         private static Dictionary<string, Motion<TQuaternion, TVec3>> Read(string inputPath, GameType gameType, out byte[] manifest)
         {
             var motions = new Dictionary<string, Motion<TQuaternion, TVec3>>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadMotion, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, Helpers.MANIFEST, Interop.ReadMotion, (string name, byte[] data) =>
             {
                 var motion = Interop.Deserialize(data, Motion<TQuaternion, TVec3>.Converter);
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased

@@ -11,7 +11,7 @@ namespace Mech3DotNet
         private static Dictionary<string, byte[]> ReadRaw(string inputPath, GameType gameType, out byte[] manifest)
         {
             var sounds = new Dictionary<string, byte[]>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadSounds, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, Helpers.MANIFEST, Interop.ReadSounds, (string name, byte[] data) =>
             {
                 // there are duplicate sounds in the archive
                 sounds[name] = data;

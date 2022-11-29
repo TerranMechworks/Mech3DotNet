@@ -26,6 +26,7 @@ namespace Mech3DotNet
         };
 
         internal const GameType IGNORED = GameType.MW;
+        internal const string MANIFEST = "manifest.bin";
 
         public static byte[] ReadArchiveRaw(string inputPath, GameType gameType, string manifestName, ReadArchiveFn readFunction, ReadArchiveCb readCallback)
         {

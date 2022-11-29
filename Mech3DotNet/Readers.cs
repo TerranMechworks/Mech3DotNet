@@ -74,7 +74,7 @@ namespace Mech3DotNet
         private static Dictionary<string, ReaderValue> Read(string inputPath, GameType gameType, out byte[] manifest)
         {
             var readers = new Dictionary<string, ReaderValue>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, "manifest.json", Interop.ReadReaderRaw, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, Helpers.MANIFEST, Interop.ReadReaderRaw, (string name, byte[] data) =>
             {
                 var stream = new MemoryStream(data);
                 var reader = new BinaryReader(stream);

@@ -50,7 +50,7 @@ namespace Mech3DotNet
         {
             List<Material>? capture = null;
             var models = new Dictionary<string, ModelPm>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, GameType.PM, "manifest.json", Interop.ReadMechlib, (string name, byte[] data) =>
+            manifest = Helpers.ReadArchiveRaw(inputPath, GameType.PM, Helpers.MANIFEST, Interop.ReadMechlib, (string name, byte[] data) =>
             {
                 switch (name)
                 {

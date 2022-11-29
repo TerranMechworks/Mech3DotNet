@@ -31,7 +31,7 @@ namespace Mech3DotNet
         private static Dictionary<string, AnimDef> ReadRaw(string inputPath, GameType gameType, out byte[] metadata)
         {
             var animations = new Dictionary<string, AnimDef>();
-            metadata = Helpers.ReadArchiveRaw(inputPath, gameType, "metadata.json", Interop.ReadAnim, (string name, byte[] data) =>
+            metadata = Helpers.ReadArchiveRaw(inputPath, gameType, "metadata.bin", Interop.ReadAnim, (string name, byte[] data) =>
             {
                 var anim = Interop.Deserialize(data, AnimDef.Converter);
                 animations.Add(name, anim);

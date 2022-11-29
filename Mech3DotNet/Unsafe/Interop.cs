@@ -210,22 +210,22 @@ namespace Mech3DotNet.Unsafe
             return System.Text.Encoding.UTF8.GetString(DecodeBytes(pointer, length));
         }
 
-        public static T Deserialize<T>(byte[] json, Mech3DotNet.Exchange.TypeConverter<T> converter)
+        public static T Deserialize<T>(byte[] data, Mech3DotNet.Exchange.TypeConverter<T> converter)
         {
-            var g = new System.Collections.Generic.List<Exchange.TypeConverter>();
-            using (var r = new Mech3DotNet.Exchange.Reader(json))
+            var dc = Mech3DotNet.Exchange.Options.DefaultConverters;
+            using (var r = new Mech3DotNet.Exchange.Reader(data))
             {
-                var d = new Mech3DotNet.Exchange.Deserializer(r, g);
+                var d = new Mech3DotNet.Exchange.Deserializer(r, dc);
                 return d.Deserialize(converter)();
             }
         }
 
         public static byte[] Serialize<T>(T value, Mech3DotNet.Exchange.TypeConverter<T> converter)
         {
-            var g = new System.Collections.Generic.List<Exchange.TypeConverter>();
+            var dc = Mech3DotNet.Exchange.Options.DefaultConverters;
             using (var w = new Mech3DotNet.Exchange.Writer())
             {
-                var s = new Mech3DotNet.Exchange.Serializer(w, g);
+                var s = new Mech3DotNet.Exchange.Serializer(w, dc);
                 s.Serialize(converter)(value);
                 return w.GetBuffer();
             }

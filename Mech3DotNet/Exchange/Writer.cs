@@ -89,6 +89,7 @@ namespace Mech3DotNet.Exchange
         public void WriteBytes(byte[] v)
         {
             WriteType(TypeMap.Bytes);
+            WriteUsize((ulong)v.LongLength);
             stream.Write(v);
         }
 

@@ -42,7 +42,7 @@ namespace Mech3DotNet.Exchange
             70 => TypeMap.Struct,
             80 => TypeMap.EnumUnit,
             81 => TypeMap.EnumNewType,
-            _ => throw new System.ArgumentOutOfRangeException(),
+            _ => throw new System.ArgumentOutOfRangeException($"Unknown type {value}"),
         };
 
         public static int ToInt(this TypeMap type) => type switch

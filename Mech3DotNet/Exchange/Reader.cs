@@ -47,7 +47,7 @@ namespace Mech3DotNet.Exchange
         {
             var actual = ReadType();
             if (actual != expected)
-                throw new ArgumentException();
+                throw new ArgumentException($"Expected {expected}, but found {actual}");
         }
 
         public sbyte ReadI8()

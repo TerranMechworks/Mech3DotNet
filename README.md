@@ -6,7 +6,7 @@ Obviously, this is an unofficial fan effort and not connected to the developers,
 
 ## Changelog
 
-### [0.6.0-rc1] - unreleased
+### [0.6.0-rc1] - 2022-11-29
 
 * Breaking changes!
 * Tracks [mech3ax v0.6.0-rc2](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.0-rc2)

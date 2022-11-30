@@ -23,8 +23,8 @@ jobs:
           echo "ref_name: $ref_name"
 
           # is this a test release, or a real release?
-          if [[ "$ref_name" == "workflow_release" ]]; then
-            version="v0.0.0-test"
+          if [[ "$ref_name" == 'workflow_release' ]]; then
+            version='v0.0.0-test'
             target_commitish='${{ github.sha }}'
           else
             version="$ref_name"
@@ -35,9 +35,9 @@ jobs:
 
           # is this a pre-release (-rc*, -alpha, -beta, -test)?
           if [[ "$version" == *"-"* ]]; then
-            prerelease="true"
+            prerelease='true'
           else
-            prerelease="false"
+            prerelease='false'
           fi
           echo "prerelease: $prerelease"
 
@@ -61,7 +61,7 @@ jobs:
       - name: Create staging dir
         id: staging
         run: |
-          staging="Mech3DotNet-${{ steps.info.outputs.version }}"
+          staging='Mech3DotNet-${{ steps.info.outputs.version }}'
           mkdir "$staging"
           cp {README.md,LICENSE} "$staging/"
           echo "staging=$staging" >> $GITHUB_OUTPUT
@@ -77,16 +77,16 @@ jobs:
           dotnet build
           --no-incremental
           --no-restore
-          --configuration "Release"
-          --output "${{ steps.staging.outputs.staging }}"
+          --configuration 'Release'
+          --output '${{ steps.staging.outputs.staging }}'
           Mech3DotNet
         shell: bash
 
       - name: Package archives
         id: package
         run: |
-          tar czvf "${{ steps.staging.outputs.staging }}.tar.gz" "${{ steps.staging.outputs.staging }}"
-          7z a "${{ steps.staging.outputs.staging }}.zip" "${{ steps.staging.outputs.staging }}"
+          tar czvf '${{ steps.staging.outputs.staging }}.tar.gz' '${{ steps.staging.outputs.staging }}'
+          7z a '${{ steps.staging.outputs.staging }}.zip' '${{ steps.staging.outputs.staging }}'
         shell: bash
 
       - name: Create GitHub release
@@ -94,7 +94,7 @@ jobs:
         run: |
           curl \
             --fail \
-            --request "POST" \
+            --request 'POST' \
             --url '${{ github.api_url }}/repos/${{ github.repository }}/releases' \
             --header 'Accept: application/vnd.github+json' \
             --header 'Authorization: Bearer ${{ github.token }}' \
@@ -119,7 +119,7 @@ jobs:
         run: |
           curl \
             --fail \
-            --request "POST" \
+            --request 'POST' \
             --url '${{ steps.release.outputs.upload_url }}?name=${{ steps.staging.outputs.staging }}.tar.gz' \
             --header 'Accept: application/vnd.github+json' \
             --header 'Authorization: Bearer ${{ github.token }}' \
@@ -131,7 +131,7 @@ jobs:
         run: |
           curl \
             --fail \
-            --request "POST" \
+            --request 'POST' \
             --url '${{ steps.release.outputs.upload_url }}?name=${{ steps.staging.outputs.staging }}.zip' \
             --header 'Accept: application/vnd.github+json' \
             --header 'Authorization: Bearer ${{ github.token }}' \

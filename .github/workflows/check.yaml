@@ -1,4 +1,5 @@
 name: Check
+
 on:
   push:
     branches:
@@ -7,28 +8,31 @@ on:
   pull_request:
     branches:
     - main
+
 jobs:
   check:
     name: Check
     runs-on: ubuntu-latest
     steps:
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '6.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
 
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Run dotnet restore
-      run: dotnet restore
+      - name: Run dotnet restore
+        run: dotnet restore
 
-    - name: Run dotnet build
-      run: >
-        dotnet build
-        --no-incremental
-        --no-restore
+      - name: Run dotnet build
+        run: >
+          dotnet build
+          --no-incremental
+          --no-restore
 
-    # -- this would need mech3ax present
-    # - name: Run dotnet test
-    #   run: dotnet test --no-restore --logger "console;verbosity=detailed"
+      - name: Run dotnet test
+        run: >
+          dotnet test
+          --no-restore
+          --logger "console;verbosity=detailed"

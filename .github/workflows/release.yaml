@@ -1,4 +1,5 @@
 name: Release
+
 on:
   push:
     branches:
@@ -9,97 +10,131 @@ on:
     - 'v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
     - 'v[0-9]+.[0-9]+.[0-9]+-alpha'
     - 'v[0-9]+.[0-9]+.[0-9]+-beta'
+
 jobs:
   release:
     name: release
     runs-on: ubuntu-latest
     steps:
-    - name: Get the branch and tag
-      id: info
-      run: |
-        branch="${GITHUB_REF#refs/heads/}"
-        echo "branch: $branch"
-        if [[ "$branch" == "workflow_release" ]]; then
-          version="TEST-0.0.0"
-          draft="true"
-        else
-          version="${GITHUB_REF#refs/tags/}"
-          draft="false"
-        fi
-        date=$(env TZ=':America/Los_Angeles' date +'%Y-%m-%d')
-        echo "version: $version, draft: $draft, date: $date"
-        echo "version=$version" >> $GITHUB_OUTPUT
-        echo "draft=$draft" >> $GITHUB_OUTPUT
-        echo "date=$date" >> $GITHUB_OUTPUT
-      shell: bash
+      - name: Get release information
+        id: info
+        run: |
+          ref_name='${{ github.ref_name }}'
+          echo "ref_name: $ref_name"
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '6.0.x'
+          # is this a test release, or a real release?
+          if [[ "$ref_name" == "workflow_release" ]]; then
+            version="v0.0.0-test"
+            target_commitish='${{ github.sha }}'
+          else
+            version="$ref_name"
+            target_commitish="$ref_name"
+          fi
+          echo "version: $version"
+          echo "target_commitish: $target_commitish"
 
-    - name: Checkout repository
-      uses: actions/checkout@v3
+          # is this a pre-release (-rc*, -alpha, -beta, -test)?
+          if [[ "$version" == *"-"* ]]; then
+            prerelease="true"
+          else
+            prerelease="false"
+          fi
+          echo "prerelease: $prerelease"
 
-    - name: Create staging dir
-      id: staging
-      run: |
-        staging="Mech3DotNet-${{ steps.info.outputs.version }}"
-        mkdir "$staging"
-        cp {README.md,LICENSE} "$staging/"
-        echo "staging=$staging" >> $GITHUB_OUTPUT
-      shell: bash
+          date=$(env TZ=':America/Los_Angeles' date +'%Y-%m-%d')
+          echo "date: $date"
 
-    - name: Run dotnet restore
-      run: dotnet restore
-      shell: bash
+          echo "version=$version" >> $GITHUB_OUTPUT
+          echo "target_commitish=$target_commitish" >> $GITHUB_OUTPUT
+          echo "date=$date" >> $GITHUB_OUTPUT
+          echo "prerelease=$prerelease" >> $GITHUB_OUTPUT
+        shell: bash
 
-    - name: Run dotnet build
-      id: build
-      run: >
-        dotnet build
-        --no-incremental
-        --no-restore
-        --configuration "Release"
-        --output "${{ steps.staging.outputs.staging }}"
-        Mech3DotNet
-      shell: bash
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
 
-    - name: Package archives
-      id: package
-      run: |
-        tar czvf "${{ steps.staging.outputs.staging }}.tar.gz" "${{ steps.staging.outputs.staging }}"
-        7z a "${{ steps.staging.outputs.staging }}.zip" "${{ steps.staging.outputs.staging }}"
-      shell: bash
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Create GitHub release
-      id: release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.info.outputs.version }}
-        release_name: ${{ steps.info.outputs.version }} (${{ steps.info.outputs.date }})
-        draft: ${{ steps.info.outputs.draft }}
+      - name: Create staging dir
+        id: staging
+        run: |
+          staging="Mech3DotNet-${{ steps.info.outputs.version }}"
+          mkdir "$staging"
+          cp {README.md,LICENSE} "$staging/"
+          echo "staging=$staging" >> $GITHUB_OUTPUT
+        shell: bash
 
-    - name: Upload tar archive
-      id: upload_tar
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.release.outputs.upload_url }}
-        asset_path: "${{ steps.staging.outputs.staging }}.tar.gz"
-        asset_name: "${{ steps.staging.outputs.staging }}.tar.gz"
-        asset_content_type: application/octet-stream
+      - name: Run dotnet restore
+        run: dotnet restore
+        shell: bash
 
-    - name: Upload zip archive
-      id: upload_zip
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.release.outputs.upload_url }}
-        asset_path: "${{ steps.staging.outputs.staging }}.zip"
-        asset_name: "${{ steps.staging.outputs.staging }}.zip"
-        asset_content_type: application/octet-stream
+      - name: Run dotnet build
+        id: build
+        run: >
+          dotnet build
+          --no-incremental
+          --no-restore
+          --configuration "Release"
+          --output "${{ steps.staging.outputs.staging }}"
+          Mech3DotNet
+        shell: bash
+
+      - name: Package archives
+        id: package
+        run: |
+          tar czvf "${{ steps.staging.outputs.staging }}.tar.gz" "${{ steps.staging.outputs.staging }}"
+          7z a "${{ steps.staging.outputs.staging }}.zip" "${{ steps.staging.outputs.staging }}"
+        shell: bash
+
+      - name: Create GitHub release
+        id: release
+        run: |
+          curl \
+            --fail \
+            --request "POST" \
+            --url '${{ github.api_url }}/repos/${{ github.repository }}/releases' \
+            --header 'Accept: application/vnd.github+json' \
+            --header 'Authorization: Bearer ${{ github.token }}' \
+            --header 'Content-type: application/json' \
+            --data '{
+              "tag_name": "${{ steps.info.outputs.version }}",
+              "target_commitish": "${{ steps.info.outputs.target_commitish }}",
+              "name": "${{ steps.info.outputs.version }} (${{ steps.info.outputs.date }})",
+              "prerelease": ${{ steps.info.outputs.prerelease }},
+              "draft": true
+              }' \
+            --output 'release.json'
+          cat release.json
+
+          upload_url=$(jq -r '.upload_url' release.json)
+          upload_url="${upload_url%%'{?name,label}'}"
+          echo "upload_url: $upload_url"
+          echo "upload_url=$upload_url" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Upload release tar archive
+        run: |
+          curl \
+            --fail \
+            --request "POST" \
+            --url '${{ steps.release.outputs.upload_url }}?name=${{ steps.staging.outputs.staging }}.tar.gz' \
+            --header 'Accept: application/vnd.github+json' \
+            --header 'Authorization: Bearer ${{ github.token }}' \
+            --header 'Content-type: application/octet-stream' \
+            --data-binary '@${{ steps.staging.outputs.staging }}.tar.gz'
+        shell: bash
+
+      - name: Upload release zip archive
+        run: |
+          curl \
+            --fail \
+            --request "POST" \
+            --url '${{ steps.release.outputs.upload_url }}?name=${{ steps.staging.outputs.staging }}.zip' \
+            --header 'Accept: application/vnd.github+json' \
+            --header 'Authorization: Bearer ${{ github.token }}' \
+            --header 'Content-type: application/octet-stream' \
+            --data-binary '@${{ steps.staging.outputs.staging }}.zip'
+        shell: bash

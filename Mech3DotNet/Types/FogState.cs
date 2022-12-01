@@ -36,7 +36,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("fog_type");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.FogType.Converter)(v.fogType);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.FogTypeConverter.Converter)(v.fogType);
             s.SerializeFieldName("color");
             s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("altitude");
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "fog_type":
-                        fields.fogType.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.FogType.Converter)();
+                        fields.fogType.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.FogTypeConverter.Converter)();
                         break;
                     case "color":
                         fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();

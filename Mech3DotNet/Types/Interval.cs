@@ -28,7 +28,7 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             s.SerializeStruct(3);
             s.SerializeFieldName("interval_type");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.IntervalType.Converter)(v.intervalType);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.IntervalTypeConverter.Converter)(v.intervalType);
             s.SerializeFieldName("interval_value");
             ((Action<float>)s.SerializeF32)(v.intervalValue);
             s.SerializeFieldName("flag");
@@ -48,7 +48,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "interval_type":
-                        fields.intervalType.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.IntervalType.Converter)();
+                        fields.intervalType.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.IntervalTypeConverter.Converter)();
                         break;
                     case "interval_value":
                         fields.intervalValue.Value = d.DeserializeF32();

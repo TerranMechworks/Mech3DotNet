@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             s.SerializeStruct(2);
             s.SerializeFieldName("offset");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.StartOffset.Converter)(v.offset);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.StartOffsetConverter.Converter)(v.offset);
             s.SerializeFieldName("time");
             ((Action<float>)s.SerializeF32)(v.time);
         }
@@ -46,7 +46,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "offset":
-                        fields.offset.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.StartOffset.Converter)();
+                        fields.offset.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.StartOffsetConverter.Converter)();
                         break;
                     case "time":
                         fields.time.Value = d.DeserializeF32();

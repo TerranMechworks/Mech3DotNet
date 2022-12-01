@@ -53,13 +53,13 @@ namespace Mech3DotNet.Types.Image
             s.SerializeFieldName("rename");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.rename);
             s.SerializeFieldName("alpha");
-            s.Serialize(Mech3DotNet.Types.Image.TextureAlpha.Converter)(v.alpha);
+            s.Serialize(Mech3DotNet.Types.Image.TextureAlphaConverter.Converter)(v.alpha);
             s.SerializeFieldName("width");
             ((Action<ushort>)s.SerializeU16)(v.width);
             s.SerializeFieldName("height");
             ((Action<ushort>)s.SerializeU16)(v.height);
             s.SerializeFieldName("stretch");
-            s.Serialize(Mech3DotNet.Types.Image.TextureStretch.Converter)(v.stretch);
+            s.Serialize(Mech3DotNet.Types.Image.TextureStretchConverter.Converter)(v.stretch);
             s.SerializeFieldName("image_loaded");
             ((Action<bool>)s.SerializeBool)(v.imageLoaded);
             s.SerializeFieldName("alpha_loaded");
@@ -96,7 +96,7 @@ namespace Mech3DotNet.Types.Image
                         fields.rename.Value = d.DeserializeRefOption(d.DeserializeString)();
                         break;
                     case "alpha":
-                        fields.alpha.Value = d.Deserialize(Mech3DotNet.Types.Image.TextureAlpha.Converter)();
+                        fields.alpha.Value = d.Deserialize(Mech3DotNet.Types.Image.TextureAlphaConverter.Converter)();
                         break;
                     case "width":
                         fields.width.Value = d.DeserializeU16();
@@ -105,7 +105,7 @@ namespace Mech3DotNet.Types.Image
                         fields.height.Value = d.DeserializeU16();
                         break;
                     case "stretch":
-                        fields.stretch.Value = d.Deserialize(Mech3DotNet.Types.Image.TextureStretch.Converter)();
+                        fields.stretch.Value = d.Deserialize(Mech3DotNet.Types.Image.TextureStretchConverter.Converter)();
                         break;
                     case "image_loaded":
                         fields.imageLoaded.Value = d.DeserializeBool();

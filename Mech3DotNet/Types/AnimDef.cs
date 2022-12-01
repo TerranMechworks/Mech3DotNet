@@ -101,7 +101,7 @@ namespace Mech3DotNet.Types.Anim
             s.SerializeFieldName("auto_reset_node_states");
             ((Action<bool>)s.SerializeBool)(v.autoResetNodeStates);
             s.SerializeFieldName("activation");
-            s.Serialize(Mech3DotNet.Types.Anim.AnimActivation.Converter)(v.activation);
+            s.Serialize(Mech3DotNet.Types.Anim.AnimActivationConverter.Converter)(v.activation);
             s.SerializeFieldName("execution");
             s.Serialize(Mech3DotNet.Types.Anim.Execution.Converter)(v.execution);
             s.SerializeFieldName("network_log");
@@ -189,7 +189,7 @@ namespace Mech3DotNet.Types.Anim
                         fields.autoResetNodeStates.Value = d.DeserializeBool();
                         break;
                     case "activation":
-                        fields.activation.Value = d.Deserialize(Mech3DotNet.Types.Anim.AnimActivation.Converter)();
+                        fields.activation.Value = d.Deserialize(Mech3DotNet.Types.Anim.AnimActivationConverter.Converter)();
                         break;
                     case "execution":
                         fields.execution.Value = d.Deserialize(Mech3DotNet.Types.Anim.Execution.Converter)();

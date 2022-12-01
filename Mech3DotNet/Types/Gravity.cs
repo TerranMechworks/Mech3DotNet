@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             s.SerializeStruct(2);
             s.SerializeFieldName("mode");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.GravityMode.Converter)(v.mode);
+            s.Serialize(Mech3DotNet.Types.Anim.Events.GravityModeConverter.Converter)(v.mode);
             s.SerializeFieldName("value");
             ((Action<float>)s.SerializeF32)(v.value);
         }
@@ -46,7 +46,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "mode":
-                        fields.mode.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.GravityMode.Converter)();
+                        fields.mode.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.GravityModeConverter.Converter)();
                         break;
                     case "value":
                         fields.value.Value = d.DeserializeF32();

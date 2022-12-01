@@ -2,42 +2,24 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public sealed class StartOffset
+    public enum StartOffset
+    {
+        Animation,
+        Sequence,
+        Event,
+    }
+
+    public static class StartOffsetConverter
     {
         public static readonly TypeConverter<StartOffset> Converter = new TypeConverter<StartOffset>(Deserialize, Serialize);
 
-        public enum Variants
-        {
-            Animation,
-            Sequence,
-            Event,
-        }
-
-        private StartOffset(Variants variant)
-        {
-            Variant = variant;
-        }
-        public static readonly StartOffset Animation = new StartOffset(Variants.Animation);
-
-        public static readonly StartOffset Sequence = new StartOffset(Variants.Sequence);
-
-        public static readonly StartOffset Event = new StartOffset(Variants.Event);
-
-        public Variants Variant { get; private set; }
-        public bool IsAnimation() => Variant == Variants.Animation;
-        public bool IsSequence() => Variant == Variants.Sequence;
-        public bool IsEvent() => Variant == Variants.Event;
-        public override bool Equals(object obj) => Equals(obj as StartOffset);
-        public bool Equals(StartOffset? other) => other != null && Variant == other.Variant;
-        public override int GetHashCode() => System.HashCode.Combine(Variant);
-
         private static void Serialize(StartOffset v, Serializer s)
         {
-            uint variantIndex = v.Variant switch
+            uint variantIndex = v switch
             {
-                Variants.Animation => 0,
-                Variants.Sequence => 1,
-                Variants.Event => 2,
+                StartOffset.Animation => 0,
+                StartOffset.Sequence => 1,
+                StartOffset.Event => 2,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
             s.SerializeUnitVariant(variantIndex);

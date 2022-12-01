@@ -2,52 +2,28 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim
 {
-    public sealed class AnimActivation
+    public enum AnimActivation
+    {
+        WeaponHit,
+        CollideHit,
+        WeaponOrCollideHit,
+        OnCall,
+        OnStartup,
+    }
+
+    public static class AnimActivationConverter
     {
         public static readonly TypeConverter<AnimActivation> Converter = new TypeConverter<AnimActivation>(Deserialize, Serialize);
 
-        public enum Variants
-        {
-            WeaponHit,
-            CollideHit,
-            WeaponOrCollideHit,
-            OnCall,
-            OnStartup,
-        }
-
-        private AnimActivation(Variants variant)
-        {
-            Variant = variant;
-        }
-        public static readonly AnimActivation WeaponHit = new AnimActivation(Variants.WeaponHit);
-
-        public static readonly AnimActivation CollideHit = new AnimActivation(Variants.CollideHit);
-
-        public static readonly AnimActivation WeaponOrCollideHit = new AnimActivation(Variants.WeaponOrCollideHit);
-
-        public static readonly AnimActivation OnCall = new AnimActivation(Variants.OnCall);
-
-        public static readonly AnimActivation OnStartup = new AnimActivation(Variants.OnStartup);
-
-        public Variants Variant { get; private set; }
-        public bool IsWeaponHit() => Variant == Variants.WeaponHit;
-        public bool IsCollideHit() => Variant == Variants.CollideHit;
-        public bool IsWeaponOrCollideHit() => Variant == Variants.WeaponOrCollideHit;
-        public bool IsOnCall() => Variant == Variants.OnCall;
-        public bool IsOnStartup() => Variant == Variants.OnStartup;
-        public override bool Equals(object obj) => Equals(obj as AnimActivation);
-        public bool Equals(AnimActivation? other) => other != null && Variant == other.Variant;
-        public override int GetHashCode() => System.HashCode.Combine(Variant);
-
         private static void Serialize(AnimActivation v, Serializer s)
         {
-            uint variantIndex = v.Variant switch
+            uint variantIndex = v switch
             {
-                Variants.WeaponHit => 0,
-                Variants.CollideHit => 1,
-                Variants.WeaponOrCollideHit => 2,
-                Variants.OnCall => 3,
-                Variants.OnStartup => 4,
+                AnimActivation.WeaponHit => 0,
+                AnimActivation.CollideHit => 1,
+                AnimActivation.WeaponOrCollideHit => 2,
+                AnimActivation.OnCall => 3,
+                AnimActivation.OnStartup => 4,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
             s.SerializeUnitVariant(variantIndex);

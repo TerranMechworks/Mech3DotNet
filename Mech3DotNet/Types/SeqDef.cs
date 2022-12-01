@@ -33,7 +33,7 @@ namespace Mech3DotNet.Types.Anim
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("activation");
-            s.Serialize(Mech3DotNet.Types.Anim.SeqActivation.Converter)(v.activation);
+            s.Serialize(Mech3DotNet.Types.Anim.SeqActivationConverter.Converter)(v.activation);
             s.SerializeFieldName("events");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.Event.Converter))(v.events);
             s.SerializeFieldName("pointer");
@@ -57,7 +57,7 @@ namespace Mech3DotNet.Types.Anim
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "activation":
-                        fields.activation.Value = d.Deserialize(Mech3DotNet.Types.Anim.SeqActivation.Converter)();
+                        fields.activation.Value = d.Deserialize(Mech3DotNet.Types.Anim.SeqActivationConverter.Converter)();
                         break;
                     case "events":
                         fields.events.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.Events.Event.Converter))();

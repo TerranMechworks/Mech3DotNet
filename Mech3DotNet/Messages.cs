@@ -1,13 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
-using Mech3DotNet.Types.Messages;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Types.Messages
 {
-    public class Mech3Msg
+    /// <summary>Message/localisation data.</summary>
+    public partial class Messages
     {
+        /// <summary>
+        /// Read message/localisation data.
+        ///
+        /// Message data cannot be written again.
+        /// </summary>
         public static Messages Read(string inputPath, GameType gameType)
         {
             if (inputPath == null)
@@ -39,6 +44,11 @@ namespace Mech3DotNet
             return messages;
         }
 
+        /// <summary>
+        /// Read message/localisation data, discarding the language ID.
+        ///
+        /// Message data cannot be written again.
+        /// </summary>
         public static Dictionary<string, string> ReadAsDict(string inputPath, GameType gameType)
         {
             var messages = Read(inputPath, gameType);

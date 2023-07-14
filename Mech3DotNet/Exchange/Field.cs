@@ -1,5 +1,11 @@
 namespace Mech3DotNet.Exchange
 {
+    /// <summary>
+    /// A field of a structure being deserialized.
+    ///
+    /// The field's value can be set. To get the value, call <c>Unwrap</c>,
+    /// which throws an exception if the value has not been set.
+    /// </summary>
     public class Field<V>
     {
         private bool isSome;

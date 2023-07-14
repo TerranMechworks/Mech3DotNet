@@ -2,6 +2,11 @@ using System;
 
 namespace Mech3DotNet.Exchange
 {
+    /// <summary>
+    /// A non-generic/dynamic type converter.
+    ///
+    /// Used for registering generic type conversions with a serializer or deserializer.
+    /// </summary>
     public readonly struct TypeConverter
     {
         public readonly Type Type;
@@ -30,6 +35,12 @@ namespace Mech3DotNet.Exchange
         }
     }
 
+    /// <summary>
+    /// A generic/static type converter.
+    ///
+    /// Used for defining exchange serialization and deserialization of a
+    /// non-generic C# type.
+    /// </summary>
     public readonly struct TypeConverter<T>
     {
         public readonly Func<Deserializer, T> Deserialize;

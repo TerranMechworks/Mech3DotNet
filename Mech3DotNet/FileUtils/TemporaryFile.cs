@@ -3,6 +3,7 @@ using System.IO;
 
 namespace Mech3DotNet.FileUtils
 {
+    /// <summary>A temporary file that is deleted when disposed.</summary>
     public class TemporaryFile : IDisposable
     {
         private string? filePath;

@@ -9,6 +9,7 @@ namespace Mech3DotNet.Exchange
         NewType,
     }
 
+    /// <summary>A reader of binary exchange data. Driven by a deserializer.</summary>
     public class Reader : IDisposable
     {
         private MemoryStream stream;

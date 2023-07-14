@@ -1,17 +1,45 @@
 using System.Collections.Generic;
+using Mech3DotNet.Types.Archive;
 using Mech3DotNet.Types.Motion;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
-    public static class Motions<TQuaternion, TVec3>
+    /// <summary>Motion data.</summary>
+    public class Motions<TQuaternion, TVec3> : Archive<Motion<TQuaternion, TVec3>>, IWritable
         where TQuaternion : notnull
         where TVec3 : notnull
     {
-        private static Dictionary<string, Motion<TQuaternion, TVec3>> Read(string inputPath, GameType gameType, out byte[] manifest)
+        public GameType gameType;
+
+        private static GameType ValidateGameType(GameType gameType)
         {
+            switch (gameType)
+            {
+                case GameType.MW:
+                case GameType.PM:
+                    return gameType;
+                case GameType.RC:
+                case GameType.CS:
+                    throw new System.ArgumentException("unsupported game type");
+                default:
+                    throw new System.ArgumentOutOfRangeException(nameof(GameType));
+            }
+        }
+
+        public Motions(
+            Dictionary<string, Motion<TQuaternion, TVec3>> items,
+            List<ArchiveEntry> entries,
+            GameType gameType) : base(items, entries)
+        {
+            this.gameType = ValidateGameType(gameType);
+        }
+
+        private static Dictionary<string, Motion<TQuaternion, TVec3>> ReadRaw(string inputPath, GameType gameType, out byte[] manifest_data)
+        {
+            ValidateGameType(gameType);
             var motions = new Dictionary<string, Motion<TQuaternion, TVec3>>();
-            manifest = Helpers.ReadArchiveRaw(inputPath, gameType, Helpers.MANIFEST, Interop.ReadMotion, (string name, byte[] data) =>
+            manifest_data = Helpers.ReadArchive(inputPath, gameType, Helpers.MANIFEST, Interop.ReadMotion, (string name, byte[] data) =>
             {
                 var motion = Interop.Deserialize(data, Motion<TQuaternion, TVec3>.Converter);
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
@@ -20,47 +48,35 @@ namespace Mech3DotNet
             return motions;
         }
 
-        public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadMW(string inputPath)
+        /// <summary>
+        /// Read motion data, discarding the manifest.
+        ///
+        /// Without the manifest, the data cannot be written again.
+        /// </summary>
+        public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadAsDict(string inputPath, GameType gameType)
         {
-            return Read(inputPath, GameType.MW, out _);
+            return ReadRaw(inputPath, gameType, out _);
         }
 
-        public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadPM(string inputPath)
+        /// <summary>Read motion data, retaining the manifest.</summary>
+        public static Motions<TQuaternion, TVec3> Read(string inputPath, GameType gameType)
         {
-            return Read(inputPath, GameType.PM, out _);
+            var items = ReadRaw(inputPath, gameType, out var manifest_data);
+            var manifest = DeserializeManifest(manifest_data);
+            return new Motions<TQuaternion, TVec3>(items, manifest, gameType);
         }
 
-        public static Archive<Motion<TQuaternion, TVec3>> ReadArchiveMW(string inputPath)
+        /// <summary>Write motion data.</summary>
+        public void Write(string outputPath)
         {
-            var items = Read(inputPath, GameType.MW, out byte[] manifest);
-            return new Archive<Motion<TQuaternion, TVec3>>(items, manifest);
-        }
-
-        public static Archive<Motion<TQuaternion, TVec3>> ReadArchivePM(string inputPath)
-        {
-            var items = Read(inputPath, GameType.PM, out byte[] manifest);
-            return new Archive<Motion<TQuaternion, TVec3>>(items, manifest);
-        }
-
-        private static void Write(string outputPath, GameType gameType, Archive<Motion<TQuaternion, TVec3>> archive)
-        {
-            var manifest = archive.SerializeManifest();
-            Helpers.WriteArchiveRaw(outputPath, gameType, manifest, Interop.WriteMotion, (string name) =>
+            ValidateGameType(gameType);
+            var manifest = SerializeManifest();
+            Helpers.WriteArchive(outputPath, gameType, manifest, Interop.WriteMotion, (string name) =>
             {
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
-                var item = archive.items[name.ToLowerInvariant()];
+                var item = items[name.ToLowerInvariant()];
                 return Interop.Serialize(item, Motion<TQuaternion, TVec3>.Converter);
             });
-        }
-
-        public static void WriteArchiveMW(string outputPath, Archive<Motion<TQuaternion, TVec3>> archive)
-        {
-            Write(outputPath, GameType.MW, archive);
-        }
-
-        public static void WriteArchivePM(string outputPath, Archive<Motion<TQuaternion, TVec3>> archive)
-        {
-            Write(outputPath, GameType.PM, archive);
         }
     }
 }

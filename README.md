@@ -6,6 +6,17 @@ Obviously, this is an unofficial fan effort and not connected to the developers,
 
 ## Changelog
 
+### [0.6.0-rc4] - Unreleased
+
+* Breaking changes!
+* Serialize C# enums as enums, not classes.
+* Tracks [mech3ax v0.6.0-rc4](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.0-rc4)
+* Major rewrite of how types are read and written.
+
+### [0.6.0-rc3] - Unreleased
+
+* This release was skipped.
+
 ### [0.6.0-rc2] - 2022-11-30
 
 * Breaking changes!

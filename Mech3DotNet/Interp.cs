@@ -6,28 +6,40 @@ using static Mech3DotNet.Helpers;
 
 namespace Mech3DotNet
 {
-    public static class Interp
+    /// <summary>Interpreter data.</summary>
+    public class Interp : IWritable
     {
-        private static readonly TypeConverter<List<Script>> ScriptsConverter = new TypeConverter<List<Script>>(DeserializeScripts, SerializeScripts);
+        public List<Script> scripts;
 
-        public static List<Script> Read(string inputPath)
+        public Interp(List<Script> scripts)
         {
-            return ReadData(inputPath, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
+            this.scripts = scripts ?? throw new System.ArgumentNullException(nameof(scripts));
         }
 
+        /// <summary>Read interpreter data, and index by lowercase script name.</summary>
         public static Dictionary<string, Script> ReadAsDict(string inputPath)
         {
-            var scripts = Read(inputPath);
+            var scripts = ReadData(inputPath, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
             var dict = new Dictionary<string, Script>(scripts.Count);
             foreach (var script in scripts)
                 dict.Add(script.name.ToLowerInvariant(), script);
             return dict;
         }
 
-        public static void Write(string outputPath, List<Script> scripts)
+        /// <summary>Read interpreter data.</summary>
+        public static Interp Read(string inputPath)
+        {
+            var scripts = ReadData(inputPath, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
+            return new Interp(scripts);
+        }
+
+        /// <summary>Write interpreter data.</summary>
+        public void Write(string outputPath)
         {
             WriteData(outputPath, Helpers.IGNORED, Interop.WriteInterp, scripts, ScriptsConverter);
         }
+
+        private static readonly TypeConverter<List<Script>> ScriptsConverter = new TypeConverter<List<Script>>(DeserializeScripts, SerializeScripts);
 
         private static void SerializeScripts(List<Script> v, Serializer s)
         {

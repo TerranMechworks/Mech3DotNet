@@ -3,6 +3,7 @@ using System.IO;
 
 namespace Mech3DotNet.Exchange
 {
+    /// <summary>A writer of binary exchange data. Driven by a serializer.</summary>
     public class Writer : IDisposable
     {
         private MemoryStream stream;

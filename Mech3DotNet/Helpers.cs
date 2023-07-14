@@ -28,7 +28,7 @@ namespace Mech3DotNet
         internal const GameType IGNORED = GameType.MW;
         internal const string MANIFEST = "manifest.bin";
 
-        public static byte[] ReadArchiveRaw(string inputPath, GameType gameType, string manifestName, ReadArchiveFn readFunction, ReadArchiveCb readCallback)
+        public static byte[] ReadArchive(string inputPath, GameType gameType, string manifestName, ReadArchiveFn readFunction, ReadArchiveCb readCallback)
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
@@ -65,15 +65,15 @@ namespace Mech3DotNet
             return manifest;
         }
 
-        public static void WriteArchiveRaw(string outputPath, GameType gameType, byte[] manifest, WriteArchiveFn writeFunction, WriteArchiveCb writeCallback)
+        public static void WriteArchive(string outputPath, GameType gameType, byte[] manifest_data, WriteArchiveFn writeFunction, WriteArchiveCb writeCallback)
         {
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
             var gameTypeId = GameTypeToId(gameType);
-            var manifestLength = (ulong)manifest.Length;
+            var manifestLength = (ulong)manifest_data.Length;
             ExceptionDispatchInfo? ex = null;
             int res;
-            using (var manifestPointer = new PinnedGCHandle(manifest))
+            using (var manifestPointer = new PinnedGCHandle(manifest_data))
             {
                 res = writeFunction(outputPath, gameTypeId, manifestPointer, manifestLength, (IntPtr namePointer, ulong nameLength, IntPtr buffer) =>
                 {
@@ -104,7 +104,7 @@ namespace Mech3DotNet
             }
         }
 
-        public static byte[] ReadDataRaw(string inputPath, GameType gameType, ReadDataFn readFunction)
+        public static T ReadData<T>(string inputPath, GameType gameType, ReadDataFn readFunction, TypeConverter<T> converter)
         {
             if (inputPath == null)
                 throw new ArgumentNullException(nameof(inputPath));
@@ -128,20 +128,15 @@ namespace Mech3DotNet
                 Interop.ThrowLastError();
             if (data == null)
                 throw new InvalidOperationException("data is null after reading");
-            return data;
-        }
-
-        public static T ReadData<T>(string inputPath, GameType gameType, ReadDataFn readFunction, TypeConverter<T> converter)
-        {
-            var data = ReadDataRaw(inputPath, gameType, readFunction);
             return Interop.Deserialize(data, converter);
         }
 
-        public static void WriteDataRaw(string outputPath, GameType gameType, WriteDataFn writeFunction, byte[] data)
+        public static void WriteData<T>(string outputPath, GameType gameType, WriteDataFn writeFunction, T value, TypeConverter<T> converter)
         {
             if (outputPath == null)
                 throw new ArgumentNullException(nameof(outputPath));
             var gameTypeId = GameTypeToId(gameType);
+            var data = Interop.Serialize(value, converter);
             var length = (ulong)data.Length;
             int res;
             using (var pointer = new PinnedGCHandle(data))
@@ -150,12 +145,6 @@ namespace Mech3DotNet
             }
             if (res != 0)
                 Interop.ThrowLastError();
-        }
-
-        public static void WriteData<T>(string outputPath, GameType gameType, WriteDataFn writeFunction, T value, TypeConverter<T> converter)
-        {
-            var data = Interop.Serialize(value, converter);
-            WriteDataRaw(outputPath, gameType, writeFunction, data);
         }
     }
 }

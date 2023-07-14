@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Mech3DotNet.Exchange
 {
+    /// <summary>Mech3ax exchange format deserializer.</summary>
     public class Deserializer
     {
         private Reader r;

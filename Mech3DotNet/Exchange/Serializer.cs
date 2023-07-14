@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Mech3DotNet.Exchange
 {
+    /// <summary>Mech3ax exchange format serializer.</summary>
     public class Serializer
     {
         private Writer w;

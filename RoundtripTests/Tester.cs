@@ -12,10 +12,7 @@ namespace RoundtripTests
     public class Tester
     {
         private delegate T ReadWithGameType<T>(string inputPath, GameType gameType);
-        private delegate void WriteWithGameType<T>(string outputPath, GameType gameType, T archive);
-
         private delegate T ReadWithoutGameType<T>(string inputPath);
-        private delegate void WriteWithoutGameType<T>(string outputPath, T archive);
 
         private List<string> failures;
         private string basePath;
@@ -46,14 +43,15 @@ namespace RoundtripTests
             return value;
         }
 
-        private void Roundtrip<T>(string name, string glob, ReadWithGameType<T> readFn, WriteWithGameType<T> writeFn)
+        private void Roundtrip<T>(string name, string glob, ReadWithGameType<T> readFn)
+        where T : IWritable
         {
             ReadWithoutGameType<T> wrappedReadFn = (string inputPath) => readFn(inputPath, gameType);
-            WriteWithoutGameType<T> wrappedWriteFn = (string outputPath, T archive) => writeFn(outputPath, gameType, archive);
-            Roundtrip<T>(name, glob, wrappedReadFn, wrappedWriteFn);
+            Roundtrip<T>(name, glob, wrappedReadFn);
         }
 
-        private void Roundtrip<T>(string name, string glob, ReadWithoutGameType<T> readFn, WriteWithoutGameType<T> writeFn)
+        private void Roundtrip<T>(string name, string glob, ReadWithoutGameType<T> readFn)
+        where T : IWritable
         {
             var matches = RecursiveGlob(new Regex(glob), basePath);
             var failed = false;
@@ -63,7 +61,7 @@ namespace RoundtripTests
                 var archive = readFn(inputPath);
                 using (var outputPath = new TemporaryFile())
                 {
-                    writeFn(nonNull(outputPath), archive);
+                    archive.Write(nonNull(outputPath));
                     var cmp = CompareFiles(inputPath, outputPath);
                     if (cmp != null)
                     {
@@ -91,8 +89,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Sounds",
                 soundRegex,
-                Mech3DotNet.Sounds.ReadArchive,
-                Mech3DotNet.Sounds.WriteArchive);
+                Mech3DotNet.Sounds.Read);
         }
 
         public void Interp()
@@ -100,8 +97,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Interpreter",
                 @"interp\.zbd$",
-                Mech3DotNet.Interp.Read,
-                Mech3DotNet.Interp.Write);
+                Mech3DotNet.Interp.Read);
         }
 
         public void Messages()
@@ -122,7 +118,7 @@ namespace RoundtripTests
                 Console.WriteLine(inputPath);
                 try
                 {
-                    var messages = Mech3DotNet.Mech3Msg.Read(inputPath, gameType);
+                    var messages = Mech3DotNet.Types.Messages.Messages.Read(inputPath, gameType);
                     if (messages.languageId < 1000)
                         throw new Exception($"Lang ID {messages.languageId}");
                     if (messages.entries.Count < 50)
@@ -145,8 +141,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Textures",
                 @".*?tex.*?\.zbd$",
-                Mech3DotNet.Textures.ReadPackage,
-                Mech3DotNet.Textures.WritePackage);
+                Mech3DotNet.Textures.Read);
         }
 
         public void Readers()
@@ -162,8 +157,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Readers",
                 readerRegex,
-                Mech3DotNet.Readers.ReadArchive,
-                Mech3DotNet.Readers.WriteArchive);
+                Mech3DotNet.ReaderArchiveGeneric.Read);
         }
 
         public void Motions()
@@ -174,15 +168,13 @@ namespace RoundtripTests
                     Roundtrip(
                         "Motions (MW)",
                         @"motion\.zbd$",
-                        Mech3DotNet.Motions<Quaternion, Vec3>.ReadArchiveMW,
-                        Mech3DotNet.Motions<Quaternion, Vec3>.WriteArchiveMW);
+                        Mech3DotNet.Motions<Quaternion, Vec3>.Read);
                     break;
                 case GameType.PM:
                     Roundtrip(
                         "Motions (PM)",
                         @"motion\.zbd$",
-                        Mech3DotNet.Motions<Quaternion, Vec3>.ReadArchivePM,
-                        Mech3DotNet.Motions<Quaternion, Vec3>.WriteArchivePM);
+                        Mech3DotNet.Motions<Quaternion, Vec3>.Read);
                     break;
                 case GameType.RC:
                     Console.WriteLine("No motions for RC");
@@ -203,15 +195,13 @@ namespace RoundtripTests
                     Roundtrip(
                         "Mechlib (MW)",
                         @"mechlib\.zbd$",
-                        Mech3DotNet.MechlibMw.ReadArchive,
-                        Mech3DotNet.MechlibMw.WriteArchive);
+                        Mech3DotNet.MechlibArchiveMw.Read);
                     break;
                 case GameType.PM:
                     Roundtrip(
                         "Mechlib (PM)",
                         @"mechlib\.zbd$",
-                        Mech3DotNet.MechlibPm.ReadArchive,
-                        Mech3DotNet.MechlibPm.WriteArchive);
+                        Mech3DotNet.MechlibArchivePm.Read);
                     break;
                 case GameType.RC:
                     Console.WriteLine("No mechlib for RC");
@@ -232,29 +222,25 @@ namespace RoundtripTests
                     Roundtrip(
                         "GameZ (MW)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.GameZ.ReadMW,
-                        Mech3DotNet.GameZ.WriteMW);
+                        Mech3DotNet.Types.Gamez.GameZDataMw.Read);
                     break;
                 case GameType.PM:
                     Roundtrip(
                         "GameZ (PM)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.GameZ.ReadPM,
-                        Mech3DotNet.GameZ.WritePM);
+                        Mech3DotNet.Types.Gamez.GameZDataPm.Read);
                     break;
                 case GameType.RC:
                     Roundtrip(
                         "GameZ (RC)",
-                        @"gamez\.zbd$",
-                        Mech3DotNet.GameZ.ReadRC,
-                        Mech3DotNet.GameZ.WriteRC);
+                        @"m([1234578]|1[0123])/gamez\.zbd$",
+                        Mech3DotNet.Types.Gamez.GameZDataRc.Read);
                     break;
                 case GameType.CS:
                     Roundtrip(
                         "GameZ (CS)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.GameZ.ReadCS,
-                        Mech3DotNet.GameZ.WriteCS);
+                        Mech3DotNet.Types.Gamez.GameZDataCs.Read);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -269,8 +255,7 @@ namespace RoundtripTests
                     Roundtrip(
                         "Animations (MW)",
                         @"anim\.zbd$",
-                        Mech3DotNet.Anim.ReadPackageMW,
-                        Mech3DotNet.Anim.WritePackageMW);
+                        Mech3DotNet.AnimMw.Read);
                     break;
                 case GameType.PM:
                     Console.WriteLine("Skipping animations for PM");
@@ -297,7 +282,7 @@ namespace RoundtripTests
                 var expectedName = System.IO.Path.GetFileName(inputPath);
                 try
                 {
-                    Mech3DotNet.Sounds.ReadSoundAsWav(inputPath, (string actualName, int channels, int frequency, float[] samples) =>
+                    Mech3DotNet.UnitySounds.ReadSoundAsWav(inputPath, (string actualName, int channels, int frequency, float[] samples) =>
                     {
                         if (expectedName != actualName)
                             throw new ArgumentException($"'{expectedName}' != '{actualName}", "name");
@@ -345,7 +330,7 @@ namespace RoundtripTests
                 Console.WriteLine(inputPath);
                 try
                 {
-                    Mech3DotNet.Sounds.ReadSoundsAsWav(inputPath, gameType, (string name, int channels, int frequency, float[] samples) =>
+                    Mech3DotNet.UnitySounds.ReadSoundsAsWav(inputPath, gameType, (string name, int channels, int frequency, float[] samples) =>
                     { });
                 }
                 catch (Exception e)
@@ -358,6 +343,54 @@ namespace RoundtripTests
                 Console.WriteLine("--- {0} FAIL ---", name);
             else
                 Console.WriteLine("--- {0} OK ---", name);
+        }
+
+        public void Zmap()
+        {
+            switch (gameType)
+            {
+                case GameType.MW:
+                    Console.WriteLine("No zmap for MW");
+                    break;
+                case GameType.PM:
+                    Console.WriteLine("No zmap for PM");
+                    break;
+                case GameType.RC:
+                    Roundtrip(
+                        "Zmap",
+                        @"m([123456789]|1[012])\.zmap$",
+                        Mech3DotNet.Types.Zmap.MapRc.Read);
+                    break;
+                case GameType.CS:
+                    Console.WriteLine("No zmap for CS");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public void Planes()
+        {
+            switch (gameType)
+            {
+                case GameType.MW:
+                    Console.WriteLine("No planes for MW");
+                    break;
+                case GameType.PM:
+                    Console.WriteLine("No planes for PM");
+                    break;
+                case GameType.RC:
+                    Console.WriteLine("No planes for RC");
+                    break;
+                case GameType.CS:
+                    Roundtrip(
+                        "Planes (CS)",
+                        @"planes\.zbd$",
+                        Mech3DotNet.Types.Gamez.GameZDataCs.Read);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void PrintResults()

@@ -36,9 +36,12 @@ namespace RoundtripTests
             tester.Anims();
             tester.SoundWav();
             tester.SoundsWav();
+            tester.Zmap();
+            tester.Planes();
 
             tester.PrintResults();
 
+            /*
             var matches = RecursiveGlob(new Regex(@"/zbd/reader\.zbd"), basePath);
             foreach (var inputPath in matches)
             {
@@ -96,6 +99,7 @@ namespace RoundtripTests
                     Console.WriteLine("{0}", chassisDef);
                 }
             }
+            */
 
             Console.WriteLine("All tests complete, press any key to exit...");
             Console.ReadKey();

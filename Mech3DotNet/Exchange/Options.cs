@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 namespace Mech3DotNet.Exchange
 {
+    /// <summary>Serializer and deserializer options.</summary>
     public static class Options
     {
         public static List<TypeConverter> DefaultConverters = GetDefaultConverters();

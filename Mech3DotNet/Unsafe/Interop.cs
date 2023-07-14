@@ -3,10 +3,13 @@ using System.Runtime.InteropServices;
 
 namespace Mech3DotNet.Unsafe
 {
+    /// <summary>
+    /// Raw, unsafe bindings to the mech3ax library.
+    /// </summary>
     public class Interop
     {
         // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
-        private const string MECH3AX = @"mech3ax-v0.6.0-rc2";
+        private const string MECH3AX = @"mech3ax-v0.6.0-rc3";
         private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
 
         public delegate void DataCb(IntPtr pointer, ulong length);
@@ -28,21 +31,21 @@ namespace Mech3DotNet.Unsafe
         public static extern int ReadInterp(
             [MarshalAs(PStr)] string filename,
             // no difference between games, it's just for consistency
-            int game_type_ignored,
+            int game_type_id_ignored,
             DataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_interp")]
         public static extern int WriteInterp(
             [MarshalAs(PStr)] string filename,
             // no difference between games, it's just for consistency
-            int game_type_ignored,
+            int game_type_id_ignored,
             IntPtr pointer,
             ulong length);
 
         [DllImport(MECH3AX, EntryPoint = "read_messages")]
         public static extern int ReadMessages(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             DataCb callback);
 
         // no write_messages
@@ -50,13 +53,13 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_sounds")]
         public static extern int ReadSounds(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_sounds")]
         public static extern int WriteSounds(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             IntPtr manifest_ptr,
             ulong manifest_len,
             NameBufferCb callback);
@@ -64,7 +67,7 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_sounds_as_wav")]
         public static extern int ReadSoundsAsWav(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             WaveArchiveCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "read_sound_as_wav")]
@@ -72,16 +75,16 @@ namespace Mech3DotNet.Unsafe
             [MarshalAs(PStr)] string filename,
             WaveFileCb callback);
 
-        [DllImport(MECH3AX, EntryPoint = "read_reader")]
-        public static extern int ReadReader(
+        [DllImport(MECH3AX, EntryPoint = "read_reader_json")]
+        public static extern int ReadReaderJson(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             NameDataCb callback);
 
-        [DllImport(MECH3AX, EntryPoint = "write_reader")]
-        public static extern int WriteReader(
+        [DllImport(MECH3AX, EntryPoint = "write_reader_json")]
+        public static extern int WriteReaderJson(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             IntPtr manifest_ptr,
             ulong manifest_len,
             NameBufferCb callback);
@@ -89,13 +92,13 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_reader_raw")]
         public static extern int ReadReaderRaw(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_reader_raw")]
         public static extern int WriteReaderRaw(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             IntPtr manifest_ptr,
             ulong manifest_len,
             NameBufferCb callback);
@@ -103,13 +106,13 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_motion")]
         public static extern int ReadMotion(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_motion")]
         public static extern int WriteMotion(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             IntPtr manifest_ptr,
             ulong manifest_len,
             NameBufferCb callback);
@@ -117,13 +120,13 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_mechlib")]
         public static extern int ReadMechlib(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_mechlib")]
         public static extern int WriteMechlib(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             IntPtr manifest_ptr,
             ulong manifest_len,
             NameBufferCb callback);
@@ -132,14 +135,14 @@ namespace Mech3DotNet.Unsafe
         public static extern int ReadTextures(
             [MarshalAs(PStr)] string filename,
             // no difference between games, it's just for consistency
-            int game_type,
+            int game_type_id,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_textures")]
         public static extern int WriteTextures(
             [MarshalAs(PStr)] string filename,
             // no difference between games, it's just for consistency
-            int game_type,
+            int game_type_id,
             IntPtr manifest_ptr,
             ulong manifest_len,
             NameBufferCb callback);
@@ -147,29 +150,42 @@ namespace Mech3DotNet.Unsafe
         [DllImport(MECH3AX, EntryPoint = "read_gamez")]
         public static extern int ReadGameZ(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             DataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_gamez")]
         public static extern int WriteGameZ(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             IntPtr pointer,
             ulong length);
 
         [DllImport(MECH3AX, EntryPoint = "read_anim")]
         public static extern int ReadAnim(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             NameDataCb callback);
 
         [DllImport(MECH3AX, EntryPoint = "write_anim")]
         public static extern int WriteAnim(
             [MarshalAs(PStr)] string filename,
-            int game_type,
+            int game_type_id,
             IntPtr metadata_ptr,
             ulong metadata_len,
             NameBufferCb callback);
+
+        [DllImport(MECH3AX, EntryPoint = "read_zmap")]
+        public static extern int ReadZmap(
+            [MarshalAs(PStr)] string filename,
+            int game_type_id,
+            DataCb callback);
+
+        [DllImport(MECH3AX, EntryPoint = "write_zmap")]
+        public static extern int WriteZmap(
+            [MarshalAs(PStr)] string filename,
+            int game_type_id,
+            IntPtr pointer,
+            ulong length);
 
         public static string? GetLastError()
         {

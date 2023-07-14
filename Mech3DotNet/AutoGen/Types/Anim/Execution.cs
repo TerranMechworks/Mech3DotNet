@@ -19,7 +19,7 @@ namespace Mech3DotNet.Types.Anim
             Variant = variant;
             Value = value;
         }
-        public static Execution ByRange(Mech3DotNet.Types.Types.Range value) => new Execution(Variants.ByRange, value);
+        public static Execution ByRange(Mech3DotNet.Types.Range value) => new Execution(Variants.ByRange, value);
 
         public static readonly Execution ByZone = new Execution(Variants.ByZone, new object());
 
@@ -28,7 +28,7 @@ namespace Mech3DotNet.Types.Anim
         public object Value { get; private set; }
         public Variants Variant { get; private set; }
         public bool IsByRange() => Variant == Variants.ByRange;
-        public Mech3DotNet.Types.Types.Range AsByRange() => (Mech3DotNet.Types.Types.Range)Value;
+        public Mech3DotNet.Types.Range AsByRange() => (Mech3DotNet.Types.Range)Value;
         public bool IsByZone() => Variant == Variants.ByZone;
         public bool IsNone() => Variant == Variants.None;
 
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         var inner = v.AsByRange();
                         s.SerializeNewTypeVariant(0);
-                        s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(inner);
                         break;
                     }
 
@@ -70,7 +70,7 @@ namespace Mech3DotNet.Types.Anim
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("Execution", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         return Execution.ByRange(inner);
                     }
 

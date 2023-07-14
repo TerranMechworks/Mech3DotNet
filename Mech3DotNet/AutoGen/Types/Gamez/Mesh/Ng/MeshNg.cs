@@ -6,9 +6,9 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
     public sealed class MeshNg
     {
         public static readonly TypeConverter<MeshNg> Converter = new TypeConverter<MeshNg>(Deserialize, Serialize);
-        public System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3> vertices;
-        public System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3> normals;
-        public System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3> morphs;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Vec3> vertices;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Vec3> normals;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Vec3> morphs;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.MeshLight> lights;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonNg> polygons;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.MeshMaterialInfo> materialInfos;
@@ -29,7 +29,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
         public float unk80;
         public float unk84;
 
-        public MeshNg(System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3> vertices, System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3> normals, System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3> morphs, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.MeshLight> lights, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonNg> polygons, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.MeshMaterialInfo> materialInfos, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, uint materialsPtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
+        public MeshNg(System.Collections.Generic.List<Mech3DotNet.Types.Vec3> vertices, System.Collections.Generic.List<Mech3DotNet.Types.Vec3> normals, System.Collections.Generic.List<Mech3DotNet.Types.Vec3> morphs, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.MeshLight> lights, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonNg> polygons, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.MeshMaterialInfo> materialInfos, uint polygonsPtr, uint verticesPtr, uint normalsPtr, uint lightsPtr, uint morphsPtr, uint materialsPtr, bool filePtr, uint unk04, uint unk08, uint parentCount, float unk40, float unk44, float unk72, float unk76, float unk80, float unk84)
         {
             this.vertices = vertices;
             this.normals = normals;
@@ -57,9 +57,9 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
 
         private struct Fields
         {
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3>> vertices;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3>> normals;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3>> morphs;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Vec3>> vertices;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Vec3>> normals;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Vec3>> morphs;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.MeshLight>> lights;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonNg>> polygons;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.MeshMaterialInfo>> materialInfos;
@@ -85,11 +85,11 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
         {
             s.SerializeStruct(22);
             s.SerializeFieldName("vertices");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.vertices);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.vertices);
             s.SerializeFieldName("normals");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.normals);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.normals);
             s.SerializeFieldName("morphs");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))(v.morphs);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.morphs);
             s.SerializeFieldName("lights");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Mesh.MeshLight.Converter))(v.lights);
             s.SerializeFieldName("polygons");
@@ -134,9 +134,9 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
         {
             var fields = new Fields()
             {
-                vertices = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3>>(),
-                normals = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3>>(),
-                morphs = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Vec3>>(),
+                vertices = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Vec3>>(),
+                normals = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Vec3>>(),
+                morphs = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Vec3>>(),
                 lights = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.MeshLight>>(),
                 polygons = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonNg>>(),
                 materialInfos = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.MeshMaterialInfo>>(),
@@ -162,13 +162,13 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                 switch (fieldName)
                 {
                     case "vertices":
-                        fields.vertices.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
+                        fields.vertices.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
                         break;
                     case "normals":
-                        fields.normals.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
+                        fields.normals.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
                         break;
                     case "morphs":
-                        fields.morphs.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter))();
+                        fields.morphs.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
                         break;
                     case "lights":
                         fields.lights.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Gamez.Mesh.MeshLight.Converter))();

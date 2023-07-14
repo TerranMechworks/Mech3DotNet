@@ -13,12 +13,12 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool? subdivide = null;
         public bool? static_ = null;
         public Mech3DotNet.Types.Anim.Events.AtNode? atNode = null;
-        public Mech3DotNet.Types.Types.Range? range = null;
-        public Mech3DotNet.Types.Types.Color? color = null;
+        public Mech3DotNet.Types.Range? range = null;
+        public Mech3DotNet.Types.Color? color = null;
         public float? ambient = null;
         public float? diffuse = null;
 
-        public LightState(string name, bool activeState, bool? directional, bool? saturated, bool? subdivide, bool? static_, Mech3DotNet.Types.Anim.Events.AtNode? atNode, Mech3DotNet.Types.Types.Range? range, Mech3DotNet.Types.Types.Color? color, float? ambient, float? diffuse)
+        public LightState(string name, bool activeState, bool? directional, bool? saturated, bool? subdivide, bool? static_, Mech3DotNet.Types.Anim.Events.AtNode? atNode, Mech3DotNet.Types.Range? range, Mech3DotNet.Types.Color? color, float? ambient, float? diffuse)
         {
             this.name = name;
             this.activeState = activeState;
@@ -42,8 +42,8 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<bool?> subdivide;
             public Field<bool?> static_;
             public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
-            public Field<Mech3DotNet.Types.Types.Range?> range;
-            public Field<Mech3DotNet.Types.Types.Color?> color;
+            public Field<Mech3DotNet.Types.Range?> range;
+            public Field<Mech3DotNet.Types.Color?> color;
             public Field<float?> ambient;
             public Field<float?> diffuse;
         }
@@ -66,9 +66,9 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
             s.SerializeFieldName("range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter))(v.range);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.RangeConverter.Converter))(v.range);
             s.SerializeFieldName("color");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter))(v.color);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.ColorConverter.Converter))(v.color);
             s.SerializeFieldName("ambient");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.ambient);
             s.SerializeFieldName("diffuse");
@@ -86,8 +86,8 @@ namespace Mech3DotNet.Types.Anim.Events
                 subdivide = new Field<bool?>(null),
                 static_ = new Field<bool?>(null),
                 atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode?>(null),
-                range = new Field<Mech3DotNet.Types.Types.Range?>(null),
-                color = new Field<Mech3DotNet.Types.Types.Color?>(null),
+                range = new Field<Mech3DotNet.Types.Range?>(null),
+                color = new Field<Mech3DotNet.Types.Color?>(null),
                 ambient = new Field<float?>(null),
                 diffuse = new Field<float?>(null),
             };
@@ -117,10 +117,10 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.atNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))();
                         break;
                     case "range":
-                        fields.range.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter))();
+                        fields.range.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter))();
                         break;
                     case "color":
-                        fields.color.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter))();
+                        fields.color.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.ColorConverter.Converter))();
                         break;
                     case "ambient":
                         fields.ambient.Value = d.DeserializeValOption(d.DeserializeF32)();

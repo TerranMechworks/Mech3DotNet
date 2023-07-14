@@ -8,10 +8,10 @@ namespace Mech3DotNet.Types.Nodes
         public static readonly TypeConverter<Display> Converter = new TypeConverter<Display>(Deserialize, Serialize);
         public uint resolutionX;
         public uint resolutionY;
-        public Mech3DotNet.Types.Types.Color clearColor;
+        public Mech3DotNet.Types.Color clearColor;
         public uint dataPtr;
 
-        public Display(uint resolutionX, uint resolutionY, Mech3DotNet.Types.Types.Color clearColor, uint dataPtr)
+        public Display(uint resolutionX, uint resolutionY, Mech3DotNet.Types.Color clearColor, uint dataPtr)
         {
             this.resolutionX = resolutionX;
             this.resolutionY = resolutionY;
@@ -23,7 +23,7 @@ namespace Mech3DotNet.Types.Nodes
         {
             public Field<uint> resolutionX;
             public Field<uint> resolutionY;
-            public Field<Mech3DotNet.Types.Types.Color> clearColor;
+            public Field<Mech3DotNet.Types.Color> clearColor;
             public Field<uint> dataPtr;
         }
 
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Nodes
             s.SerializeFieldName("resolution_y");
             ((Action<uint>)s.SerializeU32)(v.resolutionY);
             s.SerializeFieldName("clear_color");
-            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.clearColor);
+            s.Serialize(Mech3DotNet.Types.ColorConverter.Converter)(v.clearColor);
             s.SerializeFieldName("data_ptr");
             ((Action<uint>)s.SerializeU32)(v.dataPtr);
         }
@@ -46,7 +46,7 @@ namespace Mech3DotNet.Types.Nodes
             {
                 resolutionX = new Field<uint>(),
                 resolutionY = new Field<uint>(),
-                clearColor = new Field<Mech3DotNet.Types.Types.Color>(),
+                clearColor = new Field<Mech3DotNet.Types.Color>(),
                 dataPtr = new Field<uint>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
@@ -60,7 +60,7 @@ namespace Mech3DotNet.Types.Nodes
                         fields.resolutionY.Value = d.DeserializeU32();
                         break;
                     case "clear_color":
-                        fields.clearColor.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
+                        fields.clearColor.Value = d.Deserialize(Mech3DotNet.Types.ColorConverter.Converter)();
                         break;
                     case "data_ptr":
                         fields.dataPtr.Value = d.DeserializeU32();

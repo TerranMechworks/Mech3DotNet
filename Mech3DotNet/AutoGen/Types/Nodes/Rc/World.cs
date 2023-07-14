@@ -8,9 +8,9 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public static readonly TypeConverter<World> Converter = new TypeConverter<World>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Nodes.Area area;
-        public Mech3DotNet.Types.Types.Color fogColor;
-        public Mech3DotNet.Types.Types.Range fogRange;
-        public Mech3DotNet.Types.Types.Range fogAltitude;
+        public Mech3DotNet.Types.Color fogColor;
+        public Mech3DotNet.Types.Range fogRange;
+        public Mech3DotNet.Types.Range fogAltitude;
         public System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.PartitionPg>> partitions;
         public uint areaPartitionUnk;
         public uint virtPartitionXCount;
@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public uint dataPtr;
         public uint childrenArrayPtr;
 
-        public World(string name, Mech3DotNet.Types.Nodes.Area area, Mech3DotNet.Types.Types.Color fogColor, Mech3DotNet.Types.Types.Range fogRange, Mech3DotNet.Types.Types.Range fogAltitude, System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.PartitionPg>> partitions, uint areaPartitionUnk, uint virtPartitionXCount, uint virtPartitionYCount, uint areaPartitionPtr, uint virtPartitionPtr, uint worldChildrenPtr, uint worldChildValue, uint worldLightsPtr, System.Collections.Generic.List<uint> children, uint dataPtr, uint childrenArrayPtr)
+        public World(string name, Mech3DotNet.Types.Nodes.Area area, Mech3DotNet.Types.Color fogColor, Mech3DotNet.Types.Range fogRange, Mech3DotNet.Types.Range fogAltitude, System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.PartitionPg>> partitions, uint areaPartitionUnk, uint virtPartitionXCount, uint virtPartitionYCount, uint areaPartitionPtr, uint virtPartitionPtr, uint worldChildrenPtr, uint worldChildValue, uint worldLightsPtr, System.Collections.Generic.List<uint> children, uint dataPtr, uint childrenArrayPtr)
         {
             this.name = name;
             this.area = area;
@@ -49,9 +49,9 @@ namespace Mech3DotNet.Types.Nodes.Rc
         {
             public Field<string> name;
             public Field<Mech3DotNet.Types.Nodes.Area> area;
-            public Field<Mech3DotNet.Types.Types.Color> fogColor;
-            public Field<Mech3DotNet.Types.Types.Range> fogRange;
-            public Field<Mech3DotNet.Types.Types.Range> fogAltitude;
+            public Field<Mech3DotNet.Types.Color> fogColor;
+            public Field<Mech3DotNet.Types.Range> fogRange;
+            public Field<Mech3DotNet.Types.Range> fogAltitude;
             public Field<System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.PartitionPg>>> partitions;
             public Field<uint> areaPartitionUnk;
             public Field<uint> virtPartitionXCount;
@@ -74,11 +74,11 @@ namespace Mech3DotNet.Types.Nodes.Rc
             s.SerializeFieldName("area");
             s.Serialize(Mech3DotNet.Types.Nodes.AreaConverter.Converter)(v.area);
             s.SerializeFieldName("fog_color");
-            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.fogColor);
+            s.Serialize(Mech3DotNet.Types.ColorConverter.Converter)(v.fogColor);
             s.SerializeFieldName("fog_range");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.fogRange);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.fogRange);
             s.SerializeFieldName("fog_altitude");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.fogAltitude);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.fogAltitude);
             s.SerializeFieldName("partitions");
             s.SerializeVec(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Nodes.PartitionPg.Converter)))(v.partitions);
             s.SerializeFieldName("area_partition_unk");
@@ -111,9 +111,9 @@ namespace Mech3DotNet.Types.Nodes.Rc
             {
                 name = new Field<string>(),
                 area = new Field<Mech3DotNet.Types.Nodes.Area>(),
-                fogColor = new Field<Mech3DotNet.Types.Types.Color>(),
-                fogRange = new Field<Mech3DotNet.Types.Types.Range>(),
-                fogAltitude = new Field<Mech3DotNet.Types.Types.Range>(),
+                fogColor = new Field<Mech3DotNet.Types.Color>(),
+                fogRange = new Field<Mech3DotNet.Types.Range>(),
+                fogAltitude = new Field<Mech3DotNet.Types.Range>(),
                 partitions = new Field<System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.PartitionPg>>>(),
                 areaPartitionUnk = new Field<uint>(),
                 virtPartitionXCount = new Field<uint>(),
@@ -138,13 +138,13 @@ namespace Mech3DotNet.Types.Nodes.Rc
                         fields.area.Value = d.Deserialize(Mech3DotNet.Types.Nodes.AreaConverter.Converter)();
                         break;
                     case "fog_color":
-                        fields.fogColor.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
+                        fields.fogColor.Value = d.Deserialize(Mech3DotNet.Types.ColorConverter.Converter)();
                         break;
                     case "fog_range":
-                        fields.fogRange.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.fogRange.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "fog_altitude":
-                        fields.fogAltitude.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.fogAltitude.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "partitions":
                         fields.partitions.Value = d.DeserializeVec(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Nodes.PartitionPg.Converter)))();

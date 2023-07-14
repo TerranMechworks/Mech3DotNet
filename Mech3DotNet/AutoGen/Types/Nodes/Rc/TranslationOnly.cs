@@ -6,10 +6,10 @@ namespace Mech3DotNet.Types.Nodes.Rc
     public sealed class TranslationOnly
     {
         public static readonly TypeConverter<TranslationOnly> Converter = new TypeConverter<TranslationOnly>(Deserialize, Serialize);
-        public Mech3DotNet.Types.Types.Vec3 translation;
-        public Mech3DotNet.Types.Types.Matrix? matrix;
+        public Mech3DotNet.Types.Vec3 translation;
+        public Mech3DotNet.Types.Matrix? matrix;
 
-        public TranslationOnly(Mech3DotNet.Types.Types.Vec3 translation, Mech3DotNet.Types.Types.Matrix? matrix)
+        public TranslationOnly(Mech3DotNet.Types.Vec3 translation, Mech3DotNet.Types.Matrix? matrix)
         {
             this.translation = translation;
             this.matrix = matrix;
@@ -17,35 +17,35 @@ namespace Mech3DotNet.Types.Nodes.Rc
 
         private struct Fields
         {
-            public Field<Mech3DotNet.Types.Types.Vec3> translation;
-            public Field<Mech3DotNet.Types.Types.Matrix?> matrix;
+            public Field<Mech3DotNet.Types.Vec3> translation;
+            public Field<Mech3DotNet.Types.Matrix?> matrix;
         }
 
         public static void Serialize(TranslationOnly v, Serializer s)
         {
             s.SerializeStruct(2);
             s.SerializeFieldName("translation");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.translation);
+            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.translation);
             s.SerializeFieldName("matrix");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.MatrixConverter.Converter))(v.matrix);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.MatrixConverter.Converter))(v.matrix);
         }
 
         public static TranslationOnly Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                translation = new Field<Mech3DotNet.Types.Types.Vec3>(),
-                matrix = new Field<Mech3DotNet.Types.Types.Matrix?>(),
+                translation = new Field<Mech3DotNet.Types.Vec3>(),
+                matrix = new Field<Mech3DotNet.Types.Matrix?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
                     case "translation":
-                        fields.translation.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
+                        fields.translation.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
                         break;
                     case "matrix":
-                        fields.matrix.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.MatrixConverter.Converter))();
+                        fields.matrix.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.MatrixConverter.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("TranslationOnly", fieldName);

@@ -1,51 +1,57 @@
 using System;
 using Mech3DotNet.Exchange;
 
-namespace Mech3DotNet.Types.Types
+namespace Mech3DotNet.Types
 {
-    public struct Vec3
+    public struct Quaternion
     {
         public float x;
         public float y;
         public float z;
+        public float w;
 
-        public Vec3(float x, float y, float z)
+        public Quaternion(float x, float y, float z, float w)
         {
             this.x = x;
             this.y = y;
             this.z = z;
+            this.w = w;
         }
     }
 
-    public static class Vec3Converter
+    public static class QuaternionConverter
     {
-        public static readonly TypeConverter<Vec3> Converter = new TypeConverter<Vec3>(Deserialize, Serialize);
+        public static readonly TypeConverter<Quaternion> Converter = new TypeConverter<Quaternion>(Deserialize, Serialize);
 
         private struct Fields
         {
             public Field<float> x;
             public Field<float> y;
             public Field<float> z;
+            public Field<float> w;
         }
 
-        public static void Serialize(Vec3 v, Serializer s)
+        public static void Serialize(Quaternion v, Serializer s)
         {
-            s.SerializeStruct(3);
+            s.SerializeStruct(4);
             s.SerializeFieldName("x");
             ((Action<float>)s.SerializeF32)(v.x);
             s.SerializeFieldName("y");
             ((Action<float>)s.SerializeF32)(v.y);
             s.SerializeFieldName("z");
             ((Action<float>)s.SerializeF32)(v.z);
+            s.SerializeFieldName("w");
+            ((Action<float>)s.SerializeF32)(v.w);
         }
 
-        public static Vec3 Deserialize(Deserializer d)
+        public static Quaternion Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
                 x = new Field<float>(),
                 y = new Field<float>(),
                 z = new Field<float>(),
+                w = new Field<float>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -60,17 +66,22 @@ namespace Mech3DotNet.Types.Types
                     case "z":
                         fields.z.Value = d.DeserializeF32();
                         break;
+                    case "w":
+                        fields.w.Value = d.DeserializeF32();
+                        break;
                     default:
-                        throw new UnknownFieldException("Vec3", fieldName);
+                        throw new UnknownFieldException("Quaternion", fieldName);
                 }
             }
-            return new Vec3(
+            return new Quaternion(
 
-                fields.x.Unwrap("Vec3", "x"),
+                fields.x.Unwrap("Quaternion", "x"),
 
-                fields.y.Unwrap("Vec3", "y"),
+                fields.y.Unwrap("Quaternion", "y"),
 
-                fields.z.Unwrap("Vec3", "z")
+                fields.z.Unwrap("Quaternion", "z"),
+
+                fields.w.Unwrap("Quaternion", "w")
 
             );
         }

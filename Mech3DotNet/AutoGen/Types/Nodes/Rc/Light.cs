@@ -9,12 +9,12 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public string name;
         public float unk008;
         public float unk012;
-        public Mech3DotNet.Types.Types.Color color;
-        public Mech3DotNet.Types.Types.Range range;
+        public Mech3DotNet.Types.Color color;
+        public Mech3DotNet.Types.Range range;
         public uint parentPtr;
         public uint dataPtr;
 
-        public Light(string name, float unk008, float unk012, Mech3DotNet.Types.Types.Color color, Mech3DotNet.Types.Types.Range range, uint parentPtr, uint dataPtr)
+        public Light(string name, float unk008, float unk012, Mech3DotNet.Types.Color color, Mech3DotNet.Types.Range range, uint parentPtr, uint dataPtr)
         {
             this.name = name;
             this.unk008 = unk008;
@@ -30,8 +30,8 @@ namespace Mech3DotNet.Types.Nodes.Rc
             public Field<string> name;
             public Field<float> unk008;
             public Field<float> unk012;
-            public Field<Mech3DotNet.Types.Types.Color> color;
-            public Field<Mech3DotNet.Types.Types.Range> range;
+            public Field<Mech3DotNet.Types.Color> color;
+            public Field<Mech3DotNet.Types.Range> range;
             public Field<uint> parentPtr;
             public Field<uint> dataPtr;
         }
@@ -46,9 +46,9 @@ namespace Mech3DotNet.Types.Nodes.Rc
             s.SerializeFieldName("unk012");
             ((Action<float>)s.SerializeF32)(v.unk012);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("parent_ptr");
             ((Action<uint>)s.SerializeU32)(v.parentPtr);
             s.SerializeFieldName("data_ptr");
@@ -62,8 +62,8 @@ namespace Mech3DotNet.Types.Nodes.Rc
                 name = new Field<string>(),
                 unk008 = new Field<float>(),
                 unk012 = new Field<float>(),
-                color = new Field<Mech3DotNet.Types.Types.Color>(),
-                range = new Field<Mech3DotNet.Types.Types.Range>(),
+                color = new Field<Mech3DotNet.Types.Color>(),
+                range = new Field<Mech3DotNet.Types.Range>(),
                 parentPtr = new Field<uint>(),
                 dataPtr = new Field<uint>(),
             };
@@ -81,10 +81,10 @@ namespace Mech3DotNet.Types.Nodes.Rc
                         fields.unk012.Value = d.DeserializeF32();
                         break;
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.ColorConverter.Converter)();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "parent_ptr":
                         fields.parentPtr.Value = d.DeserializeU32();

@@ -1,7 +1,7 @@
 using System;
 using Mech3DotNet.Exchange;
 
-namespace Mech3DotNet.Types.Types
+namespace Mech3DotNet.Types
 {
     public struct Range
     {

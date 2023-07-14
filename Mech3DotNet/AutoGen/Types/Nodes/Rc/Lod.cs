@@ -8,7 +8,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public static readonly TypeConverter<Lod> Converter = new TypeConverter<Lod>(Deserialize, Serialize);
         public string name;
         public bool level;
-        public Mech3DotNet.Types.Types.Range range;
+        public Mech3DotNet.Types.Range range;
         public float unk60;
         public uint? unk76;
         public Mech3DotNet.Types.Nodes.NodeFlags flags;
@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public uint childrenArrayPtr;
         public Mech3DotNet.Types.Nodes.BoundingBox unk116;
 
-        public Lod(string name, bool level, Mech3DotNet.Types.Types.Range range, float unk60, uint? unk76, Mech3DotNet.Types.Nodes.NodeFlags flags, uint zoneId, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Types.Nodes.BoundingBox unk116)
+        public Lod(string name, bool level, Mech3DotNet.Types.Range range, float unk60, uint? unk76, Mech3DotNet.Types.Nodes.NodeFlags flags, uint zoneId, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Types.Nodes.BoundingBox unk116)
         {
             this.name = name;
             this.level = level;
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         {
             public Field<string> name;
             public Field<bool> level;
-            public Field<Mech3DotNet.Types.Types.Range> range;
+            public Field<Mech3DotNet.Types.Range> range;
             public Field<float> unk60;
             public Field<uint?> unk76;
             public Field<Mech3DotNet.Types.Nodes.NodeFlags> flags;
@@ -62,7 +62,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
             s.SerializeFieldName("level");
             ((Action<bool>)s.SerializeBool)(v.level);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("unk60");
             ((Action<float>)s.SerializeF32)(v.unk60);
             s.SerializeFieldName("unk76");
@@ -91,7 +91,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
             {
                 name = new Field<string>(),
                 level = new Field<bool>(),
-                range = new Field<Mech3DotNet.Types.Types.Range>(),
+                range = new Field<Mech3DotNet.Types.Range>(),
                 unk60 = new Field<float>(),
                 unk76 = new Field<uint?>(),
                 flags = new Field<Mech3DotNet.Types.Nodes.NodeFlags>(),
@@ -114,7 +114,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
                         fields.level.Value = d.DeserializeBool();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "unk60":
                         fields.unk60.Value = d.DeserializeF32();

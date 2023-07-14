@@ -3,15 +3,15 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Zmap
 {
-    public partial class MapRc
+    public partial class Zmap
     {
-        public static readonly TypeConverter<MapRc> Converter = new TypeConverter<MapRc>(Deserialize, Serialize);
+        public static readonly TypeConverter<Zmap> Converter = new TypeConverter<Zmap>(Deserialize, Serialize);
         public uint unk04;
         public float maxX;
         public float maxY;
         public System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature> features;
 
-        public MapRc(uint unk04, float maxX, float maxY, System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature> features)
+        public Zmap(uint unk04, float maxX, float maxY, System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature> features)
         {
             this.unk04 = unk04;
             this.maxX = maxX;
@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Zmap
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature>> features;
         }
 
-        public static void Serialize(MapRc v, Serializer s)
+        public static void Serialize(Zmap v, Serializer s)
         {
             s.SerializeStruct(4);
             s.SerializeFieldName("unk04");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Zmap
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Zmap.MapFeature.Converter))(v.features);
         }
 
-        public static MapRc Deserialize(Deserializer d)
+        public static Zmap Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -66,18 +66,18 @@ namespace Mech3DotNet.Types.Zmap
                         fields.features.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Zmap.MapFeature.Converter))();
                         break;
                     default:
-                        throw new UnknownFieldException("MapRc", fieldName);
+                        throw new UnknownFieldException("Zmap", fieldName);
                 }
             }
-            return new MapRc(
+            return new Zmap(
 
-                fields.unk04.Unwrap("MapRc", "unk04"),
+                fields.unk04.Unwrap("Zmap", "unk04"),
 
-                fields.maxX.Unwrap("MapRc", "maxX"),
+                fields.maxX.Unwrap("Zmap", "maxX"),
 
-                fields.maxY.Unwrap("MapRc", "maxY"),
+                fields.maxY.Unwrap("Zmap", "maxY"),
 
-                fields.features.Unwrap("MapRc", "features")
+                fields.features.Unwrap("Zmap", "features")
 
             );
         }

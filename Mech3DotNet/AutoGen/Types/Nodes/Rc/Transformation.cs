@@ -22,7 +22,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         }
         public static readonly Transformation None = new Transformation(Variants.None, new object());
 
-        public static Transformation ScaleOnly(Mech3DotNet.Types.Types.Vec3 value) => new Transformation(Variants.ScaleOnly, value);
+        public static Transformation ScaleOnly(Mech3DotNet.Types.Vec3 value) => new Transformation(Variants.ScaleOnly, value);
 
         public static Transformation RotationTranslation(Mech3DotNet.Types.Nodes.Rc.RotationTranslation value) => new Transformation(Variants.RotationTranslation, value);
 
@@ -32,7 +32,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public Variants Variant { get; private set; }
         public bool IsNone() => Variant == Variants.None;
         public bool IsScaleOnly() => Variant == Variants.ScaleOnly;
-        public Mech3DotNet.Types.Types.Vec3 AsScaleOnly() => (Mech3DotNet.Types.Types.Vec3)Value;
+        public Mech3DotNet.Types.Vec3 AsScaleOnly() => (Mech3DotNet.Types.Vec3)Value;
         public bool IsRotationTranslation() => Variant == Variants.RotationTranslation;
         public Mech3DotNet.Types.Nodes.Rc.RotationTranslation AsRotationTranslation() => (Mech3DotNet.Types.Nodes.Rc.RotationTranslation)Value;
         public bool IsTranslationOnly() => Variant == Variants.TranslationOnly;
@@ -52,7 +52,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
                     {
                         var inner = v.AsScaleOnly();
                         s.SerializeNewTypeVariant(1);
-                        s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(inner);
                         break;
                     }
 
@@ -93,7 +93,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("Transformation", 1, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
                         return Transformation.ScaleOnly(inner);
                     }
 

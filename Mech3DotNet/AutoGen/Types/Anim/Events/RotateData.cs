@@ -6,10 +6,10 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class RotateData
     {
         public static readonly TypeConverter<RotateData> Converter = new TypeConverter<RotateData>(Deserialize, Serialize);
-        public Mech3DotNet.Types.Types.Quaternion value;
+        public Mech3DotNet.Types.Quaternion value;
         public byte[] unk;
 
-        public RotateData(Mech3DotNet.Types.Types.Quaternion value, byte[] unk)
+        public RotateData(Mech3DotNet.Types.Quaternion value, byte[] unk)
         {
             this.value = value;
             this.unk = unk;
@@ -17,7 +17,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         private struct Fields
         {
-            public Field<Mech3DotNet.Types.Types.Quaternion> value;
+            public Field<Mech3DotNet.Types.Quaternion> value;
             public Field<byte[]> unk;
         }
 
@@ -25,7 +25,7 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             s.SerializeStruct(2);
             s.SerializeFieldName("value");
-            s.Serialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter)(v.value);
+            s.Serialize(Mech3DotNet.Types.QuaternionConverter.Converter)(v.value);
             s.SerializeFieldName("unk");
             ((Action<byte[]>)s.SerializeBytes)(v.unk);
         }
@@ -34,7 +34,7 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             var fields = new Fields()
             {
-                value = new Field<Mech3DotNet.Types.Types.Quaternion>(),
+                value = new Field<Mech3DotNet.Types.Quaternion>(),
                 unk = new Field<byte[]>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
@@ -42,7 +42,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     case "value":
-                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter)();
+                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.QuaternionConverter.Converter)();
                         break;
                     case "unk":
                         fields.unk.Value = d.DeserializeBytes();

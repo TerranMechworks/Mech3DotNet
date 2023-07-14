@@ -7,7 +7,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
     {
         public static readonly TypeConverter<PolygonMw> Converter = new TypeConverter<PolygonMw>(Deserialize, Serialize);
         public System.Collections.Generic.List<uint> vertexIndices;
-        public System.Collections.Generic.List<Mech3DotNet.Types.Types.Color> vertexColors;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Color> vertexColors;
         public System.Collections.Generic.List<uint>? normalIndices;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.UvCoord>? uvCoords;
         public uint materialIndex;
@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
         public uint colorsPtr;
         public uint unkPtr;
 
-        public PolygonMw(System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Mech3DotNet.Types.Types.Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.UvCoord>? uvCoords, uint materialIndex, uint textureInfo, int unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
+        public PolygonMw(System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Mech3DotNet.Types.Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.UvCoord>? uvCoords, uint materialIndex, uint textureInfo, int unk04, bool unkBit, bool vtxBit, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unkPtr)
         {
             this.vertexIndices = vertexIndices;
             this.vertexColors = vertexColors;
@@ -42,7 +42,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
         private struct Fields
         {
             public Field<System.Collections.Generic.List<uint>> vertexIndices;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Color>> vertexColors;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Color>> vertexColors;
             public Field<System.Collections.Generic.List<uint>?> normalIndices;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.UvCoord>?> uvCoords;
             public Field<uint> materialIndex;
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
             s.SerializeFieldName("vertex_indices");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.vertexIndices);
             s.SerializeFieldName("vertex_colors");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter))(v.vertexColors);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.ColorConverter.Converter))(v.vertexColors);
             s.SerializeFieldName("normal_indices");
             s.SerializeRefOption(s.SerializeVec(((Action<uint>)s.SerializeU32)))(v.normalIndices);
             s.SerializeFieldName("uv_coords");
@@ -95,7 +95,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
             var fields = new Fields()
             {
                 vertexIndices = new Field<System.Collections.Generic.List<uint>>(),
-                vertexColors = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Color>>(),
+                vertexColors = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Color>>(),
                 normalIndices = new Field<System.Collections.Generic.List<uint>?>(),
                 uvCoords = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.UvCoord>?>(),
                 materialIndex = new Field<uint>(),
@@ -117,7 +117,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Mw
                         fields.vertexIndices.Value = d.DeserializeVec(d.DeserializeU32)();
                         break;
                     case "vertex_colors":
-                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter))();
+                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.ColorConverter.Converter))();
                         break;
                     case "normal_indices":
                         fields.normalIndices.Value = d.DeserializeRefOption(d.DeserializeVec(d.DeserializeU32))();

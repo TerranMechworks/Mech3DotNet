@@ -9,9 +9,9 @@ namespace Mech3DotNet.Types.Anim.Events
         public string node;
         public string fromNode;
         public string toNode;
-        public Mech3DotNet.Types.Types.Vec3 toPos;
+        public Mech3DotNet.Types.Vec3 toPos;
 
-        public CallObjectConnector(string node, string fromNode, string toNode, Mech3DotNet.Types.Types.Vec3 toPos)
+        public CallObjectConnector(string node, string fromNode, string toNode, Mech3DotNet.Types.Vec3 toPos)
         {
             this.node = node;
             this.fromNode = fromNode;
@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<string> node;
             public Field<string> fromNode;
             public Field<string> toNode;
-            public Field<Mech3DotNet.Types.Types.Vec3> toPos;
+            public Field<Mech3DotNet.Types.Vec3> toPos;
         }
 
         public static void Serialize(CallObjectConnector v, Serializer s)
@@ -37,7 +37,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("to_node");
             ((Action<string>)s.SerializeString)(v.toNode);
             s.SerializeFieldName("to_pos");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.toPos);
+            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.toPos);
         }
 
         public static CallObjectConnector Deserialize(Deserializer d)
@@ -47,7 +47,7 @@ namespace Mech3DotNet.Types.Anim.Events
                 node = new Field<string>(),
                 fromNode = new Field<string>(),
                 toNode = new Field<string>(),
-                toPos = new Field<Mech3DotNet.Types.Types.Vec3>(),
+                toPos = new Field<Mech3DotNet.Types.Vec3>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.toNode.Value = d.DeserializeString();
                         break;
                     case "to_pos":
-                        fields.toPos.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
+                        fields.toPos.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("CallObjectConnector", fieldName);

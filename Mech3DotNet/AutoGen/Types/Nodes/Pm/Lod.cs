@@ -8,7 +8,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
         public static readonly TypeConverter<Lod> Converter = new TypeConverter<Lod>(Deserialize, Serialize);
         public string name;
         public bool level;
-        public Mech3DotNet.Types.Types.Range range;
+        public Mech3DotNet.Types.Range range;
         public float unk64;
         public float unk72;
         public uint zoneId;
@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
         public uint dataPtr;
         public uint nodeIndex;
 
-        public Lod(string name, bool level, Mech3DotNet.Types.Types.Range range, float unk64, float unk72, uint zoneId, uint parent, System.Collections.Generic.List<uint> children, Mech3DotNet.Types.Nodes.BoundingBox unk164, uint parentArrayPtr, uint childrenArrayPtr, uint dataPtr, uint nodeIndex)
+        public Lod(string name, bool level, Mech3DotNet.Types.Range range, float unk64, float unk72, uint zoneId, uint parent, System.Collections.Generic.List<uint> children, Mech3DotNet.Types.Nodes.BoundingBox unk164, uint parentArrayPtr, uint childrenArrayPtr, uint dataPtr, uint nodeIndex)
         {
             this.name = name;
             this.level = level;
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
         {
             public Field<string> name;
             public Field<bool> level;
-            public Field<Mech3DotNet.Types.Types.Range> range;
+            public Field<Mech3DotNet.Types.Range> range;
             public Field<float> unk64;
             public Field<float> unk72;
             public Field<uint> zoneId;
@@ -62,7 +62,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
             s.SerializeFieldName("level");
             ((Action<bool>)s.SerializeBool)(v.level);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("unk64");
             ((Action<float>)s.SerializeF32)(v.unk64);
             s.SerializeFieldName("unk72");
@@ -91,7 +91,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
             {
                 name = new Field<string>(),
                 level = new Field<bool>(),
-                range = new Field<Mech3DotNet.Types.Types.Range>(),
+                range = new Field<Mech3DotNet.Types.Range>(),
                 unk64 = new Field<float>(),
                 unk72 = new Field<float>(),
                 zoneId = new Field<uint>(),
@@ -114,7 +114,7 @@ namespace Mech3DotNet.Types.Nodes.Pm
                         fields.level.Value = d.DeserializeBool();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "unk64":
                         fields.unk64.Value = d.DeserializeF32();

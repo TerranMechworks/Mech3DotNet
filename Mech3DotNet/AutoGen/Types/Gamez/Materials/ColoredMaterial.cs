@@ -6,11 +6,11 @@ namespace Mech3DotNet.Types.Gamez.Materials
     public sealed class ColoredMaterial
     {
         public static readonly TypeConverter<ColoredMaterial> Converter = new TypeConverter<ColoredMaterial>(Deserialize, Serialize);
-        public Mech3DotNet.Types.Types.Color color;
+        public Mech3DotNet.Types.Color color;
         public byte alpha;
         public float specular;
 
-        public ColoredMaterial(Mech3DotNet.Types.Types.Color color, byte alpha, float specular)
+        public ColoredMaterial(Mech3DotNet.Types.Color color, byte alpha, float specular)
         {
             this.color = color;
             this.alpha = alpha;
@@ -19,7 +19,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
         private struct Fields
         {
-            public Field<Mech3DotNet.Types.Types.Color> color;
+            public Field<Mech3DotNet.Types.Color> color;
             public Field<byte> alpha;
             public Field<float> specular;
         }
@@ -28,7 +28,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
         {
             s.SerializeStruct(3);
             s.SerializeFieldName("color");
-            s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter)(v.color);
+            s.Serialize(Mech3DotNet.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("alpha");
             ((Action<byte>)s.SerializeU8)(v.alpha);
             s.SerializeFieldName("specular");
@@ -39,7 +39,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
         {
             var fields = new Fields()
             {
-                color = new Field<Mech3DotNet.Types.Types.Color>(),
+                color = new Field<Mech3DotNet.Types.Color>(),
                 alpha = new Field<byte>(),
                 specular = new Field<float>(),
             };
@@ -48,7 +48,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 switch (fieldName)
                 {
                     case "color":
-                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter)();
+                        fields.color.Value = d.Deserialize(Mech3DotNet.Types.ColorConverter.Converter)();
                         break;
                     case "alpha":
                         fields.alpha.Value = d.DeserializeU8();

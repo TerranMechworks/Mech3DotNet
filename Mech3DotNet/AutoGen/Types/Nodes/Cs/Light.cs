@@ -7,12 +7,12 @@ namespace Mech3DotNet.Types.Nodes.Cs
     {
         public static readonly TypeConverter<Light> Converter = new TypeConverter<Light>(Deserialize, Serialize);
         public string name;
-        public Mech3DotNet.Types.Types.Range range;
+        public Mech3DotNet.Types.Range range;
         public uint parentPtr;
         public uint dataPtr;
         public uint nodeIndex;
 
-        public Light(string name, Mech3DotNet.Types.Types.Range range, uint parentPtr, uint dataPtr, uint nodeIndex)
+        public Light(string name, Mech3DotNet.Types.Range range, uint parentPtr, uint dataPtr, uint nodeIndex)
         {
             this.name = name;
             this.range = range;
@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Nodes.Cs
         private struct Fields
         {
             public Field<string> name;
-            public Field<Mech3DotNet.Types.Types.Range> range;
+            public Field<Mech3DotNet.Types.Range> range;
             public Field<uint> parentPtr;
             public Field<uint> dataPtr;
             public Field<uint> nodeIndex;
@@ -36,7 +36,7 @@ namespace Mech3DotNet.Types.Nodes.Cs
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("range");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.range);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.range);
             s.SerializeFieldName("parent_ptr");
             ((Action<uint>)s.SerializeU32)(v.parentPtr);
             s.SerializeFieldName("data_ptr");
@@ -50,7 +50,7 @@ namespace Mech3DotNet.Types.Nodes.Cs
             var fields = new Fields()
             {
                 name = new Field<string>(),
-                range = new Field<Mech3DotNet.Types.Types.Range>(),
+                range = new Field<Mech3DotNet.Types.Range>(),
                 parentPtr = new Field<uint>(),
                 dataPtr = new Field<uint>(),
                 nodeIndex = new Field<uint>(),
@@ -63,7 +63,7 @@ namespace Mech3DotNet.Types.Nodes.Cs
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "range":
-                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.range.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "parent_ptr":
                         fields.parentPtr.Value = d.DeserializeU32();

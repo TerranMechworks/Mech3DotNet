@@ -19,7 +19,7 @@ namespace Mech3DotNet.Types.Anim.Events
             Variant = variant;
             Value = value;
         }
-        public static RotateState Absolute(Mech3DotNet.Types.Types.Vec3 value) => new RotateState(Variants.Absolute, value);
+        public static RotateState Absolute(Mech3DotNet.Types.Vec3 value) => new RotateState(Variants.Absolute, value);
 
         public static readonly RotateState AtNodeXYZ = new RotateState(Variants.AtNodeXYZ, new object());
 
@@ -28,7 +28,7 @@ namespace Mech3DotNet.Types.Anim.Events
         public object Value { get; private set; }
         public Variants Variant { get; private set; }
         public bool IsAbsolute() => Variant == Variants.Absolute;
-        public Mech3DotNet.Types.Types.Vec3 AsAbsolute() => (Mech3DotNet.Types.Types.Vec3)Value;
+        public Mech3DotNet.Types.Vec3 AsAbsolute() => (Mech3DotNet.Types.Vec3)Value;
         public bool IsAtNodeXYZ() => Variant == Variants.AtNodeXYZ;
         public bool IsAtNodeMatrix() => Variant == Variants.AtNodeMatrix;
 
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         var inner = v.AsAbsolute();
                         s.SerializeNewTypeVariant(0);
-                        s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(inner);
+                        s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(inner);
                         break;
                     }
 
@@ -70,7 +70,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("RotateState", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
+                        var inner = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
                         return RotateState.Absolute(inner);
                     }
 

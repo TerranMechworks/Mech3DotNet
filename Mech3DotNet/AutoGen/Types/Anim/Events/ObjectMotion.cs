@@ -9,8 +9,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public string node;
         public bool impactForce;
         public Mech3DotNet.Types.Anim.Events.Gravity? gravity = null;
-        public Mech3DotNet.Types.Types.Quaternion? translationRangeMin = null;
-        public Mech3DotNet.Types.Types.Quaternion? translationRangeMax = null;
+        public Mech3DotNet.Types.Quaternion? translationRangeMin = null;
+        public Mech3DotNet.Types.Quaternion? translationRangeMax = null;
         public Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation? translation = null;
         public Mech3DotNet.Types.Anim.Events.ForwardRotation? forwardRotation = null;
         public Mech3DotNet.Types.Anim.Events.XyzRotation? xyzRotation = null;
@@ -19,7 +19,7 @@ namespace Mech3DotNet.Types.Anim.Events
         public Mech3DotNet.Types.Anim.Events.BounceSound? bounceSound = null;
         public float? runtime = null;
 
-        public ObjectMotion(string node, bool impactForce, Mech3DotNet.Types.Anim.Events.Gravity? gravity, Mech3DotNet.Types.Types.Quaternion? translationRangeMin, Mech3DotNet.Types.Types.Quaternion? translationRangeMax, Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation? translation, Mech3DotNet.Types.Anim.Events.ForwardRotation? forwardRotation, Mech3DotNet.Types.Anim.Events.XyzRotation? xyzRotation, Mech3DotNet.Types.Anim.Events.ObjectMotionScale? scale, Mech3DotNet.Types.Anim.Events.BounceSequence? bounceSequence, Mech3DotNet.Types.Anim.Events.BounceSound? bounceSound, float? runtime)
+        public ObjectMotion(string node, bool impactForce, Mech3DotNet.Types.Anim.Events.Gravity? gravity, Mech3DotNet.Types.Quaternion? translationRangeMin, Mech3DotNet.Types.Quaternion? translationRangeMax, Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation? translation, Mech3DotNet.Types.Anim.Events.ForwardRotation? forwardRotation, Mech3DotNet.Types.Anim.Events.XyzRotation? xyzRotation, Mech3DotNet.Types.Anim.Events.ObjectMotionScale? scale, Mech3DotNet.Types.Anim.Events.BounceSequence? bounceSequence, Mech3DotNet.Types.Anim.Events.BounceSound? bounceSound, float? runtime)
         {
             this.node = node;
             this.impactForce = impactForce;
@@ -40,8 +40,8 @@ namespace Mech3DotNet.Types.Anim.Events
             public Field<string> node;
             public Field<bool> impactForce;
             public Field<Mech3DotNet.Types.Anim.Events.Gravity?> gravity;
-            public Field<Mech3DotNet.Types.Types.Quaternion?> translationRangeMin;
-            public Field<Mech3DotNet.Types.Types.Quaternion?> translationRangeMax;
+            public Field<Mech3DotNet.Types.Quaternion?> translationRangeMin;
+            public Field<Mech3DotNet.Types.Quaternion?> translationRangeMax;
             public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation?> translation;
             public Field<Mech3DotNet.Types.Anim.Events.ForwardRotation?> forwardRotation;
             public Field<Mech3DotNet.Types.Anim.Events.XyzRotation?> xyzRotation;
@@ -61,9 +61,9 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("gravity");
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Anim.Events.GravityConverter.Converter))(v.gravity);
             s.SerializeFieldName("translation_range_min");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))(v.translationRangeMin);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.QuaternionConverter.Converter))(v.translationRangeMin);
             s.SerializeFieldName("translation_range_max");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))(v.translationRangeMax);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.QuaternionConverter.Converter))(v.translationRangeMax);
             s.SerializeFieldName("translation");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation.Converter))(v.translation);
             s.SerializeFieldName("forward_rotation");
@@ -87,8 +87,8 @@ namespace Mech3DotNet.Types.Anim.Events
                 node = new Field<string>(),
                 impactForce = new Field<bool>(),
                 gravity = new Field<Mech3DotNet.Types.Anim.Events.Gravity?>(null),
-                translationRangeMin = new Field<Mech3DotNet.Types.Types.Quaternion?>(null),
-                translationRangeMax = new Field<Mech3DotNet.Types.Types.Quaternion?>(null),
+                translationRangeMin = new Field<Mech3DotNet.Types.Quaternion?>(null),
+                translationRangeMax = new Field<Mech3DotNet.Types.Quaternion?>(null),
                 translation = new Field<Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation?>(null),
                 forwardRotation = new Field<Mech3DotNet.Types.Anim.Events.ForwardRotation?>(null),
                 xyzRotation = new Field<Mech3DotNet.Types.Anim.Events.XyzRotation?>(null),
@@ -111,10 +111,10 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.gravity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.GravityConverter.Converter))();
                         break;
                     case "translation_range_min":
-                        fields.translationRangeMin.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))();
+                        fields.translationRangeMin.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.QuaternionConverter.Converter))();
                         break;
                     case "translation_range_max":
-                        fields.translationRangeMax.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Types.QuaternionConverter.Converter))();
+                        fields.translationRangeMax.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.QuaternionConverter.Converter))();
                         break;
                     case "translation":
                         fields.translation.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation.Converter))();

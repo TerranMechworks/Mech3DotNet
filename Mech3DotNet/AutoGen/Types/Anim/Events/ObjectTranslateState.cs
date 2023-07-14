@@ -7,10 +7,10 @@ namespace Mech3DotNet.Types.Anim.Events
     {
         public static readonly TypeConverter<ObjectTranslateState> Converter = new TypeConverter<ObjectTranslateState>(Deserialize, Serialize);
         public string node;
-        public Mech3DotNet.Types.Types.Vec3 translate;
+        public Mech3DotNet.Types.Vec3 translate;
         public string? atNode = null;
 
-        public ObjectTranslateState(string node, Mech3DotNet.Types.Types.Vec3 translate, string? atNode)
+        public ObjectTranslateState(string node, Mech3DotNet.Types.Vec3 translate, string? atNode)
         {
             this.node = node;
             this.translate = translate;
@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Anim.Events
         private struct Fields
         {
             public Field<string> node;
-            public Field<Mech3DotNet.Types.Types.Vec3> translate;
+            public Field<Mech3DotNet.Types.Vec3> translate;
             public Field<string?> atNode;
         }
 
@@ -30,7 +30,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("translate");
-            s.Serialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)(v.translate);
+            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.translate);
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.atNode);
         }
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
             var fields = new Fields()
             {
                 node = new Field<string>(),
-                translate = new Field<Mech3DotNet.Types.Types.Vec3>(),
+                translate = new Field<Mech3DotNet.Types.Vec3>(),
                 atNode = new Field<string?>(null),
             };
             foreach (var fieldName in d.DeserializeStruct())
@@ -51,7 +51,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.node.Value = d.DeserializeString();
                         break;
                     case "translate":
-                        fields.translate.Value = d.Deserialize(Mech3DotNet.Types.Types.Vec3Converter.Converter)();
+                        fields.translate.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
                         break;
                     case "at_node":
                         fields.atNode.Value = d.DeserializeRefOption(d.DeserializeString)();

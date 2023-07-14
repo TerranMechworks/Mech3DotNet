@@ -6,12 +6,12 @@ namespace Mech3DotNet.Types.Nodes
     public sealed class Camera
     {
         public static readonly TypeConverter<Camera> Converter = new TypeConverter<Camera>(Deserialize, Serialize);
-        public Mech3DotNet.Types.Types.Range clip;
-        public Mech3DotNet.Types.Types.Range fov;
+        public Mech3DotNet.Types.Range clip;
+        public Mech3DotNet.Types.Range fov;
         public int focusNodeXy;
         public uint dataPtr;
 
-        public Camera(Mech3DotNet.Types.Types.Range clip, Mech3DotNet.Types.Types.Range fov, int focusNodeXy, uint dataPtr)
+        public Camera(Mech3DotNet.Types.Range clip, Mech3DotNet.Types.Range fov, int focusNodeXy, uint dataPtr)
         {
             this.clip = clip;
             this.fov = fov;
@@ -21,8 +21,8 @@ namespace Mech3DotNet.Types.Nodes
 
         private struct Fields
         {
-            public Field<Mech3DotNet.Types.Types.Range> clip;
-            public Field<Mech3DotNet.Types.Types.Range> fov;
+            public Field<Mech3DotNet.Types.Range> clip;
+            public Field<Mech3DotNet.Types.Range> fov;
             public Field<int> focusNodeXy;
             public Field<uint> dataPtr;
         }
@@ -31,9 +31,9 @@ namespace Mech3DotNet.Types.Nodes
         {
             s.SerializeStruct(4);
             s.SerializeFieldName("clip");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.clip);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.clip);
             s.SerializeFieldName("fov");
-            s.Serialize(Mech3DotNet.Types.Types.RangeConverter.Converter)(v.fov);
+            s.Serialize(Mech3DotNet.Types.RangeConverter.Converter)(v.fov);
             s.SerializeFieldName("focus_node_xy");
             ((Action<int>)s.SerializeI32)(v.focusNodeXy);
             s.SerializeFieldName("data_ptr");
@@ -44,8 +44,8 @@ namespace Mech3DotNet.Types.Nodes
         {
             var fields = new Fields()
             {
-                clip = new Field<Mech3DotNet.Types.Types.Range>(),
-                fov = new Field<Mech3DotNet.Types.Types.Range>(),
+                clip = new Field<Mech3DotNet.Types.Range>(),
+                fov = new Field<Mech3DotNet.Types.Range>(),
                 focusNodeXy = new Field<int>(),
                 dataPtr = new Field<uint>(),
             };
@@ -54,10 +54,10 @@ namespace Mech3DotNet.Types.Nodes
                 switch (fieldName)
                 {
                     case "clip":
-                        fields.clip.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.clip.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "fov":
-                        fields.fov.Value = d.Deserialize(Mech3DotNet.Types.Types.RangeConverter.Converter)();
+                        fields.fov.Value = d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter)();
                         break;
                     case "focus_node_xy":
                         fields.focusNodeXy.Value = d.DeserializeI32();

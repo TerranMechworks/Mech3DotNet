@@ -8,7 +8,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
         public static readonly TypeConverter<PolygonNg> Converter = new TypeConverter<PolygonNg>(Deserialize, Serialize);
         public Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags flags;
         public System.Collections.Generic.List<uint> vertexIndices;
-        public System.Collections.Generic.List<Mech3DotNet.Types.Types.Color> vertexColors;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Color> vertexColors;
         public System.Collections.Generic.List<uint>? normalIndices;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonMaterialNg> materials;
         public int unk04;
@@ -20,7 +20,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
         public uint unk32;
         public uint unk36;
 
-        public PolygonNg(Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags flags, System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Mech3DotNet.Types.Types.Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonMaterialNg> materials, int unk04, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unk28, uint unk32, uint unk36)
+        public PolygonNg(Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags flags, System.Collections.Generic.List<uint> vertexIndices, System.Collections.Generic.List<Mech3DotNet.Types.Color> vertexColors, System.Collections.Generic.List<uint>? normalIndices, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonMaterialNg> materials, int unk04, uint verticesPtr, uint normalsPtr, uint uvsPtr, uint colorsPtr, uint unk28, uint unk32, uint unk36)
         {
             this.flags = flags;
             this.vertexIndices = vertexIndices;
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
         {
             public Field<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags> flags;
             public Field<System.Collections.Generic.List<uint>> vertexIndices;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Color>> vertexColors;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Color>> vertexColors;
             public Field<System.Collections.Generic.List<uint>?> normalIndices;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonMaterialNg>> materials;
             public Field<int> unk04;
@@ -62,7 +62,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             s.SerializeFieldName("vertex_indices");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.vertexIndices);
             s.SerializeFieldName("vertex_colors");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Types.ColorConverter.Converter))(v.vertexColors);
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.ColorConverter.Converter))(v.vertexColors);
             s.SerializeFieldName("normal_indices");
             s.SerializeRefOption(s.SerializeVec(((Action<uint>)s.SerializeU32)))(v.normalIndices);
             s.SerializeFieldName("materials");
@@ -91,7 +91,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
             {
                 flags = new Field<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonFlags>(),
                 vertexIndices = new Field<System.Collections.Generic.List<uint>>(),
-                vertexColors = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Types.Color>>(),
+                vertexColors = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Color>>(),
                 normalIndices = new Field<System.Collections.Generic.List<uint>?>(),
                 materials = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Ng.PolygonMaterialNg>>(),
                 unk04 = new Field<int>(),
@@ -114,7 +114,7 @@ namespace Mech3DotNet.Types.Gamez.Mesh.Ng
                         fields.vertexIndices.Value = d.DeserializeVec(d.DeserializeU32)();
                         break;
                     case "vertex_colors":
-                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Types.ColorConverter.Converter))();
+                        fields.vertexColors.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.ColorConverter.Converter))();
                         break;
                     case "normal_indices":
                         fields.normalIndices.Value = d.DeserializeRefOption(d.DeserializeVec(d.DeserializeU32))();

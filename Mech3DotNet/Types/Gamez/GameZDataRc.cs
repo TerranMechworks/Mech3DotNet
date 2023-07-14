@@ -3,15 +3,15 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Gamez
 {
-    public sealed class GameZRcData
+    public partial class GameZDataRc
     {
-        public static readonly TypeConverter<GameZRcData> Converter = new TypeConverter<GameZRcData>(Deserialize, Serialize);
+        public static readonly TypeConverter<GameZDataRc> Converter = new TypeConverter<GameZDataRc>(Deserialize, Serialize);
         public System.Collections.Generic.List<string> textures;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material> materials;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Rc.MeshRc> meshes;
         public System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Rc.NodeRc> nodes;
 
-        public GameZRcData(System.Collections.Generic.List<string> textures, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material> materials, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Rc.MeshRc> meshes, System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Rc.NodeRc> nodes)
+        public GameZDataRc(System.Collections.Generic.List<string> textures, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material> materials, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Rc.MeshRc> meshes, System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Rc.NodeRc> nodes)
         {
             this.textures = textures;
             this.materials = materials;
@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Gamez
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Rc.NodeRc>> nodes;
         }
 
-        public static void Serialize(GameZRcData v, Serializer s)
+        public static void Serialize(GameZDataRc v, Serializer s)
         {
             s.SerializeStruct(4);
             s.SerializeFieldName("textures");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Gamez
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Nodes.Rc.NodeRc.Converter))(v.nodes);
         }
 
-        public static GameZRcData Deserialize(Deserializer d)
+        public static GameZDataRc Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -66,18 +66,18 @@ namespace Mech3DotNet.Types.Gamez
                         fields.nodes.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Nodes.Rc.NodeRc.Converter))();
                         break;
                     default:
-                        throw new UnknownFieldException("GameZRcData", fieldName);
+                        throw new UnknownFieldException("GameZDataRc", fieldName);
                 }
             }
-            return new GameZRcData(
+            return new GameZDataRc(
 
-                fields.textures.Unwrap("GameZRcData", "textures"),
+                fields.textures.Unwrap("GameZDataRc", "textures"),
 
-                fields.materials.Unwrap("GameZRcData", "materials"),
+                fields.materials.Unwrap("GameZDataRc", "materials"),
 
-                fields.meshes.Unwrap("GameZRcData", "meshes"),
+                fields.meshes.Unwrap("GameZDataRc", "meshes"),
 
-                fields.nodes.Unwrap("GameZRcData", "nodes")
+                fields.nodes.Unwrap("GameZDataRc", "nodes")
 
             );
         }

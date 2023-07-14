@@ -3,16 +3,16 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Gamez
 {
-    public sealed class GameZMwData
+    public partial class GameZDataMw
     {
-        public static readonly TypeConverter<GameZMwData> Converter = new TypeConverter<GameZMwData>(Deserialize, Serialize);
+        public static readonly TypeConverter<GameZDataMw> Converter = new TypeConverter<GameZDataMw>(Deserialize, Serialize);
         public System.Collections.Generic.List<string> textures;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material> materials;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Mw.MeshMw> meshes;
         public System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Mw.NodeMw> nodes;
-        public Mech3DotNet.Types.Gamez.GameZMwMetadata metadata;
+        public Mech3DotNet.Types.Gamez.GameZMetadataMw metadata;
 
-        public GameZMwData(System.Collections.Generic.List<string> textures, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material> materials, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Mw.MeshMw> meshes, System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Mw.NodeMw> nodes, Mech3DotNet.Types.Gamez.GameZMwMetadata metadata)
+        public GameZDataMw(System.Collections.Generic.List<string> textures, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material> materials, System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Mw.MeshMw> meshes, System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Mw.NodeMw> nodes, Mech3DotNet.Types.Gamez.GameZMetadataMw metadata)
         {
             this.textures = textures;
             this.materials = materials;
@@ -27,10 +27,10 @@ namespace Mech3DotNet.Types.Gamez
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material>> materials;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Mw.MeshMw>> meshes;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Mw.NodeMw>> nodes;
-            public Field<Mech3DotNet.Types.Gamez.GameZMwMetadata> metadata;
+            public Field<Mech3DotNet.Types.Gamez.GameZMetadataMw> metadata;
         }
 
-        public static void Serialize(GameZMwData v, Serializer s)
+        public static void Serialize(GameZDataMw v, Serializer s)
         {
             s.SerializeStruct(5);
             s.SerializeFieldName("textures");
@@ -42,10 +42,10 @@ namespace Mech3DotNet.Types.Gamez
             s.SerializeFieldName("nodes");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Nodes.Mw.NodeMw.Converter))(v.nodes);
             s.SerializeFieldName("metadata");
-            s.Serialize(Mech3DotNet.Types.Gamez.GameZMwMetadata.Converter)(v.metadata);
+            s.Serialize(Mech3DotNet.Types.Gamez.GameZMetadataMw.Converter)(v.metadata);
         }
 
-        public static GameZMwData Deserialize(Deserializer d)
+        public static GameZDataMw Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Gamez
                 materials = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material>>(),
                 meshes = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Mesh.Mw.MeshMw>>(),
                 nodes = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Nodes.Mw.NodeMw>>(),
-                metadata = new Field<Mech3DotNet.Types.Gamez.GameZMwMetadata>(),
+                metadata = new Field<Mech3DotNet.Types.Gamez.GameZMetadataMw>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -72,23 +72,23 @@ namespace Mech3DotNet.Types.Gamez
                         fields.nodes.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Nodes.Mw.NodeMw.Converter))();
                         break;
                     case "metadata":
-                        fields.metadata.Value = d.Deserialize(Mech3DotNet.Types.Gamez.GameZMwMetadata.Converter)();
+                        fields.metadata.Value = d.Deserialize(Mech3DotNet.Types.Gamez.GameZMetadataMw.Converter)();
                         break;
                     default:
-                        throw new UnknownFieldException("GameZMwData", fieldName);
+                        throw new UnknownFieldException("GameZDataMw", fieldName);
                 }
             }
-            return new GameZMwData(
+            return new GameZDataMw(
 
-                fields.textures.Unwrap("GameZMwData", "textures"),
+                fields.textures.Unwrap("GameZDataMw", "textures"),
 
-                fields.materials.Unwrap("GameZMwData", "materials"),
+                fields.materials.Unwrap("GameZDataMw", "materials"),
 
-                fields.meshes.Unwrap("GameZMwData", "meshes"),
+                fields.meshes.Unwrap("GameZDataMw", "meshes"),
 
-                fields.nodes.Unwrap("GameZMwData", "nodes"),
+                fields.nodes.Unwrap("GameZDataMw", "nodes"),
 
-                fields.metadata.Unwrap("GameZMwData", "metadata")
+                fields.metadata.Unwrap("GameZDataMw", "metadata")
 
             );
         }

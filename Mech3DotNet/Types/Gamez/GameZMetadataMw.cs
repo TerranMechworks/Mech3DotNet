@@ -3,14 +3,14 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Gamez
 {
-    public sealed class GameZMwMetadata
+    public sealed class GameZMetadataMw
     {
-        public static readonly TypeConverter<GameZMwMetadata> Converter = new TypeConverter<GameZMwMetadata>(Deserialize, Serialize);
+        public static readonly TypeConverter<GameZMetadataMw> Converter = new TypeConverter<GameZMetadataMw>(Deserialize, Serialize);
         public int meshesArraySize;
         public uint nodeArraySize;
         public uint nodeDataCount;
 
-        public GameZMwMetadata(int meshesArraySize, uint nodeArraySize, uint nodeDataCount)
+        public GameZMetadataMw(int meshesArraySize, uint nodeArraySize, uint nodeDataCount)
         {
             this.meshesArraySize = meshesArraySize;
             this.nodeArraySize = nodeArraySize;
@@ -24,7 +24,7 @@ namespace Mech3DotNet.Types.Gamez
             public Field<uint> nodeDataCount;
         }
 
-        public static void Serialize(GameZMwMetadata v, Serializer s)
+        public static void Serialize(GameZMetadataMw v, Serializer s)
         {
             s.SerializeStruct(3);
             s.SerializeFieldName("meshes_array_size");
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Gamez
             ((Action<uint>)s.SerializeU32)(v.nodeDataCount);
         }
 
-        public static GameZMwMetadata Deserialize(Deserializer d)
+        public static GameZMetadataMw Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -57,16 +57,16 @@ namespace Mech3DotNet.Types.Gamez
                         fields.nodeDataCount.Value = d.DeserializeU32();
                         break;
                     default:
-                        throw new UnknownFieldException("GameZMwMetadata", fieldName);
+                        throw new UnknownFieldException("GameZMetadataMw", fieldName);
                 }
             }
-            return new GameZMwMetadata(
+            return new GameZMetadataMw(
 
-                fields.meshesArraySize.Unwrap("GameZMwMetadata", "meshesArraySize"),
+                fields.meshesArraySize.Unwrap("GameZMetadataMw", "meshesArraySize"),
 
-                fields.nodeArraySize.Unwrap("GameZMwMetadata", "nodeArraySize"),
+                fields.nodeArraySize.Unwrap("GameZMetadataMw", "nodeArraySize"),
 
-                fields.nodeDataCount.Unwrap("GameZMwMetadata", "nodeDataCount")
+                fields.nodeDataCount.Unwrap("GameZMetadataMw", "nodeDataCount")
 
             );
         }

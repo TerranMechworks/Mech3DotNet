@@ -3,15 +3,15 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Gamez
 {
-    public sealed class GameZPmMetadata
+    public sealed class GameZMetadataPm
     {
-        public static readonly TypeConverter<GameZPmMetadata> Converter = new TypeConverter<GameZPmMetadata>(Deserialize, Serialize);
+        public static readonly TypeConverter<GameZMetadataPm> Converter = new TypeConverter<GameZMetadataPm>(Deserialize, Serialize);
         public uint gamezHeaderUnk08;
         public int meshesArraySize;
         public uint nodeDataCount;
         public System.Collections.Generic.List<uint?> texturePtrs;
 
-        public GameZPmMetadata(uint gamezHeaderUnk08, int meshesArraySize, uint nodeDataCount, System.Collections.Generic.List<uint?> texturePtrs)
+        public GameZMetadataPm(uint gamezHeaderUnk08, int meshesArraySize, uint nodeDataCount, System.Collections.Generic.List<uint?> texturePtrs)
         {
             this.gamezHeaderUnk08 = gamezHeaderUnk08;
             this.meshesArraySize = meshesArraySize;
@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Gamez
             public Field<System.Collections.Generic.List<uint?>> texturePtrs;
         }
 
-        public static void Serialize(GameZPmMetadata v, Serializer s)
+        public static void Serialize(GameZMetadataPm v, Serializer s)
         {
             s.SerializeStruct(4);
             s.SerializeFieldName("gamez_header_unk08");
@@ -40,7 +40,7 @@ namespace Mech3DotNet.Types.Gamez
             s.SerializeVec(s.SerializeValOption(((Action<uint>)s.SerializeU32)))(v.texturePtrs);
         }
 
-        public static GameZPmMetadata Deserialize(Deserializer d)
+        public static GameZMetadataPm Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -66,18 +66,18 @@ namespace Mech3DotNet.Types.Gamez
                         fields.texturePtrs.Value = d.DeserializeVec(d.DeserializeValOption(d.DeserializeU32))();
                         break;
                     default:
-                        throw new UnknownFieldException("GameZPmMetadata", fieldName);
+                        throw new UnknownFieldException("GameZMetadataPm", fieldName);
                 }
             }
-            return new GameZPmMetadata(
+            return new GameZMetadataPm(
 
-                fields.gamezHeaderUnk08.Unwrap("GameZPmMetadata", "gamezHeaderUnk08"),
+                fields.gamezHeaderUnk08.Unwrap("GameZMetadataPm", "gamezHeaderUnk08"),
 
-                fields.meshesArraySize.Unwrap("GameZPmMetadata", "meshesArraySize"),
+                fields.meshesArraySize.Unwrap("GameZMetadataPm", "meshesArraySize"),
 
-                fields.nodeDataCount.Unwrap("GameZPmMetadata", "nodeDataCount"),
+                fields.nodeDataCount.Unwrap("GameZMetadataPm", "nodeDataCount"),
 
-                fields.texturePtrs.Unwrap("GameZPmMetadata", "texturePtrs")
+                fields.texturePtrs.Unwrap("GameZMetadataPm", "texturePtrs")
 
             );
         }

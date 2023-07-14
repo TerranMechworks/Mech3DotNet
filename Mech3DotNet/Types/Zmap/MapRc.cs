@@ -3,7 +3,7 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Zmap
 {
-    public sealed class MapRc
+    public partial class MapRc
     {
         public static readonly TypeConverter<MapRc> Converter = new TypeConverter<MapRc>(Deserialize, Serialize);
         public uint unk04;

@@ -3,7 +3,7 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Messages
 {
-    public sealed class Messages
+    public partial class Messages
     {
         public static readonly TypeConverter<Messages> Converter = new TypeConverter<Messages>(Deserialize, Serialize);
         public uint languageId;

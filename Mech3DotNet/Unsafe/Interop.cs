@@ -9,7 +9,7 @@ namespace Mech3DotNet.Unsafe
     internal class Interop
     {
         // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
-        private const string MECH3AX = @"mech3ax-v0.6.0-rc3";
+        private const string MECH3AX = @"mech3ax-v0.6.0-rc4";
         private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
 
         public delegate void DataCb(IntPtr pointer, ulong length);

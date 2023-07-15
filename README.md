@@ -6,7 +6,9 @@ Obviously, this is an unofficial fan effort and not connected to the developers,
 
 ## Changelog
 
-### [0.6.0-rc4] - Unreleased
+### [0.6.0-rc5] - Unreleased
+
+### [0.6.0-rc4] - 2023-07-15
 
 * Breaking changes!
 * Serialize C# enums as enums, not classes.
@@ -82,6 +84,17 @@ dotnet run --project RoundtripTests "$HOME/Documents/mw3/"
 ```
 
 will run the tests against both versions.
+
+## Release procedure
+
+1. Review changelog, and add the date
+1. Bump version in `Mech3DotNet/Properties/AssemblyInfo.cs` and `RoundtripTests/Properties/AssemblyInfo.cs`
+1. Commit, push, and wait for CI
+1. Create a tag of the version (e.g. `git tag v0.6.0-rc3`)
+1. Push the tag (`git push --tags`)
+1. The build will automatically create a release as a draft
+1. Add changelog items to the release notes via the GitHub web interface
+1. Publish the release via the GitHub web interface
 
 ## License
 

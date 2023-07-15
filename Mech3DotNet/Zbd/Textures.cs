@@ -4,7 +4,11 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
 {
-    /// <summary>Texture data.</summary>
+    /// <summary>
+    /// Image or texture data.
+    ///
+    /// See <see cref="Read"/> for reading a texture <c>.zbd</c> file.
+    /// </summary>
     public class Textures : IWritable
     {
         public Dictionary<string, byte[]> textureData;
@@ -29,8 +33,8 @@ namespace Mech3DotNet.Zbd
         }
 
         /// <summary>
-        /// Read texture data, fusing texture infos with texture data and
-        /// discarding other manifest data.
+        /// Read a texture <c>.zbd</c> file from the specified path, discarding
+        /// some manifest data.
         ///
         /// Without the manifest, the data cannot be written again.
         /// </summary>
@@ -50,7 +54,7 @@ namespace Mech3DotNet.Zbd
             return fused;
         }
 
-        /// <summary>Read texture data, retaining all manifest data.</summary>
+        /// <summary>Read a texture <c>.zbd</c> file from the specified path.</summary>
         public static Textures Read(string path)
         {
             var textureData = ReadRaw(path, out var manifest_data);
@@ -58,7 +62,7 @@ namespace Mech3DotNet.Zbd
             return new Textures(textureData, manifest.textureInfos, manifest.globalPalettes);
         }
 
-        /// <summary>Write texture data.</summary>
+        /// <summary>Write a texture <c>.zbd</c> file to the specified path.</summary>
         public void Write(string path)
         {
             var manifest = new TextureManifest(textureInfos, globalPalettes);

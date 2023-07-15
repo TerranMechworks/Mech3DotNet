@@ -4,7 +4,7 @@ namespace Mech3DotNet.FileUtils
 {
     public static class FileCompare
     {
-        const int CHUNK_SIZE = 4 * 1024;
+        const int CHUNK_SIZE = 4 * 1024 * 1024;
 
         public static string? CompareFiles(string? srcPath, string? dstPath)
         {

@@ -1,8 +1,14 @@
-using System;
 using System.Collections.Generic;
 
 namespace Mech3DotNet.Reader
 {
+    /// <summary>
+    /// An operation to find one or more <see cref="ReaderValue"/> by key in a
+    /// <see cref="ReaderList"/>.
+    ///
+    /// This operation returns multiple values. Each value is the next index
+    /// of the key.
+    /// </summary>
     public struct FindByKey : IQueryOperation
     {
         private string _key;
@@ -12,6 +18,16 @@ namespace Mech3DotNet.Reader
             _key = key;
         }
 
+        /// <inheritdoc/>
+        /// <returns>
+        /// A <see cref="ReaderList"/> with one or more values.
+        /// </returns>
+        /// <exception cref="ConversionException">
+        /// Thrown if the reader value this operation is applied to is not a list.
+        /// </exception>
+        /// <exception cref="NotFoundException">
+        /// Thrown if no keys are found in the list.
+        /// </exception>
         public ReaderValue Apply(ReaderValue value, List<string> path)
         {
             var list = ConversionException.List(value, path);

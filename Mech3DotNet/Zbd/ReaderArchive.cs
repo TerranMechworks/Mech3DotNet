@@ -9,7 +9,7 @@ namespace Mech3DotNet.Zbd
     /// <summary>
     /// Reader archive base.
     ///
-    /// Use <see>ReaderArchiveGeneric</see> or a game-specific reader archive
+    /// Use <see cref="ReaderArchiveGeneric"/> or a game-specific reader archive
     /// with parsing convenience functions.
     /// </summary>
     public abstract class ReaderArchive : Archive<ReaderValue>

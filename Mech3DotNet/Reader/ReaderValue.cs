@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Mech3DotNet.Reader
 {
+    /// <summary>The kind of <see cref="ReaderValue"/>.</summary>
     public enum ReaderValueKind
     {
         Int,
@@ -14,11 +15,15 @@ namespace Mech3DotNet.Reader
         List,
     }
 
-    public class ReaderValueException : Exception
+    /// <summary>
+    /// An error occurred reading a <see cref="ReaderValue"/> from binary.
+    /// </summary>
+    public class ReaderValueReadException : Exception
     {
-        public ReaderValueException(string message) : base(message) { }
+        public ReaderValueReadException(string message) : base(message) { }
     }
 
+    /// <summary>A value in reader ZBD data.</summary>
     public abstract class ReaderValue
     {
         protected const int INT = 1;
@@ -26,8 +31,18 @@ namespace Mech3DotNet.Reader
         protected const int STRING = 3;
         protected const int LIST = 4;
 
+        /// <summary>The kind of <see cref="ReaderValue"/>.</summary>
         public abstract ReaderValueKind Kind { get; }
 
+        /// <summary>Read a <see cref="ReaderValue"/> from binary.</summary>
+        /// <exception cref="ReaderValueReadException">
+        /// Thrown if:
+        /// * The reader value kind is unknown
+        /// * When the reader value kind is a string, and the string length is
+        ///   negative.
+        /// * When the reader value kind is a list, and the list length is
+        ///   negative.
+        /// </exception>
         public static ReaderValue Read(BinaryReader reader)
         {
             var kind = reader.ReadInt32();
@@ -42,7 +57,7 @@ namespace Mech3DotNet.Reader
                 case LIST:
                     return ReaderList.ReadValue(reader);
                 default:
-                    throw new ReaderValueException($"Unknown value kind {kind}");
+                    throw new ReaderValueReadException($"Unknown value kind {kind}");
             }
         }
 
@@ -50,12 +65,26 @@ namespace Mech3DotNet.Reader
 
         internal abstract void Repr(StringBuilder builder, int level);
 
+        /// <summary>
+        /// Create a new <see cref="Query"/> on this value, and apply the
+        /// <see cref="IQueryOperation"/>.
+        /// </summary>
         public static Query operator /(ReaderValue value, IQueryOperation op) => new Query(value) / op;
+        /// <summary>
+        /// Create a new <see cref="Query"/> on this value, and apply a
+        /// <see cref="FindByIndex"/> <see cref="IQueryOperation"/> based on
+        /// the specified index.
+        /// </summary>
         public static Query operator /(ReaderValue value, int index) => value / new FindByIndex(index);
+        /// <summary>
+        /// Create a new <see cref="Query"/> on this value, and apply a
+        /// <see cref="FindByKey"/> <see cref="IQueryOperation"/> based on the
+        /// specified key.
+        /// </summary>
         public static Query operator /(ReaderValue value, string key) => value / new FindByKey(key);
     }
 
-    public sealed class ReaderInt : ReaderValue
+    public sealed class ReaderInt : ReaderValue, IEquatable<ReaderInt>
     {
         public int Value { get; set; }
         public override ReaderValueKind Kind => ReaderValueKind.Int;
@@ -88,9 +117,13 @@ namespace Mech3DotNet.Reader
 
         public static implicit operator ReaderInt(int value) => new ReaderInt(value);
         public static implicit operator int(ReaderInt value) => value.Value;
+
+        public override bool Equals(object obj) => Equals(obj as ReaderInt);
+        public bool Equals(ReaderInt? other) => other != null && Value == other.Value;
+        public override int GetHashCode() => HashCode.Combine(Value);
     }
 
-    public sealed class ReaderFloat : ReaderValue
+    public sealed class ReaderFloat : ReaderValue, IEquatable<ReaderFloat>
     {
         public float Value { get; set; }
         public override ReaderValueKind Kind => ReaderValueKind.Float;
@@ -123,9 +156,13 @@ namespace Mech3DotNet.Reader
 
         public static implicit operator ReaderFloat(float value) => new ReaderFloat(value);
         public static implicit operator float(ReaderFloat value) => value.Value;
+
+        public override bool Equals(object obj) => Equals(obj as ReaderFloat);
+        public bool Equals(ReaderFloat? other) => other != null && Value == other.Value;
+        public override int GetHashCode() => HashCode.Combine(Value);
     }
 
-    public sealed class ReaderString : ReaderValue
+    public sealed class ReaderString : ReaderValue, IEquatable<ReaderString>
     {
         public string Value { get; set; }
         public override ReaderValueKind Kind => ReaderValueKind.String;
@@ -144,7 +181,7 @@ namespace Mech3DotNet.Reader
         {
             var count = reader.ReadInt32();
             if (count < 0)
-                throw new ReaderValueException($"String length was negative: {count}");
+                throw new ReaderValueReadException($"String length was negative: {count}");
 
             var bytes = reader.ReadBytes(count);
             var value = System.Text.Encoding.ASCII.GetString(bytes);
@@ -170,6 +207,10 @@ namespace Mech3DotNet.Reader
 
         public static implicit operator ReaderString(string value) => new ReaderString(value);
         public static implicit operator string(ReaderString value) => value.Value;
+
+        public override bool Equals(object obj) => Equals(obj as ReaderString);
+        public bool Equals(ReaderString? other) => other != null && Value == other.Value;
+        public override int GetHashCode() => HashCode.Combine(Value);
     }
 
     public sealed class ReaderList : ReaderValue, IEnumerable<ReaderValue>, ICollection<ReaderValue>, IList<ReaderValue>
@@ -196,7 +237,7 @@ namespace Mech3DotNet.Reader
         {
             var count = reader.ReadInt32() - 1;
             if (count < 0)
-                throw new ReaderValueException($"List length was negative: {count}");
+                throw new ReaderValueReadException($"List length was negative: {count}");
 
             var value = new List<ReaderValue>(count);
             for (var i = 0; i < count; i++)

@@ -4,7 +4,11 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
 {
-    /// <summary>Sound data.</summary>
+    /// <summary>
+    /// Sound data.
+    ///
+    /// See <see cref="Read"/> for reading a <c>sounds*.zbd</c> file.
+    /// </summary>
     public class Sounds : Archive<byte[]>, IWritable
     {
         public GameType gameType;
@@ -22,14 +26,16 @@ namespace Mech3DotNet.Zbd
             var sounds = new Dictionary<string, byte[]>();
             manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadSounds, (string name, byte[] data) =>
             {
-                // there are duplicate sounds in the archive
+                // there are duplicate sounds in the archive, however in all
+                // instances these seem to contain duplicate data. so they can
+                // be overwritten.
                 sounds[name] = data;
             });
             return sounds;
         }
 
         /// <summary>
-        /// Read sound data, discarding the manifest.
+        /// Read a <c>sounds*.zbd</c> file from the specified path, discarding the manifest.
         ///
         /// Without the manifest, the data cannot be written again.
         /// </summary>
@@ -38,7 +44,7 @@ namespace Mech3DotNet.Zbd
             return ReadRaw(path, gameType, out _);
         }
 
-        /// <summary>Read sound data, retaining the manifest.</summary>
+        /// <summary>Read a <c>sounds*.zbd</c> file from the specified path.</summary>
         public static Sounds Read(string path, GameType gameType)
         {
             var items = ReadRaw(path, gameType, out var manifest_data);
@@ -46,7 +52,7 @@ namespace Mech3DotNet.Zbd
             return new Sounds(items, manifest, gameType);
         }
 
-        /// <summary>Write sound data.</summary>
+        /// <summary>Write a <c>sounds*.zbd</c> file to the specified path</summary>
         public void Write(string path)
         {
             var manifest = SerializeManifest();

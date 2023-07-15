@@ -6,6 +6,11 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
 {
+    /// <summary>
+    /// MW MechLib data.
+    ///
+    /// See <see cref="Read"/> for reading a MW <c>mechlib.zbd</c> file.
+    /// </summary>
     public class MechlibArchiveMw : MechlibArchive<ModelMw>, IWritable
     {
         public MechlibArchiveMw(
@@ -13,6 +18,7 @@ namespace Mech3DotNet.Zbd
             List<ArchiveEntry> entries,
             List<Material> materials) : base(items, entries, materials) { }
 
+        /// <summary>Read a MW <c>mechlib.zbd</c> file from the specified path.</summary>
         public static MechlibArchiveMw Read(string path)
         {
             List<Material>? capture = null;
@@ -41,6 +47,7 @@ namespace Mech3DotNet.Zbd
             return new MechlibArchiveMw(items, manifest, materials);
         }
 
+        /// <summary>Write a MW <c>mechlib.zbd</c> file to the specified path.</summary>
         public void Write(string path)
         {
             var manifest_data = SerializeManifest();

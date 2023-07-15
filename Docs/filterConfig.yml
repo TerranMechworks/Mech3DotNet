@@ -1,0 +1,5 @@
+apiRules:
+  # Because these types generated, they have no documentation.
+  - exclude:
+      uidRegex: ^Mech3DotNet\.Types
+      type: Namespace

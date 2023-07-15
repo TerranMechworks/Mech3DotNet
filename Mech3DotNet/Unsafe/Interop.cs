@@ -6,7 +6,7 @@ namespace Mech3DotNet.Unsafe
     /// <summary>
     /// Raw, unsafe bindings to the mech3ax library.
     /// </summary>
-    public class Interop
+    internal class Interop
     {
         // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
         private const string MECH3AX = @"mech3ax-v0.6.0-rc3";

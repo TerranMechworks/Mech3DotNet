@@ -6,6 +6,11 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
 {
+    /// <summary>
+    /// PM MechLib data.
+    ///
+    /// See <see cref="Read"/> for reading a PM <c>mechlib.zbd</c> file.
+    /// </summary>
     public class MechlibArchivePm : MechlibArchive<ModelPm>, IWritable
     {
         public MechlibArchivePm(
@@ -13,6 +18,7 @@ namespace Mech3DotNet.Zbd
             List<ArchiveEntry> entries,
             List<Material> materials) : base(items, entries, materials) { }
 
+        /// <summary>Read a PM <c>mechlib.zbd</c> file from the specified path.</summary>
         public static MechlibArchivePm Read(string path)
         {
             List<Material>? capture = null;
@@ -37,10 +43,11 @@ namespace Mech3DotNet.Zbd
             if (capture == null)
                 throw new System.InvalidOperationException("materials is null after reading");
             var materials = capture;
-            var manifest = MechlibArchiveMw.DeserializeManifest(manifest_data);
+            var manifest = MechlibArchivePm.DeserializeManifest(manifest_data);
             return new MechlibArchivePm(items, manifest, materials);
         }
 
+        /// <summary>Write a PM <c>mechlib.zbd</c> file to the specified path.</summary>
         public void Write(string path)
         {
             var manifest = SerializeManifest();

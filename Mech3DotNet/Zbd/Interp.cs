@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Mech3DotNet.Exchange;
 using Mech3DotNet.Types.Interp;
 using Mech3DotNet.Unsafe;
-using static Mech3DotNet.Helpers;
+using static Mech3DotNet.Unsafe.Helpers;
 
 namespace Mech3DotNet.Zbd
 {
@@ -26,14 +26,14 @@ namespace Mech3DotNet.Zbd
             return dict;
         }
 
-        /// <summary>Read interpreter data.</summary>
+        /// <summary>Read a <c>interp.zbd</c> file from the specified path.</summary>
         public static Interp Read(string path)
         {
             var scripts = ReadData(path, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
             return new Interp(scripts);
         }
 
-        /// <summary>Write interpreter data.</summary>
+        /// <summary>Write a <c>interp.zbd</c> file to the specified path.</summary>
         public void Write(string path)
         {
             WriteData(path, Helpers.IGNORED, Interop.WriteInterp, scripts, ScriptsConverter);

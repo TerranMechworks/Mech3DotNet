@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace Mech3DotNet.Reader
 {
+    /// <summary>
+    /// Enumerate all <see cref="ReaderValue"/> in a <see cref="ReaderList"/>
+    /// as pairs.
+    /// </summary>
     public struct PairWise : IEnumerable<(string key, ReaderValue value, IEnumerable<string> path)>
     {
         private ReaderList _list;
@@ -11,7 +15,9 @@ namespace Mech3DotNet.Reader
         private int _halfCount;
         private IEnumerable<string> _path;
 
+        /// <summary>Returns the count of key-value pairs.</summary>
         public int Count => _halfCount;
+        /// <summary>Returns the underlying <see cref="ReaderList"/>.</summary>
         public ReaderList Underlying => _list;
 
         public PairWise(ReaderValue value, IEnumerable<string> path)

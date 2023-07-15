@@ -5,11 +5,16 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
 {
-    /// <summary>Message/localisation data.</summary>
+    /// <summary>
+    /// Message/localisation data.
+    ///
+    /// See <see cref="Read"/> for reading a message <c>.dll</c> file.
+    /// </summary>
     public partial class Messages
     {
         /// <summary>
-        /// Read message/localisation data.
+        /// Read message/localisation data from a message <c>.dll</c> file from
+        /// the specified path.
         ///
         /// Message data cannot be written again.
         /// </summary>
@@ -45,7 +50,8 @@ namespace Mech3DotNet.Zbd
         }
 
         /// <summary>
-        /// Read message/localisation data, discarding the language ID.
+        /// Read message/localisation data from a message <c>.dll</c> file from
+        /// the specified path, discarding the language ID and entry IDs.
         ///
         /// Message data cannot be written again.
         /// </summary>

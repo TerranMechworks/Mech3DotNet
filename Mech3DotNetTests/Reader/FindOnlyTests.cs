@@ -9,28 +9,28 @@ namespace Mech3DotNetTests.Reader
     public class FindOnlyTests
     {
         [TestMethod]
-        public void FindOnly_NotArray_Throws()
+        public void NotArray_Throws()
         {
             var value = RI(42);
             Assert.ThrowsException<ConversionException>(() => value / Only());
         }
 
         [TestMethod]
-        public void FindOnly_NoItems_Throws()
+        public void NoItems_Throws()
         {
             var value = RL();
             Assert.ThrowsException<NotFoundException>(() => value / Only());
         }
 
         [TestMethod]
-        public void FindOnly_HasItems_Throws()
+        public void HasItems_Throws()
         {
             var value = RL(42, 42);
             Assert.ThrowsException<NotFoundException>(() => value / Only());
         }
 
         [TestMethod]
-        public void FindOnly_HasItem_ReturnsOnly()
+        public void HasItem_ReturnsOnly()
         {
             var value = RL(42);
             var first = value / Only() / Int();
@@ -38,7 +38,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [TestMethod]
-        public void FindOnly_Applied_ModifiesPath()
+        public void Applied_ModifiesPath()
         {
             var value = RL(42);
             var query = value / Only();

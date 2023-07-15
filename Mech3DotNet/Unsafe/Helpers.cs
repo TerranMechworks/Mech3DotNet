@@ -1,11 +1,13 @@
 using System;
 using System.Runtime.ExceptionServices;
 using Mech3DotNet.Exchange;
-using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Unsafe
 {
-    public static class Helpers
+    /// <summary>
+    /// Helpers for interfacing with the raw mech3ax library bindings.
+    /// </summary>
+    internal static class Helpers
     {
         public delegate int ReadArchiveFn(string filename, int gameTypeId, Interop.NameDataCb callback);
         public delegate void ReadArchiveCb(string filename, byte[] data);

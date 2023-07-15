@@ -6,6 +6,8 @@ namespace Mech3DotNet.Zbd
 {
     /// <summary>
     /// A generic reader archive with no parsing convenience functions.
+    ///
+    /// See <see cref="Read"/> for reading a reader ZBD file.
     /// </summary>
     public class ReaderArchiveGeneric : ReaderArchive, IWritable
     {
@@ -19,7 +21,7 @@ namespace Mech3DotNet.Zbd
             this.gameType = gameType;
         }
 
-        /// <summary>Read reader data, retaining entry information.</summary>
+        /// <summary>Read a reader ZBD file from the specified path.</summary>
         public static ReaderArchiveGeneric Read(string path, GameType gameType)
         {
             var items = ReadRaw(path, gameType, out var manifest_data);
@@ -27,7 +29,7 @@ namespace Mech3DotNet.Zbd
             return new ReaderArchiveGeneric(items, manifest, gameType);
         }
 
-        /// <summary>Write reader data.</summary>
+        /// <summary>Write a reader ZBD file to the specified path.</summary>
         public void Write(string path)
         {
             WriteRaw(path, gameType);

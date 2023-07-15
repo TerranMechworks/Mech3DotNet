@@ -12,6 +12,7 @@ Obviously, this is an unofficial fan effort and not connected to the developers,
 * Serialize C# enums as enums, not classes.
 * Tracks [mech3ax v0.6.0-rc4](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.0-rc4)
 * Major rewrite of how types are read and written.
+* Documentation.
 
 ### [0.6.0-rc3] - Unreleased
 
@@ -66,7 +67,7 @@ dotnet test --logger "console;verbosity=detailed"
 
 ### Roundtrip tests
 
-This requires one or more MechWarrior 3 versions to be installed. For example, this might be `C:\Program Files (x86)\MechWarrior 3` for a single version on Windows. Or, you may have multiple versions for testing in a folder:
+This requires one or more compatible game files. For example, this might be `C:\Program Files (x86)\MechWarrior 3` on Windows. On other platforms, you may have multiple versions for testing in a folder:
 
 ```console
 $ ls -1 "$HOME/Documents/mw3/"
@@ -77,7 +78,7 @@ v1.2-us-patched/
 The tests will recurse into the specified folder, and execute the roundtrip tests for all matching files. So:
 
 ```shell
-dotnet run --project RoundtripTests "$HOME/Documents/mw3/v1.0-us-patched/"
+dotnet run --project RoundtripTests "$HOME/Documents/mw3/"
 ```
 
 will run the tests against both versions.

@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Mech3DotNet.Unsafe
 {
-    public class PinnedGCHandle : IDisposable
+    internal class PinnedGCHandle : IDisposable
     {
         private GCHandle handle;
 

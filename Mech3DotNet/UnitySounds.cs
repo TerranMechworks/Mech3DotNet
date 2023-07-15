@@ -5,16 +5,23 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet
 {
-    /// <summary>Sound data read in a Unity-compatible manner.</summary>
+    /// <summary>
+    /// Read sound data from a <c>sounds*.zbd</c> file in a Unity-compatible manner.
+    /// </summary>
     public static class UnitySounds
     {
         public delegate void ReadSoundCb(string name, int channels, int frequency, float[] samples);
 
         /// <summary>
-        /// Read a sound archive (soundsL.zbd, soundsH.zbd), converted into Unity-compatible data.
+        /// Read sound data from a <c>sounds*.zbd</c> file, converted into
+        /// Unity-compatible sound data (floating-point samples).
         ///
         /// The callback is invoked multiple times for each sound in the archive.
         /// </summary>
+        /// <remarks>
+        /// Not all game types have been tested; specifically CS uses higher
+        /// quality sound data that may be unsupported in mech3ax.
+        /// </remarks>
         public static void ReadSoundsAsWav(string path, GameType gameType, ReadSoundCb readCallback)
         {
             if (path == null)
@@ -51,9 +58,10 @@ namespace Mech3DotNet
         }
 
         /// <summary>
-        /// Read a sound file (*.wav), converted into Unity-compatible data.
+        /// Read sound data from a single <c>*.wav</c> file, converted into
+        /// Unity-compatible sound data (floating-point samples).
         ///
-        /// The callback is invoked at most once.
+        /// The callback is invoked once.
         /// </summary>
         public static void ReadSoundAsWav(string path, ReadSoundCb readCallback)
         {

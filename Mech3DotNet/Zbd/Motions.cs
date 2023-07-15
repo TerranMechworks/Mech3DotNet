@@ -5,7 +5,11 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
 {
-    /// <summary>Motion data.</summary>
+    /// <summary>
+    /// MW or PM motion data.
+    ///
+    /// See <see cref="Read"/> for reading a MW or PM <c>motion.zbd</c> file.
+    /// </summary>
     public class Motions<TQuaternion, TVec3> : Archive<Motion<TQuaternion, TVec3>>, IWritable
         where TQuaternion : notnull
         where TVec3 : notnull
@@ -49,16 +53,24 @@ namespace Mech3DotNet.Zbd
         }
 
         /// <summary>
-        /// Read motion data, discarding the manifest.
+        /// Read a MW or PM <c>motion.zbd</c> file from the specified path, discarding the manifest.
         ///
         /// Without the manifest, the data cannot be written again.
         /// </summary>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if the game type is not <see cref="GameType.MW"/> or <see cref="GameType.PM"/>.
+        /// </exception>
         public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadAsDict(string path, GameType gameType)
         {
             return ReadRaw(path, gameType, out _);
         }
 
-        /// <summary>Read motion data, retaining the manifest.</summary>
+        /// <summary>
+        /// Read a MW or PM <c>motion.zbd</c> file from the specified path.
+        /// </summary>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if the game type is not <see cref="GameType.MW"/> or <see cref="GameType.PM"/>.
+        /// </exception>
         public static Motions<TQuaternion, TVec3> Read(string path, GameType gameType)
         {
             var items = ReadRaw(path, gameType, out var manifest_data);
@@ -66,7 +78,10 @@ namespace Mech3DotNet.Zbd
             return new Motions<TQuaternion, TVec3>(items, manifest, gameType);
         }
 
-        /// <summary>Write motion data.</summary>
+        /// <summary>Write a MW or PM <c>motion.zbd</c> file to the specified path.</summary>
+        /// <exception cref="System.ArgumentException">
+        /// Thrown if the game type is not <see cref="GameType.MW"/> or <see cref="GameType.PM"/>.
+        /// </exception>
         public void Write(string path)
         {
             ValidateGameType(gameType);

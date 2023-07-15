@@ -6,6 +6,11 @@ using Mech3DotNet.Types.Gamez.Materials;
 
 namespace Mech3DotNet.Zbd
 {
+    /// <summary>
+    /// A generic mechlib archive.
+    ///
+    /// See the specific archive implementations for reading and writing ZBDs.
+    /// </summary>
     public abstract class MechlibArchive<TModel> : Archive<TModel>
     {
         public List<Material> materials;

@@ -8,6 +8,8 @@ namespace Mech3DotNet.Zbd
 {
     /// <summary>
     /// A MW reader archive with parsing convenience functions.
+    ///
+    /// See <see cref="Read"/> for reading a MW <c>reader*.zbd</c> file.
     /// </summary>
     public class ReaderArchiveMw : ReaderArchive, IWritable
     {
@@ -15,7 +17,7 @@ namespace Mech3DotNet.Zbd
             Dictionary<string, ReaderValue> items,
             List<ArchiveEntry> entries) : base(items, entries) { }
 
-        /// <summary>Read reader data, retaining entry information.</summary>
+        /// <summary>Read a MW <c>reader*.zbd</c> file from the specified path.</summary>
         public static ReaderArchiveMw Read(string path)
         {
             var items = ReadRaw(path, GameType.MW, out var manifest_data);
@@ -23,7 +25,7 @@ namespace Mech3DotNet.Zbd
             return new ReaderArchiveMw(items, manifest);
         }
 
-        /// <summary>Write reader data.</summary>
+        /// <summary>Write a MW <c>reader*.zbd</c> file to the specified path.</summary>
         public void Write(string path)
         {
             WriteRaw(path, GameType.MW);

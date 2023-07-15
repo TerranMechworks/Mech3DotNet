@@ -5,7 +5,11 @@ using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
 {
-    /// <summary>A generic archive, used for archive-based ZBD data.</summary>
+    /// <summary>
+    /// A generic archive, used for archive-based ZBD data.
+    ///
+    /// See the specific archive implementations for reading and writing ZBDs.
+    /// </summary>
     public abstract class Archive<TEntry>
     {
         public Dictionary<string, TEntry> items;

@@ -1,7 +1,7 @@
 using System;
 using Mech3DotNet.Exchange;
 
-namespace Mech3DotNet.Types.Gamez
+namespace Mech3DotNet.Zbd
 {
     public partial class GameZDataPm
     {

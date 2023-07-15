@@ -35,11 +35,11 @@ namespace Mech3DotNet.Zbd
             this.gameType = ValidateGameType(gameType);
         }
 
-        private static Dictionary<string, Motion<TQuaternion, TVec3>> ReadRaw(string inputPath, GameType gameType, out byte[] manifest_data)
+        private static Dictionary<string, Motion<TQuaternion, TVec3>> ReadRaw(string path, GameType gameType, out byte[] manifest_data)
         {
             ValidateGameType(gameType);
             var motions = new Dictionary<string, Motion<TQuaternion, TVec3>>();
-            manifest_data = Helpers.ReadArchive(inputPath, gameType, Helpers.MANIFEST, Interop.ReadMotion, (string name, byte[] data) =>
+            manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadMotion, (string name, byte[] data) =>
             {
                 var motion = Interop.Deserialize(data, Motion<TQuaternion, TVec3>.Converter);
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
@@ -53,25 +53,25 @@ namespace Mech3DotNet.Zbd
         ///
         /// Without the manifest, the data cannot be written again.
         /// </summary>
-        public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadAsDict(string inputPath, GameType gameType)
+        public static Dictionary<string, Motion<TQuaternion, TVec3>> ReadAsDict(string path, GameType gameType)
         {
-            return ReadRaw(inputPath, gameType, out _);
+            return ReadRaw(path, gameType, out _);
         }
 
         /// <summary>Read motion data, retaining the manifest.</summary>
-        public static Motions<TQuaternion, TVec3> Read(string inputPath, GameType gameType)
+        public static Motions<TQuaternion, TVec3> Read(string path, GameType gameType)
         {
-            var items = ReadRaw(inputPath, gameType, out var manifest_data);
+            var items = ReadRaw(path, gameType, out var manifest_data);
             var manifest = DeserializeManifest(manifest_data);
             return new Motions<TQuaternion, TVec3>(items, manifest, gameType);
         }
 
         /// <summary>Write motion data.</summary>
-        public void Write(string outputPath)
+        public void Write(string path)
         {
             ValidateGameType(gameType);
             var manifest = SerializeManifest();
-            Helpers.WriteArchive(outputPath, gameType, manifest, Interop.WriteMotion, (string name) =>
+            Helpers.WriteArchive(path, gameType, manifest, Interop.WriteMotion, (string name) =>
             {
                 // there is at least one file, "shadowcat_Fallb" that isn't lowercased
                 var item = items[name.ToLowerInvariant()];

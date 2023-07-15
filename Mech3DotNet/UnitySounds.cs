@@ -15,14 +15,14 @@ namespace Mech3DotNet
         ///
         /// The callback is invoked multiple times for each sound in the archive.
         /// </summary>
-        public static void ReadSoundsAsWav(string inputPath, GameType gameType, ReadSoundCb readCallback)
+        public static void ReadSoundsAsWav(string path, GameType gameType, ReadSoundCb readCallback)
         {
-            if (inputPath == null)
-                throw new ArgumentNullException(nameof(inputPath));
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
             var gameTypeId = Helpers.GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             var res = Interop.ReadSoundsAsWav(
-                inputPath,
+                path,
                 gameTypeId,
                 (IntPtr namePtr, ulong nameLen, int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
                 {
@@ -55,18 +55,18 @@ namespace Mech3DotNet
         ///
         /// The callback is invoked at most once.
         /// </summary>
-        public static void ReadSoundAsWav(string inputPath, ReadSoundCb readCallback)
+        public static void ReadSoundAsWav(string path, ReadSoundCb readCallback)
         {
-            if (inputPath == null)
-                throw new ArgumentNullException(nameof(inputPath));
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
             ExceptionDispatchInfo? ex = null;
             var res = Interop.ReadSoundAsWav(
-                inputPath,
+                path,
                 (int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
                 {
                     try
                     {
-                        var name = System.IO.Path.GetFileName(inputPath);
+                        var name = System.IO.Path.GetFileName(path);
                         var length = Convert.ToInt32(sampleLen);
                         var samples = new float[length];
                         Marshal.Copy(samplePtr, samples, 0, length);

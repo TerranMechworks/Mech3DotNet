@@ -18,10 +18,10 @@ namespace Mech3DotNet.Zbd
             this.globalPalettes = globalPalettes;
         }
 
-        private static Dictionary<string, byte[]> ReadRaw(string inputPath, out byte[] manifest_data)
+        private static Dictionary<string, byte[]> ReadRaw(string path, out byte[] manifest_data)
         {
             var textureData = new Dictionary<string, byte[]>();
-            manifest_data = Helpers.ReadArchive(inputPath, Helpers.IGNORED, Helpers.MANIFEST, Interop.ReadTextures, (string name, byte[] data) =>
+            manifest_data = Helpers.ReadArchive(path, Helpers.IGNORED, Helpers.MANIFEST, Interop.ReadTextures, (string name, byte[] data) =>
             {
                 textureData.Add(name, data);
             });
@@ -34,9 +34,9 @@ namespace Mech3DotNet.Zbd
         ///
         /// Without the manifest, the data cannot be written again.
         /// </summary>
-        public static Dictionary<string, FusedTexture> ReadAsDict(string inputPath)
+        public static Dictionary<string, FusedTexture> ReadAsDict(string path)
         {
-            var textureData = ReadRaw(inputPath, out var manifest_data);
+            var textureData = ReadRaw(path, out var manifest_data);
             var manifest = Interop.Deserialize(manifest_data, TextureManifest.Converter);
             var fused = new Dictionary<string, FusedTexture>(manifest.textureInfos.Count);
             foreach (var info in manifest.textureInfos)
@@ -51,19 +51,19 @@ namespace Mech3DotNet.Zbd
         }
 
         /// <summary>Read texture data, retaining all manifest data.</summary>
-        public static Textures Read(string inputPath)
+        public static Textures Read(string path)
         {
-            var textureData = ReadRaw(inputPath, out var manifest_data);
+            var textureData = ReadRaw(path, out var manifest_data);
             var manifest = Interop.Deserialize(manifest_data, TextureManifest.Converter);
             return new Textures(textureData, manifest.textureInfos, manifest.globalPalettes);
         }
 
         /// <summary>Write texture data.</summary>
-        public void Write(string outputPath)
+        public void Write(string path)
         {
             var manifest = new TextureManifest(textureInfos, globalPalettes);
             var manifest_data = Interop.Serialize(manifest, TextureManifest.Converter);
-            Helpers.WriteArchive(outputPath, Helpers.IGNORED, manifest_data, Interop.WriteTextures, (string name) =>
+            Helpers.WriteArchive(path, Helpers.IGNORED, manifest_data, Interop.WriteTextures, (string name) =>
             {
                 return textureData[name];
             });

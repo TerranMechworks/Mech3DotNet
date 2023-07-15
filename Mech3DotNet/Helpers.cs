@@ -28,14 +28,14 @@ namespace Mech3DotNet
         internal const GameType IGNORED = GameType.MW;
         internal const string MANIFEST = "manifest.bin";
 
-        public static byte[] ReadArchive(string inputPath, GameType gameType, string manifestName, ReadArchiveFn readFunction, ReadArchiveCb readCallback)
+        public static byte[] ReadArchive(string path, GameType gameType, string manifestName, ReadArchiveFn readFunction, ReadArchiveCb readCallback)
         {
-            if (inputPath == null)
-                throw new ArgumentNullException(nameof(inputPath));
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
             var gameTypeId = GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             byte[]? manifest = null;
-            var res = readFunction(inputPath, gameTypeId, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
+            var res = readFunction(path, gameTypeId, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
             {
                 try
                 {
@@ -65,17 +65,17 @@ namespace Mech3DotNet
             return manifest;
         }
 
-        public static void WriteArchive(string outputPath, GameType gameType, byte[] manifest_data, WriteArchiveFn writeFunction, WriteArchiveCb writeCallback)
+        public static void WriteArchive(string path, GameType gameType, byte[] manifest_data, WriteArchiveFn writeFunction, WriteArchiveCb writeCallback)
         {
-            if (outputPath == null)
-                throw new ArgumentNullException(nameof(outputPath));
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
             var gameTypeId = GameTypeToId(gameType);
             var manifestLength = (ulong)manifest_data.Length;
             ExceptionDispatchInfo? ex = null;
             int res;
             using (var manifestPointer = new PinnedGCHandle(manifest_data))
             {
-                res = writeFunction(outputPath, gameTypeId, manifestPointer, manifestLength, (IntPtr namePointer, ulong nameLength, IntPtr buffer) =>
+                res = writeFunction(path, gameTypeId, manifestPointer, manifestLength, (IntPtr namePointer, ulong nameLength, IntPtr buffer) =>
                 {
                     try
                     {
@@ -104,14 +104,14 @@ namespace Mech3DotNet
             }
         }
 
-        public static T ReadData<T>(string inputPath, GameType gameType, ReadDataFn readFunction, TypeConverter<T> converter)
+        public static T ReadData<T>(string path, GameType gameType, ReadDataFn readFunction, TypeConverter<T> converter)
         {
-            if (inputPath == null)
-                throw new ArgumentNullException(nameof(inputPath));
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
             var gameTypeId = GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             byte[]? data = null;
-            var res = readFunction(inputPath, gameTypeId, (IntPtr pointer, ulong length) =>
+            var res = readFunction(path, gameTypeId, (IntPtr pointer, ulong length) =>
             {
                 try
                 {
@@ -131,17 +131,17 @@ namespace Mech3DotNet
             return Interop.Deserialize(data, converter);
         }
 
-        public static void WriteData<T>(string outputPath, GameType gameType, WriteDataFn writeFunction, T value, TypeConverter<T> converter)
+        public static void WriteData<T>(string path, GameType gameType, WriteDataFn writeFunction, T value, TypeConverter<T> converter)
         {
-            if (outputPath == null)
-                throw new ArgumentNullException(nameof(outputPath));
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
             var gameTypeId = GameTypeToId(gameType);
             var data = Interop.Serialize(value, converter);
             var length = (ulong)data.Length;
             int res;
             using (var pointer = new PinnedGCHandle(data))
             {
-                res = writeFunction(outputPath, gameTypeId, pointer, length);
+                res = writeFunction(path, gameTypeId, pointer, length);
             }
             if (res != 0)
                 Interop.ThrowLastError();

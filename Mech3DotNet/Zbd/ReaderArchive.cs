@@ -23,20 +23,20 @@ namespace Mech3DotNet.Zbd
         ///
         /// Without entry information, the data cannot be written again.
         /// </summary>
-        public static Dictionary<string, byte[]> ReadAsJson(string inputPath, GameType gameType)
+        public static Dictionary<string, byte[]> ReadAsJson(string path, GameType gameType)
         {
             var readers = new Dictionary<string, byte[]>();
-            var manifest_data = Helpers.ReadArchive(inputPath, gameType, Helpers.MANIFEST, Interop.ReadReaderJson, (string name, byte[] data) =>
+            var manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadReaderJson, (string name, byte[] data) =>
             {
                 readers.Add(name, data);
             });
             return readers;
         }
 
-        protected static Dictionary<string, ReaderValue> ReadRaw(string inputPath, GameType gameType, out byte[] manifest_data)
+        protected static Dictionary<string, ReaderValue> ReadRaw(string path, GameType gameType, out byte[] manifest_data)
         {
             var readers = new Dictionary<string, ReaderValue>();
-            manifest_data = Helpers.ReadArchive(inputPath, gameType, Helpers.MANIFEST, Interop.ReadReaderRaw, (string name, byte[] data) =>
+            manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadReaderRaw, (string name, byte[] data) =>
             {
                 var stream = new MemoryStream(data);
                 var reader = new BinaryReader(stream);
@@ -51,15 +51,15 @@ namespace Mech3DotNet.Zbd
         ///
         /// Without entry information, the data cannot be written again.
         /// </summary>
-        public static Dictionary<string, ReaderValue> ReadAsDict(string inputPath, GameType gameType)
+        public static Dictionary<string, ReaderValue> ReadAsDict(string path, GameType gameType)
         {
-            return ReadRaw(inputPath, gameType, out _);
+            return ReadRaw(path, gameType, out _);
         }
 
-        protected void WriteRaw(string outputPath, GameType gameType)
+        protected void WriteRaw(string path, GameType gameType)
         {
             var manifest_data = SerializeManifest();
-            Helpers.WriteArchive(outputPath, gameType, manifest_data, Interop.WriteReaderRaw, (string name) =>
+            Helpers.WriteArchive(path, gameType, manifest_data, Interop.WriteReaderRaw, (string name) =>
             {
                 var root = items[name];
                 var stream = new MemoryStream();

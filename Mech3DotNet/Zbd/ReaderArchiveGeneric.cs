@@ -20,17 +20,17 @@ namespace Mech3DotNet.Zbd
         }
 
         /// <summary>Read reader data, retaining entry information.</summary>
-        public static ReaderArchiveGeneric Read(string inputPath, GameType gameType)
+        public static ReaderArchiveGeneric Read(string path, GameType gameType)
         {
-            var items = ReadRaw(inputPath, gameType, out var manifest_data);
+            var items = ReadRaw(path, gameType, out var manifest_data);
             var manifest = DeserializeManifest(manifest_data);
             return new ReaderArchiveGeneric(items, manifest, gameType);
         }
 
         /// <summary>Write reader data.</summary>
-        public void Write(string outputPath)
+        public void Write(string path)
         {
-            WriteRaw(outputPath, gameType);
+            WriteRaw(path, gameType);
         }
     }
 }

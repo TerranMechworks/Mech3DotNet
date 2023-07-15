@@ -13,14 +13,14 @@ namespace Mech3DotNet.Zbd
         ///
         /// Message data cannot be written again.
         /// </summary>
-        public static Messages Read(string inputPath, GameType gameType)
+        public static Messages Read(string path, GameType gameType)
         {
-            if (inputPath == null)
-                throw new ArgumentNullException(nameof(inputPath));
+            if (path == null)
+                throw new ArgumentNullException(nameof(path));
             var gameTypeId = Helpers.GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             Messages? messages = null;
-            var res = Interop.ReadMessages(inputPath, gameTypeId, (IntPtr pointer, ulong length) =>
+            var res = Interop.ReadMessages(path, gameTypeId, (IntPtr pointer, ulong length) =>
             {
                 try
                 {
@@ -49,9 +49,9 @@ namespace Mech3DotNet.Zbd
         ///
         /// Message data cannot be written again.
         /// </summary>
-        public static Dictionary<string, string> ReadAsDict(string inputPath, GameType gameType)
+        public static Dictionary<string, string> ReadAsDict(string path, GameType gameType)
         {
-            var messages = Read(inputPath, gameType);
+            var messages = Read(path, gameType);
             var dict = new Dictionary<string, string>(messages.entries.Count);
             foreach (var entry in messages.entries)
                 dict.Add(entry.key, entry.value);

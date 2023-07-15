@@ -17,9 +17,9 @@ namespace Mech3DotNet.Zbd
         }
 
         /// <summary>Read interpreter data, and index by lowercase script name.</summary>
-        public static Dictionary<string, Script> ReadAsDict(string inputPath)
+        public static Dictionary<string, Script> ReadAsDict(string path)
         {
-            var scripts = ReadData(inputPath, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
+            var scripts = ReadData(path, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
             var dict = new Dictionary<string, Script>(scripts.Count);
             foreach (var script in scripts)
                 dict.Add(script.name.ToLowerInvariant(), script);
@@ -27,16 +27,16 @@ namespace Mech3DotNet.Zbd
         }
 
         /// <summary>Read interpreter data.</summary>
-        public static Interp Read(string inputPath)
+        public static Interp Read(string path)
         {
-            var scripts = ReadData(inputPath, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
+            var scripts = ReadData(path, Helpers.IGNORED, Interop.ReadInterp, ScriptsConverter);
             return new Interp(scripts);
         }
 
         /// <summary>Write interpreter data.</summary>
-        public void Write(string outputPath)
+        public void Write(string path)
         {
-            WriteData(outputPath, Helpers.IGNORED, Interop.WriteInterp, scripts, ScriptsConverter);
+            WriteData(path, Helpers.IGNORED, Interop.WriteInterp, scripts, ScriptsConverter);
         }
 
         private static readonly TypeConverter<List<Script>> ScriptsConverter = new TypeConverter<List<Script>>(DeserializeScripts, SerializeScripts);

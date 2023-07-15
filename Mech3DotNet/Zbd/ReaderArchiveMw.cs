@@ -16,17 +16,17 @@ namespace Mech3DotNet.Zbd
             List<ArchiveEntry> entries) : base(items, entries) { }
 
         /// <summary>Read reader data, retaining entry information.</summary>
-        public static ReaderArchiveMw Read(string inputPath)
+        public static ReaderArchiveMw Read(string path)
         {
-            var items = ReadRaw(inputPath, GameType.MW, out var manifest_data);
+            var items = ReadRaw(path, GameType.MW, out var manifest_data);
             var manifest = DeserializeManifest(manifest_data);
             return new ReaderArchiveMw(items, manifest);
         }
 
         /// <summary>Write reader data.</summary>
-        public void Write(string outputPath)
+        public void Write(string path)
         {
-            WriteRaw(outputPath, GameType.MW);
+            WriteRaw(path, GameType.MW);
         }
 
         public Dictionary<string, Font> GetFonts()

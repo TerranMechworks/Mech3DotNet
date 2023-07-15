@@ -5,14 +5,14 @@ namespace Mech3DotNet.Zbd
 {
     public partial class GameZDataRc : IWritable
     {
-        public static GameZDataRc Read(string inputPath)
+        public static GameZDataRc Read(string path)
         {
-            return ReadData(inputPath, GameType.RC, Interop.ReadGameZ, Converter);
+            return ReadData(path, GameType.RC, Interop.ReadGameZ, Converter);
         }
 
-        public void Write(string outputPath)
+        public void Write(string path)
         {
-            WriteData(outputPath, GameType.RC, Interop.WriteGameZ, this, Converter);
+            WriteData(path, GameType.RC, Interop.WriteGameZ, this, Converter);
         }
     }
 }

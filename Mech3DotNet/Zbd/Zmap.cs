@@ -7,15 +7,15 @@ namespace Mech3DotNet.Zbd
     public partial class Zmap : IWritable
     {
         /// <summary>Read zmap data.</summary>
-        public static Zmap Read(string inputPath)
+        public static Zmap Read(string path)
         {
-            return ReadData(inputPath, GameType.RC, Interop.ReadZmap, Converter);
+            return ReadData(path, GameType.RC, Interop.ReadZmap, Converter);
         }
 
         /// <summary>Write zmap data.</summary>
-        public void Write(string outputPath)
+        public void Write(string path)
         {
-            WriteData(outputPath, GameType.RC, Interop.WriteZmap, this, Converter);
+            WriteData(path, GameType.RC, Interop.WriteZmap, this, Converter);
         }
     }
 }

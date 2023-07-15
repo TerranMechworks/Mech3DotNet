@@ -13,11 +13,11 @@ namespace Mech3DotNet.Zbd
             List<ArchiveEntry> entries,
             List<Material> materials) : base(items, entries, materials) { }
 
-        public static MechlibArchiveMw Read(string inputPath)
+        public static MechlibArchiveMw Read(string path)
         {
             List<Material>? capture = null;
             var items = new Dictionary<string, ModelMw>();
-            var manifest_data = Helpers.ReadArchive(inputPath, GameType.MW, Helpers.MANIFEST, Interop.ReadMechlib, (string name, byte[] data) =>
+            var manifest_data = Helpers.ReadArchive(path, GameType.MW, Helpers.MANIFEST, Interop.ReadMechlib, (string name, byte[] data) =>
             {
                 switch (name)
                 {
@@ -41,10 +41,10 @@ namespace Mech3DotNet.Zbd
             return new MechlibArchiveMw(items, manifest, materials);
         }
 
-        public void Write(string outputPath)
+        public void Write(string path)
         {
             var manifest_data = SerializeManifest();
-            Helpers.WriteArchive(outputPath, GameType.MW, manifest_data, Interop.WriteMechlib, (string name) =>
+            Helpers.WriteArchive(path, GameType.MW, manifest_data, Interop.WriteMechlib, (string name) =>
             {
                 switch (name)
                 {

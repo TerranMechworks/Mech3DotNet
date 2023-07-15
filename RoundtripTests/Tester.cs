@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Mech3DotNet;
 using Mech3DotNet.FileUtils;
-using Mech3DotNet.Types.Types;
+using Mech3DotNet.Types;
 using static Mech3DotNet.FileUtils.FileCompare;
 using static RoundtripTests.RecursiveFileGlob;
 
@@ -89,7 +89,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Sounds",
                 soundRegex,
-                Mech3DotNet.Sounds.Read);
+                Mech3DotNet.Zbd.Sounds.Read);
         }
 
         public void Interp()
@@ -97,7 +97,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Interpreter",
                 @"interp\.zbd$",
-                Mech3DotNet.Interp.Read);
+                Mech3DotNet.Zbd.Interp.Read);
         }
 
         public void Messages()
@@ -118,7 +118,7 @@ namespace RoundtripTests
                 Console.WriteLine(inputPath);
                 try
                 {
-                    var messages = Mech3DotNet.Types.Messages.Messages.Read(inputPath, gameType);
+                    var messages = Mech3DotNet.Zbd.Messages.Read(inputPath, gameType);
                     if (messages.languageId < 1000)
                         throw new Exception($"Lang ID {messages.languageId}");
                     if (messages.entries.Count < 50)
@@ -141,7 +141,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Textures",
                 @".*?tex.*?\.zbd$",
-                Mech3DotNet.Textures.Read);
+                Mech3DotNet.Zbd.Textures.Read);
         }
 
         public void Readers()
@@ -157,7 +157,7 @@ namespace RoundtripTests
             Roundtrip(
                 "Readers",
                 readerRegex,
-                Mech3DotNet.ReaderArchiveGeneric.Read);
+                Mech3DotNet.Zbd.ReaderArchiveGeneric.Read);
         }
 
         public void Motions()
@@ -168,13 +168,13 @@ namespace RoundtripTests
                     Roundtrip(
                         "Motions (MW)",
                         @"motion\.zbd$",
-                        Mech3DotNet.Motions<Quaternion, Vec3>.Read);
+                        Mech3DotNet.Zbd.Motions<Quaternion, Vec3>.Read);
                     break;
                 case GameType.PM:
                     Roundtrip(
                         "Motions (PM)",
                         @"motion\.zbd$",
-                        Mech3DotNet.Motions<Quaternion, Vec3>.Read);
+                        Mech3DotNet.Zbd.Motions<Quaternion, Vec3>.Read);
                     break;
                 case GameType.RC:
                     Console.WriteLine("No motions for RC");
@@ -195,13 +195,13 @@ namespace RoundtripTests
                     Roundtrip(
                         "Mechlib (MW)",
                         @"mechlib\.zbd$",
-                        Mech3DotNet.MechlibArchiveMw.Read);
+                        Mech3DotNet.Zbd.MechlibArchiveMw.Read);
                     break;
                 case GameType.PM:
                     Roundtrip(
                         "Mechlib (PM)",
                         @"mechlib\.zbd$",
-                        Mech3DotNet.MechlibArchivePm.Read);
+                        Mech3DotNet.Zbd.MechlibArchivePm.Read);
                     break;
                 case GameType.RC:
                     Console.WriteLine("No mechlib for RC");
@@ -222,25 +222,25 @@ namespace RoundtripTests
                     Roundtrip(
                         "GameZ (MW)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.Types.Gamez.GameZDataMw.Read);
+                        Mech3DotNet.Zbd.GameZDataMw.Read);
                     break;
                 case GameType.PM:
                     Roundtrip(
                         "GameZ (PM)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.Types.Gamez.GameZDataPm.Read);
+                        Mech3DotNet.Zbd.GameZDataPm.Read);
                     break;
                 case GameType.RC:
                     Roundtrip(
                         "GameZ (RC)",
                         @"m([1234578]|1[0123])/gamez\.zbd$",
-                        Mech3DotNet.Types.Gamez.GameZDataRc.Read);
+                        Mech3DotNet.Zbd.GameZDataRc.Read);
                     break;
                 case GameType.CS:
                     Roundtrip(
                         "GameZ (CS)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.Types.Gamez.GameZDataCs.Read);
+                        Mech3DotNet.Zbd.GameZDataCs.Read);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -255,7 +255,7 @@ namespace RoundtripTests
                     Roundtrip(
                         "Animations (MW)",
                         @"anim\.zbd$",
-                        Mech3DotNet.AnimMw.Read);
+                        Mech3DotNet.Zbd.AnimMw.Read);
                     break;
                 case GameType.PM:
                     Console.WriteLine("Skipping animations for PM");
@@ -359,7 +359,7 @@ namespace RoundtripTests
                     Roundtrip(
                         "Zmap",
                         @"m([123456789]|1[012])\.zmap$",
-                        Mech3DotNet.Types.Zmap.MapRc.Read);
+                        Mech3DotNet.Zbd.Zmap.Read);
                     break;
                 case GameType.CS:
                     Console.WriteLine("No zmap for CS");
@@ -386,7 +386,7 @@ namespace RoundtripTests
                     Roundtrip(
                         "Planes (CS)",
                         @"planes\.zbd$",
-                        Mech3DotNet.Types.Gamez.GameZDataCs.Read);
+                        Mech3DotNet.Zbd.GameZDataCs.Read);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -403,6 +403,89 @@ namespace RoundtripTests
             }
             else
                 Console.WriteLine("--- ALL OK ---");
+        }
+
+        public void ReaderParsing()
+        {
+            switch (gameType)
+            {
+                case GameType.MW:
+                    ReaderParsingMw();
+                    break;
+                case GameType.PM:
+                    Console.WriteLine("No specific reader for PM");
+                    break;
+                case GameType.RC:
+                    Console.WriteLine("No specific reader for RC");
+                    break;
+                case GameType.CS:
+                    Console.WriteLine("No specific reader for CS");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void ReaderParsingMw()
+        {
+            // TODO: make it less jank to find the root reader
+            var matches = RecursiveGlob(new Regex(@"/zbd/reader\.zbd$"), basePath);
+            foreach (var inputPath in matches)
+            {
+                Console.WriteLine(inputPath);
+                var archive = Mech3DotNet.Zbd.ReaderArchiveMw.Read(inputPath);
+                var fonts = archive.GetFonts();
+                foreach (var font in fonts)
+                {
+                    Console.WriteLine("{0} {1}", font.Key, font.Value);
+                }
+                var satmaps = archive.GetSatMaps();
+                foreach (var satmap in satmaps)
+                {
+                    Console.WriteLine("{0}", satmap);
+                }
+                var soundSets = archive.GetSoundSets();
+                foreach (var soundSet in soundSets)
+                {
+                    Console.WriteLine("{0}", soundSet.Key);
+                    foreach (var soundDef in soundSet.Value.definitions)
+                    {
+                        Console.WriteLine("{0}", soundDef);
+                    }
+                }
+                var soundGroups = archive.GetSoundGroups();
+                foreach (var soundGroup in soundGroups)
+                {
+                    Console.WriteLine("{0}", soundGroup);
+                }
+                var chassisNames = new string[] {
+                    "annihilator",
+                    "avatar",
+                    "blackhawk",
+                    "bushwacker",
+                    "cauldron",
+                    "champion",
+                    "daishi",
+                    "elemental",
+                    "firefly",
+                    "madcat",
+                    "orion",
+                    "owens",
+                    "puma",
+                    "shadowcat",
+                    "strider",
+                    "sunder",
+                    "supernova",
+                    "thor",
+                    "vulture",
+                };
+                foreach (var chassisName in chassisNames)
+                {
+                    Console.WriteLine("{0}", chassisName);
+                    var chassisDef = archive.GetMechDfn(chassisName);
+                    Console.WriteLine("{0}", chassisDef);
+                }
+            }
         }
     }
 }

@@ -55,6 +55,10 @@ jobs:
         with:
           dotnet-version: '6.0.x'
 
+      - name: Install documentation tool
+        run: dotnet tool update -g docfx
+        shell: bash
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -88,6 +92,16 @@ jobs:
           tar czvf '${{ steps.staging.outputs.staging }}.tar.gz' '${{ steps.staging.outputs.staging }}'
           7z a '${{ steps.staging.outputs.staging }}.zip' '${{ steps.staging.outputs.staging }}'
         shell: bash
+
+      - name: Generate documentation
+        run: docfx Docs/docfx.json
+        shell: bash
+
+      - name: Deploy documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: Docs/_site
 
       - name: Create GitHub release
         id: release

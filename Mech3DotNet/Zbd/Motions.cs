@@ -3,7 +3,7 @@ using Mech3DotNet.Types.Archive;
 using Mech3DotNet.Types.Motion;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>Motion data.</summary>
     public class Motions<TQuaternion, TVec3> : Archive<Motion<TQuaternion, TVec3>>, IWritable

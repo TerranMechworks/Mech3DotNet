@@ -4,7 +4,7 @@ using Mech3DotNet.Reader.Structs;
 using Mech3DotNet.Types.Archive;
 using static Mech3DotNet.Reader.Query;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>
     /// A MW reader archive with parsing convenience functions.

@@ -4,7 +4,7 @@ using Mech3DotNet.Types.Interp;
 using Mech3DotNet.Unsafe;
 using static Mech3DotNet.Helpers;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>Interpreter data.</summary>
     public class Interp : IWritable

@@ -1,7 +1,7 @@
 using Mech3DotNet.Unsafe;
 using static Mech3DotNet.Helpers;
 
-namespace Mech3DotNet.Types.Gamez
+namespace Mech3DotNet.Zbd
 {
     public partial class GameZDataPm : IWritable
     {

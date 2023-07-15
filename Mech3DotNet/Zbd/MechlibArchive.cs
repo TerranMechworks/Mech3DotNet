@@ -4,7 +4,7 @@ using Mech3DotNet.Exchange;
 using Mech3DotNet.Types.Archive;
 using Mech3DotNet.Types.Gamez.Materials;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     public abstract class MechlibArchive<TModel> : Archive<TModel>
     {

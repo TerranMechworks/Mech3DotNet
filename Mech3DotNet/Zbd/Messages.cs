@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet.Types.Messages
+namespace Mech3DotNet.Zbd
 {
     /// <summary>Message/localisation data.</summary>
     public partial class Messages

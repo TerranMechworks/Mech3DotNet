@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Mech3DotNet.Types.Image;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>Texture data.</summary>
     public class Textures : IWritable

@@ -2,9 +2,13 @@ using System.Collections.Generic;
 using Mech3DotNet.Types.Anim;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
-    /// <summary>MW animation data.</summary>
+    /// <summary>
+    /// MW animation data.
+    ///
+    /// See <see cref="Read"/> for reading a MW <c>anim.zbd</c> file.
+    /// </summary>
     public class AnimMw : IWritable
     {
         public Dictionary<string, AnimDef> animations;
@@ -28,7 +32,8 @@ namespace Mech3DotNet
         }
 
         /// <summary>
-        /// Read MW animation data, discarding the manifest.
+        /// Read a MW <c>anim.zbd</c> file from the specified path, discarding
+        /// the manifest.
         ///
         /// Without the manifest, the data cannot be written again.
         /// </summary>
@@ -37,7 +42,7 @@ namespace Mech3DotNet
             return ReadRaw(inputPath, out _);
         }
 
-        /// <summary>Read MW animation data, retaining the manifest.</summary>
+        /// <summary>Read a MW <c>anim.zbd</c> file from the specified path.</summary>
         public static AnimMw Read(string inputPath)
         {
             var animations = ReadRaw(inputPath, out var manifest_data);
@@ -45,7 +50,7 @@ namespace Mech3DotNet
             return new AnimMw(animations, metadata);
         }
 
-        /// <summary>Write MW animation data.</summary>
+        /// <summary>Write a MW <c>anim.zbd</c> file to the specified path.</summary>
         public void Write(string outputPath)
         {
             var manifest_data = Interop.Serialize(metadata, AnimMetadata.Converter);

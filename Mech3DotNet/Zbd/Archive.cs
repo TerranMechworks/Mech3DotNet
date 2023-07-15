@@ -3,10 +3,10 @@ using Mech3DotNet.Exchange;
 using Mech3DotNet.Types.Archive;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>A generic archive, used for archive-based ZBD data.</summary>
-    public class Archive<TEntry>
+    public abstract class Archive<TEntry>
     {
         public Dictionary<string, TEntry> items;
         public List<ArchiveEntry> entries;

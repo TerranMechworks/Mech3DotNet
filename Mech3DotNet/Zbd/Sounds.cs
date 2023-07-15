@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Mech3DotNet.Types.Archive;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>Sound data.</summary>
     public class Sounds : Archive<byte[]>, IWritable

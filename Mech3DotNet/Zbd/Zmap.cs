@@ -1,13 +1,13 @@
 using Mech3DotNet.Unsafe;
 using static Mech3DotNet.Helpers;
 
-namespace Mech3DotNet.Types.Zmap
+namespace Mech3DotNet.Zbd
 {
     /// <summary>Zmap data.</summary>
-    public partial class MapRc : IWritable
+    public partial class Zmap : IWritable
     {
         /// <summary>Read zmap data.</summary>
-        public static MapRc Read(string inputPath)
+        public static Zmap Read(string inputPath)
         {
             return ReadData(inputPath, GameType.RC, Interop.ReadZmap, Converter);
         }

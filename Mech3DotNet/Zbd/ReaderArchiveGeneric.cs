@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Mech3DotNet.Reader;
 using Mech3DotNet.Types.Archive;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>
     /// A generic reader archive with no parsing convenience functions.

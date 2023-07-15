@@ -4,7 +4,7 @@ using Mech3DotNet.Reader;
 using Mech3DotNet.Types.Archive;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     /// <summary>
     /// Reader archive base.

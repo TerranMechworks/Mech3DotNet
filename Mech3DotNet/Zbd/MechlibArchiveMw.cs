@@ -4,7 +4,7 @@ using Mech3DotNet.Types.Gamez.Materials;
 using Mech3DotNet.Types.Gamez.Mechlib;
 using Mech3DotNet.Unsafe;
 
-namespace Mech3DotNet
+namespace Mech3DotNet.Zbd
 {
     public class MechlibArchiveMw : MechlibArchive<ModelMw>, IWritable
     {

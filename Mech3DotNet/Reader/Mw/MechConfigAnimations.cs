@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using static Mech3DotNet.Reader.Query;
 
-namespace Mech3DotNet.Reader.Structs
+namespace Mech3DotNet.Reader.Mw
 {
     public struct MechConfigAnimEject
     {

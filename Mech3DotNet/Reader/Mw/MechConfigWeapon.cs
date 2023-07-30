@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static Mech3DotNet.Reader.Query;
 
-namespace Mech3DotNet.Reader.Structs
+namespace Mech3DotNet.Reader.Mw
 {
     internal static class Repr
     {

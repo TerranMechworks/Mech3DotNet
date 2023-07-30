@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Mech3DotNet.Reader.Structs
+namespace Mech3DotNet.Reader
 {
     public struct Range
     {

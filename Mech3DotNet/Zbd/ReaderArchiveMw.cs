@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Mech3DotNet.Reader;
-using Mech3DotNet.Reader.Structs;
+using Mech3DotNet.Reader.Mw;
 using Mech3DotNet.Types.Archive;
 using static Mech3DotNet.Reader.Query;
 

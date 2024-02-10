@@ -14,6 +14,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public Mech3DotNet.Types.Nodes.AreaPartition? areaPartition;
         public int meshIndex;
         public uint? parent;
+        public System.Collections.Generic.List<uint>? parents = null;
         public System.Collections.Generic.List<uint> children;
         public uint dataPtr;
         public uint parentArrayPtr;
@@ -22,7 +23,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
         public Mech3DotNet.Types.Nodes.BoundingBox unk140;
         public Mech3DotNet.Types.Nodes.BoundingBox unk164;
 
-        public Object3d(string name, Mech3DotNet.Types.Nodes.Rc.Transformation transformation, uint matrixSigns, Mech3DotNet.Types.Nodes.NodeFlags flags, uint zoneId, Mech3DotNet.Types.Nodes.AreaPartition? areaPartition, int meshIndex, uint? parent, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Types.Nodes.BoundingBox unk116, Mech3DotNet.Types.Nodes.BoundingBox unk140, Mech3DotNet.Types.Nodes.BoundingBox unk164)
+        public Object3d(string name, Mech3DotNet.Types.Nodes.Rc.Transformation transformation, uint matrixSigns, Mech3DotNet.Types.Nodes.NodeFlags flags, uint zoneId, Mech3DotNet.Types.Nodes.AreaPartition? areaPartition, int meshIndex, uint? parent, System.Collections.Generic.List<uint>? parents, System.Collections.Generic.List<uint> children, uint dataPtr, uint parentArrayPtr, uint childrenArrayPtr, Mech3DotNet.Types.Nodes.BoundingBox unk116, Mech3DotNet.Types.Nodes.BoundingBox unk140, Mech3DotNet.Types.Nodes.BoundingBox unk164)
         {
             this.name = name;
             this.transformation = transformation;
@@ -32,6 +33,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
             this.areaPartition = areaPartition;
             this.meshIndex = meshIndex;
             this.parent = parent;
+            this.parents = parents;
             this.children = children;
             this.dataPtr = dataPtr;
             this.parentArrayPtr = parentArrayPtr;
@@ -51,6 +53,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
             public Field<Mech3DotNet.Types.Nodes.AreaPartition?> areaPartition;
             public Field<int> meshIndex;
             public Field<uint?> parent;
+            public Field<System.Collections.Generic.List<uint>?> parents;
             public Field<System.Collections.Generic.List<uint>> children;
             public Field<uint> dataPtr;
             public Field<uint> parentArrayPtr;
@@ -62,7 +65,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
 
         public static void Serialize(Object3d v, Serializer s)
         {
-            s.SerializeStruct(15);
+            s.SerializeStruct(16);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("transformation");
@@ -79,6 +82,8 @@ namespace Mech3DotNet.Types.Nodes.Rc
             ((Action<int>)s.SerializeI32)(v.meshIndex);
             s.SerializeFieldName("parent");
             s.SerializeValOption(((Action<uint>)s.SerializeU32))(v.parent);
+            s.SerializeFieldName("parents");
+            s.SerializeRefOption(s.SerializeVec(((Action<uint>)s.SerializeU32)))(v.parents);
             s.SerializeFieldName("children");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.children);
             s.SerializeFieldName("data_ptr");
@@ -107,6 +112,7 @@ namespace Mech3DotNet.Types.Nodes.Rc
                 areaPartition = new Field<Mech3DotNet.Types.Nodes.AreaPartition?>(),
                 meshIndex = new Field<int>(),
                 parent = new Field<uint?>(),
+                parents = new Field<System.Collections.Generic.List<uint>?>(null),
                 children = new Field<System.Collections.Generic.List<uint>>(),
                 dataPtr = new Field<uint>(),
                 parentArrayPtr = new Field<uint>(),
@@ -142,6 +148,9 @@ namespace Mech3DotNet.Types.Nodes.Rc
                         break;
                     case "parent":
                         fields.parent.Value = d.DeserializeValOption(d.DeserializeU32)();
+                        break;
+                    case "parents":
+                        fields.parents.Value = d.DeserializeRefOption(d.DeserializeVec(d.DeserializeU32))();
                         break;
                     case "children":
                         fields.children.Value = d.DeserializeVec(d.DeserializeU32)();
@@ -185,6 +194,8 @@ namespace Mech3DotNet.Types.Nodes.Rc
                 fields.meshIndex.Unwrap("Object3d", "meshIndex"),
 
                 fields.parent.Unwrap("Object3d", "parent"),
+
+                fields.parents.Unwrap("Object3d", "parents"),
 
                 fields.children.Unwrap("Object3d", "children"),
 

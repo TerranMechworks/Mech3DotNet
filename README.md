@@ -53,7 +53,7 @@ will run the tests against both versions.
 1. Review changelog, and add the date
 1. Bump version in `Mech3DotNet/Properties/AssemblyInfo.cs` and `RoundtripTests/Properties/AssemblyInfo.cs`
 1. Commit, push, and wait for CI
-1. Create a tag of the version (e.g. `git tag -a v0.1.0 -m "2024-02-10"`)
+1. Create a tag of the version (e.g. `git tag -a v0.1.0 -m "2024-02-10" -s`)
 1. Push the tag (`git push origin v0.1.0`)
 1. The build will automatically create a release as a draft
 1. Add changelog items to the release notes via the GitHub web interface

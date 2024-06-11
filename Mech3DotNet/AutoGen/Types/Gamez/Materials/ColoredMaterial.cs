@@ -8,20 +8,20 @@ namespace Mech3DotNet.Types.Gamez.Materials
         public static readonly TypeConverter<ColoredMaterial> Converter = new TypeConverter<ColoredMaterial>(Deserialize, Serialize);
         public Mech3DotNet.Types.Color color;
         public byte alpha;
-        public float specular;
+        public Mech3DotNet.Types.Gamez.Materials.Soil soil = Mech3DotNet.Types.Gamez.Materials.Soil.Default;
 
-        public ColoredMaterial(Mech3DotNet.Types.Color color, byte alpha, float specular)
+        public ColoredMaterial(Mech3DotNet.Types.Color color, byte alpha, Mech3DotNet.Types.Gamez.Materials.Soil soil)
         {
             this.color = color;
             this.alpha = alpha;
-            this.specular = specular;
+            this.soil = soil;
         }
 
         private struct Fields
         {
             public Field<Mech3DotNet.Types.Color> color;
             public Field<byte> alpha;
-            public Field<float> specular;
+            public Field<Mech3DotNet.Types.Gamez.Materials.Soil> soil;
         }
 
         public static void Serialize(ColoredMaterial v, Serializer s)
@@ -31,8 +31,8 @@ namespace Mech3DotNet.Types.Gamez.Materials
             s.Serialize(Mech3DotNet.Types.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("alpha");
             ((Action<byte>)s.SerializeU8)(v.alpha);
-            s.SerializeFieldName("specular");
-            ((Action<float>)s.SerializeF32)(v.specular);
+            s.SerializeFieldName("soil");
+            s.Serialize(Mech3DotNet.Types.Gamez.Materials.SoilConverter.Converter)(v.soil);
         }
 
         public static ColoredMaterial Deserialize(Deserializer d)
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
             {
                 color = new Field<Mech3DotNet.Types.Color>(),
                 alpha = new Field<byte>(),
-                specular = new Field<float>(),
+                soil = new Field<Mech3DotNet.Types.Gamez.Materials.Soil>(Mech3DotNet.Types.Gamez.Materials.Soil.Default),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -53,8 +53,8 @@ namespace Mech3DotNet.Types.Gamez.Materials
                     case "alpha":
                         fields.alpha.Value = d.DeserializeU8();
                         break;
-                    case "specular":
-                        fields.specular.Value = d.DeserializeF32();
+                    case "soil":
+                        fields.soil.Value = d.Deserialize(Mech3DotNet.Types.Gamez.Materials.SoilConverter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("ColoredMaterial", fieldName);
@@ -66,7 +66,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
                 fields.alpha.Unwrap("ColoredMaterial", "alpha"),
 
-                fields.specular.Unwrap("ColoredMaterial", "specular")
+                fields.soil.Unwrap("ColoredMaterial", "soil")
 
             );
         }

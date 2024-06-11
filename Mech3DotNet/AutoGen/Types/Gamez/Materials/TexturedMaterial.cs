@@ -9,15 +9,15 @@ namespace Mech3DotNet.Types.Gamez.Materials
         public string texture;
         public uint pointer = 0;
         public Mech3DotNet.Types.Gamez.Materials.CycleData? cycle = null;
-        public float specular;
+        public Mech3DotNet.Types.Gamez.Materials.Soil soil = Mech3DotNet.Types.Gamez.Materials.Soil.Default;
         public bool flag;
 
-        public TexturedMaterial(string texture, uint pointer, Mech3DotNet.Types.Gamez.Materials.CycleData? cycle, float specular, bool flag)
+        public TexturedMaterial(string texture, uint pointer, Mech3DotNet.Types.Gamez.Materials.CycleData? cycle, Mech3DotNet.Types.Gamez.Materials.Soil soil, bool flag)
         {
             this.texture = texture;
             this.pointer = pointer;
             this.cycle = cycle;
-            this.specular = specular;
+            this.soil = soil;
             this.flag = flag;
         }
 
@@ -26,7 +26,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
             public Field<string> texture;
             public Field<uint> pointer;
             public Field<Mech3DotNet.Types.Gamez.Materials.CycleData?> cycle;
-            public Field<float> specular;
+            public Field<Mech3DotNet.Types.Gamez.Materials.Soil> soil;
             public Field<bool> flag;
         }
 
@@ -39,8 +39,8 @@ namespace Mech3DotNet.Types.Gamez.Materials
             ((Action<uint>)s.SerializeU32)(v.pointer);
             s.SerializeFieldName("cycle");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Gamez.Materials.CycleData.Converter))(v.cycle);
-            s.SerializeFieldName("specular");
-            ((Action<float>)s.SerializeF32)(v.specular);
+            s.SerializeFieldName("soil");
+            s.Serialize(Mech3DotNet.Types.Gamez.Materials.SoilConverter.Converter)(v.soil);
             s.SerializeFieldName("flag");
             ((Action<bool>)s.SerializeBool)(v.flag);
         }
@@ -52,7 +52,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                 texture = new Field<string>(),
                 pointer = new Field<uint>(0),
                 cycle = new Field<Mech3DotNet.Types.Gamez.Materials.CycleData?>(null),
-                specular = new Field<float>(),
+                soil = new Field<Mech3DotNet.Types.Gamez.Materials.Soil>(Mech3DotNet.Types.Gamez.Materials.Soil.Default),
                 flag = new Field<bool>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
@@ -68,8 +68,8 @@ namespace Mech3DotNet.Types.Gamez.Materials
                     case "cycle":
                         fields.cycle.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Gamez.Materials.CycleData.Converter))();
                         break;
-                    case "specular":
-                        fields.specular.Value = d.DeserializeF32();
+                    case "soil":
+                        fields.soil.Value = d.Deserialize(Mech3DotNet.Types.Gamez.Materials.SoilConverter.Converter)();
                         break;
                     case "flag":
                         fields.flag.Value = d.DeserializeBool();
@@ -86,7 +86,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
                 fields.cycle.Unwrap("TexturedMaterial", "cycle"),
 
-                fields.specular.Unwrap("TexturedMaterial", "specular"),
+                fields.soil.Unwrap("TexturedMaterial", "soil"),
 
                 fields.flag.Unwrap("TexturedMaterial", "flag")
 

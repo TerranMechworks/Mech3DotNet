@@ -31,12 +31,12 @@ namespace Mech3DotNet
             var res = Interop.ReadSoundsAsWav(
                 path,
                 gameTypeId,
-                (IntPtr namePtr, ulong nameLen, int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
+                (IntPtr namePtr, UIntPtr nameLen, int channels, int frequency, IntPtr samplePtr, UIntPtr sampleLen) =>
                 {
                     try
                     {
                         var name = Interop.DecodeString(namePtr, nameLen);
-                        var length = Convert.ToInt32(sampleLen);
+                        var length = Interop.UsizeToLen(sampleLen);
                         var samples = new float[length];
                         Marshal.Copy(samplePtr, samples, 0, length);
                         readCallback(name, channels, frequency, samples);
@@ -70,12 +70,12 @@ namespace Mech3DotNet
             ExceptionDispatchInfo? ex = null;
             var res = Interop.ReadSoundAsWav(
                 path,
-                (int channels, int frequency, IntPtr samplePtr, ulong sampleLen) =>
+                (int channels, int frequency, IntPtr samplePtr, UIntPtr sampleLen) =>
                 {
                     try
                     {
                         var name = System.IO.Path.GetFileName(path);
-                        var length = Convert.ToInt32(sampleLen);
+                        var length = Interop.UsizeToLen(sampleLen);
                         var samples = new float[length];
                         Marshal.Copy(samplePtr, samples, 0, length);
                         readCallback(name, channels, frequency, samples);

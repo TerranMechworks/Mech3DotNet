@@ -25,7 +25,7 @@ namespace Mech3DotNet.Zbd
             var gameTypeId = Helpers.GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             Messages? messages = null;
-            var res = Interop.ReadMessages(path, gameTypeId, (IntPtr pointer, ulong length) =>
+            var res = Interop.ReadMessages(path, gameTypeId, (IntPtr pointer, UIntPtr length) =>
             {
                 try
                 {

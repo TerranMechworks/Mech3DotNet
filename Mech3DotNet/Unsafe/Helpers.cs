@@ -12,11 +12,11 @@ namespace Mech3DotNet.Unsafe
         public delegate int ReadArchiveFn(string filename, int gameTypeId, Interop.NameDataCb callback);
         public delegate void ReadArchiveCb(string filename, byte[] data);
 
-        public delegate int WriteArchiveFn(string filename, int gameTypeId, IntPtr manifest_ptr, ulong manifest_len, Interop.NameBufferCb callback);
+        public delegate int WriteArchiveFn(string filename, int gameTypeId, IntPtr manifestPtr, UIntPtr manifestLen, Interop.NameBufferCb callback);
         public delegate byte[] WriteArchiveCb(string filename);
 
         public delegate int ReadDataFn(string filename, int gameTypeId, Interop.DataCb callback);
-        public delegate int WriteDataFn(string filename, int gameTypeId, IntPtr pointer, ulong length);
+        public delegate int WriteDataFn(string filename, int gameTypeId, IntPtr dataPtr, UIntPtr dataLen);
 
         internal static int GameTypeToId(GameType gameType) => gameType switch
         {
@@ -37,12 +37,12 @@ namespace Mech3DotNet.Unsafe
             var gameTypeId = GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             byte[]? manifest = null;
-            var res = readFunction(path, gameTypeId, (IntPtr namePointer, ulong nameLength, IntPtr dataPointer, ulong dataLength) =>
+            var res = readFunction(path, gameTypeId, (IntPtr namePtr, UIntPtr nameLen, IntPtr dataPtr, UIntPtr dataLen) =>
             {
                 try
                 {
-                    var name = Interop.DecodeString(namePointer, nameLength);
-                    var data = Interop.DecodeBytes(dataPointer, dataLength);
+                    var name = Interop.DecodeString(namePtr, nameLen);
+                    var data = Interop.DecodeBytes(dataPtr, dataLen);
                     if (name == manifestName)
                         manifest = data;
                     else
@@ -72,21 +72,21 @@ namespace Mech3DotNet.Unsafe
             if (path == null)
                 throw new ArgumentNullException(nameof(path));
             var gameTypeId = GameTypeToId(gameType);
-            var manifestLength = (ulong)manifest_data.Length;
+            var manifestLen = (UIntPtr)manifest_data.LongLength;
             ExceptionDispatchInfo? ex = null;
             int res;
-            using (var manifestPointer = new PinnedGCHandle(manifest_data))
+            using (var manifestPtr = new PinnedGCHandle(manifest_data))
             {
-                res = writeFunction(path, gameTypeId, manifestPointer, manifestLength, (IntPtr namePointer, ulong nameLength, IntPtr buffer) =>
+                res = writeFunction(path, gameTypeId, manifestPtr, manifestLen, (IntPtr namePtr, UIntPtr nameLen, IntPtr bufPtr) =>
                 {
                     try
                     {
-                        var name = Interop.DecodeString(namePointer, nameLength);
+                        var name = Interop.DecodeString(namePtr, nameLen);
                         var data = writeCallback(name);
-                        var dataLength = (ulong)data.Length;
-                        using (var dataPointer = new PinnedGCHandle(data))
+                        var dataLen = (UIntPtr)data.LongLength;
+                        using (var dataPtr = new PinnedGCHandle(data))
                         {
-                            Interop.BufferSetData(buffer, dataPointer, dataLength);
+                            Interop.BufferSetData(bufPtr, dataPtr, dataLen);
                         }
                         return 0;
                     }
@@ -113,11 +113,11 @@ namespace Mech3DotNet.Unsafe
             var gameTypeId = GameTypeToId(gameType);
             ExceptionDispatchInfo? ex = null;
             byte[]? data = null;
-            var res = readFunction(path, gameTypeId, (IntPtr pointer, ulong length) =>
+            var res = readFunction(path, gameTypeId, (IntPtr dataPtr, UIntPtr dataLen) =>
             {
                 try
                 {
-                    data = Interop.DecodeBytes(pointer, length);
+                    data = Interop.DecodeBytes(dataPtr, dataLen);
                 }
                 catch (Exception e)
                 {
@@ -139,11 +139,11 @@ namespace Mech3DotNet.Unsafe
                 throw new ArgumentNullException(nameof(path));
             var gameTypeId = GameTypeToId(gameType);
             var data = Interop.Serialize(value, converter);
-            var length = (ulong)data.Length;
+            var dataLen = (UIntPtr)data.LongLength;
             int res;
-            using (var pointer = new PinnedGCHandle(data))
+            using (var dataPtr = new PinnedGCHandle(data))
             {
-                res = writeFunction(path, gameTypeId, pointer, length);
+                res = writeFunction(path, gameTypeId, dataPtr, dataLen);
             }
             if (res != 0)
                 Interop.ThrowLastError();

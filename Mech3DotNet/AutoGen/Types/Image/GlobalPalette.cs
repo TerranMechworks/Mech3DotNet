@@ -6,10 +6,10 @@ namespace Mech3DotNet.Types.Image
     public sealed class GlobalPalette
     {
         public static readonly TypeConverter<GlobalPalette> Converter = new TypeConverter<GlobalPalette>(Deserialize, Serialize);
-        public int index;
+        public uint index;
         public ushort count;
 
-        public GlobalPalette(int index, ushort count)
+        public GlobalPalette(uint index, ushort count)
         {
             this.index = index;
             this.count = count;
@@ -17,7 +17,7 @@ namespace Mech3DotNet.Types.Image
 
         private struct Fields
         {
-            public Field<int> index;
+            public Field<uint> index;
             public Field<ushort> count;
         }
 
@@ -25,7 +25,7 @@ namespace Mech3DotNet.Types.Image
         {
             s.SerializeStruct(2);
             s.SerializeFieldName("index");
-            ((Action<int>)s.SerializeI32)(v.index);
+            ((Action<uint>)s.SerializeU32)(v.index);
             s.SerializeFieldName("count");
             ((Action<ushort>)s.SerializeU16)(v.count);
         }
@@ -34,7 +34,7 @@ namespace Mech3DotNet.Types.Image
         {
             var fields = new Fields()
             {
-                index = new Field<int>(),
+                index = new Field<uint>(),
                 count = new Field<ushort>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
@@ -42,7 +42,7 @@ namespace Mech3DotNet.Types.Image
                 switch (fieldName)
                 {
                     case "index":
-                        fields.index.Value = d.DeserializeI32();
+                        fields.index.Value = d.DeserializeU32();
                         break;
                     case "count":
                         fields.count.Value = d.DeserializeU16();

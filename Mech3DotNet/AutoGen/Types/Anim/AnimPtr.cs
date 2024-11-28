@@ -17,10 +17,9 @@ namespace Mech3DotNet.Types.Anim
         public uint staticSoundsPtr;
         public uint activPrereqsPtr;
         public uint animRefsPtr;
-        public uint resetStatePtr;
         public uint seqDefsPtr;
 
-        public AnimPtr(string fileName, uint animPtr, uint animRootPtr, uint objectsPtr, uint nodesPtr, uint lightsPtr, uint puffersPtr, uint dynamicSoundsPtr, uint staticSoundsPtr, uint activPrereqsPtr, uint animRefsPtr, uint resetStatePtr, uint seqDefsPtr)
+        public AnimPtr(string fileName, uint animPtr, uint animRootPtr, uint objectsPtr, uint nodesPtr, uint lightsPtr, uint puffersPtr, uint dynamicSoundsPtr, uint staticSoundsPtr, uint activPrereqsPtr, uint animRefsPtr, uint seqDefsPtr)
         {
             this.fileName = fileName;
             this.animPtr = animPtr;
@@ -33,7 +32,6 @@ namespace Mech3DotNet.Types.Anim
             this.staticSoundsPtr = staticSoundsPtr;
             this.activPrereqsPtr = activPrereqsPtr;
             this.animRefsPtr = animRefsPtr;
-            this.resetStatePtr = resetStatePtr;
             this.seqDefsPtr = seqDefsPtr;
         }
 
@@ -50,13 +48,12 @@ namespace Mech3DotNet.Types.Anim
             public Field<uint> staticSoundsPtr;
             public Field<uint> activPrereqsPtr;
             public Field<uint> animRefsPtr;
-            public Field<uint> resetStatePtr;
             public Field<uint> seqDefsPtr;
         }
 
         public static void Serialize(AnimPtr v, Serializer s)
         {
-            s.SerializeStruct(13);
+            s.SerializeStruct(12);
             s.SerializeFieldName("file_name");
             ((Action<string>)s.SerializeString)(v.fileName);
             s.SerializeFieldName("anim_ptr");
@@ -79,8 +76,6 @@ namespace Mech3DotNet.Types.Anim
             ((Action<uint>)s.SerializeU32)(v.activPrereqsPtr);
             s.SerializeFieldName("anim_refs_ptr");
             ((Action<uint>)s.SerializeU32)(v.animRefsPtr);
-            s.SerializeFieldName("reset_state_ptr");
-            ((Action<uint>)s.SerializeU32)(v.resetStatePtr);
             s.SerializeFieldName("seq_defs_ptr");
             ((Action<uint>)s.SerializeU32)(v.seqDefsPtr);
         }
@@ -100,7 +95,6 @@ namespace Mech3DotNet.Types.Anim
                 staticSoundsPtr = new Field<uint>(),
                 activPrereqsPtr = new Field<uint>(),
                 animRefsPtr = new Field<uint>(),
-                resetStatePtr = new Field<uint>(),
                 seqDefsPtr = new Field<uint>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
@@ -140,9 +134,6 @@ namespace Mech3DotNet.Types.Anim
                     case "anim_refs_ptr":
                         fields.animRefsPtr.Value = d.DeserializeU32();
                         break;
-                    case "reset_state_ptr":
-                        fields.resetStatePtr.Value = d.DeserializeU32();
-                        break;
                     case "seq_defs_ptr":
                         fields.seqDefsPtr.Value = d.DeserializeU32();
                         break;
@@ -173,8 +164,6 @@ namespace Mech3DotNet.Types.Anim
                 fields.activPrereqsPtr.Unwrap("AnimPtr", "activPrereqsPtr"),
 
                 fields.animRefsPtr.Unwrap("AnimPtr", "animRefsPtr"),
-
-                fields.resetStatePtr.Unwrap("AnimPtr", "resetStatePtr"),
 
                 fields.seqDefsPtr.Unwrap("AnimPtr", "seqDefsPtr")
 

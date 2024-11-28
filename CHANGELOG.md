@@ -1,5 +1,19 @@
 # Changelog
 
+## [unreleased]
+
+## [0.6.1] - 2024-11-28
+
+* Tracks [mech3ax v0.6.1](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.1)
+* Types: Archive entry info
+* Types: GameZ header unk08 to datetime
+* Types: Partition z_mid fix for US 1.0/1.1
+* Types: global palette index i32 -> u32
+* Types: remove reset_state_ptr in AnimDef
+* Support u64 in exchange protocol
+* Marshal `usize` values properly
+* Materials field 32 is soil type
+
 ## [0.6.0] - 2024-02-10
 
 * Tracks [mech3ax v0.6.0](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.6.0)

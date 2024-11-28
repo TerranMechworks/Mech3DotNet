@@ -12,5 +12,5 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: Guid("786990dd-e239-45bd-bcf9-751e76868747")]
 // Keep the version locked to the mech3ax version
-[assembly: AssemblyVersion("0.6.0.99")]
-[assembly: AssemblyFileVersion("0.6.0.99")]
+[assembly: AssemblyVersion("0.6.1.0")]
+[assembly: AssemblyFileVersion("0.6.1.0")]

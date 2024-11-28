@@ -6,14 +6,14 @@ namespace Mech3DotNet.Types.Gamez
     public sealed class GameZMetadataPm
     {
         public static readonly TypeConverter<GameZMetadataPm> Converter = new TypeConverter<GameZMetadataPm>(Deserialize, Serialize);
-        public uint gamezHeaderUnk08;
+        public System.DateTime datetime;
         public int meshesArraySize;
         public uint nodeDataCount;
         public System.Collections.Generic.List<uint?> texturePtrs;
 
-        public GameZMetadataPm(uint gamezHeaderUnk08, int meshesArraySize, uint nodeDataCount, System.Collections.Generic.List<uint?> texturePtrs)
+        public GameZMetadataPm(System.DateTime datetime, int meshesArraySize, uint nodeDataCount, System.Collections.Generic.List<uint?> texturePtrs)
         {
-            this.gamezHeaderUnk08 = gamezHeaderUnk08;
+            this.datetime = datetime;
             this.meshesArraySize = meshesArraySize;
             this.nodeDataCount = nodeDataCount;
             this.texturePtrs = texturePtrs;
@@ -21,7 +21,7 @@ namespace Mech3DotNet.Types.Gamez
 
         private struct Fields
         {
-            public Field<uint> gamezHeaderUnk08;
+            public Field<System.DateTime> datetime;
             public Field<int> meshesArraySize;
             public Field<uint> nodeDataCount;
             public Field<System.Collections.Generic.List<uint?>> texturePtrs;
@@ -30,8 +30,8 @@ namespace Mech3DotNet.Types.Gamez
         public static void Serialize(GameZMetadataPm v, Serializer s)
         {
             s.SerializeStruct(4);
-            s.SerializeFieldName("gamez_header_unk08");
-            ((Action<uint>)s.SerializeU32)(v.gamezHeaderUnk08);
+            s.SerializeFieldName("datetime");
+            ((Action<DateTime>)s.SerializeDateTime)(v.datetime);
             s.SerializeFieldName("meshes_array_size");
             ((Action<int>)s.SerializeI32)(v.meshesArraySize);
             s.SerializeFieldName("node_data_count");
@@ -44,7 +44,7 @@ namespace Mech3DotNet.Types.Gamez
         {
             var fields = new Fields()
             {
-                gamezHeaderUnk08 = new Field<uint>(),
+                datetime = new Field<System.DateTime>(),
                 meshesArraySize = new Field<int>(),
                 nodeDataCount = new Field<uint>(),
                 texturePtrs = new Field<System.Collections.Generic.List<uint?>>(),
@@ -53,8 +53,8 @@ namespace Mech3DotNet.Types.Gamez
             {
                 switch (fieldName)
                 {
-                    case "gamez_header_unk08":
-                        fields.gamezHeaderUnk08.Value = d.DeserializeU32();
+                    case "datetime":
+                        fields.datetime.Value = d.DeserializeDateTime();
                         break;
                     case "meshes_array_size":
                         fields.meshesArraySize.Value = d.DeserializeI32();
@@ -71,7 +71,7 @@ namespace Mech3DotNet.Types.Gamez
             }
             return new GameZMetadataPm(
 
-                fields.gamezHeaderUnk08.Unwrap("GameZMetadataPm", "gamezHeaderUnk08"),
+                fields.datetime.Unwrap("GameZMetadataPm", "datetime"),
 
                 fields.meshesArraySize.Unwrap("GameZMetadataPm", "meshesArraySize"),
 

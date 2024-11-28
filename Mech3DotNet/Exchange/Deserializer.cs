@@ -21,6 +21,7 @@ namespace Mech3DotNet.Exchange
         public byte DeserializeU8() => r.ReadU8();
         public ushort DeserializeU16() => r.ReadU16();
         public uint DeserializeU32() => r.ReadU32();
+        public ulong DeserializeU64() => r.ReadU64();
         public float DeserializeF32() => r.ReadF32();
         public bool DeserializeBool() => r.ReadBool();
         public byte[] DeserializeBytes() => r.ReadBytes();

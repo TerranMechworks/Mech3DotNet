@@ -63,6 +63,12 @@ namespace Mech3DotNet.Exchange
             stream.Write(BitConverter.GetBytes(v));
         }
 
+        public void WriteU64(ulong v)
+        {
+            WriteType(TypeMap.U64);
+            stream.Write(BitConverter.GetBytes(v));
+        }
+
         public void WriteF32(float v)
         {
             WriteType(TypeMap.F32);

@@ -99,6 +99,14 @@ namespace Mech3DotNet.Exchange
             return BitConverter.ToUInt32(buf);
         }
 
+        public ulong ReadU64()
+        {
+            ExpectType(TypeMap.U64);
+            var buf = new byte[8];
+            stream.Read(buf);
+            return BitConverter.ToUInt64(buf);
+        }
+
         public float ReadF32()
         {
             ExpectType(TypeMap.F32);

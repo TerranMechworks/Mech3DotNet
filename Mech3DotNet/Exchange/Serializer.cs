@@ -24,7 +24,7 @@ namespace Mech3DotNet.Exchange
         public void SerializeU64(ulong v) => w.WriteU64(v);
         public void SerializeF32(float v) => w.WriteF32(v);
         public void SerializeBool(bool v) => w.WriteBool(v);
-        public void SerializeDateTime(DateTime v) => w.WriteStr(v.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssK"));
+        public void SerializeDateTime(DateTime v) => w.WriteStr(v.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.FFFFFFK", System.Globalization.CultureInfo.InvariantCulture));
         public void SerializeBytes(byte[] v) => w.WriteBytes(v);
 
         public void SerializeString(string v)

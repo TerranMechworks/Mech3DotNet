@@ -30,7 +30,7 @@ namespace Mech3DotNet.Exchange
             var s = r.ReadStr();
             return DateTime.ParseExact(
                 s,
-                "yyyy-MM-dd'T'HH:mm:ssK",
+                "yyyy-MM-dd'T'HH:mm:ss.FFFFFFK",
                 System.Globalization.CultureInfo.InvariantCulture,
                 System.Globalization.DateTimeStyles.None);
         }

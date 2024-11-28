@@ -10,15 +10,17 @@ namespace Mech3DotNet.Types.Nodes
         public int y;
         public float zMin;
         public float zMax;
+        public float? zMid = null;
         public System.Collections.Generic.List<uint> nodes;
         public uint ptr;
 
-        public PartitionPg(int x, int y, float zMin, float zMax, System.Collections.Generic.List<uint> nodes, uint ptr)
+        public PartitionPg(int x, int y, float zMin, float zMax, float? zMid, System.Collections.Generic.List<uint> nodes, uint ptr)
         {
             this.x = x;
             this.y = y;
             this.zMin = zMin;
             this.zMax = zMax;
+            this.zMid = zMid;
             this.nodes = nodes;
             this.ptr = ptr;
         }
@@ -29,13 +31,14 @@ namespace Mech3DotNet.Types.Nodes
             public Field<int> y;
             public Field<float> zMin;
             public Field<float> zMax;
+            public Field<float?> zMid;
             public Field<System.Collections.Generic.List<uint>> nodes;
             public Field<uint> ptr;
         }
 
         public static void Serialize(PartitionPg v, Serializer s)
         {
-            s.SerializeStruct(6);
+            s.SerializeStruct(7);
             s.SerializeFieldName("x");
             ((Action<int>)s.SerializeI32)(v.x);
             s.SerializeFieldName("y");
@@ -44,6 +47,8 @@ namespace Mech3DotNet.Types.Nodes
             ((Action<float>)s.SerializeF32)(v.zMin);
             s.SerializeFieldName("z_max");
             ((Action<float>)s.SerializeF32)(v.zMax);
+            s.SerializeFieldName("z_mid");
+            s.SerializeValOption(((Action<float>)s.SerializeF32))(v.zMid);
             s.SerializeFieldName("nodes");
             s.SerializeVec(((Action<uint>)s.SerializeU32))(v.nodes);
             s.SerializeFieldName("ptr");
@@ -58,6 +63,7 @@ namespace Mech3DotNet.Types.Nodes
                 y = new Field<int>(),
                 zMin = new Field<float>(),
                 zMax = new Field<float>(),
+                zMid = new Field<float?>(null),
                 nodes = new Field<System.Collections.Generic.List<uint>>(),
                 ptr = new Field<uint>(),
             };
@@ -76,6 +82,9 @@ namespace Mech3DotNet.Types.Nodes
                         break;
                     case "z_max":
                         fields.zMax.Value = d.DeserializeF32();
+                        break;
+                    case "z_mid":
+                        fields.zMid.Value = d.DeserializeValOption(d.DeserializeF32)();
                         break;
                     case "nodes":
                         fields.nodes.Value = d.DeserializeVec(d.DeserializeU32)();
@@ -96,6 +105,8 @@ namespace Mech3DotNet.Types.Nodes
                 fields.zMin.Unwrap("PartitionPg", "zMin"),
 
                 fields.zMax.Unwrap("PartitionPg", "zMax"),
+
+                fields.zMid.Unwrap("PartitionPg", "zMid"),
 
                 fields.nodes.Unwrap("PartitionPg", "nodes"),
 

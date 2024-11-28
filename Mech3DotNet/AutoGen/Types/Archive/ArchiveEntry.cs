@@ -8,31 +8,36 @@ namespace Mech3DotNet.Types.Archive
         public static readonly TypeConverter<ArchiveEntry> Converter = new TypeConverter<ArchiveEntry>(Deserialize, Serialize);
         public string name;
         public string? rename = null;
-        public byte[] garbage;
+        public uint flags;
+        public Mech3DotNet.Types.Archive.ArchiveEntryInfo info;
 
-        public ArchiveEntry(string name, string? rename, byte[] garbage)
+        public ArchiveEntry(string name, string? rename, uint flags, Mech3DotNet.Types.Archive.ArchiveEntryInfo info)
         {
             this.name = name;
             this.rename = rename;
-            this.garbage = garbage;
+            this.flags = flags;
+            this.info = info;
         }
 
         private struct Fields
         {
             public Field<string> name;
             public Field<string?> rename;
-            public Field<byte[]> garbage;
+            public Field<uint> flags;
+            public Field<Mech3DotNet.Types.Archive.ArchiveEntryInfo> info;
         }
 
         public static void Serialize(ArchiveEntry v, Serializer s)
         {
-            s.SerializeStruct(3);
+            s.SerializeStruct(4);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("rename");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.rename);
-            s.SerializeFieldName("garbage");
-            ((Action<byte[]>)s.SerializeBytes)(v.garbage);
+            s.SerializeFieldName("flags");
+            ((Action<uint>)s.SerializeU32)(v.flags);
+            s.SerializeFieldName("info");
+            s.Serialize(Mech3DotNet.Types.Archive.ArchiveEntryInfo.Converter)(v.info);
         }
 
         public static ArchiveEntry Deserialize(Deserializer d)
@@ -41,7 +46,8 @@ namespace Mech3DotNet.Types.Archive
             {
                 name = new Field<string>(),
                 rename = new Field<string?>(null),
-                garbage = new Field<byte[]>(),
+                flags = new Field<uint>(),
+                info = new Field<Mech3DotNet.Types.Archive.ArchiveEntryInfo>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -53,8 +59,11 @@ namespace Mech3DotNet.Types.Archive
                     case "rename":
                         fields.rename.Value = d.DeserializeRefOption(d.DeserializeString)();
                         break;
-                    case "garbage":
-                        fields.garbage.Value = d.DeserializeBytes();
+                    case "flags":
+                        fields.flags.Value = d.DeserializeU32();
+                        break;
+                    case "info":
+                        fields.info.Value = d.Deserialize(Mech3DotNet.Types.Archive.ArchiveEntryInfo.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("ArchiveEntry", fieldName);
@@ -66,7 +75,9 @@ namespace Mech3DotNet.Types.Archive
 
                 fields.rename.Unwrap("ArchiveEntry", "rename"),
 
-                fields.garbage.Unwrap("ArchiveEntry", "garbage")
+                fields.flags.Unwrap("ArchiveEntry", "flags"),
+
+                fields.info.Unwrap("ArchiveEntry", "info")
 
             );
         }

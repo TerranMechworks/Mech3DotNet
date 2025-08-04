@@ -7,23 +7,23 @@ namespace Mech3DotNet.Zbd
     {
         public static readonly TypeConverter<Zmap> Converter = new TypeConverter<Zmap>(Deserialize, Serialize);
         public uint unk04;
-        public float maxX;
-        public float maxY;
+        public Mech3DotNet.Types.Common.Vec3 min;
+        public Mech3DotNet.Types.Common.Vec3 max;
         public System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature> features;
 
-        public Zmap(uint unk04, float maxX, float maxY, System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature> features)
+        public Zmap(uint unk04, Mech3DotNet.Types.Common.Vec3 min, Mech3DotNet.Types.Common.Vec3 max, System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature> features)
         {
             this.unk04 = unk04;
-            this.maxX = maxX;
-            this.maxY = maxY;
+            this.min = min;
+            this.max = max;
             this.features = features;
         }
 
         private struct Fields
         {
             public Field<uint> unk04;
-            public Field<float> maxX;
-            public Field<float> maxY;
+            public Field<Mech3DotNet.Types.Common.Vec3> min;
+            public Field<Mech3DotNet.Types.Common.Vec3> max;
             public Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature>> features;
         }
 
@@ -32,10 +32,10 @@ namespace Mech3DotNet.Zbd
             s.SerializeStruct(4);
             s.SerializeFieldName("unk04");
             ((Action<uint>)s.SerializeU32)(v.unk04);
-            s.SerializeFieldName("max_x");
-            ((Action<float>)s.SerializeF32)(v.maxX);
-            s.SerializeFieldName("max_y");
-            ((Action<float>)s.SerializeF32)(v.maxY);
+            s.SerializeFieldName("min");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.min);
+            s.SerializeFieldName("max");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.max);
             s.SerializeFieldName("features");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Zmap.MapFeature.Converter))(v.features);
         }
@@ -45,8 +45,8 @@ namespace Mech3DotNet.Zbd
             var fields = new Fields()
             {
                 unk04 = new Field<uint>(),
-                maxX = new Field<float>(),
-                maxY = new Field<float>(),
+                min = new Field<Mech3DotNet.Types.Common.Vec3>(),
+                max = new Field<Mech3DotNet.Types.Common.Vec3>(),
                 features = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature>>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
@@ -56,11 +56,11 @@ namespace Mech3DotNet.Zbd
                     case "unk04":
                         fields.unk04.Value = d.DeserializeU32();
                         break;
-                    case "max_x":
-                        fields.maxX.Value = d.DeserializeF32();
+                    case "min":
+                        fields.min.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
-                    case "max_y":
-                        fields.maxY.Value = d.DeserializeF32();
+                    case "max":
+                        fields.max.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
                     case "features":
                         fields.features.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Zmap.MapFeature.Converter))();
@@ -73,9 +73,9 @@ namespace Mech3DotNet.Zbd
 
                 fields.unk04.Unwrap("Zmap", "unk04"),
 
-                fields.maxX.Unwrap("Zmap", "maxX"),
+                fields.min.Unwrap("Zmap", "min"),
 
-                fields.maxY.Unwrap("Zmap", "maxY"),
+                fields.max.Unwrap("Zmap", "max"),
 
                 fields.features.Unwrap("Zmap", "features")
 

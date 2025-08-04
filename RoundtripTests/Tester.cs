@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Mech3DotNet;
 using Mech3DotNet.FileUtils;
-using Mech3DotNet.Types;
+using Mech3DotNet.Types.Common;
 using static Mech3DotNet.FileUtils.FileCompare;
 using static RoundtripTests.RecursiveFileGlob;
 
@@ -222,25 +222,22 @@ namespace RoundtripTests
                     Roundtrip(
                         "GameZ (MW)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.Zbd.GameZDataMw.Read);
+                        Mech3DotNet.Zbd.GameZ.Read);
                     break;
                 case GameType.PM:
                     Roundtrip(
                         "GameZ (PM)",
                         @"gamez\.zbd$",
-                        Mech3DotNet.Zbd.GameZDataPm.Read);
+                        Mech3DotNet.Zbd.GameZ.Read);
                     break;
                 case GameType.RC:
                     Roundtrip(
                         "GameZ (RC)",
                         @"m([1234578]|1[0123])/gamez\.zbd$",
-                        Mech3DotNet.Zbd.GameZDataRc.Read);
+                        Mech3DotNet.Zbd.GameZ.Read);
                     break;
                 case GameType.CS:
-                    Roundtrip(
-                        "GameZ (CS)",
-                        @"gamez\.zbd$",
-                        Mech3DotNet.Zbd.GameZDataCs.Read);
+                    Console.WriteLine("Skipping GameZ for CS");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -255,16 +252,22 @@ namespace RoundtripTests
                     Roundtrip(
                         "Animations (MW)",
                         @"anim\.zbd$",
-                        Mech3DotNet.Zbd.AnimMw.Read);
+                        Mech3DotNet.Zbd.Anim.Read);
                     break;
                 case GameType.PM:
-                    Console.WriteLine("Skipping animations for PM");
+                    Roundtrip(
+                        "Animations (PM)",
+                        @"anim\.zbd$",
+                        Mech3DotNet.Zbd.Anim.Read);
                     break;
                 case GameType.RC:
-                    Console.WriteLine("Skipping animations for RC");
+                    Roundtrip(
+                        "Animations (RC)",
+                        @"anim\.zbd$",
+                        Mech3DotNet.Zbd.Anim.Read);
                     break;
                 case GameType.CS:
-                    Console.WriteLine("Skipping animations for CS");
+                    Console.WriteLine("Skipping Anim for CS");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -363,30 +366,6 @@ namespace RoundtripTests
                     break;
                 case GameType.CS:
                     Console.WriteLine("No zmap for CS");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
-        public void Planes()
-        {
-            switch (gameType)
-            {
-                case GameType.MW:
-                    Console.WriteLine("No planes for MW");
-                    break;
-                case GameType.PM:
-                    Console.WriteLine("No planes for PM");
-                    break;
-                case GameType.RC:
-                    Console.WriteLine("No planes for RC");
-                    break;
-                case GameType.CS:
-                    Roundtrip(
-                        "Planes (CS)",
-                        @"planes\.zbd$",
-                        Mech3DotNet.Zbd.GameZDataCs.Read);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

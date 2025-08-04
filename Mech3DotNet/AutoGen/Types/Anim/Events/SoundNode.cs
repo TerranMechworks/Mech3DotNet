@@ -8,20 +8,20 @@ namespace Mech3DotNet.Types.Anim.Events
         public static readonly TypeConverter<SoundNode> Converter = new TypeConverter<SoundNode>(Deserialize, Serialize);
         public string name;
         public bool activeState;
-        public Mech3DotNet.Types.Anim.Events.AtNode? atNode = null;
+        public Mech3DotNet.Types.Anim.Events.Translate? translate;
 
-        public SoundNode(string name, bool activeState, Mech3DotNet.Types.Anim.Events.AtNode? atNode)
+        public SoundNode(string name, bool activeState, Mech3DotNet.Types.Anim.Events.Translate? translate)
         {
             this.name = name;
             this.activeState = activeState;
-            this.atNode = atNode;
+            this.translate = translate;
         }
 
         private struct Fields
         {
             public Field<string> name;
             public Field<bool> activeState;
-            public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
+            public Field<Mech3DotNet.Types.Anim.Events.Translate?> translate;
         }
 
         public static void Serialize(SoundNode v, Serializer s)
@@ -31,8 +31,8 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("active_state");
             ((Action<bool>)s.SerializeBool)(v.activeState);
-            s.SerializeFieldName("at_node");
-            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
+            s.SerializeFieldName("translate");
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.Translate.Converter))(v.translate);
         }
 
         public static SoundNode Deserialize(Deserializer d)
@@ -41,7 +41,7 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 name = new Field<string>(),
                 activeState = new Field<bool>(),
-                atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode?>(null),
+                translate = new Field<Mech3DotNet.Types.Anim.Events.Translate?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -53,8 +53,8 @@ namespace Mech3DotNet.Types.Anim.Events
                     case "active_state":
                         fields.activeState.Value = d.DeserializeBool();
                         break;
-                    case "at_node":
-                        fields.atNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))();
+                    case "translate":
+                        fields.translate.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.Translate.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("SoundNode", fieldName);
@@ -66,7 +66,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
                 fields.activeState.Unwrap("SoundNode", "activeState"),
 
-                fields.atNode.Unwrap("SoundNode", "atNode")
+                fields.translate.Unwrap("SoundNode", "translate")
 
             );
         }

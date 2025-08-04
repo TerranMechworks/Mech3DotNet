@@ -3,53 +3,49 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public struct ObjectOpacity
-    {
-        public float value;
-        public short state;
-
-        public ObjectOpacity(float value, short state)
-        {
-            this.value = value;
-            this.state = state;
-        }
-    }
-
-    public static class ObjectOpacityConverter
+    public sealed class ObjectOpacity
     {
         public static readonly TypeConverter<ObjectOpacity> Converter = new TypeConverter<ObjectOpacity>(Deserialize, Serialize);
+        public float opacity;
+        public bool? state;
+
+        public ObjectOpacity(float opacity, bool? state)
+        {
+            this.opacity = opacity;
+            this.state = state;
+        }
 
         private struct Fields
         {
-            public Field<float> value;
-            public Field<short> state;
+            public Field<float> opacity;
+            public Field<bool?> state;
         }
 
         public static void Serialize(ObjectOpacity v, Serializer s)
         {
             s.SerializeStruct(2);
-            s.SerializeFieldName("value");
-            ((Action<float>)s.SerializeF32)(v.value);
+            s.SerializeFieldName("opacity");
+            ((Action<float>)s.SerializeF32)(v.opacity);
             s.SerializeFieldName("state");
-            ((Action<short>)s.SerializeI16)(v.state);
+            s.SerializeValOption(((Action<bool>)s.SerializeBool))(v.state);
         }
 
         public static ObjectOpacity Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                value = new Field<float>(),
-                state = new Field<short>(),
+                opacity = new Field<float>(),
+                state = new Field<bool?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "value":
-                        fields.value.Value = d.DeserializeF32();
+                    case "opacity":
+                        fields.opacity.Value = d.DeserializeF32();
                         break;
                     case "state":
-                        fields.state.Value = d.DeserializeI16();
+                        fields.state.Value = d.DeserializeValOption(d.DeserializeBool)();
                         break;
                     default:
                         throw new UnknownFieldException("ObjectOpacity", fieldName);
@@ -57,7 +53,7 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ObjectOpacity(
 
-                fields.value.Unwrap("ObjectOpacity", "value"),
+                fields.opacity.Unwrap("ObjectOpacity", "opacity"),
 
                 fields.state.Unwrap("ObjectOpacity", "state")
 

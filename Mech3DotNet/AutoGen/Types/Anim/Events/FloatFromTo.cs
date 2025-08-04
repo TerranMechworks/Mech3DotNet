@@ -8,31 +8,26 @@ namespace Mech3DotNet.Types.Anim.Events
         public static readonly TypeConverter<FloatFromTo> Converter = new TypeConverter<FloatFromTo>(Deserialize, Serialize);
         public float from;
         public float to;
-        public float delta;
 
-        public FloatFromTo(float from, float to, float delta)
+        public FloatFromTo(float from, float to)
         {
             this.from = from;
             this.to = to;
-            this.delta = delta;
         }
 
         private struct Fields
         {
             public Field<float> from;
             public Field<float> to;
-            public Field<float> delta;
         }
 
         public static void Serialize(FloatFromTo v, Serializer s)
         {
-            s.SerializeStruct(3);
+            s.SerializeStruct(2);
             s.SerializeFieldName("from");
             ((Action<float>)s.SerializeF32)(v.from);
             s.SerializeFieldName("to");
             ((Action<float>)s.SerializeF32)(v.to);
-            s.SerializeFieldName("delta");
-            ((Action<float>)s.SerializeF32)(v.delta);
         }
 
         public static FloatFromTo Deserialize(Deserializer d)
@@ -41,7 +36,6 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 from = new Field<float>(),
                 to = new Field<float>(),
-                delta = new Field<float>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -53,9 +47,6 @@ namespace Mech3DotNet.Types.Anim.Events
                     case "to":
                         fields.to.Value = d.DeserializeF32();
                         break;
-                    case "delta":
-                        fields.delta.Value = d.DeserializeF32();
-                        break;
                     default:
                         throw new UnknownFieldException("FloatFromTo", fieldName);
                 }
@@ -64,9 +55,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
                 fields.from.Unwrap("FloatFromTo", "from"),
 
-                fields.to.Unwrap("FloatFromTo", "to"),
-
-                fields.delta.Unwrap("FloatFromTo", "delta")
+                fields.to.Unwrap("FloatFromTo", "to")
 
             );
         }

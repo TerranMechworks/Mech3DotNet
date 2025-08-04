@@ -6,141 +6,47 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class If
     {
         public static readonly TypeConverter<If> Converter = new TypeConverter<If>(Deserialize, Serialize);
+        public Mech3DotNet.Types.Anim.Events.Condition condition;
 
-        public enum Variants
+        public If(Mech3DotNet.Types.Anim.Events.Condition condition)
         {
-            RandomWeight,
-            PlayerRange,
-            AnimationLod,
-            HwRender,
-            PlayerFirstPerson,
+            this.condition = condition;
         }
 
-        private If(Variants variant, object value)
+        private struct Fields
         {
-            Variant = variant;
-            Value = value;
+            public Field<Mech3DotNet.Types.Anim.Events.Condition> condition;
         }
-        public static If RandomWeight(Mech3DotNet.Types.Anim.Events.RandomWeightCond value) => new If(Variants.RandomWeight, value);
 
-        public static If PlayerRange(Mech3DotNet.Types.Anim.Events.PlayerRangeCond value) => new If(Variants.PlayerRange, value);
-
-        public static If AnimationLod(Mech3DotNet.Types.Anim.Events.AnimationLodCond value) => new If(Variants.AnimationLod, value);
-
-        public static If HwRender(Mech3DotNet.Types.Anim.Events.HwRenderCond value) => new If(Variants.HwRender, value);
-
-        public static If PlayerFirstPerson(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond value) => new If(Variants.PlayerFirstPerson, value);
-
-        public object Value { get; private set; }
-        public Variants Variant { get; private set; }
-        public bool IsRandomWeight() => Variant == Variants.RandomWeight;
-        public Mech3DotNet.Types.Anim.Events.RandomWeightCond AsRandomWeight() => (Mech3DotNet.Types.Anim.Events.RandomWeightCond)Value;
-        public bool IsPlayerRange() => Variant == Variants.PlayerRange;
-        public Mech3DotNet.Types.Anim.Events.PlayerRangeCond AsPlayerRange() => (Mech3DotNet.Types.Anim.Events.PlayerRangeCond)Value;
-        public bool IsAnimationLod() => Variant == Variants.AnimationLod;
-        public Mech3DotNet.Types.Anim.Events.AnimationLodCond AsAnimationLod() => (Mech3DotNet.Types.Anim.Events.AnimationLodCond)Value;
-        public bool IsHwRender() => Variant == Variants.HwRender;
-        public Mech3DotNet.Types.Anim.Events.HwRenderCond AsHwRender() => (Mech3DotNet.Types.Anim.Events.HwRenderCond)Value;
-        public bool IsPlayerFirstPerson() => Variant == Variants.PlayerFirstPerson;
-        public Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond AsPlayerFirstPerson() => (Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond)Value;
-
-        private static void Serialize(If v, Serializer s)
+        public static void Serialize(If v, Serializer s)
         {
-            switch (v.Variant)
+            s.SerializeStruct(1);
+            s.SerializeFieldName("condition");
+            s.Serialize(Mech3DotNet.Types.Anim.Events.Condition.Converter)(v.condition);
+        }
+
+        public static If Deserialize(Deserializer d)
+        {
+            var fields = new Fields()
             {
-                case Variants.RandomWeight: // 0
-                    {
-                        var inner = v.AsRandomWeight();
-                        s.SerializeNewTypeVariant(0);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.RandomWeightCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.PlayerRange: // 1
-                    {
-                        var inner = v.AsPlayerRange();
-                        s.SerializeNewTypeVariant(1);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.AnimationLod: // 2
-                    {
-                        var inner = v.AsAnimationLod();
-                        s.SerializeNewTypeVariant(2);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.AnimationLodCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.HwRender: // 3
-                    {
-                        var inner = v.AsHwRender();
-                        s.SerializeNewTypeVariant(3);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.HwRenderCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.PlayerFirstPerson: // 4
-                    {
-                        var inner = v.AsPlayerFirstPerson();
-                        s.SerializeNewTypeVariant(4);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                default:
-                    throw new System.ArgumentOutOfRangeException();
-            }
-        }
-
-        private static If Deserialize(Deserializer d)
-        {
-            var (enumType, variantIndex) = d.DeserializeEnum();
-            switch (variantIndex)
+                condition = new Field<Mech3DotNet.Types.Anim.Events.Condition>(),
+            };
+            foreach (var fieldName in d.DeserializeStruct())
             {
-                case 0: // RandomWeight
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("If", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.RandomWeightCondConverter.Converter)();
-                        return If.RandomWeight(inner);
-                    }
-
-                case 1: // PlayerRange
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("If", 1, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCondConverter.Converter)();
-                        return If.PlayerRange(inner);
-                    }
-
-                case 2: // AnimationLod
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("If", 2, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.AnimationLodCondConverter.Converter)();
-                        return If.AnimationLod(inner);
-                    }
-
-                case 3: // HwRender
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("If", 3, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.HwRenderCondConverter.Converter)();
-                        return If.HwRender(inner);
-                    }
-
-                case 4: // PlayerFirstPerson
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("If", 4, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCondConverter.Converter)();
-                        return If.PlayerFirstPerson(inner);
-                    }
-
-                default:
-                    throw new UnknownVariantException("If", variantIndex);
+                switch (fieldName)
+                {
+                    case "condition":
+                        fields.condition.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.Condition.Converter)();
+                        break;
+                    default:
+                        throw new UnknownFieldException("If", fieldName);
+                }
             }
+            return new If(
+
+                fields.condition.Unwrap("If", "condition")
+
+            );
         }
     }
 }

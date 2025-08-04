@@ -6,55 +6,55 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class ObjectMotionTranslation
     {
         public static readonly TypeConverter<ObjectMotionTranslation> Converter = new TypeConverter<ObjectMotionTranslation>(Deserialize, Serialize);
-        public Mech3DotNet.Types.Vec3 delta;
-        public Mech3DotNet.Types.Vec3 initial;
-        public Mech3DotNet.Types.Vec3 unk;
+        public Mech3DotNet.Types.Common.Vec3 initial;
+        public Mech3DotNet.Types.Common.Vec3 delta;
+        public Mech3DotNet.Types.Common.Vec3 rndXz;
 
-        public ObjectMotionTranslation(Mech3DotNet.Types.Vec3 delta, Mech3DotNet.Types.Vec3 initial, Mech3DotNet.Types.Vec3 unk)
+        public ObjectMotionTranslation(Mech3DotNet.Types.Common.Vec3 initial, Mech3DotNet.Types.Common.Vec3 delta, Mech3DotNet.Types.Common.Vec3 rndXz)
         {
-            this.delta = delta;
             this.initial = initial;
-            this.unk = unk;
+            this.delta = delta;
+            this.rndXz = rndXz;
         }
 
         private struct Fields
         {
-            public Field<Mech3DotNet.Types.Vec3> delta;
-            public Field<Mech3DotNet.Types.Vec3> initial;
-            public Field<Mech3DotNet.Types.Vec3> unk;
+            public Field<Mech3DotNet.Types.Common.Vec3> initial;
+            public Field<Mech3DotNet.Types.Common.Vec3> delta;
+            public Field<Mech3DotNet.Types.Common.Vec3> rndXz;
         }
 
         public static void Serialize(ObjectMotionTranslation v, Serializer s)
         {
             s.SerializeStruct(3);
-            s.SerializeFieldName("delta");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.delta);
             s.SerializeFieldName("initial");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.initial);
-            s.SerializeFieldName("unk");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.unk);
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.initial);
+            s.SerializeFieldName("delta");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.delta);
+            s.SerializeFieldName("rnd_xz");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.rndXz);
         }
 
         public static ObjectMotionTranslation Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                delta = new Field<Mech3DotNet.Types.Vec3>(),
-                initial = new Field<Mech3DotNet.Types.Vec3>(),
-                unk = new Field<Mech3DotNet.Types.Vec3>(),
+                initial = new Field<Mech3DotNet.Types.Common.Vec3>(),
+                delta = new Field<Mech3DotNet.Types.Common.Vec3>(),
+                rndXz = new Field<Mech3DotNet.Types.Common.Vec3>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "delta":
-                        fields.delta.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
-                        break;
                     case "initial":
-                        fields.initial.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
+                        fields.initial.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
-                    case "unk":
-                        fields.unk.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
+                    case "delta":
+                        fields.delta.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
+                        break;
+                    case "rnd_xz":
+                        fields.rndXz.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("ObjectMotionTranslation", fieldName);
@@ -62,11 +62,11 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ObjectMotionTranslation(
 
-                fields.delta.Unwrap("ObjectMotionTranslation", "delta"),
-
                 fields.initial.Unwrap("ObjectMotionTranslation", "initial"),
 
-                fields.unk.Unwrap("ObjectMotionTranslation", "unk")
+                fields.delta.Unwrap("ObjectMotionTranslation", "delta"),
+
+                fields.rndXz.Unwrap("ObjectMotionTranslation", "rndXz")
 
             );
         }

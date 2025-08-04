@@ -26,8 +26,8 @@ namespace Mech3DotNet.Types.Image
                 TextureStretch.Horizontal => 2,
                 TextureStretch.Both => 3,
                 TextureStretch.Unk4 => 4,
-                TextureStretch.Unk7 => 5,
-                TextureStretch.Unk8 => 6,
+                TextureStretch.Unk7 => 7,
+                TextureStretch.Unk8 => 8,
                 _ => throw new System.ArgumentOutOfRangeException(),
             };
             s.SerializeUnitVariant(variantIndex);
@@ -43,8 +43,8 @@ namespace Mech3DotNet.Types.Image
                 2 => TextureStretch.Horizontal,
                 3 => TextureStretch.Both,
                 4 => TextureStretch.Unk4,
-                5 => TextureStretch.Unk7,
-                6 => TextureStretch.Unk8,
+                7 => TextureStretch.Unk7,
+                8 => TextureStretch.Unk8,
                 _ => throw new UnknownVariantException("TextureStretch", variantIndex),
             };
         }

@@ -6,46 +6,46 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class ObjectScaleState
     {
         public static readonly TypeConverter<ObjectScaleState> Converter = new TypeConverter<ObjectScaleState>(Deserialize, Serialize);
-        public string node;
-        public Mech3DotNet.Types.Vec3 scale;
+        public string name;
+        public Mech3DotNet.Types.Common.Vec3 state;
 
-        public ObjectScaleState(string node, Mech3DotNet.Types.Vec3 scale)
+        public ObjectScaleState(string name, Mech3DotNet.Types.Common.Vec3 state)
         {
-            this.node = node;
-            this.scale = scale;
+            this.name = name;
+            this.state = state;
         }
 
         private struct Fields
         {
-            public Field<string> node;
-            public Field<Mech3DotNet.Types.Vec3> scale;
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Common.Vec3> state;
         }
 
         public static void Serialize(ObjectScaleState v, Serializer s)
         {
             s.SerializeStruct(2);
-            s.SerializeFieldName("node");
-            ((Action<string>)s.SerializeString)(v.node);
-            s.SerializeFieldName("scale");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.scale);
+            s.SerializeFieldName("name");
+            ((Action<string>)s.SerializeString)(v.name);
+            s.SerializeFieldName("state");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.state);
         }
 
         public static ObjectScaleState Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                node = new Field<string>(),
-                scale = new Field<Mech3DotNet.Types.Vec3>(),
+                name = new Field<string>(),
+                state = new Field<Mech3DotNet.Types.Common.Vec3>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "node":
-                        fields.node.Value = d.DeserializeString();
+                    case "name":
+                        fields.name.Value = d.DeserializeString();
                         break;
-                    case "scale":
-                        fields.scale.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
+                    case "state":
+                        fields.state.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("ObjectScaleState", fieldName);
@@ -53,9 +53,9 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ObjectScaleState(
 
-                fields.node.Unwrap("ObjectScaleState", "node"),
+                fields.name.Unwrap("ObjectScaleState", "name"),
 
-                fields.scale.Unwrap("ObjectScaleState", "scale")
+                fields.state.Unwrap("ObjectScaleState", "state")
 
             );
         }

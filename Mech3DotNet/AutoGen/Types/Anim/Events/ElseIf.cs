@@ -3,144 +3,50 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public sealed class ElseIf
+    public sealed class Elseif
     {
-        public static readonly TypeConverter<ElseIf> Converter = new TypeConverter<ElseIf>(Deserialize, Serialize);
+        public static readonly TypeConverter<Elseif> Converter = new TypeConverter<Elseif>(Deserialize, Serialize);
+        public Mech3DotNet.Types.Anim.Events.Condition condition;
 
-        public enum Variants
+        public Elseif(Mech3DotNet.Types.Anim.Events.Condition condition)
         {
-            RandomWeight,
-            PlayerRange,
-            AnimationLod,
-            HwRender,
-            PlayerFirstPerson,
+            this.condition = condition;
         }
 
-        private ElseIf(Variants variant, object value)
+        private struct Fields
         {
-            Variant = variant;
-            Value = value;
+            public Field<Mech3DotNet.Types.Anim.Events.Condition> condition;
         }
-        public static ElseIf RandomWeight(Mech3DotNet.Types.Anim.Events.RandomWeightCond value) => new ElseIf(Variants.RandomWeight, value);
 
-        public static ElseIf PlayerRange(Mech3DotNet.Types.Anim.Events.PlayerRangeCond value) => new ElseIf(Variants.PlayerRange, value);
-
-        public static ElseIf AnimationLod(Mech3DotNet.Types.Anim.Events.AnimationLodCond value) => new ElseIf(Variants.AnimationLod, value);
-
-        public static ElseIf HwRender(Mech3DotNet.Types.Anim.Events.HwRenderCond value) => new ElseIf(Variants.HwRender, value);
-
-        public static ElseIf PlayerFirstPerson(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond value) => new ElseIf(Variants.PlayerFirstPerson, value);
-
-        public object Value { get; private set; }
-        public Variants Variant { get; private set; }
-        public bool IsRandomWeight() => Variant == Variants.RandomWeight;
-        public Mech3DotNet.Types.Anim.Events.RandomWeightCond AsRandomWeight() => (Mech3DotNet.Types.Anim.Events.RandomWeightCond)Value;
-        public bool IsPlayerRange() => Variant == Variants.PlayerRange;
-        public Mech3DotNet.Types.Anim.Events.PlayerRangeCond AsPlayerRange() => (Mech3DotNet.Types.Anim.Events.PlayerRangeCond)Value;
-        public bool IsAnimationLod() => Variant == Variants.AnimationLod;
-        public Mech3DotNet.Types.Anim.Events.AnimationLodCond AsAnimationLod() => (Mech3DotNet.Types.Anim.Events.AnimationLodCond)Value;
-        public bool IsHwRender() => Variant == Variants.HwRender;
-        public Mech3DotNet.Types.Anim.Events.HwRenderCond AsHwRender() => (Mech3DotNet.Types.Anim.Events.HwRenderCond)Value;
-        public bool IsPlayerFirstPerson() => Variant == Variants.PlayerFirstPerson;
-        public Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond AsPlayerFirstPerson() => (Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCond)Value;
-
-        private static void Serialize(ElseIf v, Serializer s)
+        public static void Serialize(Elseif v, Serializer s)
         {
-            switch (v.Variant)
+            s.SerializeStruct(1);
+            s.SerializeFieldName("condition");
+            s.Serialize(Mech3DotNet.Types.Anim.Events.Condition.Converter)(v.condition);
+        }
+
+        public static Elseif Deserialize(Deserializer d)
+        {
+            var fields = new Fields()
             {
-                case Variants.RandomWeight: // 0
-                    {
-                        var inner = v.AsRandomWeight();
-                        s.SerializeNewTypeVariant(0);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.RandomWeightCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.PlayerRange: // 1
-                    {
-                        var inner = v.AsPlayerRange();
-                        s.SerializeNewTypeVariant(1);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.AnimationLod: // 2
-                    {
-                        var inner = v.AsAnimationLod();
-                        s.SerializeNewTypeVariant(2);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.AnimationLodCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.HwRender: // 3
-                    {
-                        var inner = v.AsHwRender();
-                        s.SerializeNewTypeVariant(3);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.HwRenderCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.PlayerFirstPerson: // 4
-                    {
-                        var inner = v.AsPlayerFirstPerson();
-                        s.SerializeNewTypeVariant(4);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCondConverter.Converter)(inner);
-                        break;
-                    }
-
-                default:
-                    throw new System.ArgumentOutOfRangeException();
-            }
-        }
-
-        private static ElseIf Deserialize(Deserializer d)
-        {
-            var (enumType, variantIndex) = d.DeserializeEnum();
-            switch (variantIndex)
+                condition = new Field<Mech3DotNet.Types.Anim.Events.Condition>(),
+            };
+            foreach (var fieldName in d.DeserializeStruct())
             {
-                case 0: // RandomWeight
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("ElseIf", 0, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.RandomWeightCondConverter.Converter)();
-                        return ElseIf.RandomWeight(inner);
-                    }
-
-                case 1: // PlayerRange
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("ElseIf", 1, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerRangeCondConverter.Converter)();
-                        return ElseIf.PlayerRange(inner);
-                    }
-
-                case 2: // AnimationLod
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("ElseIf", 2, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.AnimationLodCondConverter.Converter)();
-                        return ElseIf.AnimationLod(inner);
-                    }
-
-                case 3: // HwRender
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("ElseIf", 3, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.HwRenderCondConverter.Converter)();
-                        return ElseIf.HwRender(inner);
-                    }
-
-                case 4: // PlayerFirstPerson
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("ElseIf", 4, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PlayerFirstPersonCondConverter.Converter)();
-                        return ElseIf.PlayerFirstPerson(inner);
-                    }
-
-                default:
-                    throw new UnknownVariantException("ElseIf", variantIndex);
+                switch (fieldName)
+                {
+                    case "condition":
+                        fields.condition.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.Condition.Converter)();
+                        break;
+                    default:
+                        throw new UnknownFieldException("Elseif", fieldName);
+                }
             }
+            return new Elseif(
+
+                fields.condition.Unwrap("Elseif", "condition")
+
+            );
         }
     }
 }

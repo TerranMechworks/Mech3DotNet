@@ -3,8 +3,9 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public struct Rgba
+    public sealed class Rgba
     {
+        public static readonly TypeConverter<Rgba> Converter = new TypeConverter<Rgba>(Deserialize, Serialize);
         public float r;
         public float g;
         public float b;
@@ -17,11 +18,6 @@ namespace Mech3DotNet.Types.Anim.Events
             this.b = b;
             this.a = a;
         }
-    }
-
-    public static class RgbaConverter
-    {
-        public static readonly TypeConverter<Rgba> Converter = new TypeConverter<Rgba>(Deserialize, Serialize);
 
         private struct Fields
         {

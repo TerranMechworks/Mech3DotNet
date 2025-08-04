@@ -3,8 +3,9 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public struct EventStart
+    public sealed class EventStart
     {
+        public static readonly TypeConverter<EventStart> Converter = new TypeConverter<EventStart>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.StartOffset offset;
         public float time;
 
@@ -13,11 +14,6 @@ namespace Mech3DotNet.Types.Anim.Events
             this.offset = offset;
             this.time = time;
         }
-    }
-
-    public static class EventStartConverter
-    {
-        public static readonly TypeConverter<EventStart> Converter = new TypeConverter<EventStart>(Deserialize, Serialize);
 
         private struct Fields
         {

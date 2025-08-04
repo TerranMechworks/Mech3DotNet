@@ -7,9 +7,9 @@ namespace Mech3DotNet.Types.Anim.Events
     {
         public static readonly TypeConverter<Sound> Converter = new TypeConverter<Sound>(Deserialize, Serialize);
         public string name;
-        public Mech3DotNet.Types.Anim.Events.AtNode atNode;
+        public Mech3DotNet.Types.Anim.Events.AtNode? atNode;
 
-        public Sound(string name, Mech3DotNet.Types.Anim.Events.AtNode atNode)
+        public Sound(string name, Mech3DotNet.Types.Anim.Events.AtNode? atNode)
         {
             this.name = name;
             this.atNode = atNode;
@@ -18,7 +18,7 @@ namespace Mech3DotNet.Types.Anim.Events
         private struct Fields
         {
             public Field<string> name;
-            public Field<Mech3DotNet.Types.Anim.Events.AtNode> atNode;
+            public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
         }
 
         public static void Serialize(Sound v, Serializer s)
@@ -27,7 +27,7 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("at_node");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter)(v.atNode);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
         }
 
         public static Sound Deserialize(Deserializer d)
@@ -35,7 +35,7 @@ namespace Mech3DotNet.Types.Anim.Events
             var fields = new Fields()
             {
                 name = new Field<string>(),
-                atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode>(),
+                atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -45,7 +45,7 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.name.Value = d.DeserializeString();
                         break;
                     case "at_node":
-                        fields.atNode.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter)();
+                        fields.atNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("Sound", fieldName);

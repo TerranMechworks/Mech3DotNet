@@ -6,26 +6,26 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class DetonateWeapon
     {
         public static readonly TypeConverter<DetonateWeapon> Converter = new TypeConverter<DetonateWeapon>(Deserialize, Serialize);
-        public string name;
+        public string weapon;
         public Mech3DotNet.Types.Anim.Events.AtNode atNode;
 
-        public DetonateWeapon(string name, Mech3DotNet.Types.Anim.Events.AtNode atNode)
+        public DetonateWeapon(string weapon, Mech3DotNet.Types.Anim.Events.AtNode atNode)
         {
-            this.name = name;
+            this.weapon = weapon;
             this.atNode = atNode;
         }
 
         private struct Fields
         {
-            public Field<string> name;
+            public Field<string> weapon;
             public Field<Mech3DotNet.Types.Anim.Events.AtNode> atNode;
         }
 
         public static void Serialize(DetonateWeapon v, Serializer s)
         {
             s.SerializeStruct(2);
-            s.SerializeFieldName("name");
-            ((Action<string>)s.SerializeString)(v.name);
+            s.SerializeFieldName("weapon");
+            ((Action<string>)s.SerializeString)(v.weapon);
             s.SerializeFieldName("at_node");
             s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter)(v.atNode);
         }
@@ -34,15 +34,15 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             var fields = new Fields()
             {
-                name = new Field<string>(),
+                weapon = new Field<string>(),
                 atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "name":
-                        fields.name.Value = d.DeserializeString();
+                    case "weapon":
+                        fields.weapon.Value = d.DeserializeString();
                         break;
                     case "at_node":
                         fields.atNode.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter)();
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new DetonateWeapon(
 
-                fields.name.Unwrap("DetonateWeapon", "name"),
+                fields.weapon.Unwrap("DetonateWeapon", "weapon"),
 
                 fields.atNode.Unwrap("DetonateWeapon", "atNode")
 

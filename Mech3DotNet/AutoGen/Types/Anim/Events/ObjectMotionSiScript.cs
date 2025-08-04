@@ -6,46 +6,46 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class ObjectMotionSiScript
     {
         public static readonly TypeConverter<ObjectMotionSiScript> Converter = new TypeConverter<ObjectMotionSiScript>(Deserialize, Serialize);
-        public string node;
-        public System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame> frames;
+        public string name;
+        public uint index;
 
-        public ObjectMotionSiScript(string node, System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame> frames)
+        public ObjectMotionSiScript(string name, uint index)
         {
-            this.node = node;
-            this.frames = frames;
+            this.name = name;
+            this.index = index;
         }
 
         private struct Fields
         {
-            public Field<string> node;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame>> frames;
+            public Field<string> name;
+            public Field<uint> index;
         }
 
         public static void Serialize(ObjectMotionSiScript v, Serializer s)
         {
             s.SerializeStruct(2);
-            s.SerializeFieldName("node");
-            ((Action<string>)s.SerializeString)(v.node);
-            s.SerializeFieldName("frames");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame.Converter))(v.frames);
+            s.SerializeFieldName("name");
+            ((Action<string>)s.SerializeString)(v.name);
+            s.SerializeFieldName("index");
+            ((Action<uint>)s.SerializeU32)(v.index);
         }
 
         public static ObjectMotionSiScript Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                node = new Field<string>(),
-                frames = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame>>(),
+                name = new Field<string>(),
+                index = new Field<uint>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "node":
-                        fields.node.Value = d.DeserializeString();
+                    case "name":
+                        fields.name.Value = d.DeserializeString();
                         break;
-                    case "frames":
-                        fields.frames.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiFrame.Converter))();
+                    case "index":
+                        fields.index.Value = d.DeserializeU32();
                         break;
                     default:
                         throw new UnknownFieldException("ObjectMotionSiScript", fieldName);
@@ -53,9 +53,9 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ObjectMotionSiScript(
 
-                fields.node.Unwrap("ObjectMotionSiScript", "node"),
+                fields.name.Unwrap("ObjectMotionSiScript", "name"),
 
-                fields.frames.Unwrap("ObjectMotionSiScript", "frames")
+                fields.index.Unwrap("ObjectMotionSiScript", "index")
 
             );
         }

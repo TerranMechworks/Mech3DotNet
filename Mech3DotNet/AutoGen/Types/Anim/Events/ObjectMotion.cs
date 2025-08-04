@@ -8,47 +8,47 @@ namespace Mech3DotNet.Types.Anim.Events
         public static readonly TypeConverter<ObjectMotion> Converter = new TypeConverter<ObjectMotion>(Deserialize, Serialize);
         public string node;
         public bool impactForce;
-        public Mech3DotNet.Types.Anim.Events.Gravity? gravity = null;
-        public Mech3DotNet.Types.Quaternion? translationRangeMin = null;
-        public Mech3DotNet.Types.Quaternion? translationRangeMax = null;
-        public Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation? translation = null;
-        public Mech3DotNet.Types.Anim.Events.ForwardRotation? forwardRotation = null;
-        public Mech3DotNet.Types.Anim.Events.XyzRotation? xyzRotation = null;
-        public Mech3DotNet.Types.Anim.Events.ObjectMotionScale? scale = null;
-        public Mech3DotNet.Types.Anim.Events.BounceSequence? bounceSequence = null;
-        public Mech3DotNet.Types.Anim.Events.BounceSound? bounceSound = null;
-        public float? runtime = null;
+        public float? morph;
+        public Mech3DotNet.Types.Anim.Events.Gravity? gravity;
+        public Mech3DotNet.Types.Anim.Events.TranslationRange? translationRange;
+        public Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation? translation;
+        public Mech3DotNet.Types.Anim.Events.ForwardRotation? forwardRotation;
+        public Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot? xyzRotation;
+        public Mech3DotNet.Types.Anim.Events.ObjectMotionScale? scale;
+        public Mech3DotNet.Types.Anim.Events.BounceSequences? bounceSequence;
+        public Mech3DotNet.Types.Anim.Events.BounceSounds? bounceSound;
+        public float? runTime;
 
-        public ObjectMotion(string node, bool impactForce, Mech3DotNet.Types.Anim.Events.Gravity? gravity, Mech3DotNet.Types.Quaternion? translationRangeMin, Mech3DotNet.Types.Quaternion? translationRangeMax, Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation? translation, Mech3DotNet.Types.Anim.Events.ForwardRotation? forwardRotation, Mech3DotNet.Types.Anim.Events.XyzRotation? xyzRotation, Mech3DotNet.Types.Anim.Events.ObjectMotionScale? scale, Mech3DotNet.Types.Anim.Events.BounceSequence? bounceSequence, Mech3DotNet.Types.Anim.Events.BounceSound? bounceSound, float? runtime)
+        public ObjectMotion(string node, bool impactForce, float? morph, Mech3DotNet.Types.Anim.Events.Gravity? gravity, Mech3DotNet.Types.Anim.Events.TranslationRange? translationRange, Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation? translation, Mech3DotNet.Types.Anim.Events.ForwardRotation? forwardRotation, Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot? xyzRotation, Mech3DotNet.Types.Anim.Events.ObjectMotionScale? scale, Mech3DotNet.Types.Anim.Events.BounceSequences? bounceSequence, Mech3DotNet.Types.Anim.Events.BounceSounds? bounceSound, float? runTime)
         {
             this.node = node;
             this.impactForce = impactForce;
+            this.morph = morph;
             this.gravity = gravity;
-            this.translationRangeMin = translationRangeMin;
-            this.translationRangeMax = translationRangeMax;
+            this.translationRange = translationRange;
             this.translation = translation;
             this.forwardRotation = forwardRotation;
             this.xyzRotation = xyzRotation;
             this.scale = scale;
             this.bounceSequence = bounceSequence;
             this.bounceSound = bounceSound;
-            this.runtime = runtime;
+            this.runTime = runTime;
         }
 
         private struct Fields
         {
             public Field<string> node;
             public Field<bool> impactForce;
+            public Field<float?> morph;
             public Field<Mech3DotNet.Types.Anim.Events.Gravity?> gravity;
-            public Field<Mech3DotNet.Types.Quaternion?> translationRangeMin;
-            public Field<Mech3DotNet.Types.Quaternion?> translationRangeMax;
+            public Field<Mech3DotNet.Types.Anim.Events.TranslationRange?> translationRange;
             public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation?> translation;
             public Field<Mech3DotNet.Types.Anim.Events.ForwardRotation?> forwardRotation;
-            public Field<Mech3DotNet.Types.Anim.Events.XyzRotation?> xyzRotation;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot?> xyzRotation;
             public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionScale?> scale;
-            public Field<Mech3DotNet.Types.Anim.Events.BounceSequence?> bounceSequence;
-            public Field<Mech3DotNet.Types.Anim.Events.BounceSound?> bounceSound;
-            public Field<float?> runtime;
+            public Field<Mech3DotNet.Types.Anim.Events.BounceSequences?> bounceSequence;
+            public Field<Mech3DotNet.Types.Anim.Events.BounceSounds?> bounceSound;
+            public Field<float?> runTime;
         }
 
         public static void Serialize(ObjectMotion v, Serializer s)
@@ -58,26 +58,26 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("impact_force");
             ((Action<bool>)s.SerializeBool)(v.impactForce);
+            s.SerializeFieldName("morph");
+            s.SerializeValOption(((Action<float>)s.SerializeF32))(v.morph);
             s.SerializeFieldName("gravity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Anim.Events.GravityConverter.Converter))(v.gravity);
-            s.SerializeFieldName("translation_range_min");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.QuaternionConverter.Converter))(v.translationRangeMin);
-            s.SerializeFieldName("translation_range_max");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.QuaternionConverter.Converter))(v.translationRangeMax);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.Gravity.Converter))(v.gravity);
+            s.SerializeFieldName("translation_range");
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.TranslationRange.Converter))(v.translationRange);
             s.SerializeFieldName("translation");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation.Converter))(v.translation);
             s.SerializeFieldName("forward_rotation");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ForwardRotation.Converter))(v.forwardRotation);
             s.SerializeFieldName("xyz_rotation");
-            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.XyzRotation.Converter))(v.xyzRotation);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot.Converter))(v.xyzRotation);
             s.SerializeFieldName("scale");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionScale.Converter))(v.scale);
             s.SerializeFieldName("bounce_sequence");
-            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.BounceSequence.Converter))(v.bounceSequence);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.BounceSequences.Converter))(v.bounceSequence);
             s.SerializeFieldName("bounce_sound");
-            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.BounceSound.Converter))(v.bounceSound);
-            s.SerializeFieldName("runtime");
-            s.SerializeValOption(((Action<float>)s.SerializeF32))(v.runtime);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.BounceSounds.Converter))(v.bounceSound);
+            s.SerializeFieldName("run_time");
+            s.SerializeValOption(((Action<float>)s.SerializeF32))(v.runTime);
         }
 
         public static ObjectMotion Deserialize(Deserializer d)
@@ -86,16 +86,16 @@ namespace Mech3DotNet.Types.Anim.Events
             {
                 node = new Field<string>(),
                 impactForce = new Field<bool>(),
-                gravity = new Field<Mech3DotNet.Types.Anim.Events.Gravity?>(null),
-                translationRangeMin = new Field<Mech3DotNet.Types.Quaternion?>(null),
-                translationRangeMax = new Field<Mech3DotNet.Types.Quaternion?>(null),
-                translation = new Field<Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation?>(null),
-                forwardRotation = new Field<Mech3DotNet.Types.Anim.Events.ForwardRotation?>(null),
-                xyzRotation = new Field<Mech3DotNet.Types.Anim.Events.XyzRotation?>(null),
-                scale = new Field<Mech3DotNet.Types.Anim.Events.ObjectMotionScale?>(null),
-                bounceSequence = new Field<Mech3DotNet.Types.Anim.Events.BounceSequence?>(null),
-                bounceSound = new Field<Mech3DotNet.Types.Anim.Events.BounceSound?>(null),
-                runtime = new Field<float?>(null),
+                morph = new Field<float?>(),
+                gravity = new Field<Mech3DotNet.Types.Anim.Events.Gravity?>(),
+                translationRange = new Field<Mech3DotNet.Types.Anim.Events.TranslationRange?>(),
+                translation = new Field<Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation?>(),
+                forwardRotation = new Field<Mech3DotNet.Types.Anim.Events.ForwardRotation?>(),
+                xyzRotation = new Field<Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot?>(),
+                scale = new Field<Mech3DotNet.Types.Anim.Events.ObjectMotionScale?>(),
+                bounceSequence = new Field<Mech3DotNet.Types.Anim.Events.BounceSequences?>(),
+                bounceSound = new Field<Mech3DotNet.Types.Anim.Events.BounceSounds?>(),
+                runTime = new Field<float?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -107,14 +107,14 @@ namespace Mech3DotNet.Types.Anim.Events
                     case "impact_force":
                         fields.impactForce.Value = d.DeserializeBool();
                         break;
+                    case "morph":
+                        fields.morph.Value = d.DeserializeValOption(d.DeserializeF32)();
+                        break;
                     case "gravity":
-                        fields.gravity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.GravityConverter.Converter))();
+                        fields.gravity.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.Gravity.Converter))();
                         break;
-                    case "translation_range_min":
-                        fields.translationRangeMin.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.QuaternionConverter.Converter))();
-                        break;
-                    case "translation_range_max":
-                        fields.translationRangeMax.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.QuaternionConverter.Converter))();
+                    case "translation_range":
+                        fields.translationRange.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.TranslationRange.Converter))();
                         break;
                     case "translation":
                         fields.translation.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation.Converter))();
@@ -123,19 +123,19 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.forwardRotation.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ForwardRotation.Converter))();
                         break;
                     case "xyz_rotation":
-                        fields.xyzRotation.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.XyzRotation.Converter))();
+                        fields.xyzRotation.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot.Converter))();
                         break;
                     case "scale":
                         fields.scale.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionScale.Converter))();
                         break;
                     case "bounce_sequence":
-                        fields.bounceSequence.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.BounceSequence.Converter))();
+                        fields.bounceSequence.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.BounceSequences.Converter))();
                         break;
                     case "bounce_sound":
-                        fields.bounceSound.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.BounceSound.Converter))();
+                        fields.bounceSound.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.BounceSounds.Converter))();
                         break;
-                    case "runtime":
-                        fields.runtime.Value = d.DeserializeValOption(d.DeserializeF32)();
+                    case "run_time":
+                        fields.runTime.Value = d.DeserializeValOption(d.DeserializeF32)();
                         break;
                     default:
                         throw new UnknownFieldException("ObjectMotion", fieldName);
@@ -147,11 +147,11 @@ namespace Mech3DotNet.Types.Anim.Events
 
                 fields.impactForce.Unwrap("ObjectMotion", "impactForce"),
 
+                fields.morph.Unwrap("ObjectMotion", "morph"),
+
                 fields.gravity.Unwrap("ObjectMotion", "gravity"),
 
-                fields.translationRangeMin.Unwrap("ObjectMotion", "translationRangeMin"),
-
-                fields.translationRangeMax.Unwrap("ObjectMotion", "translationRangeMax"),
+                fields.translationRange.Unwrap("ObjectMotion", "translationRange"),
 
                 fields.translation.Unwrap("ObjectMotion", "translation"),
 
@@ -165,7 +165,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
                 fields.bounceSound.Unwrap("ObjectMotion", "bounceSound"),
 
-                fields.runtime.Unwrap("ObjectMotion", "runtime")
+                fields.runTime.Unwrap("ObjectMotion", "runTime")
 
             );
         }

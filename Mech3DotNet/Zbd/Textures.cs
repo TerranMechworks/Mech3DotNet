@@ -25,7 +25,7 @@ namespace Mech3DotNet.Zbd
         private static Dictionary<string, byte[]> ReadRaw(string path, out byte[] manifest_data)
         {
             var textureData = new Dictionary<string, byte[]>();
-            manifest_data = Helpers.ReadArchive(path, Helpers.IGNORED, Helpers.MANIFEST, Interop.ReadTextures, (string name, byte[] data) =>
+            manifest_data = Helpers.ReadArchive(path, Helpers.IGNORED, Helpers.MANIFEST, Interop.ReadImages, (string name, byte[] data) =>
             {
                 textureData.Add(name, data);
             });
@@ -67,7 +67,7 @@ namespace Mech3DotNet.Zbd
         {
             var manifest = new TextureManifest(textureInfos, globalPalettes);
             var manifest_data = Interop.Serialize(manifest, TextureManifest.Converter);
-            Helpers.WriteArchive(path, Helpers.IGNORED, manifest_data, Interop.WriteTextures, (string name) =>
+            Helpers.WriteArchive(path, Helpers.IGNORED, manifest_data, Interop.WriteImages, (string name) =>
             {
                 return textureData[name];
             });

@@ -6,26 +6,26 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class ObjectCycleTexture
     {
         public static readonly TypeConverter<ObjectCycleTexture> Converter = new TypeConverter<ObjectCycleTexture>(Deserialize, Serialize);
-        public string node;
+        public string name;
         public ushort reset;
 
-        public ObjectCycleTexture(string node, ushort reset)
+        public ObjectCycleTexture(string name, ushort reset)
         {
-            this.node = node;
+            this.name = name;
             this.reset = reset;
         }
 
         private struct Fields
         {
-            public Field<string> node;
+            public Field<string> name;
             public Field<ushort> reset;
         }
 
         public static void Serialize(ObjectCycleTexture v, Serializer s)
         {
             s.SerializeStruct(2);
-            s.SerializeFieldName("node");
-            ((Action<string>)s.SerializeString)(v.node);
+            s.SerializeFieldName("name");
+            ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("reset");
             ((Action<ushort>)s.SerializeU16)(v.reset);
         }
@@ -34,15 +34,15 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             var fields = new Fields()
             {
-                node = new Field<string>(),
+                name = new Field<string>(),
                 reset = new Field<ushort>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "node":
-                        fields.node.Value = d.DeserializeString();
+                    case "name":
+                        fields.name.Value = d.DeserializeString();
                         break;
                     case "reset":
                         fields.reset.Value = d.DeserializeU16();
@@ -53,7 +53,7 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ObjectCycleTexture(
 
-                fields.node.Unwrap("ObjectCycleTexture", "node"),
+                fields.name.Unwrap("ObjectCycleTexture", "name"),
 
                 fields.reset.Unwrap("ObjectCycleTexture", "reset")
 

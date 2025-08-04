@@ -11,8 +11,6 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             AtNode,
             WithNode,
-            TargetNode,
-            None,
         }
 
         private CallAnimationParameters(Variants variant, object value)
@@ -24,19 +22,12 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static CallAnimationParameters WithNode(Mech3DotNet.Types.Anim.Events.CallAnimationWithNode value) => new CallAnimationParameters(Variants.WithNode, value);
 
-        public static CallAnimationParameters TargetNode(Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode value) => new CallAnimationParameters(Variants.TargetNode, value);
-
-        public static readonly CallAnimationParameters None = new CallAnimationParameters(Variants.None, new object());
-
         public object Value { get; private set; }
         public Variants Variant { get; private set; }
         public bool IsAtNode() => Variant == Variants.AtNode;
         public Mech3DotNet.Types.Anim.Events.CallAnimationAtNode AsAtNode() => (Mech3DotNet.Types.Anim.Events.CallAnimationAtNode)Value;
         public bool IsWithNode() => Variant == Variants.WithNode;
         public Mech3DotNet.Types.Anim.Events.CallAnimationWithNode AsWithNode() => (Mech3DotNet.Types.Anim.Events.CallAnimationWithNode)Value;
-        public bool IsTargetNode() => Variant == Variants.TargetNode;
-        public Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode AsTargetNode() => (Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode)Value;
-        public bool IsNone() => Variant == Variants.None;
 
         private static void Serialize(CallAnimationParameters v, Serializer s)
         {
@@ -55,20 +46,6 @@ namespace Mech3DotNet.Types.Anim.Events
                         var inner = v.AsWithNode();
                         s.SerializeNewTypeVariant(1);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationWithNode.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.TargetNode: // 2
-                    {
-                        var inner = v.AsTargetNode();
-                        s.SerializeNewTypeVariant(2);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode.Converter)(inner);
-                        break;
-                    }
-
-                case Variants.None: // 3
-                    {
-                        s.SerializeUnitVariant(3);
                         break;
                     }
 
@@ -96,21 +73,6 @@ namespace Mech3DotNet.Types.Anim.Events
                             throw new InvalidVariantException("CallAnimationParameters", 1, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.CallAnimationWithNode.Converter)();
                         return CallAnimationParameters.WithNode(inner);
-                    }
-
-                case 2: // TargetNode
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("CallAnimationParameters", 2, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.CallAnimationTargetNode.Converter)();
-                        return CallAnimationParameters.TargetNode(inner);
-                    }
-
-                case 3: // None
-                    {
-                        if (enumType != EnumType.Unit)
-                            throw new InvalidVariantException("CallAnimationParameters", 3, EnumType.Unit, enumType);
-                        return CallAnimationParameters.None;
                     }
 
                 default:

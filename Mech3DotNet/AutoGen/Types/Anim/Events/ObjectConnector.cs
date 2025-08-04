@@ -6,46 +6,61 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class ObjectConnector
     {
         public static readonly TypeConverter<ObjectConnector> Converter = new TypeConverter<ObjectConnector>(Deserialize, Serialize);
-        public string node;
-        public string? fromNode = null;
-        public string? toNode = null;
-        public Mech3DotNet.Types.Vec3? fromPos = null;
-        public Mech3DotNet.Types.Vec3? toPos = null;
-        public float? maxLength = null;
+        public string name;
+        public string? fromNode;
+        public string? toNode;
+        public Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? fromPos;
+        public Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? toPos;
+        public Mech3DotNet.Types.Anim.Events.ObjectConnectorTime? fromT;
+        public Mech3DotNet.Types.Anim.Events.ObjectConnectorTime? toT;
+        public float runTime;
+        public float? maxLength;
 
-        public ObjectConnector(string node, string? fromNode, string? toNode, Mech3DotNet.Types.Vec3? fromPos, Mech3DotNet.Types.Vec3? toPos, float? maxLength)
+        public ObjectConnector(string name, string? fromNode, string? toNode, Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? fromPos, Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? toPos, Mech3DotNet.Types.Anim.Events.ObjectConnectorTime? fromT, Mech3DotNet.Types.Anim.Events.ObjectConnectorTime? toT, float runTime, float? maxLength)
         {
-            this.node = node;
+            this.name = name;
             this.fromNode = fromNode;
             this.toNode = toNode;
             this.fromPos = fromPos;
             this.toPos = toPos;
+            this.fromT = fromT;
+            this.toT = toT;
+            this.runTime = runTime;
             this.maxLength = maxLength;
         }
 
         private struct Fields
         {
-            public Field<string> node;
+            public Field<string> name;
             public Field<string?> fromNode;
             public Field<string?> toNode;
-            public Field<Mech3DotNet.Types.Vec3?> fromPos;
-            public Field<Mech3DotNet.Types.Vec3?> toPos;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> fromPos;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> toPos;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?> fromT;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?> toT;
+            public Field<float> runTime;
             public Field<float?> maxLength;
         }
 
         public static void Serialize(ObjectConnector v, Serializer s)
         {
-            s.SerializeStruct(6);
-            s.SerializeFieldName("node");
-            ((Action<string>)s.SerializeString)(v.node);
+            s.SerializeStruct(9);
+            s.SerializeFieldName("name");
+            ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("from_node");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.fromNode);
             s.SerializeFieldName("to_node");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.toNode);
             s.SerializeFieldName("from_pos");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.fromPos);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))(v.fromPos);
             s.SerializeFieldName("to_pos");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.toPos);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))(v.toPos);
+            s.SerializeFieldName("from_t");
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorTime.Converter))(v.fromT);
+            s.SerializeFieldName("to_t");
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorTime.Converter))(v.toT);
+            s.SerializeFieldName("run_time");
+            ((Action<float>)s.SerializeF32)(v.runTime);
             s.SerializeFieldName("max_length");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.maxLength);
         }
@@ -54,19 +69,22 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             var fields = new Fields()
             {
-                node = new Field<string>(),
-                fromNode = new Field<string?>(null),
-                toNode = new Field<string?>(null),
-                fromPos = new Field<Mech3DotNet.Types.Vec3?>(null),
-                toPos = new Field<Mech3DotNet.Types.Vec3?>(null),
-                maxLength = new Field<float?>(null),
+                name = new Field<string>(),
+                fromNode = new Field<string?>(),
+                toNode = new Field<string?>(),
+                fromPos = new Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?>(),
+                toPos = new Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?>(),
+                fromT = new Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?>(),
+                toT = new Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?>(),
+                runTime = new Field<float>(),
+                maxLength = new Field<float?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "node":
-                        fields.node.Value = d.DeserializeString();
+                    case "name":
+                        fields.name.Value = d.DeserializeString();
                         break;
                     case "from_node":
                         fields.fromNode.Value = d.DeserializeRefOption(d.DeserializeString)();
@@ -75,10 +93,19 @@ namespace Mech3DotNet.Types.Anim.Events
                         fields.toNode.Value = d.DeserializeRefOption(d.DeserializeString)();
                         break;
                     case "from_pos":
-                        fields.fromPos.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
+                        fields.fromPos.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))();
                         break;
                     case "to_pos":
-                        fields.toPos.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
+                        fields.toPos.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))();
+                        break;
+                    case "from_t":
+                        fields.fromT.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorTime.Converter))();
+                        break;
+                    case "to_t":
+                        fields.toT.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorTime.Converter))();
+                        break;
+                    case "run_time":
+                        fields.runTime.Value = d.DeserializeF32();
                         break;
                     case "max_length":
                         fields.maxLength.Value = d.DeserializeValOption(d.DeserializeF32)();
@@ -89,7 +116,7 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ObjectConnector(
 
-                fields.node.Unwrap("ObjectConnector", "node"),
+                fields.name.Unwrap("ObjectConnector", "name"),
 
                 fields.fromNode.Unwrap("ObjectConnector", "fromNode"),
 
@@ -98,6 +125,12 @@ namespace Mech3DotNet.Types.Anim.Events
                 fields.fromPos.Unwrap("ObjectConnector", "fromPos"),
 
                 fields.toPos.Unwrap("ObjectConnector", "toPos"),
+
+                fields.fromT.Unwrap("ObjectConnector", "fromT"),
+
+                fields.toT.Unwrap("ObjectConnector", "toT"),
+
+                fields.runTime.Unwrap("ObjectConnector", "runTime"),
 
                 fields.maxLength.Unwrap("ObjectConnector", "maxLength")
 

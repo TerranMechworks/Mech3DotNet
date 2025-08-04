@@ -6,64 +6,82 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class CallObjectConnector
     {
         public static readonly TypeConverter<CallObjectConnector> Converter = new TypeConverter<CallObjectConnector>(Deserialize, Serialize);
-        public string node;
-        public string fromNode;
-        public string toNode;
-        public Mech3DotNet.Types.Vec3 toPos;
+        public string name;
+        public short? saveIndex;
+        public Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget? fromNode;
+        public Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget? toNode;
+        public Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? fromPos;
+        public Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? toPos;
 
-        public CallObjectConnector(string node, string fromNode, string toNode, Mech3DotNet.Types.Vec3 toPos)
+        public CallObjectConnector(string name, short? saveIndex, Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget? fromNode, Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget? toNode, Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? fromPos, Mech3DotNet.Types.Anim.Events.ObjectConnectorPos? toPos)
         {
-            this.node = node;
+            this.name = name;
+            this.saveIndex = saveIndex;
             this.fromNode = fromNode;
             this.toNode = toNode;
+            this.fromPos = fromPos;
             this.toPos = toPos;
         }
 
         private struct Fields
         {
-            public Field<string> node;
-            public Field<string> fromNode;
-            public Field<string> toNode;
-            public Field<Mech3DotNet.Types.Vec3> toPos;
+            public Field<string> name;
+            public Field<short?> saveIndex;
+            public Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?> fromNode;
+            public Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?> toNode;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> fromPos;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> toPos;
         }
 
         public static void Serialize(CallObjectConnector v, Serializer s)
         {
-            s.SerializeStruct(4);
-            s.SerializeFieldName("node");
-            ((Action<string>)s.SerializeString)(v.node);
+            s.SerializeStruct(6);
+            s.SerializeFieldName("name");
+            ((Action<string>)s.SerializeString)(v.name);
+            s.SerializeFieldName("save_index");
+            s.SerializeValOption(((Action<short>)s.SerializeI16))(v.saveIndex);
             s.SerializeFieldName("from_node");
-            ((Action<string>)s.SerializeString)(v.fromNode);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget.Converter))(v.fromNode);
             s.SerializeFieldName("to_node");
-            ((Action<string>)s.SerializeString)(v.toNode);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget.Converter))(v.toNode);
+            s.SerializeFieldName("from_pos");
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))(v.fromPos);
             s.SerializeFieldName("to_pos");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.toPos);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))(v.toPos);
         }
 
         public static CallObjectConnector Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                node = new Field<string>(),
-                fromNode = new Field<string>(),
-                toNode = new Field<string>(),
-                toPos = new Field<Mech3DotNet.Types.Vec3>(),
+                name = new Field<string>(),
+                saveIndex = new Field<short?>(),
+                fromNode = new Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?>(),
+                toNode = new Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?>(),
+                fromPos = new Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?>(),
+                toPos = new Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "node":
-                        fields.node.Value = d.DeserializeString();
+                    case "name":
+                        fields.name.Value = d.DeserializeString();
+                        break;
+                    case "save_index":
+                        fields.saveIndex.Value = d.DeserializeValOption(d.DeserializeI16)();
                         break;
                     case "from_node":
-                        fields.fromNode.Value = d.DeserializeString();
+                        fields.fromNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget.Converter))();
                         break;
                     case "to_node":
-                        fields.toNode.Value = d.DeserializeString();
+                        fields.toNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget.Converter))();
+                        break;
+                    case "from_pos":
+                        fields.fromPos.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))();
                         break;
                     case "to_pos":
-                        fields.toPos.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
+                        fields.toPos.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("CallObjectConnector", fieldName);
@@ -71,11 +89,15 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new CallObjectConnector(
 
-                fields.node.Unwrap("CallObjectConnector", "node"),
+                fields.name.Unwrap("CallObjectConnector", "name"),
+
+                fields.saveIndex.Unwrap("CallObjectConnector", "saveIndex"),
 
                 fields.fromNode.Unwrap("CallObjectConnector", "fromNode"),
 
                 fields.toNode.Unwrap("CallObjectConnector", "toNode"),
+
+                fields.fromPos.Unwrap("CallObjectConnector", "fromPos"),
 
                 fields.toPos.Unwrap("CallObjectConnector", "toPos")
 

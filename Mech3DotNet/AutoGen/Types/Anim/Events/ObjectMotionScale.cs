@@ -6,46 +6,46 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class ObjectMotionScale
     {
         public static readonly TypeConverter<ObjectMotionScale> Converter = new TypeConverter<ObjectMotionScale>(Deserialize, Serialize);
-        public Mech3DotNet.Types.Vec3 value;
-        public Mech3DotNet.Types.Vec3 unk;
+        public Mech3DotNet.Types.Common.Vec3 initial;
+        public Mech3DotNet.Types.Common.Vec3 delta;
 
-        public ObjectMotionScale(Mech3DotNet.Types.Vec3 value, Mech3DotNet.Types.Vec3 unk)
+        public ObjectMotionScale(Mech3DotNet.Types.Common.Vec3 initial, Mech3DotNet.Types.Common.Vec3 delta)
         {
-            this.value = value;
-            this.unk = unk;
+            this.initial = initial;
+            this.delta = delta;
         }
 
         private struct Fields
         {
-            public Field<Mech3DotNet.Types.Vec3> value;
-            public Field<Mech3DotNet.Types.Vec3> unk;
+            public Field<Mech3DotNet.Types.Common.Vec3> initial;
+            public Field<Mech3DotNet.Types.Common.Vec3> delta;
         }
 
         public static void Serialize(ObjectMotionScale v, Serializer s)
         {
             s.SerializeStruct(2);
-            s.SerializeFieldName("value");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.value);
-            s.SerializeFieldName("unk");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.unk);
+            s.SerializeFieldName("initial");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.initial);
+            s.SerializeFieldName("delta");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.delta);
         }
 
         public static ObjectMotionScale Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                value = new Field<Mech3DotNet.Types.Vec3>(),
-                unk = new Field<Mech3DotNet.Types.Vec3>(),
+                initial = new Field<Mech3DotNet.Types.Common.Vec3>(),
+                delta = new Field<Mech3DotNet.Types.Common.Vec3>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "value":
-                        fields.value.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
+                    case "initial":
+                        fields.initial.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
-                    case "unk":
-                        fields.unk.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
+                    case "delta":
+                        fields.delta.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
                     default:
                         throw new UnknownFieldException("ObjectMotionScale", fieldName);
@@ -53,9 +53,9 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ObjectMotionScale(
 
-                fields.value.Unwrap("ObjectMotionScale", "value"),
+                fields.initial.Unwrap("ObjectMotionScale", "initial"),
 
-                fields.unk.Unwrap("ObjectMotionScale", "unk")
+                fields.delta.Unwrap("ObjectMotionScale", "delta")
 
             );
         }

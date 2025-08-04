@@ -3,53 +3,58 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public struct Gravity
-    {
-        public Mech3DotNet.Types.Anim.Events.GravityMode mode;
-        public float value;
-
-        public Gravity(Mech3DotNet.Types.Anim.Events.GravityMode mode, float value)
-        {
-            this.mode = mode;
-            this.value = value;
-        }
-    }
-
-    public static class GravityConverter
+    public sealed class Gravity
     {
         public static readonly TypeConverter<Gravity> Converter = new TypeConverter<Gravity>(Deserialize, Serialize);
+        public float value;
+        public bool complex;
+        public bool noAltitude;
+
+        public Gravity(float value, bool complex, bool noAltitude)
+        {
+            this.value = value;
+            this.complex = complex;
+            this.noAltitude = noAltitude;
+        }
 
         private struct Fields
         {
-            public Field<Mech3DotNet.Types.Anim.Events.GravityMode> mode;
             public Field<float> value;
+            public Field<bool> complex;
+            public Field<bool> noAltitude;
         }
 
         public static void Serialize(Gravity v, Serializer s)
         {
-            s.SerializeStruct(2);
-            s.SerializeFieldName("mode");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.GravityModeConverter.Converter)(v.mode);
+            s.SerializeStruct(3);
             s.SerializeFieldName("value");
             ((Action<float>)s.SerializeF32)(v.value);
+            s.SerializeFieldName("complex");
+            ((Action<bool>)s.SerializeBool)(v.complex);
+            s.SerializeFieldName("no_altitude");
+            ((Action<bool>)s.SerializeBool)(v.noAltitude);
         }
 
         public static Gravity Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                mode = new Field<Mech3DotNet.Types.Anim.Events.GravityMode>(),
                 value = new Field<float>(),
+                complex = new Field<bool>(),
+                noAltitude = new Field<bool>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "mode":
-                        fields.mode.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.GravityModeConverter.Converter)();
-                        break;
                     case "value":
                         fields.value.Value = d.DeserializeF32();
+                        break;
+                    case "complex":
+                        fields.complex.Value = d.DeserializeBool();
+                        break;
+                    case "no_altitude":
+                        fields.noAltitude.Value = d.DeserializeBool();
                         break;
                     default:
                         throw new UnknownFieldException("Gravity", fieldName);
@@ -57,9 +62,11 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new Gravity(
 
-                fields.mode.Unwrap("Gravity", "mode"),
+                fields.value.Unwrap("Gravity", "value"),
 
-                fields.value.Unwrap("Gravity", "value")
+                fields.complex.Unwrap("Gravity", "complex"),
+
+                fields.noAltitude.Unwrap("Gravity", "noAltitude")
 
             );
         }

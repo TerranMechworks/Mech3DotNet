@@ -6,58 +6,78 @@ namespace Mech3DotNet.Types.Anim.Events
     public sealed class Loop
     {
         public static readonly TypeConverter<Loop> Converter = new TypeConverter<Loop>(Deserialize, Serialize);
-        public int start;
-        public int loopCount;
 
-        public Loop(int start, int loopCount)
+        public enum Variants
         {
-            this.start = start;
-            this.loopCount = loopCount;
+            Count,
+            RunTime,
         }
 
-        private struct Fields
+        private Loop(Variants variant, object value)
         {
-            public Field<int> start;
-            public Field<int> loopCount;
+            Variant = variant;
+            Value = value;
         }
+        public static Loop Count(short value) => new Loop(Variants.Count, value);
 
-        public static void Serialize(Loop v, Serializer s)
-        {
-            s.SerializeStruct(2);
-            s.SerializeFieldName("start");
-            ((Action<int>)s.SerializeI32)(v.start);
-            s.SerializeFieldName("loop_count");
-            ((Action<int>)s.SerializeI32)(v.loopCount);
-        }
+        public static Loop RunTime(float value) => new Loop(Variants.RunTime, value);
 
-        public static Loop Deserialize(Deserializer d)
+        public object Value { get; private set; }
+        public Variants Variant { get; private set; }
+        public bool IsCount() => Variant == Variants.Count;
+        public short AsCount() => (short)Value;
+        public bool IsRunTime() => Variant == Variants.RunTime;
+        public float AsRunTime() => (float)Value;
+
+        private static void Serialize(Loop v, Serializer s)
         {
-            var fields = new Fields()
+            switch (v.Variant)
             {
-                start = new Field<int>(),
-                loopCount = new Field<int>(),
-            };
-            foreach (var fieldName in d.DeserializeStruct())
-            {
-                switch (fieldName)
-                {
-                    case "start":
-                        fields.start.Value = d.DeserializeI32();
+                case Variants.Count: // 0
+                    {
+                        var inner = v.AsCount();
+                        s.SerializeNewTypeVariant(0);
+                        ((Action<short>)s.SerializeI16)(inner);
                         break;
-                    case "loop_count":
-                        fields.loopCount.Value = d.DeserializeI32();
+                    }
+
+                case Variants.RunTime: // 1
+                    {
+                        var inner = v.AsRunTime();
+                        s.SerializeNewTypeVariant(1);
+                        ((Action<float>)s.SerializeF32)(inner);
                         break;
-                    default:
-                        throw new UnknownFieldException("Loop", fieldName);
-                }
+                    }
+
+                default:
+                    throw new System.ArgumentOutOfRangeException();
             }
-            return new Loop(
+        }
 
-                fields.start.Unwrap("Loop", "start"),
+        private static Loop Deserialize(Deserializer d)
+        {
+            var (enumType, variantIndex) = d.DeserializeEnum();
+            switch (variantIndex)
+            {
+                case 0: // Count
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("Loop", 0, EnumType.NewType, enumType);
+                        var inner = d.DeserializeI16();
+                        return Loop.Count(inner);
+                    }
 
-                fields.loopCount.Unwrap("Loop", "loopCount")
+                case 1: // RunTime
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("Loop", 1, EnumType.NewType, enumType);
+                        var inner = d.DeserializeF32();
+                        return Loop.RunTime(inner);
+                    }
 
-            );
+                default:
+                    throw new UnknownVariantException("Loop", variantIndex);
+            }
         }
     }
 }

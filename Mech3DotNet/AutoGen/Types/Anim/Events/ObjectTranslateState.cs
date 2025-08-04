@@ -7,30 +7,35 @@ namespace Mech3DotNet.Types.Anim.Events
     {
         public static readonly TypeConverter<ObjectTranslateState> Converter = new TypeConverter<ObjectTranslateState>(Deserialize, Serialize);
         public string node;
-        public Mech3DotNet.Types.Vec3 translate;
-        public string? atNode = null;
+        public bool relative;
+        public Mech3DotNet.Types.Common.Vec3 state;
+        public string? atNode;
 
-        public ObjectTranslateState(string node, Mech3DotNet.Types.Vec3 translate, string? atNode)
+        public ObjectTranslateState(string node, bool relative, Mech3DotNet.Types.Common.Vec3 state, string? atNode)
         {
             this.node = node;
-            this.translate = translate;
+            this.relative = relative;
+            this.state = state;
             this.atNode = atNode;
         }
 
         private struct Fields
         {
             public Field<string> node;
-            public Field<Mech3DotNet.Types.Vec3> translate;
+            public Field<bool> relative;
+            public Field<Mech3DotNet.Types.Common.Vec3> state;
             public Field<string?> atNode;
         }
 
         public static void Serialize(ObjectTranslateState v, Serializer s)
         {
-            s.SerializeStruct(3);
+            s.SerializeStruct(4);
             s.SerializeFieldName("node");
             ((Action<string>)s.SerializeString)(v.node);
-            s.SerializeFieldName("translate");
-            s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter)(v.translate);
+            s.SerializeFieldName("relative");
+            ((Action<bool>)s.SerializeBool)(v.relative);
+            s.SerializeFieldName("state");
+            s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.state);
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.atNode);
         }
@@ -40,8 +45,9 @@ namespace Mech3DotNet.Types.Anim.Events
             var fields = new Fields()
             {
                 node = new Field<string>(),
-                translate = new Field<Mech3DotNet.Types.Vec3>(),
-                atNode = new Field<string?>(null),
+                relative = new Field<bool>(),
+                state = new Field<Mech3DotNet.Types.Common.Vec3>(),
+                atNode = new Field<string?>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -50,8 +56,11 @@ namespace Mech3DotNet.Types.Anim.Events
                     case "node":
                         fields.node.Value = d.DeserializeString();
                         break;
-                    case "translate":
-                        fields.translate.Value = d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter)();
+                    case "relative":
+                        fields.relative.Value = d.DeserializeBool();
+                        break;
+                    case "state":
+                        fields.state.Value = d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)();
                         break;
                     case "at_node":
                         fields.atNode.Value = d.DeserializeRefOption(d.DeserializeString)();
@@ -64,7 +73,9 @@ namespace Mech3DotNet.Types.Anim.Events
 
                 fields.node.Unwrap("ObjectTranslateState", "node"),
 
-                fields.translate.Unwrap("ObjectTranslateState", "translate"),
+                fields.relative.Unwrap("ObjectTranslateState", "relative"),
+
+                fields.state.Unwrap("ObjectTranslateState", "state"),
 
                 fields.atNode.Unwrap("ObjectTranslateState", "atNode")
 

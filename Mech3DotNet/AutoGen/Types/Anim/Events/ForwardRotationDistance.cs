@@ -3,44 +3,40 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public struct ForwardRotationDistance
-    {
-        public float v1;
-
-        public ForwardRotationDistance(float v1)
-        {
-            this.v1 = v1;
-        }
-    }
-
-    public static class ForwardRotationDistanceConverter
+    public sealed class ForwardRotationDistance
     {
         public static readonly TypeConverter<ForwardRotationDistance> Converter = new TypeConverter<ForwardRotationDistance>(Deserialize, Serialize);
+        public float initial;
+
+        public ForwardRotationDistance(float initial)
+        {
+            this.initial = initial;
+        }
 
         private struct Fields
         {
-            public Field<float> v1;
+            public Field<float> initial;
         }
 
         public static void Serialize(ForwardRotationDistance v, Serializer s)
         {
             s.SerializeStruct(1);
-            s.SerializeFieldName("v1");
-            ((Action<float>)s.SerializeF32)(v.v1);
+            s.SerializeFieldName("initial");
+            ((Action<float>)s.SerializeF32)(v.initial);
         }
 
         public static ForwardRotationDistance Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                v1 = new Field<float>(),
+                initial = new Field<float>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "v1":
-                        fields.v1.Value = d.DeserializeF32();
+                    case "initial":
+                        fields.initial.Value = d.DeserializeF32();
                         break;
                     default:
                         throw new UnknownFieldException("ForwardRotationDistance", fieldName);
@@ -48,7 +44,7 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ForwardRotationDistance(
 
-                fields.v1.Unwrap("ForwardRotationDistance", "v1")
+                fields.initial.Unwrap("ForwardRotationDistance", "initial")
 
             );
         }

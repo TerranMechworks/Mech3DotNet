@@ -35,7 +35,6 @@ namespace RoundtripTests
             tester.SoundWav();
             tester.SoundsWav();
             tester.Zmap();
-            tester.Planes();
 
             tester.PrintResults();
 

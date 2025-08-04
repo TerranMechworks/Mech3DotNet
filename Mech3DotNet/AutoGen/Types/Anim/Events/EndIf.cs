@@ -3,11 +3,11 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public sealed class EndIf
+    public sealed class Endif
     {
-        public static readonly TypeConverter<EndIf> Converter = new TypeConverter<EndIf>(Deserialize, Serialize);
+        public static readonly TypeConverter<Endif> Converter = new TypeConverter<Endif>(Deserialize, Serialize);
 
-        public EndIf()
+        public Endif()
         {
         }
 
@@ -15,12 +15,12 @@ namespace Mech3DotNet.Types.Anim.Events
         {
         }
 
-        public static void Serialize(EndIf v, Serializer s)
+        public static void Serialize(Endif v, Serializer s)
         {
             s.SerializeStruct(0);
         }
 
-        public static EndIf Deserialize(Deserializer d)
+        public static Endif Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
@@ -30,10 +30,10 @@ namespace Mech3DotNet.Types.Anim.Events
                 switch (fieldName)
                 {
                     default:
-                        throw new UnknownFieldException("EndIf", fieldName);
+                        throw new UnknownFieldException("Endif", fieldName);
                 }
             }
-            return new EndIf(
+            return new Endif(
 
             );
         }

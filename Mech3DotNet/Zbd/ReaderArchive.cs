@@ -14,29 +14,17 @@ namespace Mech3DotNet.Zbd
     /// </summary>
     public abstract class ReaderArchive : Archive<ReaderValue>
     {
+
         public ReaderArchive(
             Dictionary<string, ReaderValue> items,
-            List<ArchiveEntry> entries) : base(items, entries) { }
-
-        /// <summary>
-        /// Read reader data as JSON, discarding entry information.
-        ///
-        /// Without entry information, the data cannot be written again.
-        /// </summary>
-        public static Dictionary<string, byte[]> ReadAsJson(string path, GameType gameType)
+            List<ArchiveEntry> entries) : base(items, entries)
         {
-            var readers = new Dictionary<string, byte[]>();
-            var manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadReaderJson, (string name, byte[] data) =>
-            {
-                readers.Add(name, data);
-            });
-            return readers;
         }
 
         protected static Dictionary<string, ReaderValue> ReadRaw(string path, GameType gameType, out byte[] manifest_data)
         {
             var readers = new Dictionary<string, ReaderValue>();
-            manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadReaderRaw, (string name, byte[] data) =>
+            manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadReader, (string name, byte[] data) =>
             {
                 var stream = new MemoryStream(data);
                 var reader = new BinaryReader(stream);
@@ -59,7 +47,7 @@ namespace Mech3DotNet.Zbd
         protected void WriteRaw(string path, GameType gameType)
         {
             var manifest_data = SerializeManifest();
-            Helpers.WriteArchive(path, gameType, manifest_data, Interop.WriteReaderRaw, (string name) =>
+            Helpers.WriteArchive(path, gameType, manifest_data, Interop.WriteReader, (string name) =>
             {
                 var root = items[name];
                 var stream = new MemoryStream();

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mech3DotNet.Exchange;
 using Mech3DotNet.Types.Archive;
-using Mech3DotNet.Types.Gamez.Materials;
+using Mech3DotNet.Types.Gamez;
 
 namespace Mech3DotNet.Zbd
 {
@@ -11,14 +11,14 @@ namespace Mech3DotNet.Zbd
     ///
     /// See the specific archive implementations for reading and writing ZBDs.
     /// </summary>
-    public abstract class MechlibArchive<TModel> : Archive<TModel>
+    public abstract class MechlibArchive : Archive<MechlibModel>
     {
-        public List<Material> materials;
+        public List<MechlibMaterial> materials;
 
         public MechlibArchive(
-            Dictionary<string, TModel> items,
+            Dictionary<string, MechlibModel> items,
             List<ArchiveEntry> entries,
-            List<Material> materials) : base(items, entries)
+            List<MechlibMaterial> materials) : base(items, entries)
         {
             this.materials = materials ?? throw new System.ArgumentNullException(nameof(materials));
         }
@@ -27,16 +27,16 @@ namespace Mech3DotNet.Zbd
         protected static readonly byte[] VERSION_PM = BitConverter.GetBytes(41u);
         protected static readonly byte[] FORMAT = BitConverter.GetBytes(1u);
 
-        protected static readonly TypeConverter<List<Material>> MaterialsConverter = new TypeConverter<List<Material>>(DeserializeMaterials, SerializeMaterials);
+        protected static readonly TypeConverter<List<MechlibMaterial>> MaterialsConverter = new TypeConverter<List<MechlibMaterial>>(DeserializeMaterials, SerializeMaterials);
 
-        private static void SerializeMaterials(List<Material> v, Serializer s)
+        private static void SerializeMaterials(List<MechlibMaterial> v, Serializer s)
         {
-            s.SerializeVec(s.Serialize(Material.Converter))(v);
+            s.SerializeVec(s.Serialize(MechlibMaterial.Converter))(v);
         }
 
-        private static List<Material> DeserializeMaterials(Deserializer d)
+        private static List<MechlibMaterial> DeserializeMaterials(Deserializer d)
         {
-            return d.DeserializeVec(d.Deserialize(Material.Converter))();
+            return d.DeserializeVec(d.Deserialize(MechlibMaterial.Converter))();
         }
     }
 }

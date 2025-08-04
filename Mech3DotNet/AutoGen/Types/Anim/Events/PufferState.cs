@@ -7,31 +7,35 @@ namespace Mech3DotNet.Types.Anim.Events
     {
         public static readonly TypeConverter<PufferState> Converter = new TypeConverter<PufferState>(Deserialize, Serialize);
         public string name;
-        public bool state;
-        public bool translate;
-        public int? activeState = null;
-        public Mech3DotNet.Types.Anim.Events.AtNode? atNode = null;
-        public Mech3DotNet.Types.Vec3? localVelocity = null;
-        public Mech3DotNet.Types.Vec3? worldVelocity = null;
-        public Mech3DotNet.Types.Vec3? minRandomVelocity = null;
-        public Mech3DotNet.Types.Vec3? maxRandomVelocity = null;
-        public Mech3DotNet.Types.Vec3? worldAcceleration = null;
-        public Mech3DotNet.Types.Anim.Events.Interval interval;
-        public Mech3DotNet.Types.Range? sizeRange = null;
-        public Mech3DotNet.Types.Range? lifetimeRange = null;
-        public Mech3DotNet.Types.Range? startAgeRange = null;
-        public float? deviationDistance = null;
-        public Mech3DotNet.Types.Range? fadeRange = null;
-        public float? friction = null;
-        public Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures? textures = null;
-        public float? growthFactor = null;
+        public uint? activeState;
+        public Mech3DotNet.Types.Common.Vec3? translate;
+        public string? atNode;
+        public Mech3DotNet.Types.Common.Vec3? localVelocity;
+        public Mech3DotNet.Types.Common.Vec3? worldVelocity;
+        public Mech3DotNet.Types.Common.Vec3? minRandomVelocity;
+        public Mech3DotNet.Types.Common.Vec3? maxRandomVelocity;
+        public Mech3DotNet.Types.Common.Vec3? worldAcceleration;
+        public Mech3DotNet.Types.Anim.Events.PufferInterval? interval;
+        public Mech3DotNet.Types.Common.Range? sizeRange;
+        public Mech3DotNet.Types.Common.Range? lifetimeRange;
+        public Mech3DotNet.Types.Common.Range? startAgeRange;
+        public float? deviationDistance;
+        public Mech3DotNet.Types.Common.Range? unkRange;
+        public Mech3DotNet.Types.Common.Range? fadeRange;
+        public float? friction;
+        public float? windFactor;
+        public float? priority;
+        public uint? number;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateTexture>? textures;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateColor>? colors;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Common.Range>? growthFactors;
+        public Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage? intervalGarbage = null;
 
-        public PufferState(string name, bool state, bool translate, int? activeState, Mech3DotNet.Types.Anim.Events.AtNode? atNode, Mech3DotNet.Types.Vec3? localVelocity, Mech3DotNet.Types.Vec3? worldVelocity, Mech3DotNet.Types.Vec3? minRandomVelocity, Mech3DotNet.Types.Vec3? maxRandomVelocity, Mech3DotNet.Types.Vec3? worldAcceleration, Mech3DotNet.Types.Anim.Events.Interval interval, Mech3DotNet.Types.Range? sizeRange, Mech3DotNet.Types.Range? lifetimeRange, Mech3DotNet.Types.Range? startAgeRange, float? deviationDistance, Mech3DotNet.Types.Range? fadeRange, float? friction, Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures? textures, float? growthFactor)
+        public PufferState(string name, uint? activeState, Mech3DotNet.Types.Common.Vec3? translate, string? atNode, Mech3DotNet.Types.Common.Vec3? localVelocity, Mech3DotNet.Types.Common.Vec3? worldVelocity, Mech3DotNet.Types.Common.Vec3? minRandomVelocity, Mech3DotNet.Types.Common.Vec3? maxRandomVelocity, Mech3DotNet.Types.Common.Vec3? worldAcceleration, Mech3DotNet.Types.Anim.Events.PufferInterval? interval, Mech3DotNet.Types.Common.Range? sizeRange, Mech3DotNet.Types.Common.Range? lifetimeRange, Mech3DotNet.Types.Common.Range? startAgeRange, float? deviationDistance, Mech3DotNet.Types.Common.Range? unkRange, Mech3DotNet.Types.Common.Range? fadeRange, float? friction, float? windFactor, float? priority, uint? number, System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateTexture>? textures, System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateColor>? colors, System.Collections.Generic.List<Mech3DotNet.Types.Common.Range>? growthFactors, Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage? intervalGarbage)
         {
             this.name = name;
-            this.state = state;
-            this.translate = translate;
             this.activeState = activeState;
+            this.translate = translate;
             this.atNode = atNode;
             this.localVelocity = localVelocity;
             this.worldVelocity = worldVelocity;
@@ -43,76 +47,97 @@ namespace Mech3DotNet.Types.Anim.Events
             this.lifetimeRange = lifetimeRange;
             this.startAgeRange = startAgeRange;
             this.deviationDistance = deviationDistance;
+            this.unkRange = unkRange;
             this.fadeRange = fadeRange;
             this.friction = friction;
+            this.windFactor = windFactor;
+            this.priority = priority;
+            this.number = number;
             this.textures = textures;
-            this.growthFactor = growthFactor;
+            this.colors = colors;
+            this.growthFactors = growthFactors;
+            this.intervalGarbage = intervalGarbage;
         }
 
         private struct Fields
         {
             public Field<string> name;
-            public Field<bool> state;
-            public Field<bool> translate;
-            public Field<int?> activeState;
-            public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
-            public Field<Mech3DotNet.Types.Vec3?> localVelocity;
-            public Field<Mech3DotNet.Types.Vec3?> worldVelocity;
-            public Field<Mech3DotNet.Types.Vec3?> minRandomVelocity;
-            public Field<Mech3DotNet.Types.Vec3?> maxRandomVelocity;
-            public Field<Mech3DotNet.Types.Vec3?> worldAcceleration;
-            public Field<Mech3DotNet.Types.Anim.Events.Interval> interval;
-            public Field<Mech3DotNet.Types.Range?> sizeRange;
-            public Field<Mech3DotNet.Types.Range?> lifetimeRange;
-            public Field<Mech3DotNet.Types.Range?> startAgeRange;
+            public Field<uint?> activeState;
+            public Field<Mech3DotNet.Types.Common.Vec3?> translate;
+            public Field<string?> atNode;
+            public Field<Mech3DotNet.Types.Common.Vec3?> localVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> worldVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> minRandomVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> maxRandomVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> worldAcceleration;
+            public Field<Mech3DotNet.Types.Anim.Events.PufferInterval?> interval;
+            public Field<Mech3DotNet.Types.Common.Range?> sizeRange;
+            public Field<Mech3DotNet.Types.Common.Range?> lifetimeRange;
+            public Field<Mech3DotNet.Types.Common.Range?> startAgeRange;
             public Field<float?> deviationDistance;
-            public Field<Mech3DotNet.Types.Range?> fadeRange;
+            public Field<Mech3DotNet.Types.Common.Range?> unkRange;
+            public Field<Mech3DotNet.Types.Common.Range?> fadeRange;
             public Field<float?> friction;
-            public Field<Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures?> textures;
-            public Field<float?> growthFactor;
+            public Field<float?> windFactor;
+            public Field<float?> priority;
+            public Field<uint?> number;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateTexture>?> textures;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateColor>?> colors;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Range>?> growthFactors;
+            public Field<Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage?> intervalGarbage;
         }
 
         public static void Serialize(PufferState v, Serializer s)
         {
-            s.SerializeStruct(19);
+            s.SerializeStruct(24);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
-            s.SerializeFieldName("state");
-            ((Action<bool>)s.SerializeBool)(v.state);
-            s.SerializeFieldName("translate");
-            ((Action<bool>)s.SerializeBool)(v.translate);
             s.SerializeFieldName("active_state");
-            s.SerializeValOption(((Action<int>)s.SerializeI32))(v.activeState);
+            s.SerializeValOption(((Action<uint>)s.SerializeU32))(v.activeState);
+            s.SerializeFieldName("translate");
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.translate);
             s.SerializeFieldName("at_node");
-            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
+            s.SerializeRefOption(((Action<string>)s.SerializeString))(v.atNode);
             s.SerializeFieldName("local_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.localVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.localVelocity);
             s.SerializeFieldName("world_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.worldVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.worldVelocity);
             s.SerializeFieldName("min_random_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.minRandomVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.minRandomVelocity);
             s.SerializeFieldName("max_random_velocity");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.maxRandomVelocity);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.maxRandomVelocity);
             s.SerializeFieldName("world_acceleration");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Vec3Converter.Converter))(v.worldAcceleration);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.worldAcceleration);
             s.SerializeFieldName("interval");
-            s.Serialize(Mech3DotNet.Types.Anim.Events.Interval.Converter)(v.interval);
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.PufferInterval.Converter))(v.interval);
             s.SerializeFieldName("size_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.RangeConverter.Converter))(v.sizeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.sizeRange);
             s.SerializeFieldName("lifetime_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.RangeConverter.Converter))(v.lifetimeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.lifetimeRange);
             s.SerializeFieldName("start_age_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.RangeConverter.Converter))(v.startAgeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.startAgeRange);
             s.SerializeFieldName("deviation_distance");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.deviationDistance);
+            s.SerializeFieldName("unk_range");
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.unkRange);
             s.SerializeFieldName("fade_range");
-            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.RangeConverter.Converter))(v.fadeRange);
+            s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.fadeRange);
             s.SerializeFieldName("friction");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.friction);
+            s.SerializeFieldName("wind_factor");
+            s.SerializeValOption(((Action<float>)s.SerializeF32))(v.windFactor);
+            s.SerializeFieldName("priority");
+            s.SerializeValOption(((Action<float>)s.SerializeF32))(v.priority);
+            s.SerializeFieldName("number");
+            s.SerializeValOption(((Action<uint>)s.SerializeU32))(v.number);
             s.SerializeFieldName("textures");
-            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures.Converter))(v.textures);
-            s.SerializeFieldName("growth_factor");
-            s.SerializeValOption(((Action<float>)s.SerializeF32))(v.growthFactor);
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.PufferStateTexture.Converter)))(v.textures);
+            s.SerializeFieldName("colors");
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.PufferStateColor.Converter)))(v.colors);
+            s.SerializeFieldName("growth_factors");
+            s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter)))(v.growthFactors);
+            s.SerializeFieldName("interval_garbage");
+            s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage.Converter))(v.intervalGarbage);
         }
 
         public static PufferState Deserialize(Deserializer d)
@@ -120,24 +145,29 @@ namespace Mech3DotNet.Types.Anim.Events
             var fields = new Fields()
             {
                 name = new Field<string>(),
-                state = new Field<bool>(),
-                translate = new Field<bool>(),
-                activeState = new Field<int?>(null),
-                atNode = new Field<Mech3DotNet.Types.Anim.Events.AtNode?>(null),
-                localVelocity = new Field<Mech3DotNet.Types.Vec3?>(null),
-                worldVelocity = new Field<Mech3DotNet.Types.Vec3?>(null),
-                minRandomVelocity = new Field<Mech3DotNet.Types.Vec3?>(null),
-                maxRandomVelocity = new Field<Mech3DotNet.Types.Vec3?>(null),
-                worldAcceleration = new Field<Mech3DotNet.Types.Vec3?>(null),
-                interval = new Field<Mech3DotNet.Types.Anim.Events.Interval>(),
-                sizeRange = new Field<Mech3DotNet.Types.Range?>(null),
-                lifetimeRange = new Field<Mech3DotNet.Types.Range?>(null),
-                startAgeRange = new Field<Mech3DotNet.Types.Range?>(null),
-                deviationDistance = new Field<float?>(null),
-                fadeRange = new Field<Mech3DotNet.Types.Range?>(null),
-                friction = new Field<float?>(null),
-                textures = new Field<Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures?>(null),
-                growthFactor = new Field<float?>(null),
+                activeState = new Field<uint?>(),
+                translate = new Field<Mech3DotNet.Types.Common.Vec3?>(),
+                atNode = new Field<string?>(),
+                localVelocity = new Field<Mech3DotNet.Types.Common.Vec3?>(),
+                worldVelocity = new Field<Mech3DotNet.Types.Common.Vec3?>(),
+                minRandomVelocity = new Field<Mech3DotNet.Types.Common.Vec3?>(),
+                maxRandomVelocity = new Field<Mech3DotNet.Types.Common.Vec3?>(),
+                worldAcceleration = new Field<Mech3DotNet.Types.Common.Vec3?>(),
+                interval = new Field<Mech3DotNet.Types.Anim.Events.PufferInterval?>(),
+                sizeRange = new Field<Mech3DotNet.Types.Common.Range?>(),
+                lifetimeRange = new Field<Mech3DotNet.Types.Common.Range?>(),
+                startAgeRange = new Field<Mech3DotNet.Types.Common.Range?>(),
+                deviationDistance = new Field<float?>(),
+                unkRange = new Field<Mech3DotNet.Types.Common.Range?>(),
+                fadeRange = new Field<Mech3DotNet.Types.Common.Range?>(),
+                friction = new Field<float?>(),
+                windFactor = new Field<float?>(),
+                priority = new Field<float?>(),
+                number = new Field<uint?>(),
+                textures = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateTexture>?>(),
+                colors = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateColor>?>(),
+                growthFactors = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Range>?>(),
+                intervalGarbage = new Field<Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage?>(null),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -146,59 +176,74 @@ namespace Mech3DotNet.Types.Anim.Events
                     case "name":
                         fields.name.Value = d.DeserializeString();
                         break;
-                    case "state":
-                        fields.state.Value = d.DeserializeBool();
+                    case "active_state":
+                        fields.activeState.Value = d.DeserializeValOption(d.DeserializeU32)();
                         break;
                     case "translate":
-                        fields.translate.Value = d.DeserializeBool();
-                        break;
-                    case "active_state":
-                        fields.activeState.Value = d.DeserializeValOption(d.DeserializeI32)();
+                        fields.translate.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))();
                         break;
                     case "at_node":
-                        fields.atNode.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))();
+                        fields.atNode.Value = d.DeserializeRefOption(d.DeserializeString)();
                         break;
                     case "local_velocity":
-                        fields.localVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
+                        fields.localVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))();
                         break;
                     case "world_velocity":
-                        fields.worldVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
+                        fields.worldVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))();
                         break;
                     case "min_random_velocity":
-                        fields.minRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
+                        fields.minRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))();
                         break;
                     case "max_random_velocity":
-                        fields.maxRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
+                        fields.maxRandomVelocity.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))();
                         break;
                     case "world_acceleration":
-                        fields.worldAcceleration.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Vec3Converter.Converter))();
+                        fields.worldAcceleration.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))();
                         break;
                     case "interval":
-                        fields.interval.Value = d.Deserialize(Mech3DotNet.Types.Anim.Events.Interval.Converter)();
+                        fields.interval.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.PufferInterval.Converter))();
                         break;
                     case "size_range":
-                        fields.sizeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter))();
+                        fields.sizeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.RangeConverter.Converter))();
                         break;
                     case "lifetime_range":
-                        fields.lifetimeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter))();
+                        fields.lifetimeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.RangeConverter.Converter))();
                         break;
                     case "start_age_range":
-                        fields.startAgeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter))();
+                        fields.startAgeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.RangeConverter.Converter))();
                         break;
                     case "deviation_distance":
                         fields.deviationDistance.Value = d.DeserializeValOption(d.DeserializeF32)();
                         break;
+                    case "unk_range":
+                        fields.unkRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.RangeConverter.Converter))();
+                        break;
                     case "fade_range":
-                        fields.fadeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.RangeConverter.Converter))();
+                        fields.fadeRange.Value = d.DeserializeValOption(d.Deserialize(Mech3DotNet.Types.Common.RangeConverter.Converter))();
                         break;
                     case "friction":
                         fields.friction.Value = d.DeserializeValOption(d.DeserializeF32)();
                         break;
-                    case "textures":
-                        fields.textures.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.PufferStateCycleTextures.Converter))();
+                    case "wind_factor":
+                        fields.windFactor.Value = d.DeserializeValOption(d.DeserializeF32)();
                         break;
-                    case "growth_factor":
-                        fields.growthFactor.Value = d.DeserializeValOption(d.DeserializeF32)();
+                    case "priority":
+                        fields.priority.Value = d.DeserializeValOption(d.DeserializeF32)();
+                        break;
+                    case "number":
+                        fields.number.Value = d.DeserializeValOption(d.DeserializeU32)();
+                        break;
+                    case "textures":
+                        fields.textures.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.Events.PufferStateTexture.Converter)))();
+                        break;
+                    case "colors":
+                        fields.colors.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.Events.PufferStateColor.Converter)))();
+                        break;
+                    case "growth_factors":
+                        fields.growthFactors.Value = d.DeserializeRefOption(d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Common.RangeConverter.Converter)))();
+                        break;
+                    case "interval_garbage":
+                        fields.intervalGarbage.Value = d.DeserializeRefOption(d.Deserialize(Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("PufferState", fieldName);
@@ -208,11 +253,9 @@ namespace Mech3DotNet.Types.Anim.Events
 
                 fields.name.Unwrap("PufferState", "name"),
 
-                fields.state.Unwrap("PufferState", "state"),
+                fields.activeState.Unwrap("PufferState", "activeState"),
 
                 fields.translate.Unwrap("PufferState", "translate"),
-
-                fields.activeState.Unwrap("PufferState", "activeState"),
 
                 fields.atNode.Unwrap("PufferState", "atNode"),
 
@@ -236,13 +279,25 @@ namespace Mech3DotNet.Types.Anim.Events
 
                 fields.deviationDistance.Unwrap("PufferState", "deviationDistance"),
 
+                fields.unkRange.Unwrap("PufferState", "unkRange"),
+
                 fields.fadeRange.Unwrap("PufferState", "fadeRange"),
 
                 fields.friction.Unwrap("PufferState", "friction"),
 
+                fields.windFactor.Unwrap("PufferState", "windFactor"),
+
+                fields.priority.Unwrap("PufferState", "priority"),
+
+                fields.number.Unwrap("PufferState", "number"),
+
                 fields.textures.Unwrap("PufferState", "textures"),
 
-                fields.growthFactor.Unwrap("PufferState", "growthFactor")
+                fields.colors.Unwrap("PufferState", "colors"),
+
+                fields.growthFactors.Unwrap("PufferState", "growthFactors"),
+
+                fields.intervalGarbage.Unwrap("PufferState", "intervalGarbage")
 
             );
         }

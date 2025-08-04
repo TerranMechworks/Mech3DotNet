@@ -9,7 +9,7 @@ namespace Mech3DotNet.Unsafe
     internal class Interop
     {
         // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
-        private const string MECH3AX = @"mech3ax-v0.6.1";
+        private const string MECH3AX = "mech3ax-v0.7.0-rc2";
         private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
         private const UnmanagedType Usize = UnmanagedType.SysUInt;
 
@@ -121,32 +121,15 @@ namespace Mech3DotNet.Unsafe
             string filename,
             WaveFileCb callback);
 
-        [DllImport(MECH3AX, EntryPoint = "read_reader_json")]
-        public static extern int ReadReaderJson(
+        [DllImport(MECH3AX, EntryPoint = "read_reader")]
+        public static extern int ReadReader(
             [MarshalAs(PStr)]
             string filename,
             int gameTypeId,
             NameDataCb callback);
 
-        [DllImport(MECH3AX, EntryPoint = "write_reader_json")]
-        public static extern int WriteReaderJson(
-            [MarshalAs(PStr)]
-            string filename,
-            int gameTypeId,
-            IntPtr manifestPtr,
-            [MarshalAs(Usize)]
-            UIntPtr manifestLen,
-            NameBufferCb callback);
-
-        [DllImport(MECH3AX, EntryPoint = "read_reader_raw")]
-        public static extern int ReadReaderRaw(
-            [MarshalAs(PStr)]
-            string filename,
-            int gameTypeId,
-            NameDataCb callback);
-
-        [DllImport(MECH3AX, EntryPoint = "write_reader_raw")]
-        public static extern int WriteReaderRaw(
+        [DllImport(MECH3AX, EntryPoint = "write_reader")]
+        public static extern int WriteReader(
             [MarshalAs(PStr)]
             string filename,
             int gameTypeId,
@@ -189,16 +172,16 @@ namespace Mech3DotNet.Unsafe
             UIntPtr manifestLen,
             NameBufferCb callback);
 
-        [DllImport(MECH3AX, EntryPoint = "read_textures")]
-        public static extern int ReadTextures(
+        [DllImport(MECH3AX, EntryPoint = "read_images")]
+        public static extern int ReadImages(
             [MarshalAs(PStr)]
             string filename,
             // no difference between games, it's just for consistency
             int gameTypeId,
             NameDataCb callback);
 
-        [DllImport(MECH3AX, EntryPoint = "write_textures")]
-        public static extern int WriteTextures(
+        [DllImport(MECH3AX, EntryPoint = "write_images")]
+        public static extern int WriteImages(
             [MarshalAs(PStr)]
             string filename,
             // no difference between games, it's just for consistency

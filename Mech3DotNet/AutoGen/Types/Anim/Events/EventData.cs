@@ -11,6 +11,7 @@ namespace Mech3DotNet.Types.Anim.Events
         {
             Sound,
             SoundNode,
+            Effect,
             LightState,
             LightAnimation,
             ObjectActiveState,
@@ -19,13 +20,16 @@ namespace Mech3DotNet.Types.Anim.Events
             ObjectRotateState,
             ObjectMotion,
             ObjectMotionFromTo,
-            ObjectMotionSIScript,
+            ObjectMotionSiScript,
             ObjectOpacityState,
             ObjectOpacityFromTo,
             ObjectAddChild,
+            ObjectDeleteChild,
             ObjectCycleTexture,
             ObjectConnector,
             CallObjectConnector,
+            CameraState,
+            CameraFromTo,
             CallSequence,
             StopSequence,
             CallAnimation,
@@ -36,10 +40,12 @@ namespace Mech3DotNet.Types.Anim.Events
             Loop,
             If,
             Else,
-            Elif,
+            Elseif,
             Endif,
             Callback,
-            FrameBufferEffectColorFromTo,
+            FbfxColorFromTo,
+            FbfxCsinwaveFromTo,
+            AnimVerbose,
             DetonateWeapon,
             PufferState,
         }
@@ -52,6 +58,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public static EventData Sound(Mech3DotNet.Types.Anim.Events.Sound value) => new EventData(Variants.Sound, value);
 
         public static EventData SoundNode(Mech3DotNet.Types.Anim.Events.SoundNode value) => new EventData(Variants.SoundNode, value);
+
+        public static EventData Effect(Mech3DotNet.Types.Anim.Events.Effect value) => new EventData(Variants.Effect, value);
 
         public static EventData LightState(Mech3DotNet.Types.Anim.Events.LightState value) => new EventData(Variants.LightState, value);
 
@@ -69,7 +77,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static EventData ObjectMotionFromTo(Mech3DotNet.Types.Anim.Events.ObjectMotionFromTo value) => new EventData(Variants.ObjectMotionFromTo, value);
 
-        public static EventData ObjectMotionSIScript(Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript value) => new EventData(Variants.ObjectMotionSIScript, value);
+        public static EventData ObjectMotionSiScript(Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript value) => new EventData(Variants.ObjectMotionSiScript, value);
 
         public static EventData ObjectOpacityState(Mech3DotNet.Types.Anim.Events.ObjectOpacityState value) => new EventData(Variants.ObjectOpacityState, value);
 
@@ -77,11 +85,17 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static EventData ObjectAddChild(Mech3DotNet.Types.Anim.Events.ObjectAddChild value) => new EventData(Variants.ObjectAddChild, value);
 
+        public static EventData ObjectDeleteChild(Mech3DotNet.Types.Anim.Events.ObjectDeleteChild value) => new EventData(Variants.ObjectDeleteChild, value);
+
         public static EventData ObjectCycleTexture(Mech3DotNet.Types.Anim.Events.ObjectCycleTexture value) => new EventData(Variants.ObjectCycleTexture, value);
 
         public static EventData ObjectConnector(Mech3DotNet.Types.Anim.Events.ObjectConnector value) => new EventData(Variants.ObjectConnector, value);
 
         public static EventData CallObjectConnector(Mech3DotNet.Types.Anim.Events.CallObjectConnector value) => new EventData(Variants.CallObjectConnector, value);
+
+        public static EventData CameraState(Mech3DotNet.Types.Anim.Events.CameraState value) => new EventData(Variants.CameraState, value);
+
+        public static EventData CameraFromTo(Mech3DotNet.Types.Anim.Events.CameraFromTo value) => new EventData(Variants.CameraFromTo, value);
 
         public static EventData CallSequence(Mech3DotNet.Types.Anim.Events.CallSequence value) => new EventData(Variants.CallSequence, value);
 
@@ -103,13 +117,17 @@ namespace Mech3DotNet.Types.Anim.Events
 
         public static EventData Else(Mech3DotNet.Types.Anim.Events.Else value) => new EventData(Variants.Else, value);
 
-        public static EventData Elif(Mech3DotNet.Types.Anim.Events.ElseIf value) => new EventData(Variants.Elif, value);
+        public static EventData Elseif(Mech3DotNet.Types.Anim.Events.Elseif value) => new EventData(Variants.Elseif, value);
 
-        public static EventData Endif(Mech3DotNet.Types.Anim.Events.EndIf value) => new EventData(Variants.Endif, value);
+        public static EventData Endif(Mech3DotNet.Types.Anim.Events.Endif value) => new EventData(Variants.Endif, value);
 
         public static EventData Callback(Mech3DotNet.Types.Anim.Events.Callback value) => new EventData(Variants.Callback, value);
 
-        public static EventData FrameBufferEffectColorFromTo(Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor value) => new EventData(Variants.FrameBufferEffectColorFromTo, value);
+        public static EventData FbfxColorFromTo(Mech3DotNet.Types.Anim.Events.FbfxColorFromTo value) => new EventData(Variants.FbfxColorFromTo, value);
+
+        public static EventData FbfxCsinwaveFromTo(Mech3DotNet.Types.Anim.Events.FbfxCsinwaveFromTo value) => new EventData(Variants.FbfxCsinwaveFromTo, value);
+
+        public static EventData AnimVerbose(Mech3DotNet.Types.Anim.Events.AnimVerbose value) => new EventData(Variants.AnimVerbose, value);
 
         public static EventData DetonateWeapon(Mech3DotNet.Types.Anim.Events.DetonateWeapon value) => new EventData(Variants.DetonateWeapon, value);
 
@@ -121,6 +139,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public Mech3DotNet.Types.Anim.Events.Sound AsSound() => (Mech3DotNet.Types.Anim.Events.Sound)Value;
         public bool IsSoundNode() => Variant == Variants.SoundNode;
         public Mech3DotNet.Types.Anim.Events.SoundNode AsSoundNode() => (Mech3DotNet.Types.Anim.Events.SoundNode)Value;
+        public bool IsEffect() => Variant == Variants.Effect;
+        public Mech3DotNet.Types.Anim.Events.Effect AsEffect() => (Mech3DotNet.Types.Anim.Events.Effect)Value;
         public bool IsLightState() => Variant == Variants.LightState;
         public Mech3DotNet.Types.Anim.Events.LightState AsLightState() => (Mech3DotNet.Types.Anim.Events.LightState)Value;
         public bool IsLightAnimation() => Variant == Variants.LightAnimation;
@@ -137,20 +157,26 @@ namespace Mech3DotNet.Types.Anim.Events
         public Mech3DotNet.Types.Anim.Events.ObjectMotion AsObjectMotion() => (Mech3DotNet.Types.Anim.Events.ObjectMotion)Value;
         public bool IsObjectMotionFromTo() => Variant == Variants.ObjectMotionFromTo;
         public Mech3DotNet.Types.Anim.Events.ObjectMotionFromTo AsObjectMotionFromTo() => (Mech3DotNet.Types.Anim.Events.ObjectMotionFromTo)Value;
-        public bool IsObjectMotionSIScript() => Variant == Variants.ObjectMotionSIScript;
-        public Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript AsObjectMotionSIScript() => (Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript)Value;
+        public bool IsObjectMotionSiScript() => Variant == Variants.ObjectMotionSiScript;
+        public Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript AsObjectMotionSiScript() => (Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript)Value;
         public bool IsObjectOpacityState() => Variant == Variants.ObjectOpacityState;
         public Mech3DotNet.Types.Anim.Events.ObjectOpacityState AsObjectOpacityState() => (Mech3DotNet.Types.Anim.Events.ObjectOpacityState)Value;
         public bool IsObjectOpacityFromTo() => Variant == Variants.ObjectOpacityFromTo;
         public Mech3DotNet.Types.Anim.Events.ObjectOpacityFromTo AsObjectOpacityFromTo() => (Mech3DotNet.Types.Anim.Events.ObjectOpacityFromTo)Value;
         public bool IsObjectAddChild() => Variant == Variants.ObjectAddChild;
         public Mech3DotNet.Types.Anim.Events.ObjectAddChild AsObjectAddChild() => (Mech3DotNet.Types.Anim.Events.ObjectAddChild)Value;
+        public bool IsObjectDeleteChild() => Variant == Variants.ObjectDeleteChild;
+        public Mech3DotNet.Types.Anim.Events.ObjectDeleteChild AsObjectDeleteChild() => (Mech3DotNet.Types.Anim.Events.ObjectDeleteChild)Value;
         public bool IsObjectCycleTexture() => Variant == Variants.ObjectCycleTexture;
         public Mech3DotNet.Types.Anim.Events.ObjectCycleTexture AsObjectCycleTexture() => (Mech3DotNet.Types.Anim.Events.ObjectCycleTexture)Value;
         public bool IsObjectConnector() => Variant == Variants.ObjectConnector;
         public Mech3DotNet.Types.Anim.Events.ObjectConnector AsObjectConnector() => (Mech3DotNet.Types.Anim.Events.ObjectConnector)Value;
         public bool IsCallObjectConnector() => Variant == Variants.CallObjectConnector;
         public Mech3DotNet.Types.Anim.Events.CallObjectConnector AsCallObjectConnector() => (Mech3DotNet.Types.Anim.Events.CallObjectConnector)Value;
+        public bool IsCameraState() => Variant == Variants.CameraState;
+        public Mech3DotNet.Types.Anim.Events.CameraState AsCameraState() => (Mech3DotNet.Types.Anim.Events.CameraState)Value;
+        public bool IsCameraFromTo() => Variant == Variants.CameraFromTo;
+        public Mech3DotNet.Types.Anim.Events.CameraFromTo AsCameraFromTo() => (Mech3DotNet.Types.Anim.Events.CameraFromTo)Value;
         public bool IsCallSequence() => Variant == Variants.CallSequence;
         public Mech3DotNet.Types.Anim.Events.CallSequence AsCallSequence() => (Mech3DotNet.Types.Anim.Events.CallSequence)Value;
         public bool IsStopSequence() => Variant == Variants.StopSequence;
@@ -171,14 +197,18 @@ namespace Mech3DotNet.Types.Anim.Events
         public Mech3DotNet.Types.Anim.Events.If AsIf() => (Mech3DotNet.Types.Anim.Events.If)Value;
         public bool IsElse() => Variant == Variants.Else;
         public Mech3DotNet.Types.Anim.Events.Else AsElse() => (Mech3DotNet.Types.Anim.Events.Else)Value;
-        public bool IsElif() => Variant == Variants.Elif;
-        public Mech3DotNet.Types.Anim.Events.ElseIf AsElif() => (Mech3DotNet.Types.Anim.Events.ElseIf)Value;
+        public bool IsElseif() => Variant == Variants.Elseif;
+        public Mech3DotNet.Types.Anim.Events.Elseif AsElseif() => (Mech3DotNet.Types.Anim.Events.Elseif)Value;
         public bool IsEndif() => Variant == Variants.Endif;
-        public Mech3DotNet.Types.Anim.Events.EndIf AsEndif() => (Mech3DotNet.Types.Anim.Events.EndIf)Value;
+        public Mech3DotNet.Types.Anim.Events.Endif AsEndif() => (Mech3DotNet.Types.Anim.Events.Endif)Value;
         public bool IsCallback() => Variant == Variants.Callback;
         public Mech3DotNet.Types.Anim.Events.Callback AsCallback() => (Mech3DotNet.Types.Anim.Events.Callback)Value;
-        public bool IsFrameBufferEffectColorFromTo() => Variant == Variants.FrameBufferEffectColorFromTo;
-        public Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor AsFrameBufferEffectColorFromTo() => (Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor)Value;
+        public bool IsFbfxColorFromTo() => Variant == Variants.FbfxColorFromTo;
+        public Mech3DotNet.Types.Anim.Events.FbfxColorFromTo AsFbfxColorFromTo() => (Mech3DotNet.Types.Anim.Events.FbfxColorFromTo)Value;
+        public bool IsFbfxCsinwaveFromTo() => Variant == Variants.FbfxCsinwaveFromTo;
+        public Mech3DotNet.Types.Anim.Events.FbfxCsinwaveFromTo AsFbfxCsinwaveFromTo() => (Mech3DotNet.Types.Anim.Events.FbfxCsinwaveFromTo)Value;
+        public bool IsAnimVerbose() => Variant == Variants.AnimVerbose;
+        public Mech3DotNet.Types.Anim.Events.AnimVerbose AsAnimVerbose() => (Mech3DotNet.Types.Anim.Events.AnimVerbose)Value;
         public bool IsDetonateWeapon() => Variant == Variants.DetonateWeapon;
         public Mech3DotNet.Types.Anim.Events.DetonateWeapon AsDetonateWeapon() => (Mech3DotNet.Types.Anim.Events.DetonateWeapon)Value;
         public bool IsPufferState() => Variant == Variants.PufferState;
@@ -204,250 +234,298 @@ namespace Mech3DotNet.Types.Anim.Events
                         break;
                     }
 
-                case Variants.LightState: // 2
+                case Variants.Effect: // 2
+                    {
+                        var inner = v.AsEffect();
+                        s.SerializeNewTypeVariant(2);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.Effect.Converter)(inner);
+                        break;
+                    }
+
+                case Variants.LightState: // 3
                     {
                         var inner = v.AsLightState();
-                        s.SerializeNewTypeVariant(2);
+                        s.SerializeNewTypeVariant(3);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.LightState.Converter)(inner);
                         break;
                     }
 
-                case Variants.LightAnimation: // 3
+                case Variants.LightAnimation: // 4
                     {
                         var inner = v.AsLightAnimation();
-                        s.SerializeNewTypeVariant(3);
+                        s.SerializeNewTypeVariant(4);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.LightAnimation.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectActiveState: // 4
+                case Variants.ObjectActiveState: // 5
                     {
                         var inner = v.AsObjectActiveState();
-                        s.SerializeNewTypeVariant(4);
+                        s.SerializeNewTypeVariant(5);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectActiveState.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectTranslateState: // 5
+                case Variants.ObjectTranslateState: // 6
                     {
                         var inner = v.AsObjectTranslateState();
-                        s.SerializeNewTypeVariant(5);
+                        s.SerializeNewTypeVariant(6);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectTranslateState.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectScaleState: // 6
+                case Variants.ObjectScaleState: // 7
                     {
                         var inner = v.AsObjectScaleState();
-                        s.SerializeNewTypeVariant(6);
+                        s.SerializeNewTypeVariant(7);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectScaleState.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectRotateState: // 7
+                case Variants.ObjectRotateState: // 8
                     {
                         var inner = v.AsObjectRotateState();
-                        s.SerializeNewTypeVariant(7);
+                        s.SerializeNewTypeVariant(8);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectRotateState.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectMotion: // 8
+                case Variants.ObjectMotion: // 9
                     {
                         var inner = v.AsObjectMotion();
-                        s.SerializeNewTypeVariant(8);
+                        s.SerializeNewTypeVariant(9);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotion.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectMotionFromTo: // 9
+                case Variants.ObjectMotionFromTo: // 10
                     {
                         var inner = v.AsObjectMotionFromTo();
-                        s.SerializeNewTypeVariant(9);
+                        s.SerializeNewTypeVariant(10);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionFromTo.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectMotionSIScript: // 10
+                case Variants.ObjectMotionSiScript: // 11
                     {
-                        var inner = v.AsObjectMotionSIScript();
-                        s.SerializeNewTypeVariant(10);
+                        var inner = v.AsObjectMotionSiScript();
+                        s.SerializeNewTypeVariant(11);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectOpacityState: // 11
+                case Variants.ObjectOpacityState: // 12
                     {
                         var inner = v.AsObjectOpacityState();
-                        s.SerializeNewTypeVariant(11);
+                        s.SerializeNewTypeVariant(12);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityState.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectOpacityFromTo: // 12
+                case Variants.ObjectOpacityFromTo: // 13
                     {
                         var inner = v.AsObjectOpacityFromTo();
-                        s.SerializeNewTypeVariant(12);
+                        s.SerializeNewTypeVariant(13);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityFromTo.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectAddChild: // 13
+                case Variants.ObjectAddChild: // 14
                     {
                         var inner = v.AsObjectAddChild();
-                        s.SerializeNewTypeVariant(13);
+                        s.SerializeNewTypeVariant(14);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectAddChild.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectCycleTexture: // 14
+                case Variants.ObjectDeleteChild: // 15
+                    {
+                        var inner = v.AsObjectDeleteChild();
+                        s.SerializeNewTypeVariant(15);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectDeleteChild.Converter)(inner);
+                        break;
+                    }
+
+                case Variants.ObjectCycleTexture: // 16
                     {
                         var inner = v.AsObjectCycleTexture();
-                        s.SerializeNewTypeVariant(14);
+                        s.SerializeNewTypeVariant(16);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectCycleTexture.Converter)(inner);
                         break;
                     }
 
-                case Variants.ObjectConnector: // 15
+                case Variants.ObjectConnector: // 17
                     {
                         var inner = v.AsObjectConnector();
-                        s.SerializeNewTypeVariant(15);
+                        s.SerializeNewTypeVariant(17);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnector.Converter)(inner);
                         break;
                     }
 
-                case Variants.CallObjectConnector: // 16
+                case Variants.CallObjectConnector: // 18
                     {
                         var inner = v.AsCallObjectConnector();
-                        s.SerializeNewTypeVariant(16);
+                        s.SerializeNewTypeVariant(18);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallObjectConnector.Converter)(inner);
                         break;
                     }
 
-                case Variants.CallSequence: // 17
+                case Variants.CameraState: // 19
+                    {
+                        var inner = v.AsCameraState();
+                        s.SerializeNewTypeVariant(19);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.CameraState.Converter)(inner);
+                        break;
+                    }
+
+                case Variants.CameraFromTo: // 20
+                    {
+                        var inner = v.AsCameraFromTo();
+                        s.SerializeNewTypeVariant(20);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.CameraFromTo.Converter)(inner);
+                        break;
+                    }
+
+                case Variants.CallSequence: // 21
                     {
                         var inner = v.AsCallSequence();
-                        s.SerializeNewTypeVariant(17);
+                        s.SerializeNewTypeVariant(21);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallSequence.Converter)(inner);
                         break;
                     }
 
-                case Variants.StopSequence: // 18
+                case Variants.StopSequence: // 22
                     {
                         var inner = v.AsStopSequence();
-                        s.SerializeNewTypeVariant(18);
+                        s.SerializeNewTypeVariant(22);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.StopSequence.Converter)(inner);
                         break;
                     }
 
-                case Variants.CallAnimation: // 19
+                case Variants.CallAnimation: // 23
                     {
                         var inner = v.AsCallAnimation();
-                        s.SerializeNewTypeVariant(19);
+                        s.SerializeNewTypeVariant(23);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimation.Converter)(inner);
                         break;
                     }
 
-                case Variants.StopAnimation: // 20
+                case Variants.StopAnimation: // 24
                     {
                         var inner = v.AsStopAnimation();
-                        s.SerializeNewTypeVariant(20);
+                        s.SerializeNewTypeVariant(24);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.StopAnimation.Converter)(inner);
                         break;
                     }
 
-                case Variants.ResetAnimation: // 21
+                case Variants.ResetAnimation: // 25
                     {
                         var inner = v.AsResetAnimation();
-                        s.SerializeNewTypeVariant(21);
+                        s.SerializeNewTypeVariant(25);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.ResetAnimation.Converter)(inner);
                         break;
                     }
 
-                case Variants.InvalidateAnimation: // 22
+                case Variants.InvalidateAnimation: // 26
                     {
                         var inner = v.AsInvalidateAnimation();
-                        s.SerializeNewTypeVariant(22);
+                        s.SerializeNewTypeVariant(26);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.InvalidateAnimation.Converter)(inner);
                         break;
                     }
 
-                case Variants.FogState: // 23
+                case Variants.FogState: // 27
                     {
                         var inner = v.AsFogState();
-                        s.SerializeNewTypeVariant(23);
+                        s.SerializeNewTypeVariant(27);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.FogState.Converter)(inner);
                         break;
                     }
 
-                case Variants.Loop: // 24
+                case Variants.Loop: // 28
                     {
                         var inner = v.AsLoop();
-                        s.SerializeNewTypeVariant(24);
+                        s.SerializeNewTypeVariant(28);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.Loop.Converter)(inner);
                         break;
                     }
 
-                case Variants.If: // 25
+                case Variants.If: // 29
                     {
                         var inner = v.AsIf();
-                        s.SerializeNewTypeVariant(25);
+                        s.SerializeNewTypeVariant(29);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.If.Converter)(inner);
                         break;
                     }
 
-                case Variants.Else: // 26
+                case Variants.Else: // 30
                     {
                         var inner = v.AsElse();
-                        s.SerializeNewTypeVariant(26);
+                        s.SerializeNewTypeVariant(30);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.Else.Converter)(inner);
                         break;
                     }
 
-                case Variants.Elif: // 27
+                case Variants.Elseif: // 31
                     {
-                        var inner = v.AsElif();
-                        s.SerializeNewTypeVariant(27);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.ElseIf.Converter)(inner);
+                        var inner = v.AsElseif();
+                        s.SerializeNewTypeVariant(31);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.Elseif.Converter)(inner);
                         break;
                     }
 
-                case Variants.Endif: // 28
+                case Variants.Endif: // 32
                     {
                         var inner = v.AsEndif();
-                        s.SerializeNewTypeVariant(28);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.EndIf.Converter)(inner);
+                        s.SerializeNewTypeVariant(32);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.Endif.Converter)(inner);
                         break;
                     }
 
-                case Variants.Callback: // 29
+                case Variants.Callback: // 33
                     {
                         var inner = v.AsCallback();
-                        s.SerializeNewTypeVariant(29);
+                        s.SerializeNewTypeVariant(33);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.Callback.Converter)(inner);
                         break;
                     }
 
-                case Variants.FrameBufferEffectColorFromTo: // 30
+                case Variants.FbfxColorFromTo: // 34
                     {
-                        var inner = v.AsFrameBufferEffectColorFromTo();
-                        s.SerializeNewTypeVariant(30);
-                        s.Serialize(Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor.Converter)(inner);
+                        var inner = v.AsFbfxColorFromTo();
+                        s.SerializeNewTypeVariant(34);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.FbfxColorFromTo.Converter)(inner);
                         break;
                     }
 
-                case Variants.DetonateWeapon: // 31
+                case Variants.FbfxCsinwaveFromTo: // 35
+                    {
+                        var inner = v.AsFbfxCsinwaveFromTo();
+                        s.SerializeNewTypeVariant(35);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.FbfxCsinwaveFromTo.Converter)(inner);
+                        break;
+                    }
+
+                case Variants.AnimVerbose: // 36
+                    {
+                        var inner = v.AsAnimVerbose();
+                        s.SerializeNewTypeVariant(36);
+                        s.Serialize(Mech3DotNet.Types.Anim.Events.AnimVerbose.Converter)(inner);
+                        break;
+                    }
+
+                case Variants.DetonateWeapon: // 37
                     {
                         var inner = v.AsDetonateWeapon();
-                        s.SerializeNewTypeVariant(31);
+                        s.SerializeNewTypeVariant(37);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.DetonateWeapon.Converter)(inner);
                         break;
                     }
 
-                case Variants.PufferState: // 32
+                case Variants.PufferState: // 38
                     {
                         var inner = v.AsPufferState();
-                        s.SerializeNewTypeVariant(32);
+                        s.SerializeNewTypeVariant(38);
                         s.Serialize(Mech3DotNet.Types.Anim.Events.PufferState.Converter)(inner);
                         break;
                     }
@@ -478,250 +556,298 @@ namespace Mech3DotNet.Types.Anim.Events
                         return EventData.SoundNode(inner);
                     }
 
-                case 2: // LightState
+                case 2: // Effect
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("EventData", 2, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.Effect.Converter)();
+                        return EventData.Effect(inner);
+                    }
+
+                case 3: // LightState
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("EventData", 3, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.LightState.Converter)();
                         return EventData.LightState(inner);
                     }
 
-                case 3: // LightAnimation
+                case 4: // LightAnimation
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 3, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 4, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.LightAnimation.Converter)();
                         return EventData.LightAnimation(inner);
                     }
 
-                case 4: // ObjectActiveState
+                case 5: // ObjectActiveState
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 4, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 5, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectActiveState.Converter)();
                         return EventData.ObjectActiveState(inner);
                     }
 
-                case 5: // ObjectTranslateState
+                case 6: // ObjectTranslateState
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 5, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 6, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectTranslateState.Converter)();
                         return EventData.ObjectTranslateState(inner);
                     }
 
-                case 6: // ObjectScaleState
+                case 7: // ObjectScaleState
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 6, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 7, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectScaleState.Converter)();
                         return EventData.ObjectScaleState(inner);
                     }
 
-                case 7: // ObjectRotateState
+                case 8: // ObjectRotateState
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 7, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 8, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectRotateState.Converter)();
                         return EventData.ObjectRotateState(inner);
                     }
 
-                case 8: // ObjectMotion
+                case 9: // ObjectMotion
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 8, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 9, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotion.Converter)();
                         return EventData.ObjectMotion(inner);
                     }
 
-                case 9: // ObjectMotionFromTo
+                case 10: // ObjectMotionFromTo
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 9, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 10, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionFromTo.Converter)();
                         return EventData.ObjectMotionFromTo(inner);
                     }
 
-                case 10: // ObjectMotionSIScript
-                    {
-                        if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 10, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript.Converter)();
-                        return EventData.ObjectMotionSIScript(inner);
-                    }
-
-                case 11: // ObjectOpacityState
+                case 11: // ObjectMotionSiScript
                     {
                         if (enumType != EnumType.NewType)
                             throw new InvalidVariantException("EventData", 11, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectMotionSiScript.Converter)();
+                        return EventData.ObjectMotionSiScript(inner);
+                    }
+
+                case 12: // ObjectOpacityState
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("EventData", 12, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityState.Converter)();
                         return EventData.ObjectOpacityState(inner);
                     }
 
-                case 12: // ObjectOpacityFromTo
+                case 13: // ObjectOpacityFromTo
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 12, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 13, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectOpacityFromTo.Converter)();
                         return EventData.ObjectOpacityFromTo(inner);
                     }
 
-                case 13: // ObjectAddChild
+                case 14: // ObjectAddChild
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 13, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 14, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectAddChild.Converter)();
                         return EventData.ObjectAddChild(inner);
                     }
 
-                case 14: // ObjectCycleTexture
+                case 15: // ObjectDeleteChild
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 14, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 15, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectDeleteChild.Converter)();
+                        return EventData.ObjectDeleteChild(inner);
+                    }
+
+                case 16: // ObjectCycleTexture
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("EventData", 16, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectCycleTexture.Converter)();
                         return EventData.ObjectCycleTexture(inner);
                     }
 
-                case 15: // ObjectConnector
+                case 17: // ObjectConnector
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 15, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 17, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ObjectConnector.Converter)();
                         return EventData.ObjectConnector(inner);
                     }
 
-                case 16: // CallObjectConnector
+                case 18: // CallObjectConnector
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 16, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 18, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.CallObjectConnector.Converter)();
                         return EventData.CallObjectConnector(inner);
                     }
 
-                case 17: // CallSequence
+                case 19: // CameraState
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 17, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 19, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.CameraState.Converter)();
+                        return EventData.CameraState(inner);
+                    }
+
+                case 20: // CameraFromTo
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("EventData", 20, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.CameraFromTo.Converter)();
+                        return EventData.CameraFromTo(inner);
+                    }
+
+                case 21: // CallSequence
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("EventData", 21, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.CallSequence.Converter)();
                         return EventData.CallSequence(inner);
                     }
 
-                case 18: // StopSequence
+                case 22: // StopSequence
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 18, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 22, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.StopSequence.Converter)();
                         return EventData.StopSequence(inner);
                     }
 
-                case 19: // CallAnimation
+                case 23: // CallAnimation
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 19, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 23, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.CallAnimation.Converter)();
                         return EventData.CallAnimation(inner);
                     }
 
-                case 20: // StopAnimation
+                case 24: // StopAnimation
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 20, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 24, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.StopAnimation.Converter)();
                         return EventData.StopAnimation(inner);
                     }
 
-                case 21: // ResetAnimation
+                case 25: // ResetAnimation
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 21, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 25, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ResetAnimation.Converter)();
                         return EventData.ResetAnimation(inner);
                     }
 
-                case 22: // InvalidateAnimation
+                case 26: // InvalidateAnimation
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 22, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 26, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.InvalidateAnimation.Converter)();
                         return EventData.InvalidateAnimation(inner);
                     }
 
-                case 23: // FogState
+                case 27: // FogState
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 23, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 27, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.FogState.Converter)();
                         return EventData.FogState(inner);
                     }
 
-                case 24: // Loop
+                case 28: // Loop
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 24, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 28, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.Loop.Converter)();
                         return EventData.Loop(inner);
                     }
 
-                case 25: // If
+                case 29: // If
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 25, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 29, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.If.Converter)();
                         return EventData.If(inner);
                     }
 
-                case 26: // Else
+                case 30: // Else
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 26, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 30, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.Else.Converter)();
                         return EventData.Else(inner);
                     }
 
-                case 27: // Elif
+                case 31: // Elseif
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 27, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.ElseIf.Converter)();
-                        return EventData.Elif(inner);
+                            throw new InvalidVariantException("EventData", 31, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.Elseif.Converter)();
+                        return EventData.Elseif(inner);
                     }
 
-                case 28: // Endif
+                case 32: // Endif
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 28, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.EndIf.Converter)();
+                            throw new InvalidVariantException("EventData", 32, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.Endif.Converter)();
                         return EventData.Endif(inner);
                     }
 
-                case 29: // Callback
+                case 33: // Callback
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 29, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 33, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.Callback.Converter)();
                         return EventData.Callback(inner);
                     }
 
-                case 30: // FrameBufferEffectColorFromTo
+                case 34: // FbfxColorFromTo
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 30, EnumType.NewType, enumType);
-                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.FrameBufferEffectColor.Converter)();
-                        return EventData.FrameBufferEffectColorFromTo(inner);
+                            throw new InvalidVariantException("EventData", 34, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.FbfxColorFromTo.Converter)();
+                        return EventData.FbfxColorFromTo(inner);
                     }
 
-                case 31: // DetonateWeapon
+                case 35: // FbfxCsinwaveFromTo
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 31, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 35, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.FbfxCsinwaveFromTo.Converter)();
+                        return EventData.FbfxCsinwaveFromTo(inner);
+                    }
+
+                case 36: // AnimVerbose
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("EventData", 36, EnumType.NewType, enumType);
+                        var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.AnimVerbose.Converter)();
+                        return EventData.AnimVerbose(inner);
+                    }
+
+                case 37: // DetonateWeapon
+                    {
+                        if (enumType != EnumType.NewType)
+                            throw new InvalidVariantException("EventData", 37, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.DetonateWeapon.Converter)();
                         return EventData.DetonateWeapon(inner);
                     }
 
-                case 32: // PufferState
+                case 38: // PufferState
                     {
                         if (enumType != EnumType.NewType)
-                            throw new InvalidVariantException("EventData", 32, EnumType.NewType, enumType);
+                            throw new InvalidVariantException("EventData", 38, EnumType.NewType, enumType);
                         var inner = d.Deserialize(Mech3DotNet.Types.Anim.Events.PufferState.Converter)();
                         return EventData.PufferState(inner);
                     }

@@ -6,64 +6,82 @@ namespace Mech3DotNet.Types.Anim
     public sealed class AnimMetadata
     {
         public static readonly TypeConverter<AnimMetadata> Converter = new TypeConverter<AnimMetadata>(Deserialize, Serialize);
-        public uint basePtr;
-        public uint worldPtr;
-        public System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimName> animNames;
-        public System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimPtr> animPtrs;
+        public Mech3DotNet.Types.Anim.AnimMission mission;
+        public float gravity;
+        public System.DateTime? datetime = null;
+        public System.Collections.Generic.List<string> animDefNames;
+        public System.Collections.Generic.List<string> scriptNames;
+        public System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.AnimDefFile> animList;
 
-        public AnimMetadata(uint basePtr, uint worldPtr, System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimName> animNames, System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimPtr> animPtrs)
+        public AnimMetadata(Mech3DotNet.Types.Anim.AnimMission mission, float gravity, System.DateTime? datetime, System.Collections.Generic.List<string> animDefNames, System.Collections.Generic.List<string> scriptNames, System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.AnimDefFile> animList)
         {
-            this.basePtr = basePtr;
-            this.worldPtr = worldPtr;
-            this.animNames = animNames;
-            this.animPtrs = animPtrs;
+            this.mission = mission;
+            this.gravity = gravity;
+            this.datetime = datetime;
+            this.animDefNames = animDefNames;
+            this.scriptNames = scriptNames;
+            this.animList = animList;
         }
 
         private struct Fields
         {
-            public Field<uint> basePtr;
-            public Field<uint> worldPtr;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimName>> animNames;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimPtr>> animPtrs;
+            public Field<Mech3DotNet.Types.Anim.AnimMission> mission;
+            public Field<float> gravity;
+            public Field<System.DateTime?> datetime;
+            public Field<System.Collections.Generic.List<string>> animDefNames;
+            public Field<System.Collections.Generic.List<string>> scriptNames;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.AnimDefFile>> animList;
         }
 
         public static void Serialize(AnimMetadata v, Serializer s)
         {
-            s.SerializeStruct(4);
-            s.SerializeFieldName("base_ptr");
-            ((Action<uint>)s.SerializeU32)(v.basePtr);
-            s.SerializeFieldName("world_ptr");
-            ((Action<uint>)s.SerializeU32)(v.worldPtr);
-            s.SerializeFieldName("anim_names");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.AnimName.Converter))(v.animNames);
-            s.SerializeFieldName("anim_ptrs");
-            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.AnimPtr.Converter))(v.animPtrs);
+            s.SerializeStruct(6);
+            s.SerializeFieldName("mission");
+            s.Serialize(Mech3DotNet.Types.Anim.AnimMissionConverter.Converter)(v.mission);
+            s.SerializeFieldName("gravity");
+            ((Action<float>)s.SerializeF32)(v.gravity);
+            s.SerializeFieldName("datetime");
+            s.SerializeValOption(((Action<DateTime>)s.SerializeDateTime))(v.datetime);
+            s.SerializeFieldName("anim_def_names");
+            s.SerializeVec(((Action<string>)s.SerializeString))(v.animDefNames);
+            s.SerializeFieldName("script_names");
+            s.SerializeVec(((Action<string>)s.SerializeString))(v.scriptNames);
+            s.SerializeFieldName("anim_list");
+            s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.AnimDef.AnimDefFile.Converter))(v.animList);
         }
 
         public static AnimMetadata Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                basePtr = new Field<uint>(),
-                worldPtr = new Field<uint>(),
-                animNames = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimName>>(),
-                animPtrs = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimPtr>>(),
+                mission = new Field<Mech3DotNet.Types.Anim.AnimMission>(),
+                gravity = new Field<float>(),
+                datetime = new Field<System.DateTime?>(null),
+                animDefNames = new Field<System.Collections.Generic.List<string>>(),
+                scriptNames = new Field<System.Collections.Generic.List<string>>(),
+                animList = new Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.AnimDefFile>>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "base_ptr":
-                        fields.basePtr.Value = d.DeserializeU32();
+                    case "mission":
+                        fields.mission.Value = d.Deserialize(Mech3DotNet.Types.Anim.AnimMissionConverter.Converter)();
                         break;
-                    case "world_ptr":
-                        fields.worldPtr.Value = d.DeserializeU32();
+                    case "gravity":
+                        fields.gravity.Value = d.DeserializeF32();
                         break;
-                    case "anim_names":
-                        fields.animNames.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.AnimName.Converter))();
+                    case "datetime":
+                        fields.datetime.Value = d.DeserializeValOption(d.DeserializeDateTime)();
                         break;
-                    case "anim_ptrs":
-                        fields.animPtrs.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.AnimPtr.Converter))();
+                    case "anim_def_names":
+                        fields.animDefNames.Value = d.DeserializeVec(d.DeserializeString)();
+                        break;
+                    case "script_names":
+                        fields.scriptNames.Value = d.DeserializeVec(d.DeserializeString)();
+                        break;
+                    case "anim_list":
+                        fields.animList.Value = d.DeserializeVec(d.Deserialize(Mech3DotNet.Types.Anim.AnimDef.AnimDefFile.Converter))();
                         break;
                     default:
                         throw new UnknownFieldException("AnimMetadata", fieldName);
@@ -71,13 +89,17 @@ namespace Mech3DotNet.Types.Anim
             }
             return new AnimMetadata(
 
-                fields.basePtr.Unwrap("AnimMetadata", "basePtr"),
+                fields.mission.Unwrap("AnimMetadata", "mission"),
 
-                fields.worldPtr.Unwrap("AnimMetadata", "worldPtr"),
+                fields.gravity.Unwrap("AnimMetadata", "gravity"),
 
-                fields.animNames.Unwrap("AnimMetadata", "animNames"),
+                fields.datetime.Unwrap("AnimMetadata", "datetime"),
 
-                fields.animPtrs.Unwrap("AnimMetadata", "animPtrs")
+                fields.animDefNames.Unwrap("AnimMetadata", "animDefNames"),
+
+                fields.scriptNames.Unwrap("AnimMetadata", "scriptNames"),
+
+                fields.animList.Unwrap("AnimMetadata", "animList")
 
             );
         }

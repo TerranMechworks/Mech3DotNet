@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Mech3DotNet.Types.Archive;
-using Mech3DotNet.Types.Gamez.Materials;
-using Mech3DotNet.Types.Gamez.Mechlib;
+using Mech3DotNet.Types.Gamez;
 using Mech3DotNet.Unsafe;
 
 namespace Mech3DotNet.Zbd
@@ -11,18 +10,18 @@ namespace Mech3DotNet.Zbd
     ///
     /// See <see cref="Read"/> for reading a MW <c>mechlib.zbd</c> file.
     /// </summary>
-    public class MechlibArchiveMw : MechlibArchive<ModelMw>, IWritable
+    public class MechlibArchiveMw : MechlibArchive, IWritable
     {
         public MechlibArchiveMw(
-            Dictionary<string, ModelMw> items,
+            Dictionary<string, MechlibModel> items,
             List<ArchiveEntry> entries,
-            List<Material> materials) : base(items, entries, materials) { }
+            List<MechlibMaterial> materials) : base(items, entries, materials) { }
 
         /// <summary>Read a MW <c>mechlib.zbd</c> file from the specified path.</summary>
         public static MechlibArchiveMw Read(string path)
         {
-            List<Material>? capture = null;
-            var items = new Dictionary<string, ModelMw>();
+            List<MechlibMaterial>? capture = null;
+            var items = new Dictionary<string, MechlibModel>();
             var manifest_data = Helpers.ReadArchive(path, GameType.MW, Helpers.MANIFEST, Interop.ReadMechlib, (string name, byte[] data) =>
             {
                 switch (name)
@@ -35,7 +34,7 @@ namespace Mech3DotNet.Zbd
                         capture = Interop.Deserialize(data, MaterialsConverter);
                         return;
                     default:
-                        var model = Interop.Deserialize(data, ModelMw.Converter);
+                        var model = Interop.Deserialize(data, MechlibModel.Converter);
                         items.Add(name, model);
                         return;
                 }
@@ -63,7 +62,7 @@ namespace Mech3DotNet.Zbd
                         return Interop.Serialize(materials, MaterialsConverter);
                     default:
                         var item = items[name];
-                        return Interop.Serialize(item, ModelMw.Converter);
+                        return Interop.Serialize(item, MechlibModel.Converter);
                 }
             });
         }

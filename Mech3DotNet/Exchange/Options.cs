@@ -9,8 +9,8 @@ namespace Mech3DotNet.Exchange
 
         public static List<TypeConverter> GetDefaultConverters() => new List<TypeConverter>
         {
-            TypeConverter.From(Mech3DotNet.Types.QuaternionConverter.Converter),
-            TypeConverter.From(Mech3DotNet.Types.Vec3Converter.Converter),
+            TypeConverter.From(Mech3DotNet.Types.Common.QuaternionConverter.Converter),
+            TypeConverter.From(Mech3DotNet.Types.Common.Vec3Converter.Converter),
         };
     }
 }

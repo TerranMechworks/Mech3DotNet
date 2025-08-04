@@ -3,53 +3,49 @@ using Mech3DotNet.Exchange;
 
 namespace Mech3DotNet.Types.Anim.Events
 {
-    public struct ForwardRotationTime
-    {
-        public float v1;
-        public float v2;
-
-        public ForwardRotationTime(float v1, float v2)
-        {
-            this.v1 = v1;
-            this.v2 = v2;
-        }
-    }
-
-    public static class ForwardRotationTimeConverter
+    public sealed class ForwardRotationTime
     {
         public static readonly TypeConverter<ForwardRotationTime> Converter = new TypeConverter<ForwardRotationTime>(Deserialize, Serialize);
+        public float initial;
+        public float delta;
+
+        public ForwardRotationTime(float initial, float delta)
+        {
+            this.initial = initial;
+            this.delta = delta;
+        }
 
         private struct Fields
         {
-            public Field<float> v1;
-            public Field<float> v2;
+            public Field<float> initial;
+            public Field<float> delta;
         }
 
         public static void Serialize(ForwardRotationTime v, Serializer s)
         {
             s.SerializeStruct(2);
-            s.SerializeFieldName("v1");
-            ((Action<float>)s.SerializeF32)(v.v1);
-            s.SerializeFieldName("v2");
-            ((Action<float>)s.SerializeF32)(v.v2);
+            s.SerializeFieldName("initial");
+            ((Action<float>)s.SerializeF32)(v.initial);
+            s.SerializeFieldName("delta");
+            ((Action<float>)s.SerializeF32)(v.delta);
         }
 
         public static ForwardRotationTime Deserialize(Deserializer d)
         {
             var fields = new Fields()
             {
-                v1 = new Field<float>(),
-                v2 = new Field<float>(),
+                initial = new Field<float>(),
+                delta = new Field<float>(),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
                 switch (fieldName)
                 {
-                    case "v1":
-                        fields.v1.Value = d.DeserializeF32();
+                    case "initial":
+                        fields.initial.Value = d.DeserializeF32();
                         break;
-                    case "v2":
-                        fields.v2.Value = d.DeserializeF32();
+                    case "delta":
+                        fields.delta.Value = d.DeserializeF32();
                         break;
                     default:
                         throw new UnknownFieldException("ForwardRotationTime", fieldName);
@@ -57,9 +53,9 @@ namespace Mech3DotNet.Types.Anim.Events
             }
             return new ForwardRotationTime(
 
-                fields.v1.Unwrap("ForwardRotationTime", "v1"),
+                fields.initial.Unwrap("ForwardRotationTime", "initial"),
 
-                fields.v2.Unwrap("ForwardRotationTime", "v2")
+                fields.delta.Unwrap("ForwardRotationTime", "delta")
 
             );
         }

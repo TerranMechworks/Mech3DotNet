@@ -32,7 +32,7 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Install documentation tool
-        run: dotnet tool update -g docfx
+        run: dotnet tool update -g docfx --version 2.77.0
         shell: bash
 
       - name: Checkout repository

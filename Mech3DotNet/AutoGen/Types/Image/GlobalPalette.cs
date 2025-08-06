@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Image
 {
     public sealed class GlobalPalette
     {
-        public static readonly TypeConverter<GlobalPalette> Converter = new TypeConverter<GlobalPalette>(Deserialize, Serialize);
         public uint index;
         public ushort count;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Image
             this.count = count;
         }
 
-        private struct Fields
-        {
-            public Field<uint> index;
-            public Field<ushort> count;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<GlobalPalette> Converter = new TypeConverter<GlobalPalette>(Deserialize, Serialize);
 
         public static void Serialize(GlobalPalette v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Image
             ((Action<uint>)s.SerializeU32)(v.index);
             s.SerializeFieldName("count");
             ((Action<ushort>)s.SerializeU16)(v.count);
+        }
+
+        private struct Fields
+        {
+            public Field<uint> index;
+            public Field<ushort> count;
         }
 
         public static GlobalPalette Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Image
 
             );
         }
+
+        #endregion
     }
 }

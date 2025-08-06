@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Messages
 {
     public sealed class MessageEntry
     {
-        public static readonly TypeConverter<MessageEntry> Converter = new TypeConverter<MessageEntry>(Deserialize, Serialize);
         public string key;
         public uint id;
         public string value;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Messages
             this.value = value;
         }
 
-        private struct Fields
-        {
-            public Field<string> key;
-            public Field<uint> id;
-            public Field<string> value;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<MessageEntry> Converter = new TypeConverter<MessageEntry>(Deserialize, Serialize);
 
         public static void Serialize(MessageEntry v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Messages
             ((Action<uint>)s.SerializeU32)(v.id);
             s.SerializeFieldName("value");
             ((Action<string>)s.SerializeString)(v.value);
+        }
+
+        private struct Fields
+        {
+            public Field<string> key;
+            public Field<uint> id;
+            public Field<string> value;
         }
 
         public static MessageEntry Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Messages
 
             );
         }
+
+        #endregion
     }
 }

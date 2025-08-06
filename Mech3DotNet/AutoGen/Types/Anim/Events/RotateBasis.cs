@@ -37,6 +37,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsAtNodeXYZ() => Variant == Variants.AtNodeXYZ;
         public string AsAtNodeXYZ() => (string)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(RotateBasis v, Serializer s)
         {
             switch (v.Variant)
@@ -113,5 +115,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("RotateBasis", variantIndex);
             }
         }
+
+        #endregion
     }
 }

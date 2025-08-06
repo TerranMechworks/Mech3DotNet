@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class BounceSounds
     {
-        public static readonly TypeConverter<BounceSounds> Converter = new TypeConverter<BounceSounds>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.BounceSound? default_;
         public Mech3DotNet.Types.Anim.Events.BounceSound? water;
         public Mech3DotNet.Types.Anim.Events.BounceSound? lava;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.lava = lava;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.BounceSound?> default_;
-            public Field<Mech3DotNet.Types.Anim.Events.BounceSound?> water;
-            public Field<Mech3DotNet.Types.Anim.Events.BounceSound?> lava;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<BounceSounds> Converter = new TypeConverter<BounceSounds>(Deserialize, Serialize);
 
         public static void Serialize(BounceSounds v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.BounceSound.Converter))(v.water);
             s.SerializeFieldName("lava");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.BounceSound.Converter))(v.lava);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.BounceSound?> default_;
+            public Field<Mech3DotNet.Types.Anim.Events.BounceSound?> water;
+            public Field<Mech3DotNet.Types.Anim.Events.BounceSound?> lava;
         }
 
         public static BounceSounds Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

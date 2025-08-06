@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class NodeUndercover
     {
-        public static readonly TypeConverter<NodeUndercover> Converter = new TypeConverter<NodeUndercover>(Deserialize, Serialize);
         public uint nodeIndex;
         public uint distance;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.distance = distance;
         }
 
-        private struct Fields
-        {
-            public Field<uint> nodeIndex;
-            public Field<uint> distance;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<NodeUndercover> Converter = new TypeConverter<NodeUndercover>(Deserialize, Serialize);
 
         public static void Serialize(NodeUndercover v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<uint>)s.SerializeU32)(v.nodeIndex);
             s.SerializeFieldName("distance");
             ((Action<uint>)s.SerializeU32)(v.distance);
+        }
+
+        private struct Fields
+        {
+            public Field<uint> nodeIndex;
+            public Field<uint> distance;
         }
 
         public static NodeUndercover Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

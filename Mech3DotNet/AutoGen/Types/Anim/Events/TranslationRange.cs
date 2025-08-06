@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class TranslationRange
     {
-        public static readonly TypeConverter<TranslationRange> Converter = new TypeConverter<TranslationRange>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Range xz;
         public Mech3DotNet.Types.Common.Range y;
         public Mech3DotNet.Types.Common.Range initial;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.delta = delta;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Range> xz;
-            public Field<Mech3DotNet.Types.Common.Range> y;
-            public Field<Mech3DotNet.Types.Common.Range> initial;
-            public Field<Mech3DotNet.Types.Common.Range> delta;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<TranslationRange> Converter = new TypeConverter<TranslationRange>(Deserialize, Serialize);
 
         public static void Serialize(TranslationRange v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter)(v.initial);
             s.SerializeFieldName("delta");
             s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter)(v.delta);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Range> xz;
+            public Field<Mech3DotNet.Types.Common.Range> y;
+            public Field<Mech3DotNet.Types.Common.Range> initial;
+            public Field<Mech3DotNet.Types.Common.Range> delta;
         }
 
         public static TranslationRange Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

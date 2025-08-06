@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Model
 {
     public sealed class Polygon
     {
-        public static readonly TypeConverter<Polygon> Converter = new TypeConverter<Polygon>(Deserialize, Serialize);
         public Mech3DotNet.Types.Gamez.Model.PolygonFlags flags;
         public int priority;
         public System.Collections.Generic.List<sbyte> zoneSet;
@@ -37,22 +36,9 @@ namespace Mech3DotNet.Types.Gamez.Model
             this.materialsPtr = materialsPtr;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Gamez.Model.PolygonFlags> flags;
-            public Field<int> priority;
-            public Field<System.Collections.Generic.List<sbyte>> zoneSet;
-            public Field<System.Collections.Generic.List<uint>> vertexIndices;
-            public Field<System.Collections.Generic.List<uint>?> normalIndices;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Color>> vertexColors;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.PolygonMaterial>> materials;
-            public Field<uint> vertexIndicesPtr;
-            public Field<uint> normalIndicesPtr;
-            public Field<uint> uvsPtr;
-            public Field<uint> vertexColorsPtr;
-            public Field<uint> matlRefsPtr;
-            public Field<uint> materialsPtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Polygon> Converter = new TypeConverter<Polygon>(Deserialize, Serialize);
 
         public static void Serialize(Polygon v, Serializer s)
         {
@@ -83,6 +69,23 @@ namespace Mech3DotNet.Types.Gamez.Model
             ((Action<uint>)s.SerializeU32)(v.matlRefsPtr);
             s.SerializeFieldName("materials_ptr");
             ((Action<uint>)s.SerializeU32)(v.materialsPtr);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Gamez.Model.PolygonFlags> flags;
+            public Field<int> priority;
+            public Field<System.Collections.Generic.List<sbyte>> zoneSet;
+            public Field<System.Collections.Generic.List<uint>> vertexIndices;
+            public Field<System.Collections.Generic.List<uint>?> normalIndices;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Color>> vertexColors;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.PolygonMaterial>> materials;
+            public Field<uint> vertexIndicesPtr;
+            public Field<uint> normalIndicesPtr;
+            public Field<uint> uvsPtr;
+            public Field<uint> vertexColorsPtr;
+            public Field<uint> matlRefsPtr;
+            public Field<uint> materialsPtr;
         }
 
         public static Polygon Deserialize(Deserializer d)
@@ -180,5 +183,7 @@ namespace Mech3DotNet.Types.Gamez.Model
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class BounceSequences
     {
-        public static readonly TypeConverter<BounceSequences> Converter = new TypeConverter<BounceSequences>(Deserialize, Serialize);
         public string? default_;
         public string? water;
         public string? lava;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.lava = lava;
         }
 
-        private struct Fields
-        {
-            public Field<string?> default_;
-            public Field<string?> water;
-            public Field<string?> lava;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<BounceSequences> Converter = new TypeConverter<BounceSequences>(Deserialize, Serialize);
 
         public static void Serialize(BounceSequences v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.water);
             s.SerializeFieldName("lava");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.lava);
+        }
+
+        private struct Fields
+        {
+            public Field<string?> default_;
+            public Field<string?> water;
+            public Field<string?> lava;
         }
 
         public static BounceSequences Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

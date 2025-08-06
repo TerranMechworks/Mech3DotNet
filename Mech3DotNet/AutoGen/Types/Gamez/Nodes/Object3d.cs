@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Object3d
     {
-        public static readonly TypeConverter<Object3d> Converter = new TypeConverter<Object3d>(Deserialize, Serialize);
         public float? opacity;
         public Mech3DotNet.Types.Common.Color? color;
         public float unk;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.signs = signs;
         }
 
-        private struct Fields
-        {
-            public Field<float?> opacity;
-            public Field<Mech3DotNet.Types.Common.Color?> color;
-            public Field<float> unk;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.Transform> transform;
-            public Field<uint> signs;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Object3d> Converter = new TypeConverter<Object3d>(Deserialize, Serialize);
 
         public static void Serialize(Object3d v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             s.Serialize(Mech3DotNet.Types.Gamez.Nodes.Transform.Converter)(v.transform);
             s.SerializeFieldName("signs");
             ((Action<uint>)s.SerializeU32)(v.signs);
+        }
+
+        private struct Fields
+        {
+            public Field<float?> opacity;
+            public Field<Mech3DotNet.Types.Common.Color?> color;
+            public Field<float> unk;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.Transform> transform;
+            public Field<uint> signs;
         }
 
         public static Object3d Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

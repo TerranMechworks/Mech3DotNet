@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
 {
     public sealed class PrerequisiteAnimation
     {
-        public static readonly TypeConverter<PrerequisiteAnimation> Converter = new TypeConverter<PrerequisiteAnimation>(Deserialize, Serialize);
         public string name;
         public bool required;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
             this.required = required;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<bool> required;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PrerequisiteAnimation> Converter = new TypeConverter<PrerequisiteAnimation>(Deserialize, Serialize);
 
         public static void Serialize(PrerequisiteAnimation v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("required");
             ((Action<bool>)s.SerializeBool)(v.required);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<bool> required;
         }
 
         public static PrerequisiteAnimation Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class StopSequence
     {
-        public static readonly TypeConverter<StopSequence> Converter = new TypeConverter<StopSequence>(Deserialize, Serialize);
         public string name;
 
         public StopSequence(string name)
@@ -13,16 +12,20 @@ namespace Mech3DotNet.Types.Anim.Events
             this.name = name;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<StopSequence> Converter = new TypeConverter<StopSequence>(Deserialize, Serialize);
 
         public static void Serialize(StopSequence v, Serializer s)
         {
             s.SerializeStruct(1);
             s.SerializeFieldName("name");
             ((Action<string>)s.SerializeString)(v.name);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
         }
 
         public static StopSequence Deserialize(Deserializer d)
@@ -48,5 +51,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

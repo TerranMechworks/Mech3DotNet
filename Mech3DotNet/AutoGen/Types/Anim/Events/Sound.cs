@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Sound
     {
-        public static readonly TypeConverter<Sound> Converter = new TypeConverter<Sound>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Anim.Events.AtNode? atNode;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.atNode = atNode;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Sound> Converter = new TypeConverter<Sound>(Deserialize, Serialize);
 
         public static void Serialize(Sound v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter))(v.atNode);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
         }
 
         public static Sound Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

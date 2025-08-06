@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 {
     public sealed class ResetState
     {
-        public static readonly TypeConverter<ResetState> Converter = new TypeConverter<ResetState>(Deserialize, Serialize);
         public System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.Event> events;
         public uint pointer;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             this.pointer = pointer;
         }
 
-        private struct Fields
-        {
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.Event>> events;
-            public Field<uint> pointer;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ResetState> Converter = new TypeConverter<ResetState>(Deserialize, Serialize);
 
         public static void Serialize(ResetState v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.Event.Converter))(v.events);
             s.SerializeFieldName("pointer");
             ((Action<uint>)s.SerializeU32)(v.pointer);
+        }
+
+        private struct Fields
+        {
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.Event>> events;
+            public Field<uint> pointer;
         }
 
         public static ResetState Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 
             );
         }
+
+        #endregion
     }
 }

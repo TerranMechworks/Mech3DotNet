@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Node
     {
-        public static readonly TypeConverter<Node> Converter = new TypeConverter<Node>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Gamez.Nodes.NodeFlags flags;
         public uint updateFlags;
@@ -55,31 +54,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.index = index;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.NodeFlags> flags;
-            public Field<uint> updateFlags;
-            public Field<sbyte> zoneId;
-            public Field<short> modelIndex;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.Partition?> areaPartition;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.Partition?> virtualPartition;
-            public Field<System.Collections.Generic.List<short>> parentIndices;
-            public Field<System.Collections.Generic.List<short>> childIndices;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.ActiveBoundingBox> activeBbox;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.BoundingBox> nodeBbox;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.BoundingBox> modelBbox;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.BoundingBox> childBbox;
-            public Field<int> field192;
-            public Field<int> field196;
-            public Field<int> field200;
-            public Field<int> field204;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.NodeData> data;
-            public Field<uint> dataPtr;
-            public Field<uint> parentArrayPtr;
-            public Field<uint> childArrayPtr;
-            public Field<uint> index;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Node> Converter = new TypeConverter<Node>(Deserialize, Serialize);
 
         public static void Serialize(Node v, Serializer s)
         {
@@ -128,6 +105,32 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<uint>)s.SerializeU32)(v.childArrayPtr);
             s.SerializeFieldName("index");
             ((Action<uint>)s.SerializeU32)(v.index);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.NodeFlags> flags;
+            public Field<uint> updateFlags;
+            public Field<sbyte> zoneId;
+            public Field<short> modelIndex;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.Partition?> areaPartition;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.Partition?> virtualPartition;
+            public Field<System.Collections.Generic.List<short>> parentIndices;
+            public Field<System.Collections.Generic.List<short>> childIndices;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.ActiveBoundingBox> activeBbox;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.BoundingBox> nodeBbox;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.BoundingBox> modelBbox;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.BoundingBox> childBbox;
+            public Field<int> field192;
+            public Field<int> field196;
+            public Field<int> field200;
+            public Field<int> field204;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.NodeData> data;
+            public Field<uint> dataPtr;
+            public Field<uint> parentArrayPtr;
+            public Field<uint> childArrayPtr;
+            public Field<uint> index;
         }
 
         public static Node Deserialize(Deserializer d)
@@ -279,5 +282,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

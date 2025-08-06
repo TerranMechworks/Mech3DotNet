@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Light
     {
-        public static readonly TypeConverter<Light> Converter = new TypeConverter<Light>(Deserialize, Serialize);
         public Mech3DotNet.Types.Gamez.Nodes.LightFlags flags;
         public Mech3DotNet.Types.Common.Vec3 orientation;
         public Mech3DotNet.Types.Common.Vec3 translate;
@@ -37,22 +36,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.parentPtr = parentPtr;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Gamez.Nodes.LightFlags> flags;
-            public Field<Mech3DotNet.Types.Common.Vec3> orientation;
-            public Field<Mech3DotNet.Types.Common.Vec3> translate;
-            public Field<float> diffuse;
-            public Field<float> ambient;
-            public Field<Mech3DotNet.Types.Common.Color> color;
-            public Field<Mech3DotNet.Types.Common.Color> colorAmbient;
-            public Field<Mech3DotNet.Types.Common.Color> colorDiffuseMixed;
-            public Field<Mech3DotNet.Types.Common.Color> colorAmbientMixed;
-            public Field<Mech3DotNet.Types.Common.Color> colorDaCombined;
-            public Field<Mech3DotNet.Types.Common.Range> range;
-            public Field<System.Collections.Generic.List<short>> parentIndices;
-            public Field<uint> parentPtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Light> Converter = new TypeConverter<Light>(Deserialize, Serialize);
 
         public static void Serialize(Light v, Serializer s)
         {
@@ -83,6 +69,23 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             s.SerializeVec(((Action<short>)s.SerializeI16))(v.parentIndices);
             s.SerializeFieldName("parent_ptr");
             ((Action<uint>)s.SerializeU32)(v.parentPtr);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Gamez.Nodes.LightFlags> flags;
+            public Field<Mech3DotNet.Types.Common.Vec3> orientation;
+            public Field<Mech3DotNet.Types.Common.Vec3> translate;
+            public Field<float> diffuse;
+            public Field<float> ambient;
+            public Field<Mech3DotNet.Types.Common.Color> color;
+            public Field<Mech3DotNet.Types.Common.Color> colorAmbient;
+            public Field<Mech3DotNet.Types.Common.Color> colorDiffuseMixed;
+            public Field<Mech3DotNet.Types.Common.Color> colorAmbientMixed;
+            public Field<Mech3DotNet.Types.Common.Color> colorDaCombined;
+            public Field<Mech3DotNet.Types.Common.Range> range;
+            public Field<System.Collections.Generic.List<short>> parentIndices;
+            public Field<uint> parentPtr;
         }
 
         public static Light Deserialize(Deserializer d)
@@ -180,5 +183,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

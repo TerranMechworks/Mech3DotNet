@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class WorldPartitionValue
     {
-        public static readonly TypeConverter<WorldPartitionValue> Converter = new TypeConverter<WorldPartitionValue>(Deserialize, Serialize);
         public short nodeIndex;
         public float yMin;
         public float yMax;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.yMax = yMax;
         }
 
-        private struct Fields
-        {
-            public Field<short> nodeIndex;
-            public Field<float> yMin;
-            public Field<float> yMax;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<WorldPartitionValue> Converter = new TypeConverter<WorldPartitionValue>(Deserialize, Serialize);
 
         public static void Serialize(WorldPartitionValue v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<float>)s.SerializeF32)(v.yMin);
             s.SerializeFieldName("y_max");
             ((Action<float>)s.SerializeF32)(v.yMax);
+        }
+
+        private struct Fields
+        {
+            public Field<short> nodeIndex;
+            public Field<float> yMin;
+            public Field<float> yMax;
         }
 
         public static WorldPartitionValue Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

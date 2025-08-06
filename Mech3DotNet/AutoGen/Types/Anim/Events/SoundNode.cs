@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class SoundNode
     {
-        public static readonly TypeConverter<SoundNode> Converter = new TypeConverter<SoundNode>(Deserialize, Serialize);
         public string name;
         public bool activeState;
         public Mech3DotNet.Types.Anim.Events.Translate? translate;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.translate = translate;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<bool> activeState;
-            public Field<Mech3DotNet.Types.Anim.Events.Translate?> translate;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<SoundNode> Converter = new TypeConverter<SoundNode>(Deserialize, Serialize);
 
         public static void Serialize(SoundNode v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<bool>)s.SerializeBool)(v.activeState);
             s.SerializeFieldName("translate");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.Translate.Converter))(v.translate);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<bool> activeState;
+            public Field<Mech3DotNet.Types.Anim.Events.Translate?> translate;
         }
 
         public static SoundNode Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

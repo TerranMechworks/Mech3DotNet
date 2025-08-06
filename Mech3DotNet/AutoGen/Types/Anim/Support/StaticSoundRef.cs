@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Support
 {
     public sealed class StaticSoundRef
     {
-        public static readonly TypeConverter<StaticSoundRef> Converter = new TypeConverter<StaticSoundRef>(Deserialize, Serialize);
         public string name;
         public byte[] pad;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Support
             this.pad = pad;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<byte[]> pad;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<StaticSoundRef> Converter = new TypeConverter<StaticSoundRef>(Deserialize, Serialize);
 
         public static void Serialize(StaticSoundRef v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Support
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("pad");
             ((Action<byte[]>)s.SerializeBytes)(v.pad);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<byte[]> pad;
         }
 
         public static StaticSoundRef Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Support
 
             );
         }
+
+        #endregion
     }
 }

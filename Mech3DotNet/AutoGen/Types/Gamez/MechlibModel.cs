@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez
 {
     public sealed class MechlibModel
     {
-        public static readonly TypeConverter<MechlibModel> Converter = new TypeConverter<MechlibModel>(Deserialize, Serialize);
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.Node> nodes;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Model> models;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Gamez
             this.models = models;
         }
 
-        private struct Fields
-        {
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.Node>> nodes;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Model>> models;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<MechlibModel> Converter = new TypeConverter<MechlibModel>(Deserialize, Serialize);
 
         public static void Serialize(MechlibModel v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Gamez
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Nodes.Node.Converter))(v.nodes);
             s.SerializeFieldName("models");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Model.Model.Converter))(v.models);
+        }
+
+        private struct Fields
+        {
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.Node>> nodes;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Model>> models;
         }
 
         public static MechlibModel Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Gamez
 
             );
         }
+
+        #endregion
     }
 }

@@ -7,7 +7,6 @@ namespace Mech3DotNet.Types.Motion
         where TQuaternion : notnull
         where TVec3 : notnull
     {
-        public static readonly TypeConverter<MotionFrame<TQuaternion, TVec3>> Converter = new TypeConverter<MotionFrame<TQuaternion, TVec3>>(Deserialize, Serialize);
         public TVec3 translation;
         public TQuaternion rotation;
 
@@ -17,11 +16,9 @@ namespace Mech3DotNet.Types.Motion
             this.rotation = rotation;
         }
 
-        private struct Fields
-        {
-            public Field<TVec3> translation;
-            public Field<TQuaternion> rotation;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<MotionFrame<TQuaternion, TVec3>> Converter = new TypeConverter<MotionFrame<TQuaternion, TVec3>>(Deserialize, Serialize);
 
         public static void Serialize(MotionFrame<TQuaternion, TVec3> v, Serializer s)
         {
@@ -30,6 +27,12 @@ namespace Mech3DotNet.Types.Motion
             s.SerializeGeneric<TVec3>()(v.translation);
             s.SerializeFieldName("rotation");
             s.SerializeGeneric<TQuaternion>()(v.rotation);
+        }
+
+        private struct Fields
+        {
+            public Field<TVec3> translation;
+            public Field<TQuaternion> rotation;
         }
 
         public static MotionFrame<TQuaternion, TVec3> Deserialize(Deserializer d)
@@ -61,5 +64,7 @@ namespace Mech3DotNet.Types.Motion
 
             );
         }
+
+        #endregion
     }
 }

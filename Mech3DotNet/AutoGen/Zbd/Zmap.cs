@@ -5,7 +5,6 @@ namespace Mech3DotNet.Zbd
 {
     public partial class Zmap
     {
-        public static readonly TypeConverter<Zmap> Converter = new TypeConverter<Zmap>(Deserialize, Serialize);
         public uint unk04;
         public Mech3DotNet.Types.Common.Vec3 min;
         public Mech3DotNet.Types.Common.Vec3 max;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Zbd
             this.features = features;
         }
 
-        private struct Fields
-        {
-            public Field<uint> unk04;
-            public Field<Mech3DotNet.Types.Common.Vec3> min;
-            public Field<Mech3DotNet.Types.Common.Vec3> max;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature>> features;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Zmap> Converter = new TypeConverter<Zmap>(Deserialize, Serialize);
 
         public static void Serialize(Zmap v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Zbd
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.max);
             s.SerializeFieldName("features");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Zmap.MapFeature.Converter))(v.features);
+        }
+
+        private struct Fields
+        {
+            public Field<uint> unk04;
+            public Field<Mech3DotNet.Types.Common.Vec3> min;
+            public Field<Mech3DotNet.Types.Common.Vec3> max;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Zmap.MapFeature>> features;
         }
 
         public static Zmap Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Zbd
 
             );
         }
+
+        #endregion
     }
 }

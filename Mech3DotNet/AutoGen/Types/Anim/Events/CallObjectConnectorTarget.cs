@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class CallObjectConnectorTarget
     {
-        public static readonly TypeConverter<CallObjectConnectorTarget> Converter = new TypeConverter<CallObjectConnectorTarget>(Deserialize, Serialize);
         public string name;
         public bool pos;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.pos = pos;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<bool> pos;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CallObjectConnectorTarget> Converter = new TypeConverter<CallObjectConnectorTarget>(Deserialize, Serialize);
 
         public static void Serialize(CallObjectConnectorTarget v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("pos");
             ((Action<bool>)s.SerializeBool)(v.pos);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<bool> pos;
         }
 
         public static CallObjectConnectorTarget Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

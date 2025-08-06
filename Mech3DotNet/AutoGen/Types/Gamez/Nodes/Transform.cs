@@ -33,6 +33,8 @@ namespace Mech3DotNet.Types.Gamez.Nodes
         public bool IsRotateTranslateScale() => Variant == Variants.RotateTranslateScale;
         public Mech3DotNet.Types.Gamez.Nodes.RotateTranslateScale AsRotateTranslateScale() => (Mech3DotNet.Types.Gamez.Nodes.RotateTranslateScale)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(Transform v, Serializer s)
         {
             switch (v.Variant)
@@ -96,5 +98,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
                     throw new UnknownVariantException("Transform", variantIndex);
             }
         }
+
+        #endregion
     }
 }

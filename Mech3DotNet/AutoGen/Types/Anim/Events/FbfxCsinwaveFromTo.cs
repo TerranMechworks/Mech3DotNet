@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class FbfxCsinwaveFromTo
     {
-        public static readonly TypeConverter<FbfxCsinwaveFromTo> Converter = new TypeConverter<FbfxCsinwaveFromTo>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.AtNode? atNode;
         public Mech3DotNet.Types.Anim.Events.FbfxCsinwaveScreenPos? screenPos;
         public Mech3DotNet.Types.Anim.Events.FloatFromTo? worldRadius;
@@ -23,15 +22,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.runTime = runTime;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
-            public Field<Mech3DotNet.Types.Anim.Events.FbfxCsinwaveScreenPos?> screenPos;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> worldRadius;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> screenRadius;
-            public Field<Mech3DotNet.Types.Anim.Events.FbfxCsinwaveCsin> csin;
-            public Field<float> runTime;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<FbfxCsinwaveFromTo> Converter = new TypeConverter<FbfxCsinwaveFromTo>(Deserialize, Serialize);
 
         public static void Serialize(FbfxCsinwaveFromTo v, Serializer s)
         {
@@ -48,6 +41,16 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Anim.Events.FbfxCsinwaveCsin.Converter)(v.csin);
             s.SerializeFieldName("run_time");
             ((Action<float>)s.SerializeF32)(v.runTime);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.AtNode?> atNode;
+            public Field<Mech3DotNet.Types.Anim.Events.FbfxCsinwaveScreenPos?> screenPos;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> worldRadius;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> screenRadius;
+            public Field<Mech3DotNet.Types.Anim.Events.FbfxCsinwaveCsin> csin;
+            public Field<float> runTime;
         }
 
         public static FbfxCsinwaveFromTo Deserialize(Deserializer d)
@@ -103,5 +106,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

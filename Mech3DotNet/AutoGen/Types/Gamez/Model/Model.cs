@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Model
 {
     public sealed class Model
     {
-        public static readonly TypeConverter<Model> Converter = new TypeConverter<Model>(Deserialize, Serialize);
         public Mech3DotNet.Types.Gamez.Model.ModelType modelType;
         public Mech3DotNet.Types.Gamez.Model.FacadeMode facadeMode;
         public Mech3DotNet.Types.Gamez.Model.ModelFlags flags;
@@ -47,27 +46,9 @@ namespace Mech3DotNet.Types.Gamez.Model
             this.materialRefsPtr = materialRefsPtr;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Gamez.Model.ModelType> modelType;
-            public Field<Mech3DotNet.Types.Gamez.Model.FacadeMode> facadeMode;
-            public Field<Mech3DotNet.Types.Gamez.Model.ModelFlags> flags;
-            public Field<uint> parentCount;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> vertices;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> normals;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> morphs;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.PointLight>> lights;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Polygon>> polygons;
-            public Field<Mech3DotNet.Types.Gamez.Model.UvCoord> textureScroll;
-            public Field<Mech3DotNet.Types.Common.Vec3> bboxMid;
-            public Field<float> bboxDiag;
-            public Field<uint> polygonsPtr;
-            public Field<uint> verticesPtr;
-            public Field<uint> normalsPtr;
-            public Field<uint> lightsPtr;
-            public Field<uint> morphsPtr;
-            public Field<uint> materialRefsPtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Model> Converter = new TypeConverter<Model>(Deserialize, Serialize);
 
         public static void Serialize(Model v, Serializer s)
         {
@@ -108,6 +89,28 @@ namespace Mech3DotNet.Types.Gamez.Model
             ((Action<uint>)s.SerializeU32)(v.morphsPtr);
             s.SerializeFieldName("material_refs_ptr");
             ((Action<uint>)s.SerializeU32)(v.materialRefsPtr);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Gamez.Model.ModelType> modelType;
+            public Field<Mech3DotNet.Types.Gamez.Model.FacadeMode> facadeMode;
+            public Field<Mech3DotNet.Types.Gamez.Model.ModelFlags> flags;
+            public Field<uint> parentCount;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> vertices;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> normals;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> morphs;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.PointLight>> lights;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Polygon>> polygons;
+            public Field<Mech3DotNet.Types.Gamez.Model.UvCoord> textureScroll;
+            public Field<Mech3DotNet.Types.Common.Vec3> bboxMid;
+            public Field<float> bboxDiag;
+            public Field<uint> polygonsPtr;
+            public Field<uint> verticesPtr;
+            public Field<uint> normalsPtr;
+            public Field<uint> lightsPtr;
+            public Field<uint> morphsPtr;
+            public Field<uint> materialRefsPtr;
         }
 
         public static Model Deserialize(Deserializer d)
@@ -235,5 +238,7 @@ namespace Mech3DotNet.Types.Gamez.Model
 
             );
         }
+
+        #endregion
     }
 }

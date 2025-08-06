@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Zmap
 {
     public sealed class MapFeature
     {
-        public static readonly TypeConverter<MapFeature> Converter = new TypeConverter<MapFeature>(Deserialize, Serialize);
         public Mech3DotNet.Types.Zmap.MapColor color;
         public System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3> vertices;
         public int objective;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Zmap
             this.objective = objective;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Zmap.MapColor> color;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> vertices;
-            public Field<int> objective;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<MapFeature> Converter = new TypeConverter<MapFeature>(Deserialize, Serialize);
 
         public static void Serialize(MapFeature v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Zmap
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.vertices);
             s.SerializeFieldName("objective");
             ((Action<int>)s.SerializeI32)(v.objective);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Zmap.MapColor> color;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> vertices;
+            public Field<int> objective;
         }
 
         public static MapFeature Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Zmap
 
             );
         }
+
+        #endregion
     }
 }

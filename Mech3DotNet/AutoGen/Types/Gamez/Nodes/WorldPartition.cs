@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class WorldPartition
     {
-        public static readonly TypeConverter<WorldPartition> Converter = new TypeConverter<WorldPartition>(Deserialize, Serialize);
         public int x;
         public int z;
         public Mech3DotNet.Types.Common.Vec3 min;
@@ -25,16 +24,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.nodesPtr = nodesPtr;
         }
 
-        private struct Fields
-        {
-            public Field<int> x;
-            public Field<int> z;
-            public Field<Mech3DotNet.Types.Common.Vec3> min;
-            public Field<Mech3DotNet.Types.Common.Vec3> max;
-            public Field<System.Collections.Generic.List<short>> nodeIndices;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.WorldPartitionValue>> values;
-            public Field<uint> nodesPtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<WorldPartition> Converter = new TypeConverter<WorldPartition>(Deserialize, Serialize);
 
         public static void Serialize(WorldPartition v, Serializer s)
         {
@@ -53,6 +45,17 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Nodes.WorldPartitionValue.Converter))(v.values);
             s.SerializeFieldName("nodes_ptr");
             ((Action<uint>)s.SerializeU32)(v.nodesPtr);
+        }
+
+        private struct Fields
+        {
+            public Field<int> x;
+            public Field<int> z;
+            public Field<Mech3DotNet.Types.Common.Vec3> min;
+            public Field<Mech3DotNet.Types.Common.Vec3> max;
+            public Field<System.Collections.Generic.List<short>> nodeIndices;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.WorldPartitionValue>> values;
+            public Field<uint> nodesPtr;
         }
 
         public static WorldPartition Deserialize(Deserializer d)
@@ -114,5 +117,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

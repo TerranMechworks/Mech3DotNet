@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Model
 {
     public sealed class PointLight
     {
-        public static readonly TypeConverter<PointLight> Converter = new TypeConverter<PointLight>(Deserialize, Serialize);
         public int unk00;
         public int unk04;
         public float unk08;
@@ -41,24 +40,9 @@ namespace Mech3DotNet.Types.Gamez.Model
             this.unk72 = unk72;
         }
 
-        private struct Fields
-        {
-            public Field<int> unk00;
-            public Field<int> unk04;
-            public Field<float> unk08;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> vertices;
-            public Field<uint> unk24;
-            public Field<Mech3DotNet.Types.Common.Color> color;
-            public Field<ushort> flags;
-            public Field<uint> verticesPtr;
-            public Field<float> unk48;
-            public Field<float> unk52;
-            public Field<float> unk56;
-            public Field<int> unk60;
-            public Field<float> unk64;
-            public Field<float> unk68;
-            public Field<float> unk72;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PointLight> Converter = new TypeConverter<PointLight>(Deserialize, Serialize);
 
         public static void Serialize(PointLight v, Serializer s)
         {
@@ -93,6 +77,25 @@ namespace Mech3DotNet.Types.Gamez.Model
             ((Action<float>)s.SerializeF32)(v.unk68);
             s.SerializeFieldName("unk72");
             ((Action<float>)s.SerializeF32)(v.unk72);
+        }
+
+        private struct Fields
+        {
+            public Field<int> unk00;
+            public Field<int> unk04;
+            public Field<float> unk08;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Vec3>> vertices;
+            public Field<uint> unk24;
+            public Field<Mech3DotNet.Types.Common.Color> color;
+            public Field<ushort> flags;
+            public Field<uint> verticesPtr;
+            public Field<float> unk48;
+            public Field<float> unk52;
+            public Field<float> unk56;
+            public Field<int> unk60;
+            public Field<float> unk64;
+            public Field<float> unk68;
+            public Field<float> unk72;
         }
 
         public static PointLight Deserialize(Deserializer d)
@@ -202,5 +205,7 @@ namespace Mech3DotNet.Types.Gamez.Model
 
             );
         }
+
+        #endregion
     }
 }

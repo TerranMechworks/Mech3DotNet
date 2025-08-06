@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.SiScript
 {
     public sealed class RotateData
     {
-        public static readonly TypeConverter<RotateData> Converter = new TypeConverter<RotateData>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Quaternion base_;
         public Mech3DotNet.Types.Common.Vec3 delta;
         public byte[] splineX;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Anim.SiScript
             this.splineZ = splineZ;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Quaternion> base_;
-            public Field<Mech3DotNet.Types.Common.Vec3> delta;
-            public Field<byte[]> splineX;
-            public Field<byte[]> splineY;
-            public Field<byte[]> splineZ;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<RotateData> Converter = new TypeConverter<RotateData>(Deserialize, Serialize);
 
         public static void Serialize(RotateData v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Anim.SiScript
             ((Action<byte[]>)s.SerializeBytes)(v.splineY);
             s.SerializeFieldName("spline_z");
             ((Action<byte[]>)s.SerializeBytes)(v.splineZ);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Quaternion> base_;
+            public Field<Mech3DotNet.Types.Common.Vec3> delta;
+            public Field<byte[]> splineX;
+            public Field<byte[]> splineY;
+            public Field<byte[]> splineZ;
         }
 
         public static RotateData Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Anim.SiScript
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Support
 {
     public sealed class NodeRef
     {
-        public static readonly TypeConverter<NodeRef> Converter = new TypeConverter<NodeRef>(Deserialize, Serialize);
         public string name;
         public uint ptr;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Support
             this.ptr = ptr;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<uint> ptr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<NodeRef> Converter = new TypeConverter<NodeRef>(Deserialize, Serialize);
 
         public static void Serialize(NodeRef v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Support
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("ptr");
             ((Action<uint>)s.SerializeU32)(v.ptr);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<uint> ptr;
         }
 
         public static NodeRef Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Support
 
             );
         }
+
+        #endregion
     }
 }

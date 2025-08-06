@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectTranslateState
     {
-        public static readonly TypeConverter<ObjectTranslateState> Converter = new TypeConverter<ObjectTranslateState>(Deserialize, Serialize);
         public string node;
         public bool relative;
         public Mech3DotNet.Types.Common.Vec3 state;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.atNode = atNode;
         }
 
-        private struct Fields
-        {
-            public Field<string> node;
-            public Field<bool> relative;
-            public Field<Mech3DotNet.Types.Common.Vec3> state;
-            public Field<string?> atNode;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectTranslateState> Converter = new TypeConverter<ObjectTranslateState>(Deserialize, Serialize);
 
         public static void Serialize(ObjectTranslateState v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.state);
             s.SerializeFieldName("at_node");
             s.SerializeRefOption(((Action<string>)s.SerializeString))(v.atNode);
+        }
+
+        private struct Fields
+        {
+            public Field<string> node;
+            public Field<bool> relative;
+            public Field<Mech3DotNet.Types.Common.Vec3> state;
+            public Field<string?> atNode;
         }
 
         public static ObjectTranslateState Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

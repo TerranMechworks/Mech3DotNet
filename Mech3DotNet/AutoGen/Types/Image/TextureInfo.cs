@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Image
 {
     public sealed class TextureInfo
     {
-        public static readonly TypeConverter<TextureInfo> Converter = new TypeConverter<TextureInfo>(Deserialize, Serialize);
         public string name;
         public string? rename = null;
         public Mech3DotNet.Types.Image.TextureAlpha alpha;
@@ -31,19 +30,9 @@ namespace Mech3DotNet.Types.Image
             this.palette = palette;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<string?> rename;
-            public Field<Mech3DotNet.Types.Image.TextureAlpha> alpha;
-            public Field<ushort> width;
-            public Field<ushort> height;
-            public Field<Mech3DotNet.Types.Image.TextureStretch> stretch;
-            public Field<bool> imageLoaded;
-            public Field<bool> alphaLoaded;
-            public Field<bool> paletteLoaded;
-            public Field<Mech3DotNet.Types.Image.TexturePalette> palette;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<TextureInfo> Converter = new TypeConverter<TextureInfo>(Deserialize, Serialize);
 
         public static void Serialize(TextureInfo v, Serializer s)
         {
@@ -68,6 +57,20 @@ namespace Mech3DotNet.Types.Image
             ((Action<bool>)s.SerializeBool)(v.paletteLoaded);
             s.SerializeFieldName("palette");
             s.Serialize(Mech3DotNet.Types.Image.TexturePalette.Converter)(v.palette);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<string?> rename;
+            public Field<Mech3DotNet.Types.Image.TextureAlpha> alpha;
+            public Field<ushort> width;
+            public Field<ushort> height;
+            public Field<Mech3DotNet.Types.Image.TextureStretch> stretch;
+            public Field<bool> imageLoaded;
+            public Field<bool> alphaLoaded;
+            public Field<bool> paletteLoaded;
+            public Field<Mech3DotNet.Types.Image.TexturePalette> palette;
         }
 
         public static TextureInfo Deserialize(Deserializer d)
@@ -147,5 +150,7 @@ namespace Mech3DotNet.Types.Image
 
             );
         }
+
+        #endregion
     }
 }

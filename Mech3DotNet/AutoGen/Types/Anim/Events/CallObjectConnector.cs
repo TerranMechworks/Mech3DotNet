@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class CallObjectConnector
     {
-        public static readonly TypeConverter<CallObjectConnector> Converter = new TypeConverter<CallObjectConnector>(Deserialize, Serialize);
         public string name;
         public short? saveIndex;
         public Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget? fromNode;
@@ -23,15 +22,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.toPos = toPos;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<short?> saveIndex;
-            public Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?> fromNode;
-            public Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?> toNode;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> fromPos;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> toPos;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CallObjectConnector> Converter = new TypeConverter<CallObjectConnector>(Deserialize, Serialize);
 
         public static void Serialize(CallObjectConnector v, Serializer s)
         {
@@ -48,6 +41,16 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))(v.fromPos);
             s.SerializeFieldName("to_pos");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.ObjectConnectorPos.Converter))(v.toPos);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<short?> saveIndex;
+            public Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?> fromNode;
+            public Field<Mech3DotNet.Types.Anim.Events.CallObjectConnectorTarget?> toNode;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> fromPos;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> toPos;
         }
 
         public static CallObjectConnector Deserialize(Deserializer d)
@@ -103,5 +106,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

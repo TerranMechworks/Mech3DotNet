@@ -28,6 +28,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public Mech3DotNet.Types.Common.Vec3 AsPos() => (Mech3DotNet.Types.Common.Vec3)Value;
         public bool IsInput() => Variant == Variants.Input;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(ObjectConnectorPos v, Serializer s)
         {
             switch (v.Variant)
@@ -75,5 +77,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("ObjectConnectorPos", variantIndex);
             }
         }
+
+        #endregion
     }
 }

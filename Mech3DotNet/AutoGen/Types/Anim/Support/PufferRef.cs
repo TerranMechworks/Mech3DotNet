@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Support
 {
     public sealed class PufferRef
     {
-        public static readonly TypeConverter<PufferRef> Converter = new TypeConverter<PufferRef>(Deserialize, Serialize);
         public string name;
         public byte flags;
         public uint ptr;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Support
             this.ptr = ptr;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<byte> flags;
-            public Field<uint> ptr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PufferRef> Converter = new TypeConverter<PufferRef>(Deserialize, Serialize);
 
         public static void Serialize(PufferRef v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Support
             ((Action<byte>)s.SerializeU8)(v.flags);
             s.SerializeFieldName("ptr");
             ((Action<uint>)s.SerializeU32)(v.ptr);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<byte> flags;
+            public Field<uint> ptr;
         }
 
         public static PufferRef Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Support
 
             );
         }
+
+        #endregion
     }
 }

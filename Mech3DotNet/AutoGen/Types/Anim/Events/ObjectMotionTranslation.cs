@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectMotionTranslation
     {
-        public static readonly TypeConverter<ObjectMotionTranslation> Converter = new TypeConverter<ObjectMotionTranslation>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Vec3 initial;
         public Mech3DotNet.Types.Common.Vec3 delta;
         public Mech3DotNet.Types.Common.Vec3 rndXz;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.rndXz = rndXz;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Vec3> initial;
-            public Field<Mech3DotNet.Types.Common.Vec3> delta;
-            public Field<Mech3DotNet.Types.Common.Vec3> rndXz;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectMotionTranslation> Converter = new TypeConverter<ObjectMotionTranslation>(Deserialize, Serialize);
 
         public static void Serialize(ObjectMotionTranslation v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.delta);
             s.SerializeFieldName("rnd_xz");
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.rndXz);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Vec3> initial;
+            public Field<Mech3DotNet.Types.Common.Vec3> delta;
+            public Field<Mech3DotNet.Types.Common.Vec3> rndXz;
         }
 
         public static ObjectMotionTranslation Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

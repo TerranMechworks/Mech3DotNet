@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez
 {
     public sealed class GameZMetadata
     {
-        public static readonly TypeConverter<GameZMetadata> Converter = new TypeConverter<GameZMetadata>(Deserialize, Serialize);
         public System.DateTime datetime;
         public short materialArraySize;
         public short modelArraySize;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Gamez
             this.nodeLastFree = nodeLastFree;
         }
 
-        private struct Fields
-        {
-            public Field<System.DateTime> datetime;
-            public Field<short> materialArraySize;
-            public Field<short> modelArraySize;
-            public Field<short> nodeArraySize;
-            public Field<int> nodeLastFree;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<GameZMetadata> Converter = new TypeConverter<GameZMetadata>(Deserialize, Serialize);
 
         public static void Serialize(GameZMetadata v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Gamez
             ((Action<short>)s.SerializeI16)(v.nodeArraySize);
             s.SerializeFieldName("node_last_free");
             ((Action<int>)s.SerializeI32)(v.nodeLastFree);
+        }
+
+        private struct Fields
+        {
+            public Field<System.DateTime> datetime;
+            public Field<short> materialArraySize;
+            public Field<short> modelArraySize;
+            public Field<short> nodeArraySize;
+            public Field<int> nodeLastFree;
         }
 
         public static GameZMetadata Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Gamez
 
             );
         }
+
+        #endregion
     }
 }

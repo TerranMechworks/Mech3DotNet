@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Vec3FromTo
     {
-        public static readonly TypeConverter<Vec3FromTo> Converter = new TypeConverter<Vec3FromTo>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Vec3 from;
         public Mech3DotNet.Types.Common.Vec3 to;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.to = to;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Vec3> from;
-            public Field<Mech3DotNet.Types.Common.Vec3> to;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Vec3FromTo> Converter = new TypeConverter<Vec3FromTo>(Deserialize, Serialize);
 
         public static void Serialize(Vec3FromTo v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.from);
             s.SerializeFieldName("to");
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.to);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Vec3> from;
+            public Field<Mech3DotNet.Types.Common.Vec3> to;
         }
 
         public static Vec3FromTo Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

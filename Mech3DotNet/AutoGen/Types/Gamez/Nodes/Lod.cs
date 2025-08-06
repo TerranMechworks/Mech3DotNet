@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Lod
     {
-        public static readonly TypeConverter<Lod> Converter = new TypeConverter<Lod>(Deserialize, Serialize);
         public int field00;
         public Mech3DotNet.Types.Common.Range range;
         public float field16;
@@ -47,27 +46,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.field76 = field76;
         }
 
-        private struct Fields
-        {
-            public Field<int> field00;
-            public Field<Mech3DotNet.Types.Common.Range> range;
-            public Field<float> field16;
-            public Field<float> field20;
-            public Field<float> field24;
-            public Field<float> field28;
-            public Field<float> field32;
-            public Field<float> field36;
-            public Field<float> field40;
-            public Field<float> field44;
-            public Field<int> field48;
-            public Field<float> field52;
-            public Field<float> field56;
-            public Field<float> field60;
-            public Field<float> field64;
-            public Field<int> field68;
-            public Field<float> field72;
-            public Field<float> field76;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Lod> Converter = new TypeConverter<Lod>(Deserialize, Serialize);
 
         public static void Serialize(Lod v, Serializer s)
         {
@@ -108,6 +89,28 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<float>)s.SerializeF32)(v.field72);
             s.SerializeFieldName("field76");
             ((Action<float>)s.SerializeF32)(v.field76);
+        }
+
+        private struct Fields
+        {
+            public Field<int> field00;
+            public Field<Mech3DotNet.Types.Common.Range> range;
+            public Field<float> field16;
+            public Field<float> field20;
+            public Field<float> field24;
+            public Field<float> field28;
+            public Field<float> field32;
+            public Field<float> field36;
+            public Field<float> field40;
+            public Field<float> field44;
+            public Field<int> field48;
+            public Field<float> field52;
+            public Field<float> field56;
+            public Field<float> field60;
+            public Field<float> field64;
+            public Field<int> field68;
+            public Field<float> field72;
+            public Field<float> field76;
         }
 
         public static Lod Deserialize(Deserializer d)
@@ -235,5 +238,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

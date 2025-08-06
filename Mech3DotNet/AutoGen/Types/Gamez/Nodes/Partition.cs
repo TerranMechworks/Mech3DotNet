@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Partition
     {
-        public static readonly TypeConverter<Partition> Converter = new TypeConverter<Partition>(Deserialize, Serialize);
         public byte x;
         public byte z;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.z = z;
         }
 
-        private struct Fields
-        {
-            public Field<byte> x;
-            public Field<byte> z;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Partition> Converter = new TypeConverter<Partition>(Deserialize, Serialize);
 
         public static void Serialize(Partition v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<byte>)s.SerializeU8)(v.x);
             s.SerializeFieldName("z");
             ((Action<byte>)s.SerializeU8)(v.z);
+        }
+
+        private struct Fields
+        {
+            public Field<byte> x;
+            public Field<byte> z;
         }
 
         public static Partition Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

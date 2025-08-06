@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Materials
 {
     public sealed class CycleData
     {
-        public static readonly TypeConverter<CycleData> Converter = new TypeConverter<CycleData>(Deserialize, Serialize);
         public System.Collections.Generic.List<short> textureIndices;
         public bool looping;
         public float speed;
@@ -23,15 +22,9 @@ namespace Mech3DotNet.Types.Gamez.Materials
             this.texMapPtr = texMapPtr;
         }
 
-        private struct Fields
-        {
-            public Field<System.Collections.Generic.List<short>> textureIndices;
-            public Field<bool> looping;
-            public Field<float> speed;
-            public Field<int> currentFrame;
-            public Field<uint> cyclePtr;
-            public Field<uint> texMapPtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CycleData> Converter = new TypeConverter<CycleData>(Deserialize, Serialize);
 
         public static void Serialize(CycleData v, Serializer s)
         {
@@ -48,6 +41,16 @@ namespace Mech3DotNet.Types.Gamez.Materials
             ((Action<uint>)s.SerializeU32)(v.cyclePtr);
             s.SerializeFieldName("tex_map_ptr");
             ((Action<uint>)s.SerializeU32)(v.texMapPtr);
+        }
+
+        private struct Fields
+        {
+            public Field<System.Collections.Generic.List<short>> textureIndices;
+            public Field<bool> looping;
+            public Field<float> speed;
+            public Field<int> currentFrame;
+            public Field<uint> cyclePtr;
+            public Field<uint> texMapPtr;
         }
 
         public static CycleData Deserialize(Deserializer d)
@@ -103,5 +106,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
             );
         }
+
+        #endregion
     }
 }

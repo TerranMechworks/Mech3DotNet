@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectScaleState
     {
-        public static readonly TypeConverter<ObjectScaleState> Converter = new TypeConverter<ObjectScaleState>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Common.Vec3 state;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.state = state;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Common.Vec3> state;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectScaleState> Converter = new TypeConverter<ObjectScaleState>(Deserialize, Serialize);
 
         public static void Serialize(ObjectScaleState v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("state");
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.state);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Common.Vec3> state;
         }
 
         public static ObjectScaleState Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

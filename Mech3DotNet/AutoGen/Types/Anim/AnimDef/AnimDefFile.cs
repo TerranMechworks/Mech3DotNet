@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 {
     public sealed class AnimDefFile
     {
-        public static readonly TypeConverter<AnimDefFile> Converter = new TypeConverter<AnimDefFile>(Deserialize, Serialize);
         public string name;
         public System.DateTime datetime;
         public uint? hash = null;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             this.hash = hash;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<System.DateTime> datetime;
-            public Field<uint?> hash;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AnimDefFile> Converter = new TypeConverter<AnimDefFile>(Deserialize, Serialize);
 
         public static void Serialize(AnimDefFile v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             ((Action<DateTime>)s.SerializeDateTime)(v.datetime);
             s.SerializeFieldName("hash");
             s.SerializeValOption(((Action<uint>)s.SerializeU32))(v.hash);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<System.DateTime> datetime;
+            public Field<uint?> hash;
         }
 
         public static AnimDefFile Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 
             );
         }
+
+        #endregion
     }
 }

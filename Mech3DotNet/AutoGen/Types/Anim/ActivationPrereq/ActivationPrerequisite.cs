@@ -34,6 +34,8 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
         public bool IsObject() => Variant == Variants.Object;
         public Mech3DotNet.Types.Anim.ActivationPrereq.PrerequisiteObject AsObject() => (Mech3DotNet.Types.Anim.ActivationPrereq.PrerequisiteObject)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(ActivationPrerequisite v, Serializer s)
         {
             switch (v.Variant)
@@ -100,5 +102,7 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
                     throw new UnknownVariantException("ActivationPrerequisite", variantIndex);
             }
         }
+
+        #endregion
     }
 }

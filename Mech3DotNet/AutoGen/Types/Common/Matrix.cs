@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Common
 {
     public sealed class Matrix
     {
-        public static readonly TypeConverter<Matrix> Converter = new TypeConverter<Matrix>(Deserialize, Serialize);
         public float a;
         public float b;
         public float c;
@@ -29,18 +28,9 @@ namespace Mech3DotNet.Types.Common
             this.i = i;
         }
 
-        private struct Fields
-        {
-            public Field<float> a;
-            public Field<float> b;
-            public Field<float> c;
-            public Field<float> d;
-            public Field<float> e;
-            public Field<float> f;
-            public Field<float> g;
-            public Field<float> h;
-            public Field<float> i;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Matrix> Converter = new TypeConverter<Matrix>(Deserialize, Serialize);
 
         public static void Serialize(Matrix v, Serializer s)
         {
@@ -63,6 +53,19 @@ namespace Mech3DotNet.Types.Common
             ((Action<float>)s.SerializeF32)(v.h);
             s.SerializeFieldName("i");
             ((Action<float>)s.SerializeF32)(v.i);
+        }
+
+        private struct Fields
+        {
+            public Field<float> a;
+            public Field<float> b;
+            public Field<float> c;
+            public Field<float> d;
+            public Field<float> e;
+            public Field<float> f;
+            public Field<float> g;
+            public Field<float> h;
+            public Field<float> i;
         }
 
         public static Matrix Deserialize(Deserializer d)
@@ -136,5 +139,7 @@ namespace Mech3DotNet.Types.Common
 
             );
         }
+
+        #endregion
     }
 }

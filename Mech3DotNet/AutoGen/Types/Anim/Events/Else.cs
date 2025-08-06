@@ -5,19 +5,22 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Else
     {
-        public static readonly TypeConverter<Else> Converter = new TypeConverter<Else>(Deserialize, Serialize);
 
         public Else()
         {
         }
 
-        private struct Fields
-        {
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Else> Converter = new TypeConverter<Else>(Deserialize, Serialize);
 
         public static void Serialize(Else v, Serializer s)
         {
             s.SerializeStruct(0);
+        }
+
+        private struct Fields
+        {
         }
 
         public static Else Deserialize(Deserializer d)
@@ -37,5 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

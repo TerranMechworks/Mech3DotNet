@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Callback
     {
-        public static readonly TypeConverter<Callback> Converter = new TypeConverter<Callback>(Deserialize, Serialize);
         public uint value;
 
         public Callback(uint value)
@@ -13,16 +12,20 @@ namespace Mech3DotNet.Types.Anim.Events
             this.value = value;
         }
 
-        private struct Fields
-        {
-            public Field<uint> value;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Callback> Converter = new TypeConverter<Callback>(Deserialize, Serialize);
 
         public static void Serialize(Callback v, Serializer s)
         {
             s.SerializeStruct(1);
             s.SerializeFieldName("value");
             ((Action<uint>)s.SerializeU32)(v.value);
+        }
+
+        private struct Fields
+        {
+            public Field<uint> value;
         }
 
         public static Callback Deserialize(Deserializer d)
@@ -48,5 +51,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

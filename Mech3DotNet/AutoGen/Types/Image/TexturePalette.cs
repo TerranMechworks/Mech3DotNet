@@ -33,6 +33,8 @@ namespace Mech3DotNet.Types.Image
         public bool IsGlobal() => Variant == Variants.Global;
         public Mech3DotNet.Types.Image.GlobalPalette AsGlobal() => (Mech3DotNet.Types.Image.GlobalPalette)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(TexturePalette v, Serializer s)
         {
             switch (v.Variant)
@@ -96,5 +98,7 @@ namespace Mech3DotNet.Types.Image
                     throw new UnknownVariantException("TexturePalette", variantIndex);
             }
         }
+
+        #endregion
     }
 }

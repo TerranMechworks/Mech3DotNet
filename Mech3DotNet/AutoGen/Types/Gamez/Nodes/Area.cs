@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Area
     {
-        public static readonly TypeConverter<Area> Converter = new TypeConverter<Area>(Deserialize, Serialize);
         public int left;
         public int top;
         public int right;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.bottom = bottom;
         }
 
-        private struct Fields
-        {
-            public Field<int> left;
-            public Field<int> top;
-            public Field<int> right;
-            public Field<int> bottom;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Area> Converter = new TypeConverter<Area>(Deserialize, Serialize);
 
         public static void Serialize(Area v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<int>)s.SerializeI32)(v.right);
             s.SerializeFieldName("bottom");
             ((Action<int>)s.SerializeI32)(v.bottom);
+        }
+
+        private struct Fields
+        {
+            public Field<int> left;
+            public Field<int> top;
+            public Field<int> right;
+            public Field<int> bottom;
         }
 
         public static Area Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

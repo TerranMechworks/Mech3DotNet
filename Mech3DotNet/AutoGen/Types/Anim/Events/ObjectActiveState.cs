@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectActiveState
     {
-        public static readonly TypeConverter<ObjectActiveState> Converter = new TypeConverter<ObjectActiveState>(Deserialize, Serialize);
         public string node;
         public bool state;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.state = state;
         }
 
-        private struct Fields
-        {
-            public Field<string> node;
-            public Field<bool> state;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectActiveState> Converter = new TypeConverter<ObjectActiveState>(Deserialize, Serialize);
 
         public static void Serialize(ObjectActiveState v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("state");
             ((Action<bool>)s.SerializeBool)(v.state);
+        }
+
+        private struct Fields
+        {
+            public Field<string> node;
+            public Field<bool> state;
         }
 
         public static ObjectActiveState Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

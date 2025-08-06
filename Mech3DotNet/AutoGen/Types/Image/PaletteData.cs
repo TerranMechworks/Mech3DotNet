@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Image
 {
     public sealed class PaletteData
     {
-        public static readonly TypeConverter<PaletteData> Converter = new TypeConverter<PaletteData>(Deserialize, Serialize);
         public byte[] data;
 
         public PaletteData(byte[] data)
@@ -13,16 +12,20 @@ namespace Mech3DotNet.Types.Image
             this.data = data;
         }
 
-        private struct Fields
-        {
-            public Field<byte[]> data;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PaletteData> Converter = new TypeConverter<PaletteData>(Deserialize, Serialize);
 
         public static void Serialize(PaletteData v, Serializer s)
         {
             s.SerializeStruct(1);
             s.SerializeFieldName("data");
             ((Action<byte[]>)s.SerializeBytes)(v.data);
+        }
+
+        private struct Fields
+        {
+            public Field<byte[]> data;
         }
 
         public static PaletteData Deserialize(Deserializer d)
@@ -48,5 +51,7 @@ namespace Mech3DotNet.Types.Image
 
             );
         }
+
+        #endregion
     }
 }

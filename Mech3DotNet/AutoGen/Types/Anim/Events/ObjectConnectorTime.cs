@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsRange() => Variant == Variants.Range;
         public Mech3DotNet.Types.Common.Range AsRange() => (Mech3DotNet.Types.Common.Range)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(ObjectConnectorTime v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("ObjectConnectorTime", variantIndex);
             }
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class DetonateWeapon
     {
-        public static readonly TypeConverter<DetonateWeapon> Converter = new TypeConverter<DetonateWeapon>(Deserialize, Serialize);
         public string weapon;
         public Mech3DotNet.Types.Anim.Events.AtNode atNode;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.atNode = atNode;
         }
 
-        private struct Fields
-        {
-            public Field<string> weapon;
-            public Field<Mech3DotNet.Types.Anim.Events.AtNode> atNode;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<DetonateWeapon> Converter = new TypeConverter<DetonateWeapon>(Deserialize, Serialize);
 
         public static void Serialize(DetonateWeapon v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.weapon);
             s.SerializeFieldName("at_node");
             s.Serialize(Mech3DotNet.Types.Anim.Events.AtNode.Converter)(v.atNode);
+        }
+
+        private struct Fields
+        {
+            public Field<string> weapon;
+            public Field<Mech3DotNet.Types.Anim.Events.AtNode> atNode;
         }
 
         public static DetonateWeapon Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

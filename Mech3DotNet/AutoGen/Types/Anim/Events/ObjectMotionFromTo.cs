@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectMotionFromTo
     {
-        public static readonly TypeConverter<ObjectMotionFromTo> Converter = new TypeConverter<ObjectMotionFromTo>(Deserialize, Serialize);
         public string name;
         public float runTime;
         public Mech3DotNet.Types.Anim.Events.FloatFromTo? morph;
@@ -29,18 +28,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.scaleDelta = scaleDelta;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<float> runTime;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> morph;
-            public Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?> translate;
-            public Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?> rotate;
-            public Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?> scale;
-            public Field<Mech3DotNet.Types.Common.Vec3?> translateDelta;
-            public Field<Mech3DotNet.Types.Common.Vec3?> rotateDelta;
-            public Field<Mech3DotNet.Types.Common.Vec3?> scaleDelta;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectMotionFromTo> Converter = new TypeConverter<ObjectMotionFromTo>(Deserialize, Serialize);
 
         public static void Serialize(ObjectMotionFromTo v, Serializer s)
         {
@@ -63,6 +53,19 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.rotateDelta);
             s.SerializeFieldName("scale_delta");
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.scaleDelta);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<float> runTime;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> morph;
+            public Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?> translate;
+            public Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?> rotate;
+            public Field<Mech3DotNet.Types.Anim.Events.Vec3FromTo?> scale;
+            public Field<Mech3DotNet.Types.Common.Vec3?> translateDelta;
+            public Field<Mech3DotNet.Types.Common.Vec3?> rotateDelta;
+            public Field<Mech3DotNet.Types.Common.Vec3?> scaleDelta;
         }
 
         public static ObjectMotionFromTo Deserialize(Deserializer d)
@@ -136,5 +139,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

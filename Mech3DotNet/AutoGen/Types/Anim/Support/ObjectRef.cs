@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Support
 {
     public sealed class ObjectRef
     {
-        public static readonly TypeConverter<ObjectRef> Converter = new TypeConverter<ObjectRef>(Deserialize, Serialize);
         public string name;
         public uint? ptr = null;
         public uint flags;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Anim.Support
             this.affine = affine;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<uint?> ptr;
-            public Field<uint> flags;
-            public Field<uint?> flagsMerged;
-            public Field<byte[]> affine;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectRef> Converter = new TypeConverter<ObjectRef>(Deserialize, Serialize);
 
         public static void Serialize(ObjectRef v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Anim.Support
             s.SerializeValOption(((Action<uint>)s.SerializeU32))(v.flagsMerged);
             s.SerializeFieldName("affine");
             ((Action<byte[]>)s.SerializeBytes)(v.affine);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<uint?> ptr;
+            public Field<uint> flags;
+            public Field<uint?> flagsMerged;
+            public Field<byte[]> affine;
         }
 
         public static ObjectRef Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Anim.Support
 
             );
         }
+
+        #endregion
     }
 }

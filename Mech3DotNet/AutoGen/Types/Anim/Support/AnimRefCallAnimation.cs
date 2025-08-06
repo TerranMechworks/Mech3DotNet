@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Support
 {
     public sealed class AnimRefCallAnimation
     {
-        public static readonly TypeConverter<AnimRefCallAnimation> Converter = new TypeConverter<AnimRefCallAnimation>(Deserialize, Serialize);
         public string name;
         public byte[] namePad;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Support
             this.namePad = namePad;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<byte[]> namePad;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AnimRefCallAnimation> Converter = new TypeConverter<AnimRefCallAnimation>(Deserialize, Serialize);
 
         public static void Serialize(AnimRefCallAnimation v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Support
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("name_pad");
             ((Action<byte[]>)s.SerializeBytes)(v.namePad);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<byte[]> namePad;
         }
 
         public static AnimRefCallAnimation Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Support
 
             );
         }
+
+        #endregion
     }
 }

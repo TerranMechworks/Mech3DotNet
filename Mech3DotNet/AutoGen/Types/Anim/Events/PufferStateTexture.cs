@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class PufferStateTexture
     {
-        public static readonly TypeConverter<PufferStateTexture> Converter = new TypeConverter<PufferStateTexture>(Deserialize, Serialize);
         public string name;
         public float? runTime;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.runTime = runTime;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<float?> runTime;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PufferStateTexture> Converter = new TypeConverter<PufferStateTexture>(Deserialize, Serialize);
 
         public static void Serialize(PufferStateTexture v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("run_time");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.runTime);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<float?> runTime;
         }
 
         public static PufferStateTexture Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

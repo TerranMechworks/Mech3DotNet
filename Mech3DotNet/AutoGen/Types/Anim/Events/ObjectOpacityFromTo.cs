@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectOpacityFromTo
     {
-        public static readonly TypeConverter<ObjectOpacityFromTo> Converter = new TypeConverter<ObjectOpacityFromTo>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Anim.Events.ObjectOpacity opacityFrom;
         public Mech3DotNet.Types.Anim.Events.ObjectOpacity opacityTo;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.opacityDelta = opacityDelta;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectOpacity> opacityFrom;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectOpacity> opacityTo;
-            public Field<float> runTime;
-            public Field<float?> opacityDelta;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectOpacityFromTo> Converter = new TypeConverter<ObjectOpacityFromTo>(Deserialize, Serialize);
 
         public static void Serialize(ObjectOpacityFromTo v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.runTime);
             s.SerializeFieldName("opacity_delta");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.opacityDelta);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectOpacity> opacityFrom;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectOpacity> opacityTo;
+            public Field<float> runTime;
+            public Field<float?> opacityDelta;
         }
 
         public static ObjectOpacityFromTo Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

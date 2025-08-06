@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 {
     public sealed class AnimDef
     {
-        public static readonly TypeConverter<AnimDef> Converter = new TypeConverter<AnimDef>(Deserialize, Serialize);
         public string name;
         public string animName;
         public string animRootName;
@@ -67,37 +66,9 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             this.ptrs = ptrs;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<string> animName;
-            public Field<string> animRootName;
-            public Field<bool> hasCallbacks;
-            public Field<bool> autoResetNodeStates;
-            public Field<bool> localNodesOnly;
-            public Field<bool> proximityDamage;
-            public Field<bool> active;
-            public Field<bool> lowPriority;
-            public Field<Mech3DotNet.Types.Anim.AnimDef.AnimActivation> activation;
-            public Field<Mech3DotNet.Types.Anim.AnimDef.Execution> execution;
-            public Field<bool?> networkLog;
-            public Field<bool?> saveLog;
-            public Field<float?> resetTime;
-            public Field<float> health;
-            public Field<byte> activPrereqMinToSatisfy;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.ObjectRef>?> objects;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.NodeRef>?> nodes;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.LightRef>?> lights;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.PufferRef>?> puffers;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.DynamicSoundRef>?> dynamicSounds;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.StaticSoundRef>?> staticSounds;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.EffectRef>?> effects;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.ActivationPrereq.ActivationPrerequisite>?> activPrereqs;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.AnimRef>?> animRefs;
-            public Field<Mech3DotNet.Types.Anim.AnimDef.ResetState?> resetState;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.SeqDef>> sequences;
-            public Field<Mech3DotNet.Types.Anim.AnimDef.AnimDefPtrs?> ptrs;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AnimDef> Converter = new TypeConverter<AnimDef>(Deserialize, Serialize);
 
         public static void Serialize(AnimDef v, Serializer s)
         {
@@ -158,6 +129,38 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.AnimDef.SeqDef.Converter))(v.sequences);
             s.SerializeFieldName("ptrs");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.AnimDef.AnimDefPtrs.Converter))(v.ptrs);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<string> animName;
+            public Field<string> animRootName;
+            public Field<bool> hasCallbacks;
+            public Field<bool> autoResetNodeStates;
+            public Field<bool> localNodesOnly;
+            public Field<bool> proximityDamage;
+            public Field<bool> active;
+            public Field<bool> lowPriority;
+            public Field<Mech3DotNet.Types.Anim.AnimDef.AnimActivation> activation;
+            public Field<Mech3DotNet.Types.Anim.AnimDef.Execution> execution;
+            public Field<bool?> networkLog;
+            public Field<bool?> saveLog;
+            public Field<float?> resetTime;
+            public Field<float> health;
+            public Field<byte> activPrereqMinToSatisfy;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.ObjectRef>?> objects;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.NodeRef>?> nodes;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.LightRef>?> lights;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.PufferRef>?> puffers;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.DynamicSoundRef>?> dynamicSounds;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.StaticSoundRef>?> staticSounds;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.EffectRef>?> effects;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.ActivationPrereq.ActivationPrerequisite>?> activPrereqs;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Support.AnimRef>?> animRefs;
+            public Field<Mech3DotNet.Types.Anim.AnimDef.ResetState?> resetState;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.SeqDef>> sequences;
+            public Field<Mech3DotNet.Types.Anim.AnimDef.AnimDefPtrs?> ptrs;
         }
 
         public static AnimDef Deserialize(Deserializer d)
@@ -345,5 +348,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class RotateTranslateScale
     {
-        public static readonly TypeConverter<RotateTranslateScale> Converter = new TypeConverter<RotateTranslateScale>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Vec3 rotate;
         public Mech3DotNet.Types.Common.Vec3 translate;
         public Mech3DotNet.Types.Common.Vec3 scale;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.original = original;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Vec3> rotate;
-            public Field<Mech3DotNet.Types.Common.Vec3> translate;
-            public Field<Mech3DotNet.Types.Common.Vec3> scale;
-            public Field<Mech3DotNet.Types.Common.AffineMatrix?> original;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<RotateTranslateScale> Converter = new TypeConverter<RotateTranslateScale>(Deserialize, Serialize);
 
         public static void Serialize(RotateTranslateScale v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.scale);
             s.SerializeFieldName("original");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Common.AffineMatrix.Converter))(v.original);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Vec3> rotate;
+            public Field<Mech3DotNet.Types.Common.Vec3> translate;
+            public Field<Mech3DotNet.Types.Common.Vec3> scale;
+            public Field<Mech3DotNet.Types.Common.AffineMatrix?> original;
         }
 
         public static RotateTranslateScale Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez
 {
     public sealed class GameZ
     {
-        public static readonly TypeConverter<GameZ> Converter = new TypeConverter<GameZ>(Deserialize, Serialize);
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Texture> textures;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material> materials;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Model> models;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Gamez
             this.metadata = metadata;
         }
 
-        private struct Fields
-        {
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Texture>> textures;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material>> materials;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Model>> models;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.Node>> nodes;
-            public Field<Mech3DotNet.Types.Gamez.GameZMetadata> metadata;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<GameZ> Converter = new TypeConverter<GameZ>(Deserialize, Serialize);
 
         public static void Serialize(GameZ v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Gamez
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Nodes.Node.Converter))(v.nodes);
             s.SerializeFieldName("metadata");
             s.Serialize(Mech3DotNet.Types.Gamez.GameZMetadata.Converter)(v.metadata);
+        }
+
+        private struct Fields
+        {
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Texture>> textures;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Materials.Material>> materials;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.Model>> models;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.Node>> nodes;
+            public Field<Mech3DotNet.Types.Gamez.GameZMetadata> metadata;
         }
 
         public static GameZ Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Gamez
 
             );
         }
+
+        #endregion
     }
 }

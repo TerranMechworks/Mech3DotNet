@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Gamez.Materials
         public bool IsColored() => Variant == Variants.Colored;
         public Mech3DotNet.Types.Gamez.Materials.ColoredMaterial AsColored() => (Mech3DotNet.Types.Gamez.Materials.ColoredMaterial)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(Material v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
                     throw new UnknownVariantException("Material", variantIndex);
             }
         }
+
+        #endregion
     }
 }

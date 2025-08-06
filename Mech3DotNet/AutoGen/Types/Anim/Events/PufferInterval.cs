@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class PufferInterval
     {
-        public static readonly TypeConverter<PufferInterval> Converter = new TypeConverter<PufferInterval>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.PufferIntervalType intervalType;
         public float intervalValue;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.intervalValue = intervalValue;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.PufferIntervalType> intervalType;
-            public Field<float> intervalValue;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PufferInterval> Converter = new TypeConverter<PufferInterval>(Deserialize, Serialize);
 
         public static void Serialize(PufferInterval v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Anim.Events.PufferIntervalTypeConverter.Converter)(v.intervalType);
             s.SerializeFieldName("interval_value");
             ((Action<float>)s.SerializeF32)(v.intervalValue);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.PufferIntervalType> intervalType;
+            public Field<float> intervalValue;
         }
 
         public static PufferInterval Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

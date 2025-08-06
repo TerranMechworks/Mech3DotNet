@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class BounceSound
     {
-        public static readonly TypeConverter<BounceSound> Converter = new TypeConverter<BounceSound>(Deserialize, Serialize);
         public string name;
         public float volume;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.volume = volume;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<float> volume;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<BounceSound> Converter = new TypeConverter<BounceSound>(Deserialize, Serialize);
 
         public static void Serialize(BounceSound v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("volume");
             ((Action<float>)s.SerializeF32)(v.volume);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<float> volume;
         }
 
         public static BounceSound Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

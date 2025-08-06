@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Rgba
     {
-        public static readonly TypeConverter<Rgba> Converter = new TypeConverter<Rgba>(Deserialize, Serialize);
         public float r;
         public float g;
         public float b;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.a = a;
         }
 
-        private struct Fields
-        {
-            public Field<float> r;
-            public Field<float> g;
-            public Field<float> b;
-            public Field<float> a;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Rgba> Converter = new TypeConverter<Rgba>(Deserialize, Serialize);
 
         public static void Serialize(Rgba v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.b);
             s.SerializeFieldName("a");
             ((Action<float>)s.SerializeF32)(v.a);
+        }
+
+        private struct Fields
+        {
+            public Field<float> r;
+            public Field<float> g;
+            public Field<float> b;
+            public Field<float> a;
         }
 
         public static Rgba Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

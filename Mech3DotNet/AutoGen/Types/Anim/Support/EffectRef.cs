@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Support
 {
     public sealed class EffectRef
     {
-        public static readonly TypeConverter<EffectRef> Converter = new TypeConverter<EffectRef>(Deserialize, Serialize);
         public string name;
         public uint index;
         public byte[] pad;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Support
             this.pad = pad;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<uint> index;
-            public Field<byte[]> pad;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<EffectRef> Converter = new TypeConverter<EffectRef>(Deserialize, Serialize);
 
         public static void Serialize(EffectRef v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Support
             ((Action<uint>)s.SerializeU32)(v.index);
             s.SerializeFieldName("pad");
             ((Action<byte[]>)s.SerializeBytes)(v.pad);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<uint> index;
+            public Field<byte[]> pad;
         }
 
         public static EffectRef Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Support
 
             );
         }
+
+        #endregion
     }
 }

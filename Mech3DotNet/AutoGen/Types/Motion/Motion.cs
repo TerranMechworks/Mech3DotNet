@@ -7,7 +7,6 @@ namespace Mech3DotNet.Types.Motion
         where TQuaternion : notnull
         where TVec3 : notnull
     {
-        public static readonly TypeConverter<Motion<TQuaternion, TVec3>> Converter = new TypeConverter<Motion<TQuaternion, TVec3>>(Deserialize, Serialize);
         public float loopTime;
         public System.Collections.Generic.List<Mech3DotNet.Types.Motion.MotionPart<TQuaternion, TVec3>> parts;
         public uint frameCount;
@@ -19,12 +18,9 @@ namespace Mech3DotNet.Types.Motion
             this.frameCount = frameCount;
         }
 
-        private struct Fields
-        {
-            public Field<float> loopTime;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Motion.MotionPart<TQuaternion, TVec3>>> parts;
-            public Field<uint> frameCount;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Motion<TQuaternion, TVec3>> Converter = new TypeConverter<Motion<TQuaternion, TVec3>>(Deserialize, Serialize);
 
         public static void Serialize(Motion<TQuaternion, TVec3> v, Serializer s)
         {
@@ -35,6 +31,13 @@ namespace Mech3DotNet.Types.Motion
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Motion.MotionPart<TQuaternion, TVec3>.Converter))(v.parts);
             s.SerializeFieldName("frame_count");
             ((Action<uint>)s.SerializeU32)(v.frameCount);
+        }
+
+        private struct Fields
+        {
+            public Field<float> loopTime;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Motion.MotionPart<TQuaternion, TVec3>>> parts;
+            public Field<uint> frameCount;
         }
 
         public static Motion<TQuaternion, TVec3> Deserialize(Deserializer d)
@@ -72,5 +75,7 @@ namespace Mech3DotNet.Types.Motion
 
             );
         }
+
+        #endregion
     }
 }

@@ -49,6 +49,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsPlayerFirstPerson() => Variant == Variants.PlayerFirstPerson;
         public bool AsPlayerFirstPerson() => (bool)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(Condition v, Serializer s)
         {
             switch (v.Variant)
@@ -163,5 +165,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("Condition", variantIndex);
             }
         }
+
+        #endregion
     }
 }

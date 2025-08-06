@@ -58,6 +58,8 @@ namespace Mech3DotNet.Types.Gamez.Nodes
         public bool IsWorld() => Variant == Variants.World;
         public Mech3DotNet.Types.Gamez.Nodes.World AsWorld() => (Mech3DotNet.Types.Gamez.Nodes.World)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(NodeData v, Serializer s)
         {
             switch (v.Variant)
@@ -201,5 +203,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
                     throw new UnknownVariantException("NodeData", variantIndex);
             }
         }
+
+        #endregion
     }
 }

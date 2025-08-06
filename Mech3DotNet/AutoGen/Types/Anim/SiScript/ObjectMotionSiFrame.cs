@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.SiScript
 {
     public sealed class ObjectMotionSiFrame
     {
-        public static readonly TypeConverter<ObjectMotionSiFrame> Converter = new TypeConverter<ObjectMotionSiFrame>(Deserialize, Serialize);
         public float startTime;
         public float endTime;
         public Mech3DotNet.Types.Anim.SiScript.TranslateData? translate = null;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Anim.SiScript
             this.scale = scale;
         }
 
-        private struct Fields
-        {
-            public Field<float> startTime;
-            public Field<float> endTime;
-            public Field<Mech3DotNet.Types.Anim.SiScript.TranslateData?> translate;
-            public Field<Mech3DotNet.Types.Anim.SiScript.RotateData?> rotate;
-            public Field<Mech3DotNet.Types.Anim.SiScript.ScaleData?> scale;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectMotionSiFrame> Converter = new TypeConverter<ObjectMotionSiFrame>(Deserialize, Serialize);
 
         public static void Serialize(ObjectMotionSiFrame v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Anim.SiScript
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.SiScript.RotateData.Converter))(v.rotate);
             s.SerializeFieldName("scale");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.SiScript.ScaleData.Converter))(v.scale);
+        }
+
+        private struct Fields
+        {
+            public Field<float> startTime;
+            public Field<float> endTime;
+            public Field<Mech3DotNet.Types.Anim.SiScript.TranslateData?> translate;
+            public Field<Mech3DotNet.Types.Anim.SiScript.RotateData?> rotate;
+            public Field<Mech3DotNet.Types.Anim.SiScript.ScaleData?> scale;
         }
 
         public static ObjectMotionSiFrame Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Anim.SiScript
 
             );
         }
+
+        #endregion
     }
 }

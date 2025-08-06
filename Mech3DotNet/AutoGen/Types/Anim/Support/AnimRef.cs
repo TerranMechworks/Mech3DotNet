@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Anim.Support
         public bool IsCallObjectConnector() => Variant == Variants.CallObjectConnector;
         public Mech3DotNet.Types.Anim.Support.AnimRefCallObjectConnector AsCallObjectConnector() => (Mech3DotNet.Types.Anim.Support.AnimRefCallObjectConnector)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(AnimRef v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Anim.Support
                     throw new UnknownVariantException("AnimRef", variantIndex);
             }
         }
+
+        #endregion
     }
 }

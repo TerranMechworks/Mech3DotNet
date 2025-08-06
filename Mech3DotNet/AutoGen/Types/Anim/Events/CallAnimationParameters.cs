@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsWithNode() => Variant == Variants.WithNode;
         public Mech3DotNet.Types.Anim.Events.CallAnimationWithNode AsWithNode() => (Mech3DotNet.Types.Anim.Events.CallAnimationWithNode)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(CallAnimationParameters v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("CallAnimationParameters", variantIndex);
             }
         }
+
+        #endregion
     }
 }

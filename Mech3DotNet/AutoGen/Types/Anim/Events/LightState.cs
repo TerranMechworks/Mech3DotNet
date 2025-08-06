@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class LightState
     {
-        public static readonly TypeConverter<LightState> Converter = new TypeConverter<LightState>(Deserialize, Serialize);
         public string name;
         public bool activeState;
         public Mech3DotNet.Types.Anim.Events.LightType type;
@@ -43,25 +42,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.diffuse = diffuse;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<bool> activeState;
-            public Field<Mech3DotNet.Types.Anim.Events.LightType> type;
-            public Field<Mech3DotNet.Types.Anim.Events.Translate?> translate;
-            public Field<bool?> directional;
-            public Field<bool?> saturated;
-            public Field<bool?> subdivide;
-            public Field<bool?> lightmap;
-            public Field<bool?> static_;
-            public Field<bool?> bicolored;
-            public Field<Mech3DotNet.Types.Common.Vec3?> orientation;
-            public Field<Mech3DotNet.Types.Common.Range?> range;
-            public Field<Mech3DotNet.Types.Common.Color?> color;
-            public Field<Mech3DotNet.Types.Common.Color?> ambientColor;
-            public Field<float?> ambient;
-            public Field<float?> diffuse;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<LightState> Converter = new TypeConverter<LightState>(Deserialize, Serialize);
 
         public static void Serialize(LightState v, Serializer s)
         {
@@ -98,6 +81,26 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.ambient);
             s.SerializeFieldName("diffuse");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.diffuse);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<bool> activeState;
+            public Field<Mech3DotNet.Types.Anim.Events.LightType> type;
+            public Field<Mech3DotNet.Types.Anim.Events.Translate?> translate;
+            public Field<bool?> directional;
+            public Field<bool?> saturated;
+            public Field<bool?> subdivide;
+            public Field<bool?> lightmap;
+            public Field<bool?> static_;
+            public Field<bool?> bicolored;
+            public Field<Mech3DotNet.Types.Common.Vec3?> orientation;
+            public Field<Mech3DotNet.Types.Common.Range?> range;
+            public Field<Mech3DotNet.Types.Common.Color?> color;
+            public Field<Mech3DotNet.Types.Common.Color?> ambientColor;
+            public Field<float?> ambient;
+            public Field<float?> diffuse;
         }
 
         public static LightState Deserialize(Deserializer d)
@@ -213,5 +216,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

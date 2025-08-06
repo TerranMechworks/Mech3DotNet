@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectAddChild
     {
-        public static readonly TypeConverter<ObjectAddChild> Converter = new TypeConverter<ObjectAddChild>(Deserialize, Serialize);
         public string parent;
         public string child;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.child = child;
         }
 
-        private struct Fields
-        {
-            public Field<string> parent;
-            public Field<string> child;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectAddChild> Converter = new TypeConverter<ObjectAddChild>(Deserialize, Serialize);
 
         public static void Serialize(ObjectAddChild v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.parent);
             s.SerializeFieldName("child");
             ((Action<string>)s.SerializeString)(v.child);
+        }
+
+        private struct Fields
+        {
+            public Field<string> parent;
+            public Field<string> child;
         }
 
         public static ObjectAddChild Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Interp
 {
     public sealed class Script
     {
-        public static readonly TypeConverter<Script> Converter = new TypeConverter<Script>(Deserialize, Serialize);
         public string name;
         public System.DateTime datetime;
         public System.Collections.Generic.List<string> lines;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Interp
             this.lines = lines;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<System.DateTime> datetime;
-            public Field<System.Collections.Generic.List<string>> lines;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Script> Converter = new TypeConverter<Script>(Deserialize, Serialize);
 
         public static void Serialize(Script v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Interp
             ((Action<DateTime>)s.SerializeDateTime)(v.datetime);
             s.SerializeFieldName("lines");
             s.SerializeVec(((Action<string>)s.SerializeString))(v.lines);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<System.DateTime> datetime;
+            public Field<System.Collections.Generic.List<string>> lines;
         }
 
         public static Script Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Interp
 
             );
         }
+
+        #endregion
     }
 }

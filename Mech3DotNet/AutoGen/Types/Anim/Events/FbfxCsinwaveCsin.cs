@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class FbfxCsinwaveCsin
     {
-        public static readonly TypeConverter<FbfxCsinwaveCsin> Converter = new TypeConverter<FbfxCsinwaveCsin>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.FloatFromTo x;
         public Mech3DotNet.Types.Anim.Events.FloatFromTo y;
         public Mech3DotNet.Types.Anim.Events.FloatFromTo z;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.z = z;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo> x;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo> y;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo> z;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<FbfxCsinwaveCsin> Converter = new TypeConverter<FbfxCsinwaveCsin>(Deserialize, Serialize);
 
         public static void Serialize(FbfxCsinwaveCsin v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Anim.Events.FloatFromTo.Converter)(v.y);
             s.SerializeFieldName("z");
             s.Serialize(Mech3DotNet.Types.Anim.Events.FloatFromTo.Converter)(v.z);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo> x;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo> y;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo> z;
         }
 
         public static FbfxCsinwaveCsin Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

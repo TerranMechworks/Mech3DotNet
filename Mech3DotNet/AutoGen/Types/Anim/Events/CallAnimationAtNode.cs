@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class CallAnimationAtNode
     {
-        public static readonly TypeConverter<CallAnimationAtNode> Converter = new TypeConverter<CallAnimationAtNode>(Deserialize, Serialize);
         public string node;
         public Mech3DotNet.Types.Common.Vec3? position;
         public Mech3DotNet.Types.Common.Vec3? translate;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.translate = translate;
         }
 
-        private struct Fields
-        {
-            public Field<string> node;
-            public Field<Mech3DotNet.Types.Common.Vec3?> position;
-            public Field<Mech3DotNet.Types.Common.Vec3?> translate;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CallAnimationAtNode> Converter = new TypeConverter<CallAnimationAtNode>(Deserialize, Serialize);
 
         public static void Serialize(CallAnimationAtNode v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.position);
             s.SerializeFieldName("translate");
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.translate);
+        }
+
+        private struct Fields
+        {
+            public Field<string> node;
+            public Field<Mech3DotNet.Types.Common.Vec3?> position;
+            public Field<Mech3DotNet.Types.Common.Vec3?> translate;
         }
 
         public static CallAnimationAtNode Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

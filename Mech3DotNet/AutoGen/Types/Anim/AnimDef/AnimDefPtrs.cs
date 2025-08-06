@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 {
     public sealed class AnimDefPtrs
     {
-        public static readonly TypeConverter<AnimDefPtrs> Converter = new TypeConverter<AnimDefPtrs>(Deserialize, Serialize);
         public uint? animHash = null;
         public uint? animRootHash = null;
         public uint seqDefsPtr;
@@ -41,24 +40,9 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             this.resetStatePtr = resetStatePtr;
         }
 
-        private struct Fields
-        {
-            public Field<uint?> animHash;
-            public Field<uint?> animRootHash;
-            public Field<uint> seqDefsPtr;
-            public Field<uint> objectsPtr;
-            public Field<uint> nodesPtr;
-            public Field<uint> lightsPtr;
-            public Field<uint> dynamicSoundsPtr;
-            public Field<uint> staticSoundsPtr;
-            public Field<uint> activPrereqsPtr;
-            public Field<uint> animRefsPtr;
-            public Field<uint> animPtr;
-            public Field<uint> animRootPtr;
-            public Field<uint> puffersPtr;
-            public Field<uint> effectsPtr;
-            public Field<uint> resetStatePtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AnimDefPtrs> Converter = new TypeConverter<AnimDefPtrs>(Deserialize, Serialize);
 
         public static void Serialize(AnimDefPtrs v, Serializer s)
         {
@@ -93,6 +77,25 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             ((Action<uint>)s.SerializeU32)(v.effectsPtr);
             s.SerializeFieldName("reset_state_ptr");
             ((Action<uint>)s.SerializeU32)(v.resetStatePtr);
+        }
+
+        private struct Fields
+        {
+            public Field<uint?> animHash;
+            public Field<uint?> animRootHash;
+            public Field<uint> seqDefsPtr;
+            public Field<uint> objectsPtr;
+            public Field<uint> nodesPtr;
+            public Field<uint> lightsPtr;
+            public Field<uint> dynamicSoundsPtr;
+            public Field<uint> staticSoundsPtr;
+            public Field<uint> activPrereqsPtr;
+            public Field<uint> animRefsPtr;
+            public Field<uint> animPtr;
+            public Field<uint> animRootPtr;
+            public Field<uint> puffersPtr;
+            public Field<uint> effectsPtr;
+            public Field<uint> resetStatePtr;
         }
 
         public static AnimDefPtrs Deserialize(Deserializer d)
@@ -202,5 +205,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 
             );
         }
+
+        #endregion
     }
 }

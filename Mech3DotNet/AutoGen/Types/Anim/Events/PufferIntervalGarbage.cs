@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class PufferIntervalGarbage
     {
-        public static readonly TypeConverter<PufferIntervalGarbage> Converter = new TypeConverter<PufferIntervalGarbage>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.PufferIntervalType intervalType;
         public bool hasIntervalType;
         public float intervalValue;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.hasIntervalValue = hasIntervalValue;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.PufferIntervalType> intervalType;
-            public Field<bool> hasIntervalType;
-            public Field<float> intervalValue;
-            public Field<bool> hasIntervalValue;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PufferIntervalGarbage> Converter = new TypeConverter<PufferIntervalGarbage>(Deserialize, Serialize);
 
         public static void Serialize(PufferIntervalGarbage v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.intervalValue);
             s.SerializeFieldName("has_interval_value");
             ((Action<bool>)s.SerializeBool)(v.hasIntervalValue);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.PufferIntervalType> intervalType;
+            public Field<bool> hasIntervalType;
+            public Field<float> intervalValue;
+            public Field<bool> hasIntervalValue;
         }
 
         public static PufferIntervalGarbage Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

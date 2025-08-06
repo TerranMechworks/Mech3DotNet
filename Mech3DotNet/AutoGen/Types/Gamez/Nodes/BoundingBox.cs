@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class BoundingBox
     {
-        public static readonly TypeConverter<BoundingBox> Converter = new TypeConverter<BoundingBox>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Vec3 a;
         public Mech3DotNet.Types.Common.Vec3 b;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.b = b;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Vec3> a;
-            public Field<Mech3DotNet.Types.Common.Vec3> b;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<BoundingBox> Converter = new TypeConverter<BoundingBox>(Deserialize, Serialize);
 
         public static void Serialize(BoundingBox v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.a);
             s.SerializeFieldName("b");
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.b);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Vec3> a;
+            public Field<Mech3DotNet.Types.Common.Vec3> b;
         }
 
         public static BoundingBox Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

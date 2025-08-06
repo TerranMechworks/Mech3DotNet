@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsAtNode() => Variant == Variants.AtNode;
         public Mech3DotNet.Types.Anim.Events.AtNode AsAtNode() => (Mech3DotNet.Types.Anim.Events.AtNode)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(Translate v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("Translate", variantIndex);
             }
         }
+
+        #endregion
     }
 }

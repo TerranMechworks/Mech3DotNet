@@ -214,6 +214,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsPufferState() => Variant == Variants.PufferState;
         public Mech3DotNet.Types.Anim.Events.PufferState AsPufferState() => (Mech3DotNet.Types.Anim.Events.PufferState)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(EventData v, Serializer s)
         {
             switch (v.Variant)
@@ -856,5 +858,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("EventData", variantIndex);
             }
         }
+
+        #endregion
     }
 }

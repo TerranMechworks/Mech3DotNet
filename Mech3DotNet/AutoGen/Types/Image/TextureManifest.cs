@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Image
 {
     public sealed class TextureManifest
     {
-        public static readonly TypeConverter<TextureManifest> Converter = new TypeConverter<TextureManifest>(Deserialize, Serialize);
         public System.Collections.Generic.List<Mech3DotNet.Types.Image.TextureInfo> textureInfos;
         public System.Collections.Generic.List<Mech3DotNet.Types.Image.PaletteData> globalPalettes;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Image
             this.globalPalettes = globalPalettes;
         }
 
-        private struct Fields
-        {
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Image.TextureInfo>> textureInfos;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Image.PaletteData>> globalPalettes;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<TextureManifest> Converter = new TypeConverter<TextureManifest>(Deserialize, Serialize);
 
         public static void Serialize(TextureManifest v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Image
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Image.TextureInfo.Converter))(v.textureInfos);
             s.SerializeFieldName("global_palettes");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Image.PaletteData.Converter))(v.globalPalettes);
+        }
+
+        private struct Fields
+        {
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Image.TextureInfo>> textureInfos;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Image.PaletteData>> globalPalettes;
         }
 
         public static TextureManifest Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Image
 
             );
         }
+
+        #endregion
     }
 }

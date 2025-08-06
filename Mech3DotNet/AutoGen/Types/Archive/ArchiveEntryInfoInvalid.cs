@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Archive
 {
     public sealed class ArchiveEntryInfoInvalid
     {
-        public static readonly TypeConverter<ArchiveEntryInfoInvalid> Converter = new TypeConverter<ArchiveEntryInfoInvalid>(Deserialize, Serialize);
         public byte[] comment;
         public ulong filetime;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Archive
             this.filetime = filetime;
         }
 
-        private struct Fields
-        {
-            public Field<byte[]> comment;
-            public Field<ulong> filetime;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ArchiveEntryInfoInvalid> Converter = new TypeConverter<ArchiveEntryInfoInvalid>(Deserialize, Serialize);
 
         public static void Serialize(ArchiveEntryInfoInvalid v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Archive
             ((Action<byte[]>)s.SerializeBytes)(v.comment);
             s.SerializeFieldName("filetime");
             ((Action<ulong>)s.SerializeU64)(v.filetime);
+        }
+
+        private struct Fields
+        {
+            public Field<byte[]> comment;
+            public Field<ulong> filetime;
         }
 
         public static ArchiveEntryInfoInvalid Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Archive
 
             );
         }
+
+        #endregion
     }
 }

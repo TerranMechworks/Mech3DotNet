@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class FogState
     {
-        public static readonly TypeConverter<FogState> Converter = new TypeConverter<FogState>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.FogType? type;
         public Mech3DotNet.Types.Common.Color? color;
         public Mech3DotNet.Types.Common.Range? altitude;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.range = range;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.FogType?> type;
-            public Field<Mech3DotNet.Types.Common.Color?> color;
-            public Field<Mech3DotNet.Types.Common.Range?> altitude;
-            public Field<Mech3DotNet.Types.Common.Range?> range;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<FogState> Converter = new TypeConverter<FogState>(Deserialize, Serialize);
 
         public static void Serialize(FogState v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.altitude);
             s.SerializeFieldName("range");
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.range);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.FogType?> type;
+            public Field<Mech3DotNet.Types.Common.Color?> color;
+            public Field<Mech3DotNet.Types.Common.Range?> altitude;
+            public Field<Mech3DotNet.Types.Common.Range?> range;
         }
 
         public static FogState Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

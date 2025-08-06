@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Materials
 {
     public sealed class ColoredMaterial
     {
-        public static readonly TypeConverter<ColoredMaterial> Converter = new TypeConverter<ColoredMaterial>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Color color;
         public byte alpha;
         public Mech3DotNet.Types.Gamez.Materials.Soil soil = Mech3DotNet.Types.Gamez.Materials.Soil.Default;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Gamez.Materials
             this.soil = soil;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Color> color;
-            public Field<byte> alpha;
-            public Field<Mech3DotNet.Types.Gamez.Materials.Soil> soil;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ColoredMaterial> Converter = new TypeConverter<ColoredMaterial>(Deserialize, Serialize);
 
         public static void Serialize(ColoredMaterial v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Gamez.Materials
             ((Action<byte>)s.SerializeU8)(v.alpha);
             s.SerializeFieldName("soil");
             s.Serialize(Mech3DotNet.Types.Gamez.Materials.SoilConverter.Converter)(v.soil);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Color> color;
+            public Field<byte> alpha;
+            public Field<Mech3DotNet.Types.Gamez.Materials.Soil> soil;
         }
 
         public static ColoredMaterial Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
             );
         }
+
+        #endregion
     }
 }

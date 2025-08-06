@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectMotion
     {
-        public static readonly TypeConverter<ObjectMotion> Converter = new TypeConverter<ObjectMotion>(Deserialize, Serialize);
         public string node;
         public bool impactForce;
         public float? morph;
@@ -35,21 +34,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.runTime = runTime;
         }
 
-        private struct Fields
-        {
-            public Field<string> node;
-            public Field<bool> impactForce;
-            public Field<float?> morph;
-            public Field<Mech3DotNet.Types.Anim.Events.Gravity?> gravity;
-            public Field<Mech3DotNet.Types.Anim.Events.TranslationRange?> translationRange;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation?> translation;
-            public Field<Mech3DotNet.Types.Anim.Events.ForwardRotation?> forwardRotation;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot?> xyzRotation;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionScale?> scale;
-            public Field<Mech3DotNet.Types.Anim.Events.BounceSequences?> bounceSequence;
-            public Field<Mech3DotNet.Types.Anim.Events.BounceSounds?> bounceSound;
-            public Field<float?> runTime;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectMotion> Converter = new TypeConverter<ObjectMotion>(Deserialize, Serialize);
 
         public static void Serialize(ObjectMotion v, Serializer s)
         {
@@ -78,6 +65,22 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.BounceSounds.Converter))(v.bounceSound);
             s.SerializeFieldName("run_time");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.runTime);
+        }
+
+        private struct Fields
+        {
+            public Field<string> node;
+            public Field<bool> impactForce;
+            public Field<float?> morph;
+            public Field<Mech3DotNet.Types.Anim.Events.Gravity?> gravity;
+            public Field<Mech3DotNet.Types.Anim.Events.TranslationRange?> translationRange;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionTranslation?> translation;
+            public Field<Mech3DotNet.Types.Anim.Events.ForwardRotation?> forwardRotation;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionXyzRot?> xyzRotation;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectMotionScale?> scale;
+            public Field<Mech3DotNet.Types.Anim.Events.BounceSequences?> bounceSequence;
+            public Field<Mech3DotNet.Types.Anim.Events.BounceSounds?> bounceSound;
+            public Field<float?> runTime;
         }
 
         public static ObjectMotion Deserialize(Deserializer d)
@@ -169,5 +172,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

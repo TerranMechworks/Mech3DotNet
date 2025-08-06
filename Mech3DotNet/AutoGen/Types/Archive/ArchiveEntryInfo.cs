@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Archive
         public bool IsInvalid() => Variant == Variants.Invalid;
         public Mech3DotNet.Types.Archive.ArchiveEntryInfoInvalid AsInvalid() => (Mech3DotNet.Types.Archive.ArchiveEntryInfoInvalid)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(ArchiveEntryInfo v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Archive
                     throw new UnknownVariantException("ArchiveEntryInfo", variantIndex);
             }
         }
+
+        #endregion
     }
 }

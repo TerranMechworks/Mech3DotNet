@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class World
     {
-        public static readonly TypeConverter<World> Converter = new TypeConverter<World>(Deserialize, Serialize);
         public Mech3DotNet.Types.Gamez.Nodes.WorldFog fog;
         public Mech3DotNet.Types.Gamez.Nodes.Area area;
         public bool virtualPartition;
@@ -29,18 +28,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.ptrs = ptrs;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Gamez.Nodes.WorldFog> fog;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.Area> area;
-            public Field<bool> virtualPartition;
-            public Field<byte> partitionMaxDecFeatureCount;
-            public Field<System.Collections.Generic.List<short>> lightIndices;
-            public Field<System.Collections.Generic.List<short>> soundIndices;
-            public Field<System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.WorldPartition>>> partitions;
-            public Field<int> unk;
-            public Field<Mech3DotNet.Types.Gamez.Nodes.WorldPtrs> ptrs;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<World> Converter = new TypeConverter<World>(Deserialize, Serialize);
 
         public static void Serialize(World v, Serializer s)
         {
@@ -63,6 +53,19 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<int>)s.SerializeI32)(v.unk);
             s.SerializeFieldName("ptrs");
             s.Serialize(Mech3DotNet.Types.Gamez.Nodes.WorldPtrs.Converter)(v.ptrs);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Gamez.Nodes.WorldFog> fog;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.Area> area;
+            public Field<bool> virtualPartition;
+            public Field<byte> partitionMaxDecFeatureCount;
+            public Field<System.Collections.Generic.List<short>> lightIndices;
+            public Field<System.Collections.Generic.List<short>> soundIndices;
+            public Field<System.Collections.Generic.List<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Nodes.WorldPartition>>> partitions;
+            public Field<int> unk;
+            public Field<Mech3DotNet.Types.Gamez.Nodes.WorldPtrs> ptrs;
         }
 
         public static World Deserialize(Deserializer d)
@@ -136,5 +139,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

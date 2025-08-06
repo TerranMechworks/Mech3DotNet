@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectRotateState
     {
-        public static readonly TypeConverter<ObjectRotateState> Converter = new TypeConverter<ObjectRotateState>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Common.Vec3 state;
         public Mech3DotNet.Types.Anim.Events.RotateBasis basis;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.basis = basis;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Common.Vec3> state;
-            public Field<Mech3DotNet.Types.Anim.Events.RotateBasis> basis;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectRotateState> Converter = new TypeConverter<ObjectRotateState>(Deserialize, Serialize);
 
         public static void Serialize(ObjectRotateState v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.state);
             s.SerializeFieldName("basis");
             s.Serialize(Mech3DotNet.Types.Anim.Events.RotateBasis.Converter)(v.basis);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Common.Vec3> state;
+            public Field<Mech3DotNet.Types.Anim.Events.RotateBasis> basis;
         }
 
         public static ObjectRotateState Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

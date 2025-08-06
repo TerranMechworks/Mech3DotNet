@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class AnimVerbose
     {
-        public static readonly TypeConverter<AnimVerbose> Converter = new TypeConverter<AnimVerbose>(Deserialize, Serialize);
         public bool on;
 
         public AnimVerbose(bool on)
@@ -13,16 +12,20 @@ namespace Mech3DotNet.Types.Anim.Events
             this.on = on;
         }
 
-        private struct Fields
-        {
-            public Field<bool> on;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AnimVerbose> Converter = new TypeConverter<AnimVerbose>(Deserialize, Serialize);
 
         public static void Serialize(AnimVerbose v, Serializer s)
         {
             s.SerializeStruct(1);
             s.SerializeFieldName("on");
             ((Action<bool>)s.SerializeBool)(v.on);
+        }
+
+        private struct Fields
+        {
+            public Field<bool> on;
         }
 
         public static AnimVerbose Deserialize(Deserializer d)
@@ -48,5 +51,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

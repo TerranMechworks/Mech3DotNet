@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class CallAnimation
     {
-        public static readonly TypeConverter<CallAnimation> Converter = new TypeConverter<CallAnimation>(Deserialize, Serialize);
         public string name;
         public string? operandNode;
         public short? waitForCompletion;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.parameters = parameters;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<string?> operandNode;
-            public Field<short?> waitForCompletion;
-            public Field<Mech3DotNet.Types.Anim.Events.CallAnimationParameters?> parameters;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CallAnimation> Converter = new TypeConverter<CallAnimation>(Deserialize, Serialize);
 
         public static void Serialize(CallAnimation v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(((Action<short>)s.SerializeI16))(v.waitForCompletion);
             s.SerializeFieldName("parameters");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.CallAnimationParameters.Converter))(v.parameters);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<string?> operandNode;
+            public Field<short?> waitForCompletion;
+            public Field<Mech3DotNet.Types.Anim.Events.CallAnimationParameters?> parameters;
         }
 
         public static CallAnimation Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

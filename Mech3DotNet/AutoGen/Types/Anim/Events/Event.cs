@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Event
     {
-        public static readonly TypeConverter<Event> Converter = new TypeConverter<Event>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.EventStart? start;
         public Mech3DotNet.Types.Anim.Events.EventData data;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.data = data;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.EventStart?> start;
-            public Field<Mech3DotNet.Types.Anim.Events.EventData> data;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Event> Converter = new TypeConverter<Event>(Deserialize, Serialize);
 
         public static void Serialize(Event v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.EventStart.Converter))(v.start);
             s.SerializeFieldName("data");
             s.Serialize(Mech3DotNet.Types.Anim.Events.EventData.Converter)(v.data);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.EventStart?> start;
+            public Field<Mech3DotNet.Types.Anim.Events.EventData> data;
         }
 
         public static Event Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

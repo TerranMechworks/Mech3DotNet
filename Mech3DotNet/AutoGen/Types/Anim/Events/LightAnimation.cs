@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class LightAnimation
     {
-        public static readonly TypeConverter<LightAnimation> Converter = new TypeConverter<LightAnimation>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Common.Range range;
         public Mech3DotNet.Types.Common.Color color;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.rangeAlt = rangeAlt;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Common.Range> range;
-            public Field<Mech3DotNet.Types.Common.Color> color;
-            public Field<float> runTime;
-            public Field<Mech3DotNet.Types.Common.Range?> rangeAlt;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<LightAnimation> Converter = new TypeConverter<LightAnimation>(Deserialize, Serialize);
 
         public static void Serialize(LightAnimation v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.runTime);
             s.SerializeFieldName("range_alt");
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter))(v.rangeAlt);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Common.Range> range;
+            public Field<Mech3DotNet.Types.Common.Color> color;
+            public Field<float> runTime;
+            public Field<Mech3DotNet.Types.Common.Range?> rangeAlt;
         }
 
         public static LightAnimation Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

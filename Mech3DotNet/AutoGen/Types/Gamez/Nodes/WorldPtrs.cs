@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class WorldPtrs
     {
-        public static readonly TypeConverter<WorldPtrs> Converter = new TypeConverter<WorldPtrs>(Deserialize, Serialize);
         public uint areaPartitionPtr;
         public uint virtPartitionPtr;
         public uint lightNodesPtr;
@@ -23,15 +22,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.soundDataPtr = soundDataPtr;
         }
 
-        private struct Fields
-        {
-            public Field<uint> areaPartitionPtr;
-            public Field<uint> virtPartitionPtr;
-            public Field<uint> lightNodesPtr;
-            public Field<uint> lightDataPtr;
-            public Field<uint> soundNodesPtr;
-            public Field<uint> soundDataPtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<WorldPtrs> Converter = new TypeConverter<WorldPtrs>(Deserialize, Serialize);
 
         public static void Serialize(WorldPtrs v, Serializer s)
         {
@@ -48,6 +41,16 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<uint>)s.SerializeU32)(v.soundNodesPtr);
             s.SerializeFieldName("sound_data_ptr");
             ((Action<uint>)s.SerializeU32)(v.soundDataPtr);
+        }
+
+        private struct Fields
+        {
+            public Field<uint> areaPartitionPtr;
+            public Field<uint> virtPartitionPtr;
+            public Field<uint> lightNodesPtr;
+            public Field<uint> lightDataPtr;
+            public Field<uint> soundNodesPtr;
+            public Field<uint> soundDataPtr;
         }
 
         public static WorldPtrs Deserialize(Deserializer d)
@@ -103,5 +106,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

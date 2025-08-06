@@ -5,19 +5,22 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Endif
     {
-        public static readonly TypeConverter<Endif> Converter = new TypeConverter<Endif>(Deserialize, Serialize);
 
         public Endif()
         {
         }
 
-        private struct Fields
-        {
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Endif> Converter = new TypeConverter<Endif>(Deserialize, Serialize);
 
         public static void Serialize(Endif v, Serializer s)
         {
             s.SerializeStruct(0);
+        }
+
+        private struct Fields
+        {
         }
 
         public static Endif Deserialize(Deserializer d)
@@ -37,5 +40,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

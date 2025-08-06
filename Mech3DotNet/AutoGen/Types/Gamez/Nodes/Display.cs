@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Display
     {
-        public static readonly TypeConverter<Display> Converter = new TypeConverter<Display>(Deserialize, Serialize);
         public uint originX;
         public uint originY;
         public uint resolutionX;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.clearColor = clearColor;
         }
 
-        private struct Fields
-        {
-            public Field<uint> originX;
-            public Field<uint> originY;
-            public Field<uint> resolutionX;
-            public Field<uint> resolutionY;
-            public Field<Mech3DotNet.Types.Common.Color> clearColor;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Display> Converter = new TypeConverter<Display>(Deserialize, Serialize);
 
         public static void Serialize(Display v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<uint>)s.SerializeU32)(v.resolutionY);
             s.SerializeFieldName("clear_color");
             s.Serialize(Mech3DotNet.Types.Common.ColorConverter.Converter)(v.clearColor);
+        }
+
+        private struct Fields
+        {
+            public Field<uint> originX;
+            public Field<uint> originY;
+            public Field<uint> resolutionX;
+            public Field<uint> resolutionY;
+            public Field<Mech3DotNet.Types.Common.Color> clearColor;
         }
 
         public static Display Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

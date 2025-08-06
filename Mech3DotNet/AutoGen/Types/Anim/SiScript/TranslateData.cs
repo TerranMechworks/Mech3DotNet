@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.SiScript
 {
     public sealed class TranslateData
     {
-        public static readonly TypeConverter<TranslateData> Converter = new TypeConverter<TranslateData>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Vec3 base_;
         public Mech3DotNet.Types.Common.Vec3 delta;
         public uint garbage;
@@ -23,15 +22,9 @@ namespace Mech3DotNet.Types.Anim.SiScript
             this.splineZ = splineZ;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Vec3> base_;
-            public Field<Mech3DotNet.Types.Common.Vec3> delta;
-            public Field<uint> garbage;
-            public Field<byte[]> splineX;
-            public Field<byte[]> splineY;
-            public Field<byte[]> splineZ;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<TranslateData> Converter = new TypeConverter<TranslateData>(Deserialize, Serialize);
 
         public static void Serialize(TranslateData v, Serializer s)
         {
@@ -48,6 +41,16 @@ namespace Mech3DotNet.Types.Anim.SiScript
             ((Action<byte[]>)s.SerializeBytes)(v.splineY);
             s.SerializeFieldName("spline_z");
             ((Action<byte[]>)s.SerializeBytes)(v.splineZ);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Vec3> base_;
+            public Field<Mech3DotNet.Types.Common.Vec3> delta;
+            public Field<uint> garbage;
+            public Field<byte[]> splineX;
+            public Field<byte[]> splineY;
+            public Field<byte[]> splineZ;
         }
 
         public static TranslateData Deserialize(Deserializer d)
@@ -103,5 +106,7 @@ namespace Mech3DotNet.Types.Anim.SiScript
 
             );
         }
+
+        #endregion
     }
 }

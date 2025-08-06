@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 {
     public sealed class SeqDef
     {
-        public static readonly TypeConverter<SeqDef> Converter = new TypeConverter<SeqDef>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Anim.AnimDef.SeqDefState seqState;
         public Mech3DotNet.Types.Anim.AnimDef.SeqDefState resetState;
@@ -21,14 +20,9 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             this.pointer = pointer;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Anim.AnimDef.SeqDefState> seqState;
-            public Field<Mech3DotNet.Types.Anim.AnimDef.SeqDefState> resetState;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.Event>> events;
-            public Field<uint> pointer;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<SeqDef> Converter = new TypeConverter<SeqDef>(Deserialize, Serialize);
 
         public static void Serialize(SeqDef v, Serializer s)
         {
@@ -43,6 +37,15 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.Events.Event.Converter))(v.events);
             s.SerializeFieldName("pointer");
             ((Action<uint>)s.SerializeU32)(v.pointer);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Anim.AnimDef.SeqDefState> seqState;
+            public Field<Mech3DotNet.Types.Anim.AnimDef.SeqDefState> resetState;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.Event>> events;
+            public Field<uint> pointer;
         }
 
         public static SeqDef Deserialize(Deserializer d)
@@ -92,5 +95,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 
             );
         }
+
+        #endregion
     }
 }

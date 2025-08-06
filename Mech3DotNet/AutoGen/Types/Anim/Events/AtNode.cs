@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class AtNode
     {
-        public static readonly TypeConverter<AtNode> Converter = new TypeConverter<AtNode>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Common.Vec3 pos;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.pos = pos;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Common.Vec3> pos;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AtNode> Converter = new TypeConverter<AtNode>(Deserialize, Serialize);
 
         public static void Serialize(AtNode v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("pos");
             s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter)(v.pos);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Common.Vec3> pos;
         }
 
         public static AtNode Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

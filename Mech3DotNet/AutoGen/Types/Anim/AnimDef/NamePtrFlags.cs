@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 {
     public sealed class NamePtrFlags
     {
-        public static readonly TypeConverter<NamePtrFlags> Converter = new TypeConverter<NamePtrFlags>(Deserialize, Serialize);
         public string name;
         public uint pointer;
         public uint flags;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             this.flags = flags;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<uint> pointer;
-            public Field<uint> flags;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<NamePtrFlags> Converter = new TypeConverter<NamePtrFlags>(Deserialize, Serialize);
 
         public static void Serialize(NamePtrFlags v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             ((Action<uint>)s.SerializeU32)(v.pointer);
             s.SerializeFieldName("flags");
             ((Action<uint>)s.SerializeU32)(v.flags);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<uint> pointer;
+            public Field<uint> flags;
         }
 
         public static NamePtrFlags Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 
             );
         }
+
+        #endregion
     }
 }

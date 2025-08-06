@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez
 {
     public sealed class Texture
     {
-        public static readonly TypeConverter<Texture> Converter = new TypeConverter<Texture>(Deserialize, Serialize);
         public string name;
         public short mipIndex = -1;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Gamez
             this.mipIndex = mipIndex;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<short> mipIndex;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Texture> Converter = new TypeConverter<Texture>(Deserialize, Serialize);
 
         public static void Serialize(Texture v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Gamez
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("mip_index");
             ((Action<short>)s.SerializeI16)(v.mipIndex);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<short> mipIndex;
         }
 
         public static Texture Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Gamez
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class CameraFromTo
     {
-        public static readonly TypeConverter<CameraFromTo> Converter = new TypeConverter<CameraFromTo>(Deserialize, Serialize);
         public string name;
         public Mech3DotNet.Types.Anim.Events.FloatFromTo? clipNear;
         public Mech3DotNet.Types.Anim.Events.FloatFromTo? clipFar;
@@ -29,18 +28,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.runTime = runTime;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> clipNear;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> clipFar;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> lodMultiplier;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> fovH;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> fovV;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> zoomH;
-            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> zoomV;
-            public Field<float> runTime;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CameraFromTo> Converter = new TypeConverter<CameraFromTo>(Deserialize, Serialize);
 
         public static void Serialize(CameraFromTo v, Serializer s)
         {
@@ -63,6 +53,19 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.FloatFromTo.Converter))(v.zoomV);
             s.SerializeFieldName("run_time");
             ((Action<float>)s.SerializeF32)(v.runTime);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> clipNear;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> clipFar;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> lodMultiplier;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> fovH;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> fovV;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> zoomH;
+            public Field<Mech3DotNet.Types.Anim.Events.FloatFromTo?> zoomV;
+            public Field<float> runTime;
         }
 
         public static CameraFromTo Deserialize(Deserializer d)
@@ -136,5 +139,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

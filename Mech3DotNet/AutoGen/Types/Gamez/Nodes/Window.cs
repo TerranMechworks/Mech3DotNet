@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Window
     {
-        public static readonly TypeConverter<Window> Converter = new TypeConverter<Window>(Deserialize, Serialize);
         public int originX;
         public int originY;
         public int resolutionX;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.resolutionY = resolutionY;
         }
 
-        private struct Fields
-        {
-            public Field<int> originX;
-            public Field<int> originY;
-            public Field<int> resolutionX;
-            public Field<int> resolutionY;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Window> Converter = new TypeConverter<Window>(Deserialize, Serialize);
 
         public static void Serialize(Window v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<int>)s.SerializeI32)(v.resolutionX);
             s.SerializeFieldName("resolution_y");
             ((Action<int>)s.SerializeI32)(v.resolutionY);
+        }
+
+        private struct Fields
+        {
+            public Field<int> originX;
+            public Field<int> originY;
+            public Field<int> resolutionX;
+            public Field<int> resolutionY;
         }
 
         public static Window Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

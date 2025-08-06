@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class PufferStateColor
     {
-        public static readonly TypeConverter<PufferStateColor> Converter = new TypeConverter<PufferStateColor>(Deserialize, Serialize);
         public float unk00;
         public Mech3DotNet.Types.Common.Color color;
         public float unk16;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.unk16 = unk16;
         }
 
-        private struct Fields
-        {
-            public Field<float> unk00;
-            public Field<Mech3DotNet.Types.Common.Color> color;
-            public Field<float> unk16;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PufferStateColor> Converter = new TypeConverter<PufferStateColor>(Deserialize, Serialize);
 
         public static void Serialize(PufferStateColor v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Common.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("unk16");
             ((Action<float>)s.SerializeF32)(v.unk16);
+        }
+
+        private struct Fields
+        {
+            public Field<float> unk00;
+            public Field<Mech3DotNet.Types.Common.Color> color;
+            public Field<float> unk16;
         }
 
         public static PufferStateColor Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

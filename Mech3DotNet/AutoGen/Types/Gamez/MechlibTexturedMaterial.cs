@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez
 {
     public sealed class MechlibTexturedMaterial
     {
-        public static readonly TypeConverter<MechlibTexturedMaterial> Converter = new TypeConverter<MechlibTexturedMaterial>(Deserialize, Serialize);
         public string textureName;
         public uint ptr;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Gamez
             this.ptr = ptr;
         }
 
-        private struct Fields
-        {
-            public Field<string> textureName;
-            public Field<uint> ptr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<MechlibTexturedMaterial> Converter = new TypeConverter<MechlibTexturedMaterial>(Deserialize, Serialize);
 
         public static void Serialize(MechlibTexturedMaterial v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Gamez
             ((Action<string>)s.SerializeString)(v.textureName);
             s.SerializeFieldName("ptr");
             ((Action<uint>)s.SerializeU32)(v.ptr);
+        }
+
+        private struct Fields
+        {
+            public Field<string> textureName;
+            public Field<uint> ptr;
         }
 
         public static MechlibTexturedMaterial Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Gamez
 
             );
         }
+
+        #endregion
     }
 }

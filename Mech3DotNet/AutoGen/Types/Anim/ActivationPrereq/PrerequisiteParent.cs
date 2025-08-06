@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
 {
     public sealed class PrerequisiteParent
     {
-        public static readonly TypeConverter<PrerequisiteParent> Converter = new TypeConverter<PrerequisiteParent>(Deserialize, Serialize);
         public string name;
         public bool required;
         public bool active;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
             this.ptr = ptr;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<bool> required;
-            public Field<bool> active;
-            public Field<uint> ptr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PrerequisiteParent> Converter = new TypeConverter<PrerequisiteParent>(Deserialize, Serialize);
 
         public static void Serialize(PrerequisiteParent v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
             ((Action<bool>)s.SerializeBool)(v.active);
             s.SerializeFieldName("ptr");
             ((Action<uint>)s.SerializeU32)(v.ptr);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<bool> required;
+            public Field<bool> active;
+            public Field<uint> ptr;
         }
 
         public static PrerequisiteParent Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.ActivationPrereq
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class Gravity
     {
-        public static readonly TypeConverter<Gravity> Converter = new TypeConverter<Gravity>(Deserialize, Serialize);
         public float value;
         public bool complex;
         public bool noAltitude;
@@ -17,12 +16,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.noAltitude = noAltitude;
         }
 
-        private struct Fields
-        {
-            public Field<float> value;
-            public Field<bool> complex;
-            public Field<bool> noAltitude;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Gravity> Converter = new TypeConverter<Gravity>(Deserialize, Serialize);
 
         public static void Serialize(Gravity v, Serializer s)
         {
@@ -33,6 +29,13 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<bool>)s.SerializeBool)(v.complex);
             s.SerializeFieldName("no_altitude");
             ((Action<bool>)s.SerializeBool)(v.noAltitude);
+        }
+
+        private struct Fields
+        {
+            public Field<float> value;
+            public Field<bool> complex;
+            public Field<bool> noAltitude;
         }
 
         public static Gravity Deserialize(Deserializer d)
@@ -70,5 +73,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

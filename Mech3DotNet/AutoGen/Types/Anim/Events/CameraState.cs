@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class CameraState
     {
-        public static readonly TypeConverter<CameraState> Converter = new TypeConverter<CameraState>(Deserialize, Serialize);
         public string name;
         public float? clipNear;
         public float? clipFar;
@@ -27,17 +26,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.zoomV = zoomV;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<float?> clipNear;
-            public Field<float?> clipFar;
-            public Field<float?> lodMultiplier;
-            public Field<float?> fovH;
-            public Field<float?> fovV;
-            public Field<float?> zoomH;
-            public Field<float?> zoomV;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CameraState> Converter = new TypeConverter<CameraState>(Deserialize, Serialize);
 
         public static void Serialize(CameraState v, Serializer s)
         {
@@ -58,6 +49,18 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.zoomH);
             s.SerializeFieldName("zoom_v");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.zoomV);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<float?> clipNear;
+            public Field<float?> clipFar;
+            public Field<float?> lodMultiplier;
+            public Field<float?> fovH;
+            public Field<float?> fovV;
+            public Field<float?> zoomH;
+            public Field<float?> zoomV;
         }
 
         public static CameraState Deserialize(Deserializer d)
@@ -125,5 +128,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

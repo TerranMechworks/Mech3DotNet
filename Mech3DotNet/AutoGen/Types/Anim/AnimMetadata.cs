@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim
 {
     public sealed class AnimMetadata
     {
-        public static readonly TypeConverter<AnimMetadata> Converter = new TypeConverter<AnimMetadata>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.AnimMission mission;
         public float gravity;
         public System.DateTime? datetime = null;
@@ -23,15 +22,9 @@ namespace Mech3DotNet.Types.Anim
             this.animList = animList;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.AnimMission> mission;
-            public Field<float> gravity;
-            public Field<System.DateTime?> datetime;
-            public Field<System.Collections.Generic.List<string>> animDefNames;
-            public Field<System.Collections.Generic.List<string>> scriptNames;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.AnimDefFile>> animList;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AnimMetadata> Converter = new TypeConverter<AnimMetadata>(Deserialize, Serialize);
 
         public static void Serialize(AnimMetadata v, Serializer s)
         {
@@ -48,6 +41,16 @@ namespace Mech3DotNet.Types.Anim
             s.SerializeVec(((Action<string>)s.SerializeString))(v.scriptNames);
             s.SerializeFieldName("anim_list");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Anim.AnimDef.AnimDefFile.Converter))(v.animList);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.AnimMission> mission;
+            public Field<float> gravity;
+            public Field<System.DateTime?> datetime;
+            public Field<System.Collections.Generic.List<string>> animDefNames;
+            public Field<System.Collections.Generic.List<string>> scriptNames;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.AnimDef.AnimDefFile>> animList;
         }
 
         public static AnimMetadata Deserialize(Deserializer d)
@@ -103,5 +106,7 @@ namespace Mech3DotNet.Types.Anim
 
             );
         }
+
+        #endregion
     }
 }

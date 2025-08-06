@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez
 {
     public sealed class MechlibColoredMaterial
     {
-        public static readonly TypeConverter<MechlibColoredMaterial> Converter = new TypeConverter<MechlibColoredMaterial>(Deserialize, Serialize);
         public Mech3DotNet.Types.Common.Color color;
         public byte alpha;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Gamez
             this.alpha = alpha;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Common.Color> color;
-            public Field<byte> alpha;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<MechlibColoredMaterial> Converter = new TypeConverter<MechlibColoredMaterial>(Deserialize, Serialize);
 
         public static void Serialize(MechlibColoredMaterial v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Gamez
             s.Serialize(Mech3DotNet.Types.Common.ColorConverter.Converter)(v.color);
             s.SerializeFieldName("alpha");
             ((Action<byte>)s.SerializeU8)(v.alpha);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Common.Color> color;
+            public Field<byte> alpha;
         }
 
         public static MechlibColoredMaterial Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Gamez
 
             );
         }
+
+        #endregion
     }
 }

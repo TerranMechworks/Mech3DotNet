@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.SiScript
 {
     public sealed class SiScript
     {
-        public static readonly TypeConverter<SiScript> Converter = new TypeConverter<SiScript>(Deserialize, Serialize);
         public string scriptName;
         public string objectName;
         public System.Collections.Generic.List<Mech3DotNet.Types.Anim.SiScript.ObjectMotionSiFrame> frames;
@@ -25,16 +24,9 @@ namespace Mech3DotNet.Types.Anim.SiScript
             this.scriptDataPtr = scriptDataPtr;
         }
 
-        private struct Fields
-        {
-            public Field<string> scriptName;
-            public Field<string> objectName;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.SiScript.ObjectMotionSiFrame>> frames;
-            public Field<bool> splineInterp;
-            public Field<uint> scriptNamePtr;
-            public Field<uint> objectNamePtr;
-            public Field<uint> scriptDataPtr;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<SiScript> Converter = new TypeConverter<SiScript>(Deserialize, Serialize);
 
         public static void Serialize(SiScript v, Serializer s)
         {
@@ -53,6 +45,17 @@ namespace Mech3DotNet.Types.Anim.SiScript
             ((Action<uint>)s.SerializeU32)(v.objectNamePtr);
             s.SerializeFieldName("script_data_ptr");
             ((Action<uint>)s.SerializeU32)(v.scriptDataPtr);
+        }
+
+        private struct Fields
+        {
+            public Field<string> scriptName;
+            public Field<string> objectName;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.SiScript.ObjectMotionSiFrame>> frames;
+            public Field<bool> splineInterp;
+            public Field<uint> scriptNamePtr;
+            public Field<uint> objectNamePtr;
+            public Field<uint> scriptDataPtr;
         }
 
         public static SiScript Deserialize(Deserializer d)
@@ -114,5 +117,7 @@ namespace Mech3DotNet.Types.Anim.SiScript
 
             );
         }
+
+        #endregion
     }
 }

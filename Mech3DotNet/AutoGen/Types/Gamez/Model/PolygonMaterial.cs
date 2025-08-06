@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Model
 {
     public sealed class PolygonMaterial
     {
-        public static readonly TypeConverter<PolygonMaterial> Converter = new TypeConverter<PolygonMaterial>(Deserialize, Serialize);
         public short materialIndex;
         public System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.UvCoord>? uvCoords;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Gamez.Model
             this.uvCoords = uvCoords;
         }
 
-        private struct Fields
-        {
-            public Field<short> materialIndex;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.UvCoord>?> uvCoords;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PolygonMaterial> Converter = new TypeConverter<PolygonMaterial>(Deserialize, Serialize);
 
         public static void Serialize(PolygonMaterial v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Gamez.Model
             ((Action<short>)s.SerializeI16)(v.materialIndex);
             s.SerializeFieldName("uv_coords");
             s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Gamez.Model.UvCoordConverter.Converter)))(v.uvCoords);
+        }
+
+        private struct Fields
+        {
+            public Field<short> materialIndex;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Gamez.Model.UvCoord>?> uvCoords;
         }
 
         public static PolygonMaterial Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Gamez.Model
 
             );
         }
+
+        #endregion
     }
 }

@@ -32,6 +32,8 @@ namespace Mech3DotNet.Types.Anim.AnimDef
         public bool IsByZone() => Variant == Variants.ByZone;
         public bool IsNone() => Variant == Variants.None;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(Execution v, Serializer s)
         {
             switch (v.Variant)
@@ -92,5 +94,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
                     throw new UnknownVariantException("Execution", variantIndex);
             }
         }
+
+        #endregion
     }
 }

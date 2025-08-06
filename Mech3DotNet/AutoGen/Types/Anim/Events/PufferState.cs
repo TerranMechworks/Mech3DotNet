@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class PufferState
     {
-        public static readonly TypeConverter<PufferState> Converter = new TypeConverter<PufferState>(Deserialize, Serialize);
         public string name;
         public uint? activeState;
         public Mech3DotNet.Types.Common.Vec3? translate;
@@ -59,33 +58,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.intervalGarbage = intervalGarbage;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<uint?> activeState;
-            public Field<Mech3DotNet.Types.Common.Vec3?> translate;
-            public Field<string?> atNode;
-            public Field<Mech3DotNet.Types.Common.Vec3?> localVelocity;
-            public Field<Mech3DotNet.Types.Common.Vec3?> worldVelocity;
-            public Field<Mech3DotNet.Types.Common.Vec3?> minRandomVelocity;
-            public Field<Mech3DotNet.Types.Common.Vec3?> maxRandomVelocity;
-            public Field<Mech3DotNet.Types.Common.Vec3?> worldAcceleration;
-            public Field<Mech3DotNet.Types.Anim.Events.PufferInterval?> interval;
-            public Field<Mech3DotNet.Types.Common.Range?> sizeRange;
-            public Field<Mech3DotNet.Types.Common.Range?> lifetimeRange;
-            public Field<Mech3DotNet.Types.Common.Range?> startAgeRange;
-            public Field<float?> deviationDistance;
-            public Field<Mech3DotNet.Types.Common.Range?> unkRange;
-            public Field<Mech3DotNet.Types.Common.Range?> fadeRange;
-            public Field<float?> friction;
-            public Field<float?> windFactor;
-            public Field<float?> priority;
-            public Field<uint?> number;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateTexture>?> textures;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateColor>?> colors;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Range>?> growthFactors;
-            public Field<Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage?> intervalGarbage;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<PufferState> Converter = new TypeConverter<PufferState>(Deserialize, Serialize);
 
         public static void Serialize(PufferState v, Serializer s)
         {
@@ -138,6 +113,34 @@ namespace Mech3DotNet.Types.Anim.Events
             s.SerializeRefOption(s.SerializeVec(s.Serialize(Mech3DotNet.Types.Common.RangeConverter.Converter)))(v.growthFactors);
             s.SerializeFieldName("interval_garbage");
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage.Converter))(v.intervalGarbage);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<uint?> activeState;
+            public Field<Mech3DotNet.Types.Common.Vec3?> translate;
+            public Field<string?> atNode;
+            public Field<Mech3DotNet.Types.Common.Vec3?> localVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> worldVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> minRandomVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> maxRandomVelocity;
+            public Field<Mech3DotNet.Types.Common.Vec3?> worldAcceleration;
+            public Field<Mech3DotNet.Types.Anim.Events.PufferInterval?> interval;
+            public Field<Mech3DotNet.Types.Common.Range?> sizeRange;
+            public Field<Mech3DotNet.Types.Common.Range?> lifetimeRange;
+            public Field<Mech3DotNet.Types.Common.Range?> startAgeRange;
+            public Field<float?> deviationDistance;
+            public Field<Mech3DotNet.Types.Common.Range?> unkRange;
+            public Field<Mech3DotNet.Types.Common.Range?> fadeRange;
+            public Field<float?> friction;
+            public Field<float?> windFactor;
+            public Field<float?> priority;
+            public Field<uint?> number;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateTexture>?> textures;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Anim.Events.PufferStateColor>?> colors;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Common.Range>?> growthFactors;
+            public Field<Mech3DotNet.Types.Anim.Events.PufferIntervalGarbage?> intervalGarbage;
         }
 
         public static PufferState Deserialize(Deserializer d)
@@ -301,5 +304,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

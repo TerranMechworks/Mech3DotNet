@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Common
 {
     public sealed class AffineMatrix
     {
-        public static readonly TypeConverter<AffineMatrix> Converter = new TypeConverter<AffineMatrix>(Deserialize, Serialize);
         public float r00;
         public float r01;
         public float r02;
@@ -35,21 +34,9 @@ namespace Mech3DotNet.Types.Common
             this.r32 = r32;
         }
 
-        private struct Fields
-        {
-            public Field<float> r00;
-            public Field<float> r01;
-            public Field<float> r02;
-            public Field<float> r10;
-            public Field<float> r11;
-            public Field<float> r12;
-            public Field<float> r20;
-            public Field<float> r21;
-            public Field<float> r22;
-            public Field<float> r30;
-            public Field<float> r31;
-            public Field<float> r32;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<AffineMatrix> Converter = new TypeConverter<AffineMatrix>(Deserialize, Serialize);
 
         public static void Serialize(AffineMatrix v, Serializer s)
         {
@@ -78,6 +65,22 @@ namespace Mech3DotNet.Types.Common
             ((Action<float>)s.SerializeF32)(v.r31);
             s.SerializeFieldName("r32");
             ((Action<float>)s.SerializeF32)(v.r32);
+        }
+
+        private struct Fields
+        {
+            public Field<float> r00;
+            public Field<float> r01;
+            public Field<float> r02;
+            public Field<float> r10;
+            public Field<float> r11;
+            public Field<float> r12;
+            public Field<float> r20;
+            public Field<float> r21;
+            public Field<float> r22;
+            public Field<float> r30;
+            public Field<float> r31;
+            public Field<float> r32;
         }
 
         public static AffineMatrix Deserialize(Deserializer d)
@@ -169,5 +172,7 @@ namespace Mech3DotNet.Types.Common
 
             );
         }
+
+        #endregion
     }
 }

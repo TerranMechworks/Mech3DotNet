@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectCycleTexture
     {
-        public static readonly TypeConverter<ObjectCycleTexture> Converter = new TypeConverter<ObjectCycleTexture>(Deserialize, Serialize);
         public string name;
         public ushort reset;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.reset = reset;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<ushort> reset;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectCycleTexture> Converter = new TypeConverter<ObjectCycleTexture>(Deserialize, Serialize);
 
         public static void Serialize(ObjectCycleTexture v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("reset");
             ((Action<ushort>)s.SerializeU16)(v.reset);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<ushort> reset;
         }
 
         public static ObjectCycleTexture Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

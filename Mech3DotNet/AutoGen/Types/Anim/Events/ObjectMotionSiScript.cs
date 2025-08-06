@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectMotionSiScript
     {
-        public static readonly TypeConverter<ObjectMotionSiScript> Converter = new TypeConverter<ObjectMotionSiScript>(Deserialize, Serialize);
         public string name;
         public uint index;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.index = index;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<uint> index;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectMotionSiScript> Converter = new TypeConverter<ObjectMotionSiScript>(Deserialize, Serialize);
 
         public static void Serialize(ObjectMotionSiScript v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("index");
             ((Action<uint>)s.SerializeU32)(v.index);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<uint> index;
         }
 
         public static ObjectMotionSiScript Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

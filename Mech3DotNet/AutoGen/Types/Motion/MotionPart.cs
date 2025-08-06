@@ -7,7 +7,6 @@ namespace Mech3DotNet.Types.Motion
         where TQuaternion : notnull
         where TVec3 : notnull
     {
-        public static readonly TypeConverter<MotionPart<TQuaternion, TVec3>> Converter = new TypeConverter<MotionPart<TQuaternion, TVec3>>(Deserialize, Serialize);
         public string name;
         public System.Collections.Generic.List<Mech3DotNet.Types.Motion.MotionFrame<TQuaternion, TVec3>> frames;
 
@@ -17,11 +16,9 @@ namespace Mech3DotNet.Types.Motion
             this.frames = frames;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Motion.MotionFrame<TQuaternion, TVec3>>> frames;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<MotionPart<TQuaternion, TVec3>> Converter = new TypeConverter<MotionPart<TQuaternion, TVec3>>(Deserialize, Serialize);
 
         public static void Serialize(MotionPart<TQuaternion, TVec3> v, Serializer s)
         {
@@ -30,6 +27,12 @@ namespace Mech3DotNet.Types.Motion
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("frames");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Motion.MotionFrame<TQuaternion, TVec3>.Converter))(v.frames);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Motion.MotionFrame<TQuaternion, TVec3>>> frames;
         }
 
         public static MotionPart<TQuaternion, TVec3> Deserialize(Deserializer d)
@@ -61,5 +64,7 @@ namespace Mech3DotNet.Types.Motion
 
             );
         }
+
+        #endregion
     }
 }

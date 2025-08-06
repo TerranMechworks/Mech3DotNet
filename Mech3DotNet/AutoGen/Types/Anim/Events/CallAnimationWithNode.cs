@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class CallAnimationWithNode
     {
-        public static readonly TypeConverter<CallAnimationWithNode> Converter = new TypeConverter<CallAnimationWithNode>(Deserialize, Serialize);
         public string node;
         public Mech3DotNet.Types.Common.Vec3? position;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.position = position;
         }
 
-        private struct Fields
-        {
-            public Field<string> node;
-            public Field<Mech3DotNet.Types.Common.Vec3?> position;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<CallAnimationWithNode> Converter = new TypeConverter<CallAnimationWithNode>(Deserialize, Serialize);
 
         public static void Serialize(CallAnimationWithNode v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<string>)s.SerializeString)(v.node);
             s.SerializeFieldName("position");
             s.SerializeValOption(s.Serialize(Mech3DotNet.Types.Common.Vec3Converter.Converter))(v.position);
+        }
+
+        private struct Fields
+        {
+            public Field<string> node;
+            public Field<Mech3DotNet.Types.Common.Vec3?> position;
         }
 
         public static CallAnimationWithNode Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

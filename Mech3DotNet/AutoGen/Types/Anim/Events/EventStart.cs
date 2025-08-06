@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class EventStart
     {
-        public static readonly TypeConverter<EventStart> Converter = new TypeConverter<EventStart>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.StartOffset offset;
         public float time;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.time = time;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.StartOffset> offset;
-            public Field<float> time;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<EventStart> Converter = new TypeConverter<EventStart>(Deserialize, Serialize);
 
         public static void Serialize(EventStart v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             s.Serialize(Mech3DotNet.Types.Anim.Events.StartOffsetConverter.Converter)(v.offset);
             s.SerializeFieldName("time");
             ((Action<float>)s.SerializeF32)(v.time);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.StartOffset> offset;
+            public Field<float> time;
         }
 
         public static EventStart Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

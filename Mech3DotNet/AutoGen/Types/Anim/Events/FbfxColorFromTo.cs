@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class FbfxColorFromTo
     {
-        public static readonly TypeConverter<FbfxColorFromTo> Converter = new TypeConverter<FbfxColorFromTo>(Deserialize, Serialize);
         public Mech3DotNet.Types.Anim.Events.Rgba from;
         public Mech3DotNet.Types.Anim.Events.Rgba to;
         public float runTime;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.alphaDelta = alphaDelta;
         }
 
-        private struct Fields
-        {
-            public Field<Mech3DotNet.Types.Anim.Events.Rgba> from;
-            public Field<Mech3DotNet.Types.Anim.Events.Rgba> to;
-            public Field<float> runTime;
-            public Field<float?> alphaDelta;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<FbfxColorFromTo> Converter = new TypeConverter<FbfxColorFromTo>(Deserialize, Serialize);
 
         public static void Serialize(FbfxColorFromTo v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.runTime);
             s.SerializeFieldName("alpha_delta");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.alphaDelta);
+        }
+
+        private struct Fields
+        {
+            public Field<Mech3DotNet.Types.Anim.Events.Rgba> from;
+            public Field<Mech3DotNet.Types.Anim.Events.Rgba> to;
+            public Field<float> runTime;
+            public Field<float?> alphaDelta;
         }
 
         public static FbfxColorFromTo Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

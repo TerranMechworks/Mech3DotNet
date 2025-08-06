@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectOpacity
     {
-        public static readonly TypeConverter<ObjectOpacity> Converter = new TypeConverter<ObjectOpacity>(Deserialize, Serialize);
         public float opacity;
         public bool? state;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.state = state;
         }
 
-        private struct Fields
-        {
-            public Field<float> opacity;
-            public Field<bool?> state;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectOpacity> Converter = new TypeConverter<ObjectOpacity>(Deserialize, Serialize);
 
         public static void Serialize(ObjectOpacity v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.opacity);
             s.SerializeFieldName("state");
             s.SerializeValOption(((Action<bool>)s.SerializeBool))(v.state);
+        }
+
+        private struct Fields
+        {
+            public Field<float> opacity;
+            public Field<bool?> state;
         }
 
         public static ObjectOpacity Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class FloatFromTo
     {
-        public static readonly TypeConverter<FloatFromTo> Converter = new TypeConverter<FloatFromTo>(Deserialize, Serialize);
         public float from;
         public float to;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.to = to;
         }
 
-        private struct Fields
-        {
-            public Field<float> from;
-            public Field<float> to;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<FloatFromTo> Converter = new TypeConverter<FloatFromTo>(Deserialize, Serialize);
 
         public static void Serialize(FloatFromTo v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.from);
             s.SerializeFieldName("to");
             ((Action<float>)s.SerializeF32)(v.to);
+        }
+
+        private struct Fields
+        {
+            public Field<float> from;
+            public Field<float> to;
         }
 
         public static FloatFromTo Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

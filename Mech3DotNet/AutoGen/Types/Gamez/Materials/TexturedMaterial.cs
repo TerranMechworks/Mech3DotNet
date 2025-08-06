@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Materials
 {
     public sealed class TexturedMaterial
     {
-        public static readonly TypeConverter<TexturedMaterial> Converter = new TypeConverter<TexturedMaterial>(Deserialize, Serialize);
         public short textureIndex;
         public Mech3DotNet.Types.Gamez.Materials.Soil soil = Mech3DotNet.Types.Gamez.Materials.Soil.Default;
         public Mech3DotNet.Types.Gamez.Materials.CycleData? cycle = null;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Gamez.Materials
             this.flag = flag;
         }
 
-        private struct Fields
-        {
-            public Field<short> textureIndex;
-            public Field<Mech3DotNet.Types.Gamez.Materials.Soil> soil;
-            public Field<Mech3DotNet.Types.Gamez.Materials.CycleData?> cycle;
-            public Field<bool> flag;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<TexturedMaterial> Converter = new TypeConverter<TexturedMaterial>(Deserialize, Serialize);
 
         public static void Serialize(TexturedMaterial v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Gamez.Materials
             s.SerializeRefOption(s.Serialize(Mech3DotNet.Types.Gamez.Materials.CycleData.Converter))(v.cycle);
             s.SerializeFieldName("flag");
             ((Action<bool>)s.SerializeBool)(v.flag);
+        }
+
+        private struct Fields
+        {
+            public Field<short> textureIndex;
+            public Field<Mech3DotNet.Types.Gamez.Materials.Soil> soil;
+            public Field<Mech3DotNet.Types.Gamez.Materials.CycleData?> cycle;
+            public Field<bool> flag;
         }
 
         public static TexturedMaterial Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Gamez.Materials
 
             );
         }
+
+        #endregion
     }
 }

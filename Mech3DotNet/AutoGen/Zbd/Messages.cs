@@ -5,7 +5,6 @@ namespace Mech3DotNet.Zbd
 {
     public partial class Messages
     {
-        public static readonly TypeConverter<Messages> Converter = new TypeConverter<Messages>(Deserialize, Serialize);
         public uint languageId;
         public System.Collections.Generic.List<Mech3DotNet.Types.Messages.MessageEntry> entries;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Zbd
             this.entries = entries;
         }
 
-        private struct Fields
-        {
-            public Field<uint> languageId;
-            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Messages.MessageEntry>> entries;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Messages> Converter = new TypeConverter<Messages>(Deserialize, Serialize);
 
         public static void Serialize(Messages v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Zbd
             ((Action<uint>)s.SerializeU32)(v.languageId);
             s.SerializeFieldName("entries");
             s.SerializeVec(s.Serialize(Mech3DotNet.Types.Messages.MessageEntry.Converter))(v.entries);
+        }
+
+        private struct Fields
+        {
+            public Field<uint> languageId;
+            public Field<System.Collections.Generic.List<Mech3DotNet.Types.Messages.MessageEntry>> entries;
         }
 
         public static Messages Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Zbd
 
             );
         }
+
+        #endregion
     }
 }

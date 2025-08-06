@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Anim.Events
 {
     public sealed class ObjectConnector
     {
-        public static readonly TypeConverter<ObjectConnector> Converter = new TypeConverter<ObjectConnector>(Deserialize, Serialize);
         public string name;
         public string? fromNode;
         public string? toNode;
@@ -29,18 +28,9 @@ namespace Mech3DotNet.Types.Anim.Events
             this.maxLength = maxLength;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<string?> fromNode;
-            public Field<string?> toNode;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> fromPos;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> toPos;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?> fromT;
-            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?> toT;
-            public Field<float> runTime;
-            public Field<float?> maxLength;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ObjectConnector> Converter = new TypeConverter<ObjectConnector>(Deserialize, Serialize);
 
         public static void Serialize(ObjectConnector v, Serializer s)
         {
@@ -63,6 +53,19 @@ namespace Mech3DotNet.Types.Anim.Events
             ((Action<float>)s.SerializeF32)(v.runTime);
             s.SerializeFieldName("max_length");
             s.SerializeValOption(((Action<float>)s.SerializeF32))(v.maxLength);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<string?> fromNode;
+            public Field<string?> toNode;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> fromPos;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorPos?> toPos;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?> fromT;
+            public Field<Mech3DotNet.Types.Anim.Events.ObjectConnectorTime?> toT;
+            public Field<float> runTime;
+            public Field<float?> maxLength;
         }
 
         public static ObjectConnector Deserialize(Deserializer d)
@@ -136,5 +139,7 @@ namespace Mech3DotNet.Types.Anim.Events
 
             );
         }
+
+        #endregion
     }
 }

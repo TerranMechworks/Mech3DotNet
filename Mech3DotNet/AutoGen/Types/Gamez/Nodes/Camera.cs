@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 {
     public sealed class Camera
     {
-        public static readonly TypeConverter<Camera> Converter = new TypeConverter<Camera>(Deserialize, Serialize);
         public short worldIndex;
         public short windowIndex;
         public short focusNodeXy;
@@ -33,20 +32,9 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             this.fovVBase = fovVBase;
         }
 
-        private struct Fields
-        {
-            public Field<short> worldIndex;
-            public Field<short> windowIndex;
-            public Field<short> focusNodeXy;
-            public Field<short> focusNodeXz;
-            public Field<float> clipNear;
-            public Field<float> clipFar;
-            public Field<float> lodMultiplier;
-            public Field<float> fovHScale;
-            public Field<float> fovVScale;
-            public Field<float> fovHBase;
-            public Field<float> fovVBase;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<Camera> Converter = new TypeConverter<Camera>(Deserialize, Serialize);
 
         public static void Serialize(Camera v, Serializer s)
         {
@@ -73,6 +61,21 @@ namespace Mech3DotNet.Types.Gamez.Nodes
             ((Action<float>)s.SerializeF32)(v.fovHBase);
             s.SerializeFieldName("fov_v_base");
             ((Action<float>)s.SerializeF32)(v.fovVBase);
+        }
+
+        private struct Fields
+        {
+            public Field<short> worldIndex;
+            public Field<short> windowIndex;
+            public Field<short> focusNodeXy;
+            public Field<short> focusNodeXz;
+            public Field<float> clipNear;
+            public Field<float> clipFar;
+            public Field<float> lodMultiplier;
+            public Field<float> fovHScale;
+            public Field<float> fovVScale;
+            public Field<float> fovHBase;
+            public Field<float> fovVBase;
         }
 
         public static Camera Deserialize(Deserializer d)
@@ -158,5 +161,7 @@ namespace Mech3DotNet.Types.Gamez.Nodes
 
             );
         }
+
+        #endregion
     }
 }

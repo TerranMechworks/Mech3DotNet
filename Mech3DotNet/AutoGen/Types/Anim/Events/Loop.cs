@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsRunTime() => Variant == Variants.RunTime;
         public float AsRunTime() => (float)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(Loop v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("Loop", variantIndex);
             }
         }
+
+        #endregion
     }
 }

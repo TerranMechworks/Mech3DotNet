@@ -29,6 +29,8 @@ namespace Mech3DotNet.Types.Anim.Events
         public bool IsDistance() => Variant == Variants.Distance;
         public Mech3DotNet.Types.Anim.Events.ForwardRotationDistance AsDistance() => (Mech3DotNet.Types.Anim.Events.ForwardRotationDistance)Value;
 
+        #region "Serialize/Deserialize logic"
+
         private static void Serialize(ForwardRotation v, Serializer s)
         {
             switch (v.Variant)
@@ -79,5 +81,7 @@ namespace Mech3DotNet.Types.Anim.Events
                     throw new UnknownVariantException("ForwardRotation", variantIndex);
             }
         }
+
+        #endregion
     }
 }

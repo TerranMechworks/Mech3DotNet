@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Archive
 {
     public sealed class ArchiveEntryInfoValid
     {
-        public static readonly TypeConverter<ArchiveEntryInfoValid> Converter = new TypeConverter<ArchiveEntryInfoValid>(Deserialize, Serialize);
         public string comment;
         public System.DateTime datetime;
 
@@ -15,11 +14,9 @@ namespace Mech3DotNet.Types.Archive
             this.datetime = datetime;
         }
 
-        private struct Fields
-        {
-            public Field<string> comment;
-            public Field<System.DateTime> datetime;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ArchiveEntryInfoValid> Converter = new TypeConverter<ArchiveEntryInfoValid>(Deserialize, Serialize);
 
         public static void Serialize(ArchiveEntryInfoValid v, Serializer s)
         {
@@ -28,6 +25,12 @@ namespace Mech3DotNet.Types.Archive
             ((Action<string>)s.SerializeString)(v.comment);
             s.SerializeFieldName("datetime");
             ((Action<DateTime>)s.SerializeDateTime)(v.datetime);
+        }
+
+        private struct Fields
+        {
+            public Field<string> comment;
+            public Field<System.DateTime> datetime;
         }
 
         public static ArchiveEntryInfoValid Deserialize(Deserializer d)
@@ -59,5 +62,7 @@ namespace Mech3DotNet.Types.Archive
 
             );
         }
+
+        #endregion
     }
 }

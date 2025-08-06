@@ -5,7 +5,6 @@ namespace Mech3DotNet.Types.Archive
 {
     public sealed class ArchiveEntry
     {
-        public static readonly TypeConverter<ArchiveEntry> Converter = new TypeConverter<ArchiveEntry>(Deserialize, Serialize);
         public string name;
         public string? rename = null;
         public uint flags;
@@ -19,13 +18,9 @@ namespace Mech3DotNet.Types.Archive
             this.info = info;
         }
 
-        private struct Fields
-        {
-            public Field<string> name;
-            public Field<string?> rename;
-            public Field<uint> flags;
-            public Field<Mech3DotNet.Types.Archive.ArchiveEntryInfo> info;
-        }
+        #region "Serialize/Deserialize logic"
+
+        public static readonly TypeConverter<ArchiveEntry> Converter = new TypeConverter<ArchiveEntry>(Deserialize, Serialize);
 
         public static void Serialize(ArchiveEntry v, Serializer s)
         {
@@ -38,6 +33,14 @@ namespace Mech3DotNet.Types.Archive
             ((Action<uint>)s.SerializeU32)(v.flags);
             s.SerializeFieldName("info");
             s.Serialize(Mech3DotNet.Types.Archive.ArchiveEntryInfo.Converter)(v.info);
+        }
+
+        private struct Fields
+        {
+            public Field<string> name;
+            public Field<string?> rename;
+            public Field<uint> flags;
+            public Field<Mech3DotNet.Types.Archive.ArchiveEntryInfo> info;
         }
 
         public static ArchiveEntry Deserialize(Deserializer d)
@@ -81,5 +84,7 @@ namespace Mech3DotNet.Types.Archive
 
             );
         }
+
+        #endregion
     }
 }

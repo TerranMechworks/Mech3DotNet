@@ -16,11 +16,11 @@ The main library targets .NET Standard 2.1 for Unity compatibility (`netstandard
 
 Also required are [mech3ax](https://github.com/TerranMechworks/mech3ax/releases/) native dependencies, e.g. for version 0.6.1:
 
-* `mech3ax-0.6.1.dll` (Windows x64)
-* `libmech3ax-0.6.1.so` (Linux x64)
-* `libmech3ax-0.6.1.dylib` (MacOS x64/ARM)
+* `mech3ax-v0.6.1.dll` (Windows x64)
+* `libmech3ax-v0.6.1.so` (Linux x64)
+* `libmech3ax-v0.6.1.dylib` (MacOS x64/ARM)
 
-Put one or more into the `Mech3DotNet/` directory for testing.
+Put the one for the platform you're running on into the `Mech3DotNet/` directory for testing.
 
 ### Unit tests
 
@@ -52,6 +52,7 @@ will run the tests against both versions.
 
 1. Review changelog, and add the date
 1. Bump version in `Mech3DotNet/Properties/AssemblyInfo.cs` and `RoundtripTests/Properties/AssemblyInfo.cs`
+1. Update version in `Mech3DotNet/Mech3DotNet.csproj` so that binaries are copied to the output directory
 1. Commit, push, and wait for CI
 1. Create a tag of the version (e.g. `git tag -a v0.1.0 -m "2024-02-10" -s`)
 1. Push the tag (`git push origin v0.1.0`)

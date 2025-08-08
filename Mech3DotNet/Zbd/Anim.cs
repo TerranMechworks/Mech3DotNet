@@ -14,9 +14,13 @@ namespace Mech3DotNet.Zbd
     public class Anim : IWritable
     {
         public GameType gameType;
-        public Dictionary<string, AnimDef> animations;
-        public Dictionary<string, SiScript> siScripts;
-        public AnimMetadata metadata;
+        public OrderedDict<AnimDef> animations;
+        public OrderedDict<SiScript> siScripts;
+
+        public AnimMission mission;
+        public float gravity;
+        public System.DateTime? datetime = null;
+        public List<AnimDefFile> animList;
 
         private static GameType ValidateGameType(GameType gameType)
         {
@@ -35,45 +39,84 @@ namespace Mech3DotNet.Zbd
 
         public Anim(
             GameType gameType,
-            Dictionary<string, AnimDef> animations,
-            Dictionary<string, SiScript> siScripts,
-            AnimMetadata metadata
+            OrderedDict<AnimDef> animations,
+            OrderedDict<SiScript> siScripts,
+            AnimMission mission,
+            float gravity,
+            System.DateTime? datetime,
+            List<AnimDefFile> animList
         )
         {
             this.gameType = ValidateGameType(gameType);
             this.animations = animations ?? throw new System.ArgumentNullException(nameof(animations));
             this.siScripts = siScripts ?? throw new System.ArgumentNullException(nameof(siScripts));
-            this.metadata = metadata ?? throw new System.ArgumentNullException(nameof(metadata));
+            this.mission = mission;
+            this.gravity = gravity;
+            this.datetime = datetime;
+            this.animList = animList;
         }
 
         /// <summary>Read a <c>anim.zbd</c> file from the specified path.</summary>
         public static Anim Read(string path, GameType gameType)
         {
             ValidateGameType(gameType);
-            var animations = new Dictionary<string, AnimDef>();
-            var siScripts = new Dictionary<string, SiScript>();
+            var animationsByName = new Dictionary<string, AnimDef>();
+            var siScriptsByName = new Dictionary<string, SiScript>();
             var manifest_data = Helpers.ReadArchive(path, gameType, "metadata.bin", Interop.ReadAnim, (string name, byte[] data) =>
             {
                 if (name.EndsWith(".zan"))
                 {
                     var siScript = Interop.Deserialize(data, SiScript.Converter);
-                    siScripts.Add(name, siScript);
+                    siScriptsByName.Add(name, siScript);
                 }
                 else
                 {
                     var anim = Interop.Deserialize(data, AnimDef.Converter);
-                    animations.Add(name, anim);
+                    animationsByName.Add(name, anim);
                 }
             });
+
             var metadata = Interop.Deserialize(manifest_data, AnimMetadata.Converter);
-            return new Anim(gameType, animations, siScripts, metadata);
+
+            var animations = new OrderedDict<AnimDef>();
+            foreach (var key in metadata.animDefNames)
+            {
+                var value = animationsByName[key];
+                animations.Add(key, value);
+            }
+
+            var siScripts = new OrderedDict<SiScript>();
+            foreach (var key in metadata.scriptNames)
+            {
+                var value = siScriptsByName[key];
+                siScripts.Add(key, value);
+            }
+
+            return new Anim(gameType, animations, siScripts, metadata.mission, metadata.gravity, metadata.datetime, metadata.animList);
         }
 
         /// <summary>Write a MW <c>anim.zbd</c> file to the specified path.</summary>
         public void Write(string path)
         {
             var gameType = ValidateGameType(this.gameType);
+
+            var animDefNames = new List<string>();
+            foreach (var kv in animations)
+                animDefNames.Add(kv.Key);
+            var scriptNames = new List<string>();
+            foreach (var kv in siScripts)
+                scriptNames.Add(kv.Key);
+
+            var metadata = new AnimMetadata(
+                mission,
+                gravity,
+                datetime,
+                animDefNames,
+                scriptNames,
+                animList
+            );
             var manifest_data = Interop.Serialize(metadata, AnimMetadata.Converter);
+
             Helpers.WriteArchive(path, gameType, manifest_data, Interop.WriteAnim, (string name) =>
             {
                 if (name.EndsWith(".zan"))

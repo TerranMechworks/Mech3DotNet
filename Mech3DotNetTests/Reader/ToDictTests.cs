@@ -20,7 +20,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DynamicData(nameof(ValidCases), DynamicDataSourceType.Method)]
-        [DataTestMethod]
+        [TestMethod]
         public void Valid(ReaderValue value, params (string key, int value)[] values)
         {
             var expected = new Dictionary<string, int>(values.Length);
@@ -41,7 +41,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DynamicData(nameof(InvalidCases), DynamicDataSourceType.Method)]
-        [DataTestMethod]
+        [TestMethod]
         public void Invalid(ReaderValue value)
         {
             var message = ConvertFailure(value, Dict(Int()));

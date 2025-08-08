@@ -24,7 +24,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DynamicData(nameof(ValidIntCases), DynamicDataSourceType.Method)]
-        [DataTestMethod]
+        [TestMethod]
         public void ValidInt(ReaderValue value, params int[] values)
         {
             var expected = new List<int>(values);
@@ -47,7 +47,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DynamicData(nameof(ValidStringCases), DynamicDataSourceType.Method)]
-        [DataTestMethod]
+        [TestMethod]
         public void ValidString(ReaderValue value, params string[] values)
         {
             var expected = new List<string>(values);
@@ -63,7 +63,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DynamicData(nameof(InvalidCases), DynamicDataSourceType.Method)]
-        [DataTestMethod]
+        [TestMethod]
         public void InvalidOuter(ReaderValue value)
         {
             var message = ConvertFailure(value, List(Int()));

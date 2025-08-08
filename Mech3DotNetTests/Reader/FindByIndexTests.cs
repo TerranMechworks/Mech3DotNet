@@ -12,10 +12,10 @@ namespace Mech3DotNetTests.Reader
         public void NotArray_Throws()
         {
             var value = RI(42);
-            Assert.ThrowsException<ConversionException>(() => value / 0);
+            Assert.ThrowsExactly<ConversionException>(() => value / 0);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(1)]
         [DataRow(2)]
         [DataRow(-2)]
@@ -23,10 +23,10 @@ namespace Mech3DotNetTests.Reader
         public void InvalidIndex_Throws(int index)
         {
             var value = RL(42);
-            Assert.ThrowsException<NotFoundException>(() => value / index);
+            Assert.ThrowsExactly<NotFoundException>(() => value / index);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(0)]
         [DataRow(-1)]
         public void ValidIndex_ReturnsItem(int index)

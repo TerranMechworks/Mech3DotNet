@@ -12,21 +12,21 @@ namespace Mech3DotNetTests.Reader
         public void NotArray_Throws()
         {
             var value = RI(42);
-            Assert.ThrowsException<ConversionException>(() => value / Only("foo"));
+            Assert.ThrowsExactly<ConversionException>(() => value / Only("foo"));
         }
 
         [TestMethod]
         public void MissingKey_Throws()
         {
             var value = RL("foo", 42);
-            Assert.ThrowsException<NotFoundException>(() => value / Only("bar"));
+            Assert.ThrowsExactly<NotFoundException>(() => value / Only("bar"));
         }
 
         [TestMethod]
         public void ValidKeys_Throws()
         {
             var value = RL("foo", 42, "foo", 43);
-            Assert.ThrowsException<NotFoundException>(() => value / Only("foo"));
+            Assert.ThrowsExactly<NotFoundException>(() => value / Only("foo"));
         }
 
         [TestMethod]

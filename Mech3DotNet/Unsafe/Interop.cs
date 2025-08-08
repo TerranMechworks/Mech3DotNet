@@ -310,5 +310,12 @@ namespace Mech3DotNet.Unsafe
                 return w.GetBuffer();
             }
         }
+
+        [DllImport(MECH3AX, EntryPoint = "read_reader_json")]
+        internal static extern int ReadReaderJson(
+             [MarshalAs(PStr)]
+             string filename,
+             int gameTypeId,
+             NameDataCb callback);
     }
 }

@@ -56,5 +56,21 @@ namespace Mech3DotNet.Zbd
                 return stream.ToArray();
             });
         }
+
+        /// <summary>
+        /// Read reader data as JSON, discarding entry information.
+        ///
+        /// Without entry information, the data cannot be written again.
+        /// </summary>
+        [System.Obsolete("JSON is going away")]
+        public static Dictionary<string, byte[]> ReadAsJson(string path, GameType gameType)
+        {
+            var readers = new Dictionary<string, byte[]>();
+            var manifest_data = Helpers.ReadArchive(path, gameType, Helpers.MANIFEST, Interop.ReadReaderJson, (string name, byte[] data) =>
+            {
+                readers.Add(name, data);
+            });
+            return readers;
+        }
     }
 }

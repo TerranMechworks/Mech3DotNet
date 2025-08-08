@@ -18,7 +18,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DynamicData(nameof(ValidCases), DynamicDataSourceType.Method)]
-        [DataTestMethod]
+        [TestMethod]
         public void Valid(ReaderValue value, bool expected)
         {
             var actual = ConvertSuccess(value, Bool());
@@ -39,7 +39,7 @@ namespace Mech3DotNetTests.Reader
         }
 
         [DynamicData(nameof(InvalidCases), DynamicDataSourceType.Method)]
-        [DataTestMethod]
+        [TestMethod]
         public void Invalid(ReaderValue value)
         {
             var message = ConvertFailure(value, Bool());

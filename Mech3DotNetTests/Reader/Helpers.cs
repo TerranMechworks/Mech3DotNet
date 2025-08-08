@@ -43,7 +43,7 @@ namespace Mech3DotNetTests.Reader
 
         public static string ConvertFailure<TConv>(ReaderValue value, IConvertOperation<TConv> op)
         {
-            var e = Assert.ThrowsException<ConversionException>(() => op.ConvertTo(value, EmptyPath()));
+            var e = Assert.ThrowsExactly<ConversionException>(() => op.ConvertTo(value, EmptyPath()));
             return e.Message;
         }
     }

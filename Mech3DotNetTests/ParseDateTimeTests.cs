@@ -6,7 +6,7 @@ namespace Mech3DotNetTests
     [TestClass]
     public class ParseDateTimeTests
     {
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("1999-03-24T00:24:42Z")]
         [DataRow("1999-03-24T00:24:42.1Z")]
         [DataRow("1999-03-24T00:24:42.01Z")]

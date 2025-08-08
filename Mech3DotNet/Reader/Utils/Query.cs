@@ -15,18 +15,20 @@ namespace Mech3DotNet.Reader
         internal Query(ReaderValue value)
         {
             _value = value;
-            _path = new List<string>();
-            // ensure path starts with "/"
-            _path.Add("");
+            _path = new List<string>
+            {
+                // ensure path starts with "/"
+                ""
+            };
         }
 
         public override string ToString()
         {
             var displayPath = string.Join("/", _path);
-            return $"{displayPath}: {_value.ToString()}";
+            return $"{displayPath}: {_value}";
         }
 
-        public ReaderValue Value { get => _value; }
+        public readonly ReaderValue Value { get => _value; }
 
         /// <summary>
         /// Apply the <see cref="IQueryOperation"/> to the current value.
@@ -71,94 +73,64 @@ namespace Mech3DotNet.Reader
         /// applies a <see cref="FindOnly"/> <see cref="IQueryOperation"/>.
         /// However, this may change in future.
         /// </summary>
-        public static Query Root(ReaderValue value)
-        {
-            return value / new FindOnly();
-        }
+        public static Query Root(ReaderValue value) => value / new FindOnly();
 
         /// <summary>
         /// Convenience method to create a <see cref="ToInt"/>
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToInt Int()
-        {
-            return new ToInt();
-        }
+        public static ToInt Int() => new ToInt();
 
         /// <summary>
         /// Convenience method to create a <see cref="ToFloat"/>
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToFloat Float()
-        {
-            return new ToFloat();
-        }
+        public static ToFloat Float() => new ToFloat();
 
         /// <summary>
         /// Convenience method to create a <see cref="ToNumber"/>
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToNumber Number()
-        {
-            return new ToNumber();
-        }
+        public static ToNumber Number() => new ToNumber();
 
         /// <summary>
         /// Convenience method to create a <see cref="ToStr"/>
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToStr String()
-        {
-            return new ToStr();
-        }
+        public static ToStr String() => new ToStr();
 
         /// <summary>
         /// Convenience method to create a <see cref="ToBool"/>
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToBool Bool()
-        {
-            return new ToBool();
-        }
+        public static ToBool Bool() => new ToBool();
 
         /// <summary>
         /// Convenience method to create a <see cref="ToArray{T}"/>
         /// <see cref="IConvertOperation{T}" /> based on the specified inner
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToArray<T> Array<T>(IConvertOperation<T> op)
-        {
-            return new ToArray<T>(op);
-        }
+        public static ToArray<T> Array<T>(IConvertOperation<T> op) => new ToArray<T>(op);
 
         /// <summary>
         /// Convenience method to create a <see cref="ToList{T}"/>
         /// <see cref="IConvertOperation{T}" /> based on the specified inner
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToList<T> List<T>(IConvertOperation<T> op)
-        {
-            return new ToList<T>(op);
-        }
+        public static ToList<T> List<T>(IConvertOperation<T> op) => new ToList<T>(op);
 
         /// <summary>
         /// Convenience method to create a <see cref="ToKeyValue{T}"/>
         /// <see cref="IConvertOperation{T}" /> based on the specified inner
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToKeyValue<T> KeyValue<T>(IConvertOperation<T> op)
-        {
-            return new ToKeyValue<T>(op);
-        }
+        public static ToKeyValue<T> KeyValue<T>(IConvertOperation<T> op) => new ToKeyValue<T>(op);
 
         /// <summary>
         /// Convenience method to create a <see cref="ToDict{T}"/>
         /// <see cref="IConvertOperation{T}" /> based on the specified inner
         /// <see cref="IConvertOperation{T}" />.
         /// </summary>
-        public static ToDict<T> Dict<T>(IConvertOperation<T> op)
-        {
-            return new ToDict<T>(op);
-        }
+        public static ToDict<T> Dict<T>(IConvertOperation<T> op) => new ToDict<T>(op);
     }
 }

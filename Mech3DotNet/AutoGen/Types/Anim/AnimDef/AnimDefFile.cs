@@ -7,13 +7,13 @@ namespace Mech3DotNet.Types.Anim.AnimDef
     {
         public string name;
         public System.DateTime datetime;
-        public uint? hash = null;
+        public byte[]? garbage = null;
 
-        public AnimDefFile(string name, System.DateTime datetime, uint? hash)
+        public AnimDefFile(string name, System.DateTime datetime, byte[]? garbage)
         {
             this.name = name;
             this.datetime = datetime;
-            this.hash = hash;
+            this.garbage = garbage;
         }
 
         #region "Serialize/Deserialize logic"
@@ -27,15 +27,15 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             ((Action<string>)s.SerializeString)(v.name);
             s.SerializeFieldName("datetime");
             ((Action<DateTime>)s.SerializeDateTime)(v.datetime);
-            s.SerializeFieldName("hash");
-            s.SerializeValOption(((Action<uint>)s.SerializeU32))(v.hash);
+            s.SerializeFieldName("garbage");
+            s.SerializeRefOption(((Action<byte[]>)s.SerializeBytes))(v.garbage);
         }
 
         private struct Fields
         {
             public Field<string> name;
             public Field<System.DateTime> datetime;
-            public Field<uint?> hash;
+            public Field<byte[]?> garbage;
         }
 
         public static AnimDefFile Deserialize(Deserializer d)
@@ -44,7 +44,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
             {
                 name = new Field<string>(),
                 datetime = new Field<System.DateTime>(),
-                hash = new Field<uint?>(null),
+                garbage = new Field<byte[]?>(null),
             };
             foreach (var fieldName in d.DeserializeStruct())
             {
@@ -56,8 +56,8 @@ namespace Mech3DotNet.Types.Anim.AnimDef
                     case "datetime":
                         fields.datetime.Value = d.DeserializeDateTime();
                         break;
-                    case "hash":
-                        fields.hash.Value = d.DeserializeValOption(d.DeserializeU32)();
+                    case "garbage":
+                        fields.garbage.Value = d.DeserializeRefOption(d.DeserializeBytes)();
                         break;
                     default:
                         throw new UnknownFieldException("AnimDefFile", fieldName);
@@ -69,7 +69,7 @@ namespace Mech3DotNet.Types.Anim.AnimDef
 
                 fields.datetime.Unwrap("AnimDefFile", "datetime"),
 
-                fields.hash.Unwrap("AnimDefFile", "hash")
+                fields.garbage.Unwrap("AnimDefFile", "garbage")
 
             );
         }

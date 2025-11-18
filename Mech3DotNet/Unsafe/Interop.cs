@@ -9,7 +9,7 @@ namespace Mech3DotNet.Unsafe
     internal class Interop
     {
         // See https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
-        private const string MECH3AX = "mech3ax-v0.7.0-rc2";
+        private const string MECH3AX = "mech3ax-v0.7.0-rc3";
         private const UnmanagedType PStr = UnmanagedType.LPUTF8Str;
         private const UnmanagedType Usize = UnmanagedType.SysUInt;
 
@@ -310,12 +310,5 @@ namespace Mech3DotNet.Unsafe
                 return w.GetBuffer();
             }
         }
-
-        [DllImport(MECH3AX, EntryPoint = "read_reader_json")]
-        internal static extern int ReadReaderJson(
-             [MarshalAs(PStr)]
-             string filename,
-             int gameTypeId,
-             NameDataCb callback);
     }
 }

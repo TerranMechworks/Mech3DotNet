@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+## [0.7.0-rc2] - 2025-11-17
+
+* Tracks [mech3ax v0.7.0-rc3](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.7.0-rc3)
+
 ## [0.7.0-rc2] - 2025-08-03
 
 * Tracks [mech3ax v0.7.0-rc2](https://github.com/TerranMechworks/mech3ax/releases/tag/v0.7.0-rc2)

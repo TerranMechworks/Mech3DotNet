@@ -35,8 +35,6 @@ namespace RoundtripTests
             tester.SoundWav();
             tester.SoundsWav();
             tester.Zmap();
-            // TODO: delete me
-            tester.ReadersJson();
 
             tester.PrintResults();
 

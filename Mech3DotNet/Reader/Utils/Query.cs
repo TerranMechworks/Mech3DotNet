@@ -12,7 +12,7 @@ namespace Mech3DotNet.Reader
         internal ReaderValue _value;
         internal List<string> _path;
 
-        internal Query(ReaderValue value)
+        public Query(ReaderValue value)
         {
             _value = value;
             _path = new List<string>
@@ -73,7 +73,7 @@ namespace Mech3DotNet.Reader
         /// applies a <see cref="FindOnly"/> <see cref="IQueryOperation"/>.
         /// However, this may change in future.
         /// </summary>
-        public static Query Root(ReaderValue value) => value / new FindOnly();
+        public static Query Root(ReaderValue value) => new Query(value) / new FindOnly();
 
         /// <summary>
         /// Convenience method to create a <see cref="ToInt"/>

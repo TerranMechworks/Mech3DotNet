@@ -160,38 +160,6 @@ namespace RoundtripTests
                 Mech3DotNet.Zbd.ReaderArchiveGeneric.Read);
         }
 
-        public void ReadersJson()
-        {
-            var readerRegex = gameType switch
-            {
-                GameType.MW => @"reader.*\.zbd$",
-                GameType.PM => @"reader.*\.zbd$",
-                GameType.RC => @"zrdr.*\.zbd$",
-                GameType.CS => @"zrdr.*\.zbd$",
-                _ => throw new ArgumentOutOfRangeException(),
-            };
-            var matches = RecursiveGlob(new Regex(readerRegex), basePath);
-            var name = "ReaderJson";
-            var failed = false;
-            foreach (var inputPath in matches)
-            {
-                Console.WriteLine(inputPath);
-                try
-                {
-                    var json = Mech3DotNet.Zbd.ReaderArchive.ReadAsJson(inputPath, gameType);
-                }
-                catch (Exception e)
-                {
-                    failures.Add($"[{name}] {inputPath}: {e}");
-                    failed = true;
-                }
-            }
-            if (failed)
-                Console.WriteLine("--- {0} FAIL ---", name);
-            else
-                Console.WriteLine("--- {0} OK ---", name);
-        }
-
         public void Motions()
         {
             switch (gameType)

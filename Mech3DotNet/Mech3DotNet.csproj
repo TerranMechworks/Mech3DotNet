@@ -6,13 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <None Update="mech3ax-v0.7.0-rc2.dll">
+    <None Update="mech3ax-v0.7.0-rc3.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="libmech3ax-v0.7.0-rc2.so">
+    <None Update="libmech3ax-v0.7.0-rc3.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="libmech3ax-v0.7.0-rc2.dylib">
+    <None Update="libmech3ax-v0.7.0-rc3.dylib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
